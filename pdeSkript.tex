@@ -1,12 +1,10 @@
-\documentclass[ngerman, BCOR=5mm]{report}
+\documentclass{report}
 
 \usepackage{a4}
 
 \usepackage[english]{babel}
-%\usepackage{ngerman}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath, amssymb, mathtools}
-\usepackage[arrow, matrix, curve]{xy}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{datetime}
@@ -35,14 +33,14 @@
 \newtheorem{cor}[defn]{Corrolary}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{eg}[defn]{Example}
-\newtheorem{bem}[defn]{Remark}
+\newtheorem{rem}[defn]{Remark}
+\newtheorem{ex}[defn]{Exercise}
 
 % Counter
 \usepackage{chngcntr}
 \counterwithin{defn}{chapter}
 
-
-\renewcommand{\proofname}{Beweis}
+\renewcommand\div{\operatorname{div}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thanh Nam Phan \\ Winter Semester 2020/2021}
@@ -61,21 +59,19 @@
 
 A differential equation is an equation of a function and its derivatives. 
 
-\begin{eg}
+\begin{eg} (Linear ODE)
+  Let \(f: \mathbb{R} \to \mathbb{R}\),
   \begin{align*}
-    f: \mathbb{R} \to \mathbb{R} \\
     \begin{cases}
       f(t) = a f(t) \text{ for all } t \ge 0, a \in \mathbb{R} \\
       f(0) = a_0
     \end{cases}
   \end{align*}
-
-  Solution: \(f(t) = a_0 e^{at}\) for all \(t \ge 0\). This is a linear ODE (Ordinary differential equation).
+  is a linear ODE (Ordinary differential equation). The solution is: \(f(t) = a_0 e^{at}\) for all \(t \ge 0\).
 \end{eg}
 
-\begin{eg} (Non-Linear ODE)
+\begin{eg} (Non-Linear ODE) \(f: \mathbb{R} \to \mathbb{R}\)
   \begin{align*}
-    f: \mathbb{R} \to \mathbb{R} \\
     \begin{cases}
       f'(t) = 1 + f^2(t) \\
       f(0) = 1
@@ -116,7 +112,7 @@ We have to notations of solution:
 %   \item Weak Solutions: The solution is not smooth/continuous
 % \end{enumerate}
 
-\(Omega \subseteq R^d\)
+\(\Omega \subseteq R^d\)
 % \begin{align*}
 %   C(\Omega) &= \( \{f: \ \Omega \to \mathbb{R}, f \text{ continuous} \}\) \\
 %   C^k(\Omega) &= \( \{f: \ D^\alpha f \Omega \to \mathbb{R} \text{ is coninutous for all } |\alpha| \le k \}
@@ -131,6 +127,81 @@ Navier-Stokes equation:
     \div(u) = \sum_{i=1}^d \frac{\partial}{\partial x_1} u_i(x) = 0
   \end{cases}
 \]
-open in 3D, exists smooth solution
+open in 3D, exists smooth solution. In this course we will investigate
+\begin{itemize}
+  \item Laplace / Poisson Equation: \(-\Delta u = f\)
+  \item Heat Equation: \(\partial_t u - \Delta u = f\)
+  \item Wave Equation: \(\partial_t^2 - \Delta u = f\)
+  \item Schrödinger Equation: \(i \partial_t u - \Delta u = f\)
+\end{itemize}
+When \(f = f(x)\) \(leadsto\) linear equation \(\leadsto\) we will form on that!\\
+\(f = f(x, u, \Delta u)\) \(\leadsto\) nonlinear equation
+
+
+\chapter{Laplace / Poisson Equation}
+\(- \Delta u = 0\) (Laplace) or \(-\Delta u = f(x)\) (Poisson).
+
+% \begin{def} (Harmonic Function)
+%   Let \(Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
+% \end{def}
+
+\begin{thm}(Gauss-Green Theorem)
+  \[ \int_{\partial V} F \vec{u}\ dS(x) = \int_V \div(F)\ dx \]
+\end{thm}
+Thus
+\begin{align*}
+  0 = \int_{\partial V} \nabla u \vec{n}\ dS(x)
+  = \int_V \div(\nabla u) \ dx
+  = \int_V \nabla u(x) \ dx
+\end{align*}
+for any \(V \subseteq \Omega \) open.
+
+\begin{ex}
+Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be continuous. Prove that if \( \int_B f(x) \ dx = 0 \), then \( u \equiv 0 \) in \(\Omega\).
+\end{ex}
+
+\begin{thm}(Fundamential Lemma of Calculus of Variations)
+  Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f \in L^1(\Omega)\). If 
+  \(\int_B f(x) \ dx = 0\) for all \(x \in B_r(x) \subseteq \Omega\), then \(f(x) = 0\) a.e. (almost everywhere) \(x \in \Omega\).
+\end{thm}
+
+\begin{rem}(Solving Laplace Equation)
+  % \(Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. u(x) = v(|x|), v: \mathbb{R} \to \mathbb{R}\). Denote \( r = |x|\), then 
+  \[
+    \frac{\partial r}{\partial x} = \frac{\partial_{x_i}}{\partial_{x_i}}  (\sqrt{x_1^2 + \dots + x_d^2}) = \frac{1}{2{\sqrt{x_1^2 + \dots + x_d^2}}}(2 x_i) = \frac{x_i}{r}
+  \]
+  Then
+  \begin{align*}
+    \partial_{x_i} u &= \partial_{x_i} v = (\partial_r v) \frac{\partial r}{\partial_{x_i}} = v'(r) \frac{x_i}{r} \\
+    \partial x_i^2 u &= \partial_{x_i}(v(r)' \frac{x_i}{r}) = \partial x_i(v(r)') \frac{x_i}{r} + v'(r) \partial_{x_i} (\frac{x_i}{r}) 
+    = \partial_r(v'(r))(\frac{dr}{\partial_{x_i}}) \frac{x_i}{r} + v'(r)\left( \frac{1}{r} - \frac{x_i}{r^2}(\partial_{x_i} r) \right) = v'(r) \frac{x_i^2}{r^2} + v'r(r)\left(\frac{1}{r} - \frac{x_i^2}{r^3}\right)
+  \end{align*}
+  So we have \(\Delta u = \left( \sum_{i=1}^d d_{x_i}^2 \right) u = v''(r) + v'(r) (\frac{d}{r} - \frac{1}{r})\)
+
+  Thus \(Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
+  % \(\Rightarrow\) \log(v(r))' = \frac{v'(r)}{v(r) = - \frac{d-1}{r}} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\))
+  % \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
+  % \(\Rightarrow\) v(r) = 
+  % \begin{cases}
+  %   \frac{const}{r^{d-2}} + const xx + const, d\ge 3 \\
+  %   const \log(r) + const xx r + const , d = 2
+  % \end{cases}
+\end{rem}
+
+\begin{def}(Fundamential Solution of Laplace Equation)
+\begin{align*}
+  \Phi(x) = 
+  \begin{cases}
+    - \frac{1}{2 \pi} \log(|x|) &, d = 2 \\
+    \frac{1}{4 \pi |x|} &, d = 3 \\
+    \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}} &, d \ge 3
+  \end{cases}
+\end{align*}
+Where \(|B_1|\) is the Volume of the ball \(B_1(0) = B(0, 1) \subseteq \mathbb{R}^d\).
+\end{def}
+
+\begin{rem}
+  \(\Delta \Phi(x)) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
+\end{rem}
 
 \end{document}
