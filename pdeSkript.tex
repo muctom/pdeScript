@@ -44,7 +44,7 @@
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thanh Nam Phan \\ Winter Semester 2020/2021}
-\author{Lecture notes \TeX ed by Thomas Eingartner}
+\author{Lecture notes \TeX{} ed by Thomas Eingartner}
 \date{\today, \currenttime}
 
 \begin{document}
@@ -77,73 +77,80 @@ A differential equation is an equation of a function and its derivatives.
       f(0) = 1
     \end{cases}
   \end{align*}
-  % We consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\) because \(f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t)\). But this solution only \emph{good} in \((- \pi, \pi)\). \exists propblem to extend this to \(\mathbb{R} \to \mathbb{R}\). We have to be careful which the degree of domain of variables ... of solutions ... ?
+  Lets consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\). Then we have \[f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t),\] but this solution only is \emph{good} in \((- \pi, \pi)\). It's a problem to extend this to \(\mathbb{R} \to \mathbb{R}\).
 \end{eg}
 
-A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives. Recall \(Omega \subseteq \mathbb{R}^d\), \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) open, 
-\begin{align*}
-  \partial_{x_1} f(x) = \lim \frac{f(x + he_i) - f(x)}{h}, e_i = (0,0, 1,, 0, 0) \in \mathbb{R}^d \\
-  D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \ddots \partial_{x_d}^{\alpha_d} f(x), |\alpha| = \sum_{i=1}^d |\alpha_i| \\
-  Df = \nabla f = \text{ gradient of } f = (\partial{x_1} \dots \partial_{x_d}) \\
-  \Delta f = \partial_{x_1}^2 + \dots + \partial^2_{x_d} f \\
-  D^kf = (D^\alpha f)_{|\alpha| = k} \\
-  D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}
-\end{align*}
+A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives. \\
 
-% \begin{def}
-%   Given a function \(F\). Then the equation of the form 
-%   \[F(D^k u(x), D^{k-1} u(x), \dots, Du(x), u(x), x) = 0\]
-%   with the unknown function \(u: \Omega \subseteq \mathbb{R}^d \to \mathbb{R}\) is called a \emph{PDE of order \(k\)}.
-%   \begin{itemize}
-%     \item Linear PDE: \(\sum_d a_\alpha(x) D^\alpha u(x) = 0\), \(a_\alpha\), \(u\) is unknown. 
-%     \item Non-Linear PDE: More difficult: Semi-linear PDE
-%     \(\sum_{|alpha| = k} a_\alpha(x) D^\alpha u(x) + F(D^{k-1}u, D^{k-2}u, \dots, Du, u, x) = 0\)
-% \end{def}
+\begin{rem}
+  Recall for \( \Omega \subseteq \mathbb{R}^d\) open and \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) the notation of partial derivatives:
+  \begin{itemize}
+    \item \(\partial_{x_i} f(x) = \lim_{h \to 0} \frac{f(x + he_i) - f(x)}{h}, \text{where } e_i = (0, 0, \dots, 1, \dots, 0, 0) \in \mathbb{R}^d\)
+    \item \(D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \cdots \partial_{x_d}^{\alpha_d} f(x), \text{where } \alpha \in \mathbb{N}^d\)
+    \item \(Df = \nabla f = (\partial{x_1}, \dots, \partial_{x_d})\)
+    \item \(\Delta f = \partial_{x_1}^2 + \ldots + \partial^2_{x_d} f\)
+    \item \(D^k f = (D^\alpha f)_{|\alpha| = k},  \text{where } |\alpha| = \sum_{i=1}^d |\alpha_i|\)
+    \item \(D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}\)
+  \end{itemize}
+\end{rem}
+
+\begin{defn}
+  Given a function \( F \). Then the equation of the form 
+  \begin{align*}
+    F(D^k u(x), D^{k-1} u(x), \dots, Du(x), u(x), x) = 0 
+  \end{align*}
+  with the unknown function \(u:\ \Omega \subseteq \mathbb{R}^d \longrightarrow \mathbb{R}\) is called a \emph{PDE of order \(k\)}.
+  \begin{itemize}
+    \item Equations \(\sum_d a_\alpha(x) D^\alpha u(x) = 0\), where \(a_\alpha\) and \(u\) are unknown functions are called \emph{Linear PDEs}. 
+    \item Equations \(\sum_{|\alpha| = k} a_\alpha(x) D^\alpha u(x) + F(D^{k-1}u, D^{k-2}u, \dots, Du, u, x) = 0\) are called \emph{semi-linear PDEs}.
+  \end{itemize}
+\end{defn}
 
 Goals: For \emph{solving a PDE} we want to
 \begin{itemize}
-  \item Find an explizit solution! In many cases, it is impossible
+  \item Find an explizit solution! This is in many cases impossible.
   \item Prove a \emph{well-posted theory} (existence of solutions, uniqueness of solutions, continuous dependence of solutions on the data)
 \end{itemize}
 
-We have to notations of solution:
-% \begin{enumerate}
-%   \item Classical solution: The solution is smooth (continuous differentialble) (e.g. \(Delta u = f\) \leadsto ??? \(u \in C^2\))
-%   \item Weak Solutions: The solution is not smooth/continuous
-% \end{enumerate}
+We have two notations of solutions:
+\begin{enumerate}
+  \item Classical solution: The solution is continuous differentiable (e.g. \( \Delta u = f  \leadsto u \in C^2  \) )
+  \item Weak Solutions: The solution is not smooth/continuous
+\end{enumerate}
 
-\(\Omega \subseteq R^d\)
-% \begin{align*}
-%   C(\Omega) &= \( \{f: \ \Omega \to \mathbb{R}, f \text{ continuous} \}\) \\
-%   C^k(\Omega) &= \( \{f: \ D^\alpha f \Omega \to \mathbb{R} \text{ is coninutous for all } |\alpha| \le k \}
-% \end{align*}
-% Classical solution of a PDE of order \(k \leadsto C^k\) solutions! \\
-% \[ L^p(\Omega) = \{f: \ \Omega \to \mathbb{R} \text{ measurable lebesgue ???, \int_\Omega |f|^p < \infty, 1 \le p < p}\]???
-% Sobolev Space: ???
-Navier-Stokes equation:
-\[
-  \begin{cases}
-    d_t u + u \nabla u - \Delta u = \nabla f, \quad f \text{ is known} \\
-    \div(u) = \sum_{i=1}^d \frac{\partial}{\partial x_1} u_i(x) = 0
-  \end{cases}
-\]
-open in 3D, exists smooth solution. In this course we will investigate
+\begin{defn}(Spaces of continous and differentiable functions)
+  Let \(\Omega \subseteq R^d\) be open
+  \begin{align*}
+    C(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid f \text{ continuous} \right\} \\
+    C^k(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid D^\alpha f \text{ is continuous for all } |\alpha| \le k \right\}
+  \end{align*}
+\end{defn}
+
+Classical solution of a PDE of order \(k \leadsto C^k\) solutions!
+\begin{align*}
+  L^p(\Omega) = \left\{ f: \ \Omega \to \mathbb{R} \text{ lebesgue measurable} \mid \int_\Omega |f|^p d\lambda < \infty, 1 \le p < \infty \right\}
+\end{align*}
+
+Sobolev Space:
+\begin{align*}
+  W^{k,p}(\Omega)= \left \{ f \in L^p(\Omega) \mid \forall \alpha \in \mathbb{N}^n \text{ with } |\alpha| \leq k: D^{\alpha}f \in L^p(\Omega) \text{exists}  \right \}
+\end{align*}
+
+In this course we will investigate
 \begin{itemize}
   \item Laplace / Poisson Equation: \(-\Delta u = f\)
   \item Heat Equation: \(\partial_t u - \Delta u = f\)
   \item Wave Equation: \(\partial_t^2 - \Delta u = f\)
   \item Schrödinger Equation: \(i \partial_t u - \Delta u = f\)
 \end{itemize}
-When \(f = f(x)\) \(leadsto\) linear equation \(\leadsto\) we will form on that!\\
-\(f = f(x, u, \Delta u)\) \(\leadsto\) nonlinear equation
 
 
 \chapter{Laplace / Poisson Equation}
 \(- \Delta u = 0\) (Laplace) or \(-\Delta u = f(x)\) (Poisson).
 
-% \begin{def} (Harmonic Function)
-%   Let \(Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
-% \end{def}
+\begin{defn} (Harmonic Function)
+  Let \(Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
+\end{defn}
 
 \begin{thm}(Gauss-Green Theorem)
   \[ \int_{\partial V} F \vec{u}\ dS(x) = \int_V \div(F)\ dx \]
@@ -166,7 +173,7 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
 \end{thm}
 
 \begin{rem}(Solving Laplace Equation)
-  % \(Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. u(x) = v(|x|), v: \mathbb{R} \to \mathbb{R}\). Denote \( r = |x|\), then 
+  \(Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
   \[
     \frac{\partial r}{\partial x} = \frac{\partial_{x_i}}{\partial_{x_i}}  (\sqrt{x_1^2 + \dots + x_d^2}) = \frac{1}{2{\sqrt{x_1^2 + \dots + x_d^2}}}(2 x_i) = \frac{x_i}{r}
   \]
@@ -179,29 +186,30 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
   So we have \(\Delta u = \left( \sum_{i=1}^d d_{x_i}^2 \right) u = v''(r) + v'(r) (\frac{d}{r} - \frac{1}{r})\)
 
   Thus \(Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
-  % \(\Rightarrow\) \log(v(r))' = \frac{v'(r)}{v(r) = - \frac{d-1}{r}} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\))
-  % \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
-  % \(\Rightarrow\) v(r) = 
-  % \begin{cases}
-  %   \frac{const}{r^{d-2}} + const xx + const, d\ge 3 \\
-  %   const \log(r) + const xx r + const , d = 2
-  % \end{cases}
+  \(\Rightarrow\) \(\log(v(r))' = \frac{v'(r)}{v(r)} = - \frac{d-1}{r} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\)) \\
+  \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
+  \(\begin{cases}
+    \frac{const}{r^{d-2}} + const xx + const &,d \ge 3 \\
+    const \log(r) + const xx r + const &,d = 2
+  \end{cases}\)
 \end{rem}
 
-\begin{def}(Fundamential Solution of Laplace Equation)
-\begin{align*}
-  \Phi(x) = 
-  \begin{cases}
-    - \frac{1}{2 \pi} \log(|x|) &, d = 2 \\
-    \frac{1}{4 \pi |x|} &, d = 3 \\
-    \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}} &, d \ge 3
-  \end{cases}
-\end{align*}
-Where \(|B_1|\) is the Volume of the ball \(B_1(0) = B(0, 1) \subseteq \mathbb{R}^d\).
-\end{def}
+\begin{defn} 
+  (Fundamential Solution of Laplace Equation)
+  \begin{align*}
+    \Phi(x) = \begin{cases}
+      - \frac{1}{2 \pi} \log(|x|) &, d = 2 \\
+      \frac{1}{4 \pi |x|} &, d = 3 \\
+      \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}} &, d \ge 3
+    \end{cases}
+  \end{align*}
+  
+  Where \( |B_1| \) is the Volume of the ball \(B_1(0) = B(0, 1) \subseteq \mathbb{R}^d\).
+
+\end{defn}
 
 \begin{rem}
-  \(\Delta \Phi(x)) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
+  \(\Delta \Phi(x) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
 \end{rem}
 
 \end{document}
