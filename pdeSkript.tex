@@ -1,0 +1,166 @@
+\documentclass[ngerman, BCOR=5mm]{scrreprt}
+
+\KOMAoption{open}{left}
+
+\usepackage{a4}
+\setkomafont{sectioning}{\mdseries} 
+\usepackage{tgtermes}
+
+\usepackage[english]{babel}
+%\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage[arrow, matrix, curve]{xy}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{datetime}
+\usepackage[hidelinks]{hyperref}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+\usepackage{adjustbox}
+\usepackage{fancybox}
+\usepackage{makeidx}
+\usepackage{blindtext}
+\usepackage{wallpaper}
+\usepackage{tikz}
+\usepackage[new]{old-arrows}
+\usepackage{wrapfig}
+\usepackage{cutwin}
+\usepackage{tocstyle}
+
+\newtocstyle[KOMAlike][leaders]{alldotted}{}
+\usetocstyle{alldotted}
+
+\setlength{\parindent}{0em} 
+
+\usepackage{amsthm}
+\newtheoremstyle{tommy}% ⟨name ⟩
+{15pt}% ⟨Space above ⟩1
+{15pt}% ⟨Space below ⟩1
+{\normalfont}% ⟨Body font ⟩
+{}% ⟨Indent amount ⟩2
+{\bfseries}% ⟨Theorem head font⟩
+{}% ⟨Punctuation after theorem head ⟩
+{0.7em}% ⟨Space after theorem head ⟩3
+{}% ⟨Theorem head spec (can be left empty, meaning ‘normal’)⟩
+
+\theoremstyle{tommy}
+\newtheorem{defn}{Definition}
+\newtheorem{satz}[defn]{Satz}
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{nota}[defn]{Notation}
+\newtheorem{kor}[defn]{Korollar}
+\newtheorem{folg}[defn]{Folgerung}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{eg}[defn]{Example}
+\newtheorem{bem}[defn]{Bemerkung}
+
+
+\usepackage{chngcntr}
+\counterwithin{defn}{chapter}
+
+
+\renewcommand{\proofname}{Beweis}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+
+%Neue Befehle allgemein
+\newcommand{\IV}{\text{(IV)}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\isoto}{\xrightarrow{\,\smash{\raisebox{-0.40ex}{\ensuremath{\scriptstyle\sim}}}\,}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Auto}{\operatorname{Aut}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\chara}{\operatorname{char}}
+\newcommand{\ggT}{\operatorname{ggT}}
+\newcommand{\Mipo}{\operatorname{Mipo}}
+\newcommand{\Quot}{\operatorname{Quot}}
+\newcommand{\kgV}{\operatorname{kgV}}
+\newcommand{\rg}{\operatorname{rg}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\rang}{\operatorname{rg}}
+\newcommand{\mo}{\operatorname{mod}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\il}{\operatorname{il}}
+\newcommand{\quot}{\operatorname{Quot}}
+\newcommand*\longtwoheadrightarrow{\ensuremath{\relbar\joinrel\twoheadrightarrow}}
+\newcommand{\Vol}{\operatorname{Vol}}
+\newcommand{\Ok}{\mathcal{O}_K}
+\newcommand{\dis}{\operatorname{d}}
+\newcommand{\also}{\ $\Rightarrow$\ }
+\DeclareMathOperator*{\prolim}{\underleftarrow\lim}
+
+%\renewcommand*{\bibtitle}{Literaturverzeichnis}
+
+\title{Partial Differerential Equations \\ Thanh Nam Phan \\ Winter Semester 2020/2021}
+\author{Lecture notes \TeX ed by Thomas Eingartner}
+\date{\today, \currenttime}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+
+
+\chapter{Introduction}
+
+A differential equation is an equation of a function and its derivatives. 
+
+\begin{eg}
+  \begin{align*}
+    f: \mathbb{R} \to \mathbb{R} \\
+    \begin{cases}
+      f(t) = a f(t) \text{ for all } t \ge 0, a \in \mathbb{R} \\
+      f(0) = a_0
+    \end{cases}
+  \end{align*}
+
+  Solution: \(f(t) = a_0 e^{at}\) for all \(t \ge 0\). This is a linear ODE (Ordinary differential equation).
+\end{eg}
+
+\begin{eg} (Non-Linear ODE)
+  \begin{align*}
+    f: \mathbb{R} \to \mathbb{R} \\
+    \begin{cases}
+      f'(t) = 1 + f^2(t) \\
+      f(0) = 1
+    \end{cases}
+  \end{align*}
+  % We consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\) because \(f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t)\). But this solution only \emph{good} in \((- \pi, \pi)\). \exists propblem to extend this to \(\mathbb{R} \to \mathbb{R}\). We have to be careful which the degree of domain of variables ... of solutions ... ?
+\end{eg}
+
+A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives. Recall \(Omega \subseteq \mathbb{R}^d\), \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) open, 
+\begin{align*}
+  \partial_{x_1} f(x) = \lim \frac{f(x + he_i) - f(x)}{h}, e_i = (0,0, 1,, 0, 0) \in \mathbb{R}^d \\
+  D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \ddots \partial_{x_d}^{\alpha_d} f(x), |\alpha| = \sum_{i=1}^d |\alpha_i| \\
+  Df = \nabla f = \text{ gradient of } f = (\partial{x_1} \dots \partial_{x_d}) \\
+  \Delta f = \partial_{x_1}^2 + \dots + \partial^2_{x_d} f \\
+  D^kf = (D^\alpha f)_{|\alpha| = k} \\
+  D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}
+\end{align*}
+
+% \begin{def}
+%   Given a function \(F\). Then the equation of the form 
+%   \[F(D^k u(x), D^{k-1} u(x), \dots, Du(x), u(x), x) = 0\]
+%   with the unknown function \(u: \Omega \subseteq \mathbb{R}^d \to \mathbb{R}\) is called a \emph{PDE of order \(k\)}.
+%   \begin{itemize}
+%     \item Linear PDE: \(\sum_d a_\alpha(x) D^\alpha u(x) = 0\), \(a_\alpha\), \(u\) is unknown. 
+%     \item Non-Linear PDE: More difficult: Semi-linear PDE
+%     \(\sum_{|alpha| = k} a_\alpha(x) D^\alpha u(x) + F(D^{k-1}u, D^{k-2}u, \dots, Du, u, x) = 0\)
+% \end{def}
+
+Goals: For \emph{solving a PDE} we want to
+\begin{itemize}
+  \item Find an explizit solution! In many cases, it is impossible
+  \item Prove a \emph{well-posted theory} (existence of solutions, uniqueness of solutions, continuous dependence of solutions on the data)
+\end{itemize}
+
+
+\end{document}
