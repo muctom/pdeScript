@@ -1,10 +1,6 @@
-\documentclass[ngerman, BCOR=5mm]{scrreprt}
-
-\KOMAoption{open}{left}
+\documentclass[ngerman, BCOR=5mm]{report}
 
 \usepackage{a4}
-\setkomafont{sectioning}{\mdseries} 
-\usepackage{tgtermes}
 
 \usepackage[english]{babel}
 %\usepackage{ngerman}
@@ -17,19 +13,6 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{stmaryrd}
-\usepackage{adjustbox}
-\usepackage{fancybox}
-\usepackage{makeidx}
-\usepackage{blindtext}
-\usepackage{wallpaper}
-\usepackage{tikz}
-\usepackage[new]{old-arrows}
-\usepackage{wrapfig}
-\usepackage{cutwin}
-\usepackage{tocstyle}
-
-\newtocstyle[KOMAlike][leaders]{alldotted}{}
-\usetocstyle{alldotted}
 
 \setlength{\parindent}{0em} 
 
@@ -46,56 +29,21 @@
 
 \theoremstyle{tommy}
 \newtheorem{defn}{Definition}
-\newtheorem{satz}[defn]{Satz}
+\newtheorem{thm}[defn]{Theorem}
 \newtheorem{lem}[defn]{Lemma}
 \newtheorem{nota}[defn]{Notation}
-\newtheorem{kor}[defn]{Korollar}
-\newtheorem{folg}[defn]{Folgerung}
+\newtheorem{cor}[defn]{Corrolary}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{eg}[defn]{Example}
-\newtheorem{bem}[defn]{Bemerkung}
+\newtheorem{bem}[defn]{Remark}
 
-
+% Counter
 \usepackage{chngcntr}
 \counterwithin{defn}{chapter}
 
 
 \renewcommand{\proofname}{Beweis}
-\renewcommand\qedsymbol{$\blacksquare$}
-
-
-%Neue Befehle allgemein
-\newcommand{\IV}{\text{(IV)}}
-\newcommand{\Aut}{\operatorname{Aut}}
-\newcommand{\grad}{\operatorname{grad}}
-\newcommand{\im}{\operatorname{im}}
-\newcommand{\id}{\operatorname{id}}
-\newcommand{\isoto}{\xrightarrow{\,\smash{\raisebox{-0.40ex}{\ensuremath{\scriptstyle\sim}}}\,}}
-\newcommand{\Gal}{\operatorname{Gal}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\Auto}{\operatorname{Aut}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\chara}{\operatorname{char}}
-\newcommand{\ggT}{\operatorname{ggT}}
-\newcommand{\Mipo}{\operatorname{Mipo}}
-\newcommand{\Quot}{\operatorname{Quot}}
-\newcommand{\kgV}{\operatorname{kgV}}
-\newcommand{\rg}{\operatorname{rg}}
-\newcommand{\ord}{\operatorname{ord}}
-\newcommand{\rang}{\operatorname{rg}}
-\newcommand{\mo}{\operatorname{mod}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\GL}{\operatorname{GL}}
-\newcommand{\il}{\operatorname{il}}
-\newcommand{\quot}{\operatorname{Quot}}
-\newcommand*\longtwoheadrightarrow{\ensuremath{\relbar\joinrel\twoheadrightarrow}}
-\newcommand{\Vol}{\operatorname{Vol}}
-\newcommand{\Ok}{\mathcal{O}_K}
-\newcommand{\dis}{\operatorname{d}}
-\newcommand{\also}{\ $\Rightarrow$\ }
-\DeclareMathOperator*{\prolim}{\underleftarrow\lim}
-
-%\renewcommand*{\bibtitle}{Literaturverzeichnis}
+\renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thanh Nam Phan \\ Winter Semester 2020/2021}
 \author{Lecture notes \TeX ed by Thomas Eingartner}
