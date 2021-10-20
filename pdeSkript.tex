@@ -172,7 +172,7 @@ for any \(V \subseteq \Omega \) open.
   Let \(A \subseteq \mathbb{R}^d\) open, \(K \subseteq A\) d-dim. compactum with \(C^1\) boundary and \(f, g \in C^2(A)\)
   \begin{enumerate}
     \item Green's first identity (Partial Integration): \begin{align*}
-      \int_K \nabla f \cdot \nabla g \, dx = \int_{\partial K} f \frac{\partial f}{\partial \nu} \, dS - \int_K f \Delta g \, dx
+      \int_K \nabla f \cdot \nabla g \, dx = \int_{\partial K} f \frac{\partial g}{\partial \nu} \, dS - \int_K f \Delta g \, dx
     \end{align*}
     where \(\frac{\partial g}{\partial \nu} = \partial_\nu g = \nu \cdot \nabla g\)
     \item Green's second identity: \begin{align*}
@@ -284,27 +284,18 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     - \Delta u(x) 
     &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y) \, dy
     = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \, dy \\
-    &= \int_{\mathbb{R}^d \setminus B(0, \epsilon)} + \int_{B(0, \epsilon)} \quad (\epsilon > 0 \text{ small})
+    &= \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy + \int_{B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy \quad (\epsilon > 0 \text{ small})
   \end{align*}
   Now we come to the main part. We apply integration by parts (\ref{green-identities}):
   \begin{align*}
-    &\int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \ dy \\
-    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \nabla_y \Phi(y) \cdot \nabla_y f(x-y) \ dy - \int_{\partial B(0, \epsilon)} \Phi \frac{\partial f}{\partial \vec{n}} \ dS(y)
+    &\int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \, dy \\
+    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} (\nabla_y \Phi(y)) \cdot \nabla_y f(x-y) \, dy - \int_{\partial B(0, \epsilon)} \Phi(y) \cdot  \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y) \\
+    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{=0} f(x-y) \, dy \\ &\qquad + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \, dS(y) - \int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y)
   \end{align*}
 
-  \begin{align*}
-    \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{0} f(x-y) \, dy + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) dS(y) - \partial_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) dS(y)
-  \end{align*}
-
-  Recall the outward normal unit vector \(\vec{n}\): \(\frac{\partial}{\partial \vec{n}} = \nabla \vec{n}\).
-
+  We have that \(\nabla_y \Phi(y) = -\frac{1}{d |B_1|} \frac{y}{|y|^d}\) and \( \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)\). This leads to
     \begin{align*}
-      \nabla_y \Phi(y) = \frac{1}{d |B_1|} \frac{y}{|y|^d} \quad \text{ and } \quad \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)
-    \end{align*}
-
-    This leads to:
-    \begin{align*}
-      \frac{\partial}{\partial \vec{n}} &= \frac{1}{d |B_1|} \frac{1}{|y|^{d-1}} = \frac{1}{d |B_1| \epsilon^{d-1}}
+      \frac{\partial \Phi}{\partial \vec{n}} &= \frac{1}{d |B_1|} \frac{1}{|y|^{d-1}} = \frac{1}{d |B_1| \epsilon^{d-1}}.
     \end{align*}
 
     Hence:
