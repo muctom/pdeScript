@@ -146,6 +146,8 @@ In this course we will investigate
 
 
 \chapter{Laplace / Poisson Equation}
+
+\section{Laplace Equation}
 \(- \Delta u = 0\) (Laplace) or \(-\Delta u = f(x)\) (Poisson).
 
 \begin{defn} (Harmonic Function)
@@ -173,7 +175,7 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
 \end{thm}
 
 \begin{rem} (Solving Laplace Equation)
-  \(\Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
+  \(-\Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
   \[
     \frac{\partial r}{\partial x} 
     = \frac{\partial}{\partial x_i}  \left(\sqrt{x_1^2 + \dots + x_d^2}\right) \\
@@ -206,9 +208,8 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
   (Fundamential Solution of Laplace Equation)
   \begin{align*}
     \Phi(x) = \begin{cases}
-      - \frac{1}{2 \pi} \log(|x|) &, d = 2 \\
-      \frac{1}{4 \pi |x|} &, d = 3 \\
-      \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}} &, d \ge 3
+      - \frac{1}{2 \pi} \log(|x|), & d = 2 \\
+      \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}}, & d \ge 3
     \end{cases}
   \end{align*}
   
@@ -221,4 +222,103 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
 \end{rem}
 
 
+\section{Poisson-Equation}
+The Poisson-Equation is \(-\Delta u(x) = f(x)\) in \(\mathbb{R}^d\). The explicit solution is given by
+\begin{align*}
+  u(x) &= (\Phi \star f)(x) \\
+  = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \ dy 
+  = int_{\mathbb{R}^d} \Phi(y)f(x-y) \ dy
+\end{align*}
+This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \Phi) \star f = \delta_0 \star f = f\]
+
+
+\begin{thm}
+  Assume \(f \in C_c^2(\mathbb{R}^d)\), i.e. \(f \in C^2{\mathbb{R}^d}\) and compactly supported. Then \(u = \Phi \star f\), where \(\Phi\) is the fundamential solution if the Laplace equation satisfies that \(u \in C^2(\mathbb{R}^d)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\)
+\end{thm}
+
+
+\begin{proof}
+  By definition we have
+  \begin{align*}
+    u(x) &= \int_{\mathbb{R}^d} \Phi(y) f(x-y) dy.
+  \end{align*}
+  Firstly we check that \(u\) is continuous: Take \(x_k \to x_0\) in \(\mathbb{R}^d\). We prove that \(u(x_k) \to u_0\), i.e.
+  \begin{align*}
+    \lim_{n \to \infty} \int_{\mathbb{R}^d} \Phi(y) f(x_n - y) \ dy = \int_{\mathbb{R}^d} \Phi(y) f(x_0 - y) \ dy
+  \end{align*}
+  This follows from the Dominated Convegence Theorem. More precisely:
+  \begin{align*}
+    \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \backslash \{0\}
+  \end{align*}
+  and 
+  \begin{align*}
+    |\Phi(y) f(x-y)| &\le \| f ||_{\L^\infty} \mathbb{1}(|y| \le R) |\Phi(y)| \in L^1(\mathbb{R}^d, dy)
+  \end{align*}
+  where \(R > 0\) depends on \(\{x_n\}\) and \(\operatorname{supp}(f)\) but independent of \(y\). Now we compute the derivatives:
+  \begin{align*}
+    \partial_{x_i} u(x) &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) f(x-y) \ dy \int \Phi(y) \partial_{x_i} f(x-y) \ dy \\
+    &\lim_{h \to 0} \int_{\mathbb{R}^d} \Phi(y) \frac{f(x + h e_i - y) - f(x-y)}{h} \ dy \\
+    D^\alpha u(x) &= \int_{\mathbb{R}^d} \Phi(y) D_x^\alpha f(x-y) \ dy \quad \text{for all } |\alpha| \le 2
+  \end{align*}
+  \(D^\alpha u(x)\)  is continuous, thus \(u \in C^2(\mathbb{R}^d)\)
+  Now we check of this solves the Poisson-Equation:
+  % \begin{align*}
+  %   - \Delta u(x) 
+    % &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y) \ dy 
+    % = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \ dy
+  %   &= \int_{\mathbb{R}^d \backslash B(0, \epsilon)} + \int_{B(0, \epsilon)} \quad (\epsilon > 0 \text{ small})
+  % \end{align*}
+  Now we come to the main part. We apply integration by parts:
+  % \begin{align*}
+  %   \int_{\mathbb{R}^d \backslash \B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \ dy
+  %   = \int_{\mathbb{R}^d \backslash \B(0, \epsilon)} \nabla_y \Phi(y) \cdot \nabla_y f(x-y) \ dy - \int_{\partial \B(0, \epsilon)} \Phi \frac{\partial f}{\partial n \vec{n}} \ dS(y)
+  % \end{align*}
+  % \begin{align*}
+  %   \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{0} f(x-y) \ dy + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) dS(y) - \partial_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) dS(y)
+  % \end{align*}
+
+  Recall the outward normal unit vector \(\vec{n}\): \(\frac{\partial}{\partial \vec{n}} = \nabla \vec{n}\).
+
+    \begin{align*}
+      \nabla_y \Phi(y) = \frac{1}{d |B_1|} \frac{y}{|y|^d} \quad \text{ and } \quad \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)
+    \end{align*}
+
+    This leads to:
+    \begin{align*}
+      \frac{\partial}{\partial \vec{n}} &= \frac{1}{d |B_1|} \frac{1}{|y|^{d-1}} = \frac{1}{d |B_1| \epsilon^{d-1}}
+    \end{align*}
+
+    Hence:
+    % \begin{align*}
+    %   \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \ dS(y) 
+    %   = \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
+    %   = \avint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
+    %   = \avint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
+    %   \xrightarrow{\epsilon \to 0} f(x)
+    % \end{align*}
+
+      Error terms:
+      
+      \begin{enumerate}
+        \item 
+          \begin{align*}
+            \left| \int_{B(0, \epsilon)} \Phi(y) (- \Delta_y) f(x-y) \ dy\right| 
+            &\le \int_{B(0, \epsilon)}|\Phi(y)| \underbrace{|-\Delta_y f(x-y)}_{\le \|\Delta f\|_{L^\infty} \mathbb{1}(|y| \le R)} \ dy \\
+            &\le \| \Delta f\|_{L^\infty} \int_{\mathbb{R}^d} \underbrace{|\Phi(y) \mathbb{1}(|y| \le R)}_{L^1(\mathbb{R}^d)} \mathbb{1}(|y| \le \epsilon) 
+            &\xrightarrow{\epsilon \to 0} 0
+          \end{align*}
+        Where \(R > 0\) depends on \(x\) and the support of \(f\) but is independent of \(y\).
+      \item 
+        \begin{align*}
+          \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
+          &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
+          &\le \begin{cases}
+            const \cdot \epsilon \to 0, & d \ge 3 \\
+            const \cdot \epsilon | \log \epsilon| \to 0, & d = 2
+          \end{cases}
+        \end{align*}
+        Conclusion: \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) proved that \(u = \Phi \star f\) and \(f \in C_c^2(\mathbb{R}^d)\).
+      \end{enumerate}
+
+  \end{proof}
 \end{document}
