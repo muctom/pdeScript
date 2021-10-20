@@ -4,7 +4,7 @@
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath, amssymb, mathtools}
+\usepackage{amsmath, amssymb, mathtools, esint}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{datetime}
@@ -248,7 +248,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{align*}
   This follows from the Dominated Convegence Theorem. More precisely:
   \begin{align*}
-    \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \backslash \{0\}
+    \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \setminus \{0\}
   \end{align*}
   and 
   \begin{align*}
@@ -262,20 +262,21 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{align*}
   \(D^\alpha u(x)\)  is continuous, thus \(u \in C^2(\mathbb{R}^d)\)
   Now we check of this solves the Poisson-Equation:
-  % \begin{align*}
-  %   - \Delta u(x) 
-    % &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y) \ dy 
-    % = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \ dy
-  %   &= \int_{\mathbb{R}^d \backslash B(0, \epsilon)} + \int_{B(0, \epsilon)} \quad (\epsilon > 0 \text{ small})
-  % \end{align*}
+  \begin{align*}
+    - \Delta u(x) 
+    &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y)
+    = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \ dy \\
+    &= \int_{\mathbb{R}^d \setminus B(0, \epsilon)} + \int_{B(0, \epsilon)} \quad (\epsilon > 0 \text{ small})
+  \end{align*}
   Now we come to the main part. We apply integration by parts:
-  % \begin{align*}
-  %   \int_{\mathbb{R}^d \backslash \B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \ dy
-  %   = \int_{\mathbb{R}^d \backslash \B(0, \epsilon)} \nabla_y \Phi(y) \cdot \nabla_y f(x-y) \ dy - \int_{\partial \B(0, \epsilon)} \Phi \frac{\partial f}{\partial n \vec{n}} \ dS(y)
-  % \end{align*}
-  % \begin{align*}
-  %   \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{0} f(x-y) \ dy + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) dS(y) - \partial_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) dS(y)
-  % \end{align*}
+  \begin{align*}
+    \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \ dy
+    = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \nabla_y \Phi(y) \cdot \nabla_y f(x-y) \ dy - \int_{\partial B(0, \epsilon)} \Phi \frac{\partial f}{\partial n \vec{n}} \ dS(y)
+  \end{align*}
+
+  \begin{align*}
+    \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{0} f(x-y) \, dy + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) dS(y) - \partial_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) dS(y)
+  \end{align*}
 
   Recall the outward normal unit vector \(\vec{n}\): \(\frac{\partial}{\partial \vec{n}} = \nabla \vec{n}\).
 
@@ -289,13 +290,13 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \end{align*}
 
     Hence:
-    % \begin{align*}
-    %   \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \ dS(y) 
-    %   = \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
-    %   = \avint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
-    %   = \avint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
-    %   \xrightarrow{\epsilon \to 0} f(x)
-    % \end{align*}
+    \begin{align*}
+      \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \ dS(y) 
+      &= \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y) \\
+      = \fint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
+      &= \fint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
+      \xrightarrow{\epsilon \to 0} f(x)
+    \end{align*}
 
       Error terms:
       
