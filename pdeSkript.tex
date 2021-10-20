@@ -80,15 +80,15 @@ A differential equation is an equation of a function and its derivatives.
   Lets consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\). Then we have \[f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t),\] but this solution only is \emph{good} in \((- \pi, \pi)\). It's a problem to extend this to \(\mathbb{R} \to \mathbb{R}\).
 \end{eg}
 
-A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives. \\
+A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives.
 
 \begin{rem}
   Recall for \( \Omega \subseteq \mathbb{R}^d\) open and \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) the notation of partial derivatives:
   \begin{itemize}
     \item \(\partial_{x_i} f(x) = \lim_{h \to 0} \frac{f(x + he_i) - f(x)}{h}, \text{where } e_i = (0, 0, \dots, 1, \dots, 0, 0) \in \mathbb{R}^d\)
     \item \(D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \cdots \partial_{x_d}^{\alpha_d} f(x), \text{where } \alpha \in \mathbb{N}^d\)
-    \item \(Df = \nabla f = (\partial{x_1}, \dots, \partial_{x_d})\)
-    \item \(\Delta f = \partial_{x_1}^2 + \ldots + \partial^2_{x_d} f\)
+    \item \(Df = \nabla f = (\partial{x_1}, \ldots, \partial_{x_d})\)
+    \item \(\Delta f = \partial_{x_1}^2 + \cdots + \partial^2_{x_d} f\)
     \item \(D^k f = (D^\alpha f)_{|\alpha| = k},  \text{where } |\alpha| = \sum_{i=1}^d |\alpha_i|\)
     \item \(D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}\)
   \end{itemize}
@@ -114,11 +114,11 @@ Goals: For \emph{solving a PDE} we want to
 
 We have two notations of solutions:
 \begin{enumerate}
-  \item Classical solution: The solution is continuous differentiable (e.g. \( \Delta u = f  \leadsto u \in C^2  \) )
+  \item Classical solution: The solution is continuous differentiable (e.g. \( \Delta u = f  \leadsto u \in C^2  \))
   \item Weak Solutions: The solution is not smooth/continuous
 \end{enumerate}
 
-\begin{defn}(Spaces of continous and differentiable functions)
+\begin{defn} (Spaces of continous and differentiable functions)
   Let \(\Omega \subseteq R^d\) be open
   \begin{align*}
     C(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid f \text{ continuous} \right\} \\
@@ -152,7 +152,7 @@ In this course we will investigate
   Let \(Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
 \end{defn}
 
-\begin{thm}(Gauss-Green Theorem)
+\begin{thm} (Gauss-Green Theorem)
   \[ \int_{\partial V} F \vec{u}\ dS(x) = \int_V \div(F)\ dx \]
 \end{thm}
 Thus
@@ -167,25 +167,33 @@ for any \(V \subseteq \Omega \) open.
 Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be continuous. Prove that if \( \int_B f(x) \ dx = 0 \), then \( u \equiv 0 \) in \(\Omega\).
 \end{ex}
 
-\begin{thm}(Fundamential Lemma of Calculus of Variations)
+\begin{thm} (Fundamential Lemma of Calculus of Variations)
   Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f \in L^1(\Omega)\). If 
   \(\int_B f(x) \ dx = 0\) for all \(x \in B_r(x) \subseteq \Omega\), then \(f(x) = 0\) a.e. (almost everywhere) \(x \in \Omega\).
 \end{thm}
 
-\begin{rem}(Solving Laplace Equation)
-  \(Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
+\begin{rem} (Solving Laplace Equation)
+  \(\Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
   \[
-    \frac{\partial r}{\partial x} = \frac{\partial_{x_i}}{\partial_{x_i}}  (\sqrt{x_1^2 + \dots + x_d^2}) = \frac{1}{2{\sqrt{x_1^2 + \dots + x_d^2}}}(2 x_i) = \frac{x_i}{r}
+    \frac{\partial r}{\partial x} 
+    = \frac{\partial}{\partial x_i}  \left(\sqrt{x_1^2 + \dots + x_d^2}\right) \\
+    = \frac{2 x_i}{2{\sqrt{x_1^2 + \dots + x_d^2}}} \\
+    = \frac{x_i}{r}
   \]
   Then
   \begin{align*}
-    \partial_{x_i} u &= \partial_{x_i} v = (\partial_r v) \frac{\partial r}{\partial_{x_i}} = v'(r) \frac{x_i}{r} \\
-    \partial x_i^2 u &= \partial_{x_i}(v(r)' \frac{x_i}{r}) = \partial x_i(v(r)') \frac{x_i}{r} + v'(r) \partial_{x_i} (\frac{x_i}{r}) 
-    = \partial_r(v'(r))(\frac{dr}{\partial_{x_i}}) \frac{x_i}{r} + v'(r)\left( \frac{1}{r} - \frac{x_i}{r^2}(\partial_{x_i} r) \right) = v'(r) \frac{x_i^2}{r^2} + v'r(r)\left(\frac{1}{r} - \frac{x_i^2}{r^3}\right)
+    \partial_{x_i} u &= \partial_{x_i} v = (\partial_r v) \frac{\partial r}{\partial {x_i}} 
+    = v'(r) \frac{x_i}{r} \\
+    \partial^2_{x_i} u 
+    &= \partial_{x_i} \left(v(r)' \frac{x_i}{r}\right) 
+    = \partial_{x_i}(v(r)') \frac{x_i}{r} + v'(r) \partial_{x_i} \left(\frac{x_i}{r}\right) \\
+    &= \partial_r(v'(r))\left(\frac{dr}{\partial_{x_i}}\right) \frac{x_i}{r} + v'(r)\left( \frac{1}{r} - \frac{x_i}{r^2}(\partial_{x_i} r) \right) 
+    = v'(r) \frac{x_i^2}{r^2} + v'r(r)\left(\frac{1}{r} - \frac{x_i^2}{r^3}\right)
   \end{align*}
+
   So we have \(\Delta u = \left( \sum_{i=1}^d d_{x_i}^2 \right) u = v''(r) + v'(r) (\frac{d}{r} - \frac{1}{r})\)
 
-  Thus \(Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
+  Thus \(\Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
   \(\Rightarrow\) \(\log(v(r))' = \frac{v'(r)}{v(r)} = - \frac{d-1}{r} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\)) \\
   \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
   \(\begin{cases}
@@ -211,5 +219,6 @@ Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be 
 \begin{rem}
   \(\Delta \Phi(x) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
 \end{rem}
+
 
 \end{document}
