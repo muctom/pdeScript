@@ -43,7 +43,7 @@
 \renewcommand\div{\operatorname{div}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
-\title{Partial Differerential Equations \\ Thanh Nam Phan \\ Winter Semester 2021/2022}
+\title{Partial Differerential Equations \\ Thành Nam Phan \\ Winter Semester 2021/2022}
 \author{Lecture notes \TeX{}ed by Thomas Eingartner}
 \date{\today, \currenttime}
 
@@ -160,7 +160,7 @@ In this course we will investigate
   where \(\nu\) is the outward unit normal vector field on \(\partial K\).
 Thus
 \begin{align*}
-  0 = \int_{\partial V} \nabla u \cdot \vec{\nu}\ dS(x)
+  \int_{\partial V} \nabla u \cdot \vec{\nu}\ dS(x)
   = \int_V \div(\nabla u) \ dx
   = \int_V \Delta u(x) \ dx
 \end{align*}
@@ -262,7 +262,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \begin{align*}
     \lim_{n \to \infty} \int_{\mathbb{R}^d} \Phi(y) f(x_n - y) \ dy = \int_{\mathbb{R}^d} \Phi(y) f(x_0 - y) \ dy
   \end{align*}
-  This follows from the Dominated Convegence Theorem. More precisely:
+  This follows from the Dominated Convergence Theorem. More precisely:
   \begin{align*}
     \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \setminus \{0\}
   \end{align*}
@@ -290,7 +290,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \begin{align*}
     &\int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \, dy \\
     &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} (\nabla_y \Phi(y)) \cdot \nabla_y f(x-y) \, dy - \int_{\partial B(0, \epsilon)} \Phi(y) \cdot  \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y) \\
-    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{=0} f(x-y) \, dy \\ &\qquad + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \, dS(y) - \int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y)
+    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{=0} f(x-y) \, dy \\ &\qquad + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \, dS(y) - \int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y)
   \end{align*}
 
   We have that \(\nabla_y \Phi(y) = -\frac{1}{d |B_1|} \frac{y}{|y|^d}\) and \( \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)\). This leads to
@@ -300,54 +300,57 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 
     Hence:
     \begin{align*}
-      \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}} f(x-y) \ dS(y) 
+      \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \ dS(y) 
       &= \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y) \\
       = \fint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
       &= \fint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
       \xrightarrow{\epsilon \to 0} f(x)
     \end{align*}
 
-      Error terms:
-      
-      \begin{enumerate}
-        \item 
-          \begin{align*}
-            \left| \int_{B(0, \epsilon)} \Phi(y) (- \Delta_y) f(x-y) \ dy\right| 
-            &\le \int_{B(0, \epsilon)}|\Phi(y)| \underbrace{|-\Delta_y f(x-y)}_{\le \|\Delta f\|_{L^\infty} \mathbb{1}(|y| \le R)} \ dy \\
-            &\le \| \Delta f\|_{L^\infty} \int_{\mathbb{R}^d} \underbrace{|\Phi(y) \mathbb{1}(|y| \le R)}_{L^1(\mathbb{R}^d)} \mathbb{1}(|y| \le \epsilon) 
-            &\xrightarrow{\epsilon \to 0} 0
-          \end{align*}
-        Where \(R > 0\) depends on \(x\) and the support of \(f\) but is independent of \(y\).
-      \item 
-        \begin{align*}
-          \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
-          &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
-          &\le \begin{cases}
-            const \cdot \epsilon \to 0, & d \ge 3 \\
-            const \cdot \epsilon | \log \epsilon| \to 0, & d = 2
-          \end{cases}
-        \end{align*}
-        Conclusion: \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) proved that \(u = \Phi \star f\) and \(f \in C_c^2(\mathbb{R}^d)\). \qedhere
-      \end{enumerate}
+      \begin{samepage}
+        We have to regard the following error terms:
+        \begin{itemize}
+          \item \( 
+              \begin{aligned}[t]
+                \left| \int_{B(0, \epsilon)} \Phi(y) (- \Delta_y) f(x-y) \ dy\right| 
+                &\le \int_{B(0, \epsilon)}|\Phi(y)| \underbrace{|-\Delta_y f(x-y)|}_{\le \|\Delta f\|_{L^\infty} \mathbb{1}(|y| \le R)} \ dy \\
+                &\le \| \Delta f\|_{L^\infty} \int_{\mathbb{R}^d} \underbrace{|\Phi(y)| \mathbb{1}(|y| \le R)}_{L^1(\mathbb{R}^d)} \mathbb{1}(|y| \le \epsilon) 
+                \xrightarrow{\epsilon \to 0} 0
+              \end{aligned}
+            \)
+          Where \(R > 0\) depends on \(x\) and the support of \(f\) but is independent of \(y\).
+        \item \( 
+            \begin{aligned}[t]
+              \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
+              &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
+              &\le \begin{cases}
+                const \cdot \epsilon | \log \epsilon| \to 0, & d = 2 \\
+                const \cdot \epsilon \to 0, & d \ge 3
+              \end{cases}
+            \end{aligned}
+          \)
+        \end{itemize}
+      \end{samepage}
+      Conclusion: \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) proved that \(u = \Phi \star f\) and \(f \in C_c^2(\mathbb{R}^d)\).
   \end{proof}
 
   Thus, if \(f \in C_c^2(\mathbb{R})\), then \(u = \Phi \star f\) satisfies \(u \in C^2(\mathbb{R}^2)\) and \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\).
 
 
 \begin{rem}
-  The result holds for a much bigger class of functions \(f\). For example if \(f \in C_c^1(\mathbb{R})\) we can easil extend the previous proof:
+  The result holds for a much bigger class of functions \(f\). For example if \(f \in C_c^1(\mathbb{R})\) we can easily extend the previous proof:
   \begin{align*}
-    f \in C_c^1 \Rightarrow \partial_{x_i} u = \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \in C(\mathbb{R}^d) \Rightarrow u \in C^1(\mathbb{R}^d)
+    \partial_{x_i} u = \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \in C(\mathbb{R}^d) \Rightarrow u \in C^1(\mathbb{R}^d)
   \end{align*}
   Consequently: 
   \begin{align*}
     \partial_{x_i} \partial_{x_j} u 
     &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) \partial_{x_j} f(x-y) \, dy
-    = \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_j} f(x-y) \, dy \in C(\mathbb{R}^d) \Rightarrow u \in C^2(\mathbb{R}^d)
+    = \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_j} f(x-y) \, dy \in C(\mathbb{R}^d)
   \end{align*}
-  The computation
+  So we have \(u \in C^2(\mathbb{R}^d)\). Now we can compute
   \begin{align*}
-    \Delta u = \sum_{i=1}^d \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_i} f(x-y) \, dy \overset{(IBP)}{=} f(x)
+    \Delta u = \sum_{i=1}^d \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_i} f(x-y) \, dy \overset{(IBP)}{=} f(x).
   \end{align*}
 \end{rem}
 
@@ -357,7 +360,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 
 \section{Equations in general domains}
 \begin{thm}(Mean Value Theorem for Harmonic Functions)
-  Let \(\Omega \subseteq \mathbb{R}\) be open, let \( u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Then
+  \label{mean-value-theorem} Let \(\Omega \subseteq \mathbb{R}\) be open, let \( u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Then
   \begin{align*}
     u(x) 
     &= \fint_{B(x, r)} u
@@ -369,25 +372,25 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   In 1D: \(\Delta u = 0 \Leftrightarrow u'' = 0 \Leftrightarrow u(x) = ax + b\) (Linear Equation)
 \end{ex}
 
-\begin{proof}
+\begin{proof} (Of theorem \ref{mean-value-theorem})
   Consider all \(r > 0\) s.t. \(B(x,r) \subseteq \Omega\),
   \begin{align*}
     f(r) &= \fint_{\partial B(x,r)} u
   \end{align*}
-  We need to prove that \(f(r)\) is independent of \(r\). When it is done, then we imideatelly obtain
+  We need to prove that \(f(r)\) is independent of \(r\). When it is done, then we immediately obtain
   \begin{align*}
     f(r) = \lim_{t \to 0} f(t) = u(x)
   \end{align*}
   as \(u\) is continuous. To prove that, consider
   \begin{align*}
     f'(r) 
-    &= \frac{d}{dr} \left(\fint_{\partial B(0, r)} u(x+y) \, dS(y) \right) 
-    = \frac{d}{dr} \left(\fint_{B(0, 1)} u(x + rz) \, dS(z) \right) \\
-    \text{(dom. convergence)} \quad & = \fint_{\partial B(0, 1)} \frac{d}{dr} [u(x + rz)] \, dS(z)
-    = \fint_{\partial B(0, 1)} \nabla u(x + rz) z \, dS(z) \\
-    &= \fint_{\partial B(x, r)} \nabla u(y) \frac{y-x}{r} \, dS(y)
-    = \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{\partial B(x, r)} \nabla u(y) \cdot \vec{n_y} \, dS(y) \\
-    \text{(Green)} \quad &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{B(x, r)} \underbrace{(\Delta u)(y)}_{= 0} \, dy = 0
+    &= \frac{d}{dr} \left(\fint_{\partial B(0, r)} u(x+y) \, dS(y) \right) \\
+    &= \frac{d}{dr} \left(\fint_{\partial B(0, 1)} u(x + rz) \, dS(z) \right) \\
+    \text{(dom. convergence)} \quad & = \fint_{\partial B(0, 1)} \frac{d}{dr} [u(x + rz)] \, dS(z) \\
+    &= \fint_{\partial B(0, 1)} \nabla u(x + rz) z \, dS(z) \\
+    &= \fint_{\partial B(x, r)} \nabla u(y) \frac{y-x}{r} \, dS(y) \\
+    &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{\partial B(x, r)} \nabla \cdot u(y) \cdot \vec{n_y} \, dS(y) \\
+    \text{(Gauss-Green \ref{gauss-green})} \quad &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{B(x, r)} \underbrace{(\Delta u)(y)}_{= 0} \, dy = 0 \qedhere
   \end{align*}
 \end{proof}
 
