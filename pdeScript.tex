@@ -397,41 +397,44 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 \begin{rem}
   Recall the polar decomposition. Let \(x \in \mathbb{R}^d, x = (r,w), r = |x| > 0, \omega \in S^{d-1}\), then
   \begin{align*}
-    \int_{\mathbb{R}^d} g(y) \, dy = \int_0^r \left(\int_{B(0, r)} g(y) \, dS(y) \right) dr
+    \int_{B(0, r)} g(y) \, dy = \int_0^r \left(\int_{B(0, r)} g(y) \, dS(y) \right) dr
   \end{align*}
 \end{rem}
 
-We already proved that \( u(x) = \fint_{\partial B(x,r)} u \, dy \) if \(B(x,r) \subseteq \Omega\). Now we have 
-\begin{align*}
-  \int_{B(x, r)} u(y) \, dy 
-  &= \int_{B(0, r)} u(x+y) \, dy \\
-  \text{(Pol. decomposition)} \quad &= \int_0^r \left(\int_{\partial B(0, r)} u(x+y) \, dS(y)\right) ds \\
-  &= \int_0^r \left(\int_{\partial B(x, s)} u(y) \, dS(y) \right) ds \\
-  &= \int_0^r \left(|\partial B(x, s)| u(x) \right) ds
-  = |B(x,r)| u(x)
-\end{align*}
-This implies
-\begin{align*}
-  \fint_{B(x,r)} u(y) \, dy = u(x)
-  \quad \text{for any \(B(x,r) \subseteq \Omega\).}
-\end{align*}
+
+\begin{rem}
+  We already proved that for \(u\) harmonic we have \( u(x) = \fint_{\partial B(x,r)} u \, dy \). Now we have 
+  \begin{align*}
+    \int_{B(x, r)} u(y) \, dy 
+    &= \int_{B(0, r)} u(x+y) \, dy \\
+    \text{(Pol. decomposition)} \quad &= \int_0^r \left(\int_{\partial B(0, s)} u(x+y) \, dS(y)\right) ds \\
+    &= \int_0^r \left(\int_{\partial B(x, s)} u(y) \, dS(y) \right) ds \\
+    \text{(Mean value property)} \quad &= \int_0^r \left(|\partial B(x, s)| \, u(x) \right) ds
+    = |B(x,r)| \, u(x)
+  \end{align*}
+  This implies
+  \begin{align*}
+    \fint_{B(x,r)} u(y) \, dy = u(x)
+    \quad \text{for any \(B(x,r) \subseteq \Omega\).}
+  \end{align*}
+\end{rem}
 
 \begin{rem}
   The reverse direction is also correct, namely if \(u \in C^2(\Omega)\) and
   \begin{align*}
     u(x) 
-    &= \fint_{B(x, r)} u
-    = \fint_{\partial B(x,r)} u
-    \quad \text{for all } B(x,r) \subseteq \Omega
+    &= \fint_{B(x, r)} u(y) \, dy
+    = \fint_{\partial B(x,r)} u(y) \, dy
+    \quad \text{for all } B(x,r) \subseteq \Omega,
   \end{align*}
-  Then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
+  then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
 \end{rem}
 
 \begin{thm} (Maximum Principle)
   Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
   \begin{enumerate}
     \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
-    \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const\) in \(\Omega\).
+    \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
   \end{enumerate}
 \end{thm}
 
