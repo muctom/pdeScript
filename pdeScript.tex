@@ -1,6 +1,7 @@
 % chktex-file 11
 % chktex-file 35
 % chktex-file 2
+% chktex-file 10
 % chktex-file 40
 
 \documentclass{report}
@@ -436,26 +437,9 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
 \end{rem}
 
-\begin{ex} (E 1.1)
-  Proof the Gauss–Green formula: Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
-  Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
-\end{ex}
-
-\begin{proof}[My Solution (wrong)]
-  Let \(\tilde 1 = (1, \dots, 1) \in \mathbb{R}^d\).
-  \begin{align*}
-    \int_{B(y, r)} \div(f) \, dx 
-    &= \int_{B(y, r)} \nabla f \cdot \tilde 1 \, dx \\
-    &= \int_{B(y, r)} \nabla f \cdot \nabla x \, dx \\
-    \text{(Partial Integration~\ref{green-identities})} \quad &= \int_{\partial B(y, r)} f \cdot \frac{\partial x}{\partial \nu_x} \, dS(x) - \int_{B(y, r)} f \cdot \underbrace{\Delta x}_{= 0} \, dx \\
-    &= \int_{\partial B(y, r)} f \cdot \nu_x \cdot \underbrace{\nabla x}_{= \tilde 1} \, dS(x) \\
-    &= \int_{\partial B(y, r)} f \cdot \nu_x \, dS(x) \qedhere
-  \end{align*}
-\end{proof}
-
 \begin{thm} (Maximum Principle)
   Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
-  \begin{enumerate}
+  \begin{enumerate}[label=\alph*)]
     \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
     \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
   \end{enumerate}
@@ -477,20 +461,19 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \item[b)] Assume that \(\Omega\) is connected and there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{y \in \Omega} u(x)\). Define \(U = \{ x \in \Omega \mid u(x) = u(x_0)\} = u^{-1}(u(x_0))\). \(U\) is closed since \(u\) is continuous.
     Moreover, \(U\) is open by the mean-value theorem. I.e.~for all \(x \in U\) there is a \(r > 0\) s.t. \(B(x,r) \subseteq U \subseteq \Omega\).
     Since \(U\) is connected we get \(U = \Omega\), so \(u\) is constant in \(\Omega\). On the other hand, if there is no \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega}\) we have \(\forall x_0 \in \Omega: \quad u(x) < \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
+    \item[a)] Given \(\Omega \subseteq \mathbb{R}^d\) open, we can write \(\Omega = \bigcup_i \Omega_i\), where \(\Omega_i\) is open and connected. By b) we have
+      \[\sup_{x \in \bar \Omega_i} u(x) = \sup_{x \in \partial \Omega_i} u(x), \quad \forall i\]
+      So we can conclude
+      \[\quad \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x). \qedhere\]
   \end{enumerate}
-  a) Given \(\Omega \subseteq \mathbb{R}^d\) open, we can write \(\Omega = \bigcup_i \Omega_i\), where \(\Omega_i\) is open and connected. By b) we have \begin{align*}
-    \sup_{x \in \bar \Omega_i} u(x) &= \sup_{x \in \partial \Omega_i} u(x), \quad \forall i \\
-    \Rightarrow \quad \sup_{x \in \bar \Omega} u(x) &= \sup_{x \in \partial \Omega} u(x) \qedhere
-  \end{align*}
 \end{proof}
 
 \begin{defn}
   \begin{itemize}
-    \item If \(\Omega \subseteq \mathbb{R}^d\) is open, \(u \in C^2(\Omega)\), then \(u\) is \emph{sub-harmonic} if \(\Delta u \ge 0\) in \(\Omega\).
-    \item If \(\Delta u \le u\), then \(u\) is called \emph{super-harmonic}.
+    \item If \(\Omega \subseteq \mathbb{R}^d\) is open, \(u \in C^2(\Omega)\), then \(u\) is called \emph{sub-harmonic} if \(\Delta u \ge 0\) in \(\Omega\).
+    \item If \(\Delta u \le 0\), then \(u\) is called \emph{super-harmonic}.
   \end{itemize}
 \end{defn}
-
 
 \begin{thm}
   Let \(\Omega\) be open in \(\mathbb{R}^d\), \(u \in C^2(\Omega)\), \(\Delta u \ge 0\) in \(\Omega\). \begin{enumerate}
@@ -499,23 +482,25 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \end{align*}
     \item Assume that \(\Omega\) is connected and bounded. Then either \begin{itemize}
       \item \(u\) is a constant in \(\Omega\)
-      \item \(u(x) < \sup_{y \in \partial \Omega} u(y)\) for all \(x \in \partial \Omega\)
+      \item \(u(x) < \sup_{y \in \partial \Omega} u(y)\) for all \(x \in \Omega\)
     \end{itemize}
   \end{enumerate}
 \end{thm}
 
-The Poisson Equation for given \(f, g\) on a bounded set is:
-\begin{align*}
-  \begin{cases}
-    - \Delta f = f, &\text{in } \Omega \\
-    u = g, &\text{on } \partial \Omega
-  \end{cases}
-\end{align*} 
+\begin{defn}
+  The \emph{Poisson Equation} for given \(f, g\) on a bounded set is:
+  \begin{align*}
+    \begin{cases}
+      - \Delta u = f, &\text{in } \Omega \\
+      u = g, &\text{on } \partial \Omega
+    \end{cases}
+  \end{align*} 
+\end{defn}
 
 \begin{thm}(Uniqueness)
   Let \(\Omega \subseteq \mathbb{R}^d\) be bounded, open  and connected. Let \(f \in C(\Omega), g \in C(\partial \Omega)\). Then there exists \emph{at most} one solution \(u \in C^2(\Omega) \cap C(\bar \Omega)\), s.t. \begin{align*}
     \begin{cases}
-      - \Delta f = f, &\text{in } \Omega \\
+      - \Delta u = f, &\text{in } \Omega \\
       u = g, &\text{on } \partial \Omega
     \end{cases}
   \end{align*}
@@ -523,22 +508,25 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
 
 \begin{proof}
   Assume that we have two solutions \(u_1\) and \(u_2\). Then \(u \coloneqq u_1 - u_2\) is a solution to 
-  % \begin{align*}
-  %   \begin{cases}
-  %     - \Delta u = 0, &\text{in } \Omega
-  %     u = 0 &\text{on } \partial \Omega
-  %   \end{cases}
-  % \end{align*}
-  By the maximum principle, we know that \(u = 0\) in \(\Omega\). More precisely, by the maximum principle we have
+  \begin{align*}
+    \begin{cases}
+      - \Delta u = 0, &\text{in } \Omega \\
+      u = 0 &\text{on } \partial \Omega
+    \end{cases}
+  \end{align*}
+  By the maximum principle, we know that \(u = 0\) in \(\Omega\). More precisely, by the maximum principle we have \(\forall x \in \Omega\)
   \begin{align*}
     \sup_{x \in \Omega} u(x) \le \sup_{x \in \partial \Omega} u(x) = 0
-    \Rightarrow u(x) \le 0 \forall x \in \Omega
+    \quad \Rightarrow \quad
+    u(x) \le 0
   \end{align*}
-  Since \(-u\) satisfies the same property:
+  Since \(-u\) satisfies the same property we have \(\forall x \in \Omega\):
   \begin{align*}
-    \sup_{x \in \Omega}(-u(x)) \le \sup_{x \in \partial \Omega} (-u(x)) = 0 \\
-    \Rightarrow - u(x) \le 0 \text{ for all } x \in \Omega \\
-    \Rightarrow u(x) \ge 0 \text{ for all } x \in \Omega
+    \sup_{x \in \Omega}(-u(x)) \le \sup_{x \in \partial \Omega} (-u(x)) = 0
+    \quad \Rightarrow \quad
+    - u(x) \le 0
+    \quad \Rightarrow \quad
+    u(x) \ge 0
   \end{align*}
   So we geht \(u(x)  = 0\) in \(\Omega\).
 \end{proof}
@@ -548,7 +536,7 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
   \begin{align*}
     \begin{cases}
       \Delta u = 0, &\text{in } \Omega \\
-      u = g, &\text{on } \delta \Omega
+      u = g, &\text{on } \partial \Omega
     \end{cases}
   \end{align*}
   Proof that \begin{enumerate}
@@ -558,7 +546,7 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
 \end{ex}
 
 \begin{lem} (Estimates for derivatives)\label{estimates-of-derivatives} If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\) and \(B(x_0, r) \subseteq \Omega\), then 
-  \[D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u|\]
+  \[|D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u|\]
 \end{lem}
 
 \begin{thm} (Regularity)
@@ -566,19 +554,19 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
 \end{thm}
 
 \begin{proof}
-  % We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\), \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \g 1\), \(\eta\) radial.
-  \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
+  We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
   \begin{align*}
     \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
   \end{align*}
   We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
   \begin{align*}
     u_\epsilon(x) 
-    &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy 
-    = \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
-    &= \int_0^\infty \left[\int_{\partial B} n_\epsilon(r) \, dS(y)\right] dr
-    = \int_0^\infty \left[\eta_\epsilon(r) |\partial B(x, r)| u(x) \right] \, dr \\
-    &= u(x) \int_0^\infty \left[\eta_\epsilon(r) |\partial B(0, r)|\right] \, dr = u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
+    &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
+    &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
+    (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
+    \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
+    &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
+    &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
   \end{align*}
 
   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
@@ -588,8 +576,8 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
-  Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\), so \(\Delta u = 0\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
-  Analytically, we need to prove that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
+  Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
+  To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
   Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
   We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
   \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
@@ -598,7 +586,7 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
   \[|D^\alpha u(x)| \le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|\]
 
   \begin{align*}
-    |R_N(x) 
+    |R_N(x)| 
     &\le \sum_{|\alpha| = N} \|D^\alpha u\|_{L^\infty(B(x_0, r))} \frac{r^N}{\alpha!} \quad \text{for all } x \in B(x_0, r) \\
     &\le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{r^N}{\alpha!} \int_{B(x_0, (L+1) r)} |u| \\
     &= \sum_{|\alpha| = N} \left(\frac{c_d N}{L}\right)^N \frac{1}{\alpha!} \underbrace{ \frac{1}{(Lr)^d} \int_{B(x_0, (L+1)r)} |u|}_{M}
@@ -613,6 +601,24 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
     &\le \left(\frac{d C_d N}{L}\right)^N \frac{1}{N!} M
   \end{align*}
   We need \(N^N << N!\) (Stirly formula)
+\end{proof}
+
+\begin{ex} (E 1.1)
+  Proof the Gauss–Green formula: Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
+  Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
+\end{ex}
+
+\begin{ex} (E 1.2)
+  Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r) u = 0}\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
+\end{ex}
+
+\begin{proof} [My Solution]
+  Assume there is a \(x_0 \in \mathbb{R}^d\) s.t. w.l.o.g. \(u(x_0) > 0\). Since \(u\) is continous there is a ball \(B(x_0, r)\) s.t. \(u(y) > \frac{u(x_0)}{2}\) for all \(y \in B(x_0, r)\). But then we get
+  \begin{align*}
+    \int_{B(x_0, r)} u(y) \, dy
+    &\ge \int_{B(x_0, r)} |u(x_0)| \, dy
+    = |u(x_0)| \, |B(x_0, r)| > 0. \qedhere
+  \end{align*}
 \end{proof}
 
 \end{document}
