@@ -46,6 +46,7 @@
 \counterwithin{defn}{chapter}
 
 \renewcommand\div{\operatorname{div}}
+\newcommand{\dist}{\operatorname{dist}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thành Nam Phan \\ Winter Semester 2021/2022}
@@ -461,7 +462,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 \end{thm}
 
 \begin{proof}[Proof-Idea]
-  Assume there exists \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \bar \Omega} u(x)\). We have that \(B(x_0, r) \subseteq \Omega\), so by the Mean value theorem we have
+  Assume there exists \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \bar \Omega} u(x)\). We have that \(B(x_0, r) \subseteq \Omega\), so by the mean valum theorem we have
   \begin{align*}
     u(x_0) 
     = \fint_{B(x_0, r)} \underbrace{u(x)}_{\le u(x_0)}
@@ -472,9 +473,11 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 
 \begin{proof}
   Given \(U \subseteq \mathbb{R}^d\) open, we can write \(U = \bigcup_i U_i\), where \(U_i\) is open and connected.
-  % \begin{enumerate}
-  %   \item[b)] Assume that \(\Omega\) is connected and there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{y \in \Omega} u(x)\). Define \(U = \{ x \in \Omega \mid u(x) = u(x_0)\} = u^{-1}(u(x_0))\). \(U\) is closed since \(u\) is continuous. Moreover, \(U\) is open by the mean-value theorem. I.e. for all \(x \in U\) there is a \(r > 0\) s.t. \(B(x,r) \subseteq U \subseteq \Omega\). Since \(U\) is connected we get \(U = \Omega\), so \(u\) is constant in \(\Omega\). On the other hand, if there is no \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega} we have \(\forall x_0 \in \Omega: \quad u(x) < \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
-  % \end{enumerate}
+  \begin{enumerate}
+    \item[b)] Assume that \(\Omega\) is connected and there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{y \in \Omega} u(x)\). Define \(U = \{ x \in \Omega \mid u(x) = u(x_0)\} = u^{-1}(u(x_0))\). \(U\) is closed since \(u\) is continuous.
+    Moreover, \(U\) is open by the mean-value theorem. I.e.~for all \(x \in U\) there is a \(r > 0\) s.t. \(B(x,r) \subseteq U \subseteq \Omega\).
+    Since \(U\) is connected we get \(U = \Omega\), so \(u\) is constant in \(\Omega\). On the other hand, if there is no \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega}\) we have \(\forall x_0 \in \Omega: \quad u(x) < \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
+  \end{enumerate}
   a) Given \(\Omega \subseteq \mathbb{R}^d\) open, we can write \(\Omega = \bigcup_i \Omega_i\), where \(\Omega_i\) is open and connected. By b) we have \begin{align*}
     \sup_{x \in \bar \Omega_i} u(x) &= \sup_{x \in \partial \Omega_i} u(x), \quad \forall i \\
     \Rightarrow \quad \sup_{x \in \bar \Omega} u(x) &= \sup_{x \in \partial \Omega} u(x) \qedhere
@@ -537,7 +540,7 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
     \Rightarrow - u(x) \le 0 \text{ for all } x \in \Omega \\
     \Rightarrow u(x) \ge 0 \text{ for all } x \in \Omega
   \end{align*}
-  So we geht \(u(x)  = 0\) in \(Omega\).
+  So we geht \(u(x)  = 0\) in \(\Omega\).
 \end{proof}
 
 \begin{ex}
@@ -553,5 +556,63 @@ The Poisson Equation for given \(f, g\) on a bounded set is:
     \item If \(g \ge 0\) on \(\partial \Omega\) and \(g \ne 0\), then \(u > 0\) in \(\Omega\).
   \end{enumerate}
 \end{ex}
+
+\begin{lem} (Estimates for derivatives)\label{estimates-of-derivatives} If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\) and \(B(x_0, r) \subseteq \Omega\), then 
+  \[D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u|\]
+\end{lem}
+
+\begin{thm} (Regularity)
+  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\), namely \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
+\end{thm}
+
+\begin{proof}
+  % We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\), \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \g 1\), \(\eta\) radial.
+  \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
+  \begin{align*}
+    \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
+  \end{align*}
+  We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
+  \begin{align*}
+    u_\epsilon(x) 
+    &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy 
+    = \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
+    &= \int_0^\infty \left[\int_{\partial B} n_\epsilon(r) \, dS(y)\right] dr
+    = \int_0^\infty \left[\eta_\epsilon(r) |\partial B(x, r)| u(x) \right] \, dr \\
+    &= u(x) \int_0^\infty \left[\eta_\epsilon(r) |\partial B(0, r)|\right] \, dr = u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
+  \end{align*}
+
+  On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
+
+  Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
+  Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
+  Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
+  \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
+  is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
+  Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\), so \(\Delta u = 0\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
+  Analytically, we need to prove that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
+  Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
+  We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
+  \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
+  where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
+  We have: Take \(x_0 \in \Omega\), take \(r > 0\) small and \(L = L_d > 0\) large, s.t. \(B(x_0, (L+1) r) \subseteq \Omega\). Then for all \(x \in B(x_0, r)\) we have \(B(x, L_r) \subseteq B(x_0, (L+1)r) \subseteq \Omega\). With lemma~\ref{estimates-of-derivatives} we get
+  \[|D^\alpha u(x)| \le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|\]
+
+  \begin{align*}
+    |R_N(x) 
+    &\le \sum_{|\alpha| = N} \|D^\alpha u\|_{L^\infty(B(x_0, r))} \frac{r^N}{\alpha!} \quad \text{for all } x \in B(x_0, r) \\
+    &\le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{r^N}{\alpha!} \int_{B(x_0, (L+1) r)} |u| \\
+    &= \sum_{|\alpha| = N} \left(\frac{c_d N}{L}\right)^N \frac{1}{\alpha!} \underbrace{ \frac{1}{(Lr)^d} \int_{B(x_0, (L+1)r)} |u|}_{M}
+  \end{align*}
+  Multinomial theorem:
+  \begin{align*}
+    d^N = (1+1+ \dots + 1)^N = \sum_{|\alpha| = N} \frac{N!}{\alpha!}
+  \end{align*}
+  Conclusion:
+  \begin{align*}
+    |R_N(x)| 
+    &\le \left(\frac{d C_d N}{L}\right)^N \frac{1}{N!} M
+  \end{align*}
+  We need \(N^N << N!\) (Stirly formula)
+\end{proof}
 
 \end{document}
