@@ -553,136 +553,182 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\), namely \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
 \end{thm}
 
-\begin{proof}
-  We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
-  \begin{align*}
-    \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
-  \end{align*}
-  We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
-  \begin{align*}
-    u_\epsilon(x) 
-    &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
-    &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
-    (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
-    \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
-    &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
-    &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
-  \end{align*}
+% \begin{proof}
+%   We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
+%   \begin{align*}
+%     \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
+%   \end{align*}
+%   We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
+%   \begin{align*}
+%     u_\epsilon(x) 
+%     &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
+%     &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
+%     (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
+%     \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
+%     &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
+%     &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
+%   \end{align*}
 
-  On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
+%   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
 
-  Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
-  Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
-  Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
-  \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
-  is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
-  Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
-  To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
-  Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
-  We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
-  \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
-  where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
-  We have: Take \(x_0 \in \Omega\), take \(r > 0\) small and \(L = L_d > 0\) large, s.t. \(B(x_0, (L+1) r) \subseteq \Omega\). Then for all \(x \in B(x_0, r)\) we have \(B(x, L_r) \subseteq B(x_0, (L+1)r) \subseteq \Omega\). With lemma~\ref{estimates-of-derivatives} we get
-  \[|D^\alpha u(x)| \le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|\]
+%   Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
+%   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
+%   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
+%   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
+%   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
+%   Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
+%   To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
+%   Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
+%   We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
+%   \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
+%   where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
+%   New: Let \(x_0 \in \Omega\), take \(r > 0\), \(r < \frac{1}{L+1} \dist(x_0, \Omega^c)\) s.t. if \(x \in B(x_0, r)\), then \[B(x, Lr) \subseteq B(x_0, (L+1)r) \subseteq \Omega\]. With Lemma~\ref{estimates-of-derivatives} we get:
+%   \begin{align*}
+%     |D^\alpha u(x_0 + t(x-x_0))
+%     &\le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|
+%   \end{align*}
+%   With \((x_0, r) \leadsto (x, Lr)\)
+%   \begin{align*}
+%     |R_N(x)| \le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{1}{\alpha!} \frac{1}{\alpha!} \tau^N \int_{B(x_0, (L+1)r) |u|}
+%   \end{align*}
 
-  \begin{align*}
-    |R_N(x)| 
-    &\le \sum_{|\alpha| = N} \|D^\alpha u\|_{L^\infty(B(x_0, r))} \frac{r^N}{\alpha!} \quad \text{for all } x \in B(x_0, r) \\
-    &\le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{r^N}{\alpha!} \int_{B(x_0, (L+1) r)} |u| \\
-    &= \sum_{|\alpha| = N} \left(\frac{c_d N}{L}\right)^N \frac{1}{\alpha!} \underbrace{ \frac{1}{(Lr)^d} \int_{B(x_0, (L+1)r)} |u|}_{M}
-  \end{align*}
-  Multinomial theorem:
-  \begin{align*}
-    d^N = (1+1+ \dots + 1)^N = \sum_{|\alpha| = N} \frac{N!}{\alpha!}
-  \end{align*}
-  Conclusion:
-  \begin{align*}
-    |R_N(x)| 
-    &\le \left(\frac{d C_d N}{L}\right)^N \frac{1}{N!} M
-  \end{align*}
-  We need \(N^N << N!\) (Stirly formula)
-\end{proof}
+%   Thus 
+%   \begin{align*}
+%     \left(\frac{\tilde c_d N}{L}\right) \frac{1}{N!}
+%     &\le \left(\frac{\tilde c_d N}{L}\right) \left(\frac{e}{N}\right)^N \quad \text{ if \(N\) large} \\
+%     &= \left(\frac{\tilde c_d e}{L}\right)^N \xrightarrow{N \to \infty} 0 \quad \text{if } L > \tilde c_d e (L = L_d)
+%   \end{align*}
+%   We conclude that \[u(x) = u(x_0) + \sum_{\alpha \ne 0} \frac{D^\alpha u(x_0)}{\alpha!}(x-x_0)^\alpha\]
+%   The series converges uniformly \(x \in B(x_0, r)\).
+%   Now we proof the bound on derivatives. For \(\alpha = 0\)
+%   \begin{align*}
+%     |u(x_0)| = \left| \fint_{B(x_0, r)} u \right| \le \frac{1}{|B_1|r^d} \int_{B(x_0, r)} |u|
+%   \end{align*}
+%   For \(\alpha = 1:\) \(\Delta u = 0\) in \(\Omega\) \(\Rightarrow\) \(0 = \partial_{x_i} (\Delta u) = \Delta (\partial_{x_i} u)\), so \(\partial_{x_i} u\) is harmonic in \(\Omega\). Hence, by the mean-varlue theorem again:
+%   \begin{align*}
+%     \partial_{x_i} u(x_0) &= \fint_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{\frac{r}{2}}{2}^d} \int_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{r}{2}^d} \int_{\partial B(x_0, \frac{r}{2})}u n_i \, dS
+%   \end{align*}
+%   So we get:
+%   \begin{align*}
+%     |\partial_{x_i} u(x_0)| 
+%     &= \frac{1}{|B_1| r^d} \int_{\partial B(x, r)} \, dS \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}  \\
+%     &= \frac{|S_1|}{|B_1|\frac{r}{2}} \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}
+%   \end{align*}
+%   For any \(y \in \partial B(x_0, \frac{r}{2})\) by the mean value theorem, we get:
+%   \begin{align*}
+%     |u(y)| 
+%     &= \left| \fint_{B(y, \frac{r}{2})} u\right|
+%     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(y, \frac{r}{2})} |u|
+%     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+%   \end{align*}
+%   Thus,
+%   \begin{align*}
+%     |\partial_{x_i} u(x_0)| 
+%     &\le \frac{|S_1|}{|B_1| \left(\frac{r}{2}\right)} \frac{1}{|B_1|  \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+%     \le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u|
+%   \end{align*}
+%   Induction: Assume that we already proved the bound when \(|\alpha| = N-1\). Then:
+%   \begin{align*}
+%     \partial_{x_i} D^\alpha u 
+%     &= D^\alpha(\underbrace{\partial_{x_i} u}_{\text{harmonic}})
+%     = 0
+%     \quad \Rightarrow \quad
+%     D^\alpha u \text{ is harmonic}
+%   \end{align*}
+%   So we get
+%   \begin{align*}
+%     \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
+%     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
+%   \end{align*}
+%   and by the induction hypothesis:
+  
+%   \begin{align*}
+%     |D^\alpha u(x_0)| &\le \frac{c_d}{r} \|D^\alpha u\|_{L^\infty B(x_0, \frac{r}{2})} \\
+%     &\le \frac{c_d}{r^{d+N-1}} \int_{B(x_0, r)} |u| \quad \forall x \in B\left(x_0, \frac{r}{2}\right)
+%   \end{align*}
+%   Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
+% \end{proof}
 
-\begin{ex} (E 1.1)
-  Proof the Gauss–Green formula: Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
-  Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
-\end{ex}
+% \begin{ex} (E 1.1)
+%   Proof the Gauss–Green formula: Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
+%   Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
+% \end{ex}
 
-\begin{proof}[Solution]
-  \[mass = \int_\Omega f(t, x) \, dx\]
-  Change of mass = \(\frac{d}{dt} \int_\Omega f(t, x) \, dx = \int_\Omega \partial_t f(t,x) \, dx\)
-  Flux through the boundary \(\int_{\partial \Omega} \rho_{\vec n} \vec{n} \, dS\)
-  G-G Theorem: 
-  \begin{align*}
-    \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = \int_{\Omega} \div f(\phi_{\vec{n}}) \, dx
-  \end{align*}
-  Conserveration of mass:
-  \begin{align*}
-    \frac{d}{dt} \int_\Omega f(t, x) + \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = 0 \\
-    \Rightarrow \int_\Omega (\partial_t f(t, x) + \div(\rho)) \, dx = 0 \\
-    \Rightarrow \partial_t f(t,x) + \div(\rho) = 0
-  \end{align*}
-  Proof of Gauss-Green formula: \(\Omega = Ball\): We can use polar formular for integral
-  \begin{align*}
-    \int_{\partial B} f \cdot \vec{n} \, dS = \int_B \div(f) \, dx, \quad f = (f_i)_{i=1}^d \\
-    \Leftrightarrow \quad \int_{\partial B} (f_1 n_1 + \dots + f_d n_d) \, dS = \int_B \left(\frac{\partial}{\partial x_1 f_1} + \dots + \frac{\partial}{\partial x_d f_d}\right) \, dx
-  \end{align*}
-  It sufficies to prove that for all \(i = 1, \dots, d\), then
-  \[\int_{\partial B} f_i n_i \, dS = \int_B \frac{\partial}{\partial x_i} f\, dx\]
-  We only need to consider \(i=1, B = B(0,1), f_1 = g\).
-  \[\int_{\partial B(0,1)} g n_1 = \int_{B(0,1)} \frac{\partial}{\partial x_i g} \, dx, \quad \forall g \in C^1(B)\]
-  For d=1:
-  \begin{align*}
-    \int_{\partial B(0,1)} g n_1 = g(1) - g(-1)
-    \int_{B(0,1)} \frac{\partial}{\partial x_1 g} = \int_{-1}^1 g' \, dx
-  \end{align*}
-  So \(g(1) - g(-1) = \int_{-1}^1 q'\)
-  For d=2: 
-  \begin{align*}
-    \{x_1^2 + x_2^2 \le 1\} = \{(r, \theta) \mid 0 \le r \le 1, 0 \le \theta \le 2 \pi\}
-  \end{align*}
+% \begin{proof}[Solution]
+%   \[mass = \int_\Omega f(t, x) \, dx\]
+%   Change of mass = \(\frac{d}{dt} \int_\Omega f(t, x) \, dx = \int_\Omega \partial_t f(t,x) \, dx\)
+%   Flux through the boundary \(\int_{\partial \Omega} \rho_{\vec n} \vec{n} \, dS\)
+%   G-G Theorem: 
+%   \begin{align*}
+%     \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = \int_{\Omega} \div f(\phi_{\vec{n}}) \, dx
+%   \end{align*}
+%   Conserveration of mass:
+%   \begin{align*}
+%     \frac{d}{dt} \int_\Omega f(t, x) + \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = 0 \\
+%     \Rightarrow \int_\Omega (\partial_t f(t, x) + \div(\rho)) \, dx = 0 \\
+%     \Rightarrow \partial_t f(t,x) + \div(\rho) = 0
+%   \end{align*}
+%   Proof of Gauss-Green formula: \(\Omega = Ball\): We can use polar formular for integral
+%   \begin{align*}
+%     \int_{\partial B} f \cdot \vec{n} \, dS = \int_B \div(f) \, dx, \quad f = (f_i)_{i=1}^d \\
+%     \Leftrightarrow \quad \int_{\partial B} (f_1 n_1 + \dots + f_d n_d) \, dS = \int_B \left(\frac{\partial}{\partial x_1 f_1} + \dots + \frac{\partial}{\partial x_d f_d}\right) \, dx
+%   \end{align*}
+%   It sufficies to prove that for all \(i = 1, \dots, d\), then
+%   \[\int_{\partial B} f_i n_i \, dS = \int_B \frac{\partial}{\partial x_i} f\, dx\]
+%   We only need to consider \(i=1, B = B(0,1), f_1 = g\).
+%   \[\int_{\partial B(0,1)} g n_1 = \int_{B(0,1)} \frac{\partial}{\partial x_i g} \, dx, \quad \forall g \in C^1(B)\]
+%   For d=1:
+%   \begin{align*}
+%     \int_{\partial B(0,1)} g n_1 = g(1) - g(-1)
+%     \int_{B(0,1)} \frac{\partial}{\partial x_1 g} = \int_{-1}^1 g' \, dx
+%   \end{align*}
+%   So \(g(1) - g(-1) = \int_{-1}^1 q'\)
+%   For d=2: 
+%   \begin{align*}
+%     \{x_1^2 + x_2^2 \le 1\} = \{(r, \theta) \mid 0 \le r \le 1, 0 \le \theta \le 2 \pi\}
+%   \end{align*}
 
 
-  \begin{align*}
-    \frac{\partial}{\partial x_1} g(x_1, x_2) \\
-    x_1 = r \cos \theta \\
-    x_2 = r \sin \theta \\
-    r = \sqrt{x_1^2 + x_2^2} \\
-    \frac{\partial r}{\partial x_1} = \frac{2 x_1}{2 \sqrt{x_1^2 + x_2^2}} = \frac{x_1}{r} = \cos \theta \\
-    \frac{\partial}{\partial x_1} g = 
-    \begin{cases}
-      \frac{\partial}{\partial r} g \frac{\partial r}{\partial x_i} = \frac{\partial}{\partial r} g \cos \theta \\
-      \frac{\partial}{\partial \partial} g \frac{\partial \theta}{\partial x_1} = \frac{\partial}{\partial \theta} g \frac{-1}{r \sin \theta}
-    \end{cases}
-  \end{align*}
+%   \begin{align*}
+%     \frac{\partial}{\partial x_1} g(x_1, x_2) \\
+%     x_1 = r \cos \theta \\
+%     x_2 = r \sin \theta \\
+%     r = \sqrt{x_1^2 + x_2^2} \\
+%     \frac{\partial r}{\partial x_1} = \frac{2 x_1}{2 \sqrt{x_1^2 + x_2^2}} = \frac{x_1}{r} = \cos \theta \\
+%     \frac{\partial}{\partial x_1} g = 
+%     \begin{cases}
+%       \frac{\partial}{\partial r} g \frac{\partial r}{\partial x_i} = \frac{\partial}{\partial r} g \cos \theta \\
+%       \frac{\partial}{\partial \partial} g \frac{\partial \theta}{\partial x_1} = \frac{\partial}{\partial \theta} g \frac{-1}{r \sin \theta}
+%     \end{cases}
+%   \end{align*}
 
-  \begin{align*}
-    \int_{B(0,1)} \frac{\partial}{\partial x_1}g 
-    &= \int_0^1 \left(\int_0^{2 \pi} \frac{\partial}{\partial r} g \cos \theta \, d \theta \right) \, dr \\
-    &= \int_0^{2 \pi} \left(\int_0^1 \frac{\partial}{\partial r} g r \, dr \right) \cos \theta d \theta \\
-    &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \cos \theta \, d \theta - \int_0^{2 \pi} \int_0^1 g \cos \theta \, d \theta d r \\
-    \int_{\partial B(0, 1)} g n_1 &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \, \cos \theta d \theta
-  \end{align*}
+%   \begin{align*}
+%     \int_{B(0,1)} \frac{\partial}{\partial x_1}g 
+%     &= \int_0^1 \left(\int_0^{2 \pi} \frac{\partial}{\partial r} g \cos \theta \, d \theta \right) \, dr \\
+%     &= \int_0^{2 \pi} \left(\int_0^1 \frac{\partial}{\partial r} g r \, dr \right) \cos \theta d \theta \\
+%     &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \cos \theta \, d \theta - \int_0^{2 \pi} \int_0^1 g \cos \theta \, d \theta d r \\
+%     \int_{\partial B(0, 1)} g n_1 &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \, \cos \theta d \theta
+%   \end{align*}
 
-  Try another parametrization \(B(0,1) = \{x_1^2 + x_2^2 \le 1 \}\).
-  \begin{align*}
-    \int_{B(0,1)} \frac{\partial g}{\partial x_1}
-    &= \int_{-1}^1 \left(\int_{-\sqrt{1 - x_2^2}} \frac{\partial g}{\partial x_1} \, dx_1\right) dx_2 \\
-    &= \int_{-1}^1 \left[g(\sqrt{1-x_2^2}, 2) - g(-\sqrt{1-x_2^2}, x_2)\right] \, dx_2 \\
-    \int_{\partial B(0,1)} g n_1 &= \int_{r_+} + \int_{r_-}, 
-  \end{align*}
-  \begin{align*}
-    \int_{r_+} &= \int_{-1}^1 g(\sqrt{1-x_2^2}, x_2) \, dx_2 \\
-    \int_{r_-} &= - \int_{-1}^1 g(-\sqrt{1-x_2^2}, x_2) \, dx_2 = - \int_{-1}^1 \qedhere
-  \end{align*}
-\end{proof}
+%   Try another parametrization \(B(0,1) = \{x_1^2 + x_2^2 \le 1 \}\).
+%   \begin{align*}
+%     \int_{B(0,1)} \frac{\partial g}{\partial x_1}
+%     &= \int_{-1}^1 \left(\int_{-\sqrt{1 - x_2^2}} \frac{\partial g}{\partial x_1} \, dx_1\right) dx_2 \\
+%     &= \int_{-1}^1 \left[g(\sqrt{1-x_2^2}, 2) - g(-\sqrt{1-x_2^2}, x_2)\right] \, dx_2 \\
+%     \int_{\partial B(0,1)} g n_1 &= \int_{r_+} + \int_{r_-}, 
+%   \end{align*}
+%   \begin{align*}
+%     \int_{r_+} &= \int_{-1}^1 g(\sqrt{1-x_2^2}, x_2) \, dx_2 \\
+%     \int_{r_-} &= - \int_{-1}^1 g(-\sqrt{1-x_2^2}, x_2) \, dx_2 = - \int_{-1}^1 \qedhere
+%   \end{align*}
+% \end{proof}
 
 
 \begin{ex} (E 1.2)
   Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
 \end{ex}
 
-\begin{proof} [My Solution]
+\begin{proof}[My Solution]
   Assume there is a \(x_0 \in \mathbb{R}^d\) s.t. w.l.o.g. \(u(x_0) > 0\). Since \(u\) is continous there is a ball \(B(x_0, r)\) s.t. \(u(y) > \frac{u(x_0)}{2}\) for all \(y \in B(x_0, r)\). But then we get
   \begin{align*}
     \int_{B(x_0, r)} u(y) \, dy
@@ -720,7 +766,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 \begin{ex} (E 1.4)
   Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
   \begin{enumerate}
-    \item Proof that \(u\) satisfies the MVT
+    \item Proof that \(u\) satisfies the Mean-Value-Inequality
     \item Proof that \(u\) satisfies the SMP
   \end{enumerate}
 \end{ex}
@@ -769,5 +815,89 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \item Prove that if \(g \ge 0\) on \(\partial \Omega\), \(g \ne 0\), then \(u > 0\) in \(\Omega\)
   \end{enumerate}
 \end{ex}
+
+
+\begin{thm} (Liouville's Theorem) 
+  If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
+\end{thm}
+
+\begin{proof}
+  By the bound of the derivative \ref{estimates-of-derivatives} we have
+  \begin{align*}
+    |\partial_{x_i} u(x_0)| 
+    &\le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u| \quad \forall x_0 \in \mathbb{{R}^d \forall r > 0} \\
+    &\le \|u\|_{L^\infty} \frac{c_d}{r^{d+1}} |B(x_0, r)| \le \|u\|_{L^\infty} \frac{c_d}{r} \xrightarrow{r \to \infty} 0
+  \end{align*}
+  Thus \(\partial_{x_i} u = 0\) for all \(i = 1, 2, \dots d\) and \(u = const.\) in \(\mathbb{R}^d\)
+\end{proof}
+
+\begin{thm} (Uniqueness of solutions to Poisson Equation in \(\mathbb{R}^d\))
+  If \(u \in C^2(\mathbb{R}^d)\) is a bounded function and satisfies \(- \Delta u = f\) in \(\mathbb{R}^d\) where \(f \in C_c^2(\mathbb{R}^d)\), then we have
+  \begin{align*}
+    u(x) = \Phi \star f(x) + C = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \, dy + C \quad \forall x \in \mathbb{R}^d
+  \end{align*}
+  where \(C\) is a constant and \(\Phi\) is the fundamental solution of the Laplace equation in \(\mathbb{R}^d\).
+\end{thm}
+
+\begin{proof}
+  If we can prove that \(v\) is bounded, then \(v = const.\). We first need to show that \(\Phi \star f\) is bounded.
+  \begin{align*}
+    \Phi = \Phi_1 + \Phi_2 = \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
+    \Phi \star f = \Phi_1 \star f + \Phi_2 \star f
+  \end{align*}
+  We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
+\end{proof}
+
+\begin{ex} (Hanack's inequality)
+  Let \(u \in C^2(\mathbb{R}^d)\) be harmonic and non-negative. Prove that for all open, bounded and connected \(\Omega \subseteq \mathbb{R}^d\), we have
+  \begin{align*}
+    \sup_{x \in \Omega} u(x) \le C_\Omega \inf_{x \in \Omega} u(x),
+  \end{align*}
+  where \(C_\infty\) is a finite constant depending only on \(\Omega\).
+\end{ex}
+
+\begin{proof} (Exercise)
+  Hint: \(\Omega = B(x,r)\). General case cover \(\Omega\) by finitely many balls, one ball is inside \(\Omega\).
+\end{proof}
+
+
+\begin{defn}[Convolution]
+  Let \(f, g: \mathbb{{R}^d \to \mathbb{R}}\) or \(\mathbb{C}\).
+  \begin{align*}
+    (f \star g)(x)
+    &= \int_{\mathbb{R}^d} f(x-y) g(y) \, dy
+    = \int_{\mathbb{R}^d} f(y) g(x-y) \, dy 
+    = (g \star f)(x)
+  \end{align*}
+\end{defn}
+
+\begin{rem}[Properties of the Convolution]
+  \begin{itemize}
+    \item \((f \star g)(x) = f \star (g \star h)\)
+    \item \(\hat{f \star g} = \hat f \star \hat g\)
+  \end{itemize}
+\end{rem}
+
+
+\begin{thm}[Young Inequality]
+  If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \(\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\). More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \(\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q}\), where \(1 \le p, q, r, \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\)
+\end{thm}
+
+\begin{proof}
+  Let \(f \in L^1, g \in L^p\). With the Hölder Inequality \ref{hölder-inequality}, we have:
+  % \begin{align*}
+  %   \left|(f \star g)(x)| 
+  %   &= \left| \int_{\mathbb{R}^d} f(x-y)g(y) \, dy \right| \\
+  %   &\le \left(\int_{\mathbb{R}^d} |f(x-y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
+  %   &= \| f \|_{L^1}^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} \dots \right)^{\frac{1}{p}}
+  % \end{align*}
+  \begin{align*}
+    \|f \star g\|_{L^p}^p
+    &= \int_{\mathbb{R}^d} |f \star g(x)|^p \, dx
+    &\le \|f\|_{L^1}^{\frac{p}{q}} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} |f(x-y)||g(y)|^p \, dy \, dx \\
+    &= \| f \|_{L^1}^{\frac{p}{q} + 1} \|g\|_{L^p}^p
+  \end{align*}
+  So we have \(\| f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\)
+\end{proof}
 
 \end{document}
