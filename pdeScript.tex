@@ -437,7 +437,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
 \end{rem}
 
-\begin{thm} (Maximum Principle)
+\begin{thm}[Maximum Principle]\label{maximum-principle}
   Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
   \begin{enumerate}[label=\alph*)]
     \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
@@ -531,7 +531,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   So we geht \(u(x)  = 0\) in \(\Omega\).
 \end{proof}
 
-\begin{ex}
+\begin{ex}[Bonus 1]\label{bonus-1}
   Let \(\Omega\) be open, connected and bounded in \(\mathbb{R}^d\). Let \(u \in C^2(\Omega) \cap C(\bar \Omega)\) s.t. 
   \begin{align*}
     \begin{cases}
@@ -539,11 +539,22 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
       u = g, &\text{on } \partial \Omega
     \end{cases}
   \end{align*}
-  Proof that \begin{enumerate}
+  Proof that \begin{enumerate}[label=\alph*)]
     \item If \(g \ge 0\) on \(\partial \Omega\), then \(u \ge 0\) in \(\Omega\). 
     \item If \(g \ge 0\) on \(\partial \Omega\) and \(g \ne 0\), then \(u > 0\) in \(\Omega\).
   \end{enumerate}
 \end{ex}
+
+\begin{proof}[My Solution]
+  \begin{enumerate}[label=\alph*)]
+    \item We have that \(\Delta (-u) = 0\), so \(-u\) is harmonic in \(\Omega\). Since \(\Omega\) is open and bounded we can apply the Maximum Principle (\ref{maximum-principle}) and get that
+    \[\sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0.\]
+    This implies \(\inf_{x \in \Omega} u(x) \ge 0\), so \(u \ge 0\) in \(\Omega\).
+    \item We proof this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
+    \[0 = -u(x_0) = \sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0,\]
+    so \(-u\) attains its maximum on \(\Omega\). Hence \(-u = 0 = u\) is constant by the strong maximum principle because \(\Omega\) is connected, in fact \(0 = u|_{\partial \Omega} = g\). \qedhere
+  \end{enumerate}
+\end{proof}
 
 \begin{lem} (Estimates for derivatives)\label{estimates-of-derivatives} If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\) and \(B(x_0, r) \subseteq \Omega\), then 
   \[|D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u|\]
@@ -767,6 +778,11 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
   \begin{enumerate}
     \item Proof that \(u\) satisfies the Mean-Value-Inequality
+     \begin{align*}
+       \fint_{\partial B(x, r)} u(y) \, dS(y)
+       \ge \fint_{B(x, r)} u(y) \, dy
+       \ge u(x)
+     \end{align*}
     \item Proof that \(u\) satisfies the SMP
   \end{enumerate}
 \end{ex}
@@ -800,22 +816,6 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \item \(\fint_{B(x_0, r)} u \ge u(x_0) = \sup u \Rightarrow u(x) = u(x_0) \forall x \in B(x,r)\)
   \end{enumerate}
 \end{proof}
-
-\begin{ex} (Bonus 1)
-  Let \(\Omega\) be open, bounded and connected in \(\mathbb{R}^d\). Let \(u \in C^2(\Omega) \cap C(\bar \Omega)\) satisfy
-  \begin{align*}
-    \begin{cases}
-      \Delta u = 0, &\text{in } \Omega \\
-      u = g, &\text{in } \partial \Omega
-    \end{cases}
-  \end{align*}
-  with \(g \in C(\partial \Omega)\). Prove
-  \begin{enumerate}
-    \item Prove if \(g \ge 0\) on \(\partial \Omega\) then \(u \ge 0\) in \(\Omega\)
-    \item Prove that if \(g \ge 0\) on \(\partial \Omega\), \(g \ne 0\), then \(u > 0\) in \(\Omega\)
-  \end{enumerate}
-\end{ex}
-
 
 \begin{thm} (Liouville's Theorem) 
   If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
