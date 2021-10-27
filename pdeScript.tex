@@ -255,7 +255,7 @@ The Poisson-Equation is \(-\Delta u(x) = f(x)\) in \(\mathbb{R}^d\). The explici
 This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \Phi) \star f = \delta_0 \star f = f\]
 
 
-\begin{thm}
+\begin{thm} \label{solution-for-poisson}
   Assume \(f \in C_c^2(\mathbb{R}^d)\). Then \(u = \Phi \star f\) satisfies that \(u \in C^2(\mathbb{R}^d)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\)
 \end{thm}
 
@@ -608,17 +608,166 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
 \end{ex}
 
+\begin{proof}[Solution]
+  \[mass = \int_\Omega f(t, x) \, dx\]
+  Change of mass = \(\frac{d}{dt} \int_\Omega f(t, x) \, dx = \int_\Omega \partial_t f(t,x) \, dx\)
+  Flux through the boundary \(\int_{\partial \Omega} \rho_{\vec n} \vec{n} \, dS\)
+  G-G Theorem: 
+  \begin{align*}
+    \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = \int_{\Omega} \div f(\phi_{\vec{n}}) \, dx
+  \end{align*}
+  Conserveration of mass:
+  \begin{align*}
+    \frac{d}{dt} \int_\Omega f(t, x) + \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = 0 \\
+    \Rightarrow \int_\Omega (\partial_t f(t, x) + \div(\rho)) \, dx = 0 \\
+    \Rightarrow \partial_t f(t,x) + \div(\rho) = 0
+  \end{align*}
+  Proof of Gauss-Green formula: \(\Omega = Ball\): We can use polar formular for integral
+  \begin{align*}
+    \int_{\partial B} f \cdot \vec{n} \, dS = \int_B \div(f) \, dx, \quad f = (f_i)_{i=1}^d \\
+    \Leftrightarrow \quad \int_{\partial B} (f_1 n_1 + \dots + f_d n_d) \, dS = \int_B \left(\frac{\partial}{\partial x_1 f_1} + \dots + \frac{\partial}{\partial x_d f_d}\right) \, dx
+  \end{align*}
+  It sufficies to prove that for all \(i = 1, \dots, d\), then
+  \[\int_{\partial B} f_i n_i \, dS = \int_B \frac{\partial}{\partial x_i} f\, dx\]
+  We only need to consider \(i=1, B = B(0,1), f_1 = g\).
+  \[\int_{\partial B(0,1)} g n_1 = \int_{B(0,1)} \frac{\partial}{\partial x_i g} \, dx, \quad \forall g \in C^1(B)\]
+  For d=1:
+  \begin{align*}
+    \int_{\partial B(0,1)} g n_1 = g(1) - g(-1)
+    \int_{B(0,1)} \frac{\partial}{\partial x_1 g} = \int_{-1}^1 g' \, dx
+  \end{align*}
+  So \(g(1) - g(-1) = \int_{-1}^1 q'\)
+  For d=2: 
+  \begin{align*}
+    \{x_1^2 + x_2^2 \le 1\} = \{(r, \theta) \mid 0 \le r \le 1, 0 \le \theta \le 2 \pi\}
+  \end{align*}
+
+
+  \begin{align*}
+    \frac{\partial}{\partial x_1} g(x_1, x_2) \\
+    x_1 = r \cos \theta \\
+    x_2 = r \sin \theta \\
+    r = \sqrt{x_1^2 + x_2^2} \\
+    \frac{\partial r}{\partial x_1} = \frac{2 x_1}{2 \sqrt{x_1^2 + x_2^2}} = \frac{x_1}{r} = \cos \theta \\
+    \frac{\partial}{\partial x_1} g = 
+    \begin{cases}
+      \frac{\partial}{\partial r} g \frac{\partial r}{\partial x_i} = \frac{\partial}{\partial r} g \cos \theta \\
+      \frac{\partial}{\partial \partial} g \frac{\partial \theta}{\partial x_1} = \frac{\partial}{\partial \theta} g \frac{-1}{r \sin \theta}
+    \end{cases}
+  \end{align*}
+
+  \begin{align*}
+    \int_{B(0,1)} \frac{\partial}{\partial x_1}g 
+    &= \int_0^1 \left(\int_0^{2 \pi} \frac{\partial}{\partial r} g \cos \theta \, d \theta \right) \, dr \\
+    &= \int_0^{2 \pi} \left(\int_0^1 \frac{\partial}{\partial r} g r \, dr \right) \cos \theta d \theta \\
+    &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \cos \theta \, d \theta - \int_0^{2 \pi} \int_0^1 g \cos \theta \, d \theta d r \\
+    \int_{\partial B(0, 1)} g n_1 &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \, \cos \theta d \theta
+  \end{align*}
+
+  Try another parametrization \(B(0,1) = \{x_1^2 + x_2^2 \le 1 \}\).
+  \begin{align*}
+    \int_{B(0,1)} \frac{\partial g}{\partial x_1}
+    &= \int_{-1}^1 \left(\int_{-\sqrt{1 - x_2^2}} \frac{\partial g}{\partial x_1} \, dx_1\right) dx_2 \\
+    &= \int_{-1}^1 \left[g(\sqrt{1-x_2^2}, 2) - g(-\sqrt{1-x_2^2}, x_2)\right] \, dx_2 \\
+    \int_{\partial B(0,1)} g n_1 &= \int_{r_+} + \int_{r_-}, 
+  \end{align*}
+  \begin{align*}
+    \int_{r_+} &= \int_{-1}^1 g(\sqrt{1-x_2^2}, x_2) \, dx_2 \\
+    \int_{r_-} &= - \int_{-1}^1 g(-\sqrt{1-x_2^2}, x_2) \, dx_2 = - \int_{-1}^1 \qedhere
+  \end{align*}
+\end{proof}
+
+
 \begin{ex} (E 1.2)
-  Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r) u = 0}\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
+  Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
 \end{ex}
 
 \begin{proof} [My Solution]
   Assume there is a \(x_0 \in \mathbb{R}^d\) s.t. w.l.o.g. \(u(x_0) > 0\). Since \(u\) is continous there is a ball \(B(x_0, r)\) s.t. \(u(y) > \frac{u(x_0)}{2}\) for all \(y \in B(x_0, r)\). But then we get
   \begin{align*}
     \int_{B(x_0, r)} u(y) \, dy
-    &\ge \int_{B(x_0, r)} |u(x_0)| \, dy
-    = |u(x_0)| \, |B(x_0, r)| > 0. \qedhere
+    &\ge \int_{B(x_0, r)} \frac{u(x_0)}{2} \, dy
+    = \frac{u(x_0)}{2} \, |B(x_0, r)| > 0. \qedhere
   \end{align*}
 \end{proof}
+
+\begin{ex} (E 1.3)
+  Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
+\end{ex}
+
+\begin{proof} [Solution]
+  \begin{align*}
+    \partial x_i u(x) 
+    &= \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \\
+    = \int_{\mathbb{R}^d} \Phi(x-y) \partial y_i f(y) \, dy \\
+    \partial x_j \partial x_i u(x) &= \int \partial x_j \Phi(x-y) \partial y_i f(y) \, dy,
+  \end{align*}
+  \(\nabla \Phi  \cos \frac{y}{|y|^d}\) locally integrable. We can apply dominated convergence because
+  \begin{align*}
+    \lim_{h \to 0} \int_{\mathbb{R}^d} \frac{\Phi(x + h e_j - y) - \Phi(x-y)}{h} \partial_{y_i} f(y) \, dy
+  \end{align*}
+  For every \(y\):
+  \begin{align*}
+    \frac{\Phi(x + h e_j - y) - \Phi(x-y)}{h} \partial_{y_i} f(y) &\to \partial_{x_i} \Phi(x-y) \, \partial_{y_i}(y) \\
+    \left| \frac{\Phi(x + h e_j -y) - \Phi(x-y)}{h} \right| 
+    &= \left|\frac{1}{h} \int_0^h \partial_{x_j} \Phi(x + te_j-y) \, dt \right|  \\
+    &\le \frac{1}{h} \int_0^h \frac{|(x_j + te-j - y_i)}{| \dots |^d} \, dt \\
+    &\le \frac{1}{h} \int_0^h \frac{1}{|x + te_j - y|^{d-1}} \, dt \\ 
+    &\le \sup_{t \in (0, \epsilon]} \frac{1}{|x + te_j - y|^{d-1}}
+  \end{align*}
+\end{proof}
+
+\begin{ex} (E 1.4)
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
+  \begin{enumerate}
+    \item Proof that \(u\) satisfies the MVT
+    \item Proof that \(u\) satisfies the SMP
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}[Solution]
+  \begin{enumerate}
+    \item 
+      \begin{align*}
+        f(r) &= \fint_{\partial B(x, r)} u(y) \, dS(y) \\
+        f'(r) &= \frac{r}{d} \fint_{B(x, r)} \underbrace{\Delta u(y)}_{\ge 0} \, dy \ge 0
+      \end{align*}
+      So \(f\) is increasing, so we get
+      \begin{align*}
+        f(r) &\ge \lim_{t \to 0} f(t) = u(x) \\
+        \fint_{\partial B(x, r)} u \ge u(x)
+      \end{align*}
+      \begin{align*}
+        \int_{B(x,r)} u 
+        &= \int_0^r \left(\int_{\partial B(x,s) u}\right) \, ds \\
+        &= \int_0^r |\partial B(x, s)| \left(\fint_{\partial B(x, s)} u\right) \, ds \\
+        &\ge \int_0^r |\partial B(x,r)| u(x) \, ds \\
+        &= u(x) \int_{B(x,r)} = u(x) |B(x,r)|
+      \end{align*}
+      So we can conclude
+      \[\fint_{B(x,r)} u \ge u(x)\]
+      Use \(\fint_{\partial B(x,s)} u \le \fint_{\partial B(x,r)} u\):
+      \begin{align*}
+        \int_{B(x,r)} 
+        &\le \int_0^r |\partial B(x,r)| \left(\int_{\partial B(x,r)} u\right) \, ds = \left( \fint_{\partial B(x,r)} u \right) |B(x,r)|
+      \end{align*}
+    \item \(\fint_{B(x_0, r)} u \ge u(x_0) = \sup u \Rightarrow u(x) = u(x_0) \forall x \in B(x,r)\)
+  \end{enumerate}
+\end{proof}
+
+\begin{ex} (Bonus 1)
+  Let \(\Omega\) be open, bounded and connected in \(\mathbb{R}^d\). Let \(u \in C^2(\Omega) \cap C(\bar \Omega)\) satisfy
+  \begin{align*}
+    \begin{cases}
+      \Delta u = 0, &\text{in } \Omega \\
+      u = g, &\text{in } \partial \Omega
+    \end{cases}
+  \end{align*}
+  with \(g \in C(\partial \Omega)\). Prove
+  \begin{enumerate}
+    \item Prove if \(g \ge 0\) on \(\partial \Omega\) then \(u \ge 0\) in \(\Omega\)
+    \item Prove that if \(g \ge 0\) on \(\partial \Omega\), \(g \ne 0\), then \(u > 0\) in \(\Omega\)
+  \end{enumerate}
+\end{ex}
 
 \end{document}
