@@ -66,7 +66,7 @@
 
 A differential equation is an equation of a function and its derivatives. 
 
-\begin{eg} (Linear ODE)
+\begin{eg}[Linear ODE]
   Let \(f: \mathbb{R} \to \mathbb{R}\),
   \begin{align*}
     \begin{cases}
@@ -375,11 +375,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{align*}
 \end{thm}
 
-\begin{ex}
-  In 1D\@: \(\Delta u = 0 \Leftrightarrow u'' = 0 \Leftrightarrow u(x) = ax + b\) (Linear Equation)
-\end{ex}
-
-\begin{proof} (Of theorem)\ref{mean-value-theorem}
+\begin{proof}
   Consider all \(r > 0\) s.t. \(B(x,r) \subseteq \Omega\),
   \begin{align*}
     f(r) &= \fint_{\partial B(x,r)} u
@@ -400,6 +396,10 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \text{(Gauss-Green \ref{gauss-green})} \quad &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{B(x, r)} \underbrace{(\Delta u)(y)}_{= 0} \, dy = 0 \qedhere
   \end{align*}
 \end{proof}
+
+\begin{ex}
+  In 1D\@: \(\Delta u = 0 \Leftrightarrow u'' = 0 \Leftrightarrow u(x) = ax + b\) (Linear Equation)
+\end{ex}
 
 \begin{rem}
   Recall the polar decomposition. Let \(x \in \mathbb{R}^d, x = (r,w), r = |x| > 0, \omega \in S^{d-1}\), then
@@ -445,16 +445,6 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{enumerate}
 \end{thm}
 
-\begin{proof}[Proof-Idea]
-  Assume there exists \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \bar \Omega} u(x)\). We have that \(B(x_0, r) \subseteq \Omega\), so by the mean valum theorem we have
-  \begin{align*}
-    u(x_0) 
-    = \fint_{B(x_0, r)} \underbrace{u(x)}_{\le u(x_0)}
-    \le \fint_{B(x_0, r)} u(x_0) \, dx = u(x_0)
-  \end{align*}
-  So we get \(u(x) = u(x_0)\) for all \(x \in B(x_0, r)\).
-\end{proof}
-
 \begin{proof}
   Given \(U \subseteq \mathbb{R}^d\) open, we can write \(U = \bigcup_i U_i\), where \(U_i\) is open and connected.
   \begin{enumerate}
@@ -475,17 +465,76 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{itemize}
 \end{defn}
 
-\begin{thm}
-  Let \(\Omega\) be open in \(\mathbb{R}^d\), \(u \in C^2(\Omega)\), \(\Delta u \ge 0\) in \(\Omega\). \begin{enumerate}
-    \item We have the mean-value inequality \begin{align*}
-      u(x) &= \fint_{B(x, r)} u \le \fint_{\partial B(x, r)} u \quad \text{for all } x \in B(x, r) \subseteq \Omega
-    \end{align*}
-    \item Assume that \(\Omega\) is connected and bounded. Then either \begin{itemize}
-      \item \(u\) is a constant in \(\Omega\)
-      \item \(u(x) < \sup_{y \in \partial \Omega} u(y)\) for all \(x \in \Omega\)
+\begin{ex}[E 1.4]
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
+  \begin{enumerate}[label=\alph*)]
+    \item Prove that \(u\) satisfies the Mean Value Inequality
+     \begin{align*}
+       \fint_{\partial B(x, r)} u(y) \, dS(y)
+       \ge \fint_{B(x, r)} u(y) \, dy
+       \ge u(x)
+     \end{align*}
+     for all \(B(x,r) \subseteq \mathbb{R}^d\).
+    \item Assume further that \(\Omega\) is connected and \(u \in C(\bar \Omega)\). Prove that \(u\) satisfies the strong maximum principle, namely either
+    \begin{itemize}
+      \item \(u\) is constant in \(\Omega\), or 
+      \item \(\sup_{y \in \partial \Omega} u(y) > u(x)\) for all \(x \in \Omega\).
     \end{itemize}
   \end{enumerate}
-\end{thm}
+\end{ex}
+
+\begin{proof}[My Solution]
+  \begin{enumerate}[label=\alph*)]
+    \item Let \(f(r) = \fint_{\partial B(x, r)} u(y) \, dS(y)\), then we have
+      \begin{align*}
+        \partial_r f(r)
+        &= \partial_r \fint_{\partial B(x,r)} u(y) \, dS(y) \\
+        \text{(Dom. Convergence)} \quad &= \fint_{\partial B(x, r)} \partial_r u(y) \, dS(y) \\
+        &= \fint_{\partial B(0,1)} \partial_r u(x+yr) \, dS(y) \\
+        &= \fint_{\partial B(0,1)} \nabla u(x+yr) \cdot y \, dS(y) \\
+        &= \fint_{\partial B(x, r)} \nabla u(y) \cdot \frac{y-x}{r} \, dS(y) \\
+        &= \fint_{\partial B(x,r)} \nabla u(y) \cdot \vec{n}_y \, dS(y) \\
+        \text{(Gauss-Green)} \quad &= \fint_{B(x, r)} \div(\nabla u(y)) \, dS(y) \\
+        &= \fint_{B(x,r)} \underbrace{\Delta u(y)}_{\ge 0} \, dS(y) \ge 0
+      \end{align*}
+      So we can conclude that
+      \[\fint_{\partial B(x, r)} u(y) \, dS(y) = f(r) \ge \lim_{r \to 0} f(r) = u(x).\]
+
+      Now regard
+      \begin{align*}
+        \int_{B(x,r)} u(y) \, dy 
+        &= \int_0^r \left(\int_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
+        &= \int_0^r \left(|\partial B(x, r)| \fint_{\partial B(x,r)} u(y) \, dS(y)\right) \, ds \\
+        &\ge \int_0^r |\partial B(x, r)| \cdot  u(x) \, dS(y) \\
+        &= u(x) \int_0^r |\partial B(x, r)| \, dS(y)
+        = u(x) |B(x,r)|.
+      \end{align*}
+
+      Thus we have
+      \begin{align*}
+        u(x) \le \fint_{B(x,r)} u(y) dy.
+      \end{align*}
+
+      Finally, lets regard
+      \begin{align*}
+        \int_{B(x, r)} u(y) \, dy
+        &= \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, s)} u(y) \, dS(y)\right) \, ds \\
+        (\partial_r f(r) \ge 0) \quad &\le \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
+        &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \int_0^r |\partial B(x,s)| \, ds \\
+        &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \cdot |B(x,s)|
+      \end{align*}
+      and we conclude
+      \[\fint_{B(x, r)} u(y) \, dy \le \fint_{\partial B(x,r)} u(y) \, dS(y).\]
+    \item Let \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega} u(x)\). Now, \begin{align*}
+      \sup_{x \in \Omega} u(x) 
+      &= u(x_0) 
+      \le \fint_{\partial B(x_0, r)} u(y) \, dy \\
+      &\le \fint_{\partial B(x_0, r)} \sup_{x \in \Omega} u(x) \, dy 
+      = \sup_{x \in \Omega} u(x)
+    \end{align*}
+    Since \(u\) is continous we get \(u(y) = u(x_0)\) for all \(y \in B(x_0, r)\), so \(u\) is constant. \qedhere
+  \end{enumerate}
+\end{proof}
 
 \begin{defn}
   The \emph{Poisson Equation} for given \(f, g\) on a bounded set is:
@@ -539,7 +588,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
       u = g, &\text{on } \partial \Omega
     \end{cases}
   \end{align*}
-  Proof that \begin{enumerate}[label=\alph*)]
+  Prove that \begin{enumerate}[label=\alph*)]
     \item If \(g \ge 0\) on \(\partial \Omega\), then \(u \ge 0\) in \(\Omega\). 
     \item If \(g \ge 0\) on \(\partial \Omega\) and \(g \ne 0\), then \(u > 0\) in \(\Omega\).
   \end{enumerate}
@@ -550,18 +599,18 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
     \item We have that \(\Delta (-u) = 0\), so \(-u\) is harmonic in \(\Omega\). Since \(\Omega\) is open and bounded we can apply the Maximum Principle (\ref{maximum-principle}) and get that
     \[\sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0.\]
     This implies \(\inf_{x \in \Omega} u(x) \ge 0\), so \(u \ge 0\) in \(\Omega\).
-    \item We proof this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
+    \item We prove this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
     \[0 = -u(x_0) = \sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0,\]
     so \(-u\) attains its maximum on \(\Omega\). Hence \(-u = 0 = u\) is constant by the strong maximum principle because \(\Omega\) is connected, in fact \(0 = u|_{\partial \Omega} = g\). \qedhere
   \end{enumerate}
 \end{proof}
 
 \begin{lem} (Estimates for derivatives)\label{estimates-of-derivatives} If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\) and \(B(x_0, r) \subseteq \Omega\), then 
-  \[|D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u|\]
+  \[|D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u| \, dy\]
 \end{lem}
 
 \begin{thm} (Regularity)
-  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\), namely \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
+  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
 \end{thm}
 
 % \begin{proof}
@@ -660,82 +709,12 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
 %   Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
 % \end{proof}
 
-% \begin{ex} (E 1.1)
-%   Proof the Gauss–Green formula: Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
-%   Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
-% \end{ex}
+\begin{ex}[E 1.1: Proof the Gauss–Green formula]
+  Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
+  Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
+\end{ex}
 
-% \begin{proof}[Solution]
-%   \[mass = \int_\Omega f(t, x) \, dx\]
-%   Change of mass = \(\frac{d}{dt} \int_\Omega f(t, x) \, dx = \int_\Omega \partial_t f(t,x) \, dx\)
-%   Flux through the boundary \(\int_{\partial \Omega} \rho_{\vec n} \vec{n} \, dS\)
-%   G-G Theorem: 
-%   \begin{align*}
-%     \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = \int_{\Omega} \div f(\phi_{\vec{n}}) \, dx
-%   \end{align*}
-%   Conserveration of mass:
-%   \begin{align*}
-%     \frac{d}{dt} \int_\Omega f(t, x) + \int_{\partial \Omega} \rho_{\vec{n}} \vec{n} \, dS = 0 \\
-%     \Rightarrow \int_\Omega (\partial_t f(t, x) + \div(\rho)) \, dx = 0 \\
-%     \Rightarrow \partial_t f(t,x) + \div(\rho) = 0
-%   \end{align*}
-%   Proof of Gauss-Green formula: \(\Omega = Ball\): We can use polar formular for integral
-%   \begin{align*}
-%     \int_{\partial B} f \cdot \vec{n} \, dS = \int_B \div(f) \, dx, \quad f = (f_i)_{i=1}^d \\
-%     \Leftrightarrow \quad \int_{\partial B} (f_1 n_1 + \dots + f_d n_d) \, dS = \int_B \left(\frac{\partial}{\partial x_1 f_1} + \dots + \frac{\partial}{\partial x_d f_d}\right) \, dx
-%   \end{align*}
-%   It sufficies to prove that for all \(i = 1, \dots, d\), then
-%   \[\int_{\partial B} f_i n_i \, dS = \int_B \frac{\partial}{\partial x_i} f\, dx\]
-%   We only need to consider \(i=1, B = B(0,1), f_1 = g\).
-%   \[\int_{\partial B(0,1)} g n_1 = \int_{B(0,1)} \frac{\partial}{\partial x_i g} \, dx, \quad \forall g \in C^1(B)\]
-%   For d=1:
-%   \begin{align*}
-%     \int_{\partial B(0,1)} g n_1 = g(1) - g(-1)
-%     \int_{B(0,1)} \frac{\partial}{\partial x_1 g} = \int_{-1}^1 g' \, dx
-%   \end{align*}
-%   So \(g(1) - g(-1) = \int_{-1}^1 q'\)
-%   For d=2: 
-%   \begin{align*}
-%     \{x_1^2 + x_2^2 \le 1\} = \{(r, \theta) \mid 0 \le r \le 1, 0 \le \theta \le 2 \pi\}
-%   \end{align*}
-
-
-%   \begin{align*}
-%     \frac{\partial}{\partial x_1} g(x_1, x_2) \\
-%     x_1 = r \cos \theta \\
-%     x_2 = r \sin \theta \\
-%     r = \sqrt{x_1^2 + x_2^2} \\
-%     \frac{\partial r}{\partial x_1} = \frac{2 x_1}{2 \sqrt{x_1^2 + x_2^2}} = \frac{x_1}{r} = \cos \theta \\
-%     \frac{\partial}{\partial x_1} g = 
-%     \begin{cases}
-%       \frac{\partial}{\partial r} g \frac{\partial r}{\partial x_i} = \frac{\partial}{\partial r} g \cos \theta \\
-%       \frac{\partial}{\partial \partial} g \frac{\partial \theta}{\partial x_1} = \frac{\partial}{\partial \theta} g \frac{-1}{r \sin \theta}
-%     \end{cases}
-%   \end{align*}
-
-%   \begin{align*}
-%     \int_{B(0,1)} \frac{\partial}{\partial x_1}g 
-%     &= \int_0^1 \left(\int_0^{2 \pi} \frac{\partial}{\partial r} g \cos \theta \, d \theta \right) \, dr \\
-%     &= \int_0^{2 \pi} \left(\int_0^1 \frac{\partial}{\partial r} g r \, dr \right) \cos \theta d \theta \\
-%     &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \cos \theta \, d \theta - \int_0^{2 \pi} \int_0^1 g \cos \theta \, d \theta d r \\
-%     \int_{\partial B(0, 1)} g n_1 &= \int_0^{2 \pi} g(\cos \theta, \sin \theta) \, \cos \theta d \theta
-%   \end{align*}
-
-%   Try another parametrization \(B(0,1) = \{x_1^2 + x_2^2 \le 1 \}\).
-%   \begin{align*}
-%     \int_{B(0,1)} \frac{\partial g}{\partial x_1}
-%     &= \int_{-1}^1 \left(\int_{-\sqrt{1 - x_2^2}} \frac{\partial g}{\partial x_1} \, dx_1\right) dx_2 \\
-%     &= \int_{-1}^1 \left[g(\sqrt{1-x_2^2}, 2) - g(-\sqrt{1-x_2^2}, x_2)\right] \, dx_2 \\
-%     \int_{\partial B(0,1)} g n_1 &= \int_{r_+} + \int_{r_-}, 
-%   \end{align*}
-%   \begin{align*}
-%     \int_{r_+} &= \int_{-1}^1 g(\sqrt{1-x_2^2}, x_2) \, dx_2 \\
-%     \int_{r_-} &= - \int_{-1}^1 g(-\sqrt{1-x_2^2}, x_2) \, dx_2 = - \int_{-1}^1 \qedhere
-%   \end{align*}
-% \end{proof}
-
-
-\begin{ex} (E 1.2)
+\begin{ex}[E 1.2]
   Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
 \end{ex}
 
@@ -748,74 +727,9 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{align*}
 \end{proof}
 
-\begin{ex} (E 1.3)
+\begin{ex}[E 1.3]
   Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
 \end{ex}
-
-\begin{proof} [Solution]
-  \begin{align*}
-    \partial x_i u(x) 
-    &= \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \\
-    = \int_{\mathbb{R}^d} \Phi(x-y) \partial y_i f(y) \, dy \\
-    \partial x_j \partial x_i u(x) &= \int \partial x_j \Phi(x-y) \partial y_i f(y) \, dy,
-  \end{align*}
-  \(\nabla \Phi  \cos \frac{y}{|y|^d}\) locally integrable. We can apply dominated convergence because
-  \begin{align*}
-    \lim_{h \to 0} \int_{\mathbb{R}^d} \frac{\Phi(x + h e_j - y) - \Phi(x-y)}{h} \partial_{y_i} f(y) \, dy
-  \end{align*}
-  For every \(y\):
-  \begin{align*}
-    \frac{\Phi(x + h e_j - y) - \Phi(x-y)}{h} \partial_{y_i} f(y) &\to \partial_{x_i} \Phi(x-y) \, \partial_{y_i}(y) \\
-    \left| \frac{\Phi(x + h e_j -y) - \Phi(x-y)}{h} \right| 
-    &= \left|\frac{1}{h} \int_0^h \partial_{x_j} \Phi(x + te_j-y) \, dt \right|  \\
-    &\le \frac{1}{h} \int_0^h \frac{|(x_j + te-j - y_i)}{| \dots |^d} \, dt \\
-    &\le \frac{1}{h} \int_0^h \frac{1}{|x + te_j - y|^{d-1}} \, dt \\ 
-    &\le \sup_{t \in (0, \epsilon]} \frac{1}{|x + te_j - y|^{d-1}}
-  \end{align*}
-\end{proof}
-
-\begin{ex} (E 1.4)
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
-  \begin{enumerate}
-    \item Proof that \(u\) satisfies the Mean-Value-Inequality
-     \begin{align*}
-       \fint_{\partial B(x, r)} u(y) \, dS(y)
-       \ge \fint_{B(x, r)} u(y) \, dy
-       \ge u(x)
-     \end{align*}
-    \item Proof that \(u\) satisfies the SMP
-  \end{enumerate}
-\end{ex}
-
-\begin{proof}[Solution]
-  \begin{enumerate}
-    \item 
-      \begin{align*}
-        f(r) &= \fint_{\partial B(x, r)} u(y) \, dS(y) \\
-        f'(r) &= \frac{r}{d} \fint_{B(x, r)} \underbrace{\Delta u(y)}_{\ge 0} \, dy \ge 0
-      \end{align*}
-      So \(f\) is increasing, so we get
-      \begin{align*}
-        f(r) &\ge \lim_{t \to 0} f(t) = u(x) \\
-        \fint_{\partial B(x, r)} u \ge u(x)
-      \end{align*}
-      \begin{align*}
-        \int_{B(x,r)} u 
-        &= \int_0^r \left(\int_{\partial B(x,s) u}\right) \, ds \\
-        &= \int_0^r |\partial B(x, s)| \left(\fint_{\partial B(x, s)} u\right) \, ds \\
-        &\ge \int_0^r |\partial B(x,r)| u(x) \, ds \\
-        &= u(x) \int_{B(x,r)} = u(x) |B(x,r)|
-      \end{align*}
-      So we can conclude
-      \[\fint_{B(x,r)} u \ge u(x)\]
-      Use \(\fint_{\partial B(x,s)} u \le \fint_{\partial B(x,r)} u\):
-      \begin{align*}
-        \int_{B(x,r)} 
-        &\le \int_0^r |\partial B(x,r)| \left(\int_{\partial B(x,r)} u\right) \, ds = \left( \fint_{\partial B(x,r)} u \right) |B(x,r)|
-      \end{align*}
-    \item \(\fint_{B(x_0, r)} u \ge u(x_0) = \sup u \Rightarrow u(x) = u(x_0) \forall x \in B(x,r)\)
-  \end{enumerate}
-\end{proof}
 
 \begin{thm} (Liouville's Theorem) 
   If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
