@@ -59,8 +59,8 @@
 \maketitle
 \tableofcontents
 \newpage
-
-
+Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises still can be handed in.
+\newpage
 
 \chapter{Introduction}
 
@@ -605,12 +605,13 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   \end{enumerate}
 \end{proof}
 
-\begin{lem} (Estimates for derivatives)\label{estimates-of-derivatives} If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\) and \(B(x_0, r) \subseteq \Omega\), then 
-  \[|D^\alpha u(x_0)| \le \frac{(c_d N)^N}{r^{d+n}} \int_{B(x_0, r)} |u| \, dy\]
+\begin{lem}[Estimates for derivatives]\label{estimates-of-derivatives}
+  If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\), \(\alpha \in \mathbb{N}_0^d\), \(|\alpha| = k\) and \(B(x_0, r) \subseteq \Omega\), then 
+  \[|D^\alpha u(x_0)| \le \frac{c_k}{r^{d+k}} \int_{B(x_0, r)} |u| \, dy,\] where \(c_0 = \frac{1}{|B(0,1)|}\) and \(c_k = \frac{(2^{n+1}nk)^k}{|B(0,1)|}\) for \(k=1,\dots\)
 \end{lem}
 
-\begin{thm} (Regularity)
-  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
+\begin{thm}[Regularity]
+  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u \, dy\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
 \end{thm}
 
 % \begin{proof}
@@ -731,7 +732,7 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
 \end{ex}
 
-\begin{thm} (Liouville's Theorem) 
+\begin{thm}[Liouville's Theorem] 
   If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
 \end{thm}
 
@@ -739,13 +740,14 @@ This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \
   By the bound of the derivative \ref{estimates-of-derivatives} we have
   \begin{align*}
     |\partial_{x_i} u(x_0)| 
-    &\le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u| \quad \forall x_0 \in \mathbb{{R}^d \forall r > 0} \\
-    &\le \|u\|_{L^\infty} \frac{c_d}{r^{d+1}} |B(x_0, r)| \le \|u\|_{L^\infty} \frac{c_d}{r} \xrightarrow{r \to \infty} 0
+    &\le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u| \, dy \quad \forall x_0 \in \mathbb{R}^d\ \forall r > 0 \\
+    &\le \|u\|_{L^\infty} \frac{c_d}{r^{d+1}} |B(x_0, r)| \\
+    &\le \|u\|_{L^\infty} \frac{c_d}{r} \xrightarrow{r \to \infty} 0
   \end{align*}
   Thus \(\partial_{x_i} u = 0\) for all \(i = 1, 2, \dots d\) and \(u = const.\) in \(\mathbb{R}^d\)
 \end{proof}
 
-\begin{thm} (Uniqueness of solutions to Poisson Equation in \(\mathbb{R}^d\))
+\begin{thm}[Uniqueness of solutions to Poisson Equation in \(\mathbb{R}^d\)]
   If \(u \in C^2(\mathbb{R}^d)\) is a bounded function and satisfies \(- \Delta u = f\) in \(\mathbb{R}^d\) where \(f \in C_c^2(\mathbb{R}^d)\), then we have
   \begin{align*}
     u(x) = \Phi \star f(x) + C = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \, dy + C \quad \forall x \in \mathbb{R}^d
