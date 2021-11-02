@@ -48,6 +48,7 @@
 
 \renewcommand\div{\operatorname{div}}
 \newcommand{\dist}{\operatorname{dist}}
+\newcommand{\supp}{\operatorname{supp}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thành Nam Phan \\ Winter Semester 2021/2022}
@@ -896,17 +897,113 @@
   \end{thm}
 
   \begin{proof}
-    Step 1: Let \(f, g \in C_c(\mathbb{R}^d)\). Then
-    \begin{align*}
-      (f_\epsilon \star g)(x) - g(x) 
-      &= \int f_\epsilon(y) g(x-y) \, dy - \int f_\epsilon(y) g(x) \, dy \\
-      &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
-      |(f_\epsilon - g)(x) - g(x)|
-      &\le \left| \int_{\mathbb{R}^d} \right| \\
-      &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
-      &\le \int{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
-      &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] \xrightarrow{\epsilon \to 0} 0
-    \end{align*}
+    \begin{itemize}
+      \item [Step 1] Let \(f, g \in C_c(\mathbb{R}^d)\). Then
+      \begin{align*}
+        (f_\epsilon \star g)(x) - g(x) 
+        &= \int_{\mathbb{R}^d} f_\epsilon(y) g(x-y) \, dy - \int_{\mathbb{R}^d} f_\epsilon(y) g(x) \, dy \\
+        &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
+        |(f_\epsilon - g)(x) - g(x)|
+        &\le \left| \int_{\mathbb{R}^d} \right| \\
+        &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
+        &\le \int{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
+        &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] \xrightarrow{\epsilon \to 0} 0
+      \end{align*}
+      We have Dominated Convergence:
+      \begin{align*}
+        (f_\epsilon \star g)(x) - g(x) \to 0 \quad \text{as } \epsilon \to 0 \\
+        |f_\epsilon \star g(x) - g(x)| \le \|f\|_{L^1} \sup_{|z| \le R_\epsilon} |g(x-z) - g(x)| \le 2 \|f\|_1 \|g\|_{L^\infty} \mathbb{1}(|x| \le R_1)
+      \end{align*}
+      Where \(B(0, R_1) \supseteq \supp(g) + B(0, R_\epsilon)\), thus
+      \(f_\epsilon \star g \to g\) in \(L^p(\mathbb{R}^d)\). To remove the technical assumptions \(f, g \in C_c(\mathbb{R}^d)\), then we use a density argument. We use the fact that \(C_c(\mathbb{R}^d)\) is dense in \(L^p(\mathbb{R}^d)\), \(1 \le p < \infty\).
+      \item[Step 2:] Let \(g \in C_c(\mathbb{R}^d), g \in L^p(\mathbb{R}^d)\). Then there is \(\{g_m\} \subseteq L^p(\mathbb{R}^d), g_m \to g\) in \(L^p(\mathbb{R}^d)\). Then 
+      \begin{align*}
+        \|f_\epsilon \star g - g\|_{L^p} 
+        &\le \|f_\epsilon \star (g - g_m)\|_{L^p}  + \|f_\epsilon \star g_m - g_m \|_{L^p}+ \|g_m - g\|_{L^p} \\
+        \text{(Young)} \quad &\le \|f_\epsilon\|_{L^1}\|g-g_m\|_{L^p}  + \|f_\epsilon \star g_m - g_m \|_{L^p}+ \|g_m - g\|_{L^p} \\
+        &\le \|f\|_{L^1}\|g-g_m\|_{L^p}  + \|f_\epsilon \star g_m - g_m \|_{L^p}+ \|g_m - g\|_{L^p} \\
+        &\le (\|f\|_{L^1} + 1) \|g - g_m\|_{L^p} + \|f \star g_m - g_m\|_{L^p}
+      \end{align*}
+      
+      So we get:
+      \begin{align*}
+        \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} 
+        &\le (\|f\|_{L^p} + 1) \|g - g_m\|_{L^p} + \underbrace{\limsup_{\epsilon \to 0} \|f_\epsilon \star g_m - g_m\|_{L^p}}_{0 \text{by step 1.}} \\
+        \xrightarrow{m \to \infty} 0
+      \end{align*}
+      \item[Step 3:] Let \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\). Take \(\{f_m\} \subseteq C_c(\mathbb{R}^d)\), s.t. 
+      \begin{align*}
+        \begin{cases}
+          F_m \to g in L^1(\mathbb{R}) \text{ as } m \to \infty \\
+          \int_{\mathbb{R}^d} F_m = 1 (\text{it is possible since } \int_{\mathbb{R}^d}) f = 1)
+        \end{cases}
+      \end{align*} 
+      Define \(F_{m, \epsilon}(x) = \epsilon^{-d} F_m(\epsilon^{-1} x)\) (recall \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\)). Then:
+      \begin{align*}
+        f_\epsilon \star g - g &= (f_\epsilon - F_{m, \epsilon}) \star g + F_{m, \epsilon} \star g -g \\
+        \Rightarrow \|f_\epsilon - g \|_{L^p} &\le \underbrace{\|f_\epsilon - F_{m, \epsilon} \star g\|_{L^p}}_{\mathclap{\overset{\text{Young}}{\le} \|f_\epsilon - F_{m, \epsilon}\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g\|_{L^p}}} + \|F_{m, \epsilon} \star g - g\|_{L^p} \\
+        \Rightarrow \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} &\le \|f - F_m\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g \|_{L^p}
+      \end{align*}
+    \end{itemize}
   \end{proof}
 
+  
+  \begin{lem}
+    \(C_c(\mathbb{{R}^d})\) is dense in \(L^p(\mathbb{R}^d)\), \(1 \le p < \infty\)
+  \end{lem}
+
+  \begin{proof}
+    For all \(g \in L^p(\mathbb{R}^d)\) there are \(g_m\) step functions and \(g_m \to m\) in \(L^p(\mathbb{R}^d)\),
+    % \[g_m(x) = \sum_{\substack{\Omega \\ \text{{finite sum} \\ \Omega \subseteq \mathbb{R}^d \text{measurable}}}} \chi_\Omega(x) a_\Omega\]
+    We can assume that \(\Omega\) is open and bounded and we want to approximate \(\chi_\Omega\) by \(C_c(\mathbb{R}^d)\). 
+  \end{proof}
+
+  \begin{lem}[Urnson]
+    Define 
+    \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\]
+    Then there is a \(\eta_\epsilon \in C_c(\mathbb{R}^d)\) s.t.
+    \begin{align*}
+      \begin{cases}
+        0 \le \eta(x) \le 1 & \forall x \in \mathbb{R}^d \\
+        \eta_\epsilon(x) = 1 & \text{if } x \in \Omega_\epsilon \\
+        \eta_\epsilon(x) = 0 & \text{if } x \notin \Omega
+      \end{cases}
+    \end{align*}
+  \end{lem}
+
+  \begin{lem}[Gernal Version of Urnson]
+    If \(A, B \subseteq \mathbb{R}^d\), \(A\) closed, \(B\) closed, \(A \cap B = \emptyset\). Then
+    \[\eta(x) = \frac{\dist(x, A)}{\dist(x, A) + \dist(x, B)}\]
+    Then \(\eta \in C(\mathbb{R}^d)\), \(0 \le \eta \le 1\) and \(\eta = 0\)if \(x \in B\), \(\eta = 1\) if \(x \in A\). App to \(A = \overline{\Omega_\epsilon} \subset \subset \Omega\) and \(B = \mathbb{R}^d \setminus \Omega\).
+  \end{lem}
+
+  
+  \begin{thm}[Appendix C4 in Evans]
+    Let \(\Omega\) be open in \(\mathbb{R}^d\) and for \(\epsilon > 0\) define
+    \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \mathbb{R}^d \setminus \Omega) > \epsilon\}\]
+    Let \(f \in C_c^\infty(\mathbb{R}^d), \int_{\mathbb{R}^d} f = 1, \supp f \subseteq B(0, 1), f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x) \supp\) is \(B(0, \epsilon)\). Then for all \(g \in L_{loc}^p(\Omega)\) (i.e. \(\mathbb{1}_K g \in L^p(\Omega) \forall K\) compakt set in \(\Omega\)), then:
+    \begin{enumerate}[label=\alph*)]
+      \item \(g_\epsilon(x) = (f_\epsilon \star g)(x) = \int_{\mathbb{R}^d} f_\epsilon(x-y) g(y) \, dy - \int_\Omega f_\epsilon(x-y) g(y) \, dy\) is well-defined in \(\Omega_\epsilon\) and \(g_\epsilon \in C^\infty(\Omega_\epsilon)\).
+      \item \(g_\epsilon \to g\) in \(L_{loc}^p(\Omega)\) if \(1 \le p < \infty\) and \(g_\epsilon(x) \to g(x)\) almost everywhere \(x \in \Omega\).
+      \item If \(g \in C(\Omega)\), then \(g_\epsilon(x) \to g(x)\) uniformly in any compact subset of \(\Omega\).
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \item \(D^\alpha(g_\epsilon) = (D^\alpha f_\epsilon) \star g \in C(\Omega_\epsilon)\)
+      % \item Replace \(g \mapsto \mathbb{1}_K g\) where \(K\) is a compact set \(\subbseteq \Omega\). Then \(\mathbb{1}_K g \in L^p\). Then our theorem \(f_\epsilon \star (\mathbb{1}_K g) \to \mathbb{1}_K g\) in \(L^p(\Omega)\). On the other hand \(\mathbb{1}_K[(f_\epsilon \star \mathbb{1}_K g) - (f_\epsilon \star g)] \to 0\) as \(\epsilon \to 0\) (exercise)
+      \item Already proved in \(\mathbb{R}^d\) space.
+    \end{enumerate}
+  \end{proof}
+
+  
+  \begin{cor}[Lebesgue differentation theorem]
+    If \(f \in L_{loc}^P(\mathbb{R}^d)\), then
+    \begin{align*}
+      \fint_{B(x, \epsilon)} |f(y) - f(x)|^p \, dy \to 0 \quad \text{ as } \epsilon \to 0
+    \end{align*}
+    
+  \end{cor}
 \end{document}
+ 
