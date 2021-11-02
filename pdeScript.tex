@@ -56,764 +56,857 @@
 
 \begin{document}
 
-\maketitle
-\tableofcontents
-\newpage
-Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises still can be handed in.
-\newpage
+  \maketitle
+  \tableofcontents
+  \newpage
+  Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises still can be handed in.
+  \newpage
 
-\chapter{Introduction}
+  \chapter{Introduction}
 
-A differential equation is an equation of a function and its derivatives. 
+  A differential equation is an equation of a function and its derivatives. 
 
-\begin{eg}[Linear ODE]
-  Let \(f: \mathbb{R} \to \mathbb{R}\),
-  \begin{align*}
-    \begin{cases}
-      f(t) = a f(t) \text{ for all } t \ge 0, a \in \mathbb{R} \\
-      f(0) = a_0
-    \end{cases}
-  \end{align*}
-  is a linear ODE (Ordinary differential equation). The solution is: \(f(t) = a_0 e^{at}\) for all \(t \ge 0\).
-\end{eg}
+  \begin{eg}[Linear ODE]
+    Let \(f: \mathbb{R} \to \mathbb{R}\),
+    \begin{align*}
+      \begin{cases}
+        f(t) = a f(t) \text{ for all } t \ge 0, a \in \mathbb{R} \\
+        f(0) = a_0
+      \end{cases}
+    \end{align*}
+    is a linear ODE (Ordinary differential equation). The solution is: \(f(t) = a_0 e^{at}\) for all \(t \ge 0\).
+  \end{eg}
 
-\begin{eg} (Non-Linear ODE) \(f: \mathbb{R} \to \mathbb{R}\)
-  \begin{align*}
-    \begin{cases}
-      f'(t) = 1 + f^2(t) \\
-      f(0) = 1
-    \end{cases}
-  \end{align*}
-  Lets consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\). Then we have \[f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t),\] but this solution only is \emph{good} in \((- \pi, \pi)\). It's a problem to extend this to \(\mathbb{R} \to \mathbb{R}\).
-\end{eg}
+  \begin{eg} (Non-Linear ODE) \(f: \mathbb{R} \to \mathbb{R}\)
+    \begin{align*}
+      \begin{cases}
+        f'(t) = 1 + f^2(t) \\
+        f(0) = 1
+      \end{cases}
+    \end{align*}
+    Lets consider \(f(t) = \tan(t) = \frac{\sin(t)}{\cos(t)}\). Then we have \[f'(t) = \frac{1}{\cos(t)} = 1 + \tan^2(t) = 1 + f^2(t),\] but this solution only is \emph{good} in \((- \pi, \pi)\). It's a problem to extend this to \(\mathbb{R} \to \mathbb{R}\).
+  \end{eg}
 
-A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives.
+  A PDE (Partial Differential Equation) is an equation of a function of 2 or more variables and its derivatives.
 
-\begin{rem}
-  Recall for \( \Omega \subseteq \mathbb{R}^d\) open and \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) the notation of partial derivatives:
+  \begin{rem}
+    Recall for \( \Omega \subseteq \mathbb{R}^d\) open and \(f: \Omega \to \{\mathbb{R}, \mathbb{C}\}\) the notation of partial derivatives:
+    \begin{itemize}
+      \item \(\partial_{x_i} f(x) = \lim_{h \to 0} \frac{f(x + he_i) - f(x)}{h}, \text{where } e_i = (0, 0, \dots, 1, \dots, 0, 0) \in \mathbb{R}^d\)
+      \item \(D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \cdots \partial_{x_d}^{\alpha_d} f(x), \text{where } \alpha \in \mathbb{N}^d\)
+      \item \(Df = \nabla f = (\partial{x_1}, \ldots, \partial_{x_d})\)
+      \item \(\Delta f = \partial_{x_1}^2 + \cdots + \partial^2_{x_d} f\)
+      \item \(D^k f = (D^\alpha f)_{|\alpha| = k},  \text{where } |\alpha| = \sum_{i=1}^d |\alpha_i|\)
+      \item \(D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}\)
+    \end{itemize}
+  \end{rem}
+
+  \begin{defn}
+    Given a function \( F \). Then the equation of the form 
+    \begin{align*}
+      F(D^k u(x), D^{k-1} u(x), \dots, Du(x), u(x), x) = 0 
+    \end{align*}
+    with the unknown function \(u:\ \Omega \subseteq \mathbb{R}^d \longrightarrow \mathbb{R}\) is called a \emph{PDE of order \(k\)}.
+    \begin{itemize}
+      \item Equations \(\sum_d a_\alpha(x) D^\alpha u(x) = 0\), where \(a_\alpha\) and \(u\) are unknown functions are called \emph{Linear PDEs}. 
+      \item Equations \(\sum_{|\alpha| = k} a_\alpha(x) D^\alpha u(x) + F(D^{k-1}u, D^{k-2}u, \dots, Du, u, x) = 0\) are called \emph{semi-linear PDEs}.
+    \end{itemize}
+  \end{defn}
+
+  Goals: For \emph{solving a PDE} we want to
   \begin{itemize}
-    \item \(\partial_{x_i} f(x) = \lim_{h \to 0} \frac{f(x + he_i) - f(x)}{h}, \text{where } e_i = (0, 0, \dots, 1, \dots, 0, 0) \in \mathbb{R}^d\)
-    \item \(D^\alpha f(x) = \partial_{x_1}^{\alpha_1} \cdots \partial_{x_d}^{\alpha_d} f(x), \text{where } \alpha \in \mathbb{N}^d\)
-    \item \(Df = \nabla f = (\partial{x_1}, \ldots, \partial_{x_d})\)
-    \item \(\Delta f = \partial_{x_1}^2 + \cdots + \partial^2_{x_d} f\)
-    \item \(D^k f = (D^\alpha f)_{|\alpha| = k},  \text{where } |\alpha| = \sum_{i=1}^d |\alpha_i|\)
-    \item \(D^2 f = (\partial_{x_i} \partial_{x_j} f)_{1 \le i, j \le d}\)
+    \item Find an explizit solution! This is in many cases impossible.
+    \item Prove a \emph{well-posted theory} (existence of solutions, uniqueness of solutions, continuous dependence of solutions on the data)
   \end{itemize}
-\end{rem}
 
-\begin{defn}
-  Given a function \( F \). Then the equation of the form 
-  \begin{align*}
-    F(D^k u(x), D^{k-1} u(x), \dots, Du(x), u(x), x) = 0 
-  \end{align*}
-  with the unknown function \(u:\ \Omega \subseteq \mathbb{R}^d \longrightarrow \mathbb{R}\) is called a \emph{PDE of order \(k\)}.
-  \begin{itemize}
-    \item Equations \(\sum_d a_\alpha(x) D^\alpha u(x) = 0\), where \(a_\alpha\) and \(u\) are unknown functions are called \emph{Linear PDEs}. 
-    \item Equations \(\sum_{|\alpha| = k} a_\alpha(x) D^\alpha u(x) + F(D^{k-1}u, D^{k-2}u, \dots, Du, u, x) = 0\) are called \emph{semi-linear PDEs}.
-  \end{itemize}
-\end{defn}
-
-Goals: For \emph{solving a PDE} we want to
-\begin{itemize}
-  \item Find an explizit solution! This is in many cases impossible.
-  \item Prove a \emph{well-posted theory} (existence of solutions, uniqueness of solutions, continuous dependence of solutions on the data)
-\end{itemize}
-
-We have two notations of solutions:
-\begin{enumerate}
-  \item Classical solution: The solution is continuous differentiable (e.g. \( \Delta u = f  \leadsto u \in C^2  \))
-  \item Weak Solutions: The solution is not smooth/continuous
-\end{enumerate}
-
-\begin{defn} (Spaces of continous and differentiable functions)
-  Let \(\Omega \subseteq R^d\) be open
-  \begin{align*}
-    C(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid f \text{ continuous} \right\} \\
-    C^k(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid D^\alpha f \text{ is continuous for all } |\alpha| \le k \right\}
-  \end{align*}
-\end{defn}
-
-Classical solution of a PDE of order \(k \leadsto C^k\) solutions!
-\begin{align*}
-  L^p(\Omega) = \left\{ f: \ \Omega \to \mathbb{R} \text{ lebesgue measurable} \mid \int_\Omega |f|^p d\lambda < \infty, 1 \le p < \infty \right\}
-\end{align*}
-
-Sobolev Space:
-\begin{align*}
-  W^{k,p}(\Omega)= \left \{ f \in L^p(\Omega) \mid \forall \alpha \in \mathbb{N}^n \text{ with } |\alpha| \leq k: D^{\alpha}f \in L^p(\Omega) \text{exists}  \right \}
-\end{align*}
-
-In this course we will investigate
-\begin{itemize}
-  \item Laplace / Poisson Equation: \(-\Delta u = f\)
-  \item Heat Equation: \(\partial_t u - \Delta u = f\)
-  \item Wave Equation: \(\partial_t^2 - \Delta u = f\)
-  \item Schrödinger Equation: \(i \partial_t u - \Delta u = f\)
-\end{itemize}
-
-
-\chapter{Laplace / Poisson Equation}
-
-\section{Laplace Equation}
-\(- \Delta u = 0\) (Laplace) or \(-\Delta u = f(x)\) (Poisson).
-
-\begin{defn} (Harmonic Function)
-  Let \(\Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
-\end{defn}
-
-\begin{thm} (Gauss-Green Theorem)\label{gauss-green}
-  Let \(A \subseteq \mathbb{R}^d\) open, \(\vec{F} \in C^1(A, \mathbb{R}^d)\) and \(K \subseteq A\) compact with \(C^1\) boundary. Then
-  \[ \int_{\partial K} \vec{F} \cdot \vec{\nu}\ dS(x) = \int_K \div(\vec{F})\ dx \]
-  where \(\nu\) is the outward unit normal vector field on \(\partial K\).
-Thus
-\begin{align*}
-  \int_{\partial V} \nabla u \cdot \vec{\nu}\ dS(x)
-  = \int_V \div(\nabla u) \ dx
-  = \int_V \Delta u(x) \ dx
-\end{align*}
-for any \(V \subseteq \Omega \) open.
-\end{thm}
-
-
-\begin{thm} (Green's Identities)\label{green-identities}
-  Let \(A \subseteq \mathbb{R}^d\) open, \(K \subseteq A\) d-dim.\ compactum with \(C^1\) boundary and \(f, g \in C^2(A)\)
+  We have two notations of solutions:
   \begin{enumerate}
-    \item Green's first identity (Partial Integration): \begin{align*}
-      \int_K \nabla f \cdot \nabla g \, dx = \int_{\partial K} f \frac{\partial g}{\partial \nu} \, dS - \int_K f \Delta g \, dx
-    \end{align*}
-    where \(\frac{\partial g}{\partial \nu} = \partial_\nu g = \nu \cdot \nabla g\)
-    \item Green's second identity: \begin{align*}
-      \int_K f \Delta g - (\Delta f) g \, dx = \int_{\partial K} \left(f \frac{\partial g}{\partial \nu} - g \frac{\partial f}{\partial \nu}\right) \, dS
-    \end{align*}
+    \item Classical solution: The solution is continuous differentiable (e.g. \( \Delta u = f  \leadsto u \in C^2  \))
+    \item Weak Solutions: The solution is not smooth/continuous
   \end{enumerate}
-\end{thm}
 
-\begin{ex}
-  Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be continuous. Prove that if \( \int_B f(x) \ dx = 0 \), then \( u \equiv 0 \) in \(\Omega\).
-\end{ex}
-
-\begin{thm} (Fundamential Lemma of Calculus of Variations)
-  Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f \in L^1(\Omega)\). If 
-  \(\int_B f(x) \ dx = 0\) for all \(x \in B_r(x) \subseteq \Omega\), then \(f(x) = 0\) a.e. (almost everywhere) \(x \in \Omega\).
-\end{thm}
-
-\begin{rem} (Solving Laplace Equation)
-  \(-\Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
-  \[
-    \frac{\partial r}{\partial x} 
-    = \frac{\partial}{\partial x_i}  \left(\sqrt{x_1^2 + \dots + x_d^2}\right) \\
-    = \frac{2 x_i}{2{\sqrt{x_1^2 + \dots + x_d^2}}} \\
-    = \frac{x_i}{r}
-  \]
-  Then
-  \begin{align*}
-    \partial_{x_i} u &= \partial_{x_i} v = (\partial_r v) \frac{\partial r}{\partial {x_i}} 
-    = v'(r) \frac{x_i}{r} \\
-    \partial^2_{x_i} u 
-    &= \partial_{x_i} \left(v(r)' \frac{x_i}{r}\right) 
-    = (\partial_{x_i}v(r)') \frac{x_i}{r} + v'(r) \partial_{x_i} \left(\frac{x_i}{r}\right) \\
-    &= (\partial_r v'(r))\left(\frac{dr}{\partial_{x_i}}\right) \frac{x_i}{r} + v'(r)\left( \frac{1}{r} - \frac{x_i}{r^2}(\partial_{x_i} r) \right) 
-    = v'(r) \frac{x_i^2}{r^2} + v'r(r)\left(\frac{1}{r} - \frac{x_i^2}{r^3}\right)
-  \end{align*}
-
-  So we have \(\Delta u = \left( \sum_{i=1}^d d_{x_i}^2 \right) u = v''(r) + v'(r) (\frac{d}{r} - \frac{1}{r})\)
-
-  Thus \(\Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
-  \(\Rightarrow\) \(\log(v(r))' = \frac{v'(r)}{v(r)} = - \frac{d-1}{r} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\)) \\
-  \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
-  \(\begin{cases}
-    \frac{const}{r^{d-2}} + const xx + const &,d \ge 3 \\
-    const \log(r) + const xx r + const &,d = 2
-  \end{cases}\)
-\end{rem}
-
-\begin{defn} 
-  (Fundamential Solution of Laplace Equation)
-  \begin{align*}
-    \Phi(x) = \begin{cases}
-      - \frac{1}{2 \pi} \log(|x|), & d = 2 \\
-      \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}}, & d \ge 3
-    \end{cases}
-  \end{align*}
-  
-  Where \( |B_1| \) is the Volume of the ball \(B_1(0) = B(0, 1) \subseteq \mathbb{R}^d\).
-
-\end{defn}
-
-\begin{rem}
-  \(\Delta \Phi(x) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
-\end{rem}
-
-
-\section{Poisson-Equation}
-The Poisson-Equation is \(-\Delta u(x) = f(x)\) in \(\mathbb{R}^d\). The explicit solution is given by
-\begin{align*}
-  u(x) &= (\Phi \star f)(x)
-  = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \ dy 
-  = \int_{\mathbb{R}^d} \Phi(y)f(x-y) \ dy
-\end{align*}
-This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \Phi) \star f = \delta_0 \star f = f\]
-
-
-\begin{thm} \label{solution-for-poisson}
-  Assume \(f \in C_c^2(\mathbb{R}^d)\). Then \(u = \Phi \star f\) satisfies that \(u \in C^2(\mathbb{R}^d)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\)
-\end{thm}
-
-
-\begin{proof}
-  By definition we have
-  \begin{align*}
-    u(x) &= \int_{\mathbb{R}^d} \Phi(y) f(x-y) \, dy.
-  \end{align*}
-  First we check that \(u\) is continuous: Take \(x_k \to x_0\) in \(\mathbb{R}^d\). We prove that \(u(x_n) \xrightarrow{n} u_0\), i.e.
-  \begin{align*}
-    \lim_{n \to \infty} \int_{\mathbb{R}^d} \Phi(y) f(x_n - y) \ dy = \int_{\mathbb{R}^d} \Phi(y) f(x_0 - y) \ dy
-  \end{align*}
-  This follows from the Dominated Convergence Theorem. More precisely:
-  \begin{align*}
-    \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \setminus \{0\}
-  \end{align*}
-  and 
-  \begin{align*}
-    |\Phi(y) f(x-y)| &\le \| f ||_{L^\infty} \cdot \mathbb{1}(|y| \le R) \cdot |\Phi(y)| \in L^1(\mathbb{R}^d, dy)
-  \end{align*}
-  where \(R > 0\) depends on \(\{x_n\}\) and \(\operatorname{supp}(f)\) but independent of \(y\). Now we compute the derivatives:
-  \begin{align*}
-    \partial_{x_i} u(x) 
-    &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) f(x-y) \ dy
-    = \lim_{h \to 0} \int_{\mathbb{R}^d} \Phi(y) \frac{f(x + h e_i - y) - f(x-y)}{h} \ dy \\
-    \text{(dom.\ conv.)} \quad &= \int \Phi(y) \partial_{x_i} f(x-y) \ dy \\
-    \Rightarrow \quad D^\alpha u(x) &= \int_{\mathbb{R}^d} \Phi(y) D_x^\alpha f(x-y) \ dy \quad \text{for all } |\alpha| \le 2
-  \end{align*}
-  \(D^\alpha u(x)\)  is continuous, thus \(u \in C^2(\mathbb{R}^d)\).
-  Now we check if this solves the Poisson-Equation:
-  \begin{align*}
-    - \Delta u(x) 
-    &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y) \, dy
-    = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \, dy \\
-    &= \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy + \int_{B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy \quad (\epsilon > 0 \text{ small})
-  \end{align*}
-  Now we come to the main part. We apply integration by parts (\ref{green-identities}):
-  \begin{align*}
-    &\int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \, dy \\
-    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} (\nabla_y \Phi(y)) \cdot \nabla_y f(x-y) \, dy - \int_{\partial B(0, \epsilon)} \Phi(y) \cdot  \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y) \\
-    &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{=0} f(x-y) \, dy \\ &\qquad + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \, dS(y) - \int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y)
-  \end{align*}
-
-  We have that \(\nabla_y \Phi(y) = -\frac{1}{d |B_1|} \frac{y}{|y|^d}\) and \( \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)\). This leads to
+  \begin{defn} (Spaces of continous and differentiable functions)
+    Let \(\Omega \subseteq R^d\) be open
     \begin{align*}
-      \frac{\partial \Phi}{\partial \vec{n}} &= \frac{1}{d |B_1|} \frac{1}{|y|^{d-1}} = \frac{1}{d |B_1| \epsilon^{d-1}} \quad \text{ for } y \in \partial B(0, \epsilon)
+      C(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid f \text{ continuous} \right\} \\
+      C^k(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid D^\alpha f \text{ is continuous for all } |\alpha| \le k \right\}
+    \end{align*}
+  \end{defn}
+
+  Classical solution of a PDE of order \(k \leadsto C^k\) solutions!
+  \begin{align*}
+    L^p(\Omega) = \left\{ f: \ \Omega \to \mathbb{R} \text{ lebesgue measurable} \mid \int_\Omega |f|^p d\lambda < \infty, 1 \le p < \infty \right\}
+  \end{align*}
+
+  Sobolev Space:
+  \begin{align*}
+    W^{k,p}(\Omega)= \left \{ f \in L^p(\Omega) \mid \forall \alpha \in \mathbb{N}^n \text{ with } |\alpha| \leq k: D^{\alpha}f \in L^p(\Omega) \text{exists}  \right \}
+  \end{align*}
+
+  In this course we will investigate
+  \begin{itemize}
+    \item Laplace / Poisson Equation: \(-\Delta u = f\)
+    \item Heat Equation: \(\partial_t u - \Delta u = f\)
+    \item Wave Equation: \(\partial_t^2 - \Delta u = f\)
+    \item Schrödinger Equation: \(i \partial_t u - \Delta u = f\)
+  \end{itemize}
+
+
+  \chapter{Laplace / Poisson Equation}
+
+  \section{Laplace Equation}
+  \(- \Delta u = 0\) (Laplace) or \(-\Delta u = f(x)\) (Poisson).
+
+  \begin{defn} (Harmonic Function)
+    Let \(\Omega\) be an open set in \(\mathbb{R}^d\). If \(u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\), then \(u\) is a harmonic function in \(\Omega\).
+  \end{defn}
+
+  \begin{thm} (Gauss-Green Theorem)\label{gauss-green}
+    Let \(A \subseteq \mathbb{R}^d\) open, \(\vec{F} \in C^1(A, \mathbb{R}^d)\) and \(K \subseteq A\) compact with \(C^1\) boundary. Then
+    \[ \int_{\partial K} \vec{F} \cdot \vec{\nu}\ dS(x) = \int_K \div(\vec{F})\ dx \]
+    where \(\nu\) is the outward unit normal vector field on \(\partial K\).
+  Thus
+  \begin{align*}
+    \int_{\partial V} \nabla u \cdot \vec{\nu}\ dS(x)
+    = \int_V \div(\nabla u) \ dx
+    = \int_V \Delta u(x) \ dx
+  \end{align*}
+  for any \(V \subseteq \Omega \) open.
+  \end{thm}
+
+
+  \begin{thm} (Green's Identities)\label{green-identities}
+    Let \(A \subseteq \mathbb{R}^d\) open, \(K \subseteq A\) d-dim.\ compactum with \(C^1\) boundary and \(f, g \in C^2(A)\)
+    \begin{enumerate}
+      \item Green's first identity (Partial Integration): \begin{align*}
+        \int_K \nabla f \cdot \nabla g \, dx = \int_{\partial K} f \frac{\partial g}{\partial \nu} \, dS - \int_K f \Delta g \, dx
+      \end{align*}
+      where \(\frac{\partial g}{\partial \nu} = \partial_\nu g = \nu \cdot \nabla g\)
+      \item Green's second identity: \begin{align*}
+        \int_K f \Delta g - (\Delta f) g \, dx = \int_{\partial K} \left(f \frac{\partial g}{\partial \nu} - g \frac{\partial f}{\partial \nu}\right) \, dS
+      \end{align*}
+    \end{enumerate}
+  \end{thm}
+
+  \begin{ex}
+    Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f: \Omega \to \mathbb{R}\) be continuous. Prove that if \( \int_B f(x) \ dx = 0 \), then \( u \equiv 0 \) in \(\Omega\).
+  \end{ex}
+
+  \begin{thm} (Fundamential Lemma of Calculus of Variations)
+    Let \(\Omega \subseteq \mathbb{R}^d\) open, let \(f \in L^1(\Omega)\). If 
+    \(\int_B f(x) \ dx = 0\) for all \(x \in B_r(x) \subseteq \Omega\), then \(f(x) = 0\) a.e. (almost everywhere) \(x \in \Omega\).
+  \end{thm}
+
+  \begin{rem} (Solving Laplace Equation)
+    \(-\Delta u = 0\) in \(\mathbb{R}^d\). Consider the case when \(u\) is radial, i.e. \(u(x) = v(|x|)\), \(v: \mathbb{R} \to \mathbb{R}\). Denote \(r = |x|\), then 
+    \[
+      \frac{\partial r}{\partial x} 
+      = \frac{\partial}{\partial x_i}  \left(\sqrt{x_1^2 + \dots + x_d^2}\right) \\
+      = \frac{2 x_i}{2{\sqrt{x_1^2 + \dots + x_d^2}}} \\
+      = \frac{x_i}{r}
+    \]
+    Then
+    \begin{align*}
+      \partial_{x_i} u &= \partial_{x_i} v = (\partial_r v) \frac{\partial r}{\partial {x_i}} 
+      = v'(r) \frac{x_i}{r} \\
+      \partial^2_{x_i} u 
+      &= \partial_{x_i} \left(v(r)' \frac{x_i}{r}\right) 
+      = (\partial_{x_i}v(r)') \frac{x_i}{r} + v'(r) \partial_{x_i} \left(\frac{x_i}{r}\right) \\
+      &= (\partial_r v'(r))\left(\frac{dr}{\partial_{x_i}}\right) \frac{x_i}{r} + v'(r)\left( \frac{1}{r} - \frac{x_i}{r^2}(\partial_{x_i} r) \right) 
+      = v'(r) \frac{x_i^2}{r^2} + v'r(r)\left(\frac{1}{r} - \frac{x_i^2}{r^3}\right)
     \end{align*}
 
-    Hence:
+    So we have \(\Delta u = \left( \sum_{i=1}^d d_{x_i}^2 \right) u = v''(r) + v'(r) (\frac{d}{r} - \frac{1}{r})\)
+
+    Thus \(\Delta u = v'(r) + v(r) \frac{d-1}{r}\). We consider \(d \ge 2\). Laplace operator \(\Delta u = 0\) now becomes \(v''(r) + v'(r) \frac{d-1}{r} = 0\) \\
+    \(\Rightarrow\) \(\log(v(r))' = \frac{v'(r)}{v(r)} = - \frac{d-1}{r} = -(d-1)(\log r)'\) (recall \(log(f)' = \frac{f'}{f}\)) \\
+    \(\Rightarrow v'(r) = \frac{1}{v^{d-2} + \text{ const.}}\) \\
+    \(\begin{cases}
+      \frac{const}{r^{d-2}} + const xx + const &,d \ge 3 \\
+      const \log(r) + const xx r + const &,d = 2
+    \end{cases}\)
+  \end{rem}
+
+  \begin{defn} 
+    (Fundamential Solution of Laplace Equation)
     \begin{align*}
-      \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \ dS(y) 
-      &= \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y) \\
-      = \fint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
-      &= \fint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
-      \xrightarrow{\epsilon \to 0} f(x)
+      \Phi(x) = \begin{cases}
+        - \frac{1}{2 \pi} \log(|x|), & d = 2 \\
+        \frac{1}{(d-2) d |B_1|} \frac{1}{|x|^{d-2}}, & d \ge 3
+      \end{cases}
+    \end{align*}
+    
+    Where \( |B_1| \) is the Volume of the ball \(B_1(0) = B(0, 1) \subseteq \mathbb{R}^d\).
+
+  \end{defn}
+
+  \begin{rem}
+    \(\Delta \Phi(x) = 0\) for all \(x \in \mathbb{R}^d\) and \(x \ne 0\). 
+  \end{rem}
+
+
+  \section{Poisson-Equation}
+  The Poisson-Equation is \(-\Delta u(x) = f(x)\) in \(\mathbb{R}^d\). The explicit solution is given by
+  \begin{align*}
+    u(x) &= (\Phi \star f)(x)
+    = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \ dy 
+    = \int_{\mathbb{R}^d} \Phi(y)f(x-y) \ dy
+  \end{align*}
+  This can be heuristically justifyfied with \[-\Delta (\Phi \star f) = (-\Delta \Phi) \star f = \delta_0 \star f = f\]
+
+
+  \begin{thm} \label{solution-for-poisson}
+    Assume \(f \in C_c^2(\mathbb{R}^d)\). Then \(u = \Phi \star f\) satisfies that \(u \in C^2(\mathbb{R}^d)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\)
+  \end{thm}
+
+
+  \begin{proof}
+    By definition we have
+    \begin{align*}
+      u(x) &= \int_{\mathbb{R}^d} \Phi(y) f(x-y) \, dy.
+    \end{align*}
+    First we check that \(u\) is continuous: Take \(x_k \to x_0\) in \(\mathbb{R}^d\). We prove that \(u(x_n) \xrightarrow{n} u_0\), i.e.
+    \begin{align*}
+      \lim_{n \to \infty} \int_{\mathbb{R}^d} \Phi(y) f(x_n - y) \ dy = \int_{\mathbb{R}^d} \Phi(y) f(x_0 - y) \ dy
+    \end{align*}
+    This follows from the Dominated Convergence Theorem. More precisely:
+    \begin{align*}
+      \lim_{n \to \infty} \Phi(y) f(x_n -y) = \Phi(y) f(x_0 - y) \quad \text{ for all } y \in \mathbb{R}^d \setminus \{0\}
+    \end{align*}
+    and 
+    \begin{align*}
+      |\Phi(y) f(x-y)| &\le \| f ||_{L^\infty} \cdot \mathbb{1}(|y| \le R) \cdot |\Phi(y)| \in L^1(\mathbb{R}^d, dy)
+    \end{align*}
+    where \(R > 0\) depends on \(\{x_n\}\) and \(\operatorname{supp}(f)\) but independent of \(y\). Now we compute the derivatives:
+    \begin{align*}
+      \partial_{x_i} u(x) 
+      &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) f(x-y) \ dy
+      = \lim_{h \to 0} \int_{\mathbb{R}^d} \Phi(y) \frac{f(x + h e_i - y) - f(x-y)}{h} \ dy \\
+      \text{(dom.\ conv.)} \quad &= \int \Phi(y) \partial_{x_i} f(x-y) \ dy \\
+      \Rightarrow \quad D^\alpha u(x) &= \int_{\mathbb{R}^d} \Phi(y) D_x^\alpha f(x-y) \ dy \quad \text{for all } |\alpha| \le 2
+    \end{align*}
+    \(D^\alpha u(x)\)  is continuous, thus \(u \in C^2(\mathbb{R}^d)\).
+    Now we check if this solves the Poisson-Equation:
+    \begin{align*}
+      - \Delta u(x) 
+      &= \int_{\mathbb{R}^d} \Phi(y) (-\Delta_x) f(x-y) \, dy
+      = \int_{\mathbb{R}^d} \Phi(y) (-\Delta_y) f(x-y) \, dy \\
+      &= \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy + \int_{B(0, \epsilon)} \Phi(y) (-\Delta_x) f(x-y) \, dy \quad (\epsilon > 0 \text{ small})
+    \end{align*}
+    Now we come to the main part. We apply integration by parts (\ref{green-identities}):
+    \begin{align*}
+      &\int_{\mathbb{R}^d \setminus B(0, \epsilon)} \Phi(y)(- \Delta_y) f(x-y) \, dy \\
+      &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} (\nabla_y \Phi(y)) \cdot \nabla_y f(x-y) \, dy - \int_{\partial B(0, \epsilon)} \Phi(y) \cdot  \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y) \\
+      &\quad = \int_{\mathbb{R}^d \setminus B(0, \epsilon)} \underbrace{(-\Delta_y \Phi(y))}_{=0} f(x-y) \, dy \\ &\qquad + \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \, dS(y) - \int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \, dS(y)
     \end{align*}
 
-      \begin{samepage}
-        We have to regard the following error terms:
-        \begin{itemize}
+    We have that \(\nabla_y \Phi(y) = -\frac{1}{d |B_1|} \frac{y}{|y|^d}\) and \( \vec{n} = \frac{y}{|y|} \text{ in } \partial B(0, \epsilon)\). This leads to
+      \begin{align*}
+        \frac{\partial \Phi}{\partial \vec{n}} &= \frac{1}{d |B_1|} \frac{1}{|y|^{d-1}} = \frac{1}{d |B_1| \epsilon^{d-1}} \quad \text{ for } y \in \partial B(0, \epsilon)
+      \end{align*}
+
+      Hence:
+      \begin{align*}
+        \int_{\partial B(0, \epsilon)} \frac{\partial \Phi}{\partial \vec{n}}(y) f(x-y) \ dS(y) 
+        &= \frac{1}{d |B_1| \epsilon^{d-1}} \int_{\partial B(0, \epsilon)} f(x-y) \ dS(y) \\
+        = \fint_{\partial B(0, \epsilon)} f(x-y) \ dS(y)
+        &= \fint_{\partial B(x, \epsilon)} f(y) \ dS(y) 
+        \xrightarrow{\epsilon \to 0} f(x)
+      \end{align*}
+
+        \begin{samepage}
+          We have to regard the following error terms:
+          \begin{itemize}
+            \item \( 
+                \begin{aligned}[t]
+                  \left| \int_{B(0, \epsilon)} \Phi(y) (- \Delta_y) f(x-y) \ dy\right| 
+                  &\le \int_{B(0, \epsilon)}|\Phi(y)| \underbrace{|-\Delta_y f(x-y)|}_{\le \|\Delta f\|_{L^\infty} \mathbb{1}(|y| \le R)} \ dy \\
+                  &\le \| \Delta f\|_{L^\infty} \int_{\mathbb{R}^d} \underbrace{|\Phi(y)| \mathbb{1}(|y| \le R)}_{L^1(\mathbb{R}^d)} \mathbb{1}(|y| \le \epsilon) 
+                  \xrightarrow{\epsilon \to 0} 0
+                \end{aligned}
+              \)
+            Where \(R > 0\) depends on \(x\) and the support of \(f\) but is independent of \(y\).
           \item \( 
               \begin{aligned}[t]
-                \left| \int_{B(0, \epsilon)} \Phi(y) (- \Delta_y) f(x-y) \ dy\right| 
-                &\le \int_{B(0, \epsilon)}|\Phi(y)| \underbrace{|-\Delta_y f(x-y)|}_{\le \|\Delta f\|_{L^\infty} \mathbb{1}(|y| \le R)} \ dy \\
-                &\le \| \Delta f\|_{L^\infty} \int_{\mathbb{R}^d} \underbrace{|\Phi(y)| \mathbb{1}(|y| \le R)}_{L^1(\mathbb{R}^d)} \mathbb{1}(|y| \le \epsilon) 
-                \xrightarrow{\epsilon \to 0} 0
+                \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
+                &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
+                &\le \begin{cases}
+                  const \cdot \epsilon | \log \epsilon| \to 0, & d = 2 \\
+                  const \cdot \epsilon \to 0, & d \ge 3
+                \end{cases}
               \end{aligned}
             \)
-          Where \(R > 0\) depends on \(x\) and the support of \(f\) but is independent of \(y\).
-        \item \( 
-            \begin{aligned}[t]
-              \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
-              &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
-              &\le \begin{cases}
-                const \cdot \epsilon | \log \epsilon| \to 0, & d = 2 \\
-                const \cdot \epsilon \to 0, & d \ge 3
-              \end{cases}
-            \end{aligned}
-          \)
-        \end{itemize}
-      \end{samepage}
-      Conclusion: \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) proved that \(u = \Phi \star f\) and \(f \in C_c^2(\mathbb{R}^d)\).
+          \end{itemize}
+        \end{samepage}
+        Conclusion: \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) proved that \(u = \Phi \star f\) and \(f \in C_c^2(\mathbb{R}^d)\).
+    \end{proof}
+
+    Thus, if \(f \in C_c^2(\mathbb{R})\), then \(u = \Phi \star f\) satisfies \(u \in C^2(\mathbb{R}^2)\) and \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\).
+
+
+  \begin{rem}
+    The result holds for a much bigger class of functions \(f\). For example if \(f \in C_c^1(\mathbb{R})\) we can easily extend the previous proof:
+    \begin{align*}
+      \partial_{x_i} u = \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \in C(\mathbb{R}^d) \Rightarrow u \in C^1(\mathbb{R}^d)
+    \end{align*}
+    Consequently: 
+    \begin{align*}
+      \partial_{x_i} \partial_{x_j} u 
+      &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) \partial_{x_j} f(x-y) \, dy
+      = \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_j} f(x-y) \, dy \in C(\mathbb{R}^d)
+    \end{align*}
+    So we have \(u \in C^2(\mathbb{R}^d)\). Now we can compute
+    \begin{align*}
+      \Delta u = \sum_{i=1}^d \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_i} f(x-y) \, dy \overset{(IBP)}{=} f(x).
+    \end{align*}
+  \end{rem}
+
+  \begin{ex}
+    Extend this to more general functions!
+  \end{ex}
+
+  \section{Equations in general domains}
+  \begin{thm} (Mean Value Theorem for Harmonic Functions)\label{mean-value-theorem} 
+    Let \(\Omega \subseteq \mathbb{R}\) be open, let \( u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Then
+    \begin{align*}
+      u(x) 
+      &= \fint_{B(x, r)} u
+      = \fint_{\partial B(x, r)} u \quad \text{for all } x \in \Omega, B(x,r) \subseteq \Omega
+    \end{align*}
+  \end{thm}
+
+  \begin{proof}
+    Consider all \(r > 0\) s.t. \(B(x,r) \subseteq \Omega\),
+    \begin{align*}
+      f(r) &= \fint_{\partial B(x,r)} u
+    \end{align*}
+    We need to prove that \(f(r)\) is independent of \(r\). When it is done, then we immediately obtain
+    \begin{align*}
+      f(r) = \lim_{t \to 0} f(t) = u(x)
+    \end{align*}
+    as \(u\) is continuous. To prove that, consider
+    \begin{align*}
+      f'(r) 
+      &= \frac{d}{dr} \left(\fint_{\partial B(0, r)} u(x+y) \, dS(y) \right) \\
+      &= \frac{d}{dr} \left(\fint_{\partial B(0, 1)} u(x + rz) \, dS(z) \right) \\
+      \text{(dom.\ convergence)} \quad & = \fint_{\partial B(0, 1)} \frac{d}{dr} [u(x + rz)] \, dS(z) \\
+      &= \fint_{\partial B(0, 1)} \nabla u(x + rz) z \, dS(z) \\
+      &= \fint_{\partial B(x, r)} \nabla u(y) \frac{y-x}{r} \, dS(y) \\
+      &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{\partial B(x, r)} \nabla \cdot u(y) \cdot \vec{n_y} \, dS(y) \\
+      \text{(Gauss-Green \ref{gauss-green})} \quad &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{B(x, r)} \underbrace{(\Delta u)(y)}_{= 0} \, dy = 0 \qedhere
+    \end{align*}
   \end{proof}
 
-  Thus, if \(f \in C_c^2(\mathbb{R})\), then \(u = \Phi \star f\) satisfies \(u \in C^2(\mathbb{R}^2)\) and \(-\Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\).
+  \begin{ex}
+    In 1D\@: \(\Delta u = 0 \Leftrightarrow u'' = 0 \Leftrightarrow u(x) = ax + b\) (Linear Equation)
+  \end{ex}
 
-
-\begin{rem}
-  The result holds for a much bigger class of functions \(f\). For example if \(f \in C_c^1(\mathbb{R})\) we can easily extend the previous proof:
-  \begin{align*}
-    \partial_{x_i} u = \int_{\mathbb{R}^d} \Phi(y) \partial_{x_i} f(x-y) \, dy \in C(\mathbb{R}^d) \Rightarrow u \in C^1(\mathbb{R}^d)
-  \end{align*}
-  Consequently: 
-  \begin{align*}
-    \partial_{x_i} \partial_{x_j} u 
-    &= \partial_{x_i} \int_{\mathbb{R}^d} \Phi(y) \partial_{x_j} f(x-y) \, dy
-    = \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_j} f(x-y) \, dy \in C(\mathbb{R}^d)
-  \end{align*}
-  So we have \(u \in C^2(\mathbb{R}^d)\). Now we can compute
-  \begin{align*}
-    \Delta u = \sum_{i=1}^d \int_{\mathbb{R}^d} \partial_{x_i} \Phi(y) \partial_{x_i} f(x-y) \, dy \overset{(IBP)}{=} f(x).
-  \end{align*}
-\end{rem}
-
-\begin{ex}
-  Extend this to more general functions!
-\end{ex}
-
-\section{Equations in general domains}
-\begin{thm} (Mean Value Theorem for Harmonic Functions)\label{mean-value-theorem} 
-  Let \(\Omega \subseteq \mathbb{R}\) be open, let \( u \in C^2(\Omega)\) and \(\Delta u = 0\) in \(\Omega\). Then
-  \begin{align*}
-    u(x) 
-    &= \fint_{B(x, r)} u
-    = \fint_{\partial B(x, r)} u \quad \text{for all } x \in \Omega, B(x,r) \subseteq \Omega
-  \end{align*}
-\end{thm}
-
-\begin{proof}
-  Consider all \(r > 0\) s.t. \(B(x,r) \subseteq \Omega\),
-  \begin{align*}
-    f(r) &= \fint_{\partial B(x,r)} u
-  \end{align*}
-  We need to prove that \(f(r)\) is independent of \(r\). When it is done, then we immediately obtain
-  \begin{align*}
-    f(r) = \lim_{t \to 0} f(t) = u(x)
-  \end{align*}
-  as \(u\) is continuous. To prove that, consider
-  \begin{align*}
-    f'(r) 
-    &= \frac{d}{dr} \left(\fint_{\partial B(0, r)} u(x+y) \, dS(y) \right) \\
-    &= \frac{d}{dr} \left(\fint_{\partial B(0, 1)} u(x + rz) \, dS(z) \right) \\
-    \text{(dom.\ convergence)} \quad & = \fint_{\partial B(0, 1)} \frac{d}{dr} [u(x + rz)] \, dS(z) \\
-    &= \fint_{\partial B(0, 1)} \nabla u(x + rz) z \, dS(z) \\
-    &= \fint_{\partial B(x, r)} \nabla u(y) \frac{y-x}{r} \, dS(y) \\
-    &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{\partial B(x, r)} \nabla \cdot u(y) \cdot \vec{n_y} \, dS(y) \\
-    \text{(Gauss-Green \ref{gauss-green})} \quad &= \frac{1}{|B(x, r)|_{\mathbb{R}^d}} \int_{B(x, r)} \underbrace{(\Delta u)(y)}_{= 0} \, dy = 0 \qedhere
-  \end{align*}
-\end{proof}
-
-\begin{ex}
-  In 1D\@: \(\Delta u = 0 \Leftrightarrow u'' = 0 \Leftrightarrow u(x) = ax + b\) (Linear Equation)
-\end{ex}
-
-\begin{rem}
-  Recall the polar decomposition. Let \(x \in \mathbb{R}^d, x = (r,w), r = |x| > 0, \omega \in S^{d-1}\), then
-  \begin{align*}
-    \int_{B(0, r)} g(y) \, dy = \int_0^r \left(\int_{B(0, r)} g(y) \, dS(y) \right) dr
-  \end{align*}
-\end{rem}
-
-
-\begin{rem}
-  We already proved that for \(u\) harmonic we have \( u(x) = \fint_{\partial B(x,r)} u \, dy \). Now we have 
-  \begin{align*}
-    \int_{B(x, r)} u(y) \, dy 
-    &= \int_{B(0, r)} u(x+y) \, dy \\
-    \text{(Pol.\ decomposition)} \quad &= \int_0^r \left(\int_{\partial B(0, s)} u(x+y) \, dS(y)\right) ds \\
-    &= \int_0^r \left(\int_{\partial B(x, s)} u(y) \, dS(y) \right) ds \\
-    \text{(Mean value property)} \quad &= \int_0^r \left(|\partial B(x, s)| \, u(x) \right) ds
-    = |B(x,r)| \, u(x)
-  \end{align*}
-  This implies
-  \begin{align*}
-    \fint_{B(x,r)} u(y) \, dy = u(x)
-    \quad \text{for any \(B(x,r) \subseteq \Omega\).}
-  \end{align*}
-\end{rem}
-
-\begin{rem}
-  The reverse direction is also correct, namely if \(u \in C^2(\Omega)\) and
-  \begin{align*}
-    u(x) 
-    &= \fint_{B(x, r)} u(y) \, dy
-    = \fint_{\partial B(x,r)} u(y) \, dy
-    \quad \text{for all } B(x,r) \subseteq \Omega,
-  \end{align*}
-  then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
-\end{rem}
-
-\begin{thm}[Maximum Principle]\label{maximum-principle}
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
-  \begin{enumerate}[label=\alph*)]
-    \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
-    \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
-  \end{enumerate}
-\end{thm}
-
-\begin{proof}
-  Given \(U \subseteq \mathbb{R}^d\) open, we can write \(U = \bigcup_i U_i\), where \(U_i\) is open and connected.
-  \begin{enumerate}
-    \item[b)] Assume that \(\Omega\) is connected and there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{y \in \Omega} u(x)\). Define \(U = \{ x \in \Omega \mid u(x) = u(x_0)\} = u^{-1}(u(x_0))\). \(U\) is closed since \(u\) is continuous.
-    Moreover, \(U\) is open by the mean-value theorem. I.e.~for all \(x \in U\) there is a \(r > 0\) s.t. \(B(x,r) \subseteq U \subseteq \Omega\).
-    Since \(U\) is connected we get \(U = \Omega\), so \(u\) is constant in \(\Omega\). On the other hand, if there is no \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega}\) we have \(\forall x_0 \in \Omega: \quad u(x) < \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
-    \item[a)] Given \(\Omega \subseteq \mathbb{R}^d\) open, we can write \(\Omega = \bigcup_i \Omega_i\), where \(\Omega_i\) is open and connected. By b) we have
-      \[\sup_{x \in \bar \Omega_i} u(x) = \sup_{x \in \partial \Omega_i} u(x), \quad \forall i\]
-      So we can conclude
-      \[\quad \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x). \qedhere\]
-  \end{enumerate}
-\end{proof}
-
-\begin{defn}
-  \begin{itemize}
-    \item If \(\Omega \subseteq \mathbb{R}^d\) is open, \(u \in C^2(\Omega)\), then \(u\) is called \emph{sub-harmonic} if \(\Delta u \ge 0\) in \(\Omega\).
-    \item If \(\Delta u \le 0\), then \(u\) is called \emph{super-harmonic}.
-  \end{itemize}
-\end{defn}
-
-\begin{ex}[E 1.4]
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
-  \begin{enumerate}[label=\alph*)]
-    \item Prove that \(u\) satisfies the Mean Value Inequality
-     \begin{align*}
-       \fint_{\partial B(x, r)} u(y) \, dS(y)
-       \ge \fint_{B(x, r)} u(y) \, dy
-       \ge u(x)
-     \end{align*}
-     for all \(B(x,r) \subseteq \mathbb{R}^d\).
-    \item Assume further that \(\Omega\) is connected and \(u \in C(\bar \Omega)\). Prove that \(u\) satisfies the strong maximum principle, namely either
-    \begin{itemize}
-      \item \(u\) is constant in \(\Omega\), or 
-      \item \(\sup_{y \in \partial \Omega} u(y) > u(x)\) for all \(x \in \Omega\).
-    \end{itemize}
-  \end{enumerate}
-\end{ex}
-
-\begin{proof}[My Solution]
-  \begin{enumerate}[label=\alph*)]
-    \item Let \(f(r) = \fint_{\partial B(x, r)} u(y) \, dS(y)\), then we have
-      \begin{align*}
-        \partial_r f(r)
-        &= \partial_r \fint_{\partial B(x,r)} u(y) \, dS(y) \\
-        \text{(Dom. Convergence)} \quad &= \fint_{\partial B(x, r)} \partial_r u(y) \, dS(y) \\
-        &= \fint_{\partial B(0,1)} \partial_r u(x+yr) \, dS(y) \\
-        &= \fint_{\partial B(0,1)} \nabla u(x+yr) \cdot y \, dS(y) \\
-        &= \fint_{\partial B(x, r)} \nabla u(y) \cdot \frac{y-x}{r} \, dS(y) \\
-        &= \fint_{\partial B(x,r)} \nabla u(y) \cdot \vec{n}_y \, dS(y) \\
-        \text{(Gauss-Green)} \quad &= \fint_{B(x, r)} \div(\nabla u(y)) \, dS(y) \\
-        &= \fint_{B(x,r)} \underbrace{\Delta u(y)}_{\ge 0} \, dS(y) \ge 0
-      \end{align*}
-      So we can conclude that
-      \[\fint_{\partial B(x, r)} u(y) \, dS(y) = f(r) \ge \lim_{r \to 0} f(r) = u(x).\]
-
-      Now regard
-      \begin{align*}
-        \int_{B(x,r)} u(y) \, dy 
-        &= \int_0^r \left(\int_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
-        &= \int_0^r \left(|\partial B(x, r)| \fint_{\partial B(x,r)} u(y) \, dS(y)\right) \, ds \\
-        &\ge \int_0^r |\partial B(x, r)| \cdot  u(x) \, dS(y) \\
-        &= u(x) \int_0^r |\partial B(x, r)| \, dS(y)
-        = u(x) |B(x,r)|.
-      \end{align*}
-
-      Thus we have
-      \begin{align*}
-        u(x) \le \fint_{B(x,r)} u(y) dy.
-      \end{align*}
-
-      Finally, lets regard
-      \begin{align*}
-        \int_{B(x, r)} u(y) \, dy
-        &= \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, s)} u(y) \, dS(y)\right) \, ds \\
-        (\partial_r f(r) \ge 0) \quad &\le \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
-        &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \int_0^r |\partial B(x,s)| \, ds \\
-        &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \cdot |B(x,s)|
-      \end{align*}
-      and we conclude
-      \[\fint_{B(x, r)} u(y) \, dy \le \fint_{\partial B(x,r)} u(y) \, dS(y).\]
-    \item Let \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega} u(x)\). Now, \begin{align*}
-      \sup_{x \in \Omega} u(x) 
-      &= u(x_0) 
-      \le \fint_{\partial B(x_0, r)} u(y) \, dy \\
-      &\le \fint_{\partial B(x_0, r)} \sup_{x \in \Omega} u(x) \, dy 
-      = \sup_{x \in \Omega} u(x)
+  \begin{rem}
+    Recall the polar decomposition. Let \(x \in \mathbb{R}^d, x = (r,w), r = |x| > 0, \omega \in S^{d-1}\), then
+    \begin{align*}
+      \int_{B(0, r)} g(y) \, dy = \int_0^r \left(\int_{B(0, r)} g(y) \, dS(y) \right) dr
     \end{align*}
-    Since \(u\) is continous we get \(u(y) = u(x_0)\) for all \(y \in B(x_0, r)\), so \(u\) is constant. \qedhere
-  \end{enumerate}
-\end{proof}
+  \end{rem}
 
-\begin{defn}
-  The \emph{Poisson Equation} for given \(f, g\) on a bounded set is:
+
+  \begin{rem}
+    We already proved that for \(u\) harmonic we have \( u(x) = \fint_{\partial B(x,r)} u \, dy \). Now we have 
+    \begin{align*}
+      \int_{B(x, r)} u(y) \, dy 
+      &= \int_{B(0, r)} u(x+y) \, dy \\
+      \text{(Pol.\ decomposition)} \quad &= \int_0^r \left(\int_{\partial B(0, s)} u(x+y) \, dS(y)\right) ds \\
+      &= \int_0^r \left(\int_{\partial B(x, s)} u(y) \, dS(y) \right) ds \\
+      \text{(Mean value property)} \quad &= \int_0^r \left(|\partial B(x, s)| \, u(x) \right) ds
+      = |B(x,r)| \, u(x)
+    \end{align*}
+    This implies
+    \begin{align*}
+      \fint_{B(x,r)} u(y) \, dy = u(x)
+      \quad \text{for any \(B(x,r) \subseteq \Omega\).}
+    \end{align*}
+  \end{rem}
+
+  \begin{rem}
+    The reverse direction is also correct, namely if \(u \in C^2(\Omega)\) and
+    \begin{align*}
+      u(x) 
+      &= \fint_{B(x, r)} u(y) \, dy
+      = \fint_{\partial B(x,r)} u(y) \, dy
+      \quad \text{for all } B(x,r) \subseteq \Omega,
+    \end{align*}
+    then \(u\) is harmonic, i.e. \(\Delta u = 0\) in \(\Omega\). (The proof is exactly like before)
+  \end{rem}
+
+  \begin{thm}[Maximum Principle]\label{maximum-principle}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
+    \begin{enumerate}[label=\alph*)]
+      \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
+      \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    Given \(U \subseteq \mathbb{R}^d\) open, we can write \(U = \bigcup_i U_i\), where \(U_i\) is open and connected.
+    \begin{enumerate}
+      \item[b)] Assume that \(\Omega\) is connected and there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{y \in \Omega} u(x)\). Define \(U = \{ x \in \Omega \mid u(x) = u(x_0)\} = u^{-1}(u(x_0))\). \(U\) is closed since \(u\) is continuous.
+      Moreover, \(U\) is open by the mean-value theorem. I.e.~for all \(x \in U\) there is a \(r > 0\) s.t. \(B(x,r) \subseteq U \subseteq \Omega\).
+      Since \(U\) is connected we get \(U = \Omega\), so \(u\) is constant in \(\Omega\). On the other hand, if there is no \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega}\) we have \(\forall x_0 \in \Omega: \quad u(x) < \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
+      \item[a)] Given \(\Omega \subseteq \mathbb{R}^d\) open, we can write \(\Omega = \bigcup_i \Omega_i\), where \(\Omega_i\) is open and connected. By b) we have
+        \[\sup_{x \in \bar \Omega_i} u(x) = \sup_{x \in \partial \Omega_i} u(x), \quad \forall i\]
+        So we can conclude
+        \[\quad \sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x). \qedhere\]
+    \end{enumerate}
+  \end{proof}
+
+  \begin{defn}
+    \begin{itemize}
+      \item If \(\Omega \subseteq \mathbb{R}^d\) is open, \(u \in C^2(\Omega)\), then \(u\) is called \emph{sub-harmonic} if \(\Delta u \ge 0\) in \(\Omega\).
+      \item If \(\Delta u \le 0\), then \(u\) is called \emph{super-harmonic}.
+    \end{itemize}
+  \end{defn}
+
+  \begin{ex}[E 1.4]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(u \in C^2(\Omega)\) be subharmonic.
+    \begin{enumerate}[label=\alph*)]
+      \item Prove that \(u\) satisfies the Mean Value Inequality
+      \begin{align*}
+        \fint_{\partial B(x, r)} u(y) \, dS(y)
+        \ge \fint_{B(x, r)} u(y) \, dy
+        \ge u(x)
+      \end{align*}
+      for all \(B(x,r) \subseteq \mathbb{R}^d\).
+      \item Assume further that \(\Omega\) is connected and \(u \in C(\bar \Omega)\). Prove that \(u\) satisfies the strong maximum principle, namely either
+      \begin{itemize}
+        \item \(u\) is constant in \(\Omega\), or 
+        \item \(\sup_{y \in \partial \Omega} u(y) > u(x)\) for all \(x \in \Omega\).
+      \end{itemize}
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    \begin{enumerate}[label=\alph*)]
+      \item Let \(f(r) = \fint_{\partial B(x, r)} u(y) \, dS(y)\), then we have
+        \begin{align*}
+          \partial_r f(r)
+          &= \partial_r \fint_{\partial B(x,r)} u(y) \, dS(y) \\
+          \text{(Dom. Convergence)} \quad &= \fint_{\partial B(x, r)} \partial_r u(y) \, dS(y) \\
+          &= \fint_{\partial B(0,1)} \partial_r u(x+yr) \, dS(y) \\
+          &= \fint_{\partial B(0,1)} \nabla u(x+yr) \cdot y \, dS(y) \\
+          &= \fint_{\partial B(x, r)} \nabla u(y) \cdot \frac{y-x}{r} \, dS(y) \\
+          &= \fint_{\partial B(x,r)} \nabla u(y) \cdot \vec{n}_y \, dS(y) \\
+          \text{(Gauss-Green)} \quad &= \fint_{B(x, r)} \div(\nabla u(y)) \, dS(y) \\
+          &= \fint_{B(x,r)} \underbrace{\Delta u(y)}_{\ge 0} \, dS(y) \ge 0
+        \end{align*}
+        So we can conclude that
+        \[\fint_{\partial B(x, r)} u(y) \, dS(y) = f(r) \ge \lim_{r \to 0} f(r) = u(x).\]
+
+        Now regard
+        \begin{align*}
+          \int_{B(x,r)} u(y) \, dy 
+          &= \int_0^r \left(\int_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
+          &= \int_0^r \left(|\partial B(x, r)| \fint_{\partial B(x,r)} u(y) \, dS(y)\right) \, ds \\
+          &\ge \int_0^r |\partial B(x, r)| \cdot  u(x) \, dS(y) \\
+          &= u(x) \int_0^r |\partial B(x, r)| \, dS(y)
+          = u(x) |B(x,r)|.
+        \end{align*}
+
+        Thus we have
+        \begin{align*}
+          u(x) \le \fint_{B(x,r)} u(y) dy.
+        \end{align*}
+
+        Finally, lets regard
+        \begin{align*}
+          \int_{B(x, r)} u(y) \, dy
+          &= \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, s)} u(y) \, dS(y)\right) \, ds \\
+          (\partial_r f(r) \ge 0) \quad &\le \int_0^r \left(|\partial B(x,s)| \fint_{\partial B(x, r)} u(y) \, dS(y)\right) \, ds \\
+          &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \int_0^r |\partial B(x,s)| \, ds \\
+          &= \fint_{\partial B(x, r)} u(y)  \, dS(y) \cdot |B(x,s)|
+        \end{align*}
+        and we conclude
+        \[\fint_{B(x, r)} u(y) \, dy \le \fint_{\partial B(x,r)} u(y) \, dS(y).\]
+      \item Let \(x_0 \in \Omega\) s.t. \(u(x_0) = \sup_{x \in \Omega} u(x)\). Now, \begin{align*}
+        \sup_{x \in \Omega} u(x) 
+        &= u(x_0) 
+        \le \fint_{\partial B(x_0, r)} u(y) \, dy \\
+        &\le \fint_{\partial B(x_0, r)} \sup_{x \in \Omega} u(x) \, dy 
+        = \sup_{x \in \Omega} u(x)
+      \end{align*}
+      Since \(u\) is continous we get \(u(y) = u(x_0)\) for all \(y \in B(x_0, r)\), so \(u\) is constant. \qedhere
+    \end{enumerate}
+  \end{proof}
+
+  \begin{defn}
+    The \emph{Poisson Equation} for given \(f, g\) on a bounded set is:
+    \begin{align*}
+      \begin{cases}
+        - \Delta u = f, &\text{in } \Omega \\
+        u = g, &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*} 
+  \end{defn}
+
+  \begin{thm}(Uniqueness)
+    Let \(\Omega \subseteq \mathbb{R}^d\) be bounded, open  and connected. Let \(f \in C(\Omega), g \in C(\partial \Omega)\). Then there exists \emph{at most} one solution \(u \in C^2(\Omega) \cap C(\bar \Omega)\), s.t. \begin{align*}
+      \begin{cases}
+        - \Delta u = f, &\text{in } \Omega \\
+        u = g, &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*}
+  \end{thm}
+
+  \begin{proof}
+    Assume that we have two solutions \(u_1\) and \(u_2\). Then \(u \coloneqq u_1 - u_2\) is a solution to 
+    \begin{align*}
+      \begin{cases}
+        - \Delta u = 0, &\text{in } \Omega \\
+        u = 0 &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*}
+    By the maximum principle, we know that \(u = 0\) in \(\Omega\). More precisely, by the maximum principle we have \(\forall x \in \Omega\)
+    \begin{align*}
+      \sup_{x \in \Omega} u(x) \le \sup_{x \in \partial \Omega} u(x) = 0
+      \quad \Rightarrow \quad
+      u(x) \le 0
+    \end{align*}
+    Since \(-u\) satisfies the same property we have \(\forall x \in \Omega\):
+    \begin{align*}
+      \sup_{x \in \Omega}(-u(x)) \le \sup_{x \in \partial \Omega} (-u(x)) = 0
+      \quad \Rightarrow \quad
+      - u(x) \le 0
+      \quad \Rightarrow \quad
+      u(x) \ge 0
+    \end{align*}
+    So we geht \(u(x)  = 0\) in \(\Omega\).
+  \end{proof}
+
+  \begin{ex}[Bonus 1]\label{bonus-1}
+    Let \(\Omega\) be open, connected and bounded in \(\mathbb{R}^d\). Let \(u \in C^2(\Omega) \cap C(\bar \Omega)\) s.t. 
+    \begin{align*}
+      \begin{cases}
+        \Delta u = 0, &\text{in } \Omega \\
+        u = g, &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*}
+    Prove that \begin{enumerate}[label=\alph*)]
+      \item If \(g \ge 0\) on \(\partial \Omega\), then \(u \ge 0\) in \(\Omega\). 
+      \item If \(g \ge 0\) on \(\partial \Omega\) and \(g \ne 0\), then \(u > 0\) in \(\Omega\).
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    \begin{enumerate}[label=\alph*)]
+      \item We have that \(\Delta (-u) = 0\), so \(-u\) is harmonic in \(\Omega\). Since \(\Omega\) is open and bounded we can apply the Maximum Principle (\ref{maximum-principle}) and get that
+      \[\sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0.\]
+      This implies \(\inf_{x \in \Omega} u(x) \ge 0\), so \(u \ge 0\) in \(\Omega\).
+      \item We prove this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
+      \[0 = -u(x_0) = \sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0,\]
+      so \(-u\) attains its maximum on \(\Omega\). Hence \(-u = 0 = u\) is constant by the strong maximum principle because \(\Omega\) is connected, in fact \(0 = u|_{\partial \Omega} = g\). \qedhere
+    \end{enumerate}
+  \end{proof}
+
+  \begin{lem}[Estimates for derivatives]\label{estimates-of-derivatives}
+    If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\), \(\alpha \in \mathbb{N}_0^d\), \(|\alpha| = N\) and \(B(x_0, r) \subseteq \Omega\), then 
+    \[|D^\alpha u(x)| \le \frac{(c_dN)^N}{r^{d+N}} \int_{B(x, r)} |u| \, dy\]
+  \end{lem}
+
+  \begin{proof}
+    Induction: Assume \(|\alpha| = N-1\), Take \(|\alpha| = N\)
+    \begin{align*}
+      |D^\alpha u(x_0)| 
+      &\le \frac{|S_1|}{|B_1|\frac{r}{N}} \| D^\beta u \|_{L^\infty (B(x_0, \frac{r}{n}))}, \quad D^\alpha u = \partial_{x_i}(D^\beta u)_{|\beta| = N-1}
+    \end{align*}
+    Note: \(x \in B(x_0, \frac{r}{N})\), so \(B(x, \frac{r(N-1)}{N}) \subseteq B(x_0, r)\). By the induction hypothesis:
+    \begin{align*}
+      \|D^\beta u\|_{L^\infty(B(x_0, \frac{r}{N}))} 
+      &\le \frac{[c_d (N-1)]^{N-1}}{[r \frac{(N-1)}{N}]^{d+N-1}} \int_{B(x_0, r)} |u| \, dy
+    \end{align*}
+    The conclusion is:
+    \begin{align*}
+      |D^\alpha u (x_0)|
+      &\le \frac{|S_1|}{|B_1| \frac{r}{N}} \frac{[c_d(N-1)]^{N-1}}{\left(r \frac{N-1}{N^d}\right)^{d + N - 1}} \int_{B(x_0, r)} |u| \, dy \\
+      &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} (N-1)^d} \int_{B(x_0, r)} |u| \, dy \\
+      &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} N^d} \left(\frac{N}{N-1}\right)^d \int_{B(x_0, r)} |u| \, dy \\
+      &\le \frac{2^d |S_1|}{|B_1|} \frac{c_d^{N-1} N^N}{r^{d+N}} \int_{B(x_0, r)} |u| \, dy \qquad \text{if } c_d \ge \frac{2^d |S_1|}{|B_1|}
+    \end{align*}
+  \end{proof}
+
+  \begin{thm}[Regularity]
+    Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u \, dy\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
+  \end{thm}
+
+  % \begin{proof}
+  %   We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
+  %   \begin{align*}
+  %     \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
+  %   \end{align*}
+  %   We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
+  %   \begin{align*}
+  %     u_\epsilon(x) 
+  %     &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
+  %     &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
+  %     (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
+  %     \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
+  %     &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
+  %     &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
+  %   \end{align*}
+
+  %   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
+
+  %   Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
+  %   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
+  %   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
+  %   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
+  %   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
+  %   Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
+  %   To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
+  %   Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
+  %   We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
+  %   \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
+  %   where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
+  %   New: Let \(x_0 \in \Omega\), take \(r > 0\), \(r < \frac{1}{L+1} \dist(x_0, \Omega^c)\) s.t. if \(x \in B(x_0, r)\), then \[B(x, Lr) \subseteq B(x_0, (L+1)r) \subseteq \Omega\]. With Lemma~\ref{estimates-of-derivatives} we get:
+  %   \begin{align*}
+  %     |D^\alpha u(x_0 + t(x-x_0))
+  %     &\le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|
+  %   \end{align*}
+  %   With \((x_0, r) \leadsto (x, Lr)\)
+  %   \begin{align*}
+  %     |R_N(x)| \le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{1}{\alpha!} \frac{1}{\alpha!} \tau^N \int_{B(x_0, (L+1)r) |u|}
+  %   \end{align*}
+
+  %   Thus 
+  %   \begin{align*}
+  %     \left(\frac{\tilde c_d N}{L}\right) \frac{1}{N!}
+  %     &\le \left(\frac{\tilde c_d N}{L}\right) \left(\frac{e}{N}\right)^N \quad \text{ if \(N\) large} \\
+  %     &= \left(\frac{\tilde c_d e}{L}\right)^N \xrightarrow{N \to \infty} 0 \quad \text{if } L > \tilde c_d e (L = L_d)
+  %   \end{align*}
+  %   We conclude that \[u(x) = u(x_0) + \sum_{\alpha \ne 0} \frac{D^\alpha u(x_0)}{\alpha!}(x-x_0)^\alpha\]
+  %   The series converges uniformly \(x \in B(x_0, r)\).
+  %   Now we proof the bound on derivatives. For \(\alpha = 0\)
+  %   \begin{align*}
+  %     |u(x_0)| = \left| \fint_{B(x_0, r)} u \right| \le \frac{1}{|B_1|r^d} \int_{B(x_0, r)} |u|
+  %   \end{align*}
+  %   For \(\alpha = 1:\) \(\Delta u = 0\) in \(\Omega\) \(\Rightarrow\) \(0 = \partial_{x_i} (\Delta u) = \Delta (\partial_{x_i} u)\), so \(\partial_{x_i} u\) is harmonic in \(\Omega\). Hence, by the mean-varlue theorem again:
+  %   \begin{align*}
+  %     \partial_{x_i} u(x_0) &= \fint_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{\frac{r}{2}}{2}^d} \int_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{r}{2}^d} \int_{\partial B(x_0, \frac{r}{2})}u n_i \, dS
+  %   \end{align*}
+  %   So we get:
+  %   \begin{align*}
+  %     |\partial_{x_i} u(x_0)| 
+  %     &= \frac{1}{|B_1| r^d} \int_{\partial B(x, r)} \, dS \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}  \\
+  %     &= \frac{|S_1|}{|B_1|\frac{r}{2}} \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}
+  %   \end{align*}
+  %   For any \(y \in \partial B(x_0, \frac{r}{2})\) by the mean value theorem, we get:
+  %   \begin{align*}
+  %     |u(y)| 
+  %     &= \left| \fint_{B(y, \frac{r}{2})} u\right|
+  %     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(y, \frac{r}{2})} |u|
+  %     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+  %   \end{align*}
+  %   Thus,
+  %   \begin{align*}
+  %     |\partial_{x_i} u(x_0)| 
+  %     &\le \frac{|S_1|}{|B_1| \left(\frac{r}{2}\right)} \frac{1}{|B_1|  \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+  %     \le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u|
+  %   \end{align*}
+  %   Induction: Assume that we already proved the bound when \(|\alpha| = N-1\). Then:
+  %   \begin{align*}
+  %     \partial_{x_i} D^\alpha u 
+  %     &= D^\alpha(\underbrace{\partial_{x_i} u}_{\text{harmonic}})
+  %     = 0
+  %     \quad \Rightarrow \quad
+  %     D^\alpha u \text{ is harmonic}
+  %   \end{align*}
+  %   So we get
+  %   \begin{align*}
+  %     \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
+  %     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
+  %   \end{align*}
+  %   and by the induction hypothesis:
+    
+  %   \begin{align*}
+  %     |D^\alpha u(x_0)| &\le \frac{c_d}{r} \|D^\alpha u\|_{L^\infty B(x_0, \frac{r}{2})} \\
+  %     &\le \frac{c_d}{r^{d+N-1}} \int_{B(x_0, r)} |u| \quad \forall x \in B\left(x_0, \frac{r}{2}\right)
+  %   \end{align*}
+  %   Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
+  % \end{proof}
+
+  \begin{ex}[E 1.1: Proof the Gauss–Green formula]
+    Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
+    Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
+  \end{ex}
+
+  \begin{ex}[E 1.2]
+    Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u \, dy = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    Assume there is a \(x_0 \in \mathbb{R}^d\) s.t. w.l.o.g. \(u(x_0) > 0\). Since \(u\) is continous there is a ball \(B(x_0, r)\) s.t. \(u(y) > \frac{u(x_0)}{2}\) for all \(y \in B(x_0, r)\). But then we get
+    \begin{align*}
+      \int_{B(x_0, r)} u(y) \, dy
+      &\ge \int_{B(x_0, r)} \frac{u(x_0)}{2} \, dy
+      = \frac{u(x_0)}{2} \, |B(x_0, r)| > 0. \qedhere
+    \end{align*}
+  \end{proof}
+
+  \begin{ex}[E 1.3]
+    Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
+  \end{ex}
+
+  \begin{thm}[Liouville's Theorem] 
+    If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
+  \end{thm}
+
+  \begin{proof}
+    By the bound of the derivative \ref{estimates-of-derivatives} we have
+    \begin{align*}
+      |\partial_{x_i} u(x_0)| 
+      &\le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u| \, dy \quad \forall x_0 \in \mathbb{R}^d\ \forall r > 0 \\
+      &\le \|u\|_{L^\infty} \frac{c_d}{r^{d+1}} |B(x_0, r)| \\
+      &\le \|u\|_{L^\infty} \frac{c_d}{r} \xrightarrow{r \to \infty} 0
+    \end{align*}
+    Thus \(\partial_{x_i} u = 0\) for all \(i = 1, 2, \dots d\) and \(u = const.\) in \(\mathbb{R}^d\)
+  \end{proof}
+
+  \begin{thm}[Uniqueness of solutions to Poisson Equation in \(\mathbb{R}^d\)]
+    If \(u \in C^2(\mathbb{R}^d)\) is a bounded function and satisfies \(- \Delta u = f\) in \(\mathbb{R}^d\) where \(f \in C_c^2(\mathbb{R}^d)\), then we have
+    \begin{align*}
+      u(x) = \Phi \star f(x) + C = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \, dy + C \quad \forall x \in \mathbb{R}^d
+    \end{align*}
+    where \(C\) is a constant and \(\Phi\) is the fundamental solution of the Laplace equation in \(\mathbb{R}^d\).
+  \end{thm}
+
+  \begin{proof}
+    If we can prove that \(v\) is bounded, then \(v = const.\). We first need to show that \(\Phi \star f\) is bounded.
+    \begin{align*}
+      \Phi = \Phi_1 + \Phi_2 = \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
+      \Phi \star f = \Phi_1 \star f + \Phi_2 \star f
+    \end{align*}
+    We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
+  \end{proof}
+
+  \begin{ex} (Hanack's inequality)
+    Let \(u \in C^2(\mathbb{R}^d)\) be harmonic and non-negative. Prove that for all open, bounded and connected \(\Omega \subseteq \mathbb{R}^d\), we have
+    \begin{align*}
+      \sup_{x \in \Omega} u(x) \le C_\Omega \inf_{x \in \Omega} u(x),
+    \end{align*}
+    where \(C_\infty\) is a finite constant depending only on \(\Omega\).
+  \end{ex}
+
+  \begin{proof} (Exercise)
+    Hint: \(\Omega = B(x,r)\). General case cover \(\Omega\) by finitely many balls, one ball is inside \(\Omega\).
+  \end{proof}
+
+
+  \chapter{Convolution, Fourier Transform and Distributions}
+
+
+  \begin{defn}[Convolution]
+    Let \(f, g: \mathbb{{R}^d \to \mathbb{R}}\) or \(\mathbb{C}\).
+    \begin{align*}
+      (f \star g)(x)
+      &= \int_{\mathbb{R}^d} f(x-y) g(y) \, dy
+      = \int_{\mathbb{R}^d} f(y) g(x-y) \, dy 
+      = (g \star f)(x)
+    \end{align*}
+  \end{defn}
+
+  \begin{rem}[Properties of the Convolution]
+    \begin{itemize}
+      \item \((f \star g)(x) = f \star (g \star h)\)
+      \item \(\hat{f \star g} = \hat f \star \hat g\)
+    \end{itemize}
+  \end{rem}
+
+
+  \begin{thm}[Young Inequality]
+    If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \(\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\). More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \(\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q}\), where \(1 \le p, q, r, \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\)
+  \end{thm}
+
+  \begin{proof}
+    Let \(f \in L^1, g \in L^p\). With the Hölder Inequality \ref{hölder-inequality}, we have:
+    % \begin{align*}
+    %   \left|(f \star g)(x)| 
+    %   &= \left| \int_{\mathbb{R}^d} f(x-y)g(y) \, dy \right| \\
+    %   &\le \left(\int_{\mathbb{R}^d} |f(x-y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
+    %   &= \| f \|_{L^1}^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} \dots \right)^{\frac{1}{p}}
+    % \end{align*}
+    \begin{align*}
+      \|f \star g\|_{L^p}^p
+      &= \int_{\mathbb{R}^d} |f \star g(x)|^p \, dx \\
+      &\le \|f\|_{L^1}^{\frac{p}{q}} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} |f(x-y)||g(y)|^p \, dy \, dx \\
+      &= \| f \|_{L^1}^{\frac{p}{q} + 1} \|g\|_{L^p}^p
+    \end{align*}
+    So we have \(\| f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\)
+  \end{proof}
+
+  \begin{thm}[Smoothness of the Convolution]
+    If \(f \in C_c^\infty(\mathbb{R}^d), g \in L^p(\mathbb{R}^d), 1 \le p \le p\). Then \(f \star g \in C^\infty(\mathbb{R})\) and 
+    \[D^\alpha (f\star g) = (D^\alpha f) \star g\]
+    for all \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\)
+  \end{thm}
+
+  \begin{proof}
+    First we note that \(x \mapsto (f \star g)\) is continous as \(x_n \to x\) in \(\mathbb{R}^d\) since
+    \begin{align*}
+      (f \star g)(x_n) 
+      &= \int_{\mathbb{R}^d} f(x_n - y) g(y) \, dy \\
+      \text{By dom. conv.} \quad &\longrightarrow \int_{\mathbb{R}^d} f(x-y) g(y) \, dy = (f \star g)(x)
+    \end{align*}
+    We can apply Dominated convergence because 
+      \[f(x_n - y)g(y) \to f(x-y)g(y) \forall y \text{ as \(f\) is continuous and } x_n \to x\]
+      and
+      \[|f(x_n -y) g(y)| \le \|f\|_{L^\infty} |g(y)| \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d).\]
+      Where \(R > 0\) satisfies \(B(0, R) \supseteq supp f + \sup_n |x_n|\)
+      Now we can compute the derivatives:
+      \begin{align*}
+        \partial_{x_i} (f \star g)(x)
+        &= \lim_{h \to 0} \frac{(f \star g)(x + he_i) - (f \star g)(x)}{h} \\
+        &= \lim_{x \to 0} \int_{\mathbb{R}^d} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
+        &= \int_{\mathbb{R}^d}\lim_{x \to 0} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
+        &= \int_{\mathbb{R}^d} (\partial_{x_i} f)(x-y) g(y) \, dy
+      \end{align*}
+      We could apply Dominated Convergence since
+      \begin{align*}
+        \frac{f(x + e_i -y) - f(x-y)}{h} g(y) \xrightarrow{h \to 0} (\partial_{x_i} f) (x-y) g(y) \quad \text{as \(f \in C^1\)} \\
+        \left| \frac{f(x + h e_i -y) - f(x-y)}{h} g(y) \right| \le \| \partial_{x_i} f \|_{L^\infty} |g(y)| \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d)
+      \end{align*}
+      where \(B(0, r) \supseteq supp(f) + B(0, |x| + 1)\)
+      and \(\partial_{x_i} (f \star g) = (\partial_{x_i} f) \star g \in C(\mathbb{R}^d)\) since \(\partial_{x_i} f \in C_c^\infty(\mathbb{R}^d)\)
+      By induction: \(D^\alpha (f \star g) = (D^\alpha f \star g) \in C^(\mathbb{R}^d)\)
+  \end{proof}
+
+  Question: Is there a \(f\) s.t. \(f \star g = g\) for all \(g\). In fact there is no regular function \(f\) that solves this formally:
+  \[f \star g = g \Rightarrow \hat{f \star g} = \hat g \Rightarrow \hat f \hat g = \hat g\ \Rightarrow \hat f = 1 \Rightarrow f \text{ is not a regular function!}]\]
+
+  However, if \(f\) is the Dirac-Delta Distribution, \(f = \delta_0\) then \(\delta_0 \star g = g\) for all \(g\). Formally:
   \begin{align*}
-    \begin{cases}
-      - \Delta u = f, &\text{in } \Omega \\
-      u = g, &\text{on } \partial \Omega
+    \delta_0(x) &= \begin{cases}
+      0 & x \ne 0 \\
+      \infty &, x = 0 \\
+      \int \delta_0 = 1
     \end{cases}
-  \end{align*} 
-\end{defn}
-
-\begin{thm}(Uniqueness)
-  Let \(\Omega \subseteq \mathbb{R}^d\) be bounded, open  and connected. Let \(f \in C(\Omega), g \in C(\partial \Omega)\). Then there exists \emph{at most} one solution \(u \in C^2(\Omega) \cap C(\bar \Omega)\), s.t. \begin{align*}
-    \begin{cases}
-      - \Delta u = f, &\text{in } \Omega \\
-      u = g, &\text{on } \partial \Omega
-    \end{cases}
   \end{align*}
-\end{thm}
+  In fact, if \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\), \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\), then \(f_\epsilon \to \delta_0\) in an appropriate sense and \(f_\epsilon \star g \to g\) for all \(g\) nice enough.
 
-\begin{proof}
-  Assume that we have two solutions \(u_1\) and \(u_2\). Then \(u \coloneqq u_1 - u_2\) is a solution to 
-  \begin{align*}
-    \begin{cases}
-      - \Delta u = 0, &\text{in } \Omega \\
-      u = 0 &\text{on } \partial \Omega
-    \end{cases}
-  \end{align*}
-  By the maximum principle, we know that \(u = 0\) in \(\Omega\). More precisely, by the maximum principle we have \(\forall x \in \Omega\)
-  \begin{align*}
-    \sup_{x \in \Omega} u(x) \le \sup_{x \in \partial \Omega} u(x) = 0
-    \quad \Rightarrow \quad
-    u(x) \le 0
-  \end{align*}
-  Since \(-u\) satisfies the same property we have \(\forall x \in \Omega\):
-  \begin{align*}
-    \sup_{x \in \Omega}(-u(x)) \le \sup_{x \in \partial \Omega} (-u(x)) = 0
-    \quad \Rightarrow \quad
-    - u(x) \le 0
-    \quad \Rightarrow \quad
-    u(x) \ge 0
-  \end{align*}
-  So we geht \(u(x)  = 0\) in \(\Omega\).
-\end{proof}
-
-\begin{ex}[Bonus 1]\label{bonus-1}
-  Let \(\Omega\) be open, connected and bounded in \(\mathbb{R}^d\). Let \(u \in C^2(\Omega) \cap C(\bar \Omega)\) s.t. 
-  \begin{align*}
-    \begin{cases}
-      \Delta u = 0, &\text{in } \Omega \\
-      u = g, &\text{on } \partial \Omega
-    \end{cases}
-  \end{align*}
-  Prove that \begin{enumerate}[label=\alph*)]
-    \item If \(g \ge 0\) on \(\partial \Omega\), then \(u \ge 0\) in \(\Omega\). 
-    \item If \(g \ge 0\) on \(\partial \Omega\) and \(g \ne 0\), then \(u > 0\) in \(\Omega\).
-  \end{enumerate}
-\end{ex}
-
-\begin{proof}[My Solution]
-  \begin{enumerate}[label=\alph*)]
-    \item We have that \(\Delta (-u) = 0\), so \(-u\) is harmonic in \(\Omega\). Since \(\Omega\) is open and bounded we can apply the Maximum Principle (\ref{maximum-principle}) and get that
-    \[\sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0.\]
-    This implies \(\inf_{x \in \Omega} u(x) \ge 0\), so \(u \ge 0\) in \(\Omega\).
-    \item We prove this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
-    \[0 = -u(x_0) = \sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0,\]
-    so \(-u\) attains its maximum on \(\Omega\). Hence \(-u = 0 = u\) is constant by the strong maximum principle because \(\Omega\) is connected, in fact \(0 = u|_{\partial \Omega} = g\). \qedhere
-  \end{enumerate}
-\end{proof}
-
-\begin{lem}[Estimates for derivatives]\label{estimates-of-derivatives}
-  If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\), \(\alpha \in \mathbb{N}_0^d\), \(|\alpha| = k\) and \(B(x_0, r) \subseteq \Omega\), then 
-  \[|D^\alpha u(x_0)| \le \frac{c_k}{r^{d+k}} \int_{B(x_0, r)} |u| \, dy,\] where \(c_0 = \frac{1}{|B(0,1)|}\) and \(c_k = \frac{(2^{n+1}nk)^k}{|B(0,1)|}\) for \(k=1,\dots\)
-\end{lem}
-
-\begin{thm}[Regularity]
-  Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u \, dy\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
-\end{thm}
-
-% \begin{proof}
-%   We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
-%   \begin{align*}
-%     \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
-%   \end{align*}
-%   We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
-%   \begin{align*}
-%     u_\epsilon(x) 
-%     &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
-%     &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
-%     (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
-%     \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
-%     &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
-%     &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
-%   \end{align*}
-
-%   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
-
-%   Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
-%   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
-%   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
-%   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
-%   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
-%   Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
-%   To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
-%   Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
-%   We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
-%   \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
-%   where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
-%   New: Let \(x_0 \in \Omega\), take \(r > 0\), \(r < \frac{1}{L+1} \dist(x_0, \Omega^c)\) s.t. if \(x \in B(x_0, r)\), then \[B(x, Lr) \subseteq B(x_0, (L+1)r) \subseteq \Omega\]. With Lemma~\ref{estimates-of-derivatives} we get:
-%   \begin{align*}
-%     |D^\alpha u(x_0 + t(x-x_0))
-%     &\le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|
-%   \end{align*}
-%   With \((x_0, r) \leadsto (x, Lr)\)
-%   \begin{align*}
-%     |R_N(x)| \le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{1}{\alpha!} \frac{1}{\alpha!} \tau^N \int_{B(x_0, (L+1)r) |u|}
-%   \end{align*}
-
-%   Thus 
-%   \begin{align*}
-%     \left(\frac{\tilde c_d N}{L}\right) \frac{1}{N!}
-%     &\le \left(\frac{\tilde c_d N}{L}\right) \left(\frac{e}{N}\right)^N \quad \text{ if \(N\) large} \\
-%     &= \left(\frac{\tilde c_d e}{L}\right)^N \xrightarrow{N \to \infty} 0 \quad \text{if } L > \tilde c_d e (L = L_d)
-%   \end{align*}
-%   We conclude that \[u(x) = u(x_0) + \sum_{\alpha \ne 0} \frac{D^\alpha u(x_0)}{\alpha!}(x-x_0)^\alpha\]
-%   The series converges uniformly \(x \in B(x_0, r)\).
-%   Now we proof the bound on derivatives. For \(\alpha = 0\)
-%   \begin{align*}
-%     |u(x_0)| = \left| \fint_{B(x_0, r)} u \right| \le \frac{1}{|B_1|r^d} \int_{B(x_0, r)} |u|
-%   \end{align*}
-%   For \(\alpha = 1:\) \(\Delta u = 0\) in \(\Omega\) \(\Rightarrow\) \(0 = \partial_{x_i} (\Delta u) = \Delta (\partial_{x_i} u)\), so \(\partial_{x_i} u\) is harmonic in \(\Omega\). Hence, by the mean-varlue theorem again:
-%   \begin{align*}
-%     \partial_{x_i} u(x_0) &= \fint_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{\frac{r}{2}}{2}^d} \int_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{r}{2}^d} \int_{\partial B(x_0, \frac{r}{2})}u n_i \, dS
-%   \end{align*}
-%   So we get:
-%   \begin{align*}
-%     |\partial_{x_i} u(x_0)| 
-%     &= \frac{1}{|B_1| r^d} \int_{\partial B(x, r)} \, dS \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}  \\
-%     &= \frac{|S_1|}{|B_1|\frac{r}{2}} \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}
-%   \end{align*}
-%   For any \(y \in \partial B(x_0, \frac{r}{2})\) by the mean value theorem, we get:
-%   \begin{align*}
-%     |u(y)| 
-%     &= \left| \fint_{B(y, \frac{r}{2})} u\right|
-%     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(y, \frac{r}{2})} |u|
-%     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
-%   \end{align*}
-%   Thus,
-%   \begin{align*}
-%     |\partial_{x_i} u(x_0)| 
-%     &\le \frac{|S_1|}{|B_1| \left(\frac{r}{2}\right)} \frac{1}{|B_1|  \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
-%     \le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u|
-%   \end{align*}
-%   Induction: Assume that we already proved the bound when \(|\alpha| = N-1\). Then:
-%   \begin{align*}
-%     \partial_{x_i} D^\alpha u 
-%     &= D^\alpha(\underbrace{\partial_{x_i} u}_{\text{harmonic}})
-%     = 0
-%     \quad \Rightarrow \quad
-%     D^\alpha u \text{ is harmonic}
-%   \end{align*}
-%   So we get
-%   \begin{align*}
-%     \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
-%     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
-%   \end{align*}
-%   and by the induction hypothesis:
   
-%   \begin{align*}
-%     |D^\alpha u(x_0)| &\le \frac{c_d}{r} \|D^\alpha u\|_{L^\infty B(x_0, \frac{r}{2})} \\
-%     &\le \frac{c_d}{r^{d+N-1}} \int_{B(x_0, r)} |u| \quad \forall x \in B\left(x_0, \frac{r}{2}\right)
-%   \end{align*}
-%   Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
-% \end{proof}
+  \begin{thm}[Approximation by convolution]
+    Let \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\), \(f_\epsilon(x) = \epsilon^{-d} f(\frac{x}{\epsilon})\). Then for all \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p < \infty\), then
+    \[f_\epsilon \star g \to g \quad \text{in } L^p(\mathbb{{R}^d})\]
+  \end{thm}
 
-\begin{ex}[E 1.1: Proof the Gauss–Green formula]
-  Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
-  Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
-\end{ex}
-
-\begin{ex}[E 1.2]
-  Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u \, dy = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
-\end{ex}
-
-\begin{proof}[My Solution]
-  Assume there is a \(x_0 \in \mathbb{R}^d\) s.t. w.l.o.g. \(u(x_0) > 0\). Since \(u\) is continous there is a ball \(B(x_0, r)\) s.t. \(u(y) > \frac{u(x_0)}{2}\) for all \(y \in B(x_0, r)\). But then we get
-  \begin{align*}
-    \int_{B(x_0, r)} u(y) \, dy
-    &\ge \int_{B(x_0, r)} \frac{u(x_0)}{2} \, dy
-    = \frac{u(x_0)}{2} \, |B(x_0, r)| > 0. \qedhere
-  \end{align*}
-\end{proof}
-
-\begin{ex}[E 1.3]
-  Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
-\end{ex}
-
-\begin{thm}[Liouville's Theorem] 
-  If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
-\end{thm}
-
-\begin{proof}
-  By the bound of the derivative \ref{estimates-of-derivatives} we have
-  \begin{align*}
-    |\partial_{x_i} u(x_0)| 
-    &\le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u| \, dy \quad \forall x_0 \in \mathbb{R}^d\ \forall r > 0 \\
-    &\le \|u\|_{L^\infty} \frac{c_d}{r^{d+1}} |B(x_0, r)| \\
-    &\le \|u\|_{L^\infty} \frac{c_d}{r} \xrightarrow{r \to \infty} 0
-  \end{align*}
-  Thus \(\partial_{x_i} u = 0\) for all \(i = 1, 2, \dots d\) and \(u = const.\) in \(\mathbb{R}^d\)
-\end{proof}
-
-\begin{thm}[Uniqueness of solutions to Poisson Equation in \(\mathbb{R}^d\)]
-  If \(u \in C^2(\mathbb{R}^d)\) is a bounded function and satisfies \(- \Delta u = f\) in \(\mathbb{R}^d\) where \(f \in C_c^2(\mathbb{R}^d)\), then we have
-  \begin{align*}
-    u(x) = \Phi \star f(x) + C = \int_{\mathbb{R}^d} \Phi(x-y)f(y) \, dy + C \quad \forall x \in \mathbb{R}^d
-  \end{align*}
-  where \(C\) is a constant and \(\Phi\) is the fundamental solution of the Laplace equation in \(\mathbb{R}^d\).
-\end{thm}
-
-\begin{proof}
-  If we can prove that \(v\) is bounded, then \(v = const.\). We first need to show that \(\Phi \star f\) is bounded.
-  \begin{align*}
-    \Phi = \Phi_1 + \Phi_2 = \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
-    \Phi \star f = \Phi_1 \star f + \Phi_2 \star f
-  \end{align*}
-  We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
-\end{proof}
-
-\begin{ex} (Hanack's inequality)
-  Let \(u \in C^2(\mathbb{R}^d)\) be harmonic and non-negative. Prove that for all open, bounded and connected \(\Omega \subseteq \mathbb{R}^d\), we have
-  \begin{align*}
-    \sup_{x \in \Omega} u(x) \le C_\Omega \inf_{x \in \Omega} u(x),
-  \end{align*}
-  where \(C_\infty\) is a finite constant depending only on \(\Omega\).
-\end{ex}
-
-\begin{proof} (Exercise)
-  Hint: \(\Omega = B(x,r)\). General case cover \(\Omega\) by finitely many balls, one ball is inside \(\Omega\).
-\end{proof}
-
-
-\begin{defn}[Convolution]
-  Let \(f, g: \mathbb{{R}^d \to \mathbb{R}}\) or \(\mathbb{C}\).
-  \begin{align*}
-    (f \star g)(x)
-    &= \int_{\mathbb{R}^d} f(x-y) g(y) \, dy
-    = \int_{\mathbb{R}^d} f(y) g(x-y) \, dy 
-    = (g \star f)(x)
-  \end{align*}
-\end{defn}
-
-\begin{rem}[Properties of the Convolution]
-  \begin{itemize}
-    \item \((f \star g)(x) = f \star (g \star h)\)
-    \item \(\hat{f \star g} = \hat f \star \hat g\)
-  \end{itemize}
-\end{rem}
-
-
-\begin{thm}[Young Inequality]
-  If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \(\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\). More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \(\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q}\), where \(1 \le p, q, r, \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\)
-\end{thm}
-
-\begin{proof}
-  Let \(f \in L^1, g \in L^p\). With the Hölder Inequality \ref{hölder-inequality}, we have:
-  % \begin{align*}
-  %   \left|(f \star g)(x)| 
-  %   &= \left| \int_{\mathbb{R}^d} f(x-y)g(y) \, dy \right| \\
-  %   &\le \left(\int_{\mathbb{R}^d} |f(x-y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
-  %   &= \| f \|_{L^1}^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} \dots \right)^{\frac{1}{p}}
-  % \end{align*}
-  \begin{align*}
-    \|f \star g\|_{L^p}^p
-    &= \int_{\mathbb{R}^d} |f \star g(x)|^p \, dx
-    &\le \|f\|_{L^1}^{\frac{p}{q}} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} |f(x-y)||g(y)|^p \, dy \, dx \\
-    &= \| f \|_{L^1}^{\frac{p}{q} + 1} \|g\|_{L^p}^p
-  \end{align*}
-  So we have \(\| f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\)
-\end{proof}
+  \begin{proof}
+    Step 1: Let \(f, g \in C_c(\mathbb{R}^d)\). Then
+    \begin{align*}
+      (f_\epsilon \star g)(x) - g(x) 
+      &= \int f_\epsilon(y) g(x-y) \, dy - \int f_\epsilon(y) g(x) \, dy \\
+      &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
+      |(f_\epsilon - g)(x) - g(x)|
+      &\le \left| \int_{\mathbb{R}^d} \right| \\
+      &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
+      &\le \int{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
+      &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] \xrightarrow{\epsilon \to 0} 0
+    \end{align*}
+  \end{proof}
 
 \end{document}
