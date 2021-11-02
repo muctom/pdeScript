@@ -842,7 +842,7 @@
   \end{proof}
 
   \begin{thm}[Smoothness of the Convolution]
-    If \(f \in C_c^\infty(\mathbb{R}^d), g \in L^p(\mathbb{R}^d), 1 \le p \le p\). Then \(f \star g \in C^\infty(\mathbb{R})\) and 
+    If \(f \in C_c^\infty(\mathbb{R}^d),\ g \in L^p(\mathbb{R}^d),\ 1 \le p \le \infty\). Then \(f \star g \in C^\infty(\mathbb{R})\) and 
     \[D^\alpha (f\star g) = (D^\alpha f) \star g\]
     for all \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\)
   \end{thm}
@@ -851,72 +851,73 @@
     First we note that \(x \mapsto (f \star g)\) is continous as \(x_n \to x\) in \(\mathbb{R}^d\) since
     \begin{align*}
       (f \star g)(x_n) 
-      &= \int_{\mathbb{R}^d} f(x_n - y) g(y) \, dy \\
-      \text{By dom. conv.} \quad &\longrightarrow \int_{\mathbb{R}^d} f(x-y) g(y) \, dy = (f \star g)(x)
+      &= \int_{\mathbb{R}^d} f(x_n - y) g(y) \, dy \xrightarrow{\text{dom. conv.}} \int_{\mathbb{R}^d} f(x-y) g(y) \, dy = (f \star g)(x)
     \end{align*}
     We can apply Dominated convergence because 
-      \[f(x_n - y)g(y) \to f(x-y)g(y) \forall y \text{ as \(f\) is continuous and } x_n \to x\]
+      \[f(x_n - y)g(y) \to f(x-y)g(y)\quad  \forall y \text{ as \(f\) is continuous and } x_n \to x\]
       and
-      \[|f(x_n -y) g(y)| \le \|f\|_{L^\infty} |g(y)| \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d).\]
-      Where \(R > 0\) satisfies \(B(0, R) \supseteq supp f + \sup_n |x_n|\)
+      \[|f(x_n -y)\ g(y)| \le \|f\|_{L^\infty} |g(y)| \ \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d).\]
+      Where \(R > 0\) satisfies \(B(0, R) \supseteq \supp f + \sup_n |x_n|\).
       Now we can compute the derivatives:
       \begin{align*}
         \partial_{x_i} (f \star g)(x)
         &= \lim_{h \to 0} \frac{(f \star g)(x + he_i) - (f \star g)(x)}{h} \\
-        &= \lim_{x \to 0} \int_{\mathbb{R}^d} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
-        &= \int_{\mathbb{R}^d}\lim_{x \to 0} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
+        &= \lim_{h \to 0} \int_{\mathbb{R}^d} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
+        \text{(Dominated Convergence)} \quad &= \int_{\mathbb{R}^d}\lim_{h \to 0} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
         &= \int_{\mathbb{R}^d} (\partial_{x_i} f)(x-y) g(y) \, dy
       \end{align*}
       We could apply Dominated Convergence since
       \begin{align*}
-        \frac{f(x + e_i -y) - f(x-y)}{h} g(y) \xrightarrow{h \to 0} (\partial_{x_i} f) (x-y) g(y) \quad \text{as \(f \in C^1\)} \\
-        \left| \frac{f(x + h e_i -y) - f(x-y)}{h} g(y) \right| \le \| \partial_{x_i} f \|_{L^\infty} |g(y)| \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d)
+        \frac{f(x + he_i -y) - f(x-y)}{h} g(y) \xrightarrow{h \to 0} (\partial_{x_i} f) (x-y) g(y) \quad \text{as \(f \in C^1\)} \\
+        \left| \frac{f(x + h e_i -y) - f(x-y)}{h} g(y) \right| \le \| \partial_{x_i} f \|_{L^\infty} |g(y)| \ \mathbb{1}(|y| \le R) \in L^1(\mathbb{R}^d)
       \end{align*}
-      where \(B(0, r) \supseteq supp(f) + B(0, |x| + 1)\)
-      and \(\partial_{x_i} (f \star g) = (\partial_{x_i} f) \star g \in C(\mathbb{R}^d)\) since \(\partial_{x_i} f \in C_c^\infty(\mathbb{R}^d)\)
-      By induction: \(D^\alpha (f \star g) = (D^\alpha f \star g) \in C^(\mathbb{R}^d)\)
+      where \(B(0, R) \supseteq \supp(f) + B(0, |x| + 1)\)
+      and \(\partial_{x_i} (f \star g) = (\partial_{x_i} f) \star g \in C(\mathbb{R}^d)\) since \(\partial_{x_i} f \in C_c^\infty(\mathbb{R}^d)\).
+      By induction we get \(D^\alpha (f \star g) = (D^\alpha f \star g) \in C(\mathbb{R}^d)\).
   \end{proof}
 
-  Question: Is there a \(f\) s.t. \(f \star g = g\) for all \(g\). In fact there is no regular function \(f\) that solves this formally:
-  \[f \star g = g \Rightarrow \hat{f \star g} = \hat g \Rightarrow \hat f \hat g = \hat g\ \Rightarrow \hat f = 1 \Rightarrow f \text{ is not a regular function!}]\]
 
-  However, if \(f\) is the Dirac-Delta Distribution, \(f = \delta_0\) then \(\delta_0 \star g = g\) for all \(g\). Formally:
-  \begin{align*}
-    \delta_0(x) &= \begin{cases}
-      0 & x \ne 0 \\
-      \infty &, x = 0 \\
-      \int \delta_0 = 1
-    \end{cases}
-  \end{align*}
-  In fact, if \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\), \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\), then \(f_\epsilon \to \delta_0\) in an appropriate sense and \(f_\epsilon \star g \to g\) for all \(g\) nice enough.
+  \begin{rem}
+      Question: Is there a \(f\) s.t. \(f \star g = g\) for all \(g\). In fact there is no regular function \(f\) that solves this formally:
+      \[f \star g = g \Rightarrow \widehat{f \star g} = \hat g \Rightarrow \hat f \hat g = \hat g\ \Rightarrow \hat f = 1 \Rightarrow f \text{ is not a regular function!}\]
 
+      However, if \(f\) is the Dirac-Delta Distribution, \(f = \delta_0\) then \(\delta_0 \star g = g\) for all \(g\). Formally:
+      \begin{align*}
+        \delta_0(x) &= \begin{cases}
+          0 &x \ne 0 \\
+          \infty &x = 0 \\
+          \int \delta_0 = 1
+        \end{cases}
+      \end{align*}
+      In fact, if \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\), \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\), then \(f_\epsilon \to \delta_0\) in an appropriate sense and \(f_\epsilon \star g \to g\) for all \(g\) nice enough.
+  \end{rem}
   
   \begin{thm}[Approximation by convolution]
     Let \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\), \(f_\epsilon(x) = \epsilon^{-d} f(\frac{x}{\epsilon})\). Then for all \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p < \infty\), then
     \[f_\epsilon \star g \to g \quad \text{in } L^p(\mathbb{{R}^d})\]
   \end{thm}
 
-  \begin{proof}
-    \begin{itemize}
-      \item [Step 1] Let \(f, g \in C_c(\mathbb{R}^d)\). Then
+  \begin{proof}\
+    \begin{enumerate}[label=Step \arabic*:]
+      \item Let \(f, g \in C_c(\mathbb{R}^d)\). Then
       \begin{align*}
         (f_\epsilon \star g)(x) - g(x) 
         &= \int_{\mathbb{R}^d} f_\epsilon(y) g(x-y) \, dy - \int_{\mathbb{R}^d} f_\epsilon(y) g(x) \, dy \\
         &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
-        |(f_\epsilon - g)(x) - g(x)|
-        &\le \left| \int_{\mathbb{R}^d} \right| \\
+        |(f_\epsilon \star g)(x) - g(x)| 
+        &= \left| \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \right| \\
         &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
-        &\le \int{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
-        &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] \xrightarrow{\epsilon \to 0} 0
+        &\le \int_{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
+        &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] 
+        \xrightarrow{\epsilon \to 0} 0
       \end{align*}
-      We have Dominated Convergence:
-      \begin{align*}
-        (f_\epsilon \star g)(x) - g(x) \to 0 \quad \text{as } \epsilon \to 0 \\
-        |f_\epsilon \star g(x) - g(x)| \le \|f\|_{L^1} \sup_{|z| \le R_\epsilon} |g(x-z) - g(x)| \le 2 \|f\|_1 \|g\|_{L^\infty} \mathbb{1}(|x| \le R_1)
-      \end{align*}
+      We have Dominated Convergence since:
+      \[(f_\epsilon \star g)(x) - g(x) \to 0 \quad \text{as } \epsilon \to 0\]
+      and
+      \[|f_\epsilon \star g(x) - g(x)| \le \|f\|_{L^1} \sup_{|z| \le R_\epsilon} |g(x-z) - g(x)| \le 2 \|f\|_1 \|g\|_{L^\infty} \mathbb{1}(|x| \le R_1).\]
       Where \(B(0, R_1) \supseteq \supp(g) + B(0, R_\epsilon)\), thus
       \(f_\epsilon \star g \to g\) in \(L^p(\mathbb{R}^d)\). To remove the technical assumptions \(f, g \in C_c(\mathbb{R}^d)\), then we use a density argument. We use the fact that \(C_c(\mathbb{R}^d)\) is dense in \(L^p(\mathbb{R}^d)\), \(1 \le p < \infty\).
-      \item[Step 2:] Let \(g \in C_c(\mathbb{R}^d), g \in L^p(\mathbb{R}^d)\). Then there is \(\{g_m\} \subseteq L^p(\mathbb{R}^d), g_m \to g\) in \(L^p(\mathbb{R}^d)\). Then 
+      \item Let \(g \in C_c(\mathbb{R}^d), g \in L^p(\mathbb{R}^d)\). Then there is \(\{g_m\} \subseteq L^p(\mathbb{R}^d), g_m \to g\) in \(L^p(\mathbb{R}^d)\). Then 
       \begin{align*}
         \|f_\epsilon \star g - g\|_{L^p} 
         &\le \|f_\epsilon \star (g - g_m)\|_{L^p}  + \|f_\epsilon \star g_m - g_m \|_{L^p}+ \|g_m - g\|_{L^p} \\
@@ -931,7 +932,7 @@
         &\le (\|f\|_{L^p} + 1) \|g - g_m\|_{L^p} + \underbrace{\limsup_{\epsilon \to 0} \|f_\epsilon \star g_m - g_m\|_{L^p}}_{0 \text{by step 1.}} \\
         \xrightarrow{m \to \infty} 0
       \end{align*}
-      \item[Step 3:] Let \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\). Take \(\{f_m\} \subseteq C_c(\mathbb{R}^d)\), s.t. 
+      \item Let \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\). Take \(\{f_m\} \subseteq C_c(\mathbb{R}^d)\), s.t. 
       \begin{align*}
         \begin{cases}
           F_m \to g in L^1(\mathbb{R}) \text{ as } m \to \infty \\
@@ -942,9 +943,9 @@
       \begin{align*}
         f_\epsilon \star g - g &= (f_\epsilon - F_{m, \epsilon}) \star g + F_{m, \epsilon} \star g -g \\
         \Rightarrow \|f_\epsilon - g \|_{L^p} &\le \underbrace{\|f_\epsilon - F_{m, \epsilon} \star g\|_{L^p}}_{\mathclap{\overset{\text{Young}}{\le} \|f_\epsilon - F_{m, \epsilon}\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g\|_{L^p}}} + \|F_{m, \epsilon} \star g - g\|_{L^p} \\
-        \Rightarrow \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} &\le \|f - F_m\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g \|_{L^p}
+        \Rightarrow \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} &\le \|f - F_m\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g \|_{L^p} \qedhere
       \end{align*}
-    \end{itemize}
+    \end{enumerate}
   \end{proof}
 
   
