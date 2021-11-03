@@ -1348,9 +1348,9 @@
   \end{rem}
 
   
-  \begin{thm}[Fourier Transform of \(\frac{1}{|x|^d}\) for \(0 < \alpha < d\)]. We have permally
+  \begin{thm}[Fourier Transform of \(\frac{1}{|x|^\alpha}\) for \(0 < \alpha < d\)] We have formally
     \begin{align*}
-      \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \forall 0 < \alpha < d
+      \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \quad \forall 0 < \alpha < d
     \end{align*}
     Here
     \begin{align*}
@@ -1358,12 +1358,100 @@
     \end{align*}
     More precisely, for all \(f \in C_c^\infty(\mathbb{R}^d)\), 
     \begin{align*}
-      \frac{c_\alpha}{|x|^\alpha}\star f = \widecheck{\left(\frac{c_{d-\alpha}}{|k|^{d + \alpha}} \hat f (k)\right)}
+      \frac{c_\alpha}{|x|^\alpha}\star f = \left(\frac{c_{d-\alpha}}{|k|^{d + \alpha}} \hat f (k)\right)^\lor
     \end{align*}
-    Moreover if \(\alpha < \frac{d}{2}\), then we also have
+    Moreover if \(\alpha > \frac{d}{2}\), then we also have
     \begin{align*}
-      \left(\frac{c_\alpha}{|x|^\alpha j} \star f\right)^\land = \frac{c_{d - \alpha}}{|f|^{d-\alpha}} \hat f (k)
+      \left(\frac{c_\alpha}{|x|^\alpha} \star f\right)^\land = \frac{c_{d - \alpha}}{|f|^{d-\alpha}} \hat f (k)
     \end{align*}
-    
   \end{thm}
+
+
+  \begin{rem}
+    If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) 
+    Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \hat{\tilde f_1} + \hat{\tilde f_2} \in L^1 \cap \L^2\)?
+    In fact:
+    \begin{align*}
+      f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
+      \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
+      \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
+    \end{align*}
+  \end{rem}
+
+  
+  \begin{lem}[Fourier Transform of Gaussians] In \(\Rd\),
+    \[\widehat{e^{- \pi |x|^2}} = e^{- \pi |k|^2}\]
+    More generally for all \(\lambda > 0\):
+    \[\widehat{e^{- \pi \lambda^2 |x|^2}} = \lambda^{-d} e^{-\pi \frac{|k|^2}{\lambda^2}}\]
+    (exercise)
+  \end{lem}
+
+  \begin{proof}[Proof of Theorem]
+    Formally:
+    \begin{align*}
+      \frac{c_\alpha}{|x|^\alpha} &= \frac{1}{|x|^\alpha} \pi^{- \frac{\alpha}{2}} \int_0^\infty e^{-\lambda} \lambda^{\frac{\alpha}{2} -1} \, d \lambda = \int_0^\infty e^{- \pi \lambda |x|^2} \lambda^{\frac{\alpha}{2}-1} \, d \lambda \\
+      \Rightarrow \frac{\hat c_\alpha}{|x|^\alpha}(k) &= \int_0^\infty \widehat{e^{- \pi \lambda |x|^2}}(k) \lambda^{\frac{\alpha}{2}-1} \, d \lambda = \int_0^\infty \lambda^{-\frac{d}{2}} e^{- \pi \frac{|k|^2}{\lambda}} \lambda^{\frac{\alpha}{2}-1} \, d \lambda \\
+      (\lambda \to \frac{1}{\lambda}) \quad &= \int_0^\infty \lambda^{\frac{d}{2} e^{- \pi |k|^2 \lambda}} \lambda^{- \frac{\alpha}{2} + 1} \lambda^{-2} \, d\lambda \\
+      &= \frac{c_{d-\alpha}}{|k|^{d-\alpha}}
+    \end{align*}
+
+    Let \(f \in C_c(\Rd)\). Then \(\left(\frac{1}{|x|^\alpha} \star f\right)(x) = \int_{\Rd} \frac{1}{|x-y|^\alpha} f(y) \, dy\) is well defined as \(\frac{1}{|x-y|} \in L_{loc}^1(\mathbb{R}^d, dy)\). It is bounded
+    \begin{align*}
+      \frac{1}{|x|^\alpha} \star f = \frac{1}{|x|^\alpha} \underbrace{\mathbb{1}(|x| \le 1)}_{\in L^\infty(\Rd)} \star \underbrace{f}_{L^\infty} + \underbrace{\frac{1}{|x|} \mathbb{1}(|x| > 1)}_{\in L^\infty} \star \underbrace{f}_{\in L^1} \in L^\infty(\Rd)
+    \end{align*}
+    When \(|x| \to \infty\):
+    \begin{align*}
+      \left(\frac{1}{|x|^\alpha} \star f\right)(x) &= \int_{\Rd} \frac{f(y)}{|x-y|^\alpha} \, dy = \int_{|y| \le R} \frac{f(y)}{|x-y|^\alpha} \, dy \sim \frac{\int_{\Rd} f(y) \, dy}{|x|^\alpha}
+    \end{align*}
+
+    Note that \(\frac{c_{d-\alpha}}{|k|^{d-\alpha}} \underbrace{\hat f(k)}_{\text{bounded}} \in L^1(\Rd)\).
+    \begin{align*}
+      (...) \mathbb{1}(|k| \le 1) + (...) \mathbb{1}(|k|> 1)
+      \frac{1}{|k|^{d - \alpha}}|\hat f(k)| \mathbb{1}(|k| \le 1) \le \|f\|_{L^1} \frac{\mathbb{1}(|k| \le 1)}{|k|^{d-\alpha}} \in L^1(\Rd, dk) \\
+      \frac{1}{|k|^{d-\alpha}} |\hat f(k)| \mathbb{1}(k >1) \le |\hat f(k)| \in L^2(\Rd, dK) \text{ as } f \in L^2(\Rd)
+    \end{align*}
+
+    
+    \begin{lem}
+      If \(f \in C_c^\infty(\Rd)\), then \(\hat f \in L^1(\mathbb{R}^d)\)
+    \end{lem}
+
+    \begin{proof}(Exercise)
+      Hint: \(|\widehat{D^\alpha f}| = |2 \pi k|^{|\alpha|} |\hat f(k)| \leadsto |\hat f(k)| \le \frac{1}{|k|^{|k|}}\) as \(|k| \to \infty\).
+    \end{proof}
+
+    Compute:
+    \begin{align*}
+      \left(\frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f(k)\right)^\lor (x) 
+      &= \int_{\Rd} \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f(k) e^{2 \pi i k x} \, dk \\
+      &= \int_{\Rd} \left(\int_0^\infty e^{-\pi |k|^2 \lambda} \lambda^{\frac{d-\alpha}{2}-1} \, d \lambda \right) \hat f (k) e^{2 \pi i k x} \, dk \\
+      &= \int_0^\infty \left(\int_{\Rd} e^{-\pi |k|^2 \lambda} \hat f (k) e^{2 \pi i k x} \, dk \right) \lambda^{\frac{d-\alpha}{2}-1} \, d \lambda \\
+      &= \int_0^\infty \left(e^{- \pi k^2 \lambda} \hat f(x)\right)^\lor \lambda^{\frac{d-\alpha}{2} - 1} \, d \lambda \\
+      &= \int_0^\infty \left(\widehat{\lambda^{-\frac{d}{2}} e^{- \pi \frac{x^2}{\lambda}}}(k) \hat f(k)\right)^\lor \lambda^{\frac{d-\alpha}{2} - 1} \, d \lambda \\
+      &= \int_0^\infty \left(\lambda^{- \frac{d}{2}} e^{- \pi \frac{x^2}{\lambda}} \star f \right) \lambda^{\frac{d-\alpha}{2} - 1} \, d \lambda \\
+      &= \left(\int_0^\infty \lambda^{- \frac{d}{2}} e^{- \pi \frac{x^2}{\lambda}}\lambda^{\frac{d-\alpha}{2} - 1} \, d \lambda \right) \star f
+    \end{align*}
+    Assume \(d > \alpha > \frac{d}{2}\). Then \(\frac{c_\alpha}{|x|^\alpha} \star f \in L^\infty\) and behaves \(\frac{c_\alpha(\int f)}{|x|^\alpha}\) as \(|x| \to \infty\). This implies:
+    \begin{align*}
+      \int_{\mathbb{R}^d} \left| \frac{c_\alpha}{|x|^\alpha} \star f \right|^2 \le c + \int_{|x| \ge R} \frac{c}{|x|^{2d}} \, dx < \infty 
+    \end{align*}
+    Thus the Fourier Transform \(\widehat{\frac{c_\alpha}{|x|^\alpha}} \star f\) exists. Combining with 
+    \begin{align*}
+      \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f (k) \right)^\check \\
+      \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
+    \end{align*}
+  \end{proof}
+
+  
+  \begin{rem}
+    If \(d \ge 3\)
+    \begin{align*}
+      \hat G(k) = \frac{1}{|2 \pi k|^2}  \\
+      \Rightarrow G(x) = \left(\frac{1}{|2 \pi k|^2}\right)^\check = \frac{1}{d(d-2(k) |x|^{d-2})} = fundamential solution of laplace
+    \end{align*}
+  \end{rem}
+
+
+
+
 \end{document}
