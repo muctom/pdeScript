@@ -10,7 +10,7 @@
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath, amssymb, mathtools, esint, bbold}
+\usepackage{amsmath, amssymb, mathtools, esint, bbold, mathabx}
 \usepackage{graphicx}
 \usepackage{color}
 \usepackage{datetime}
@@ -49,6 +49,7 @@
 \renewcommand\div{\operatorname{div}}
 \newcommand{\dist}{\operatorname{dist}}
 \newcommand{\supp}{\operatorname{supp}}
+\newcommand{\Rd}{\mathbb{R}^d}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thành Nam Phan \\ Winter Semester 2021/2022}
@@ -1245,4 +1246,124 @@
       &\le \frac{(\int_{\mathbb{R}^3} f_1)(\int_{\mathbb{R}^3} f_2)}{|z_1 - z_2|}
     \end{align*}
   \end{proof}
+
+  
+  \begin{ex}[Bonus 2]
+    Consider \(u(x) = \frac{1}{|x|}\) in \(\mathbb{R}^d\). 
+    \begin{enumerate}
+      \item Prove that \(u\) is sub-harmonic in \(\mathbb{R}^2 \setminus \{0\}\). 
+      \item Prove that if \(f: \mathbb{R}^2 \to \mathbb{R}\) radial, non-negative, measurable:
+      \begin{align*}
+        \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy \ge \int_{\mathbb{R}^2} \frac{f(y)}{\max(|x|, |y|)} \, dy
+      \end{align*}
+    \end{enumerate}
+  \end{ex}
+
+  
+  \begin{defn}[Fourier Transform]
+    
+  \end{defn}
+
+  
+  \begin{thm}[Basic Properties]
+    \begin{enumerate}
+      % \item If \(f \in L^1(\mathbb{R}^d)\), then \(\hat f \in L^\infty(\mathbb{R}^d)\) and \(\|\hat f \|\_{L^\infty} = \|L\|_{L^?})\)
+      \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(F\) can be extendet to be a unitary transforamtion \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
+      % \item \[\|F g\|_{L^2} = \|f\|_{L^2} \quad \forall f \in L^2(Á\mathbb{R}^d)\]
+      % \item The inverse of \(F\) can be depied as
+      % \item \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
+      \item \(\widehat{D^\alpha f}(k) = (2 \pi i k)^\alpha \hat f(k)\) as laj as \((2 \pi ik)^k f(k) \in L^2(\mathbb{R}^d)\) (\(k^\alpha = k_1^{alpha_1} \cdots k_\alpha^{\alpha_k}\))
+      \item (Formel) \(\widehat{f + g}(k) = \hat f(k) \hat g (k)\) if \(f,g\) are nice enough.
+    \end{enumerate}
+  \end{thm}
+
+  \begin{thm}[Hausdorff-Young-Inequality]
+    If \(1 \le p \le 2\) and \(\frac{1}{p} + \frac{1}{p'} = 1\), then
+    \[F: \quad L^P(\mathbb{R}^d) \to L^p(\mathbb{R}^d)\]
+    and 
+    \[\|\hat f\|_{L^p} \le \|f\|_{L^p} \quad \forall f \in L^p(\mathbb{R}^d)\]
+  \end{thm}
+  
+  \begin{rem}
+    If \(1 \le p \le 2\) and \(f \in L^p(\mathbb{R}^d)\) we can write \(f = f_1 + f_2\) when \(f_1 \in L^1\), \(f_2 \in L^2\), e.g.
+    \begin{align*}
+      f = \underbrace{f \mathbb{1}(|f| \ge 1)}_{f_1} + \underbrace{f \mathbb{1}(|f| < 1)}_{f_2}
+    \end{align*}
+    \begin{align*}
+      \int_{\mathbb{R}^d} |f_2|^2 \, dy &= \int_{\mathbb{R}^d}|f|^2 \mathbb{1}(|f| < 1) \le \int_{\mathbb{R}^d} |f|^p \, dy < \infty \\
+      \int_{\mathbb{R}^d} |f_1| = \int_{\mathbb{R}^d} |f| \mathbb{1}(|f| \ge 1) \le \int_{\mathbb{R}^d} |f|^p < \infty
+    \end{align*}
+    thus we can define \(\hat f = \hat f_1 + \hat f_2\) well defined in \(L^\infty(\mathbb{R}^d) + L^2(\mathbb{R}^d)\) what it in unclear why \(\hat f \in L^q\)?
+    Proof of HY inequality. Weee nedd Riez-Theorem interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
+    % \[T: L^{p_0}(\Omega} + L^{p_1})(\Omega) \longrightarrow L^{q_0}(\Omega} + L^{q_1})(\Omega)\]
+    is a linear operator and
+    \begin{align*}
+      T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for } i = 0, 1.
+      \text{ Then } T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for any } 0 < \theta < 1, where \begin{cases}
+        \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} \\
+        \frac{1}{q_0} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1}
+      \end{cases}
+    \end{align*}
+    Consider the Foureir Transform:
+    \begin{align*}
+      F: L^1 + L^1 \to L^2 + L^\infty 
+    \end{align*}
+    and
+    \begin{align*}
+      \|F\|_{L^1 \to L^\infty} \le 1 \text{ as } \|\hat f\|_{L^\infty} \le \|f\|_{L^1} \forall f p \in L^1 \\
+      \|F\|_{L^2 \to L^2} = 1 \text{ as } \| \hat f \|_{L^2} = \|f\|_{L^2} \forall f \in L^2 \\
+      \Rightarrow \|F\|_{L^{p_0} \to L^{p_t}} \le 1 \forall \theta \in (0,1)
+    \end{align*}
+    \(p_0 = 1, p_1 = 2, q_0 = \infty, q_1 = 2\)
+    % \begin{align*}
+    %   \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} = \theta + \frac{1 - \theta}{2} = \frac{1 + \theta}{2} \\
+    %   \frac{1}{q_\theta} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1} = \frac{1 - \theta}{2} \\
+    %   \Rightarrow \frac{1}{p_0} + \frac{1}{q_\theta}} = \frac{1 + \theta}{2} + \frac{1 - \theta}{2} = 1
+    % \end{align*}
+    % Thus: Let \(1 \le p,q,r \le 2\) s.t. \(\frac{1}{p} + \frac{1}{a} = 1 + \frac{1}{r}}\)
+    % Let \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\). Recall \(f \star g \in L^r(\mathbb{R}^d)\) by Young. We have
+    % \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \text{ a.e. k \in \mathbb{R}^d}\]
+    
+    \begin{ex}
+      Hint: first \(f,g \in C_c(\mathbb{R}^d)\) then use a density arugment)
+    \end{ex}
+
+    % \begin{align*}
+    %   \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
+    %   = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \left(f(x-y) e^{- 2 \pi i k(x-y)}\right) (g(y)) e^{- 2 \pi i k y}) \, dx \, dy \\
+    %   &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} (f(x-y) e^{- 2 \pi i k (x-y)} \, dy)\right) (g(y) e^{ - 2 \pi i k y}) \, dy = \hat f(k) \hat g(k)
+    % \end{align*}
+    We want to deque the Fourier transform for singular function, e.g. \(\frac{1}{|x|}\). Poisson:
+    \begin{align*}
+      - \Delta u = f \text{ in } \mathbb{R}^d \\
+      \Rightarrow | 2 \pi k|^2 \hat u (k) = \hat f(k) \\
+      \Rightarrow \hat u(k) = \frac{1}{|2 \pi k|^2} \hat f(k) 
+    \end{align*}
+    If we can find \(G\) s.t. \(\hat G(k)  = \frac{1}{|2 \pi k|^2}\), then
+    \begin{align*}
+      \hat u(k) = \hat G(k) \hat f(k) = \widehat{G \star f} \\
+      \Rightarrow u(x) = (G \star g) (x) = \int_{\Rd} G(x-y)f(y)\, dy
+    \end{align*}
+    In fact \(G\) is the fundamential solution of laplace quation.
+  \end{rem}
+
+  
+  \begin{thm}[Fourier Transform of \(\frac{1}{|x|^d}\) for \(0 < \alpha < d\)]. We have permally
+    \begin{align*}
+      \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \forall 0 < \alpha < d
+    \end{align*}
+    Here
+    \begin{align*}
+      c_\alpha = \pi^{- \frac{d}{2}} \Gamma \left(\frac{\alpha}{2} \right) = \pi^{- \frac{\alpha}{2}} \int_0^\infty e^{-\lambda} \lambda^{\frac{\alpha}{2}-1} \, d\lambda
+    \end{align*}
+    More precisely, for all \(f \in C_c^\infty(\mathbb{R}^d)\), 
+    \begin{align*}
+      \frac{c_\alpha}{|x|^\alpha}\star f = \widecheck{\left(\frac{c_{d-\alpha}}{|k|^{d + \alpha}} \hat f (k)\right)}
+    \end{align*}
+    Moreover if \(\alpha < \frac{d}{2}\), then we also have
+    \begin{align*}
+      \left(\frac{c_\alpha}{|x|^\alpha j} \star f\right)^\land = \frac{c_{d - \alpha}}{|f|^{d-\alpha}} \hat f (k)
+    \end{align*}
+    
+  \end{thm}
 \end{document}
