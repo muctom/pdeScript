@@ -737,6 +737,50 @@
     Here \(\nu_y\) is the outward unit normal vector and \(dS\) is the surface measure on the sphere.
   \end{ex}
 
+  \begin{proof}[Solution]
+    We proof this in d=3. Let \(f \in C^1(\mathbb{R}^3)\)
+    \begin{align*}
+      \int_{B(0, 1)} \partial_{x_3} f \, dx = \int_{\partial B(0, 1)} f x_3 \, dS(x), \quad x = (x_1, x_2, x_3) \in \mathbb{R}^3, \vec{n} = \frac{x}{|x|} \text{ on } \partial B(0,1)
+    \end{align*}
+    \begin{align*}
+      B(0,1) &
+      = \{x_1^2 + x_2^2 + x_3^2 \le 1 \} \\
+      &= \{ x_1^2+ x_2^2 \le 1 - \sqrt{1 - x_1^2 - x_2^2} \le x_3 \le \sqrt{1 - x_1^2 - x_2^2}\}
+    \end{align*}
+    Then: 
+    \begin{align*}
+      \int_{B(0,1)} \partial_{x_3} f \, dx 
+      &= \int_{x_1^2 + x_2^2 \le 1} \left(\int_{-\sqrt{1 - x_1^2 - x_2^2} \le x_3 \le \sqrt{1 - x_1^2 -x_2^2}} \partial_{x_3} f \, dx_3\right) \, dx_1 \, dx_2 \\
+      &= \int_{x_1^2 + x_2^2 \le 1} \left[f(x_1, x_2, \sqrt{1 - x_1^2 - x_2^2})\right. \\
+      &\qquad \left. - f(x_1, x_2, - \sqrt{1 - x_1^2 - x_2^2})\right] \, dx_1 \, dx_2
+    \end{align*}
+    Lets take polar coordinates in 2D:\begin{align*}
+      x_1 &= r \cos \phi & r > 0, \phi \in [0, 2 \pi)\\
+      x_2 &= r \sin \phi & \det \frac{\partial(x_1, x_2)}{\partial(r, \phi)} = r
+    \end{align*}
+    \begin{align*}
+      (\star) &= \int_0^1 \int_0^{2 \pi} [f(r \cos \phi, r \sin \phi, r) - f(r \cos \theta, r \sin \phi, -r)] r \, dr \, d\phi
+    \end{align*}
+    On the other hand:
+    \begin{align*}
+      \int_{\partial B(0, 1)} f x_3 \, dS
+    \end{align*}
+    The polar coordinates in 3D are:
+    \begin{align*}
+      x_1 &= r \cos \phi sin \theta& r > 0, \phi \in (0, 2 \pi), \theta \in (0, \pi) \\
+      x_2 &= r \sin \phi \sin \theta & \det \frac{\partial{x_1, x_2, x_3}}{\partial(r, \phi, t)} = r^2 \sin \theta\\
+      x_3 &= \cos \theta
+    \end{align*}
+    Then: 
+    \begin{align*}
+      (\star \star) 
+      &= \int_0^{2 \pi} \int_0^\pi f(\cos \phi \sin \theta, \sin \phi \sin \theta, \cos \theta) \sin \theta \cos \theta \, d \theta \, d \phi \\
+      &= \int_0^{2 \pi} \left(\int_0^{\frac{\pi}{2}} + \int_{\frac{\pi}{2}}^\pi \, d \theta\right) \, d \phi \\
+      (r = \sin \theta) \quad &= \int_0^{2 \pi} \int_0^1 f(r \cos \phi, r \sin \phi, \sqrt{1 - r^2}) r \, dr \, d \phi \\
+      &\qquad - f(r \cos \phi, r \sin \phi, -\sqrt{1 - r^2}) r \, dr \, d\phi \qedhere
+    \end{align*}
+  \end{proof}
+
   \begin{ex}[E 1.2]
     Let \(u \in C(\mathbb{R}^d)\) and \(\int_{B(x, r)} u \, dy = 0\) for every open ball \(B(x, r) \subseteq \mathbb{R}^d\). Show that \(u(x) = 0\) for all \(x \in \mathbb{R}^d\).
   \end{ex}
@@ -753,6 +797,77 @@
   \begin{ex}[E 1.3]
     Let \(f \in C_c^1(\mathbb{R}^d)\) with \(d \ge 2\) and \(u(x) \coloneqq (\Phi \star f)(x)\). Prove that \(u \in C^2(\mathbb{R}^2)\) and \(- \Delta u(x) = f(x)\) for all \(x \in \mathbb{R}^d\) (\ref{solution-for-poisson} was the same for \(f \in C_1(\mathbb{R})\))
   \end{ex}
+
+  % \begin{proof}[Solution]
+  %   We regard d=3. 
+    
+  %   \begin{lem}
+  %     If \(f \in C_c(\mathbb{R}^3)\), then \(\frac{1}{|x|} \star f \in C^1(\mathbb{R}^3)\) and \(\partial_{x_1} \left(\frac{1}{|x|} \star f\right) = \partial_{x_1} \left(\frac{1}{|x|}\right) \star f  = \left( \frac{- x_1}{|x|^3}\right) \star f\)
+  %   \end{lem}
+
+  %   \begin{proof}
+  %     \begin{align*}
+  %       \partial_{x_i} \left(\frac{1}{|x|} \star f\right) 
+  %       &= \lim_{h \to 0} \frac{1}{h} \left[\int_{\mathbb{R}^3} \frac{1}{|x-y-he_i|} f(y) \, dy - \int_{\mathbb{R}^3} \frac{1}{|x-y|}f(y) \, dy\right] \\
+  %       &= \lim_{h \to 0} \int_{\mathbb{R}^3} \frac{1}{h} \left[ \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy \\
+  %       &= \lim_{h \to 0} \int_{|x-y-he_i| \ge 2h} \frac{1}{h} \left[ \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy \\
+  %       &\qquad + \lim_{h \to 0} \int_{|x-y-he_i| < 2h} \frac{1}{h} \left[ \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy
+  %     \end{align*}
+  %     \begin{align*}
+  %       (I) \quad \lim_{h \to 0} \int_{\mathbb{R}^3} \frac{\mathbb{1}(|x-y-he_i| \ge 2H)}{h} \left[\frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy
+  %     \end{align*}
+  %     Dominated Convergence:
+  %     \begin{align*}
+  %       \lim_{h \to 0} (...) = \frac{\partial}{\partial x_i} \left(\frac{1}{|x-y|}\right) f(y) = \frac{-(x_i - y_i)}{|x-y|^3}f(y)
+  %     \end{align*}
+  %     and
+  %     \begin{align*}
+  %       \left| \frac{\mathbb{1}(|x-y-he_i| \ge 2h)}{h}\right| \left| \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right| |f(y)|
+  %     \end{align*}
+  %     Here:
+  %     \begin{align*}
+  %       \left| \frac{1}{|a|} - \frac{1}{|b|}\right| = \frac{||a|-|b||}{|a||b|} \le \frac{|a-b|}{|a||b|} \quad \forall a,b \in \mathbb{R}^3
+  %     \end{align*}
+  %     So we get
+  %     \begin{align*}
+  %       &\mathbb{1}(|x_3 - he_i) \ge 4h) \left|\frac{1}{|x-y-he_i|} - \frac{1}{|x-y|} \right| \\
+  %       &\qquad \le \frac{|he_i|}{|x-y-he_i||x-y|} \mathbb{1}(|x-y-he_i| \ge 4h) \\
+  %       &\qquad \le \frac{h}{\left(\frac{2}{3}\right)|x-y|}
+  %     \end{align*}
+  %     \begin{align*}
+  %       (II) &= \left[ \int_{|x-y-he_i| < 4h} \frac{1}{h}\left[\frac{1}{|x-y-he_i|}-\frac{1}{|x-y|}\right]f(y) \, dy\right| \\
+  %       &\le \int_{|x-y-he_i| < 4h} \frac{1}{h} \left| \frac{1}{|x-y-he_i|}-\frac{1}{|x-y|}\right| |f(y)| \, dy \\
+  %       &\le \int_{|x-y-he_i| < 4h} \frac{1}{|x-y-he_i||x-y|}|f(y)| \, dy \\
+  %       &\le \|f\|_{L^\infty} \int_{|x-y-he_i| < 4h} \left[\frac{1}{|x-y-he_i|^2}+\frac{1}{|x-y|^2}\right]\, dy
+  %     \end{align*}
+  %     Here:
+  %     \begin{align*}
+  %       \int_{|x-y-he_i| < 4h} \frac{1}{|x-y-he_i|^2} \, dy 
+  %       &= \int_{|y| < 4h} \frac{1}{|y|^2} \, dy = const.\ h \xrightarrow{h \to 0} 0
+  %     \end{align*}
+  %     \begin{align*}
+  %       \int_{|x-y-he_i| < 4h} \frac{1}{|x-y|^2} \, dy \\
+  %       &\le \int_{|x-y| \le 5h} \frac{1}{|x-y|^2} \, dy \\
+  %       &= \int_{|y| \le 5h} \frac{1}{|y|^2} \, dy ...
+  %     \end{align*}
+  %   \end{proof}
+  %   To conclude: \(f \in C_c^1(\mathbb{R}^3)\). From the Lemma:
+  %   \begin{align*}
+  %     \frac{1}{|x|} \star f \in C^1
+  %   \end{align*}
+  %   and
+  %   \begin{align*}
+  %     \partial_{x_1} \left(\frac{1}{|x|} \star f\right)
+  %     &= \frac{1}{|x|}\star\left(\partial_{x_i} f\right)
+  %   \end{align*}
+  %   \begin{align*}
+  %     \frac{1}{|x|} \star \underbrace{(\partial_{x_i}f)} \in C^1
+  %   \end{align*}
+  %   and
+  %   \begin{align*}
+  %     \partial_{x_j} \frac{1}{|x|} \star \partial_{x_i}f =  ...
+  %   \end{align*}
+  % \end{proof}
 
   \begin{thm}[Liouville's Theorem] 
     If \(u \in C^2(\mathbb{R}^d)\) is harmonic and bounded, then \(u = const.\)
@@ -1004,7 +1119,130 @@
     \begin{align*}
       \fint_{B(x, \epsilon)} |f(y) - f(x)|^p \, dy \to 0 \quad \text{ as } \epsilon \to 0
     \end{align*}
-    
   \end{cor}
+
+
+  \begin{ex}[E 2.1]
+    Let \(u \in C^2(\mathbb{R}^2)\) be convex. I.e.
+    \begin{align*}
+      t u(x) + u(y) (1-t) \ge u(tx + (1-t)y) \forall x,y \in \mathbb{R}^d \forall t \in [0,1]
+    \end{align*}
+    \begin{enumerate}[label=\alph*)]
+      \item Prove for all \(x \in \mathbb{R}^d\) that \(H(x) =  \) ...
+    \end{enumerate}
+  \end{ex}
+  
+  \begin{proof}[Solution]\
+    \begin{enumerate}[label=\alph*]
+      \item In 1D: If \(u\) is convex \(\Leftrightarrow\) \(u''(x) \ge 0\) for all \(x \in \mathbb{R}\). In general: Taylor expansion for all \(x,z \in \mathbb{R}^d\):
+      \begin{align*}
+        u(x) &= u(z) + \nabla u(z)(x-y) + \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-z)^\alpha}{\alpha!} \, ds
+      \end{align*}
+      \(x = z + s(x-z), s= 1\)
+      Use \(z = tx + (t-1)y\) \(\Rightarrow\) \(x-z = (1-t)(x-y)\)
+      \begin{align*}
+        t u(x) &= tu(z) + t\nabla u(z) (1-t)(x-y) + t\int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{\left[(1-t)(x-y)\right]^\alpha}{\alpha!} \, ds \\
+        (1-t) u(y) &= (1-t)u(z) + (1-t)\nabla u(z) t (y-x) + (1-t)\int_0^r \sum_{|\alpha| = 2} D^\alpha u(z + s(y-z)) \frac{[t(y-x)]^\alpha}{\alpha!} \, ds
+      \end{align*}
+      \begin{align*}
+        \Rightarrow t u(x) + (1-t) u(y) = u(z) + t \int_0^1 ... + (1-t) \int_0^1 ... \\
+        \Rightarrow t \int_0^1 ... + (1-t) \int_0^1 ... \ge 0 \forall x,y,t,z = tx + (1-t)y
+      \end{align*}
+      
+      \begin{align*}
+        t(1-t)^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-y)}{\alpha!} \, ds + (1-t) t^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(y-z)) \frac{(y-z)^\alpha}{\alpha!} \,ds \ge 0
+      \end{align*}
+      for all \(x,y \in \mathbb{R}^d, t \in [0,1], z = tx+ (1-t)y\). Divides for \(t(1-t)\)
+      \begin{align*}
+        (1-t) \int_0^1 \dots + + \int_0^1 \dots \ge 0
+      \end{align*}
+      Take \(t \to 0\)
+      \begin{align*}
+        \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(y + s(x-y)) \frac{(x-y)^\alpha}{\alpha!} \, ds \ge 0 \forall x,y \in \mathbb{R}^d
+      \end{align*}
+      Take \(y = x +a, a \in \mathbb{R}^d\)
+      \begin{align*}
+        \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(x +a+sa) \frac{a^\alpha}{\alpha!} \, ds \ge 0 \forall \epsilon > 0, \forall x,a \in \mathbb{R}^d
+      \end{align*}
+      Take \(\epsilon \to 0\)
+      \begin{align*}
+        \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(x) \frac{a^\alpha}{\alpha!} \ge 0 \Rightarrow \sum_{i,j = 1, i \ne j}\partial_{x_i} \partial_{x_j} u(x) a_i a_j + \sum_{i=j=1}^d \partial_{x_i}^2 u(x) \frac{a_i^2}{2}
+      \end{align*}
+      We get
+      \begin{align*}
+        \frac{1}{2} a^T Ha \ge 0 \forall a(a_i)_{i=1}^d \in \mathbb{R}^d
+      \end{align*}
+      \item \(H(x) \ge 0 \Rightarrow \left(\partial_i \partial_j u\right) \ge 0 \Rightarrow Tr H(x) \ge 0 \Rightarrow \sum_{i=1}^d \partial_{x_i}^2 u(x) \ge 0 \Rightarrow \Delta u(x) \ge 0 \forall x \in \mathbb{R}^d\)
+    \end{enumerate}
+  \end{proof}
+
+  
+  \begin{ex}[E 2.2]
+    
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Regard \(d = 3\). De function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
+    \begin{align*}
+      \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
+    \end{align*}
+    If \(|x| > r\), then \(0 \notin B(x,r + \epsilon)\). Then
+    \[y \mapsto \frac{1}{|y|}\] is harmonic in \(B(x, r  + \epsilon)\). Then by the Mean Value Property:
+    \[\fint_{\partial B(x,r)} \frac{dS(y)}{|y|} = \frac{1}{|x|}\]
+    If \(|x| < r\): Then \(\frac{1}{|y|}\) is not harmonic in \(B(x,r)\) since \(0 \in B(x,r)\). Note
+    \begin{align*}
+      \fint_{\partial B(x,r)} \frac{d S(y)}{|y|} 
+      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}
+    \end{align*}
+    This function depens on \(x\) only via \(|x|\). 
+    \begin{align*}
+      ... &= \fint_{\partial B(0,r)} \frac{dS(y)}{|Rx-Ry|}
+    \end{align*}
+    for all \(R\) rotation \(SO(3)\), \(dS(R_y) = dS(y)\)
+    \begin{align*}
+      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|Rx - y|} \\
+      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z - y|} \\
+      &= \fint_{\partial B(0, |x|)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|}\right) \, dS(y) \\
+      (\text{Fubini}) \quad &= \fint_{\partial B(0,r)} \left(\fint_{\partial B(0, |x|)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
+      (\text{case 1 since \(|y| = r > |x|\))} \quad &= \fint_{\partial B(0,r)} \left(\frac{1}{|y|}\right) \, dS(y)
+      = \frac{1}{r}
+    \end{align*}
+    If \(|x| = r\): Continuiti: \(x \mapsto \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}\)
+  \end{proof}
+
+  \begin{rem}
+    For \(f \in C^{|\alpha|}, g \in C^{|\beta|}\):
+    \begin{align*}
+      D^{\alpha + \beta}(f \star g) = (D^\alpha f)\star(D^\beta g)
+    \end{align*}
+  \end{rem}
+
+  
+  \begin{lem}
+    If \(d \ge 3\) and \(f: \mathbb{R}^d \to \mathbb{R}\) radial. Then:
+    \begin{align*}
+      \left(\frac{1}{|x|^{d-2}} \star f \right)(x) 
+      = \int_{\mathbb{R}^d} \frac{f(y)}{|x-y|^{d-2}} \, dy \\
+      = \int_{\mathbb{R}^d} \frac{f(y)}{\max(|x|^{d-2}, |y|^{d-2})}\, dy
+    \end{align*}
+  \end{lem}
+  \begin{proof}
+    (d=3) Polar coordinates:
+    \begin{align*}
+      \int_{\mathbb{R}^3} \frac{f(y)}{|x-y|}\, dy 
+      &= \int_0^{\infty} \left[\int_{\partial B(0,1)} \frac{1}{|x-rw|} \, d\omega \right] \, f(r) \, dr \\
+      (a) \quad &= \int_0^\infty \left[\int_{\partial B(0,1)} \frac{d \omega}{\max(|x|, r)}\right] f(r) \, dr \\
+      &= \int_{\mathbb{R}^3} \frac{f(y)}{\max(|x|, |y|)} \, dy
+    \end{align*}
+    (b) (d=3) If \(f\) radial and non-negative
+    \begin{align*}
+      \int_{\mathbb{R}^3} \frac{f(y))}{|x-y|} &= \int_{\mathbb{R}^3} \frac{f(y)}{|x|} \, dy = \frac{(Sf?)}{|x|}
+    \end{align*}
+    Then
+    \begin{align*}
+      \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x-z_1)f_2(y-z_2)}{|x-y|} \, dx \, dy &= \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x) f_2(y)}{|x+ z_1 - y - z_2} \, dx \, dy \\
+      &= \int_{\mathbb{R}^3} \left(\int_{\mathbb{R}^3} f_1(x) \, dx \right) f_2(y) \, dy \le \int_{\mathbb{R}^3} \frac{\left(\int_{\mathbb{R}^3} f_1\right)}{|y + z_2 - z_1|} f_2(y) \, dy \\
+      &\le \frac{(\int_{\mathbb{R}^3} f_1)(\int_{\mathbb{R}^3} f_2)}{|z_1 - z_2|}
+    \end{align*}
+  \end{proof}
 \end{document}
- 
