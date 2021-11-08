@@ -48,6 +48,7 @@
 
 \renewcommand\div{\operatorname{div}}
 \newcommand{\dist}{\operatorname{dist}}
+\newcommand{\four}{\mathcal{F}}
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\Rd}{\mathbb{R}^d}
 \renewcommand\qedsymbol{\(\blacksquare\)}
@@ -1195,7 +1196,7 @@
       \fint_{\partial B(x,r)} \frac{d S(y)}{|y|} 
       &= \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}
     \end{align*}
-    This function depens on \(x\) only via \(|x|\). 
+    This function depends on \(x\) only via \(|x|\). 
     \begin{align*}
       ... &= \fint_{\partial B(0,r)} \frac{dS(y)}{|Rx-Ry|}
     \end{align*}
@@ -1203,12 +1204,12 @@
     \begin{align*}
       &= \fint_{\partial B(0, r)} \frac{dS(y)}{|Rx - y|} \\
       &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z - y|} \\
-      &= \fint_{\partial B(0, |x|)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|}\right) \, dS(y) \\
+      \text{(Radial in z)} \quad &= \fint_{\partial B(0, |x|)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|}\right) \, dS(z) \\
       (\text{Fubini}) \quad &= \fint_{\partial B(0,r)} \left(\fint_{\partial B(0, |x|)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
-      (\text{case 1 since \(|y| = r > |x|\))} \quad &= \fint_{\partial B(0,r)} \left(\frac{1}{|y|}\right) \, dS(y)
+      (\text{case 1 since \(|y| = r > |x|\))} \quad &= \fint_{\partial B(0,r)} \frac{1}{|y|} \, dS(y)
       = \frac{1}{r}
     \end{align*}
-    If \(|x| = r\): Continuiti: \(x \mapsto \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}\)
+    If \(|x| = r\): Continuity: \(x \mapsto \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}\)
   \end{proof}
 
   \begin{rem}
@@ -1249,9 +1250,8 @@
 
   
   \begin{ex}[Bonus 2]
-    Consider \(u(x) = \frac{1}{|x|}\) in \(\mathbb{R}^d\). 
-    \begin{enumerate}
-      \item Prove that \(u\) is sub-harmonic in \(\mathbb{R}^2 \setminus \{0\}\). 
+    \begin{enumerate}[label=\alph*)]
+      \item Prove that \(u(x) = \frac{1}{|x|}\) is sub-harmonic in \(\mathbb{R}^2 \setminus \{0\}\). 
       \item Prove that if \(f: \mathbb{R}^2 \to \mathbb{R}\) radial, non-negative, measurable:
       \begin{align*}
         \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy \ge \int_{\mathbb{R}^2} \frac{f(y)}{\max(|x|, |y|)} \, dy
@@ -1259,62 +1259,134 @@
     \end{enumerate}
   \end{ex}
 
+  \begin{proof}[My Solution]
+    \begin{enumerate}[label=\alph*)]
+      \item Let \(x \in \mathbb{R} \setminus \{0\}\).
+      \begin{align*}
+        \partial_{x_i} u &= \partial_{x_i} |x|^{-1} = - |x|^{-2} \frac{x_i}{|x|} = -x_i |x|^{-3} \\
+        \Rightarrow \ \partial_{x_i}^2 u &= \partial_{x_i} (-x_i |x|^{-3}) = -|x|^{-3} + 3x_i^2 |x|^{-5} \\
+        \Rightarrow \ \Delta u &= - |x|^{-3} + 3x_1^2 |x|^{-5} - |x|^{-3} + 3x_2^2 |x|^{-5} \\
+        &= - 2 |x|^{-3} + 3 \underbrace{(x_2^2 + x_2^2)}_{= |x|^2} |x|^{-5} = \frac{1}{|x|^3} > 0
+      \end{align*}
+      So \(u\) is sub-harmonic in \(\mathbb{R}^2\setminus \{0\}\).
+
+      \item Let \(r > 0, x \in \mathbb{R}^2\) and \(|x| < r\). First we show that
+      \begin{align*}
+        \fint_{\partial B(x, r)} \frac{1}{|y|} \, dS(y) \ge \frac{1}{r} \qquad (\star)
+      \end{align*}
+      Now, 
+      \begin{align*}
+        \fint_{\partial B(0, r)} \frac{1}{|y|} \, dS(y)
+        &= \fint_{\partial B(0, r)} \frac{1}{|x-y|} dS(y) \eqqcolon \tilde u(x)
+      \end{align*}
+      Take \(z \in \mathbb{R}^2 \setminus \{0\}\) such that \(z = |x|\), then \(\tilde u(x) = \tilde u(z)\). Let \(0 < \epsilon < r\) be small. Then we get
+      \begin{align*}
+        \tilde u(z) 
+        &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|} \\
+        \left(\begin{aligned}|y| = r > |x| = |z| \\ \tilde u \text{ radial function} \end{aligned}\right)
+        \quad &= \fint_{\partial B(0, |x|-\epsilon)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|} \, \right) \, dS(z) \\
+        \text{(Fubini)} \quad &= \fint_{\partial B(0, r)} \left(\fint_{\partial B(0, |x|-\epsilon)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
+        &= \fint_{\partial B(0, r)} \left(\fint_{\partial B(y, |x|-\epsilon)} \frac{dS(z)}{|z|}\right) \, dS(y) \\
+        \left(\frac{1}{|y|} \text{ sub-harmonic in } \mathbb{R}^2\setminus \{0\}\right) 
+        \quad &\ge \fint_{\partial B(0, r)} \frac{1}{|y|} \, dS(y) \\
+        &= \fint_{\partial B(0, r)} \frac{1}{r} \, dS(y) \\
+        &= \frac{1}{r}
+      \end{align*}
+      Now, 
+      \begin{align*}
+        \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy &= \int_{|x| \ge |y|} \frac{f(y)}{|x-y|} \, dy + \int_{|x| < |y|} \frac{f(y)}{|x-y|} \, dy,
+      \end{align*}
+      where
+      \begin{align*}
+        \int_{|x| \le |y|} \frac{f(y)}{|x-y|} \, dy &= \int_0^\infty \int_{\partial B(0, r)} \frac{f(y)}{|x-y|} \mathbb{1}(|x| \le |y|) \, dS(y)  \, dr \\
+        (f \text{ radial}) \quad &= \int_0^\infty f(r) \int_{\partial B(0,r)} \frac{\mathbb{1}(|x| \le r)}{|x-y|} \, dS(y) \, dr \\
+        &= \int_0^\infty f(r) \int_{\partial B(x,r)} \frac{\mathbb{1}(|x| \le r)}{|y|} \, dS(y) \, dr \\
+        (\star) \quad &\ge \int_0^\infty  \frac{f(r)}{r} |\partial B(x, r)| \mathbb{1}(|x| \le r) \, dr \\
+        &= \int_0^\infty \int_{\partial B(x, r)} \frac{f(r)}{r} \mathbb{1}(|x| \le r) \, dS(y) \, dr \\
+        &= \int_{\mathbb{R}^2} \frac{f(y)}{|y|}\mathbb{1}(|x| \le |y|) \, dy \\
+        &= \int_{|x| \le |y|} \frac{f(y)}{|y|} \, dy
+      \end{align*}
+      and
+      \begin{align*}
+        \int_{|x| > |y|} \frac{f(y)}{|x-y|} \, dy 
+        &= \int_0^\infty \left(\int_{\partial B(0, r)} \frac{f(r)}{|x-y|}\mathbb{1}(|x| > |y|) \, dS(y)\right) \, dr \\
+        (f \text{ radial}) \quad &= \int_0^\infty f(r) \mathbb{1}(|x| > r)\left(\int_{\partial B(x,r)} \frac{1}{|y|} \, dS(y)\right) \, dr \\
+        \left(\begin{aligned}
+          \frac{1}{|y|} \text{ sub-harmonic in \(\mathbb{R}^2\),} \\ \text{MVP and } |x| > r
+        \end{aligned}\right)
+         \quad 
+        &\ge \int_0^\infty f(r) \mathbb{1}(|x| > r)|\partial B(x,r)|\frac{1}{|x|} \, dr \\
+        &= \int_0^\infty \int_{\partial B(x,r)} f(r) \mathbb{1}(|x| > r) \frac{1}{|x|} \, dS(y) \, dr \\
+        &= \int_{\mathbb{R}^2} f(y) \mathbb{1}(|x| > |y|) \frac{1}{|x|} \, dy \\
+        &= \int_{|x| > |y|} f(y) \frac{1}{|x|} \, dy.
+      \end{align*}
+
+      So we can conclude, 
+      \begin{align*}
+        \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy &= \int_{|x| > |y|} \frac{f(y)}{|x-y|} \, dy + \int_{|x| \le |y|} \frac{f(y)}{|x-y|} \, dy \\
+        &\ge \int_{|x| > |y|}  \frac{f(y)}{|x|} \, dy + \int_{|x| \le |y|} \frac{f(y)}{|y|} \, dy \\
+        &= \int_{\mathbb{R}^2} \frac{f(y)}{\max(|x|, |y|)} \, dy \qedhere
+      \end{align*}
+    \end{enumerate}
+  \end{proof}
+
   
   \begin{defn}[Fourier Transform]
-    
+    For \(f \in L^1(\mathbb{R}^d)\) define
+    \[\four f(k) = \hat f(k) = \int_{\mathbb{R}^d} f(x) e^{- 2 \pi i k \cdot x} \, dx, \quad k\cdot x = \sum_{i=1}^d k_i x_i\]
   \end{defn}
 
   
   \begin{thm}[Basic Properties]
     \begin{enumerate}
-      % \item If \(f \in L^1(\mathbb{R}^d)\), then \(\hat f \in L^\infty(\mathbb{R}^d)\) and \(\|\hat f \|\_{L^\infty} = \|L\|_{L^?})\)
-      \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(F\) can be extendet to be a unitary transforamtion \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
-      % \item \[\|F g\|_{L^2} = \|f\|_{L^2} \quad \forall f \in L^2(Á\mathbb{R}^d)\]
-      % \item The inverse of \(F\) can be depied as
-      % \item \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
-      \item \(\widehat{D^\alpha f}(k) = (2 \pi i k)^\alpha \hat f(k)\) as laj as \((2 \pi ik)^k f(k) \in L^2(\mathbb{R}^d)\) (\(k^\alpha = k_1^{alpha_1} \cdots k_\alpha^{\alpha_k}\))
+      \item If \(f \in L^1(\mathbb{R}^d)\), then \(\hat f \in L^\infty(\mathbb{R}^d)\) and \(\| \hat f \|_{L^\infty} \le \|f\|_{L^1}\)
+      \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(\four\) can be extended to be a unitary transforamtion \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
+      \[\|\four g\|_{L^2} = \|f\|_{L^2} \quad \forall f \in L^2(\mathbb{R}^d)\]
+      \item The inverse of \(F\) can be defined as
+      \item \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
+      \item \(\widehat{D^\alpha f}(k) = (2 \pi i k)^\alpha \hat f(k)\) as \((2 \pi ik)^\alpha f(k) \in L^2(\mathbb{R}^d)\) (\(k^\alpha = k_1^{\alpha_1} \cdots k_\alpha^{\alpha_k}\))
       \item (Formel) \(\widehat{f + g}(k) = \hat f(k) \hat g (k)\) if \(f,g\) are nice enough.
     \end{enumerate}
   \end{thm}
 
   \begin{thm}[Hausdorff-Young-Inequality]
-    If \(1 \le p \le 2\) and \(\frac{1}{p} + \frac{1}{p'} = 1\), then
-    \[F: \quad L^P(\mathbb{R}^d) \to L^p(\mathbb{R}^d)\]
+    If \(1 \le p \le 2\), \(\frac{1}{p} + \frac{1}{p'} = 1\) and \(f \in L^p(\mathbb{R}^d) \cap L^1(\mathbb{R}^n)\) then
+    \[\| \hat f \|_{L^{p'}} \le \|f\|_{L^p}\]
     and 
     \[\|\hat f\|_{L^p} \le \|f\|_{L^p} \quad \forall f \in L^p(\mathbb{R}^d)\]
   \end{thm}
   
-  \begin{rem}
-    If \(1 \le p \le 2\) and \(f \in L^p(\mathbb{R}^d)\) we can write \(f = f_1 + f_2\) when \(f_1 \in L^1\), \(f_2 \in L^2\), e.g.
-    \begin{align*}
-      f = \underbrace{f \mathbb{1}(|f| \ge 1)}_{f_1} + \underbrace{f \mathbb{1}(|f| < 1)}_{f_2}
-    \end{align*}
-    \begin{align*}
-      \int_{\mathbb{R}^d} |f_2|^2 \, dy &= \int_{\mathbb{R}^d}|f|^2 \mathbb{1}(|f| < 1) \le \int_{\mathbb{R}^d} |f|^p \, dy < \infty \\
-      \int_{\mathbb{R}^d} |f_1| = \int_{\mathbb{R}^d} |f| \mathbb{1}(|f| \ge 1) \le \int_{\mathbb{R}^d} |f|^p < \infty
-    \end{align*}
-    thus we can define \(\hat f = \hat f_1 + \hat f_2\) well defined in \(L^\infty(\mathbb{R}^d) + L^2(\mathbb{R}^d)\) what it in unclear why \(\hat f \in L^q\)?
-    Proof of HY inequality. Weee nedd Riez-Theorem interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
+  % \begin{rem}
+  %   If \(1 \le p \le 2\) and \(f \in L^p(\mathbb{R}^d)\) we can write \(f = f_1 + f_2\) when \(f_1 \in L^1\), \(f_2 \in L^2\), e.g.
+  %   \begin{align*}
+  %     f = \underbrace{f \mathbb{1}(|f| \ge 1)}_{f_1} + \underbrace{f \mathbb{1}(|f| < 1)}_{f_2}
+  %   \end{align*}
+  %   \begin{align*}
+  %     \int_{\mathbb{R}^d} |f_2|^2 \, dy &= \int_{\mathbb{R}^d}|f|^2 \mathbb{1}(|f| < 1) \le \int_{\mathbb{R}^d} |f|^p \, dy < \infty \\
+  %     \int_{\mathbb{R}^d} |f_1| \, dy &= \int_{\mathbb{R}^d} |f| \mathbb{1}(|f| \ge 1) \le \int_{\mathbb{R}^d} |f|^p < \infty
+  %   \end{align*}
+  %   thus we can define \(\hat f = \hat f_1 + \hat f_2\) well defined in \(L^\infty(\mathbb{R}^d) + L^2(\mathbb{R}^d)\) what it in unclear why \(\hat f \in L^q\)?
+  %   Proof of HY inequality. Weee nedd Riez-Theorem interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
     % \[T: L^{p_0}(\Omega} + L^{p_1})(\Omega) \longrightarrow L^{q_0}(\Omega} + L^{q_1})(\Omega)\]
-    is a linear operator and
-    \begin{align*}
-      T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for } i = 0, 1.
-      \text{ Then } T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for any } 0 < \theta < 1, where \begin{cases}
-        \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} \\
-        \frac{1}{q_0} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1}
-      \end{cases}
-    \end{align*}
-    Consider the Foureir Transform:
-    \begin{align*}
-      F: L^1 + L^1 \to L^2 + L^\infty 
-    \end{align*}
-    and
-    \begin{align*}
-      \|F\|_{L^1 \to L^\infty} \le 1 \text{ as } \|\hat f\|_{L^\infty} \le \|f\|_{L^1} \forall f p \in L^1 \\
-      \|F\|_{L^2 \to L^2} = 1 \text{ as } \| \hat f \|_{L^2} = \|f\|_{L^2} \forall f \in L^2 \\
-      \Rightarrow \|F\|_{L^{p_0} \to L^{p_t}} \le 1 \forall \theta \in (0,1)
-    \end{align*}
-    \(p_0 = 1, p_1 = 2, q_0 = \infty, q_1 = 2\)
+    % is a linear operator and
+    % \begin{align*}
+    %   T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for } i = 0, 1.
+    %   \text{ Then } T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for any } 0 < \theta < 1, where \begin{cases}
+    %     \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} \\
+    %     \frac{1}{q_0} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1}
+    %   \end{cases}
+    % \end{align*}
+    % Consider the Foureir Transform:
+    % \begin{align*}
+    %   F: L^1 + L^1 \to L^2 + L^\infty 
+    % \end{align*}
+    % and
+    % \begin{align*}
+    %   \|F\|_{L^1 \to L^\infty} \le 1 \text{ as } \|\hat f\|_{L^\infty} \le \|f\|_{L^1} \forall f p \in L^1 \\
+    %   \|F\|_{L^2 \to L^2} = 1 \text{ as } \| \hat f \|_{L^2} = \|f\|_{L^2} \forall f \in L^2 \\
+    %   \Rightarrow \|F\|_{L^{p_0} \to L^{p_t}} \le 1 \forall \theta \in (0,1)
+    % \end{align*}
+    % \(p_0 = 1, p_1 = 2, q_0 = \infty, q_1 = 2\)
     % \begin{align*}
     %   \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} = \theta + \frac{1 - \theta}{2} = \frac{1 + \theta}{2} \\
     %   \frac{1}{q_\theta} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1} = \frac{1 - \theta}{2} \\
@@ -1323,34 +1395,36 @@
     % Thus: Let \(1 \le p,q,r \le 2\) s.t. \(\frac{1}{p} + \frac{1}{a} = 1 + \frac{1}{r}}\)
     % Let \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\). Recall \(f \star g \in L^r(\mathbb{R}^d)\) by Young. We have
     % \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \text{ a.e. k \in \mathbb{R}^d}\]
+  
     
-    \begin{ex}
-      Hint: first \(f,g \in C_c(\mathbb{R}^d)\) then use a density arugment)
-    \end{ex}
+    % \begin{ex}
+    %   Hint: first \(f,g \in C_c(\mathbb{R}^d)\) then use a density arugment)
+    % \end{ex}
 
     % \begin{align*}
     %   \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
     %   = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \left(f(x-y) e^{- 2 \pi i k(x-y)}\right) (g(y)) e^{- 2 \pi i k y}) \, dx \, dy \\
     %   &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} (f(x-y) e^{- 2 \pi i k (x-y)} \, dy)\right) (g(y) e^{ - 2 \pi i k y}) \, dy = \hat f(k) \hat g(k)
     % \end{align*}
-    We want to deque the Fourier transform for singular function, e.g. \(\frac{1}{|x|}\). Poisson:
-    \begin{align*}
-      - \Delta u = f \text{ in } \mathbb{R}^d \\
-      \Rightarrow | 2 \pi k|^2 \hat u (k) = \hat f(k) \\
-      \Rightarrow \hat u(k) = \frac{1}{|2 \pi k|^2} \hat f(k) 
-    \end{align*}
-    If we can find \(G\) s.t. \(\hat G(k)  = \frac{1}{|2 \pi k|^2}\), then
-    \begin{align*}
-      \hat u(k) = \hat G(k) \hat f(k) = \widehat{G \star f} \\
-      \Rightarrow u(x) = (G \star g) (x) = \int_{\Rd} G(x-y)f(y)\, dy
-    \end{align*}
-    In fact \(G\) is the fundamential solution of laplace quation.
+    \begin{rem}
+      We want to apply the Fourier transform to find the solution of a PDE, e.g. the Poisson-Equation:
+      \begin{align*}
+        - \Delta u = f \text{ in } \mathbb{R}^d
+        \Rightarrow | 2 \pi k|^2 \hat u (k) = \hat f(k)
+        \Rightarrow \hat u(k) = \frac{1}{|2 \pi k|^2} \hat f(k) 
+      \end{align*}
+      If we can find \(G\) s.t. \(\hat G(k)  = \frac{1}{|2 \pi k|^2}\), then
+      \begin{align*}
+        \hat u(k) &= \hat G(k) \hat f(k) = \widehat{G \star f} \\
+        \Rightarrow u(x) &= (G \star f) (x) = \int_{\Rd} G(x-y)f(y)\, dy
+      \end{align*}
+      In fact \(G\) is the fundamential solution of laplace quation.
   \end{rem}
 
   
   \begin{thm}[Fourier Transform of \(\frac{1}{|x|^\alpha}\) for \(0 < \alpha < d\)] We have formally
     \begin{align*}
-      \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \quad \forall 0 < \alpha < d
+      \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \quad \forall\ 0 < \alpha < d
     \end{align*}
     Here
     \begin{align*}
@@ -1358,7 +1432,7 @@
     \end{align*}
     More precisely, for all \(f \in C_c^\infty(\mathbb{R}^d)\), 
     \begin{align*}
-      \frac{c_\alpha}{|x|^\alpha}\star f = \left(\frac{c_{d-\alpha}}{|k|^{d + \alpha}} \hat f (k)\right)^\lor
+      \frac{c_\alpha}{|x|^\alpha}\star f = \left(\frac{c_{d-\alpha}}{|k|^{d - \alpha}} \hat f (k)\right)^\lor
     \end{align*}
     Moreover if \(\alpha > \frac{d}{2}\), then we also have
     \begin{align*}
@@ -1368,14 +1442,14 @@
 
 
   \begin{rem}
-    If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) 
-    Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \hat{\tilde f_1} + \hat{\tilde f_2} \in L^1 \cap \L^2\)?
-    In fact:
-    \begin{align*}
-      f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
-      \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
-      \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
-    \end{align*}
+    If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) \\
+    % Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_2}} \in L^1 \cap \L^2\)?
+    % In fact:
+    % \begin{align*}
+    %   f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
+    %   \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
+    %   \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
+    % \end{align*}
   \end{rem}
 
   
@@ -1436,18 +1510,22 @@
       \int_{\mathbb{R}^d} \left| \frac{c_\alpha}{|x|^\alpha} \star f \right|^2 \le c + \int_{|x| \ge R} \frac{c}{|x|^{2d}} \, dx < \infty 
     \end{align*}
     Thus the Fourier Transform \(\widehat{\frac{c_\alpha}{|x|^\alpha}} \star f\) exists. Combining with 
-    \begin{align*}
-      \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f (k) \right)^\check \\
-      \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
-    \end{align*}
+    % \begin{align*}
+    %   \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f (k) \right)^\check \\
+    %   \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
+    % \end{align*}
   \end{proof}
 
   
   \begin{rem}
     If \(d \ge 3\)
     \begin{align*}
-      \hat G(k) = \frac{1}{|2 \pi k|^2}  \\
-      \Rightarrow G(x) = \left(\frac{1}{|2 \pi k|^2}\right)^\check = \frac{1}{d(d-2(k) |x|^{d-2})} = fundamential solution of laplace
+      \hat G(k) 
+      &= \frac{1}{|2 \pi k|^2}  \\
+      \Rightarrow G(x) 
+      &= \left(\frac{1}{|2 \pi k|^2}\right)^\lor
+      = \frac{1}{d(d-2(k) |x|^{d-2})} 
+      = \Phi(x)
     \end{align*}
   \end{rem}
 
