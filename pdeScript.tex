@@ -1345,7 +1345,7 @@
       \item The inverse of \(F\) can be defined as
       \item \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
       \item \(\widehat{D^\alpha f}(k) = (2 \pi i k)^\alpha \hat f(k)\) as \((2 \pi ik)^\alpha f(k) \in L^2(\mathbb{R}^d)\) (\(k^\alpha = k_1^{\alpha_1} \cdots k_\alpha^{\alpha_k}\))
-      \item (Formel) \(\widehat{f + g}(k) = \hat f(k) \hat g (k)\) if \(f,g\) are nice enough.
+      \item \(\widehat{f \star g}(k) = \hat f(k) \hat g (k)\) if \(f,g\) are nice enough.
     \end{enumerate}
   \end{thm}
 
@@ -1825,7 +1825,7 @@
       \item \((-\Delta)^N f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \widehat{(-\Delta)^N f} \in L^\infty\)
     \end{enumerate}
     Conclusion: \(\hat f(k) \le \begin{cases}
-      C \forall k \\ \frac{C_N}{|k|^{2N} \forall k}
+      C &\forall k \\ \frac{C_N}{|k|^{2N}} &\forall k
     \end{cases}\)
     So \(\hat f(k) \le \frac{C_N}{(1+|k|)^N}\)
   \end{proof}
@@ -1837,15 +1837,50 @@
   \begin{proof}
     Siehe Goodnotes
   \end{proof}
-
   
   \begin{ex}[Bonus 3]
     Let \(f \in L^1(\mathbb{R}^d)\) such that
     \[|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\]
-    for all \(k \in \mathbb{R}^d\), for all \(N \ge 1\). (\(C_n\) is independent of \(k\)). Prove that \(f \in C^\infty(\mathbb{R}^d)\)
+    for all \(k \in \mathbb{R}^d\), for all \(N \ge 1\). (\(C_N\) is independent of \(k\)). Prove that \(f \in C^\infty(\mathbb{R}^d)\)
   \end{ex}
   (\(f \in C^\infty\)) i.e. \(\exists \tilde f \in C^\infty\) s.t. \(f = \tilde f\) a.e.
 
+  \begin{proof}[My Solution]
+    First we regard for \(N \in \mathbb{N}\) and \(|k| \ge 1\):
+    \begin{align*}
+      \int_{\mathbb{R}^d} \frac{1}{(1 + |k|)^N} \, dk 
+      &= \int_0^\infty \left(\int_{\partial B(0, r)} \frac{1}{(1+r)^N} \, dS(y)\right) \, dr \\
+      &= \int_0^\infty \frac{1}{(1+r)^N} |\partial B(0, r)| \, dr \\
+      &\le \int_1^\infty \frac{1}{r^N} \underbrace{|\partial B(0,r)|}_{c r^{d-1}} \, dr \quad \text{for a } c \in \mathbb{R} \\
+      &= c \int_1^\infty \frac{1}{r^{N-d+1}} \, dr
+    \end{align*}
+    From Ana I we know that \(\int_1^\infty \frac{1}{r^{N-d+1}} \, dr < \infty\) is equivalent to \(N-d+1 > 1\) \(\Leftrightarrow\) \(N > d\), so for \(N > d\) we have 
+    \[\frac{1}{(1+|k|)^N} \in L^1(\mathbb{R}^d).\]
+    Now let \(\alpha \in \mathbb{N}^d\), then we have
+    \begin{align*}
+      k^\alpha 
+      = k_1^{\alpha_1} \cdots k_d^{\alpha_d}
+      = |k|^{\alpha_1} \cdots |k|^{\alpha_d}
+      = |k|^{\alpha_1 + \cdots + \alpha_d}
+      = |k|^{|\alpha|}
+      = (1 + |k|)^{|\alpha|}.
+    \end{align*}
+    By assumption we have for all \(N \ge 1\):
+    \begin{align*}
+      k^\alpha \hat f(k) 
+      \le k^\alpha \frac{C_n}{(1 + |k|)^N}
+      \le (1 + |k|)^{|\alpha|} \frac{C_n}{(1 + |k|)^N}
+      = \frac{C_n}{(1 + |k|)^{N - |\alpha|}}
+    \end{align*}
+    If we set \(N\) such that \(N - |\alpha| > d\), for example \(N = d + |\alpha| + 1\), then we can conclude that \(k^\alpha \hat f \in L^1(\mathbb{R}^d)\). This implies \(\widehat{k^\alpha \hat f} \in L^\infty(\mathbb{R}^d)\), so
+    \begin{align*}
+      \widehat{k^\alpha \hat f} (k)
+      = \partial^\alpha \widehat{\hat f}(k)
+      = \partial^\alpha (\hat f)^\lor (-k)
+      = \partial^\alpha f(-k) \in L^\infty(\mathbb{R}^d).
+    \end{align*}
+    This implies \(f \in C^\infty(\mathbb{R}^d)\).
+  \end{proof}
   
   \begin{thm}
     Take \(T \in D'(\mathbb{R}), f \in C_c^\infty(\mathbb{R}^d) = D(\mathbb{R}^d)\), \(f_y(x) = f(x-y)\)
@@ -1941,7 +1976,6 @@
       \[\int g(y) T(f_n) \, dy = T(g \star f)\]
     \end{enumerate}
   \end{proof}
-
   
   \begin{thm}
     Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(T \i D'(\Omega)\) and \(f \in C_c^\infty(\Omega)\). Denote
@@ -1952,7 +1986,6 @@
       \[\int_\Omega g(y) T(f_y) \, dy = T(f \star g)\]
     \end{enumerate}
   \end{thm}
-
   
   \begin{thm}
     Let \(T \in D'(\Omega)\) s.t. \(\nabla T = 0\) in \(D'(\Omega)\). Then: \(T = const.\) in \(\Omega\).
