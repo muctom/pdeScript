@@ -918,7 +918,7 @@
 
   \chapter{Convolution, Fourier Transform and Distributions}
 
-
+  \section{Convolutions}
   \begin{defn}[Convolution]
     Let \(f, g: \mathbb{{R}^d \to \mathbb{R}}\) or \(\mathbb{C}\).
     \begin{align*}
@@ -1330,7 +1330,7 @@
     \end{enumerate}
   \end{proof}
 
-  
+  \section{Fourier Transformation}
   \begin{defn}[Fourier Transform]
     For \(f \in L^1(\mathbb{R}^d)\) define
     \[\four f(k) = \hat f(k) = \int_{\mathbb{R}^d} f(x) e^{- 2 \pi i k \cdot x} \, dx, \quad k\cdot x = \sum_{i=1}^d k_i x_i\]
@@ -1440,18 +1440,16 @@
     \end{align*}
   \end{thm}
 
-
-  \begin{rem}
-    If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) \\
-    % Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_2}} \in L^1 \cap \L^2\)?
-    % In fact:
-    % \begin{align*}
-    %   f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
-    %   \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
-    %   \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
-    % \end{align*}
-  \end{rem}
-
+  % \begin{rem}
+  %   If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) \\
+  %   Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_2}} \in L^1 \cap \L^2\)?
+  %   In fact:
+  %   \begin{align*}
+  %     f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
+  %     \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
+  %     \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
+  %   \end{align*}
+  % \end{rem}
   
   \begin{lem}[Fourier Transform of Gaussians] In \(\Rd\),
     \[\widehat{e^{- \pi |x|^2}} = e^{- \pi |k|^2}\]
@@ -1485,7 +1483,6 @@
       \frac{1}{|k|^{d-\alpha}} |\hat f(k)| \mathbb{1}(k >1) \le |\hat f(k)| \in L^2(\Rd, dK) \text{ as } f \in L^2(\Rd)
     \end{align*}
 
-    
     \begin{lem}
       If \(f \in C_c^\infty(\Rd)\), then \(\hat f \in L^1(\mathbb{R}^d)\)
     \end{lem}
@@ -1510,12 +1507,11 @@
       \int_{\mathbb{R}^d} \left| \frac{c_\alpha}{|x|^\alpha} \star f \right|^2 \le c + \int_{|x| \ge R} \frac{c}{|x|^{2d}} \, dx < \infty 
     \end{align*}
     Thus the Fourier Transform \(\widehat{\frac{c_\alpha}{|x|^\alpha}} \star f\) exists. Combining with 
-    % \begin{align*}
-    %   \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f (k) \right)^\check \\
-    %   \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
-    % \end{align*}
+    \begin{align*}
+      \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f(k) \right)^\lor \\
+      \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
+    \end{align*}
   \end{proof}
-
   
   \begin{rem}
     If \(d \ge 3\)
@@ -1529,7 +1525,502 @@
     \end{align*}
   \end{rem}
 
+  \section{Theory of Distribution}
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open.
+  \begin{itemize}
+    \item \(D(\Omega) = C_c^\infty(\Omega)\) the space of test functions.
+    \item \(\phi_n \to \phi\) in \(D(\Omega)\) if \(\exists K \subseteq \Omega\), \(\supp(\phi_n), \supp(\phi) \subseteq K\) and \(\|D^\alpha(\phi_n - \phi)\|_{L^\infty} \to 0\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\), \(d_i \in \{0, 1, 2, \dots\}\).
+    \[D'(\Omega) = \{T: D(\Omega) \to \mathbb{R} \text{ on } \mathbb{C} \text{ linear and continuous}\}\] the space of distributions.
+  \end{itemize}
+
+  Motivation: \(L^2(\Omega)' = L^2(\Omega)\), \((L^p(\Omega))' = (L^q(\Omega))\), \(\frac{1}{p} + \frac{1}{q} = 1\).
 
 
+  \begin{eg}["normal functions" are distributions]
+    If \(f \in L_{loc}^1(\Omega)\), then \(T = T_f\) defined by:
+    \[T(\phi) = \int_{\Omega} f(x) \phi(x) \, dx \quad \forall \phi \in D(\Omega)\]
+    is a distribution, i.e. \(T \in D'(\Omega)\). Indeed, it is clear that \(T(\phi)\) is well-defined for all \(\phi \in D(\Omega)\) and \(\phi \mapsto T(\phi)\) is linear. Let us check that \(\phi \mapsto T(\phi)\) is continuous. Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove that \(T(\phi_n) \to T(\phi)\). Since \(\phi_n \to \phi\) in \(D(\Omega)\), there is a compact \(K\) s.t. \(\supp(\phi_n), \supp(\phi) \subseteq K \subseteq \Omega\).
+  \end{eg}
 
+  Question: Why is \(f \mapsto T_f\) injective?
+
+  \begin{lem}[Fundamental lemma of calculus of variants]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. If \(f, g \in L_{loc}^1(\Omega)\) and 
+    \(\int_\Omega f \phi = \int_{\Omega} g \phi\) for all \(\phi \in D(\Omega) \), then \(f = g\) in \(L_{loc}^1(\Omega)\)
+  \end{lem}
+
+  % \begin{proof}
+  %   By the linearity, it suffices to show that if \(f \in L_{loc}^1(\Omega)\) and \(\int_\Omega f \phi = 0\) for all \(\phi \in D(\Omega)\), then \(f = 0\).
+  %   \begin{enumerate}[label=Step \arabic*)]
+  %     \item (\(\Omega = \mathbb{R}^d\) and \(f \in L^1(\mathbb{R}^d)\))Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\) for all \(\epsilon > 0\). Then \(h_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\) as \(\epsilon \to 0\). On the other hand: \[h_\epsilon \star f(x) = \int_{\mathbb{R}^d} f(y) \underbrace{h_\epsilon(x-y)}_{\phi_{\epsilon, x}(y)} \, dy = 0\] as \(\phi_{\epsilon, x} \in C_c^\infty\).
+  %     \item (\(\Omega \subseteq \mathbb{R}^d, f \in L_{loc}^1(\Omega)\)) For any \(\epsilon > 0\), 
+  %     \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \Omega^\complement) > \epsilon\}\]
+  %     Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\supp f \subseteq \{|x| \le 1\}\) and \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\). Then for all \(g \in C_c^\infty(\Omega_\epsilon)\) for all \(\epsilon > 0\) small we have 
+  %     \begin{align*}
+  %       h_\epsilon \star (gf)(x) 
+  %       &= \int_{\mathbb{R}^d} \underbrace{h_\epsilon(x-y) g(y)}_{\phi_{\epsilon, x}(y)}f(y) \, dy = 0 \quad \text{as } \phi_{\epsilon, x} \in C_c^\infty(\Omega)
+  %     \end{align*}
+  %     but ...
+  %   \end{enumerate}
+  % \end{proof}
+  
+  \begin{eg}[Dirac delta function]
+    Let \(\Omega \subseteq \mathbb{R}^d\) open. Define \(T: D(\Omega) \to \mathbb{R}\) or \(\mathbb{C}\) by \(T(\phi) = \phi(x_0)\). Let \(x_0 \in \Omega\). Then \(T \in D'(\Omega)\) and we denote it by \(\delta_{x_0}\). It is clear that \(\phi \mapsto T(\phi) = \phi(x_0)\) is well-defined and linear for all \(\phi \in D(\Omega)\). Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove \(T(\phi_n) \to T(\phi)\), i.e. \(\phi_n(x_0) \to \phi(x_0)\) (obvious.)
+  \end{eg}
+
+  \begin{eg}[Principle Value]
+    The function \(f(x) = \frac{1}{x}\) is not in \(L_{loc}^1(\mathbb{R})\), but we can still define
+    \[\int_{\mathbb{R}} f \phi = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \(|\phi(x)| = |\phi(x)-\phi(0)| \le (\sup |\phi'|)|x|\), so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supportet. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
+    Define \(T: D(\mathbb{R}) \to \mathbb{R}\) or \(\mathbb{C}\) by \begin{align*}
+      T(\phi) 
+      &= \lim_{\epsilon \to 0} \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \quad \forall \phi \in D(\mathbb{R}) \text{ s.t. } \phi(0) = 0
+    \end{align*}
+    We denote \(T = p.v. \left(\frac{1}{x}\right)\). Check that \(T \in D'(\mathbb{R}: \) For all \(\epsilon > 0, \) \(\left|\frac{\phi(x)}{x} \right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\) for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
+    \begin{align*}
+      \mathbb{1}(|x| \ge \epsilon)\frac{\phi(x)}{x} \in L^1(\mathbb{R}) \leadsto \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \text{ finite.}
+    \end{align*}
+    We can write:
+    \begin{align*}
+      \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx = \int_{|x| \ge 1} \frac{\phi(x)}{x} \, dx + \int_{\epsilon \le |x| \le 1} \frac{\phi(x)}{x}\, dx
+    \end{align*}
+    The second part can be written as:
+    \begin{align*}
+      \int_{\epsilon \le |x| \le 1} \frac{\phi(x)}{x} \, dx
+      &= \int_{\epsilon} \frac{\phi(x)}{x} \, dx + \int_{-1}^{-\epsilon} \frac{\phi(x)}{x} \, dx 
+      = \int_\epsilon^1 \frac{\phi(x) - \phi(-x)}{x}\, dx
+    \end{align*}
+    Since \(\phi \in C_c^\infty(\mathbb{R})\)
+    \begin{align*}
+      |\phi(x) - \phi(-x)| \le 2 \|\phi'\| \le 2 \|\phi'\|_{L^\infty} |x|
+    \end{align*}
+    \begin{align*}
+      \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^\infty(\mathbb{R})
+      \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^1(0, 1) \\
+      \Rightarrow \int_0^1 \frac{\phi(x) - \phi(-x)}{x} \, dx = \lim_{\epsilon \to 0} \int_\epsilon^1 \frac{\phi(x) - \phi(-x)}{x} \, dx
+    \end{align*}
+  \end{eg}
+
+  \begin{rem}
+    The function \(\frac{1}{|x|^d}\) is not in \(L_{loc}^1(\mathbb{R}^d)\) but \(\exists T \in D'(\mathbb{R}^d)\) s.t. \(T(\phi) = \int_{\mathbb{R}^d} \frac{\phi(x)}{|x|^d} \, dx\) for all \(\phi \in C_c^\infty(\mathbb{R}^d)\) s.t. \(\phi(0) = 0\)
+  \end{rem}
+
+  
+  \begin{defn}[Derivatives of distributions] 
+    Let \(\Omega \subseteq \mathbb{R}^d\) and \(T \in D'(\Omega)\). Define 
+    \begin{align*}
+      D^\alpha T: \ D(\Omega) &\to \mathbb{R} \text{ or } \mathbb{C} \\
+      (D^\alpha T)(\phi)= (-1)^{|\alpha|}T(\underbrace{D^\alpha \phi}_{in D(\Omega)}), \quad |\alpha| = \alpha_1 + \dots + \alpha_d \text{ with } \alpha = (\alpha_1, \dots, \alpha_d)
+    \end{align*}
+    
+  \end{defn}
+  Motivation: \(f \in C_c^\infty(\Omega)\)
+  \begin{align*}
+    \int_\Omega(D^\alpha f) \phi = (-1)^{|\alpha|} \int_\Omega f(D^\alpha \phi) \\
+    (D^\alpha T)(\phi) \leftarrow T_{D^\alpha f} (\phi) = (-1)^{|\alpha|}T_f(d^\alpha \phi)
+  \end{align*}
+  "If the classical derivatives exist, then They are the same with the distributional derivatives"
+
+  
+  \begin{rem}
+    For all \(T \in D'(\Omega)\), then \(D^\alpha T \in D'(\Omega)\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\). Clearly:
+    \[\phi \mapsto (D^\alpha T)(\phi) = (-1)^{|\alpha|}T(D^\alpha \phi)\] linear. Moreover, if \(\phi_n \to \phi\) in \(D(\Omega)\): 
+    \begin{align*}
+      \Rightarrow D^\alpha \phi_n \to D^\alpha \phi \text{ in } D(\Omega) \\
+      \Rightarrow (D^\alpha T)(\phi_n) = (-1)^\alpha T(D^\alpha \phi_n) \xrightarrow{n \to \infty} (-1)^\alpha T(D^\alpha \phi) = (D^\alpha T)(\phi)
+    \end{align*}
+  \end{rem}
+
+  \begin{eg}
+    Consider \(f(x) = |x|\) in \(\mathbb{R}\). Then \(f \in C(\mathbb{R})\) but \(f \notin C^1(\mathbb{R})\). However, 
+    \[f'(x) = g(x) = \begin{cases}
+      1 & x > 0 \\ -1 &x > 0
+    \end{cases} \in L_{loc}^1\]
+    Lets check \(f' = g\), i.e. \(-f(\phi') = f'(\phi) = g(\phi)\) for all \(\phi \in D(\mathbb{R})\). Thus we need to prove:
+    \begin{align*}
+      - \int_{\mathbb{R}} f(x) \phi'(x) \, dx = \int_{\mathbb{R}} g(x) \phi(x) \, dx \quad \forall \phi \in D(\mathbb{R})
+    \end{align*}
+    namely:
+    \begin{align*}
+      - \int_{\mathbb{R}} |x| \phi'(x) \, dx &= \int_0^\infty \phi(x) \, dx - \int_{-\infty}^0 \phi(x) \, dx
+    \end{align*}
+    \begin{align*}
+      LHS = - \int_0^\infty x \phi'(x) \, dx + \int_{-\infty}^{\infty} x \phi'(x) \, dx
+    \end{align*}
+    By integration by parts:
+    \begin{align*}
+      \int_0^\infty x \phi'(x) \, dx = \underbrace{[x \phi(x)]_0^\infty}_{= 0} - \int_0^\infty \phi(x) \, dx = - \int_0^\infty \phi(x) \, dx
+    \end{align*}
+    and similary:
+    \begin{align*}
+      \int_{-\infty}^0 x \phi'(x) \, dx = - \int_{-\infty}^0 \phi(x) \, dx
+    \end{align*}
+    Thus \(f' = g\) in \(D'(\Omega)\).
+
+    Claim: \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\). In fact, for all \(\phi \in D(\mathbb{R})\), then:
+    \begin{align*}
+      g'(\phi) 
+      &= - g(\phi') 
+      = - \int_{\mathbb{R}} g\phi' 
+      = - \int_{-\infty}^0 (-1) \phi' - \int_0^\infty (1) \phi' \\
+      &= - \int_0^\infty \phi' + \int_{-\infty}^0 \phi' = [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
+      = 2 \phi(0) = 2 \delta_0 (\phi)
+    \end{align*}
+    So \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\)
+  \end{eg}
+
+  \begin{ex}
+    Prove that \((D^\alpha \delta_x)(\phi) = (-1)^{|\alpha|}(\Delta^\alpha \phi)(x)\) for all \(\phi \in D(\mathbb{R})\) for all \(x \in \mathbb{R}\).
+  \end{ex}
+
+  \begin{defn}[Convergence of distributions]
+    Let \(\Omega \subseteq \mathbb{R}^d\) open, then
+    \[T_n \xrightarrow{n \to \infty} T\] in \(D'(\Omega)\) if \(T_n(\phi) \xrightarrow{n \to \infty} T(\phi)\) for all \(\phi \in D(\Omega)\).
+  \end{defn}
+
+  \begin{ex}
+    Let \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\) For \(\epsilon > 0\), define \(f_\epsilon(x) = \epsilon^{-d}f(\epsilon^{-1} x)\). Then: \(f_\epsilon \to \delta_0\) in \(D'(\Omega)\).
+  \end{ex}
+  
+  \begin{ex}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and \(T_n \to T\) in \(D'(\Omega)\). Then:
+    \(D^\alpha T_n \to D^\alpha T\) in \(D'(\Omega)\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\)
+  \end{ex}
+  
+  \begin{defn}[Convolution of distributions]
+    Let \(T \in D'(\mathbb{R})\) and \(f \in L_c^\infty(\mathbb{R}^d)\). Define \[(T \star f)(y) = T(f_y)\]
+    We write \(f_y(x) = f(x-y)\) and \(\tilde f(x) = f(-x)\).
+  \end{defn}
+  
+  \begin{thm}
+    For all \(T \in D'(\mathbb{R})\), for all \(f \in D(\mathbb{R})\), then
+    \begin{enumerate}
+      \item \(y \mapsto T(f_y)\) is \(C^\infty(\mathbb{R}^d)\) and 
+      \[D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T(D^\alpha f_y)\]
+      \item For all \(g \in L^1(\mathbb{R}^d)\) and compactly supported, then
+      \[\int_{\mathbb{R}^d} g(y) T(f_y) \, dy = T(\underbrace{f \star g}_{\in C_c^\infty(\mathbb{R})})\]
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    \begin{enumerate}
+      \item We prove that \(y \mapsto T(f_y)\) is continous. Take \(y_n \to y\) in \(\mathbb{R}^d\), then:
+      \item \[T(f_{y_n}) \to T(f_y)\] since \(f_{y_n} \to f_y\) in \(D(\mathbb{R}^d)\) \((\star)\)
+    \end{enumerate}
+    Check \((\star)\): Since \(f \subseteq C_c^\infty(\mathbb{R}^d)\Rightarrow \supp f \subseteq B(0, R) \subseteq \mathbb{R}^d\). Since \(y_n \to y\) in \(\mathbb{R}^d\). We have \(\sup_n |y_n| < \infty\). Thus \(f_{y_n}, f_y\) are supported in \(\overline{B(0, R + \sup_n |y_n|)} = K\) compact. Moreover
+    \begin{align*}
+      |f_{y_n}(x) - f_y(x)|
+      &= |f(x-y_n) - f(x-y))|
+      \le \| \delta f \|_{L^\infty} \|y_n - y\| \to 0
+    \end{align*}
+    So we get \(\| f_{y_n} - f_y\|_{L^\infty} \to 0\)
+    Similary:
+    \[\|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} \ to 0\]
+    Thus \(f_{y_n} \to f_y\) in \(D(\mathbb{R}^d)\) i.e. \((\star)\) holds.
+  \end{proof}
+
+
+  \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
+    Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
+    \[\fint_{B(x,r)} |f(y)  f(x)| \, dy \xrightarrow{r \to 0} 0\]
+  \end{ex}
+
+  \begin{proof}[Solution]
+    If \(g \in L^(\mathbb{R}^d) \int g = 1, g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1} x)\), then: \(g_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\)
+    
+    \begin{lem}
+      If \(f_n \to f\) in \(L^1(\Omega)\), then there is a subsequence \(\{f_{n_k}\}\) s.t. we have the Dominated Convergence 
+      \begin{align*}
+        \begin{cases}
+          f_{n_k} (x) \to f(x) a.e. \\
+          |(f_{n_k}(x))| \le F(x) \in L^1(\Omega)
+        \end{cases}
+      \end{align*}
+    \end{lem}
+      
+      Consequence of the proof of the completeness of \(L^1(\Omega)\). Consequence:
+      \begin{align*}
+        \int_{B(x, r)} f 
+        &= \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(x, r))(y)}{|B(x,r)|} \, dy 
+        = \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(0,r))}{|B(0,r)} (x-y) f(y) \, dy \\
+        &= (g_r \star f) (x) , \quad g_r = \frac{\mathbb{1}(B(0,r))}{|B(0,r)|} \text{(similar to \(g_\epsilon\))}
+      \end{align*}
+      We le that if \(f \in L^1\), then: \(g_r \star f \xrightarrow{r \to 0} f\) in \(L^1\). So up to a subsequence we have \((g_r \star f)(x) \to f(x)\) a.e.
+      Here the Lebesgue differentation then is stronger:
+      \begin{itemize}
+        \item \(g_r \star f(x) \to f(x)\) as \(r \to 0\) a.e. x. 
+        \item \begin{align*}
+          \left| (g_r \star f)(x) - f(x) \right|
+          &= \left| \fint_{B(x,r)} (f(y) - f(x)) \, dy \right| 
+          = \fint_{B(x,r)} |f(y) - f(x)| \, dy
+        \end{align*}
+      \end{itemize}
+      \begin{enumerate}[label=Step \arabic*)]
+        \item Assume \(f \in C(\mathbb{R}^d)\). Then:
+        \[\fint_{B(x,r)} |f(y) - f(x)| \, dy \le \sup_{|y-x| \le r} |f(y) - f(x)| \to 0 \quad \forall x \in \mathbb{R}^d\] 
+        since \(f\) is continuous
+        \item Take \(f \in L^1(\mathbb{R}^d)\), then \(\exists \{f_n \subseteq C_c(\mathbb{R}^d)\}\) s.t. \(f_n \to f\) in \(L^1(\mathbb{R}^d)\) and \(f_n(x) \to f(x)\) for a.e. \(x \in \mathbb{R}^d\).
+        \begin{align*}
+          &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
+          &= \fint_{B(x,r)} \underbrace{|f(y) - f_n(y)}_{|f(x) - f_n(x)} + \int_{B(x, r)}|f_n(y) - f_n(x)| \, dy + \fint_{B(x,r)} |f_n(x) - f(x)| \, dy \\
+          \Rightarrow &\limsup_{n \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy \le 2 |f(x) - f_n(x)| \xrightarrow{n \to \infty} 0
+        \end{align*}
+        Claim without proof: For all \(g \in L^1\)
+        \[\fint_{B(x,r)} g(y) \, dy \xrightarrow{r \to 0} g(x)\]
+       \end{enumerate}
+  \end{proof}
+
+
+  \begin{ex}[E 3.2]
+    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Take \(f \in L^p, g \in L^q\), prove:
+    \[\widehat{f \star g} = \hat f \hat g\]
+    Aufgabenstellung ..
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{enumerate}[label=Step \arabic*)]
+      \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
+      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. We have
+      \item
+      \begin{align*}
+        \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
+        \text{(Hausdorff-Young)} \quad &\le \|f \star g\|_{L^r} 
+        = \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
+        &\le \| (f-f_n) \star g_n \|_{L^r} + \| f_n \star (g_n - g)\|_{L^r} \\
+        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty}
+      \end{align*}
+      Moreover:
+      \begin{align*}
+        \|\hat f_n \hat g_n - \hat f \hat g \|_{L^{r'}} 
+        &= \|(\hat f_n \hat f)\hat g_n + \hat f (\hat g_n - \hat g) \|_{L^{r'}} \\
+        \text{(Hölder)} \quad &\le \|\hat f_n - \hat f \|_{L^{p'}} \| \hat g_n \|_{L^{q'}} + \| \hat f \|_{L^{q'}} \\
+        \text{(Hausdorff-Young)} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
+      \end{align*}
+      So \(\hat f_n \hat g_n \to \hat f \hat g \text{ in } L^{r'}\)
+      \(\widehat{f \star g} = \hat f \hat g\) in \(L^{r'}\)
+      \(\frac{1}{r'} = \frac{1}{p'} + \frac{1}{q'}\) 
+      
+    \end{enumerate}
+  \end{proof}
+
+  
+  \begin{ex}[E 3.3]
+    \(f \in C_c^\infty(\mathbb{R}^d)\). Prove \(|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\)
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Since \(f \in C_c^\infty\) we have that \(D^\alpha f \in C_c^\infty\).
+    Recall
+    \begin{align*}
+      \widehat{D^\alpha f}(k) &= (-2 \pi ik)^\alpha \hat f (k)
+    \end{align*}
+    For example
+    \begin{align*}
+      \widehat{- \Delta f}(k) &= |2 \pi i k|^2 \hat f (k) \\
+      (\text{Induction}) \leadsto \widehat{(-\Delta)^N f}(k) &= |2 \pi k|^{2N} \hat f (k)
+    \end{align*}
+    So we can conclude
+    \[ \hat f(k) = \frac{\widehat{(-\Delta)^N}f(k)}{|2 \pi k|^{2N}} \forall k \in \mathbb{R}^d\]
+    \begin{enumerate}
+      \item \(f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \hat f \in L^\infty\)
+      \item \((-\Delta)^N f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \widehat{(-\Delta)^N f} \in L^\infty\)
+    \end{enumerate}
+    Conclusion: \(\hat f(k) \le \begin{cases}
+      C \forall k \\ \frac{C_N}{|k|^{2N} \forall k}
+    \end{cases}\)
+    So \(\hat f(k) \le \frac{C_N}{(1+|k|)^N}\)
+  \end{proof}
+
+  \begin{ex}[E 3.4]
+    
+  \end{ex}
+
+  \begin{proof}
+    Siehe Goodnotes
+  \end{proof}
+
+  
+  \begin{ex}[Bonus 3]
+    Let \(f \in L^1(\mathbb{R}^d)\) such that
+    \[|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\]
+    for all \(k \in \mathbb{R}^d\), for all \(N \ge 1\). (\(C_n\) is independent of \(k\)). Prove that \(f \in C^\infty(\mathbb{R}^d)\)
+  \end{ex}
+  (\(f \in C^\infty\)) i.e. \(\exists \tilde f \in C^\infty\) s.t. \(f = \tilde f\) a.e.
+
+  
+  \begin{thm}
+    Take \(T \in D'(\mathbb{R}), f \in C_c^\infty(\mathbb{R}^d) = D(\mathbb{R}^d)\), \(f_y(x) = f(x-y)\)
+    \begin{enumerate}[label=\alph*)]
+      \item \(y \mapsto T(f_y) \in C^\infty(\mathbb{R}^d)\) and \(D_y^\alpha(T(f_y)) = (D^\alpha T) (f_y) = (-1)^{|\alpha|} T(D_x^\alpha f_y)\)
+      \item \(\forall g \in L^1(\mathbb{R}^d)\) and compactly supported 
+      \[\int_{\mathbb{R}^d} g(y) T(f_y) \, dy = T(\underbrace{f \star g}_{\in C_c^\infty})\]
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    \begin{enumerate}[label=\alph*)]
+      \item \(y \mapsto T(f_y)\) is continuous since \(y_n \to y\) in \(\mathbb{R}^d\), then 
+      \(f_{y_n} \to f_y\) implies \(T(f_{y_n}) \to T(f_y)\). Let's check that \(y \mapsto T(f_y) \in C^1\):
+      \begin{align*}
+        \lim_{h \to 0} \frac{T(f_{y-he_i})-T(f_y)}{h}
+        &= \lim_{h \to 0} T \left(\frac{f_{y-he_i} - f_y}{h}\right)
+      \end{align*}
+        We have \(\frac{f_{y - h e_i} - f_y}{h} \xrightarrow{h \to 0} (\partial_i f)_y\) in \(D(\mathbb{R}^d)\)
+      \begin{itemize}
+        \item \(\exists K\) compact set such that \(\supp(f_{y - e_i} - f_y)\), \(\supp \partial_i f \subseteq K\) as \(|h|\) small.
+        \item 
+        \begin{align*}
+          \frac{f_{y - h e_i}(x)- f_y(x)}{h} - (\partial_i f)_y(x) 
+          = \frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y) \\
+          \left| \int_0^1 \partial_i f(x-y+the_i) \, dt - \partial_i f(x-y) \right| \xrightarrow{h \to 0} 0 \text{ uniformly in } x
+        \end{align*}
+        Similary:
+        \begin{align*}
+          &\left| D_x^\alpha \left(\frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y)\right) \right| \\
+          &= \left| \frac{D^\alpha f(x-y+he_i) - D^\alpha f(x-y)}{h} - \partial_i(D^\alpha f)(x-y) \right| \xrightarrow{h \to 0} 0 
+        \end{align*}
+        uniformly in \(x\). Conclude: 
+        \begin{align*}
+          \lim_{h \to 0} \frac{T(f_{y - he_i}) - T(f_y)}{h} \xrightarrow{h \to 0} T((\partial_i f)_y) \in C(\mathbb{R}^d)
+        \end{align*}
+        So we geht that \(y \mapsto T(f_y) \in C^1\) and \(- \partial_{y_i} T(f_y) = T((\partial_i f)_y)\)
+      \end{itemize}
+      By induction: 
+      \begin{align*}
+        D_y^\alpha T(f_y) = (-1)^{|\alpha|} T((D^\alpha f)_y) = (D^\alpha T)(f_y) \quad \forall \alpha
+      \end{align*}
+    \end{enumerate}
+    \item Heuristic: \(T = T(x)\)
+    \item 
+    \begin{align*}
+      \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
+      &= \int_{\mathbb{R}^d} g(y) \left(\int_{\mathbb{R}^d}T(x) f(x-y) \, dx \right)\, dy \\
+      &= \int_{\mathbb{R}^d} T(x) \left(\int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right) \, dx \\
+      &= \int_{\mathbb{R}^d} T(x) (f \star g)(x) \, dx = T(f \star g)
+    \end{align*}
+    \begin{enumerate}[label=Step \arabic*:]
+      \item \(g \in C_c^\infty(\mathbb{R}^d)\) \begin{align*}
+        (\text{Rieman Sum}) \quad \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
+        &= \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) T(f_{y_j}) \\
+        &= \lim_{\Delta_N \to 0} T\left(\Delta_N \sum_{j=1}^N g(y_j) f_{y_j}\right) \\
+        &= T(f\star g)
+      \end{align*}
+      because
+      \begin{align*}
+        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f_{y_j} (x) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d) \\
+        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \xrightarrow{\text{Riemann}} \int_{\mathbb{R}^d} g(y) f(x-y) \, dy = (f \star g)(x)
+      \end{align*}
+      Proof of: 
+      \begin{align*}
+        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d)
+      \end{align*}
+      \begin{enumerate}[label=\arabic*)]
+        \item Since \(f, g \in C_c^\infty\) we have \(f \star g \in C_c^\infty\). And we have \[x \mapsto \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \in C^\infty\] since \(f \in C^\infty\) supported in \((\supp g + \supp f)\). So all functions are \(C_c^\infty\) and supported in \((\supp g + \supp f)\).
+        \item 
+        \begin{align*}
+          \left| \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) - \int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right| \xrightarrow{\Delta_N \to 0} 0
+        \end{align*}
+        uniformly in \(x\). (Result from the Riemann-Sum)
+        \item \begin{align*}
+          &\left| D_x^\alpha(\Delta_N \sum_{j=1}^N g(y_j) f(x-y) - (f \star g)(x)) \right| \\
+          &= \left| \Delta_N \sum_{j=1}^N g(y_j) D^\alpha f(x-y) - (D^\alpha f)\star g(x) \right| \xrightarrow{\Delta_N \to 0} 0
+        \end{align*}
+        uniformly in \(x\) for all \(\alpha\).
+      \end{enumerate}
+      \item Take \(g \in L^1(\mathbb{R}^d)\) and compactly supported. Then \(\exists \{g_n\} \subseteq C_c^\infty(\mathbb{R}^d)\), \(\supp g_n \subseteq \supp g + B(0,1)\) such that \(g_n \to g\) in \(L^1(\mathbb{R}^d)\). By Step 1: 
+      \begin{align*}
+        \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy = T(g_n \star f)
+      \end{align*}
+      Take \(n \to \infty\):
+      \begin{align*}
+        \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy \to \int_{\mathbb{R}^d} g(y) T(f_y) \, dy
+      \end{align*}
+      since \(g_n \to g\) in \(L^1\) compaclty supported and \(y \mapsto T(f_y) \in C^\infty \subseteq L^\infty(K)\). Moreover (exercise):
+      \[\underbrace{g_n \star f}_{\in C_c^\infty} \to g \star f \quad \text{ in } D(\mathbb{R}^d)\]
+      So \(T(g_n \star f) \xrightarrow{n \to \infty} T(g \star f)\).
+      Finally we optain:
+      \[\int g(y) T(f_n) \, dy = T(g \star f)\]
+    \end{enumerate}
+  \end{proof}
+
+  
+  \begin{thm}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(T \i D'(\Omega)\) and \(f \in C_c^\infty(\Omega)\). Denote
+    \[\Omega_f = \{y \in \mathbb{R}^d \mid \supp f_y = y + \supp f \subseteq \Omega\}\]
+    \begin{enumerate}[label=\alph*)]
+      \item \(y \mapsto T(f_y) \in C^\infty(\Omega_f)\) and \(D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T((D^\alpha f)_y)\)
+      \item For all \(g \in L^1(\Omega_g)\) and compactly supported in \(\Omega_f\) , then:
+      \[\int_\Omega g(y) T(f_y) \, dy = T(f \star g)\]
+    \end{enumerate}
+  \end{thm}
+
+  
+  \begin{thm}
+    Let \(T \in D'(\Omega)\) s.t. \(\nabla T = 0\) in \(D'(\Omega)\). Then: \(T = const.\) in \(\Omega\).
+  \end{thm}
+
+  \begin{proof}
+    \((\Omega = \mathbb{R}^d)\) for all \(f \in C_c^\infty\), \(y \mapsto T(f_y) \in C^\infty(\mathbb{R}^d)\) and \(\partial_{y_i} T(f_y) = (\partial_j T)(f_y) = 0\) for all \(i = 1, \dots, d\). Then by the result of the theorem for \(C^\infty\) functions,
+    \(y \mapsto T(f_y) = const\) independent of \(y\). Consequently:
+    \begin{align*}
+      T(f_y) = T(f_0) = T(f) \quad \forall y \in \mathbb{R}^d \ \forall f \in C_c^\infty(\mathbb{R}^d)
+    \end{align*}
+    For any \(g \in C^\infty(\mathbb{R}^d)\):
+    \begin{align*}
+      \left(\int_{\mathbb{R}^d} g \, dy\right) T(f)
+      &= \int_{\mathbb{R}^d} g(y) T(f_y) \, dy
+      = T(f \star g)
+      = T(g \star f)
+      = \left(\int_{\mathbb{R}^d} f \, dy\right) T(g)
+    \end{align*}
+    So \(\frac{T(f)}{\int_{\mathbb{R}^d}f}\) is independent of \(f\) (as soon as \(\int f \ne 0\)). So we get that \(T(f) = const \int_{\mathbb{R}^d} f\), where const is independent of \(f\).
+  \end{proof}
+  
+  \begin{rem}
+    If \(u \in C^1(\mathbb{R}^d)\), then:
+      \begin{align*}
+        u(x+y) - u(x) 
+        &= \int_0^1 \sum_{j=1}^d y_j u(x + ty_j) \, dt \\
+        &= \int_0^1 y \nabla u(x+ty) \, dt
+      \end{align*}
+      So we get that if \(\nabla u = 0\), then \(u(x+y) - u(x) = 0\) for all \(x,y\), so \(u = const.\)
+  \end{rem}
+
+  \begin{thm}[Taylor expansion for distributions]
+    Let \(T \in D'(\mathbb{R}^d)\) and \(f \in C_c^\infty(\mathbb{R}^d)\). Then: \[T(f_y) - T(f) = \int_0^1 \sum_{j=1}^d y_j(\partial_j T) (f_{ty}) \, dt\]
+  \end{thm}
+
+  \begin{proof}
+    \(y \mapsto T(f_y)\) is \(C^\infty\) and \(\frac{d}{dt} [T(f_{ty})] = (\nabla T)(f_{ty}) y\) So we get
+    \begin{align*}
+      T(f_y) - T(f) 
+      &= \int_0^1 \frac{d}{dt}(T(f_{ty})) \, dt \\
+      &= \int_0^1 (\nabla T)(f_{ty}) y \, dt \\
+      &= \int_0^1 \sum_{j=1}^d (\partial_j T)(f_{ty}) y_j \, dt
+    \end{align*}
+  \end{proof}
+
+  
+  \begin{cor}
+    Let \(g \in L_{loc}^1(\mathbb{R}^d)\) s.t. \(\partial_j g\in L_{loc}^1(\mathbb{R}^d)\) for all \(j = 1, 2, \dots, d\) (i.e. \(g \in W_{loc}^{1,1}(\mathbb{R}^d)\)). Then for all \(y \in \mathbb{R}^d\):
+    \begin{align*}
+      g(x+y) - g(x) &= \int_0^1 y \nabla g(x + ty) \, dt \\
+      &= \int_0^1 \sum_{j=1}^d y_j \partial g(x+ty) \, dt
+    \end{align*}
+    for a.e. \(x\).
+  \end{cor}
+
+  \begin{proof}
+    For all \(f \in C_c^\infty\) we have 
+    \begin{align*}
+      \int_{\mathbb{R}^d} f(x) [g(x+y) - g(x)] \, dx
+      &= \int_{\mathbb{R}^d} g(x) [f(x-y) - f(x)] \, dx \\
+      &= g(f_y) - g(f) \\
+      &= \int_0^1 \sum_{j=1}^d y_j (\partial_j g)(f_{ty}) \, dt \\
+      &= \int_0^1 \sum_{j=1}^d y_j \int_{\mathbb{R}^d} \sum_{j=1}^d y_j \left[\int_{\mathbb{R}^d} (\partial_j g)(x) f_{ty}(x) \, dx\right] \\
+      &= \int_0^1 \sum_{j=1}^d y_i \left[\int_{\mathbb{R}^d}(\partial_j g)(x+ty) f(x) \, dx\right] \, dt \\
+      &= \int_{\mathbb{R}^d} f(x) \left[\int_0^1 \sum_{j=1}^d y_j \partial_j g(x+ty) \, dt \right] \, dx
+    \end{align*}
+    For all \(\phi \in C_c^\infty\): \( = g(x+y) - g(x)\) a.e. \(x \in \mathbb{R}^d\).
+  \end{proof}
 \end{document}
+ 
