@@ -1538,15 +1538,15 @@
 
   \begin{eg}["normal functions" are distributions]
     If \(f \in L_{loc}^1(\Omega)\), then \(T = T_f\) defined by:
-    \[T(\phi) = \int_{\Omega} f(x) \phi(x) \, dx \quad \forall \phi \in D(\Omega)\]
-    is a distribution, i.e. \(T \in D'(\Omega)\). Indeed, it is clear that \(T(\phi)\) is well-defined for all \(\phi \in D(\Omega)\) and \(\phi \mapsto T(\phi)\) is linear. Let us check that \(\phi \mapsto T(\phi)\) is continuous. Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove that \(T(\phi_n) \to T(\phi)\). Since \(\phi_n \to \phi\) in \(D(\Omega)\), there is a compact \(K\) s.t. \(\supp(\phi_n), \supp(\phi) \subseteq K \subseteq \Omega\).
+    \[T(\phi) = \int_{\Omega} f(x) \phi(x) \, dx\]
+    is a distribution for all \(\phi \in D(\Omega)\), i.e. \(T \in D'(\Omega)\). Indeed, it is clear that \(T(\phi)\) is well-defined for all \(\phi \in D(\Omega)\) and \(\phi \mapsto T(\phi)\) is linear. Let us check that \(\phi \mapsto T(\phi)\) is continuous. Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove that \(T(\phi_n) \to T(\phi)\). Since \(\phi_n \to \phi\) in \(D(\Omega)\), there is a compact \(K\) s.t. \(\supp(\phi_n), \supp(\phi) \subseteq K \subseteq \Omega\).
   \end{eg}
 
   Question: Why is \(f \mapsto T_f\) injective?
 
   \begin{lem}[Fundamental lemma of calculus of variants]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open. If \(f, g \in L_{loc}^1(\Omega)\) and 
-    \(\int_\Omega f \phi = \int_{\Omega} g \phi\) for all \(\phi \in D(\Omega) \), then \(f = g\) in \(L_{loc}^1(\Omega)\)
+    \(\int_\Omega f \phi \, dy = \int_{\Omega} g \phi \, dy\) for all \(\phi \in D(\Omega) \), then \(f = g\) in \(L_{loc}^1(\Omega)\)
   \end{lem}
 
   % \begin{proof}
@@ -1570,29 +1570,27 @@
 
   \begin{eg}[Principle Value]
     The function \(f(x) = \frac{1}{x}\) is not in \(L_{loc}^1(\mathbb{R})\), but we can still define
-    \[\int_{\mathbb{R}} f \phi = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \(|\phi(x)| = |\phi(x)-\phi(0)| \le (\sup |\phi'|)|x|\), so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supportet. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
+    \[\int_{\mathbb{R}} f(x) \phi(x) \, dx = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \[\phi(x) = |\phi(x)-\phi(0)| \le (\sup |\phi'|)(x),\] so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supported. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
     Define \(T: D(\mathbb{R}) \to \mathbb{R}\) or \(\mathbb{C}\) by \begin{align*}
       T(\phi) 
       &= \lim_{\epsilon \to 0} \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \quad \forall \phi \in D(\mathbb{R}) \text{ s.t. } \phi(0) = 0
     \end{align*}
-    We denote \(T = p.v. \left(\frac{1}{x}\right)\). Check that \(T \in D'(\mathbb{R}: \) For all \(\epsilon > 0, \) \(\left|\frac{\phi(x)}{x} \right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\) for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
+    We denote \(T = p.v. \left(\frac{1}{x}\right)\). We check that \(T \in D'(\mathbb{R})\): For all \(\epsilon > 0\) we have  \[\left|\frac{\phi(x)}{x}\right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\] for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
     \begin{align*}
-      \mathbb{1}(|x| \ge \epsilon)\frac{\phi(x)}{x} \in L^1(\mathbb{R}) \leadsto \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \text{ finite.}
+      \mathbb{1}(|x| \ge \epsilon)\frac{\phi(x)}{x} \in L^1(\mathbb{R}) \leadsto \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx < \infty
     \end{align*}
     We can write:
     \begin{align*}
-      \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx = \int_{|x| \ge 1} \frac{\phi(x)}{x} \, dx + \int_{\epsilon \le |x| \le 1} \frac{\phi(x)}{x}\, dx
+      \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx 
+      = \int_{|x|\ge 1} \frac{\phi(x)}{x} \, dx + \int_{\epsilon \le |x|\le 1} \frac{\phi(x)}{x}\, dx
     \end{align*}
     The second part can be written as:
     \begin{align*}
       \int_{\epsilon \le |x| \le 1} \frac{\phi(x)}{x} \, dx
-      &= \int_{\epsilon} \frac{\phi(x)}{x} \, dx + \int_{-1}^{-\epsilon} \frac{\phi(x)}{x} \, dx 
+      &= \int_{\epsilon}^1 \frac{\phi(x)}{x} \, dx + \int_{-1}^{-\epsilon} \frac{\phi(x)}{x} \, dx 
       = \int_\epsilon^1 \frac{\phi(x) - \phi(-x)}{x}\, dx
     \end{align*}
-    Since \(\phi \in C_c^\infty(\mathbb{R})\)
-    \begin{align*}
-      |\phi(x) - \phi(-x)| \le 2 \|\phi'\| \le 2 \|\phi'\|_{L^\infty} |x|
-    \end{align*}
+    Since \(\phi \in C_c^\infty(\mathbb{R})\) it holds that \(|\phi(x) - \phi(-x)|  \le 2 \|\phi'\|_{L^\infty}(x)\).
     \begin{align*}
       \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^\infty(\mathbb{R})
       \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^1(0, 1) \\
@@ -1604,36 +1602,35 @@
     The function \(\frac{1}{|x|^d}\) is not in \(L_{loc}^1(\mathbb{R}^d)\) but \(\exists T \in D'(\mathbb{R}^d)\) s.t. \(T(\phi) = \int_{\mathbb{R}^d} \frac{\phi(x)}{|x|^d} \, dx\) for all \(\phi \in C_c^\infty(\mathbb{R}^d)\) s.t. \(\phi(0) = 0\)
   \end{rem}
 
-  
+  Let in the following \(\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}\).
+
   \begin{defn}[Derivatives of distributions] 
-    Let \(\Omega \subseteq \mathbb{R}^d\) and \(T \in D'(\Omega)\). Define 
+    Let \(\Omega \subseteq \mathbb{R}^d\) and \(T \in D'(\Omega)\). Define for \(\alpha \in \mathbb{N}^d\): 
     \begin{align*}
-      D^\alpha T: \ D(\Omega) &\to \mathbb{R} \text{ or } \mathbb{C} \\
-      (D^\alpha T)(\phi)= (-1)^{|\alpha|}T(\underbrace{D^\alpha \phi}_{in D(\Omega)}), \quad |\alpha| = \alpha_1 + \dots + \alpha_d \text{ with } \alpha = (\alpha_1, \dots, \alpha_d)
+      D^\alpha T: \ D(\Omega) &\longrightarrow \mathbb{K} \\
+      \phi &\longmapsto (-1)^{|\alpha|}T(D^\alpha \phi)
     \end{align*}
     
   \end{defn}
   Motivation: \(f \in C_c^\infty(\Omega)\)
   \begin{align*}
-    \int_\Omega(D^\alpha f) \phi = (-1)^{|\alpha|} \int_\Omega f(D^\alpha \phi) \\
-    (D^\alpha T)(\phi) \leftarrow T_{D^\alpha f} (\phi) = (-1)^{|\alpha|}T_f(d^\alpha \phi)
+    \int_\Omega(D^\alpha f) \phi = (-1)^{|\alpha|} \int_\Omega f(D^\alpha \phi)
   \end{align*}
-  "If the classical derivatives exist, then They are the same with the distributional derivatives"
-
+  \glqq{}If the classical derivative exists, then it is the same as the distributional derivative.\grqq{} We write
+  \[(D^\alpha T)(\phi) = T_{D^\alpha f} (\phi) = (-1)^{|\alpha|}T_f(D^\alpha \phi).\]
   
   \begin{rem}
-    For all \(T \in D'(\Omega)\), then \(D^\alpha T \in D'(\Omega)\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\). Clearly:
-    \[\phi \mapsto (D^\alpha T)(\phi) = (-1)^{|\alpha|}T(D^\alpha \phi)\] linear. Moreover, if \(\phi_n \to \phi\) in \(D(\Omega)\): 
+    For all \(T \in D'(\Omega)\) it holds \(D^\alpha T \in D'(\Omega)\) for all \(\alpha \in \mathbb{N}^d\). Clearly
+    \[\phi \longmapsto (D^\alpha T)(\phi) = (-1)^{|\alpha|}T(D^\alpha \phi)\] is linear. Moreover, if \(\phi_n \to \phi\) in \(D(\Omega)\), then \(D^\alpha \phi_n \to D^\alpha \phi \text{ in } D(\Omega)\), so
     \begin{align*}
-      \Rightarrow D^\alpha \phi_n \to D^\alpha \phi \text{ in } D(\Omega) \\
-      \Rightarrow (D^\alpha T)(\phi_n) = (-1)^\alpha T(D^\alpha \phi_n) \xrightarrow{n \to \infty} (-1)^\alpha T(D^\alpha \phi) = (D^\alpha T)(\phi)
+      (D^\alpha T)(\phi_n) = (-1)^{|\alpha|} T(D^\alpha \phi_n) \xrightarrow{n \to \infty} (-1)^{|\alpha|} T(D^\alpha \phi) = (D^\alpha T)(\phi)
     \end{align*}
   \end{rem}
 
   \begin{eg}
-    Consider \(f(x) = |x|\) in \(\mathbb{R}\). Then \(f \in C(\mathbb{R})\) but \(f \notin C^1(\mathbb{R})\). However, 
+    Consider \(f: x \mapsto |x|\), then \(f \in C(\mathbb{R})\) but \(f \notin C^1(\mathbb{R})\). However, 
     \[f'(x) = g(x) = \begin{cases}
-      1 & x > 0 \\ -1 &x > 0
+      1 & x \ge 0 \\ -1 &x < 0
     \end{cases} \in L_{loc}^1\]
     Lets check \(f' = g\), i.e. \(-f(\phi') = f'(\phi) = g(\phi)\) for all \(\phi \in D(\mathbb{R})\). Thus we need to prove:
     \begin{align*}
@@ -1641,10 +1638,11 @@
     \end{align*}
     namely:
     \begin{align*}
-      - \int_{\mathbb{R}} |x| \phi'(x) \, dx &= \int_0^\infty \phi(x) \, dx - \int_{-\infty}^0 \phi(x) \, dx
+      \underbrace{- \int_{\mathbb{R}} |x| \phi'(x) \, dx}_{\coloneqq (\star)} &= \int_0^\infty \phi(x) \, dx - \int_{-\infty}^0 \phi(x) \, dx
     \end{align*}
+    Now we have
     \begin{align*}
-      LHS = - \int_0^\infty x \phi'(x) \, dx + \int_{-\infty}^{\infty} x \phi'(x) \, dx
+      (\star) = - \int_0^\infty x \phi'(x) \, dx + \int_{-\infty}^0 x \phi'(x) \, dx.
     \end{align*}
     By integration by parts:
     \begin{align*}
@@ -1654,26 +1652,25 @@
     \begin{align*}
       \int_{-\infty}^0 x \phi'(x) \, dx = - \int_{-\infty}^0 \phi(x) \, dx
     \end{align*}
-    Thus \(f' = g\) in \(D'(\Omega)\).
-
-    Claim: \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\). In fact, for all \(\phi \in D(\mathbb{R})\), then:
+    Thus \(f' = g\) in \(D'(\Omega)\). We claim that \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\). In fact, for all \(\phi \in D(\mathbb{R})\), then:
     \begin{align*}
       g'(\phi) 
       &= - g(\phi') 
-      = - \int_{\mathbb{R}} g\phi' 
-      = - \int_{-\infty}^0 (-1) \phi' - \int_0^\infty (1) \phi' \\
-      &= - \int_0^\infty \phi' + \int_{-\infty}^0 \phi' = [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
+      = - \int_{\mathbb{R}} g\phi' \, dx
+      = - \int_{-\infty}^0 (-1) \phi'  \, dx - \int_0^\infty (1) \phi'  \, dx\\
+      &= - \int_0^\infty \phi'  \, dx + \int_{-\infty}^0 \phi' \, dx
+      = [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
       = 2 \phi(0) = 2 \delta_0 (\phi)
     \end{align*}
-    So \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\)
+    So \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\).
   \end{eg}
 
   \begin{ex}
-    Prove that \((D^\alpha \delta_x)(\phi) = (-1)^{|\alpha|}(\Delta^\alpha \phi)(x)\) for all \(\phi \in D(\mathbb{R})\) for all \(x \in \mathbb{R}\).
+    Prove that \((D^\alpha \delta_x)(\phi) = (-1)^{|\alpha|}(D^\alpha \phi)(x)\) for all \(\phi \in D(\mathbb{R})\) for all \(x \in \mathbb{R}\).
   \end{ex}
 
   \begin{defn}[Convergence of distributions]
-    Let \(\Omega \subseteq \mathbb{R}^d\) open, then
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, then
     \[T_n \xrightarrow{n \to \infty} T\] in \(D'(\Omega)\) if \(T_n(\phi) \xrightarrow{n \to \infty} T(\phi)\) for all \(\phi \in D(\Omega)\).
   \end{defn}
 
@@ -1692,7 +1689,7 @@
   \end{defn}
   
   \begin{thm}
-    For all \(T \in D'(\mathbb{R})\), for all \(f \in D(\mathbb{R})\), then
+    Let \(T \in D'(\mathbb{R})\). Then for all \(f \in D(\mathbb{R})\):
     \begin{enumerate}
       \item \(y \mapsto T(f_y)\) is \(C^\infty(\mathbb{R}^d)\) and 
       \[D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T(D^\alpha f_y)\]
@@ -1703,72 +1700,68 @@
 
   \begin{proof}
     \begin{enumerate}
-      \item We prove that \(y \mapsto T(f_y)\) is continous. Take \(y_n \to y\) in \(\mathbb{R}^d\), then:
-      \item \[T(f_{y_n}) \to T(f_y)\] since \(f_{y_n} \to f_y\) in \(D(\mathbb{R}^d)\) \((\star)\)
+      \item We prove that \(y \mapsto T(f_y)\) is continuous. Take \(y_n \to y\) in \(\mathbb{R}^d\), then:\[T(f_{y_n}) \to T(f_y)\] since \(f_{y_n} \to f_y\) in \(D(\mathbb{R}^d)\). We check this: Since \(f \subseteq C_c^\infty(\mathbb{R}^d)\), it holds that \(\supp f \subseteq B(0, R) \subseteq \mathbb{R}^d\). Since \(y_n \to y\) in \(\mathbb{R}^d\). We have \(\sup_n |y_n| < \infty\). Thus \(f_{y_n}, f_y\) are supported in \(\overline{B(0, R + \sup_n |y_n|)} = K\) compact. Moreover
+      \begin{align*}
+        |f_{y_n}(x) - f_y(x)|
+        &= |f(x-y_n) - f(x-y))|
+        \le \| \nabla f \|_{L^\infty} \|y_n - y\| \to 0
+      \end{align*}
+      So we get \(\| f_{y_n} - f_y\|_{L^\infty} \to 0\)
+      Similary:
+      \[\|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} \to 0\] \qedhere
     \end{enumerate}
-    Check \((\star)\): Since \(f \subseteq C_c^\infty(\mathbb{R}^d)\Rightarrow \supp f \subseteq B(0, R) \subseteq \mathbb{R}^d\). Since \(y_n \to y\) in \(\mathbb{R}^d\). We have \(\sup_n |y_n| < \infty\). Thus \(f_{y_n}, f_y\) are supported in \(\overline{B(0, R + \sup_n |y_n|)} = K\) compact. Moreover
-    \begin{align*}
-      |f_{y_n}(x) - f_y(x)|
-      &= |f(x-y_n) - f(x-y))|
-      \le \| \delta f \|_{L^\infty} \|y_n - y\| \to 0
-    \end{align*}
-    So we get \(\| f_{y_n} - f_y\|_{L^\infty} \to 0\)
-    Similary:
-    \[\|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} \ to 0\]
-    Thus \(f_{y_n} \to f_y\) in \(D(\mathbb{R}^d)\) i.e. \((\star)\) holds.
   \end{proof}
 
 
   \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
     Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
-    \[\fint_{B(x,r)} |f(y)  f(x)| \, dy \xrightarrow{r \to 0} 0\]
+    \[\fint_{B(x,r)} |f(y)| \, dy \xrightarrow{r \to 0} 0\]
   \end{ex}
 
-  \begin{proof}[Solution]
-    If \(g \in L^(\mathbb{R}^d) \int g = 1, g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1} x)\), then: \(g_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\)
+  % \begin{proof}[Solution]
+  %   If \(g \in L^1(\mathbb{R}^d) \int g = 1, g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1} x)\), then: \(g_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\)
     
-    \begin{lem}
-      If \(f_n \to f\) in \(L^1(\Omega)\), then there is a subsequence \(\{f_{n_k}\}\) s.t. we have the Dominated Convergence 
-      \begin{align*}
-        \begin{cases}
-          f_{n_k} (x) \to f(x) a.e. \\
-          |(f_{n_k}(x))| \le F(x) \in L^1(\Omega)
-        \end{cases}
-      \end{align*}
-    \end{lem}
+  %   \begin{lem}
+  %     If \(f_n \to f\) in \(L^1(\Omega)\), then there is a subsequence \(\{f_{n_k}\}\) s.t. we have the Dominated Convergence 
+  %     \begin{align*}
+  %       \begin{cases}
+  %         f_{n_k} (x) \to f(x) a.e. \\
+  %         |(f_{n_k}(x))| \le F(x) \in L^1(\Omega)
+  %       \end{cases}
+  %     \end{align*}
+  %   \end{lem}
       
-      Consequence of the proof of the completeness of \(L^1(\Omega)\). Consequence:
-      \begin{align*}
-        \int_{B(x, r)} f 
-        &= \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(x, r))(y)}{|B(x,r)|} \, dy 
-        = \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(0,r))}{|B(0,r)} (x-y) f(y) \, dy \\
-        &= (g_r \star f) (x) , \quad g_r = \frac{\mathbb{1}(B(0,r))}{|B(0,r)|} \text{(similar to \(g_\epsilon\))}
-      \end{align*}
-      We le that if \(f \in L^1\), then: \(g_r \star f \xrightarrow{r \to 0} f\) in \(L^1\). So up to a subsequence we have \((g_r \star f)(x) \to f(x)\) a.e.
-      Here the Lebesgue differentation then is stronger:
-      \begin{itemize}
-        \item \(g_r \star f(x) \to f(x)\) as \(r \to 0\) a.e. x. 
-        \item \begin{align*}
-          \left| (g_r \star f)(x) - f(x) \right|
-          &= \left| \fint_{B(x,r)} (f(y) - f(x)) \, dy \right| 
-          = \fint_{B(x,r)} |f(y) - f(x)| \, dy
-        \end{align*}
-      \end{itemize}
-      \begin{enumerate}[label=Step \arabic*)]
-        \item Assume \(f \in C(\mathbb{R}^d)\). Then:
-        \[\fint_{B(x,r)} |f(y) - f(x)| \, dy \le \sup_{|y-x| \le r} |f(y) - f(x)| \to 0 \quad \forall x \in \mathbb{R}^d\] 
-        since \(f\) is continuous
-        \item Take \(f \in L^1(\mathbb{R}^d)\), then \(\exists \{f_n \subseteq C_c(\mathbb{R}^d)\}\) s.t. \(f_n \to f\) in \(L^1(\mathbb{R}^d)\) and \(f_n(x) \to f(x)\) for a.e. \(x \in \mathbb{R}^d\).
-        \begin{align*}
-          &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
-          &= \fint_{B(x,r)} \underbrace{|f(y) - f_n(y)}_{|f(x) - f_n(x)} + \int_{B(x, r)}|f_n(y) - f_n(x)| \, dy + \fint_{B(x,r)} |f_n(x) - f(x)| \, dy \\
-          \Rightarrow &\limsup_{n \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy \le 2 |f(x) - f_n(x)| \xrightarrow{n \to \infty} 0
-        \end{align*}
-        Claim without proof: For all \(g \in L^1\)
-        \[\fint_{B(x,r)} g(y) \, dy \xrightarrow{r \to 0} g(x)\]
-       \end{enumerate}
-  \end{proof}
-
+  %     Consequence of the proof of the completeness of \(L^1(\Omega)\). Consequence:
+  %     \begin{align*}
+  %       \int_{B(x, r)} f 
+  %       &= \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(x, r))(y)}{|B(x,r)|} \, dy 
+  %       = \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(0,r))}{|B(0,r)} (x-y) f(y) \, dy \\
+  %       &= (g_r \star f) (x) , \quad g_r = \frac{\mathbb{1}(B(0,r))}{|B(0,r)|} \text{(similar to \(g_\epsilon\))}
+  %     \end{align*}
+  %     We le that if \(f \in L^1\), then: \(g_r \star f \xrightarrow{r \to 0} f\) in \(L^1\). So up to a subsequence we have \((g_r \star f)(x) \to f(x)\) a.e.
+  %     Here the Lebesgue differentation then is stronger:
+  %     \begin{itemize}
+  %       \item \(g_r \star f(x) \to f(x)\) as \(r \to 0\) a.e. x. 
+  %       \item \begin{align*}
+  %         \left| (g_r \star f)(x) - f(x) \right|
+  %         &= \left| \fint_{B(x,r)} (f(y) - f(x)) \, dy \right| 
+  %         = \fint_{B(x,r)} |f(y) - f(x)| \, dy
+  %       \end{align*}
+  %     \end{itemize}
+  %     \begin{enumerate}[label=Step \arabic*)]
+  %       \item Assume \(f \in C(\mathbb{R}^d)\). Then:
+  %       \[\fint_{B(x,r)} |f(y) - f(x)| \, dy \le \sup_{|y-x| \le r} |f(y) - f(x)| \to 0 \quad \forall x \in \mathbb{R}^d\] 
+  %       since \(f\) is continuous
+  %       \item Take \(f \in L^1(\mathbb{R}^d)\), then \(\exists \{f_n \subseteq C_c(\mathbb{R}^d)\}\) s.t. \(f_n \to f\) in \(L^1(\mathbb{R}^d)\) and \(f_n(x) \to f(x)\) for a.e. \(x \in \mathbb{R}^d\).
+  %       \begin{align*}
+  %         &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
+  %         &= \fint_{B(x,r)} \underbrace{|f(y) - f_n(y)}_{|f(x) - f_n(x)} + \int_{B(x, r)}|f_n(y) - f_n(x)| \, dy + \fint_{B(x,r)} |f_n(x) - f(x)| \, dy \\
+  %         \Rightarrow &\limsup_{n \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy \le 2 |f(x) - f_n(x)| \xrightarrow{n \to \infty} 0
+  %       \end{align*}
+  %       Claim without proof: For all \(g \in L^1\)
+  %       \[\fint_{B(x,r)} g(y) \, dy \xrightarrow{r \to 0} g(x)\]
+  %      \end{enumerate}
+  % \end{proof}
 
   \begin{ex}[E 3.2]
     Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Take \(f \in L^p, g \in L^q\), prove:
@@ -2028,7 +2021,7 @@
       T(f_y) - T(f) 
       &= \int_0^1 \frac{d}{dt}(T(f_{ty})) \, dt \\
       &= \int_0^1 (\nabla T)(f_{ty}) y \, dt \\
-      &= \int_0^1 \sum_{j=1}^d (\partial_j T)(f_{ty}) y_j \, dt
+      &= \int_0^1 \sum_{j=1}^d (\partial_j T)(f_{ty}) y_j \, dt \qedhere
     \end{align*}
   \end{proof}
 
