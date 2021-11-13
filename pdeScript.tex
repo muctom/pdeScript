@@ -1895,12 +1895,11 @@
         We have \(\frac{f_{y - h e_i} - f_y}{h} \xrightarrow{h \to 0} (\partial_i f)_y\) in \(D(\mathbb{R}^d)\)
       \begin{itemize}
         \item \(\exists K\) compact set such that \(\supp(f_{y - e_i} - f_y)\), \(\supp \partial_i f \subseteq K\) as \(|h|\) small.
-        \item 
-        \begin{align*}
-          \frac{f_{y - h e_i}(x)- f_y(x)}{h} - (\partial_i f)_y(x) 
-          = \frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y) \\
-          \left| \int_0^1 \partial_i f(x-y+the_i) \, dt - \partial_i f(x-y) \right| \xrightarrow{h \to 0} 0 \text{ uniformly in } x
-        \end{align*}
+        \item \(\begin{aligned}[t]
+          &\frac{f_{y - h e_i}(x)- f_y(x)}{h} - (\partial_i f)_y(x) \\
+          &\quad = \frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y) \\
+          &\left| \int_0^1 \partial_i f(x-y+the_i) \, dt - \partial_i f(x-y) \right| \xrightarrow{h \to 0} 0 \text{ uniformly in } x
+        \end{aligned}\) \\
         Similary:
         \begin{align*}
           &\left| D_x^\alpha \left(\frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y)\right) \right| \\
@@ -1914,60 +1913,59 @@
       \end{itemize}
       By induction: 
       \begin{align*}
-        D_y^\alpha T(f_y) = (-1)^{|\alpha|} T((D^\alpha f)_y) = (D^\alpha T)(f_y) \quad \forall \alpha
+        D_y^\alpha T(f_y) = (-1)^{|\alpha|} T((D^\alpha f)_y) = (D^\alpha T)(f_y) \quad \forall \alpha \in \mathbb{N}^d
       \end{align*}
-    \end{enumerate}
-    \item Heuristic: \(T = T(x)\)
-    \item 
-    \begin{align*}
-      \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
-      &= \int_{\mathbb{R}^d} g(y) \left(\int_{\mathbb{R}^d}T(x) f(x-y) \, dx \right)\, dy \\
-      &= \int_{\mathbb{R}^d} T(x) \left(\int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right) \, dx \\
-      &= \int_{\mathbb{R}^d} T(x) (f \star g)(x) \, dx = T(f \star g)
-    \end{align*}
-    \begin{enumerate}[label=Step \arabic*:]
-      \item \(g \in C_c^\infty(\mathbb{R}^d)\) \begin{align*}
-        (\text{Rieman Sum}) \quad \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
-        &= \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) T(f_{y_j}) \\
-        &= \lim_{\Delta_N \to 0} T\left(\Delta_N \sum_{j=1}^N g(y_j) f_{y_j}\right) \\
-        &= T(f\star g)
-      \end{align*}
-      because
+      \item Heuristic: \(T = T(x)\)
       \begin{align*}
-        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f_{y_j} (x) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d) \\
-        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \xrightarrow{\text{Riemann}} \int_{\mathbb{R}^d} g(y) f(x-y) \, dy = (f \star g)(x)
+        \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
+        &= \int_{\mathbb{R}^d} g(y) \left(\int_{\mathbb{R}^d}T(x) f(x-y) \, dx \right)\, dy \\
+        &= \int_{\mathbb{R}^d} T(x) \left(\int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right) \, dx \\
+        &= \int_{\mathbb{R}^d} T(x) (f \star g)(x) \, dx = T(f \star g)
       \end{align*}
-      Proof of: 
-      \begin{align*}
-        \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d)
-      \end{align*}
-      \begin{enumerate}[label=\arabic*)]
-        \item Since \(f, g \in C_c^\infty\) we have \(f \star g \in C_c^\infty\). And we have \[x \mapsto \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \in C^\infty\] since \(f \in C^\infty\) supported in \((\supp g + \supp f)\). So all functions are \(C_c^\infty\) and supported in \((\supp g + \supp f)\).
-        \item 
+      \begin{enumerate}[label=Step \arabic*:]
+        \item \(g \in C_c^\infty(\mathbb{R}^d)\) \begin{align*}
+          (\text{Rieman Sum}) \quad \int_{\mathbb{R}^d} g(y) T(f_y) \, dy 
+          &= \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) T(f_{y_j}) \\
+          &= \lim_{\Delta_N \to 0} T\left(\Delta_N \sum_{j=1}^N g(y_j) f_{y_j}\right) \\
+          &= T(f\star g)
+        \end{align*}
+        because
         \begin{align*}
-          \left| \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) - \int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right| \xrightarrow{\Delta_N \to 0} 0
+          \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f_{y_j} (x) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d) \\
+          \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \xrightarrow{\text{Riemann}} \int_{\mathbb{R}^d} g(y) f(x-y) \, dy = (f \star g)(x)
         \end{align*}
-        uniformly in \(x\). (Result from the Riemann-Sum)
-        \item \begin{align*}
-          &\left| D_x^\alpha(\Delta_N \sum_{j=1}^N g(y_j) f(x-y) - (f \star g)(x)) \right| \\
-          &= \left| \Delta_N \sum_{j=1}^N g(y_j) D^\alpha f(x-y) - (D^\alpha f)\star g(x) \right| \xrightarrow{\Delta_N \to 0} 0
+        Proof of: 
+        \begin{align*}
+          \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d)
         \end{align*}
-        uniformly in \(x\) for all \(\alpha\).
+        \begin{enumerate}[label=\arabic*)]
+          \item Since \(f, g \in C_c^\infty\) we have \(f \star g \in C_c^\infty\). And we have \[x \mapsto \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \in C^\infty\] since \(f \in C^\infty\) supported in \((\supp g + \supp f)\). So all functions are \(C_c^\infty\) and supported in \((\supp g + \supp f)\).
+          \item 
+          \begin{align*}
+            \left| \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) - \int_{\mathbb{R}^d} g(y) f(x-y) \, dy \right| \xrightarrow{\Delta_N \to 0} 0
+          \end{align*}
+          uniformly in \(x\). (Result from the Riemann-Sum)
+          \item \begin{align*}
+            &\left| D_x^\alpha(\Delta_N \sum_{j=1}^N g(y_j) f(x-y) - (f \star g)(x)) \right| \\
+            &= \left| \Delta_N \sum_{j=1}^N g(y_j) D^\alpha f(x-y) - (D^\alpha f)\star g(x) \right| \xrightarrow{\Delta_N \to 0} 0
+          \end{align*}
+          uniformly in \(x\) for all \(\alpha\).
+        \end{enumerate}
+        \item Take \(g \in L^1(\mathbb{R}^d)\) and compactly supported. Then \(\exists \{g_n\} \subseteq C_c^\infty(\mathbb{R}^d)\), \(\supp g_n \subseteq \supp g + B(0,1)\) such that \(g_n \to g\) in \(L^1(\mathbb{R}^d)\). By Step 1: 
+        \begin{align*}
+          \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy = T(g_n \star f)
+        \end{align*}
+        Take \(n \to \infty\):
+        \begin{align*}
+          \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy \to \int_{\mathbb{R}^d} g(y) T(f_y) \, dy
+        \end{align*}
+        since \(g_n \to g\) in \(L^1\) compaclty supported and \(y \mapsto T(f_y) \in C^\infty \subseteq L^\infty(K)\). Moreover (exercise):
+        \[\underbrace{g_n \star f}_{\in C_c^\infty} \to g \star f \quad \text{ in } D(\mathbb{R}^d)\]
+        So \(T(g_n \star f) \xrightarrow{n \to \infty} T(g \star f)\).
+        Finally we optain:
+        \[\int g(y) T(f_n) \, dy = T(g \star f)\] \qedhere
       \end{enumerate}
-      \item Take \(g \in L^1(\mathbb{R}^d)\) and compactly supported. Then \(\exists \{g_n\} \subseteq C_c^\infty(\mathbb{R}^d)\), \(\supp g_n \subseteq \supp g + B(0,1)\) such that \(g_n \to g\) in \(L^1(\mathbb{R}^d)\). By Step 1: 
-      \begin{align*}
-        \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy = T(g_n \star f)
-      \end{align*}
-      Take \(n \to \infty\):
-      \begin{align*}
-        \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy \to \int_{\mathbb{R}^d} g(y) T(f_y) \, dy
-      \end{align*}
-      since \(g_n \to g\) in \(L^1\) compaclty supported and \(y \mapsto T(f_y) \in C^\infty \subseteq L^\infty(K)\). Moreover (exercise):
-      \[\underbrace{g_n \star f}_{\in C_c^\infty} \to g \star f \quad \text{ in } D(\mathbb{R}^d)\]
-      So \(T(g_n \star f) \xrightarrow{n \to \infty} T(g \star f)\).
-      Finally we optain:
-      \[\int g(y) T(f_n) \, dy = T(g \star f)\]
-    \end{enumerate}
+  \end{enumerate}
   \end{proof}
   
   \begin{thm}
@@ -1975,8 +1973,8 @@
     \[\Omega_f = \{y \in \mathbb{R}^d \mid \supp f_y = y + \supp f \subseteq \Omega\}\]
     \begin{enumerate}[label=\alph*)]
       \item \(y \mapsto T(f_y) \in C^\infty(\Omega_f)\) and \(D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T((D^\alpha f)_y)\)
-      \item For all \(g \in L^1(\Omega_g)\) and compactly supported in \(\Omega_f\) , then:
-      \[\int_\Omega g(y) T(f_y) \, dy = T(f \star g)\]
+      \item For all \(g \in L^1(\Omega_g)\) compactly supported in \(\Omega_f\)it holds:
+      \[\int_\Omega g(y) T(f_y) \, dy = T(f \star g).\]
     \end{enumerate}
   \end{thm}
   
@@ -2005,8 +2003,8 @@
     If \(u \in C^1(\mathbb{R}^d)\), then:
       \begin{align*}
         u(x+y) - u(x) 
-        &= \int_0^1 \sum_{j=1}^d y_j u(x + ty_j) \, dt \\
-        &= \int_0^1 y \nabla u(x+ty) \, dt
+        &= \int_0^1 \sum_{j=1}^d y_j u(x + ty_j) \, dt
+        = \int_0^1 y \nabla u(x+ty) \, dt
       \end{align*}
       So we get that if \(\nabla u = 0\), then \(u(x+y) - u(x) = 0\) for all \(x,y\), so \(u = const.\)
   \end{rem}
