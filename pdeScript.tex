@@ -2059,7 +2059,7 @@
   \end{rem}
 
   \begin{thm}[Equivalence of the classical and distributional derivatives]
-      Let \(\Omega \subseteq \mathbb{R}^d\). Then TFAE:
+      Let \(\Omega \subseteq \mathbb{R}^d\). Then the following are equivalent:
       \begin{enumerate}
         \item \(T \in D'(\Omega)\) s.t. \(\partial_{x_i} T = g_i \in C(\Omega)\) for all \(i = 1, \dots, d\).
         \item \(T = f \in C^1(\Omega)\) and \(g_i = \partial_{x_i} f\)
@@ -2129,5 +2129,133 @@
     So we get \(\partial_{x_i} f(x) = g_i(x) \in C(\Omega)\) in the classical sense. So \(f \in C^1(\Omega)\).
   \end{proof}
 
+  
+  \begin{defn}[Sobolev Spaces]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. We define for \(1 \le p \le \infty\):
+    \begin{align*}
+      W^{1, p}(\Omega)
+      &= \{f \in L^p(\Omega) \mid \partial_{x_i} f \in L^p(\Omega)\ \forall i=1, \dots, d \} \\
+      W^{k, p}(\Omega)
+      &= \{f \in L^p(\Omega) \mid D^\alpha f \in L^p(\Omega) \ \forall |\alpha| \le k \} \\
+      W^{k, p}_{loc}(\Omega)
+      &= \{f \in L_{loc}^p(\Omega) \mid D^\alpha f \in L_{loc}^p(\Omega) \ \forall |\alpha| \le k \}
+    \end{align*}
+  \end{defn}
+
+  
+  \begin{thm}[Approximation of \(W_{loc}^{\frac{1}{p}}(\Omega)\) by \(C^\infty(\Omega)\)]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(f \in W_{loc}^{\frac{1}{p}}(\Omega)\). Then there exists \(\{f_n\} \subseteq C^\infty(\Omega)\) such that \(f_n \to f \) in \(W_{loc}^{\frac{1}{p}}(\Omega)\), i.e. for all \(K\) compact in \(\Omega\): \(\|f_n - f\|_{L^p(K)} + \sum_{i=1}^d \| \partial_{x_i}(f_n - f)\|_{L^p(K)} \to 0\) .
+  \end{thm}
+
+  \begin{proof}
+    Case \(\Omega = \mathbb{R}^d\): Take \(g \in C_c^\infty\), \(\int g = 1\), \(g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1}x)\). Then \(g_\epsilon \star f\). Then \(f \in L_{loc}^p(\Omega)\), so \(g_\epsilon \star f \to f\) in \(L_{loc}^p\) as \(\epsilon \to 0\). Moreover \(\partial_{x_i} (g_\epsilon \star \partial_{x_i} f) \to \partial_{x_i} f\) in \(L_{loc}^p\). Then we can take \(f_n = g_{\frac{1}{n} \star f}\)
+  \end{proof}
+
+  \begin{rem}
+    In general, if we want to compute the distributional derivative \(D^\alpha f\), then we can find \(f_n \to f\) in \(D'(\Omega)\) and compute \(D^\alpha f\). Then \(D^\alpha f_n \to D^\alpha f\) in \(D^\alpha (\Omega)\). As an example we can compute \(\nabla |f|\) with \(f \in W_{loc}^{\frac{1}{p}}(\Omega)\).
+    \begin{align*}
+      (\nabla |f|)(x)
+      &= \begin{cases}
+        \nabla f(x) & f(x) > 0 \\
+        - \nabla f(x) & f(x) < 0 \\
+        0 & f(x) = 0
+      \end{cases}
+    \end{align*}
+  \end{rem}
+
+  
+  \begin{thm}[Chain Rule]
+    let \(G \in C^1(\mathbb{R}^1)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{\frac{1}{p}}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{\frac{1}{p}}(\Omega)\) and
+    \begin{align*}
+      \partial_{x_i} G(f)
+      &= \sum_{k=1}^d \partial_k G(f) \partial_{x_i} f_k \quad \text{ in } D'(\Omega)
+    \end{align*}
+    Moreover, if \(G(0) \in L^p(\Omega)\) (i.e. either \(|\Omega| < \infty\) or \(G(0) = 0\)), then if \(f = (f_i)_{i=1}^d \subseteq W^{\frac{1}{p}}(\Omega)\), then \(G(f) \in W^{\frac{1}{p}}(\Omega)\).
+  \end{thm}
+
+  \begin{proof}
+    Since \(G \in C^1\) we have that \(G\) is bounded in any compact set. Moreover \(\|\nabla G\|_{L^\infty} < \infty\) implies:
+    \[|G(f) - G(0)| \le \|\nabla G\|_{L^\infty} |f| \in L^p_{loc}\]
+  
+    So \(G(f) \in L_{loc}^p\). Let us compute \(\partial_{x_i} G(f)\). Let \(\{f^{(n)}\}_{n=1}^\infty \subseteq C^\infty\) such that \(f^{(n)} \to f\) in \(W_{loc}^{\frac{1}{p}}\), then: 
+    \begin{align*}
+      |G(f(^n)) - G(f)|
+      \le \|\nabla G\|_{L^\infty} |f^{(n)} - f| \to 0 \text{ in  \(L_{loc}^p\)}
+    \end{align*}
+    So \(G(f^{(n)}) \to G(f)\) in \(L_{loc}^p\), thus \(\partial_{x_i} G(f^{(n)}) \to \partial_{x_i} G(f)\) in \(D'(\Omega)\). On the other hand, by the standard Chain-Rule for \(C^1\)-functions:
+    \begin{align*}
+      \partial_{x_i} G(f^{(k)})
+      &= \sum_{k=1}^d \underbrace{\partial_k G(f^{(k)})}_{\text{b.d.} \to \partial_k G(f)} \underbrace{\partial_i f_k^{(n)}}_{\to \partial_i f_k \text{ in } L^p(\Omega)} \\
+      &\to \sum_{k=1}^d \partial_k G(f) \partial_i f_k \text{ in }L_{loc}^p(\Omega)
+    \end{align*}
+    Thus
+    \begin{align*}
+      \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p
+      \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p \text{ in } D'(\Omega)
+    \end{align*}
+    So \(G(f) \in W_{loc}^{\frac{1}{p}}(\Omega)\). Aussume that \(G(0) \in L^p(\Omega)\) (i.e. \(|\Omega| < \infty\) or \(G(0) = 0\)). If \(f \in W^{\frac{1}{p}}(\Omega)\), then \(G(f) \in W^{\frac{1}{p}}(\Omega)\) since
+    \begin{align*}
+      |G(f) - G(0) | \le \|\nabla G\|_{L^\infty} |f| \in L^p \Rightarrow G(f) \in L^p
+    \end{align*}
+    and 
+    \begin{align*}
+      \partial_{x_i} G(f) = \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{\frac{1}{p}}(\Omega)
+    \end{align*}
+  \end{proof}
+
+  
+  \begin{thm}[Derivative of absolute value] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(f \in W^{\frac{1}{p}}(\Omega)\). 
+    Then \(|f| \in W^{\frac{1}{p}}(\Omega)\)
+    and  if \(f\) is real-valued:
+    \begin{align*}
+      (\nabla |f|) (x) =
+      \begin{cases}
+        \nabla f(x) & f(x) > 0 \\
+        -\nabla f(x) & f(x) < 0 \\
+        0 & f(x) = 0
+      \end{cases}
+    \end{align*}
+  \end{thm}
+
+  \begin{proof}
+    Exercise. Hint: Use the Chain-Rule for \(G_\epsilon(x) = \sqrt{\epsilon^2 + x^2} - \epsilon \to |x|\) as  \(\epsilon \to 0\)
+  \end{proof}
+
+  \section{Distribution vs. measures}
+  Let \(\mu\) be a Borel measure in \(\mathbb{R}^d\) s.t. \(\mu(K) < \infty\) for all compact \(K \subseteq \mathbb{R}^d\). Then define 
+  \begin{align*}
+    T: \ D(\mathbb{R}^d) &\longrightarrow \mathbb{C} \\
+    \phi &\longmapsto \int_{\mathbb{R}^d} \phi(x) \, d\mu(x) \quad \forall \phi \in C_c^\infty
+  \end{align*}
+  \(\leadsto\) T is a distribution since if \(\phi_n \to \phi\) in \(D(\Omega)\), then
+  \begin{align*}
+    |T(\phi_n) - T(\phi)| 
+    \le \int_{\mathbb{R}^d} |\phi_n - \phi| \, d\mu(x) \le \|\phi_n - \phi\|_{L^\infty} \left(\int_{K} \, d \mu \right) \to 0
+  \end{align*}
+  
+  
+  \begin{eg}
+    \(\partial_0\) in \(D'(\mathbb{R}^d)\) is a Borel probability measure.
+  \end{eg}  
+
+  
+  \begin{thm}[Positive distributions are measures] 
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(T \in D'(\Omega)\). Assume \(T \ge 0\), i.e. \(T(\phi) \ge 0\) for all \(\phi \in D(\Omega)\) satisfying \(\phi(x) \ge 0\) for all \(x\). Then there is a Borel positive measure \(\mu\) on \(\Omega\) such that \(\mu(K) < \infty\) for all \(K \subseteq \Omega\) compact and:
+    \[T(\phi) = \int_\Omega \phi(x) \, d\mu (x) \quad \forall \phi \in D^(\Omega)\]
+  \end{thm}
+
+  \begin{proof}See Lieb-Loss Analysis. Sketch: If \(O \subseteq \mathbb{R}^d\) is open, then 
+    \[\mu(O) = \sup \{T(\phi) \mid \phi \in D(\Omega), 0 \le \phi \le 1, \supp \phi \subseteq O\}\]
+    For all \(A \subseteq \Omega\) (not necessarily open),
+    \[\mu(A) = \inf \{\mu(O) \mid O \text{ open}, A \subseteq O\}\]
+    The mapping \(\mu: 2^\Omega \to [0, \infty]\) is an outer measure, i.e.
+    \begin{enumerate}
+      \item \(\mu(\emptyset) = 0\)
+      \item \(\mu(A) \le \mu(B)\) if \(A \subseteq B\)
+      \item \(\mu \left(\bigcup_{i=1}^\infty A_i\right) \le \sum_{i=1}^\infty \mu(A_i)\)
+    \end{enumerate}
+    From the outer measure we can find a \(\sigma\)-algebra \(\Sigma\) and \(\mu\) is a measure on \(\Omega\) s.t. \(E\) is measurable iff \[\mu(E) = \mu(E \cap A) + \mu(E \cap A^\complement)\].
+    So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
+  \end{proof}
 
 \end{document}
