@@ -2010,7 +2010,13 @@
   \end{rem}
 
   \begin{thm}[Taylor expansion for distributions]
-    Let \(T \in D'(\mathbb{R}^d)\) and \(f \in C_c^\infty(\mathbb{R}^d)\). Then: \[T(f_y) - T(f) = \int_0^1 \sum_{j=1}^d y_j(\partial_j T) (f_{ty}) \, dt\]
+    Let \(
+      T \in D'(\mathbb{R}^d)\) and \(f \in C_c^\infty(\mathbb{R}^d)\). Then \(y \mapsto T(f_y) \in C^\infty\)
+       and 
+    \[T(f_y) - T(f) = \int_0^1 \sum_{j=1}^d y_j(\partial_j T) (f_{ty}) \, dt.\]
+    In particular, if \(g \in L_{loc}^1\) and \(\nabla g \in L_{loc}^1\), then \(\forall y \in \mathbb{R}^d\):
+    \[g (x+y) - g(x) = \int_0^1 g(x + ty) y \, dt\]
+    for a.e. \(x \in \mathbb{R}^d\).
   \end{thm}
 
   \begin{proof}
@@ -2046,4 +2052,82 @@
     \end{align*}
     For all \(\phi \in C_c^\infty\): \( = g(x+y) - g(x)\) a.e. \(x \in \mathbb{R}^d\).
   \end{proof}
+
+
+  \begin{rem}
+    If \(T \in D'(\Omega)\), \(\Omega \subseteq \mathbb{R}^d\) open, if \(y \nabla T = 0\), then \(T = const\).
+  \end{rem}
+
+  \begin{thm}[Equivalence of the classical and distributional derivatives]
+      Let \(\Omega \subseteq \mathbb{R}^d\). Then TFAE:
+      \begin{enumerate}
+        \item \(T \in D'(\Omega)\) s.t. \(\partial_{x_i} T = g_i \in C(\Omega)\) for all \(i = 1, \dots, d\).
+        \item \(T = f \in C^1(\Omega)\) and \(g_i = \partial_{x_i} f\)
+      \end{enumerate}
+  \end{thm}
+
+  \begin{proof} \
+    \begin{itemize}
+      \item [(2) \(\Rightarrow\) (1):] If \(T = f \in C^1(\Omega)\), then: \(\partial_{x_i} f \in C(\Omega)\).
+      \begin{align*}
+        \partial_{x_i} T(\phi) &= - T(\partial_{x_i} \phi) 
+        = - \int_\Omega f(\partial_{x_i} \phi) \int_\Omega (\partial_{x_i} f) \phi
+      \end{align*}
+      for all \(\phi \in D(\Omega)\), so \(\partial_{x_i} T = \partial_{x_i} f\).
+      \item [(1) \(\Rightarrow\) (2):] Why is \(T = f\) with \(f\) continous? As \(\partial_{x_i} f = g_i\): 
+      \begin{align*}
+        f(x+y) - f(x) 
+        &= \int_0^1 \nabla f(x+ty) y \, dt
+        = \int_0^1 \sum_{i=1}^d g_i(x + ty) y_i \, dt
+      \end{align*}
+      So we get
+      \begin{align*}
+        f(y) = f(0) + \int_0^1 \sum_{i=1}^d g_i(ty) g_i \, dt.
+      \end{align*}
+      We expect that \(f \in C^1\) and \(\partial_{x_i} f = g_i\). But this is not trivial to prove.
+    \end{itemize}
+    \begin{align*}
+      \frac{f(y + he_i) - f(y)}{h} 
+      &= \int_0^1 \sum_{i=1}^d [g_i(ty + the_i)(y_i + h \delta_{ij})] \, dt \\
+      &= \int_0^1 g_i(ty + the_i) \, dt + \int_0^1 \sum_{j \ne i} \frac{[g_i(ty + the_i) - g_i(ty)]}{h} y_i \, dt \\
+      &\xrightarrow{h \to 0} \int_0^1 g_i(ty) \, dt  + \text{ is difficult ...}
+    \end{align*}
+    Lets take \(\phi \in C_c^\infty\), then:
+    \begin{align*}
+      T(\phi_{y}) - T(\phi)
+      &= \int_0^1 \underbrace{\nabla T}_{(g_i)_{i=1}^d} (\phi_{ty}) y \, dt \\
+      &= \int_0^1 \sum_{i=1}^d \left(\int_\Omega g_i(x) \smash{\underbrace{\phi_{ty} }_{\mathclap{= \phi(x - ty)}}} \, dx \right) \, dt \\
+      &= \int_{\mathbb{R}^d} \left(\sum_{i=1}^d \int_0^1 g_i(x) \phi(x-ty) y_i \ dt\right) \, dx \\
+      &= \int_{\mathbb{R}^d} \left(\sum_{i=1}^d \int_0^1 g_i(x + ty) \phi(x) y_i \, dt\right) \, dx \\
+      &= \int_{\mathbb{R}^d} \left(\sum_i \int_0^1 g_i(x + ty) y_i \, dt \right) \phi(x) \, dx
+    \end{align*}
+    Integrating against \(\psi(y)\) with \(\psi \in C_c^\infty\):
+    \begin{align*}
+      &\int_{\mathbb{R}^d} T(\phi_y) \psi(y) \, dy - T(\phi) \int_{\mathbb{R}^d} \psi(y) \, dy  \\
+      &\quad = \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} \sum_{i} \int_0^1 g_i (x + ty) y_i \psi(y) \, dt \, dy \right) \psi(x) \, dx
+    \end{align*}
+    \begin{align*}
+      &\Rightarrow T(\phi \star \psi) - T(\phi)\int \psi = \dots \\
+      &\Rightarrow \int_{\mathbb{R}^d} T(\psi_y) \phi(y) \, dy - T(\phi) \int \psi = \dots
+    \end{align*}
+    Take \(\psi \in C_c^\infty(\mathbb{R}^d)\) such that \(\int \psi = 1\). Then:
+    \begin{align*}
+      T(\phi)
+      &= \int_{\mathbb{R}^d} \underbrace{T(\psi_x) - \left(\int_{\mathbb{R}^d} \sum_{i=1}^d \int_0^1 g_i(x + ty) y_i \psi(y) \, dt \, dy\right)}_{\smash{f(x)}} \phi(x) \, dx
+    \end{align*}
+    for all \(\phi \in C_c^\infty\), so \(T = f \in C(\Omega)\). Thus \(T = f \in C(\Omega)\) and \(\partial_{x_i} T = g_i \in C(\Omega)\). Then we need to prove that \(f \in C^1(\Omega)\) and \(\partial_{x_i} f = g_i\) (classical derivative). Since \(f \in W_{loc}^{1,1}\):
+    \begin{align*}
+      f(x + y) - f(x)
+      &= \int_0^1 \sum_{i=1}^d g_i(x + ty)y_i \, dt \quad \forall x,y
+    \end{align*}
+    In particular:
+    \begin{align*}
+      \frac{f(x + h e_i) - f(x)}{h}
+      &= \int_0^1 \frac{1}{h} \sum_{i=1}^d g_i (x + the_i) h \delta_{ij} \, dt \\
+      &= \int_0^1 g_i(x + the_i) \, dt \xrightarrow{h \to 0} g_i(x)
+    \end{align*}
+    So we get \(\partial_{x_i} f(x) = g_i(x) \in C(\Omega)\) in the classical sense. So \(f \in C^1(\Omega)\).
+  \end{proof}
+
+
 \end{document}
