@@ -2468,7 +2468,7 @@
     \end{align*}
     Let us prove \(- \Delta = f\) in \(D'(\mathbb{R}^d)\). Take \(\phi \in D(\mathbb{R}^d)\). Then:
     \begin{align*}
-      (-\Delta u)(\phi) \\
+      (-\Delta u)(\phi)
       &= u(-\Delta \phi)\\
       &= \int_{\mathbb{R}^d} u(x) (-\Delta \phi)(x) \, dx \\
       &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} G(x-y) f(y) (-\Delta \phi)(x) \, dx \, dy\\
@@ -2499,10 +2499,107 @@
     So \(\partial_i u = \partial_i G \star f \in L_{loc}^1(\mathbb{R}^d)\). Thus \(u \in L_{loc}^1\), \(\partial_i u \in L_{loc}^1\) for all \(i\). So \(u \in W_{loc}^{1,1}(\mathbb{R}^d)\).
   \end{proof}
 
- 
+  Regularity: We consider the Laplace Equation \(\Delta u = 0\) in \(\mathbb{R}^d\).
 
- 
+  
+  \begin{lem}[Weyl]\label{weyl}
+    If \(\Omega \subseteq \mathbb{R}^d\) open and \(T \in D'(\Omega)\) s.t. \(\Delta T = 0\) in \(D'(\Omega)\), then: \(T = f \in C^\infty(\Omega)\) and \(f\) is a harmonic function.
+  \end{lem}
 
+  \begin{proof}
+    (\(\Omega = \mathbb{R}^d\)). Take \(\phi \in C_c^\infty\), then \(y \mapsto T(\phi_y) = T(\phi(-y))\) is \(C^\infty\) and \(\Delta_y T(\phi_y) = T((\Delta \phi)_y) = (\Delta T)(\phi_y)=0\). Take \(g \in C_c^\infty\), \(g\) is radial. Then:
+    \begin{align*}
+      \int_{\mathbb{R}^d} T(\phi_y) g(y) \, dy 
+      \overset{\text{(exercise)}}{=} \int_{\mathbb{R}^d} T(\phi)g(y) \, dy 
+      = T(\phi) \left(\int_{\mathbb{R}^d} g \, dy \right)
+    \end{align*}
+  
+  
+    \begin{ex}
+      Let \(f \in C^\infty(\mathbb{R}^d)\) be a harmonic function and \(g \in C_c^\infty\), \(g\) is radial. Then:
+      \begin{align*}
+        \int_{\mathbb{R}^d} f(x) g(x) \, dx = f(0) \left(\int_{\mathbb{R}^d} g(x) \, dx\right)
+      \end{align*}
+    \end{ex}
 
+    On the other hand:
+    \begin{align*}
+      \int_{\mathbb{R}^d} T(\phi_y) g(y) \, dy = T(\phi \star g) = T(g \star \phi) = \int_{\mathbb{R}^d} T(g_y) \phi(y)\, dy
+    \end{align*}
+
+    Take \(\int_{\mathbb{R}^d} g \, dy = 1\), then:
+    \begin{align*}
+      T(\phi) 
+      &= \int_{\mathbb{R}^d} T(g_y) \phi(y) \, dy 
+    \end{align*}
+    For all \(\phi \in C_c^\infty\). Then \(T = T(g_y) \in C^\infty\)
+  \end{proof}
+
+  Now lets regard the Poisson Equation \(- \Delta u = f\) in \(D'(\mathbb{R}^d)\).
+
+  \begin{rem}
+    Any solution has the form \(u = G \star g + h\) where \(\Delta h = 0\) in \(D'(\mathbb{R}^d)\). By Weyls Lemma (\ref{weyl}), \(h \in C^\infty\), then we only need to consider the regularity of \(G \star f\).
+  \end{rem}
+
+  \begin{rem}
+    The regularity is a \emph{local question}, namely if we write \[f = f_1 + f_2 = f \phi + f(1-\phi),\] where \(\phi = 1\) in a ball \(B\) and \(\phi \in C_c^\infty\).
+  \end{rem}
+  Then \(G \star f = G \star f_1 + G \star f_2\). Here \(f_2 = f(1 - \phi) = 0\) in \(B\). With Weyls Lemma (\ref{weyl}), \(G \star f_2 \in C^\infty\).
+
+  \begin{thm}[Low Regularity for Poisson Equation]\label{Low Regularity for Poisson Equation}
+    Lef \(f \in L^p(\mathbb{R}^d)\) and compactly supported. Then
+    \begin{enumerate}[label=\alph*)]
+      \item If \(p \ge 1\), then \begin{itemize}
+        \item \(G \star f \in C^1(\mathbb{R}^d)\) if \(d = 1\).
+        \item \(G \star f \in L_{loc}^q(\mathbb{R}^d)\) for any \(q < \infty\) if \(d = 2\).
+        \item \(G \star f \in L_{loc}^q(\mathbb{R}^d)\) for \(q < \frac{d}{d-2}\) if \(d \ge 3\).
+      \end{itemize}
+      \item If \(\frac{d}{2} < p \le d\), then \(G \star f \in C_{loc}^{0, \alpha}(\mathbb{R}^d)\) for all \(0 < \alpha < 2 - \frac{d}{p}\), i.e.
+      \begin{align*}
+        |(G \star f)(x) - (G \star f)(y) | \le C_k|x-y|^\alpha \quad \forall x,y \in K
+      \end{align*}
+      with \(K\) compact in \(\mathbb{R}^d\).
+      \item If \(p > d\), then \(G \star f \in C_{loc}^{1, \alpha} (\mathbb{R}^d)\) for all \(0 < \alpha < 1 - \frac{d}{p}\).
+    \end{enumerate}
+  \end{thm}
+
+  \begin{eg}
+    Let \(r = |x|\)
+    \begin{align*}
+      u(x) 
+      &= \omega(r) = \log(|\log(r)|)
+    \end{align*}
+    if \(0 < r < \frac{1}{2}\), so \(u\) is well-defined in \(B = B(0, \frac{1}{2})\). We conclude:
+    \begin{align*}
+      - \Delta_{\mathbb{R}^3} u(x) = - \omega''(r) - \frac{2 \omega'(r)}{r} = f(x) \in L^{\frac{3}{2}(B)}
+    \end{align*}
+    But the Theorem (b) tells us that if \(f \in L^{\frac{3}{2}}\) then \(u\) is continuous but \(u \notin C(B)\).
+  \end{eg}
+
+  \begin{proof}[Proof of theorem \ref{Low Regularity for Poisson Equation}]
+    \begin{enumerate}[label=\alph*)]
+      \item (\(p=1\)) Why is \(G \star f \in L_{loc}^q\)? Recall from the proof of Youngs inequality:
+      \item \begin{align*}
+        |(G\star f)(x)| 
+        &= \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \\
+        (\text{Hölder}) \quad &= \left(\int_{\mathbb{R}^d} |G(x-y)|^q |f(y)| \, yd\right)^{\frac{1}{q}}\left(\int_{\mathbb{R}^d} |f(y)| \, dy\right)^{\frac{1}{q'}}
+      \end{align*}
+      Where \(\frac{1}{q} + \frac{1}{q'} = 1\). Then:
+      \begin{align*}
+        |(G \star f)(x)|^q 
+        &\le C \int_{\mathbb{R}^d} |G(x-y)|^q |f(y)| \, dy
+      \end{align*}
+      For any Ball \(B = B(0, R) \subseteq \mathbb{R}^d\):
+      \begin{align*}
+        \int_B |G \star f(x)|^q \, dx
+        &\le C \int_B \left(\int_{\mathbb{R}^d} |G(x-y)|^q |f(y)| \, dy\right) \, dx \\
+        &= C \int_{\mathbb{R}^d} \left(\int_B |G(x-y)|^q \, dx \right) |f(y)| \, dy
+      \end{align*}
+      \(G(x) \sim \frac{1}{|x|^{d-2}} \leadsto |G|^{q} = \frac{1}{|x|^{(d-2)q}} \in L_{loc}^1(\mathbb{R}^d)\) if \((d-2)q < 2 \Leftrightarrow q < \frac{d}{d-2}\). Here, \(y \in \supp f \), so \(|y| \le R_1\), then \(|x-y| \le R + R\) if \(|x| \le R\). With \(y \in \supp f\), this implies:
+      \begin{align*}
+        \int_{B(0,R)}|G(x-y)|^q \, dx \le \int_{|z| \le R + R_1} |G(z)|^q \, dz < \infty
+      \end{align*}
+    \end{enumerate}
+  \end{proof}
 
 \end{document}
