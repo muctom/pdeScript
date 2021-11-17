@@ -50,6 +50,7 @@
 \newcommand{\dist}{\operatorname{dist}}
 \newcommand{\four}{\mathcal{F}}
 \newcommand{\supp}{\operatorname{supp}}
+\newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Rd}{\mathbb{R}^d}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
@@ -1718,50 +1719,95 @@
     \[\fint_{B(x,r)} |f(y)| \, dy \xrightarrow{r \to 0} 0\]
   \end{ex}
 
-  % \begin{proof}[Solution]
-  %   If \(g \in L^1(\mathbb{R}^d) \int g = 1, g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1} x)\), then: \(g_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\)
+  \begin{proof}
+    Clearly the same result holds with \(\mathbb{R}^d \leadsto \Omega \subseteq \mathbb{R}^d\) open. Also it suffices to consider \(f \in L^1(\mathbb{R}^d)\). From the last time discussion, by a density argument there exists \(r_n \to 0\) s.t.
+    \[\fint_{B(x, r_n)} |f(y) - f(x)| \, dy = 0\]
+    for a.e. \(x \in \mathbb{R}^d\). We prove that for all \(\epsilon > 0\), te set \(A_\epsilon = \{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy > \epsilon\}\) has measure \(0\). This will imply that 
+    \[\bigcup_{n = 1}^\infty A_{\frac{1}{n}} = \left\{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \int_{B(x,r)} |f(y) - f(x)| \, dy > 0\right\}\] has measure \(0\), which is what wie want to show. First, we show that \(|A_\epsilon| = 0\): Take \(\{f_n\} \subseteq C_c^\infty\), \(f_n \to f\) in \(L^1(\mathbb{R}^d)\). By the triangle inequality:
+    \begin{align*}
+      |f(y) - f(x)| \le |f(y) - f_n(y)| + |f_n(y) - f_n(x)| + |f_n(x) - f(x)|
+    \end{align*}
+    So we get 
+    \begin{align*}
+      &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
+      \quad &\le \fint_{B(x,r)}|f(y) - f_n(y)| \, dy + \fint_{B(x, r)} |f_n(y) - f_n(x)| + |f_n(x) - f(x)| \\
+      \Rightarrow \quad \limsup_{r \to 0} ... &\le \limsup_{r \to 0} (\dots) +0 + |f_n(x) - f(x)|
+    \end{align*}
+    Thus, for all \(x \in A_\epsilon\), then:
+    \begin{align*}
+      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(y) - f(y)| \, dy + |f_n(x) - f(x)| > 2 \epsilon
+    \end{align*}
+    Observation: If \(a, b \ge 0\), \(a + b > 2 \epsilon\) then either \(a > \epsilon\) or \(b > \epsilon\). Therefore \(A_\epsilon \subseteq \left(S_{n, \epsilon} \bigcup \tilde S_{n, \epsilon}\right)\), where
+    \begin{align*}
+      S_{n, \epsilon} &= \{x \mid |f_n(x) - f(x)| > \epsilon\} \\
+      \tilde S_{n, \epsilon} &= \{x \mid \limsup_{r \to 0} \fint_{B(x,r)} |f_n(y) - f(y)| \, dy > \epsilon\}
+    \end{align*}
+    Consequently: \(|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}|\) for all \(n \ge 1\). By the Markov / Chebyshev inequality:
+    \begin{align*}
+      |S_{n, \epsilon}| 
+      &\le \int_{S_{n, \epsilon}} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
+      = \int_{\mathbb{R}^d} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
+      = \frac{\|f_n - f\|_{L^1}}{\epsilon}
+    \end{align*}
+    We want to prove a simpler bound for \(\tilde S_{n \epsilon}\). For all \(x \in \tilde S_{n \epsilon}\): 
+    \begin{align*}
+      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(x) - f(y)| \, dy > \epsilon
+    \end{align*}
+    So there is a \(r_x \in (0,1)\) s.t.
+    \[\fint_{B(x,r_x) = B_x} |f_n(y) - f(y)| \, dy > \epsilon\]
+    Thus \(\tilde S_{n \epsilon} \subseteq \left(\bigcup_{x \in \tilde S_{n, \epsilon}} B_x\right)\). 
     
-  %   \begin{lem}
-  %     If \(f_n \to f\) in \(L^1(\Omega)\), then there is a subsequence \(\{f_{n_k}\}\) s.t. we have the Dominated Convergence 
-  %     \begin{align*}
-  %       \begin{cases}
-  %         f_{n_k} (x) \to f(x) a.e. \\
-  %         |(f_{n_k}(x))| \le F(x) \in L^1(\Omega)
-  %       \end{cases}
-  %     \end{align*}
-  %   \end{lem}
-      
-  %     Consequence of the proof of the completeness of \(L^1(\Omega)\). Consequence:
-  %     \begin{align*}
-  %       \int_{B(x, r)} f 
-  %       &= \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(x, r))(y)}{|B(x,r)|} \, dy 
-  %       = \int_{\mathbb{R}^d} \frac{\mathbb{1}(B(0,r))}{|B(0,r)} (x-y) f(y) \, dy \\
-  %       &= (g_r \star f) (x) , \quad g_r = \frac{\mathbb{1}(B(0,r))}{|B(0,r)|} \text{(similar to \(g_\epsilon\))}
-  %     \end{align*}
-  %     We le that if \(f \in L^1\), then: \(g_r \star f \xrightarrow{r \to 0} f\) in \(L^1\). So up to a subsequence we have \((g_r \star f)(x) \to f(x)\) a.e.
-  %     Here the Lebesgue differentation then is stronger:
-  %     \begin{itemize}
-  %       \item \(g_r \star f(x) \to f(x)\) as \(r \to 0\) a.e. x. 
-  %       \item \begin{align*}
-  %         \left| (g_r \star f)(x) - f(x) \right|
-  %         &= \left| \fint_{B(x,r)} (f(y) - f(x)) \, dy \right| 
-  %         = \fint_{B(x,r)} |f(y) - f(x)| \, dy
-  %       \end{align*}
-  %     \end{itemize}
-  %     \begin{enumerate}[label=Step \arabic*)]
-  %       \item Assume \(f \in C(\mathbb{R}^d)\). Then:
-  %       \[\fint_{B(x,r)} |f(y) - f(x)| \, dy \le \sup_{|y-x| \le r} |f(y) - f(x)| \to 0 \quad \forall x \in \mathbb{R}^d\] 
-  %       since \(f\) is continuous
-  %       \item Take \(f \in L^1(\mathbb{R}^d)\), then \(\exists \{f_n \subseteq C_c(\mathbb{R}^d)\}\) s.t. \(f_n \to f\) in \(L^1(\mathbb{R}^d)\) and \(f_n(x) \to f(x)\) for a.e. \(x \in \mathbb{R}^d\).
-  %       \begin{align*}
-  %         &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
-  %         &= \fint_{B(x,r)} \underbrace{|f(y) - f_n(y)}_{|f(x) - f_n(x)} + \int_{B(x, r)}|f_n(y) - f_n(x)| \, dy + \fint_{B(x,r)} |f_n(x) - f(x)| \, dy \\
-  %         \Rightarrow &\limsup_{n \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy \le 2 |f(x) - f_n(x)| \xrightarrow{n \to \infty} 0
-  %       \end{align*}
-  %       Claim without proof: For all \(g \in L^1\)
-  %       \[\fint_{B(x,r)} g(y) \, dy \xrightarrow{r \to 0} g(x)\]
-  %      \end{enumerate}
-  % \end{proof}
+    \begin{lem}[Vitali Covering]
+      If \(F\) is a collection of balls in \(\mathbb{R}^d\) with bounded radius, then there exists a sub-collection \(G \subseteq F\) s.t.
+      \begin{itemize}
+        \item \(G\) has disjoint balls
+        \item \(\bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5B, 5B(x,r) = B(x, 5r)\)
+      \end{itemize}
+    \end{lem}
+
+    \begin{rem}
+      The condition of the boundedness of the radius is necessary. Otherwise, consider \(\{B(0,n)\}_{n=1}^\infty\)
+    \end{rem}
+
+    Here consider \(F = \{B_x\}_{x \in \tilde S_{n \epsilon}}\). With the vitali covering leamm there is a \(G \subseteq F\) s.t. \(G \) contains disjoint balls and:
+    \[\tilde S_{n, \epsilon} \subseteq \bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5 B\]
+    So we get
+    \[|\tilde S_{n, \epsilon}| \le |\bigcup_{B \in G} 5B| \le \sum_{B \in G} |5B| = \sum_{B \in G} 5^d|B|\]
+    On the other hand, for all \(B \in G \subseteq F\): 
+    \begin{align*}
+      \fint_B |f_n(y) - f(y)| \, dy > \epsilon \Rightarrow \int_B |f_n - f| > \epsilon|B|
+    \end{align*}
+    This implies:
+    \begin{align*}
+      \sup_{B \in G} \int_B |f_n - f| > \epsilon \sum_{B \in G} |B|
+    \end{align*}
+    Since balls in \(G\) are disjoint:
+    \begin{align*}
+      \int_{\mathbb{R}^d} \ge \int_{\bigcup_{B \in G}} |f_n - f| \, dy 
+      > \epsilon \sum_{B \in G} |B|
+      \ge \frac{\epsilon}{5^d} |\tilde S_{n, \epsilon}|
+    \end{align*}
+    So 
+    \[|\tilde S_{n \epsilon}| \le \frac{5^d}{\epsilon} \|f_n - f\|_{L^1}\]
+    In summary: 
+    \[|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}| \le \frac{5^d + 1}{\epsilon} \|f_n - f\|_{L^1} \to 0\]
+    as \(n \to \infty\). So \(|A_\epsilon| = 0\) for all \(\epsilon > 0\)
+  \end{proof}
+  
+  \begin{rem}
+    \begin{enumerate}
+      \item The proof can be done by using the Besicovitch covering lemma: For all \(E \subseteq \mathbb{R}^d\) s.t. \(E\) is bounded. Let \(F = \) collection of balls s.t. for all \(x \in E\) there is a \(B_x \in F\) s.t. \(x\) is the center of \(B_x\). There is a sub-collection \(G \subseteq F\) s.t.
+      \begin{itemize}
+        \item \(E \subseteq \bigcup_{B \in G} B\)
+        \item Any point in \(E\) belongs to at most \(C_d\) balls in \(C_T\) (\(C_d\) depends only on \(\mathbb{R}^d\)), i.e. 
+        \begin{align*}
+          \mathbb{1}_E(x) \le \sum_{B \in G} \mathbb{1}_B(x) \le C_d \mathbb{1}_E(x) \forall x
+        \end{align*}
+      \end{itemize}
+      \item By a simpler argument we can prove the weak \(L^1\)-estimate:
+      \[\{x \mid f^\star(x) > \epsilon\} \le \frac{c_d}{\epsilon} \|f\|_{L^1(\mathbb{R}^d)}\] (Hardy-Littlewood maximal function)
+    \end{enumerate}
+  \end{rem}
 
   \begin{ex}[E 3.2]
     Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Take \(f \in L^p, g \in L^q\), prove:
@@ -1769,7 +1815,7 @@
     Aufgabenstellung ..
   \end{ex}
 
-  \begin{proof}[Solution]
+  \begin{proof}[Solution] \
     \begin{enumerate}[label=Step \arabic*)]
       \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
       \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. We have
@@ -1963,7 +2009,7 @@
         \[\underbrace{g_n \star f}_{\in C_c^\infty} \to g \star f \quad \text{ in } D(\mathbb{R}^d)\]
         So \(T(g_n \star f) \xrightarrow{n \to \infty} T(g \star f)\).
         Finally we optain:
-        \[\int g(y) T(f_n) \, dy = T(g \star f)\] \qedhere
+        \[\int g(y) T(f_n) \, dy = T(g \star f)\qedhere\] 
       \end{enumerate}
   \end{enumerate}
   \end{proof}
@@ -2257,5 +2303,206 @@
     From the outer measure we can find a \(\sigma\)-algebra \(\Sigma\) and \(\mu\) is a measure on \(\Omega\) s.t. \(E\) is measurable iff \[\mu(E) = \mu(E \cap A) + \mu(E \cap A^\complement)\].
     So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
   \end{proof}
+
+
+  \begin{ex}[E 4.1]
+    Prove that if \(T_n \to T\) in \(D'(\mathbb{R}^d)\), then \(D^\alpha T_n  \to D^\alpha T\) in \(D^\alpha(\mathbb{R}^d)\) for all \(\alpha \in \mathbb{N}^d\).
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    See Goodnotes.
+  \end{proof}
+
+  \begin{ex}[E 4.2]
+    
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    See Goodnotes.
+  \end{proof}
+
+  \begin{ex}[E 4.3]
+    \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\) \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1}x)\). Then \(f_\epsilon \to \delta_0\) in \(D'(\mathbb{R}^d)\). 
+  \end{ex}
+
+  \begin{proof}[My Solution]
+    See Goodnotes.
+  \end{proof}
+
+  \begin{ex}[E 4.4]
+    \(\{f_n\} \subseteq L^1\), \(\supp\) in \(B(0,1), f_n \to f\) in \(L^1\). Prove for all \(g \in C_c^\infty\) that \(f_n \star g \to f \star g\) in \(D(\mathbb{R}^d)\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Since \(f_n \in L^1\), \(\supp B(0,1)\), \(g \in C_c^\infty\) We have \(f_n \star g \in C_c^\infty\), \(\supp(f_n \star g) \subseteq (\supp g) + \overline{B(0,1)} = K\). Since \(f_n \to f\) in \(L^1\) there is a subsequence \(f_{n_k} \to f\) almost everywhere, so \(f \supp\) in \(\overline{B(0,1)}\), so \(f \star g \in C_c^\infty\), \(\supp(f \star g) \subseteq K\). We have:
+    \begin{align*}
+      |f_n \star g(x) - f \star g(x)| 
+      &= \left|\int_{\mathbb{R}^d} (f_n(y)-f(y))g(x-y) \, dy \right| \\
+      &\le \int_{\mathbb{R}^d} |f_n(y) - f(y)| |g(x-y)| \, dy \\
+      &\le \|g\|_{L^\infty} ||f_n - f\|_{L^1} 
+      \xrightarrow{n \to \infty} 0
+    \end{align*}
+    thus \(\|f_n \star g - f \star g\|_{L^\infty} \to 0\). Similary:
+    \begin{align*}
+      \|D^\alpha(f_n \star g) - D^\alpha (f\star g)\|_{L^\infty} 
+      &= \|f_n \star \underbrace{(D^\alpha g)_{\in C_c^\infty}} - f \star (D^\alpha g)\|_{L^\infty} \xrightarrow{n \to \infty} 0  \forall \alpha
+    \end{align*}
+    So \(f_n \star g \to f \star g\) in \(D(\mathbb{R}^d)\).
+  \end{proof}
+
+  \begin{ex}[E 4.5]
+    Compute distributional derivatives \(f', f''\) of \(f(x) = x|x-1|\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    We prove \(f'(x) = g(x) \coloneqq \begin{cases}
+      2x - 1 & x > 1 \\  1- 2x & x < 1
+    \end{cases}\). Take \(\phi \in C_c^\infty(\mathbb{R}^d)\).
+    \begin{align*}
+      -f'(\phi) 
+      &= - \int_{\mathbb{R}^d} f \phi' \, dy \\
+      &= - \int_{-\infty}^1 f \phi' \, dy - \int_1^\infty f \phi' \, dy  \\
+      &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 f' \phi \, dy + [f \phi]_1^\infty - \int_1^\infty f' \phi \\
+      &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 f' \phi \, dy + [f \phi]_1^\infty - \int_1^\infty g \phi \\
+      &= f(1-) \phi(1) - f(1+)\phi(1) - \int_{\mathbb{R}^d} g \phi \, dy \\
+      &= 0  - \int_{\mathbb{R}^d} g \phi \, dy \\
+    \end{align*}
+    Now we compute \(f'' = g'\). Take \(\phi \in C_c^\infty(\mathbb{R}^d)\):
+    \begin{align*}
+      -(g')(\phi) 
+      &= \int_{\mathbb{R}^d} g\phi' \\
+      &= \int_{- \infty}^1 + \int_1^\infty  \\
+      &= [g(1-) - g(1+)] \phi(1) - \int_{\infty}^1(-2) \phi - \int_1^\infty 2 \phi \\
+      &= - 2 \phi(1) + \int_{-\infty}^\infty [2 \mathbb{1}_{(1, \infty)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
+      &= -2 \delta_1(\phi) + \int_{-\infty}^\infty [2 \mathbb{1}_{(1, \infty)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
+      \Rightarrow g' &= \underbrace{2 \delta_1}_{\notin L_{loc}^1} - \underbrace{2 \mathbb{1}_{(-\infty, 1)} + 2 \mathbb{1}_{(1, \infty)}}_{\int L_{loc}^1}
+    \end{align*}
+  \end{proof}
+
+  \begin{ex}[Bonus 4]
+    Let \(T \in D'(\mathbb{R}^d)\) and \(f \in D(\mathbb{R}^d)\). Recall
+    \[(f \star T)(y) = T(\tilde f_y) = T(f(y - \cdot)) \in C^\infty(\mathbb{R}^d)\]
+    Prove that if \(\int_{\mathbb{R}^d} f = 1\) and \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\), then: \(f_\epsilon \star T \to T\) in \(D'(\mathbb{R}^d)\) as \(\epsilon \to 0\)
+  \end{ex}
+
+  \chapter{Weak Solutions and Regularity}
+
+  \begin{defn}
+    Consider the linear PDE:
+    \[\sum_{\alpha} c_\alpha D^\alpha u(x) = F(x), \quad c_\alpha \text{ constant}, F \text{ given}\]
+    A function is called a weak solution (a distributional solution) if 
+    \[\sum_\alpha c_\alpha D^\alpha u = F \quad \text{in } D'(\Omega).\]
+    Namely,
+    \[\sum_\alpha (-1)^{|\alpha|} c_\alpha \int_\Omega u (D^\alpha \phi) = \int_\Omega F \phi, \quad \forall \phi \in D(\Omega)\]
+  \end{defn}
+
+  Regularity: Given some condition on the data \(F\), what can we say about the smoothness of \(u\)? Can we say that the equation holds in the classical sense? We derived \(G\) (the solution of the Laplace Equation) before in two ways:
+  \begin{enumerate}
+    \item \(\Delta G(x) = 0\) for all \(x \ne 0\), assuming \(G(x) = G(|x|)\) and \(d \ge 2\)
+    \item \(\hat G(k) = \frac{1}{|2\pi k}|^2\), \(d \ge 3\)
+  \end{enumerate}
+
+  
+  \begin{thm}
+    For all \(d \ge 1\) we have \(G \in L_{loc}^1(\mathbb{R^d})\) and \(- \Delta G = \delta_0\) in \(D'(\mathbb{R}^d)\).
+  \end{thm}
+
+  \begin{proof}
+    Take \(\phi \in D(\mathbb{R}^d)\). Then:
+    \begin{align*}
+      (- \Delta G_y)(\phi) 
+      &= G_y(-\Delta \phi)
+      = \int_{\mathbb{R}^d} G_y(x) (-\Delta \phi)(x) \, dx \\
+      &= \int_{\mathbb{R}^d} G(y-x) (-\Delta \phi)(x) \, dx \\
+      &= [G \star (-\Delta \phi)](y) = (-\Delta)(G \star \phi)(y)
+    \end{align*}
+    Recall for all \(f \in C^2\), \(-\Delta (G \star f) = f\) pointwise. So we can conclude \(-\Delta G_y = \delta_y\) in \(D'(\mathbb{R}^d)\).
+  \end{proof}
+  
+  \begin{rem}
+    In \(d = 1\), \(G(x) = - \frac{1}{2}|x|\), so \(-G'(x) = \sgn(x)/2\), so \(-G''(x) = \delta_0\).
+  \end{rem}
+
+  \begin{rem}
+    Formally: \(-\Delta(G_y \star \phi) = (-\Delta G_y) \star \phi(x) = (\delta_0 \star \phi)(x) = \int \delta_0(y) \phi(x y) \, dy = \delta_0 (\phi(x-\bullet))\)
+  \end{rem}
+
+  \begin{thm}[Poisson's equation with \(L_{loc}^1\) data]\label{PoissonsequationwithL1locdata}
+    Let \(f \in L_{loc}^1(\mathbb{R}^d)\) s.t. \(\omega_d f \in L^1(\mathbb{R}^d)\) where 
+    \[\omega_d(x) = \begin{cases}
+      1 + |x| & d = 1 \\ \log(1 + |x|) & d=2 \\ \frac{1}{1 + |x|^{d-2}} & d \ge 3,
+    \end{cases}\]
+    then \(u(x) = (G\star f)(x) \in L_{loc}^1(\mathbb{R}^d)\). Moreover \(-\Delta u = f\) in \(D'(\mathbb{R}^d)\). In fact, \(u \in W_{loc}^{1,1}(\mathbb{R}^d)\) and:
+    \[\partial_{x_i} u(x) = (\partial_{x_i} G) \star f(x) = \int_{\mathbb{R}^d} (\partial_{x_i} G)(x-y)f(y) \, dy\]
+  \end{thm}
+
+  \begin{rem}
+    We can also replace \(\mathbb{R}^d\) by \(\Omega\) and get \(- \Delta u = f\) in \(D'(\Omega)\). 
+  \end{rem}
+
+  \begin{proof}[Proof of Theorem \ref{PoissonsequationwithL1locdata}]
+    First we check that \(u \in L_{loc}^1\). Take any Ball \(B(0, R) \subseteq \mathbb{R}^d\), prove \(\int_B |u| \, dy < \infty\). We have 
+    \begin{align*}
+      \int_B |u| \, dy 
+      &= \int_B \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \, dx \\
+      &\le \int_B \int_{\mathbb{R}^d} |G(x-y)||f(y)| \, dy \, dx \\
+      &= \int_{\mathbb{R}^d} \left(\int_B |G(x-y) \, dx\right)|f(y)| \, dy
+    \end{align*}
+    If \(y \notin B = B(0,R)\), then by Newtons's theorem (Mean-value theorem):
+    \begin{align*}
+      \int_{B(0, R)} |G(x-y)| \, dx
+      &= |B(0, r)| |G(y)|
+      \le C|B| \omega_d(y)
+    \end{align*}
+    If \(y \in B\), then \(|y| \le R\), so \(|x-y| \le 2 R\) if \(x \in B\).
+    \begin{align*}
+      \int_{B(0,R)}|G(x-y)| \, dx
+      &\le \int_{|x-y| \le 2 R} |G(x-y)| \, dx
+      = \int_{|z| \le 2 R} |G(z)| \, dz 
+      \le c_R \text{ as } G \in L_{loc}^1
+    \end{align*}
+    Thus
+    \begin{align*}
+      \int_B |u| \, dy 
+      \le c_B \int_{|y| \ge R} \omega_d (y) |f(y)|\, dy + c_B \int_{|y| \le R} |f(y)| \, dy < \infty
+    \end{align*}
+    Let us prove \(- \Delta = f\) in \(D'(\mathbb{R}^d)\). Take \(\phi \in D(\mathbb{R}^d)\). Then:
+    \begin{align*}
+      (-\Delta u)(\phi) \\
+      &= u(-\Delta \phi)\\
+      &= \int_{\mathbb{R}^d} u(x) (-\Delta \phi)(x) \, dx \\
+      &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} G(x-y) f(y) (-\Delta \phi)(x) \, dx \, dy\\
+      &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} G(y-x) f(y) (-\Delta \phi)(x) \, dx \, dy \\
+      &= \int_{\mathbb{R}^d} [G \star (-\Delta \phi)](y) f(y) \, dy \\
+      &= \int_{\mathbb{R}^d} -\Delta(G\star \phi)(y) f(y) \, dy \\
+      &= \int_{\mathbb{R}^d} \phi(y) f(y) \, dy
+    \end{align*}
+    So \(-\Delta u = f\) in \(D'(\mathbb{R}^d)\). We check that \(\partial_i G \star f \in L_{loc}^1(\mathbb{R}^d)\). Note that 
+    \[|\partial_i G(x)| \le c \frac{1}{|x|^{d-1}} \in L_{loc}^1(\mathbb{R}^d)\]
+    and
+    \[\int_{B(0,R)} |\partial_i G(x-y)| \, dx \le \begin{cases}
+      C_r \omega_d(y) & |y| \ge R \\ C_r & |y| \le R
+    \end{cases}\]
+    So \(\int_{B(0,R)} |(\partial_i G\star f)|(y) < \infty\) for all \(R > 0\). For all \(\phi \in D(\mathbb{R}^d)\): 
+    \begin{align*}
+      -(\partial_i u)(\phi) 
+      &= u(\partial_i \phi)
+      = \int_{\mathbb{R}^d} u(x) \partial_i \phi(x) \, dx \\
+      &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} G(x-y) f(y) \partial_i \phi(x) \, dx \, dy \\
+      &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} G(y-x) f(y) \partial_i \phi(x) \, dx \, dy \\
+      &= \int_{\mathbb{R}^d} (G \star \partial_i^y \phi)(y) f(y) \, dy \\
+      &= \int_{\mathbb{R}^d}(\partial_i^y G \star \phi)(y) f(y) \, dy \\
+      &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \partial_i^y G(y-x) f(y) \phi(x) \, dx \, dy \\
+      &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} -(\partial_i G)(x-y) f(y) \phi(x) \, dx \, dy \\
+      &= - \int_{\mathbb{R}^d} (\partial_i G \star f)(x) \phi(x) \, dx
+    \end{align*}
+    So \(\partial_i u = \partial_i G \star f \in L_{loc}^1(\mathbb{R}^d)\). Thus \(u \in L_{loc}^1\), \(\partial_i u \in L_{loc}^1\) for all \(i\). So \(u \in W_{loc}^{1,1}(\mathbb{R}^d)\).
+  \end{proof}
+
+ 
+
+ 
+
+
 
 \end{document}
