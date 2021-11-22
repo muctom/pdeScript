@@ -1350,7 +1350,7 @@
     \end{enumerate}
   \end{thm}
 
-  \begin{thm}[Hausdorff-Young-Inequality]
+  \begin{thm}[Hausdorff-Young-Inequality]\label{hausdorff-young}
     If \(1 \le p \le 2\), \(\frac{1}{p} + \frac{1}{p'} = 1\) and \(f \in L^p(\mathbb{R}^d) \cap L^1(\mathbb{R}^n)\) then
     \[\| \hat f \|_{L^{p'}} \le \|f\|_{L^p}\]
     and 
@@ -1810,34 +1810,33 @@
   \end{rem}
 
   \begin{ex}[E 3.2]
-    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Take \(f \in L^p, g \in L^q\), prove:
-    \[\widehat{f \star g} = \hat f \hat g\]
-    Aufgabenstellung ..
+    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdroff-Young inequality. Prove that 
+    \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \quad \forall k \in \mathbb{R}^d\]
+
+    Hint: In the lecture we already discussed the case \(f, g \in C_c(\mathbb{R}^d)\).
   \end{ex}
 
   \begin{proof}[Solution] \
     \begin{enumerate}[label=Step \arabic*)]
       \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
-      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. We have
-      \item
+      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. we have
       \begin{align*}
-        \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
-        \text{(Hausdorff-Young)} \quad &\le \|f \star g\|_{L^r} 
-        = \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
+        \text{(Hausdorff-Young)} \quad &\|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
+        &\le \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^r} \\
+        &= \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
         &\le \| (f-f_n) \star g_n \|_{L^r} + \| f_n \star (g_n - g)\|_{L^r} \\
-        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty}
+        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
       \end{align*}
       Moreover:
       \begin{align*}
         \|\hat f_n \hat g_n - \hat f \hat g \|_{L^{r'}} 
         &= \|(\hat f_n \hat f)\hat g_n + \hat f (\hat g_n - \hat g) \|_{L^{r'}} \\
         \text{(Hölder)} \quad &\le \|\hat f_n - \hat f \|_{L^{p'}} \| \hat g_n \|_{L^{q'}} + \| \hat f \|_{L^{q'}} \\
-        \text{(Hausdorff-Young)} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
+        \text{(Hausdorff-Young (\ref{hausdorff-young}))} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
       \end{align*}
       So \(\hat f_n \hat g_n \to \hat f \hat g \text{ in } L^{r'}\)
       \(\widehat{f \star g} = \hat f \hat g\) in \(L^{r'}\)
-      \(\frac{1}{r'} = \frac{1}{p'} + \frac{1}{q'}\) 
-      
+      \(\frac{1}{r'} = \frac{1}{p'} + \frac{1}{q'}\) \qedhere
     \end{enumerate}
   \end{proof}
 
@@ -2015,11 +2014,11 @@
   \end{proof}
   
   \begin{thm}
-    Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(T \i D'(\Omega)\) and \(f \in C_c^\infty(\Omega)\). Denote
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(T \in D'(\Omega)\) and \(f \in C_c^\infty(\Omega)\). Denote
     \[\Omega_f = \{y \in \mathbb{R}^d \mid \supp f_y = y + \supp f \subseteq \Omega\}\]
     \begin{enumerate}[label=\alph*)]
       \item \(y \mapsto T(f_y) \in C^\infty(\Omega_f)\) and \(D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T((D^\alpha f)_y)\)
-      \item For all \(g \in L^1(\Omega_g)\) compactly supported in \(\Omega_f\)it holds:
+      \item For all \(g \in L^1(\Omega_g)\) compactly supported in \(\Omega_f\) and it holds:
       \[\int_\Omega g(y) T(f_y) \, dy = T(f \star g).\]
     \end{enumerate}
   \end{thm}
@@ -2049,7 +2048,7 @@
     If \(u \in C^1(\mathbb{R}^d)\), then:
       \begin{align*}
         u(x+y) - u(x) 
-        &= \int_0^1 \sum_{j=1}^d y_j u(x + ty_j) \, dt
+        &= \int_0^1 \sum_{j=1}^d y_j (\partial_j u)(x + ty_j) \, dt
         = \int_0^1 y \nabla u(x+ty) \, dt
       \end{align*}
       So we get that if \(\nabla u = 0\), then \(u(x+y) - u(x) = 0\) for all \(x,y\), so \(u = const.\)
@@ -2079,7 +2078,7 @@
   \begin{cor}
     Let \(g \in L_{loc}^1(\mathbb{R}^d)\) s.t. \(\partial_j g\in L_{loc}^1(\mathbb{R}^d)\) for all \(j = 1, 2, \dots, d\) (i.e. \(g \in W_{loc}^{1,1}(\mathbb{R}^d)\)). Then for all \(y \in \mathbb{R}^d\):
     \begin{align*}
-      g(x+y) - g(x) &= \int_0^1 y \nabla g(x + ty) \, dt \\
+      g(x+y) - g(x) &= \int_0^1 y \cdot \nabla g(x + ty) \, dt \\
       &= \int_0^1 \sum_{j=1}^d y_j \partial g(x+ty) \, dt
     \end{align*}
     for a.e. \(x\).
@@ -2182,23 +2181,23 @@
       W^{1, p}(\Omega)
       &= \{f \in L^p(\Omega) \mid \partial_{x_i} f \in L^p(\Omega)\ \forall i=1, \dots, d \} \\
       W^{k, p}(\Omega)
-      &= \{f \in L^p(\Omega) \mid D^\alpha f \in L^p(\Omega) \ \forall |\alpha| \le k \} \\
+      &= \{f \in L^p(\Omega) \mid D^\alpha f \in L^p(\Omega) \ \forall |\alpha|\le k \} \\
       W^{k, p}_{loc}(\Omega)
-      &= \{f \in L_{loc}^p(\Omega) \mid D^\alpha f \in L_{loc}^p(\Omega) \ \forall |\alpha| \le k \}
+      &= \{f \in L_{loc}^p(\Omega) \mid D^\alpha f \in L_{loc}^p(\Omega) \ \forall |\alpha|\le k \}
     \end{align*}
   \end{defn}
 
   
-  \begin{thm}[Approximation of \(W_{loc}^{\frac{1}{p}}(\Omega)\) by \(C^\infty(\Omega)\)]
-    Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(f \in W_{loc}^{\frac{1}{p}}(\Omega)\). Then there exists \(\{f_n\} \subseteq C^\infty(\Omega)\) such that \(f_n \to f \) in \(W_{loc}^{\frac{1}{p}}(\Omega)\), i.e. for all \(K\) compact in \(\Omega\): \(\|f_n - f\|_{L^p(K)} + \sum_{i=1}^d \| \partial_{x_i}(f_n - f)\|_{L^p(K)} \to 0\) .
+  \begin{thm}[Approximation of \(W_{loc}^{1,p}(\Omega)\) by \(C^\infty(\Omega)\)]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(f \in W_{loc}^{1,p}(\Omega)\). Then there exists \(\{f_n\} \subseteq C^\infty(\Omega)\) such that \(f_n \to f \) in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(K \subseteq \Omega\) compact: \(\|f_n - f\|_{L^p(K)} + \sum_{i=1}^d \| \partial_{x_i}(f_n - f)\|_{L^p(K)} \to 0\) .
   \end{thm}
 
   \begin{proof}
-    Case \(\Omega = \mathbb{R}^d\): Take \(g \in C_c^\infty\), \(\int g = 1\), \(g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1}x)\). Then \(g_\epsilon \star f\). Then \(f \in L_{loc}^p(\Omega)\), so \(g_\epsilon \star f \to f\) in \(L_{loc}^p\) as \(\epsilon \to 0\). Moreover \(\partial_{x_i} (g_\epsilon \star \partial_{x_i} f) \to \partial_{x_i} f\) in \(L_{loc}^p\). Then we can take \(f_n = g_{\frac{1}{n} \star f}\)
+    Case \(\Omega = \mathbb{R}^d\): Take \(g \in C_c^\infty\), \(\int g = 1\), \(g_\epsilon(x) = \epsilon^{-d} g(\epsilon^{-1}x)\). Then \(g_\epsilon \star f \in C_c^\infty\). Since \(f \in L_{loc}^p(\Omega)\) we have \(g_\epsilon \star f \to f\) in \(L_{loc}^p\) as \(\epsilon \to 0\). Moreover \(\partial_{x_i} (g_\epsilon \star f) = (g_\epsilon \star \partial_{x_i} f)\xrightarrow{\epsilon \to 0} \partial_{x_i} f\) in \(L_{loc}^p\). Then we can take \(f_n = g_{\frac{1}{n} \star f}\).
   \end{proof}
 
   \begin{rem}
-    In general, if we want to compute the distributional derivative \(D^\alpha f\), then we can find \(f_n \to f\) in \(D'(\Omega)\) and compute \(D^\alpha f\). Then \(D^\alpha f_n \to D^\alpha f\) in \(D^\alpha (\Omega)\). As an example we can compute \(\nabla |f|\) with \(f \in W_{loc}^{\frac{1}{p}}(\Omega)\).
+    In general, if we want to compute the distributional derivative \(D^\alpha f\), then we can find \(f_n \to f\) in \(D'(\Omega)\) and compute \(D^\alpha f\). Then \(D^\alpha f_n \to D^\alpha f\) in \(D^\alpha (\Omega)\). As an example we can compute \(\nabla |f|\) with \(f \in W_{loc}^{1,p}(\Omega)\).
     \begin{align*}
       (\nabla |f|)(x)
       &= \begin{cases}
@@ -2211,19 +2210,19 @@
 
   
   \begin{thm}[Chain Rule]
-    let \(G \in C^1(\mathbb{R}^1)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{\frac{1}{p}}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{\frac{1}{p}}(\Omega)\) and
+    Let \(G \in C^1(\mathbb{R}^d)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{1,p}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{1,p}(\Omega)\) and
     \begin{align*}
       \partial_{x_i} G(f)
-      &= \sum_{k=1}^d \partial_k G(f) \partial_{x_i} f_k \quad \text{ in } D'(\Omega)
+      &= \sum_{k=1}^d (\partial_k G)(f) \cdot \partial_{x_i} f_k \quad \text{ in } D'(\Omega)
     \end{align*}
-    Moreover, if \(G(0) \in L^p(\Omega)\) (i.e. either \(|\Omega| < \infty\) or \(G(0) = 0\)), then if \(f = (f_i)_{i=1}^d \subseteq W^{\frac{1}{p}}(\Omega)\), then \(G(f) \in W^{\frac{1}{p}}(\Omega)\).
+    Moreover, if \(G(0) \in L^p(\Omega)\) (i.e. either \(|\Omega| < \infty\) or \(G(0) = 0\)), then if \(f = (f_i)_{i=1}^d \subseteq W^{1,p}(\Omega)\), then \(G(f) \in W^{1,p}(\Omega)\).
   \end{thm}
 
   \begin{proof}
     Since \(G \in C^1\) we have that \(G\) is bounded in any compact set. Moreover \(\|\nabla G\|_{L^\infty} < \infty\) implies:
     \[|G(f) - G(0)| \le \|\nabla G\|_{L^\infty} |f| \in L^p_{loc}\]
   
-    So \(G(f) \in L_{loc}^p\). Let us compute \(\partial_{x_i} G(f)\). Let \(\{f^{(n)}\}_{n=1}^\infty \subseteq C^\infty\) such that \(f^{(n)} \to f\) in \(W_{loc}^{\frac{1}{p}}\), then: 
+    So \(G(f) \in L_{loc}^p\). Let us compute \(\partial_{x_i} G(f)\). Let \(\{f^{(n)}\}_{n=1}^\infty \subseteq C^\infty\) such that \(f^{(n)} \to f\) in \(W_{loc}^{1,p}\), then: 
     \begin{align*}
       |G(f(^n)) - G(f)|
       \le \|\nabla G\|_{L^\infty} |f^{(n)} - f| \to 0 \text{ in  \(L_{loc}^p\)}
@@ -2239,19 +2238,19 @@
       \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p
       \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p \text{ in } D'(\Omega)
     \end{align*}
-    So \(G(f) \in W_{loc}^{\frac{1}{p}}(\Omega)\). Aussume that \(G(0) \in L^p(\Omega)\) (i.e. \(|\Omega| < \infty\) or \(G(0) = 0\)). If \(f \in W^{\frac{1}{p}}(\Omega)\), then \(G(f) \in W^{\frac{1}{p}}(\Omega)\) since
+    So \(G(f) \in W_{loc}^{1,p}(\Omega)\). Aussume that \(G(0) \in L^p(\Omega)\) (i.e. \(|\Omega| < \infty\) or \(G(0) = 0\)). If \(f \in W^{1,p}(\Omega)\), then \(G(f) \in W^{1,p}(\Omega)\) since
     \begin{align*}
       |G(f) - G(0) | \le \|\nabla G\|_{L^\infty} |f| \in L^p \Rightarrow G(f) \in L^p
     \end{align*}
     and 
     \begin{align*}
-      \partial_{x_i} G(f) = \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{\frac{1}{p}}(\Omega)
+      \partial_{x_i} G(f) = \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{1,p}(\Omega)
     \end{align*}
   \end{proof}
 
   
-  \begin{thm}[Derivative of absolute value] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(f \in W^{\frac{1}{p}}(\Omega)\). 
-    Then \(|f| \in W^{\frac{1}{p}}(\Omega)\)
+  \begin{thm}[Derivative of absolute value] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(f \in W^{1,p}(\Omega)\). 
+    Then \(|f| \in W^{1,p}(\Omega)\)
     and  if \(f\) is real-valued:
     \begin{align*}
       (\nabla |f|) (x) =
@@ -2276,7 +2275,7 @@
   \(\leadsto\) T is a distribution since if \(\phi_n \to \phi\) in \(D(\Omega)\), then
   \begin{align*}
     |T(\phi_n) - T(\phi)| 
-    \le \int_{\mathbb{R}^d} |\phi_n - \phi| \, d\mu(x) \le \|\phi_n - \phi\|_{L^\infty} \left(\int_{K} \, d \mu \right) \to 0
+    \le \int_{\mathbb{R}^d} |\phi_n - \phi| \, d\mu(x) \le \|\phi_n - \phi\|_{L^\infty} \left(\int_{K} \, d \mu \right) \xrightarrow{n \to \infty} 0
   \end{align*}
   
   
@@ -2380,17 +2379,29 @@
   \end{proof}
 
   \begin{ex}[Bonus 4]
-    Let \(T \in D'(\mathbb{R}^d)\) and \(f \in D(\mathbb{R}^d)\). Recall
-    \[(f \star T)(y) = T(\tilde f_y) = T(f(y - \cdot)) \in C^\infty(\mathbb{R}^d)\]
-    Prove that if \(\int_{\mathbb{R}^d} f = 1\) and \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\), then: \(f_\epsilon \star T \to T\) in \(D'(\mathbb{R}^d)\) as \(\epsilon \to 0\)
+    Let \(T \in D'(\mathbb{R}^d)\), \(f \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} f(y) \, dy = 1\). Let \(f_\epsilon \coloneqq \epsilon^{-d} f\left(\frac{x}{\epsilon}\right)\) for \(\epsilon > 0\). Show that \(T \star f_\epsilon \xrightarrow{\epsilon \to 0} T\).
   \end{ex}
+
+  \begin{proof}[My Solution]
+    Let \(\phi \in D(\mathbb{R}^d)\). Now, since \(f\) is compactly supported we can write
+    \begin{align*}
+      (T \star f_\epsilon)(\phi) 
+      &= \int_{\mathbb{R^d}} (T \star f_\epsilon)(x) \phi(x) \, dx \\
+      &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} T(x-y) f_\epsilon(y) \, dy \right) \phi(x) \, dx \\
+      &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} \epsilon^{-d} T(x-y) f\left(\frac{y}{\epsilon}\right) \, dy \right) \phi(x) \, dx \\
+      \left(z(y) \coloneqq \frac{y}{\epsilon}\right) \quad &= \int_{\mathbb{R}^d} \left( \int_{\mathbb{R}^d} T(x-\epsilon z) f(z) \, dz \right) \phi(x) \, dx \\
+      &\xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} T(x) f(z) \, dz \right) \phi(x) \, dx \\
+      &= \int_{\mathbb{R}^d} T(x)\phi(x) \, dx \underbrace{\int_{\mathbb{R}^d}  f(z) \, dz}_{= 1}
+      = T(\phi) \qedhere
+    \end{align*}
+  \end{proof}
 
   \chapter{Weak Solutions and Regularity}
 
   \begin{defn}
     Consider the linear PDE:
     \[\sum_{\alpha} c_\alpha D^\alpha u(x) = F(x), \quad c_\alpha \text{ constant}, F \text{ given}\]
-    A function is called a weak solution (a distributional solution) if 
+    A function \(u\) is called a weak solution (a distributional solution) if 
     \[\sum_\alpha c_\alpha D^\alpha u = F \quad \text{in } D'(\Omega).\]
     Namely,
     \[\sum_\alpha (-1)^{|\alpha|} c_\alpha \int_\Omega u (D^\alpha \phi) = \int_\Omega F \phi, \quad \forall \phi \in D(\Omega)\]
@@ -2601,5 +2612,4 @@
       \end{align*}
     \end{enumerate}
   \end{proof}
-
 \end{document}
