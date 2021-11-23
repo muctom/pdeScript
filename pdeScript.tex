@@ -2557,7 +2557,7 @@
   \end{rem}
   Then \(G \star f = G \star f_1 + G \star f_2\). Here \(f_2 = f(1 - \phi) = 0\) in \(B\). With Weyls Lemma (\ref{weyl}), \(G \star f_2 \in C^\infty\).
 
-  \begin{thm}[Low Regularity for Poisson Equation]\label{Low Regularity for Poisson Equation}
+  \begin{thm}[Low Regularity of Poisson Equation]\label{Low Regularity for Poisson Equation}
     Lef \(f \in L^p(\mathbb{R}^d)\) and compactly supported. Then
     \begin{enumerate}[label=\alph*)]
       \item If \(p \ge 1\), then \begin{itemize}
@@ -2572,6 +2572,7 @@
       with \(K\) compact in \(\mathbb{R}^d\).
       \item If \(p > d\), then \(G \star f \in C_{loc}^{1, \alpha} (\mathbb{R}^d)\) for all \(0 < \alpha < 1 - \frac{d}{p}\).
     \end{enumerate}
+    where \(G\) is den fundamental solution of the laplace equation.
   \end{thm}
 
   \begin{eg}
@@ -2589,8 +2590,7 @@
 
   \begin{proof}[Proof of theorem \ref{Low Regularity for Poisson Equation}]
     \begin{enumerate}[label=\alph*)]
-      \item (\(p=1\)) Why is \(G \star f \in L_{loc}^q\)? Recall from the proof of Youngs inequality:
-      \item \begin{align*}
+      \item (\(p=1\)) Why is \(G \star f \in L_{loc}^q\)? Recall from the proof of Youngs inequality: \begin{align*}
         |(G\star f)(x)| 
         &= \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \\
         (\text{Hölder}) \quad &= \left(\int_{\mathbb{R}^d} |G(x-y)|^q |f(y)| \, yd\right)^{\frac{1}{q}}\left(\int_{\mathbb{R}^d} |f(y)| \, dy\right)^{\frac{1}{q'}}
@@ -2610,6 +2610,73 @@
       \begin{align*}
         \int_{B(0,R)}|G(x-y)|^q \, dx \le \int_{|z| \le R + R_1} |G(z)|^q \, dz < \infty
       \end{align*}
+
+      \item \begin{align*}
+        (G \star f)(x) - (G \star f)(y) 
+        &= \int_{\mathbb{R}^d} (G(x-z)-G(y-z)) f(z) \, dz
+      \end{align*}
+      So \begin{align*}
+        |G \star f(x) - (G\star f)(y)| 
+        &\le C \int_{\mathbb{R}^d} \left| \frac{1}{|x-z|^{d-2}} - \frac{1}{|y-z|^{d-2}}\right| |f(z)| \, dz
+        \end{align*}
+        for all \(x, y \in \mathbb{R}^d\):
+        \begin{align*}
+          \left| \frac{1}{|x|^{d-2}} - \frac{1}{|y|^{d-2}} \right|
+          &= \left| \left( \frac{1}{|x|} - \frac{1}{|y|}\right) \left(\frac{1}{|x|^{d-3}} + \cdots + \frac{1}{|y|^{d-3}}\right) \right| \\
+          &\le C \frac{||x|-|y||}{|x||y|} \max \left(\frac{1}{|x|^{d-3}}, \frac{1}{|y|^{d-3}}\right) \\
+          &= C \frac{|x-y|}{|x||y|} \max \left(\frac{1}{|x|^{d-3}}, \frac{1}{|y|^{d-3}}\right) \\
+          &\le C \max(|x|, |y|)^{1-\alpha} \frac{|x-y|^\alpha}{|x||y|} \max \left(\frac{1}{|x|^{d-3}}, \frac{1}{|y|^{d-3}}\right)
+        \end{align*}
+        as
+        \begin{align*}
+          ||x|-|y|| 
+          &\le \min \left(|x-y|, \max(|x|, |y|)\right)
+          \le |x-y|^\alpha \max(|x|, |y|)^{1-\alpha}
+        \end{align*}
+        Thus, for all \(x,y \in \mathbb{R}^d\):
+        \begin{align*}
+          \left| \frac{1}{|x|^{d-2}}- \frac{1}{|y|^{d-2}}\right| 
+          &\le C |x-y|^\alpha \frac{\max(|x|, |y|)^{1-\alpha}}{|x||y|} \max \left(\frac{1}{|x|^{d-3}}, \frac{1}{|y|^{d-3}}\right) \\
+          &\le C |x-y|^\alpha \max \left(\frac{1}{|x|^{d-2+\alpha}}, \frac{1}{|y|^{d-2+\alpha}}\right)
+        \end{align*}
+        So we get \begin{align*}
+          \left| \frac{1}{|x-y|^{d-2}}- \frac{1}{|y-z|^{d-2}}\right|
+          &\le C |x-y|^\alpha \max \left(\frac{1}{|x-z|^{d-2+\alpha}}, \frac{1}{|y-z|^{d-2+\alpha}}\right)
+        \end{align*}
+        Therefore:
+        \begin{align*}
+          &|G \star f(x) - G \star f(y)| \\
+          &\quad\le C \int_{\mathbb{R}^d}|x-y|^\alpha \max \left(\frac{1}{|x-z|^{d-2+\alpha}}, \frac{1}{|y-z|^{d-2+\alpha}}\right) |f(z)| \, dz \\
+          &\quad\le C |x-y|^\alpha \left(\sup_{\xi \in \mathbb{R^d}} \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d-2+\alpha}} |f(z)| \, dz\right)
+        \end{align*}
+        Claim: If \(f \in L^p(\mathbb{R}^d)\) is compactly supported, \(d \ge p > \frac{d}{2}\), then: 
+        \begin{align*}
+          \sup_{\xi \in \mathbb{R}^d} \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d - 2 + d}}|f(z)| \, dz < \infty
+        \end{align*}
+        for all \(0 < \alpha < 2 - \frac{d}{p}\). Assume \(\supp f \subseteq \overline{B(0, R_1)}\). Consider 2 cases:
+        \begin{itemize}
+          \item If \(|\xi| > 2 R_1\), then: \(|\xi - z| \ge R_1\) for all \(z \in B(0, R_1)\). Hence: \begin{align*}
+            \int_{\mathbb{R}^d} \frac{1}{|\xi -z|^{d-2+\alpha}}|f(z)| \, dz
+            &\le \frac{1}{R_1^{d-2+\alpha}} \|f\|_{L^1} < \infty
+          \end{align*}
+          \item If \(|\xi| \le 2 R_1\), then: \(|\xi - z| \le 3 R_1\) for all \(z \in B(0, R_1)\):
+          \begin{align*}
+            \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d-2+\alpha}} |f(z)| \, dz
+            &\le \int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{d - 2 + \alpha}} |f(z)| \, dz \\
+            (\text{Hölder}), \left(\frac{1}{p} + \frac{1}{q} = 1\right) \quad &\le \left(\int_{\mathbb{R}^d}|f(z)|^p \, dz\right)^{\frac{1}{p}}\\
+            &\quad \cdot \left(\int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{(d - 2 + \alpha)q}}\right)^{\frac{1}{q}} \\
+            &= \|f\|_{L^p} \left(\int_{|z| \le 3 R_1} \frac{1}{|z|^{(d-2+\alpha)q}} \, dz\right)^{\frac{1}{q}} < \infty
+          \end{align*}
+        \end{itemize}
+        \item (\(d \ge 3\)) We already know: \begin{align*}
+          \partial_i(G \star f) =(\partial_i G \star f) \in L_{loc}^1(\mathbb{R}^d)
+        \end{align*}
+        as \(\omega_d f \in L^1(\mathbb{R}^d)\). We claim that \(\partial_i G \star f \in C^{0, \alpha}(\mathbb{R}^d)\). So \(G \star f \in C^{1, \alpha}(\mathbb{R}^d)\) by the equivalence between the classical and the distributional derivatives. Exercise. Hint:
+        \begin{align*}
+          |\partial_i G\star f(x) - \partial_i G \star f(y)|
+          &\le \int_{\mathbb{R}^d} |\partial_i G(x-z) - \partial_i G(y-z)||f(z)| \, dz,
+        \end{align*}
+        \(\partial_i G(x) = \frac{-x_i}{d|B_1||x|^d}\). \(\leadsto\) Need to estimate \(|\partial_i G(x) - \partial_i G(y)| \le C|x-y|^\alpha\). \qedhere
     \end{enumerate}
   \end{proof}
 \end{document}
