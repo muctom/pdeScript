@@ -2004,7 +2004,7 @@
         \begin{align*}
           \int_{\mathbb{R}^d} g_n(y) T(f_y) \, dy \to \int_{\mathbb{R}^d} g(y) T(f_y) \, dy
         \end{align*}
-        since \(g_n \to g\) in \(L^1\) compaclty supported and \(y \mapsto T(f_y) \in C^\infty \subseteq L^\infty(K)\). Moreover (exercise):
+        since \(g_n \to g\) in \(L^1\) compactly supported and \(y \mapsto T(f_y) \in C^\infty \subseteq L^\infty(K)\). Moreover (exercise):
         \[\underbrace{g_n \star f}_{\in C_c^\infty} \to g \star f \quad \text{ in } D(\mathbb{R}^d)\]
         So \(T(g_n \star f) \xrightarrow{n \to \infty} T(g \star f)\).
         Finally we optain:
@@ -2679,4 +2679,90 @@
         \(\partial_i G(x) = \frac{-x_i}{d|B_1||x|^d}\). \(\leadsto\) Need to estimate \(|\partial_i G(x) - \partial_i G(y)| \le C|x-y|^\alpha\). \qedhere
     \end{enumerate}
   \end{proof}
+
+  \begin{thm}[High regularity for Poisson's equation]\label{High regularity for Poisson's equation}
+    Let \(f \in C^{0, \alpha}(\mathbb{R}^d)\), \(0 < \alpha < 1\) be compactly supported. Then \(G \star f \in C^{2, \alpha}(\mathbb{R}^d)\).
+  \end{thm}
+
+  \begin{rem}
+    \((- \Delta u = f)\) and \(f \in C(\mathbb{R}^d)\) does not imply that \(u \in C^2(\mathbb{R}^d)\). (exercise)
+  \end{rem}
+
+  \begin{rem}
+    If \(f \in C^{k, \alpha}(\mathbb{R}^d)\), \(k \in \{0, 1, \dots\}\), \(0 < \alpha < 1\) is compactly supported, then \(G \star f \in C^{k + 2, \alpha}(\mathbb{R}^d)\). This more general statement is a consequence of the theorem since
+    \[D^\beta(G \star f) = G \star \underbrace{(D^\beta f)}_{\in C^{0, \alpha}}\]
+    for all \(\beta = (\beta_1, \dots, \beta_d)\), \(|\beta| \le k\).
+  \end{rem}
+
+  \begin{proof}[Proof of theorem \ref{High regularity for Poisson's equation}]
+    Since \(f \in L^p\) for all \(p \le \infty\) by the low regularity (\ref{Low Regularity for Poisson Equation}) we have \(G \star f \in C^{1, \alpha}\) and \(\partial_i (G \star f) = \partial_i G \star f\)
+    in the classical sense. We will compute the distributional derivatives \(\partial_i \partial_j (G \star f)\) and prove that they are Hölder continuous. Compute \(\partial_j \partial_i (G \star f)\): For all \(\phi \in C_c^\infty(\mathbb{R}^d)\) we have
+    \begin{align*}
+      -(\partial_j \partial_i G \star f)(\phi)
+      &= (\underbrace{\partial_i(G \star f)}_{\in C})(\partial_j \phi) \\
+      &= \int_{\mathbb{R}^d}((\partial_i G)\star f)(x) \partial_j \phi(x) \, dx \\
+      &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \partial_i G(x-y) f(y) \partial_j \phi(x) \, dx \, dy \\
+      &= \int_{\mathbb{R}^d} f(y) \left[\int_{\mathbb{R}^d} \partial_i G(x-y)\partial \phi(x) \, x\right] \, dy \\
+      &\overset{?}{=} \int_{\mathbb{R}^d} \square \phi(y) \, dy
+    \end{align*}
+    Recall: \(\partial_i G(x) = \frac{-x_i}{d|B_1||x|^d}, \partial_i \partial_j G(x) = \frac{1}{|B_1|}\left[\frac{x_i x_j}{|x|^2}- \frac{\delta_{ij}}{d}\right] \frac{1}{|x|^d}\). We have:
+    \begin{align*}
+      \int_{\mathbb{R}^d} \partial_i G(x-y) \partial_j \phi(x) \, dx
+      &= \lim_{\epsilon \to 0^+}\int_{|x-y| \ge \epsilon} \partial_i G(x-y) \partial_j \phi(x) \, dx
+    \end{align*}
+    By dominated convergence we have \(|\partial_i G(x-y) \partial_j \phi(x)| \in L^1(dx)\).
+    By the Gauss-Green-Theorem (\ref{gauss-green}) for all \(\epsilon > 0\):
+    \begin{align*}
+      &\int_{|x-y| \ge \epsilon} \partial_i G(x-y) \partial_j \phi(x) \, dx \\
+      &\quad= \int_{\partial B(y, \epsilon)}\partial_i G(x-y) \phi(x) \omega_j \, dS(x) - \int_{|x-y| \ge \epsilon} \partial_j \partial_i G(x-y) \phi(x) \, dx
+    \end{align*}
+    Where \(\omega = \frac{x-y}{|x-y|}\). For the boundary term:
+    \begin{align*}
+      - \int_{\partial B(y, \epsilon)} \partial_i G(x-y) \phi(x) \omega_j \, dS(x)
+      &= - \epsilon^{d-1} \int_{\partial B(0, 1)} \partial_i G(\epsilon \omega) \phi(y + \epsilon \omega) \omega_j \, d\omega \\
+      (\star) \quad &= \int_{\partial B(0, 1)} \frac{1}{d|B_1|} \omega_i \omega_j \phi(y + \epsilon \omega) \, d \omega \\
+      &\xrightarrow{\epsilon \to 0} \int_{\partial B(0, 1)} \frac{1}{d|B_1|} \omega_i \omega_j \phi(y) \, d\omega \\
+      &= \frac{1}{d} \delta_{i,j} \phi(y)
+    \end{align*}
+    \((\star)\) \ \(\partial_i G(x) = \frac{- x_i}{d|B_1||x|^d}\)
+    , so \(\partial_i G(\epsilon \omega) = - \frac{- \omega_i}{d |B_1|} \frac{1}{\epsilon^{d-1}}.\) for all \(|\omega| = 1\). \\
+    
+    Now we split:
+    \begin{align*}
+      &- \int_{|x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(x) \, dx \\
+      &\quad= - \int_{|x-y| \ge 1}  \partial_i \partial_j G(x-y) \phi(x) \, dx - \int_{1 \ge |x-y| \ge \epsilon}  \partial_i \partial_j G(x-y) \phi(x) \, dx
+    \end{align*}
+    The key observation is: \(\int_{\partial B(0, r)} \partial_i \partial_j G(x) \, dx = 0\) since \[\partial_i \partial_j G(x) = \frac{1}{|B_1|}\left(\omega_i \omega_j - \frac{\partial_{ij}}{d}\right) \frac{1}{|x|^d},\] \(\omega = \frac{x}{|x|}\). For example if \(i = 1, j = 2, r = 1\):
+    \begin{align*}
+      \int_{\partial B(0, 1)} \partial_1 \partial_2 G(x) \, dS(x) 
+      &= \frac{1}{|B_1|} \int_{\partial B(0, 1)} \omega_1 \omega_2 \, d \omega,
+    \end{align*}
+    \(\partial B(0,1) = \{\omega \mid |\omega| = 1\}\). Consider: \(\omega \mapsto R \omega, (\omega_1, \dots, \omega_d) \mapsto (- \omega_1, \omega_2, \dots, \omega_d)\). Then
+    \begin{align*}
+      -\int_{1 \ge |x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(y) \, dx = 0.
+    \end{align*}
+    So 
+    \begin{align*}
+      - \int_{1 \ge |x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(x) \, dx &= - \int_{1 \ge |x-y|\ge \epsilon} \partial_i \partial_j G(x-y) (\phi(x) - \phi(y)) \, dx
+    \end{align*}
+    In summary:
+    \begin{align*}
+      \partial_i \partial_j (G \star f)(\phi)
+      &= \int_{\mathbb{R}^d} f(y) \left(\int_{\mathbb{R}^d} \partial_i G(x-y) \partial_j \phi(x) \, dx\right) \, dy \\
+      &= \int_{\mathbb{R}^d} f(y) \frac{1}{d} \partial_{ij} \phi(y) \, dy \\
+      & \quad - \int_{\mathbb{R}^d} f(y) \left(\int_{|x-y| > 1} \partial_i \partial_j G(x-y) \phi(x) \, dx\right) \\
+      & \quad - \int_{\mathbb{R}^d} \left[\lim_{\epsilon \to 0} \int_{1 \ge |x-y| \ge \epsilon} \underbrace{\partial_i \partial_j G(x-y) (\phi(x) - \phi(y)) \, dx}_{\smash{\le \frac{C}{|x-y|^d}|x-y| \|\nabla \phi\|_{L^\infty} \le \frac{C}{|x-y|^{d-1}} \in L_{loc}^1(dx) \forall y}}\right] \, dy \\
+      &= \int_{\mathbb{R}^d} \frac{\delta_{ij}}{d} f(x) \phi(x) \, dx
+      - \int_{\mathbb{R}^d} \phi(x) \left(\int_{|x-y| > 1} \partial_i \partial_j G(x-y) f(y) \, dy\right) \, dx \\
+      & \quad - \int_{\mathbb{R}^d} \phi(x) \left[\int_{|x-y| \le 1} \partial_i \partial_j G(x-y) (f(y)-f(x))\, dy\right] \, dx
+    \end{align*}
+    Conclusion: 
+    \begin{align*}
+      \partial_i \partial_j (G \star f) (x) &= - \frac{\delta_{ij}}{d} f(x) + \int_{|x-y| > 1} \partial_i \partial_j G(x-y) f(y) \, dy \\
+      &\quad + \int_{|x-y| \le 1} \partial_i \partial_j G(x-y) \left(f(y) - f(x)\right) \, dy
+    \end{align*}
+  \end{proof}
+
+  
+
 \end{document}
