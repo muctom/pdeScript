@@ -63,7 +63,7 @@
   \maketitle
   \tableofcontents
   \newpage
-  Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises still can be handed in.
+  Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises can be handed in.
   \newpage
 
   \chapter{Introduction}
@@ -2073,7 +2073,6 @@
       &= \int_0^1 \sum_{j=1}^d (\partial_j T)(f_{ty}) y_j \, dt \qedhere
     \end{align*}
   \end{proof}
-
   
   \begin{cor}
     Let \(g \in L_{loc}^1(\mathbb{R}^d)\) s.t. \(\partial_j g\in L_{loc}^1(\mathbb{R}^d)\) for all \(j = 1, 2, \dots, d\) (i.e. \(g \in W_{loc}^{1,1}(\mathbb{R}^d)\)). Then for all \(y \in \mathbb{R}^d\):
@@ -2097,7 +2096,6 @@
     \end{align*}
     For all \(\phi \in C_c^\infty\): \( = g(x+y) - g(x)\) a.e. \(x \in \mathbb{R}^d\).
   \end{proof}
-
 
   \begin{rem}
     If \(T \in D'(\Omega)\), \(\Omega \subseteq \mathbb{R}^d\) open, if \(y \nabla T = 0\), then \(T = const\).
@@ -2173,7 +2171,6 @@
     \end{align*}
     So we get \(\partial_{x_i} f(x) = g_i(x) \in C(\Omega)\) in the classical sense. So \(f \in C^1(\Omega)\).
   \end{proof}
-
   
   \begin{defn}[Sobolev Spaces]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open. We define for \(1 \le p \le \infty\):
@@ -2186,7 +2183,6 @@
       &= \{f \in L_{loc}^p(\Omega) \mid D^\alpha f \in L_{loc}^p(\Omega) \ \forall |\alpha|\le k \}
     \end{align*}
   \end{defn}
-
   
   \begin{thm}[Approximation of \(W_{loc}^{1,p}(\Omega)\) by \(C^\infty(\Omega)\)]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(f \in W_{loc}^{1,p}(\Omega)\). Then there exists \(\{f_n\} \subseteq C^\infty(\Omega)\) such that \(f_n \to f \) in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(K \subseteq \Omega\) compact: \(\|f_n - f\|_{L^p(K)} + \sum_{i=1}^d \| \partial_{x_i}(f_n - f)\|_{L^p(K)} \to 0\) .
@@ -2207,7 +2203,6 @@
       \end{cases}
     \end{align*}
   \end{rem}
-
   
   \begin{thm}[Chain Rule]
     Let \(G \in C^1(\mathbb{R}^d)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{1,p}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{1,p}(\Omega)\) and
@@ -2247,7 +2242,6 @@
       \partial_{x_i} G(f) = \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{1,p}(\Omega)
     \end{align*}
   \end{proof}
-
   
   \begin{thm}[Derivative of absolute value] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Let \(f \in W^{1,p}(\Omega)\). 
     Then \(|f| \in W^{1,p}(\Omega)\)
@@ -2278,11 +2272,9 @@
     \le \int_{\mathbb{R}^d} |\phi_n - \phi| \, d\mu(x) \le \|\phi_n - \phi\|_{L^\infty} \left(\int_{K} \, d \mu \right) \xrightarrow{n \to \infty} 0
   \end{align*}
   
-  
   \begin{eg}
     \(\partial_0\) in \(D'(\mathbb{R}^d)\) is a Borel probability measure.
   \end{eg}  
-
   
   \begin{thm}[Positive distributions are measures] 
     Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(T \in D'(\Omega)\). Assume \(T \ge 0\), i.e. \(T(\phi) \ge 0\) for all \(\phi \in D(\Omega)\) satisfying \(\phi(x) \ge 0\) for all \(x\). Then there is a Borel positive measure \(\mu\) on \(\Omega\) such that \(\mu(K) < \infty\) for all \(K \subseteq \Omega\) compact and:
@@ -2303,7 +2295,6 @@
     So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
   \end{proof}
 
-
   \begin{ex}[E 4.1]
     Prove that if \(T_n \to T\) in \(D'(\mathbb{R}^d)\), then \(D^\alpha T_n  \to D^\alpha T\) in \(D^\alpha(\mathbb{R}^d)\) for all \(\alpha \in \mathbb{N}^d\).
   \end{ex}
@@ -2313,7 +2304,6 @@
   \end{proof}
 
   \begin{ex}[E 4.2]
-    
   \end{ex}
 
   \begin{proof}[My Solution]
@@ -2362,25 +2352,24 @@
       &= - \int_{\mathbb{R}^d} f \phi' \, dy \\
       &= - \int_{-\infty}^1 f \phi' \, dy - \int_1^\infty f \phi' \, dy  \\
       &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 f' \phi \, dy + [f \phi]_1^\infty - \int_1^\infty f' \phi \, dy \\
-      &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 f' \phi \, dy + [f \phi]_1^\infty - \int_1^\infty g \phi \, dy \\
+      &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 g \phi \, dy + [f \phi]_1^\infty - \int_1^\infty g \phi \, dy \\
       &= f(1-) \phi(1) - f(1+)\phi(1) - \int_{\mathbb{R}^d} g \phi \, dy \\
       &= 0  - \int_{\mathbb{R}^d} g \phi \, dy \\
     \end{align*}
     Now we compute \(f'' = g'\). Take \(\phi \in C_c^\infty(\mathbb{R}^d)\):
     \begin{align*}
       -(g')(\phi) 
-      &= \int_{\mathbb{R}^d} g\phi' \\
-      &= \int_{- \infty}^1 + \int_1^\infty  \\
-      &= [g(1-) - g(1+)] \phi(1) - \int_{\infty}^1(-2) \phi - \int_1^\infty 2 \phi \\
-      &= - 2 \phi(1) + \int_{-\infty}^\infty [2 \mathbb{1}_{(1, \infty)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
-      &= -2 \delta_1(\phi) + \int_{-\infty}^\infty [2 \mathbb{1}_{(1, \infty)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
-      \Rightarrow g' &= \underbrace{2 \delta_1}_{\notin L_{loc}^1} - \underbrace{2 \mathbb{1}_{(-\infty, 1)} + 2 \mathbb{1}_{(1, \infty)}}_{\int L_{loc}^1}
+      &= \int_{\mathbb{R}^d} g\phi' \, dy \\
+      &= \int_{- \infty}^1  g\phi' \, dy + \int_1^\infty  g\phi' \, dy \\
+      &= [g(1-) - g(1+)] \phi(1) - \int_{-\infty}^1g' \phi \, dy - \int_1^\infty g' \phi \, dy \\
+      &= [g(1-) - g(1+)] \phi(1) - \int_{-\infty}^1(-2) \phi \, dy - \int_1^\infty 2 \phi \, dy \\
+      &= - 2 \phi(1) + \int_{-\infty}^\infty [2 \mathbb{1}_{(-\infty, 1)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
+      &= -2 \delta_1(\phi) + \int_{-\infty}^\infty [2 \mathbb{1}_{(-\infty, 1)}(x) - 2 \mathbb{1}_{(1,  \infty)} (x)]\phi(x) \, dx \\
+      \Rightarrow g' &= \underbrace{2 \delta_1}_{\notin L_{loc}^1} - \underbrace{2 \mathbb{1}_{(-\infty, 1)} + 2 \mathbb{1}_{(1, \infty)}}_{\int L_{loc}^1} \qedhere
     \end{align*}
   \end{proof}
 
-
   \chapter{Weak Solutions and Regularity}
-
   \begin{defn}
     Consider the linear PDE:
     \[\sum_{\alpha} c_\alpha D^\alpha u(x) = F(x), \quad c_\alpha \text{ constant}, F \text{ given}\]
@@ -2395,7 +2384,6 @@
     \item \(\Delta G(x) = 0\) for all \(x \ne 0\), assuming \(G(x) = G(|x|)\) and \(d \ge 2\)
     \item \(\hat G(k) = \frac{1}{|2\pi k}|^2\), \(d \ge 3\)
   \end{enumerate}
-
   
   \begin{thm}
     For all \(d \ge 1\) we have \(G \in L_{loc}^1(\mathbb{R^d})\) and \(- \Delta G = \delta_0\) in \(D'(\mathbb{R}^d)\).
@@ -2744,8 +2732,270 @@
       \partial_i \partial_j (G \star f) (x) &= - \frac{\delta_{ij}}{d} f(x) + \int_{|x-y| > 1} \partial_i \partial_j G(x-y) f(y) \, dy \\
       &\quad + \int_{|x-y| \le 1} \partial_i \partial_j G(x-y) \left(f(y) - f(x)\right) \, dy
     \end{align*}
+    The first term \(f \in C^{0, \alpha}\). The second term is also at least \(C^{0, \alpha}\) since \(\partial_i \partial_j G(x)\) is smooth as \(|x| > 1\). We need to prove that the thirt term
+    \begin{align*}
+      W_{ij}(x) &= \int_{|x-y| \le 1} \partial_i \partial_j G(x-y)(f(y) - f(x)) \, dy
+    \end{align*}
+    is Hölder-continuous, \(|W_{ij}(x) - W_{ij(y)}| \le C |x-y|^\alpha\). Recall:
+    \begin{align*}
+      |\partial_i \partial_j G(x-y) (f(y)-f(x))| \le C \frac{1}{|x-y|^d}|x-y|^\alpha = \frac{C}{|x-y|^{d-\alpha}} \in L_{loc}^1(dy)
+    \end{align*}
+    We write 
+    \begin{align*}
+      W_{ij}(x) 
+      &= \int_{|x-y| \le 1} \partial_i \partial_j G(x-y) (f(y)-f(x)) \, dy \\
+      &= \int_{|z| \le 1} \partial_i \partial_j G(z) (f(x+z)-f(x)) \, dz
+    \end{align*}
+    So we get: \begin{align*}
+      W_{ij} - W_{ij}(y) &= \int_{|z| \le 1} \partial_i \partial_j G(z) (f(x+z)-f(y+z)-f(x)+f(y)) \, dz
+    \end{align*}
+    Easy thought: Use \(\partial_i \partial_j G(z)| \le \frac{C}{|z|^d}\) and 
+    
+    \begin{align*}
+      &|f(x+z) - f(y+z) - f(x) + f(y)| \\
+      &\quad\le 
+      \begin{cases}
+        |f(x+z) - f(x)| + |f(y+z)-f(y)| \le C|z|^\alpha \\
+        |f(x+z) - f(y+z)| + |f(x) - f(y)| \le C|x-y|^\alpha
+      \end{cases}
+    \end{align*}
+    Thus: 
+    
+    \begin{align*}
+      |W_{ij}(x) - W_{ij}(y)| 
+      &\le C \int_{|z| \le 1} \frac{1}{|z|^d} \min(|z|^\alpha, |x-y|^\alpha) \, dz \\
+      &\le C \int_{|z| \le 1} \frac{1}{|z|^d} (|z|^\alpha)^\epsilon (|x-y|^\alpha)^{1-\epsilon}, \quad 0 < \epsilon < 1 \\
+      &\le C \left(\int_{|z| \le 1} \frac{1}{|z|^{d-\alpha \epsilon}}\right)|x-y|^{\alpha(1-\epsilon)} \\
+      &\le C_\epsilon |x-y|^{\alpha (1 - \epsilon)}
+    \end{align*}
+
+    thus it is easy to prove \(|W_{ij}(x) - W_{ij}(y)| \le C_\alpha |x-y|^\alpha\) for all \(\alpha' \le \alpha\). However, to get \(\alpha' = \alpha\) we need a more precise estimate. We split:
+    \begin{align*}
+      W_{ij}(x) - W_{ij}(y) 
+      &= \int_{|z| \le 1} \dots = \int_{|z| \le min(4|x-y|, 1)} + \int_{4|x-y| < |z| \le 1}
+    \end{align*}
+    For the first domain:
+    \begin{align*}
+      &\int_{|z| \le 4 |x-y|} |\partial_{ij} G(z)| |f(x+z)-f(y+z)-f(y)+f(x)| \, dz \\
+      &\quad \le C \int_{|z| \le 4|x-y|} \frac{1}{|z|^d} |z|^\alpha \, dz
+      = const \cdot |x-y|^\alpha
+    \end{align*}
+    For the second domain:
+    \begin{align*}
+      &\int_{4|x-y| < |z| \le 1} \partial_{ij} G(z) (f(x+z) - f(y+z) + f(y)  f(x)) \, dz \\
+      &\quad = \int_{4|x-y| < z \le 1} \partial_{ij} G(z) (f(x+z) - f(y+z)) \, dz = (\ldots)
+    \end{align*}
+    since \(\int_{4|x-y|<|z|\le1} \partial_{ij}G(z) \, dz = 0\). Then
+    \begin{align*}
+      (\ldots) &= \int_{4|x-y| < |z-x| \le 1} \partial_{ij} G(z-x) f(z) \, dz - \int_{4|x-y| < |z-y| \le 1} \partial_{ij} G(z-y) f(z) \, dz.
+    \end{align*}
+    Denote \(A = \{z \mid 4 |x-y| < |z-x| \le 1\}\), \(B = \{z \mid 4|x-y| < |z-y| \le 1\}\). Consider 
+    \begin{align*}
+      &\int_A \partial_{ij} G(z-x) f(z) \, dz - \int_B \partial_{ij} G(z-y) f(z) \, dz \\
+      &\quad = \int_{A\setminus B} + \int_{B \setminus A} + \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y))f(z) \, dz
+    \end{align*}
+    Lets regard the intersection. We have \begin{align*}
+      \partial_{ij} G(x) &= \frac{1}{|B_1|}\frac{1}{|x|^d} (\omega_i \omega_j - \frac{1}{d} \delta_{ij}) \\
+      |\partial_{ij}G(x) - \partial_{ij}G(y)| &\le C|x-y| \left(\frac{1}{|x|^{d+1}} + \frac{1}{|y|^{d+1}}\right)
+    \end{align*}
+    Now, 
+    \begin{align*}
+      |\partial_{ij} G(z-x) - \partial_{ij} G(z-y)|
+      &\le C |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right)
+    \end{align*}
+    So we have 
+    \begin{align*}
+      &\left| \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y)) f(z) \, dz \right| \\
+      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |f(z)| \, dz = (\ldots)
+    \end{align*}
+    Now we replace \(f(z)\) by \(f(z) - f(x)\), then:
+    \begin{align*}
+      &\left| \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y)) (f(z)-f(x)) \, dz \right| \\
+      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |z-x|^\alpha \, dz \\
+      &\quad = C \underbrace{\int_{A \cap B} |x-y| \frac{1}{|z-x|^{d + 1 - \alpha}} \, dz}_{(I)} + \underbrace{C \int_{A \cap B} |x-y| \frac{1}{|z-y|^{d+1}}|z-x|^\alpha \, dz}_{(II)}
+    \end{align*}
+    Now, \begin{align*}
+      (I) &\le C |x-y| \int_{4 |x-y| < |z-x| \le 1} \frac{1}{|z - x|^{d+1-\alpha}} \, dz \\
+      &= C |x-y| \int_{4 {x-y} < |z| \le 1} \frac{1}{|z|^{d+1-\alpha}} \, dz \\
+      &\le C|x-y| \int_{4|x-y|}^1 \frac{1}{r^{d+1-\alpha}}r^{d-1} \, dr \\
+      &= C|x-y| \int_{4|x-y|}^1 \frac{1}{r^{2-\alpha}} \, dr \\
+      &\le C |x-y| \left[-1 + \frac{1}{(4|x-y|)^{1-\alpha}}\right] \\
+      &\le C|x-y|^\alpha
+    \end{align*}
+
+    \begin{align*}
+      (II) &\le C |x-y| \int_{A \cap B} \frac{1}{|z-y|^{d+1}} |z-x|^\alpha \, dz \\
+      &\le C |x-y| \int_{A \cap B} \frac{1}{|z-y|^{d+1}} \left(|z-y|^\alpha + |x-y|^\alpha\right) \, dz \\
+      &\le \underbrace{C |x-y| \int_B \frac{1}{|z-y|^{d+1-\alpha}} \, dz}_{\text{similar to (I)}} +\ C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz \\
+    \end{align*}
+    and \begin{align*}
+      C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz
+      &\le \int_{4|x-y|} \frac{1}{r^{d+1}} r^{d-1} \, dr 
+      \le \frac{C}{|x-y|} \qedhere
+    \end{align*}
   \end{proof}
 
-  
 
+  \begin{ex}[E 5.1]
+    Prove that if \(f\) is a harmonic function in \(\mathbb{R}^d\) and \(g \in C_c(\mathbb{R}^d)\) is radial, then
+    \[\int_{\mathbb{R}^d} f(x) g(x) \, dx = f(0) \int_{\mathbb{R}^d} g(x) \, dx\]
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \(x = r \omega, r > 0, |\omega| = 1\)
+    \begin{align*}
+      \int_{\mathbb{R}^d} f(x) g(x) \, dx &\overset{{\text{(Polar)}}}{=} \int_0^\infty \left(\int_{\partial B(0,1)} f(r\omega) g(r\omega) \, d \omega\right) \, dr \\
+      &= \int_0^\infty \left(g_0(r) \int_{\partial B(0, 1)} f(r \omega) \, d \omega   \right) \, dr \\
+      \text{(Mean value theorem (\ref{mean-value-theorem}))} \quad &= \int_0^\infty \left(g_0(r) f(0) \int_{\partial B(0, 1)}\, d \omega\right) \, dr \\
+      &= f(0) \int_0^\infty \left( \int_{\partial B(0,1)} g(r \omega) \, d \omega \right) \, dr \\
+      &= f(0) \int_{\mathbb{R}^d} g(x) \, dx
+    \end{align*}
+  \end{proof}
+
+
+  \begin{rem}
+    Let \(g \in C_c(\mathbb{R}^d)\) be radial. Why is \(\int_{\mathbb{R}^3} \frac{q(x)}{|x|} \,dx \ne \infty\)? Because \(f(x) = \frac{1}{|x|}\) is harmonic in \(\mathbb{R}^d \setminus \{0\}\) and sub-harmonic in \(\mathbb{R}^d\), \(- \Delta = c \delta_0\).
+  \end{rem}
+
+  \begin{ex}[E 5.2]
+    Let \(1 \le p < \infty\). Let \(\Omega \subseteq \mathbb{R}^d\) be open. Consider the Sobolev Space
+    \begin{align*}
+      W^{1, p}(\Omega) &= \{f \in L^p(\Omega) \mid \partial_{x_i} f \in L^p(\Omega), \ \forall i = 1, 2, \dots, d\}
+    \end{align*}
+    with the norm
+    \[\| f \|_{W^{1,p}} = \|f\| + \sum_{i=1}^d \| \partial_{x_i} f\|_{L^p(\Omega)}.\]
+    Prove that \(W^{1,p}(\Omega)\) is a Banach space. Here \(x = (x_i)_{i=1}^d \in \mathbb{R}^d\). Hint: You can use the fact that \(L^p(\Omega\) is a Banach Space.
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \(W^{1,p}(\Omega) \subseteq L^p(\Omega) \times L^p(\Omega) \cdots \times L^p(\Omega) = (L^p(\Omega))^{d+1}\). For an element \(f \in W^{1,p}(\Omega)\) we can think of it as \(f \mapsto (f, \partial_1 f, \partial_2 f, \dots, \partial_d f)\), so \(W^{1,p}(\Omega)\)  is a subspace of \((L^p(\Omega))^{d+1}\), which is a norm-space. Why is \(W^{1,p}(\Omega)\) closed in \((L^p(\Omega))^{d+1}\)? Take \(\{f_n\}_{n=1}^\infty \subseteq W^{1,p}(\Omega)\) such that \(f_n \to f\) in \(L^p\) an \(\partial_i f_n \to g_i\) in \(L^p\) for all \(i = 1, \dots, d\). We prove that \((f, g_1, \dots, g_d) \in W^{1,p}(\Omega)\), i.e. \(f \in W^{1,p}\) and \(g_i = \partial_i f\) for all \(i = 1, \dots, d\). We know that \(f_n \to f\) in \(L^p(\Omega)\), so \(f_n \to f\) in \(D'(\Omega)\) and \(\partial_i f_n \to \partial_i f\) in \(D'(\Omega)\). On the other hand we have \(partial_i f_n \to g_i\) in \(L^p(\Omega)\), so \(\partial_i f_n \to g_i\) in \(D'(\Omega)\). So we get \(\partial_i f = g_i \in L^p(\Omega)\) for all \(i=1, \dots, d\) in \(D'(\Omega)\). So we can conclude \(f \in W^{1,p}(\Omega)\) and \(\partial_i f = g_i\) for all \(i = 1, \dots, d\).
+  \end{proof}
+
+  \begin{ex}[E 5.3]
+    Let \(f\) be a real-values function in \(W^{1,p}(\mathbb{R}^d)\) for some \(1 \le p < \infty\). Prove that \(|f| \in W^{1,p}(\mathbb{R}^d)\) and 
+    \begin{align*}
+      (\nabla |f|)(x) &= \begin{cases}
+        \nabla f(x) & f(x) > 0 \\ - \nabla f(x) & f(x) < 0 \\ 0 & f(x) = 0
+      \end{cases}.
+    \end{align*}
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Consider \(G_\epsilon(t)= \sqrt{\epsilon^2 + t^2} - \epsilon\) for \(\epsilon > 0\), \(t \in \mathbb{R}\). Clearly we have \(G_\epsilon(t) \to |t|\) as \(\epsilon \to 0\) and 
+    \begin{align*}
+      G_\epsilon'(t) &= \frac{2t}{2 \sqrt{\epsilon^2 + t^2}} = \frac{t}{\sqrt{\epsilon^2 + t^2}},
+    \end{align*}
+    so \(|G_\epsilon'(t)| \le 1\), \(G_\epsilon(0) = 0\). By the chain rule, \(G_\epsilon(f) \in W^{1,p}(\mathbb{R}^d)\) and 
+    \begin{align*}
+      \partial_i G_\epsilon(f)(x) &= G_\epsilon'(f), \partial_if(x) = \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}} \partial_i f(x) \in L^p(\mathbb{R}^d)
+    \end{align*}
+    for all \(i = 1, \dots, d\). Note then when \(\epsilon \to 0\) that \(G_\epsilon(f)(x) \to |f(x)|\) pointwise, so \(G_\epsilon(f) \to |f|\) in \(L^p(\mathbb{R}^d)\). \(|G_\epsilon(f)(x) - G_\epsilon(0)| \le |f(x)| \in L^p(\mathbb{R}^d)\) by dominated convergence. \begin{align*}
+      \partial_i G_\epsilon(f)(x) 
+      &= \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}} \partial_i f(x) \xrightarrow{\epsilon \to 0} g_i(x) \coloneqq \begin{cases}
+        \partial f_i(x) & f(x) > 0 \\ - \partial_i f(x) & f(x) < 0 \\ 0 & f(x) = 0
+      \end{cases} \\
+      |\partial_i G_\epsilon(f)(x)|
+      &\le \left| \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}}\right| |\partial_i f(x)| \le |\partial_i f(x)| \in L^p(\mathbb{R}^d)
+    \end{align*}
+    So we get \(\partial_i G_\epsilon(f) \xrightarrow{\epsilon \to 0} g_i\) in \(L^p(\mathbb{R}^d)\) by Dominated Convergence. So we conclude: \(\partial_i(|f|) = g_i \in L^p(\mathbb{R}^d)\) for all \(i = 1, \dots, d\), so \(|f| \in W^{1,p}(\mathbb{R}^d)\), \(|f| \in L^p\).
+  \end{proof}
+
+  \begin{ex}[E 5.4]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded, \(f \in L^1(\Omega)\), 
+    \begin{align*}
+      u(x) &= \int_\Omega G(x-y)f(y) \, dy
+    \end{align*}
+    Prove that \(- \Delta u = f\) in \(D'(\Omega)\) and \(u \in L_{loc}^1(\Omega)\). Recall \(f \in L_{loc}^1(\mathbb{R}^d)\) and \(\omega_d f \in L^1(\mathbb{R}^d)\), \[\omega_d (x) = \begin{cases}
+      1 + |x| & d = 1 \\ \log(1 + |x|) & d = 1 \\ \frac{1}{(1 + |x|)^{d-2}} & d \ge 3
+    \end{cases}\]
+    Then \begin{align*}
+      G \star f &= \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \in L_{loc}^1(\mathbb{R}^d) 
+    \end{align*}
+    and \(- \Delta (G \star f) = f\) in \(D'(\mathbb{R}^d)\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Define \(\tilde f = \mathbb{1}_\Omega(x) f(x) = \begin{cases}
+      f(x) & x \in \Omega \\ 0 & x \notin \Omega
+    \end{cases}\). Then 
+    \begin{align*}
+      u(x) &= \int_{\Omega} G(x-y)f(y) \, dy = \int_{\mathbb{R}^d} G(x-y) \tilde f(y) \, dy = (G \star \tilde f)(x)
+    \end{align*}
+    We have \(u \in L_{loc}^1(\mathbb{R}^d)\), so \(u \in L^1(\Omega)\).
+    Then \(- \Delta u = \tilde f\) in \(D'(\mathbb{R}^d)\), so \(- \Delta u = f\) in \(D'(\Omega)\). Claim: \(- \Delta u = f\) in \(D'(\mathbb{R}^d)\), so \(- \Delta u = f\) in \(D'(\Omega)\) if \(\Omega \subseteq \mathbb{R}^d\), \(\tilde f|_\Omega = f\). Take \(\phi \in C_c^\infty(\Omega)\). We need: \((- \Delta u)(\phi) \overset{?}{=} \int_\Omega f \phi\). We have \(\phi \in C_c^\infty(\Omega)\), so \(\phi C_c^\infty(\mathbb{R}^d)\). This implies:
+    \begin{align*}
+      (- \Delta u)(\phi) 
+      &= \int_{\mathbb{R}^d} \tilde f \phi 
+      = \int_{\substack{\Omega \\ \supp \phi \subseteq \Omega}} \tilde f \phi = \int_\Omega f \phi
+    \end{align*}
+  \end{proof}
+
+  \begin{ex}[E 5.5]
+    \(B = B(0, \frac{1}{2}) \subseteq \mathbb{R}^3\), \(r = |x|\), \(u(x) = \omega(r) = \log|\log(r)|\) for all \(r \in \left(0, \frac{1}{2}\right)\). Compute \(- \Delta u\) in \(D'(B)\), 
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{align*}
+      \omega(r) &= \log(-\log(r)), \quad \text{for } r \in \left(0, \frac{1}{2}\right) \\
+      \omega'(r) &= \frac{1}{- \log(r)} \left(- \frac{1}{r}\right) = \frac{1}{r \log{r}} \\
+      \omega''(r) &= - \frac{1}{(r \log(r))^2}(r \log(r))' = - \frac{\log(r)+1}{(r \log r)^2}
+    \end{align*}
+    \(- \Delta u = - \omega''(r) - \frac{2 \omega'(r)}{r} = \frac{\log(r) + 1}{(r \log(r))^2} - \frac{2}{r^2 \log (r)} = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)\)
+    \(f \in L^{\frac{3}{2}}: \) 
+    \begin{align*}
+      \int_B |f(x)|^{\frac{3}{2}} \, dx 
+      &= const \int_0^{\frac{1}{2}} \left| \frac{1}{r^2 \log r^2} - \frac{1}{r^2 \log{r}} \right|^{\frac{3}{2}} r^2 \, dr \\
+      \left(\begin{aligned}
+        r = e^{-x}, \\
+        x \in (\log(2), \infty), \\
+        dr = -e^{-x} \, dxs
+      \end{aligned}\right) \quad &\tilde < \int_0^{\frac{1}{2}} \frac{1}{r} \left| \frac{1}{(\log(r))^2} - \frac{1}{(\log(r))} \right|^{\frac{3}{2}} \, dr \\
+      &\tilde < \int_{\log(2))}^\infty e^x \left(\frac{1}{x^2} + \frac{1}{x}\right)^{\frac{3}{2}} e^{-x} \, dx \\
+      &\tilde < \int_{\log(2)}^\infty \frac{1}{x^{\frac{3}{2}}} \, dx < \infty
+    \end{align*}
+    Where \(\tilde <\) means \emph{up to a constant}. Now, \(u(x) = \omega(r) = \log(-\log(r))\). 
+    \begin{align*}
+      - \Delta u(x) &= f(r) = \frac{1}{r^2(\log(r))^2} - \frac{1}{r^2\log(r))}
+    \end{align*}
+    for all \(x \ne 0, |x| = r < \frac{1}{2}\). Why is \(- \Delta u(x) = f\) in \(D'(B)\)? Take \(\phi \in C_c^\infty(B)\), check: \(\int_B(-\Delta \phi) = \int_B f d \phi\). 
+    \begin{align*}
+      \int_{|x| < \frac{1}{2}} u (- \Delta \phi) \, dx = \lim_{\epsilon \to 0^+} \int_{\epsilon < |x| < \frac{1}{2}} u(x) (- \Delta \phi)(x) \, dx
+    \end{align*}
+    by Dominated convergence. \(u \in L^1(B)\). For all \(\epsilon > 0\):
+    \begin{align*}
+      \int_{\epsilon < |x| < \frac{1}{2}} u(x) (-\Delta \phi)(x) \, dx 
+      &= \int_{|x| > \epsilon} u(x) (-\Delta \phi)(x) \, dx \\
+      &= \int_{\partial B(0, \epsilon)}u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) + \int_{|x| > \epsilon} \nabla u(x) \nabla \phi(x) \, dx
+    \end{align*}
+    The boundary term vanishes as \(\epsilon \to 0\) since 
+    \begin{align*}
+      \left|u(x) \nabla \phi(x) \frac{x}{|x|}\right| \le \|\nabla \phi \|_{L^\infty} |u(x)| = c \log|\log(r)|
+    \end{align*}
+    \begin{align*}
+      \left| \int_{\partial B(0, \epsilon)} u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) \right| 
+      &\le C \int_{\partial B(0, \epsilon)} \log |\log(\epsilon)| \, dS(x) \\
+      &= C \log |\log \epsilon| \underbrace{|\partial B(0, \epsilon)}_{\sim \epsilon^2} \xrightarrow{\epsilon \to 0} 0
+    \end{align*}
+    \begin{align*}
+      &\int_{|x| > \epsilon} \nabla u(x) \nabla \phi(x) \, dx 
+      = \sum_{i=1}^d \int_{|x| > \epsilon} \partial_i u(x) \partial_i \phi(x) \, dx \\
+      &\quad= \sum_{i=1}^d \left(- \int_{\partial B(0, \epsilon)} \partial_i u(x) \phi(x) \frac{x_i}{|x|} \, dS(x) - \int_{|x|> \epsilon} \underbrace{\partial_i \partial_i u(x)}_{f(x)} \phi(x) \, dx\right)
+    \end{align*}
+    The boundary term vanishes as \(\epsilon \to 0\) as 
+    \begin{align*}
+      \left| \int_{\partial B(0, \epsilon)} \partial u(x) \phi(x) \frac{x_i}{|x|}\, dS(x) \right|
+      &\le \|\phi\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\partial_i u(x)| \, dS(x) \\
+      (\star) \quad &\le C \frac{1}{|\epsilon \log(r)|} |\partial B(0, \epsilon)| \to 0
+    \end{align*} as \(\epsilon \to 0\). 
+    \((\star) u = u(r), u(x) = \omega(|x|), \partial_i u(x) = \omega(|x|)\frac{x_i}{|x|}\), \(|\partial_i u(x)| \le |\omega(|x|)| = \left|\frac{1}{r\log(r)}\right|\). Finally:
+    \begin{align*}
+      \int_{|x| > \epsilon} f(x) \phi(x) \, dx \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} f(x) \phi(x) \, dx
+    \end{align*}
+    Since \(f \phi \in L^1\) and Dominated Convergence.
+  \end{proof}
+
+  \begin{ex}[Bonus 5]
+    Construct \(u \in L^1(\mathbb{R}^3)\) compactly supported s.t. \(- \Delta u \in L^{\frac{3}{2}}(\mathbb{R}^3)\) and \(u\) is not continuous at \(0\).
+  \end{ex}
+  Hint: Related to E 5.5. \(u_0(x) = \omega(r) = \log(|\log(r)|)\) if \(0 < r = |x| < \frac{1}{2}\). Consider \(\chi u_0\) where \(\chi \in C_c^\infty\), \(\chi = 0\) if \(|x| > \frac{1}{2}\), \(\chi = 1\) if \(|x| < \frac{1}{4}\). You can prove that \(\Delta (\chi u_0) = (\Delta \chi) u_0 + 2 \nabla \chi \nabla u_0 + \chi(\underbrace{\Delta u_0}_{\in L^{\frac{3}{2}}})\) in \(D'(\mathbb{R}^3)\). (almost everywhere, in distributional sense, integration by parts)
 \end{document}
