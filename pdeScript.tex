@@ -2831,10 +2831,41 @@
     and \begin{align*}
       C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz
       &\le \int_{4|x-y|} \frac{1}{r^{d+1}} r^{d-1} \, dr 
-      \le \frac{C}{|x-y|} \qedhere
+      \le \frac{C}{|x-y|}
+    \end{align*}
+    Consider \(A \setminus B\): 
+    \begin{align*}
+      \left| \int_{A \setminus B} \right| \le C \|f\|_{L^\infty} \int_{A \setminus B} \frac{1}{|z-x|^d} \, dz
+    \end{align*}
+    where
+    \begin{align*}
+      A &= \{z \mid 4 |x-y| < |z-x| \le 1\} \\
+      B &= \{z \mid 4 |x-y| < |z-y| \le 1\} \\
+      A \setminus B &= \{z \in A \mid |z-y| \le 4 |x-y|\} \cup \{z \in A \mid |z-y| > 1\} = E_1 \cup E_2 \\
+    \end{align*}
+    for 
+    \begin{align*}
+      E_1 &= \{z \mid |z-y| \le 4 |x-y| < |z-x| \le 1\} \\
+      &\subseteq \{ z \mid 4 |x-y| \le |x-z| \le 5 |x-y| \}.
+    \end{align*}
+    \(|x-z| \le |x-y| + |y-z| \le 5 |x-y|\) in \(E_1\).
+    We have 
+    \begin{align*}
+      \int_{E_1} \frac{1}{|z-x|^d} \, dz 
+      &\le \int_{4|x-y| \le |x-z| \le 5 |x-y|} \frac{1}{|z-x|^{d-\alpha}} \, dz \\
+      &= \int_{4|x-y| \le |z| \le 5 |x-y|} \frac{1}{|z|^{d-\alpha}} \, dz \\
+      &= \int_{4|x-y|} \frac{1}{r^d} r^{d-1} \, dr \\
+      &= \int_{4|x-y|} \frac{1}{r^{1-\alpha}} \, dr \\
+      &\le C |x-y|^\alpha
+    \end{align*}
+    Now in \(E_2\): \(|z-x| \ge |z-y| - |y-x| \ge 1 - |y-x|\).
+    \begin{align*}
+      \int_{E_2} \frac{1}{|z-x|^{d-\alpha}} \, dz
+      &\le \int \frac{1}{|z-x|^{d-\alpha}} \, dz
+      = \int_{1-|x-y|}^1 \frac{1}{r^{d-\alpha}} r^{d-1} \, dr \\
+      &\le const. \left| 1 - \frac{1}{(1 - |x-y|)^\alpha} \right| \le C |x-y|^\alpha
     \end{align*}
   \end{proof}
-
 
   \begin{ex}[E 5.1]
     Prove that if \(f\) is a harmonic function in \(\mathbb{R}^d\) and \(g \in C_c(\mathbb{R}^d)\) is radial, then
@@ -2926,12 +2957,16 @@
     \begin{align*}
       (- \Delta u)(\phi) 
       &= \int_{\mathbb{R}^d} \tilde f \phi 
-      = \int_{\substack{\Omega \\ \supp \phi \subseteq \Omega}} \tilde f \phi = \int_\Omega f \phi
+      = \int_{\substack{\Omega, \\ \supp \phi \subseteq \Omega}} \tilde f \phi = \int_\Omega f \phi
     \end{align*}
   \end{proof}
 
   \begin{ex}[E 5.5]
-    \(B = B(0, \frac{1}{2}) \subseteq \mathbb{R}^3\), \(r = |x|\), \(u(x) = \omega(r) = \log|\log(r)|\) for all \(r \in \left(0, \frac{1}{2}\right)\). Compute \(- \Delta u\) in \(D'(B)\), 
+    Let \(B = B\left(0, \frac{1}{2}\right) \subseteq \mathbb{R}^3\). Consider \(u: B \to \mathbb{R}\), defined by 
+    \begin{align*}
+      u(x) &= \log|\log|x||.
+    \end{align*}
+    Prove that the distributional derivative \(f = - \Delta u\) is a function in \(L^{\frac{3}{2}}(B)\).
   \end{ex}
 
   \begin{proof}[Solution]
@@ -2988,9 +3023,9 @@
       (\star) \quad &\le C \frac{1}{|\epsilon \log(r)|} |\partial B(0, \epsilon)| \to 0
     \end{align*} as \(\epsilon \to 0\). 
     \((\star) u = u(r), u(x) = \omega(|x|), \partial_i u(x) = \omega(|x|)\frac{x_i}{|x|}\), \(|\partial_i u(x)| \le |\omega(|x|)| = \left|\frac{1}{r\log(r)}\right|\). Finally:
-    \begin{align*}
+    \begin{equation*}
       \int_{|x| > \epsilon} f(x) \phi(x) \, dx \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} f(x) \phi(x) \, dx
-    \end{align*}
+    \end{equation*}
     Since \(f \phi \in L^1\) and Dominated Convergence.
   \end{proof}
 
@@ -2998,4 +3033,34 @@
     Construct \(u \in L^1(\mathbb{R}^3)\) compactly supported s.t. \(- \Delta u \in L^{\frac{3}{2}}(\mathbb{R}^3)\) and \(u\) is not continuous at \(0\).
   \end{ex}
   Hint: Related to E 5.5. \(u_0(x) = \omega(r) = \log(|\log(r)|)\) if \(0 < r = |x| < \frac{1}{2}\). Consider \(\chi u_0\) where \(\chi \in C_c^\infty\), \(\chi = 0\) if \(|x| > \frac{1}{2}\), \(\chi = 1\) if \(|x| < \frac{1}{4}\). You can prove that \(\Delta (\chi u_0) = (\Delta \chi) u_0 + 2 \nabla \chi \nabla u_0 + \chi(\underbrace{\Delta u_0}_{\in L^{\frac{3}{2}}})\) in \(D'(\mathbb{R}^3)\). (almost everywhere, in distributional sense, integration by parts)
+
+  \begin{thm}[Regularity on Domains] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Assume \(u, f \in D'(\Omega)\) such that \(- \Delta u = f\) in \(D'(\Omega)\).
+    \begin{enumerate}[label=\alph*)]
+      \item If \(f \in L_{loc}^1(\Omega)\), then \begin{itemize}
+        \item \(u \in C^1(\Omega)\) if \(d = 1\)
+        \item \(u \in L_{loc}^q(\Omega)\) for all \(q < \infty\) if \(d = 2\)
+        \item \(u \in L_{loc}^q(\Omega)\) for all \(q < \frac{d}{d-2}\) if \(d \ge 3\)
+      \end{itemize}
+      \item If \(f \in L_{loc}^q(\Omega)\), \( d \ge p < \frac{d}{2}\), then \(u \in C_{loc}^{0, \alpha}(\Omega)\), where \(0 < \alpha < 2 - \frac{d}{p}\)
+      \item If \(f \in L_{loc}^p(\Omega)\), \(p > d\)f, then \(u \in C_{loc}^{1, \alpha}(\Omega)\), where \(0 \le \alpha < 1 - \frac{d}{p}\)
+      \item If \(f \in C_{loc}^{0, \alpha}(\Omega)\) for some \(0 < \alpha < 1\), then \(u \in C_{loc}^{2, \alpha}(\Omega)\)
+      \item If \(f \in C_{loc}^{m, \alpha}(\Omega)\), then \(u \in C_{loc}^{m+2, \alpha}(\Omega)\)
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    Let \(\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}\).
+    Take a ball \(\overline B \subseteq \Omega\). Define \(f_B: \mathbb{R}^d \to \mathbb{K}\), \begin{align*}
+      f_B(x) &= (\mathbb{1}_B f)(x) = \begin{cases}
+        f(x) & x \in B \\ 0 & x \notin B
+      \end{cases}
+    \end{align*}
+    Then if \(f \in L_{loc}^1(\Omega)\), \(f_B\) is compactly supported. From the previous theorems: \(G \star f_B \in L_{loc}^1(\mathbb{R}^d)\) and \(- \Delta (G \star f_B) = f_B\) in \(D'(\mathbb{R}^d)\). On the other hand, \(- \Delta u = f\) in \(D'(\Omega)\), so \(- \Delta(u - G \star f_B) = 0\) in \(D'(B)\). Indeed, for all \(\phi \in C_c^\infty(B)\), then:
+    \begin{align*}
+      (- \Delta u)(\phi) &= \int_\Omega f \phi = \int_B f_B \phi = - \int_{\mathbb{R}^d} f_B \phi = (-\Delta)(G \star f_B)(\phi)
+    \end{align*}
+    Then \(- \Delta u = - \Delta (G \star f_B)\) in \(D'(B)\). Then \(u - G \star f_B\) is harmonic in \(B\) and by Weyls lemma we have \(u - G \star f_B \in C^\infty(B)\). So the smoothness of \(u\) in \(B\) is the same to that of \(G \star f\).
+  \end{proof}
+
+
 \end{document}
