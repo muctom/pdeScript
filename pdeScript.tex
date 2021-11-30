@@ -2543,7 +2543,7 @@
     \end{enumerate}
     where \(G\) is den fundamental solution of the laplace equation.
   \end{thm}
-
+¨
   \begin{eg}
     Let \(r = |x|\)
     \begin{align*}
@@ -3064,7 +3064,154 @@
     Then \(- \Delta u = - \Delta (G \star f_B)\) in \(D'(B)\). Then \(u - G \star f_B\) is harmonic in \(B\) and by Weyls lemma we have \(u - G \star f_B \in C^\infty(B)\). So the smoothness of \(u\) in \(B\) is the same to that of \(G \star f\).
   \end{proof}
 
+
+  \chapter{Existence for Poisson's Equation on Domains}
+
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open. Consider Poisson's equation.
+  \[\begin{cases}
+    - \Delta u = f & \text{in } \Omega \\ u = g & \text{on } \partial \Omega
+  \end{cases}\]
+  for given data \((f, g)\) and \(u\) the unknonwn function.
+  \begin{itemize}
+    \item Classical solutions: \(f \in C^2(\bar \Omega) \leadsto\) explicit representation formula.
+    \item Weak solution: \(f \in L^p( \Omega)\), \(g \in L^p(\partial \Omega)\) \(\leadsto\) \(u \in W^{2,p}(\Omega)\). We are going to establish the existence by \emph{Energy Methods}. (Calculus of variations)
+  \end{itemize}
+
+  \begin{defn}[\(C^1\)-Domains]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. We say that \(\Omega\) is of class \(C^1\) (i.e. \(\partial \Omega \in C^1\)) if for all \(x_0 \in \partial \Omega\) there is a bijective function \(h: U \to Q\), where \begin{itemize}
+      \item \(x_0 \in U\) open in \(\mathbb{R}^d\)
+      \item \(Q = \{x = (x_1, \dots, x_d) = (x', x_d)\} \in \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'| < 1, |x_d| < 1 \}\)
+      \item \(h \in C^1(\bar U)\) and \(h^{-1} \in C^1(\bar Q)\) (\(C^1\)-diffeomorphism)
+      \item \(h(U) = Q\)
+      \begin{align*}
+        h(U \cap \Omega) &= Q_+ = Q \cap \mathbb{R}_+^d = \{x = (x', x_d) \in Q \mid x_d > 0\} \\
+        h(U \cap \partial \Omega) &= Q_0 = Q \cap \partial \mathbb{R}_+^d = \{x = (x', x_d) \in Q \mid x_d = 0\} \\
+        h(U \setminus \bar \Omega) &= Q_- = Q \cap \mathbb{R}_-^d = \{x = (x', x_d) \in Q \mid x_d < 1\}
+      \end{align*}
+      (From Brezis' book)
+    \end{itemize}
+  \end{defn}
   
+  \begin{rem}
+    The set \(Q\) can be replaced by a ball, i.e. \(\Omega\) is of \(C^1\) if for all \(x_0 \in \partial \Omega\) there is a function \(U \to B(0,1) \subseteq \mathbb{R}^d\).
+    \begin{itemize}
+      \item \(x_0 \in U\) with \(U \subseteq \mathbb{R}^d\) open.
+      \item \(h \in C^1(\bar U), h^{-1} \in C^1(\overline{B(0,1)})\)
+      \item \(h(U \cap \Omega) = B(0,1) \cap \mathbb{R}_+^d\), \(h(U \cap \partial \Omega) = B(0,1) \cap \mathbb{R}^d\).
+    \end{itemize}
+  \end{rem}
 
+  \begin{rem}[An equivalent definition form Evan's book App. C]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. Then \(\Omega\) is \(C^1\) if for all \(x_0 \in \partial \Omega\) there is a \(r > 0\) and a \(C^1\)-function \(\gamma: \mathbb{R}^{d-1} \to \mathbb{R}\) s.t. (upon relabeling and reorienting the axes if necessary) such that:
+    \begin{align*}
+      \Omega \cap B(x_0, r) &= \{x = (x', x_d) \in B(x_0, r) \mid x_d < \gamma(x_0)\}
+    \end{align*}
+  \end{rem}
 
+  \begin{proof}[Proof of the equivalence of the two definitions]\
+    \begin{itemize}
+      \item [Def. 2 \(\Rightarrow\) Def. 1:] In fact, given \(x_0 \in \partial \Omega\) and \(\gamma\) we can define
+      \begin{align*}
+        h(x', x_d) &= (x', x_d - \gamma(x')) \in C^1(\mathbb{R}^d, \mathbb{R}^d) \\
+        h^{-1}(x', x_d) &= (x', x_d + \gamma(x')) \in C^1(\mathbb{R}^d, \mathbb{R}^d)
+      \end{align*}
+      \item [Def. 1 \(\Rightarrow\) Def. 2:] We need the inverse function theorem and the implicit function theorem. Let \(x_0 \in \partial \Omega\), let \(h: U \to B(0,1)\) as in Def. 1. Denote \(h = (h_1, h_2, \dots, h_d)\). Since \(h\) is invertible near \(x_0\), by the inverse function theorem we have for the Jacobi matrix \(J h(x_0) = (\partial_j h_i(x_0))_{1 \le i,j \le d}\) is invertible. So we have \(\nabla h_d(x_0) = (\partial_j h_d(x_0))_{1 \le j \le d} \ne \vec{0}^{\mathbb{R}^d}\), so there is a \(j \in \{1, 2, \dots, d\}\) s.t. \(\partial_j h_d(x_0) \ne 0\). By relabeling and reorienting the axes, we can assume that \(\partial_d h_d(x_0) > 0\). By continuity there is a \(r > 0\) such that \(\partial_d h_d(x) > 0\) for all \(x \in B(x_0, r)\). Define \(\gamma: \mathbb{R}^{d-1} \to \mathbb{R}\) s.t. in \(B(x_0, r)\):
+      \begin{equation*}
+        x = (x', x_d) \in \partial \Omega
+        \Longleftrightarrow h_d(x', x_d) = 0
+        \Longleftrightarrow x_d = \gamma(x'),
+      \end{equation*}
+      \(h_d: \mathbb{R}^d \to \mathbb{R}\). This gives a solution \(\gamma\) if \(\partial_d h_d > 0\) in \(B(x_0, r)\). (For implicit function theorem, \(\partial_d h_d(x_0) \ne 0\))
+      Question: Why in \(B(x_0,r)\)?
+      \begin{align*}
+        x = (x', x_d) \in \Omega
+        \Longleftrightarrow x_d > \gamma(x')
+      \end{align*}
+      Since \(\partial_d h_d(x) > 0\) for all \(x \in B(x_0, r)\) we have that \(x_d \mapsto h_d(x', x_d)\) is strictly increasing, hence 
+      \begin{align*}
+        &x = (x', x_d) \in \Omega \\
+        \Longleftrightarrow \quad&h(x', x_d) \in \mathbb{R}_+^d \\
+        \Longleftrightarrow \quad&h_d(x', x_d) > 0 = h_d(x', \gamma(x')) \\
+        \Longleftrightarrow \quad& x_d > \gamma(x') \qedhere
+      \end{align*}
+    \end{itemize}
+  \end{proof}
+  
+  \begin{thm}[Gauss-Green formula / Integration by parts]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded. Then
+    \begin{enumerate}
+      \item For all \(u, v \in C^1(\bar \Omega)\):
+      \begin{align*}
+        \int_\Omega (\partial_i u) v &= - \int_\Omega u(\partial_i v) + \int_{\partial \Omega} uv n_i \, dS,
+      \end{align*}
+      where \(\vec{n} = (n_i)_{i=1}^d\) is the outwarded unit normal vector.
+    \item For all \(u,v \in C^2(\bar \Omega)\):
+    \begin{align*}
+      \int_\Omega u(-\Delta v) &= \int_\Omega \nabla u \nabla v - \int_{\partial \Omega} u \frac{\partial v}{\partial \vec{n}} \, dS
+    \end{align*}
+    where \(\frac{\partial v}{\partial \vec{n}} = \nabla v \vec{n} = \sum_{i=1}^d \partial_i v n_i\). 
+  \end{enumerate}
+  \end{thm}
+
+  Classical solutions via Green's function:
+  \begin{align*}
+    \begin{cases}
+      - \Delta u = f & \text{in } \Omega \\ u = g & \text{on } \partial \Omega
+    \end{cases}
+  \end{align*}
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded, \(\partial \Omega \in C^1\). Assume there exists a \(u \in C^2(\bar \Omega)\), \(f \in C(\bar \Omega)\), \(g \in C(\partial \Omega)\). Let \(G\) be the fundamential solution of the Laplace Equation in \(\mathbb{R}^d\). We use integration by parts in \(\Omega \setminus B(x, \epsilon)\):
+  \begin{align*}
+    &\int_{\Omega \setminus B(x, \epsilon)} u(y)(-\Delta G)(y-d) \, dy \\
+    &\quad= \int_{\Omega \setminus B(x, \epsilon)} \nabla u(y) \nabla G(y-x) \, dy - \int_{\partial \Omega \cup \partial B(x, \epsilon)} u(y) \frac{\partial G}{\partial \vec{n}} (y-x) \, dS(y) \\
+    &\int_{\Omega \setminus B(x, \epsilon)} G(y-x)(-\Delta u)(y) \, dy \\
+    &\quad= \int_{\Omega \setminus B(x,\epsilon)} \nabla G(y-x)\nabla u(y) \, dy - \int_{\partial \Omega \cup \partial B(x,\epsilon)}G(y-x) \frac{\partial u}{\partial \vec{n}}(y) \, dS(y)
+  \end{align*}
+  This implies:
+  \begin{align*}
+    &\int_{\Omega \setminus B(x,\epsilon)} \left[u(y) (-\Delta G(y-x))-G(y-x)(-\Delta u)(y)\right] \, dy  \\
+    &\quad= - \int_{\partial \Omega \cup \partial B(x, \epsilon)} \left[u(y) \frac{\partial G}{\partial \vec{n}}(y-x) - G(y,x) \frac{\partial u}{\partial \vec{n}}(y)\right] \, dS(y)
+  \end{align*}
+  for all \(x \in \Omega, x \in B(x, \epsilon) \subseteq \Omega\). When \(\epsilon \to 0\), then the left hand side converges to \(- \int_\Omega G(y-x) f(y) \, dy\) and the right hand side (for \(d \ge 2\)) we have \(\partial_j G(y) = \frac{-y_j}{d|B_1||y|^d}\), so
+  \begin{align*}
+    \frac{\partial G}{\partial \vec{n}}
+    = \nabla G \vec{n} 
+    = \nabla G(y) \left(\frac{-y}{|y|}\right)
+    = \sum_{j=1}^d \frac{-y_i}{d|B_1||y|^d} \frac{-y_j}{|y|}
+    = \frac{1}{d|B_1||y|^{d-1}} \text{ on} \partial B(0, \epsilon)
+  \end{align*}
+  so we have 
+  \begin{align*}
+    \frac{\partial G}{\partial \vec{n}}(y-x) = \frac{1}{d|B_1| \epsilon^{d-1}}
+  \end{align*}
+  on \(\partial B(x, \epsilon)\). Hence
+  \begin{align*}
+    \int_{\partial B(x, \epsilon)} u(y) \frac{\partial G}{\partial \vec{n}}(y-x) \, dS(y) 
+    &= \frac{1}{d|B_1| \epsilon^{d-1}} \int_{\partial B(x, \epsilon)} u(y) \, dS(y) \\
+    &= \fint_{\partial B(x,\epsilon)} u(y) \, dS(y)
+    \xrightarrow{\epsilon \to 0} u(x) 
+  \end{align*}
+  On the other hand:
+  \begin{align*}
+    \left|\int_{\partial B(x, \epsilon)} G(y-x) \frac{\partial u(y)}{\partial \vec{n}} \, dS(y)\right|
+    &\le C \epsilon^{d-1} \sup_{|z| = \epsilon} |G(z)| \xrightarrow{\epsilon \to 0} 0
+  \end{align*}
+  since \(|G(z)|\le \frac{C}{|z|^{d-2}}\) if \(d \ge 3\), \(|G(z)|\le C |\log(z)| \) if \(d = 2\) and \(|G(z)|\le C|z|\) if \(d = 1\). In summary: 
+  \begin{align*}
+    - \int_\Omega G(y-x) f(y) \, dy 
+    = - \int_{\partial \Omega} \left[u(y) \frac{\partial G}{\partial \vec{n}} (y-x) - G(y-x) \frac{\partial u}{\partial \vec{n}}(y)\right] \, dS(y) - u(x) \\
+    \Leftrightarrow u(x) = \int_\Omega G(y-x) f(y) \, dy + \int_{\partial \Omega} \left[G(y-x) \frac{\partial u}{\partial \vec{n}}(y) - g(y) \frac{\partial G}{\partial \vec{n}}(y-x)\right] \, dS(y)
+  \end{align*}
+  Problem: We don't know anything about \(\frac{\partial u}{\partial \vec{n}}\) on \(\partial \Omega\). Trick: We can resolve that by using the \emph{corrector} function: \(\Phi_x = \Phi_x(y)\) which solves:
+  \[\begin{cases}
+    - \Delta \Phi_x = 0 & \text{in } \Omega \\ \Phi_x(y) = G(y-x) &\text{on } \partial \Omega
+  \end{cases}\]
+  We assume that \(\Phi_x\) exists. 
+
+  \begin{defn}[Green's function]
+    \(\tilde G(x-y) = G(y-x) - \Phi_x(y)\) for all \(x,y \in \Omega\), \(x \ne y\).
+  \end{defn}
+  
+  \begin{ex}
+    Prove that (under the assumtion that the corrector exists) that \(\tilde G(x,y) = \tilde G(y,x)\) for all \(x,y \in \Omega\), \(x \ne y\).
+  \end{ex}
 \end{document}
