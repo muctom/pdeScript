@@ -2219,18 +2219,16 @@
   
     So \(G(f) \in L_{loc}^p\). Let us compute \(\partial_{x_i} G(f)\). Let \(\{f^{(n)}\}_{n=1}^\infty \subseteq C^\infty\) such that \(f^{(n)} \to f\) in \(W_{loc}^{1,p}\), then: 
     \begin{align*}
-      |G(f(^n)) - G(f)|
+      |G(f^{(n)}) - G(f)|
       \le \|\nabla G\|_{L^\infty} |f^{(n)} - f| \to 0 \text{ in  \(L_{loc}^p\)}
     \end{align*}
     So \(G(f^{(n)}) \to G(f)\) in \(L_{loc}^p\), thus \(\partial_{x_i} G(f^{(n)}) \to \partial_{x_i} G(f)\) in \(D'(\Omega)\). On the other hand, by the standard Chain-Rule for \(C^1\)-functions:
     \begin{align*}
       \partial_{x_i} G(f^{(k)})
-      &= \sum_{k=1}^d \underbrace{\partial_k G(f^{(k)})}_{\text{b.d.} \to \partial_k G(f)} \underbrace{\partial_i f_k^{(n)}}_{\to \partial_i f_k \text{ in } L^p(\Omega)} \\
-      &\to \sum_{k=1}^d \partial_k G(f) \partial_i f_k \text{ in }L_{loc}^p(\Omega)
+      &= \sum_{k=1}^d \underbrace{\partial_k G(f^{(k)})}_{(\text{b.d.} \to \partial_k G(f))} \underbrace{\partial_i f_k^{(n)}}_{(\to \partial_i f_k \text{ in } L^p(\Omega))} \to \sum_{k=1}^d \partial_k G(f) \partial_i f_k \text{ in }L_{loc}^p(\Omega)
     \end{align*}
     Thus
     \begin{align*}
-      \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p
       \partial_{x_i} G(f) = \sum_{k=1}^d \underbrace{\partial_k G(f)}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L_{loc}^p} \in L_{loc}^p \text{ in } D'(\Omega)
     \end{align*}
     So \(G(f) \in W_{loc}^{1,p}(\Omega)\). Aussume that \(G(0) \in L^p(\Omega)\) (i.e. \(|\Omega| < \infty\) or \(G(0) = 0\)). If \(f \in W^{1,p}(\Omega)\), then \(G(f) \in W^{1,p}(\Omega)\) since
@@ -2879,13 +2877,12 @@
       &= \int_0^\infty \left(g_0(r) \int_{\partial B(0, 1)} f(r \omega) \, d \omega   \right) \, dr \\
       \text{(Mean value theorem (\ref{mean-value-theorem}))} \quad &= \int_0^\infty \left(g_0(r) f(0) \int_{\partial B(0, 1)}\, d \omega\right) \, dr \\
       &= f(0) \int_0^\infty \left( \int_{\partial B(0,1)} g(r \omega) \, d \omega \right) \, dr \\
-      &= f(0) \int_{\mathbb{R}^d} g(x) \, dx
+      &= f(0) \int_{\mathbb{R}^d} g(x) \, dx \qedhere
     \end{align*}
   \end{proof}
 
-
   \begin{rem}
-    Let \(g \in C_c(\mathbb{R}^d)\) be radial. Why is \(\int_{\mathbb{R}^3} \frac{q(x)}{|x|} \,dx \ne \infty\)? Because \(f(x) = \frac{1}{|x|}\) is harmonic in \(\mathbb{R}^d \setminus \{0\}\) and sub-harmonic in \(\mathbb{R}^d\), \(- \Delta = c \delta_0\).
+    Let \(g \in C_c(\mathbb{R}^d)\) be radial. Why is \(\int_{\mathbb{R}^3} \frac{g(x)}{|x|} \,dx \ne \infty\)? Because \(f(x) = \frac{1}{|x|}\) is harmonic in \(\mathbb{R}^d \setminus \{0\}\) and sub-harmonic in \(\mathbb{R}^d\), \(- \Delta f= c \delta_0\).
   \end{rem}
 
   \begin{ex}[E 5.2]
@@ -2975,45 +2972,50 @@
       \omega'(r) &= \frac{1}{- \log(r)} \left(- \frac{1}{r}\right) = \frac{1}{r \log{r}} \\
       \omega''(r) &= - \frac{1}{(r \log(r))^2}(r \log(r))' = - \frac{\log(r)+1}{(r \log r)^2}
     \end{align*}
-    \(- \Delta u = - \omega''(r) - \frac{2 \omega'(r)}{r} = \frac{\log(r) + 1}{(r \log(r))^2} - \frac{2}{r^2 \log (r)} = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)\)
-    \(f \in L^{\frac{3}{2}}: \) 
+    So we have 
+    \begin{align*}
+      - \Delta u = w''(r) = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)
+    \end{align*}
+    % Originally:
+    % \[- \Delta u = - \omega''(r) - \frac{2 \omega'(r)}{r} = \frac{\log(r) + 1}{(r \log(r))^2} - \frac{2}{r^2 \log (r)} = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)\]
+    We show that \(f \in L^{\frac{3}{2}}: \) 
     \begin{align*}
       \int_B |f(x)|^{\frac{3}{2}} \, dx 
-      &= const \int_0^{\frac{1}{2}} \left| \frac{1}{r^2 \log r^2} - \frac{1}{r^2 \log{r}} \right|^{\frac{3}{2}} r^2 \, dr \\
+      &= const \int_0^{\frac{1}{2}} \left| \frac{1}{r^2 (\log r)^2} - \frac{1}{r^2 \log{r}} \right|^{\frac{3}{2}} r^2 \, dr \\
+      &\tilde < \int_0^{\frac{1}{2}} \frac{1}{r} \left| \frac{1}{(\log(r))^2} - \frac{1}{(\log(r))} \right|^{\frac{3}{2}} \, dr \\
       \left(\begin{aligned}
         r = e^{-x}, \\
         x \in (\log(2), \infty), \\
-        dr = -e^{-x} \, dxs
-      \end{aligned}\right) \quad &\tilde < \int_0^{\frac{1}{2}} \frac{1}{r} \left| \frac{1}{(\log(r))^2} - \frac{1}{(\log(r))} \right|^{\frac{3}{2}} \, dr \\
-      &\tilde < \int_{\log(2))}^\infty e^x \left(\frac{1}{x^2} + \frac{1}{x}\right)^{\frac{3}{2}} e^{-x} \, dx \\
+        dr = -e^{-x} \, dx
+      \end{aligned}\right) \quad &\tilde < \int_{\log(2)}^\infty e^x \left(\frac{1}{x^2} + \frac{1}{x}\right)^{\frac{3}{2}} e^{-x} \, dx \\
       &\tilde < \int_{\log(2)}^\infty \frac{1}{x^{\frac{3}{2}}} \, dx < \infty
     \end{align*}
     Where \(\tilde <\) means \emph{up to a constant}. Now, \(u(x) = \omega(r) = \log(-\log(r))\). 
     \begin{align*}
       - \Delta u(x) &= f(r) = \frac{1}{r^2(\log(r))^2} - \frac{1}{r^2\log(r))}
     \end{align*}
-    for all \(x \ne 0, |x| = r < \frac{1}{2}\). Why is \(- \Delta u(x) = f\) in \(D'(B)\)? Take \(\phi \in C_c^\infty(B)\), check: \(\int_B(-\Delta \phi) = \int_B f d \phi\). 
+    for all \(x \ne 0, |x| = r < \frac{1}{2}\). Why is \(- \Delta u(x) = f\) in \(D'(B)\)? Take \(\phi \in C_c^\infty(B)\), check: \(\int_B u(-\Delta \phi) = \int_B f \phi\). 
     \begin{align*}
       \int_{|x| < \frac{1}{2}} u (- \Delta \phi) \, dx = \lim_{\epsilon \to 0^+} \int_{\epsilon < |x| < \frac{1}{2}} u(x) (- \Delta \phi)(x) \, dx
     \end{align*}
     by Dominated convergence. \(u \in L^1(B)\). For all \(\epsilon > 0\):
     \begin{align*}
       \int_{\epsilon < |x| < \frac{1}{2}} u(x) (-\Delta \phi)(x) \, dx 
-      &= \int_{|x| > \epsilon} u(x) (-\Delta \phi)(x) \, dx \\
+      &= \int_{|x|>\epsilon} u(x) (-\Delta \phi)(x) \, dx \\
       &= \int_{\partial B(0, \epsilon)}u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) + \int_{|x| > \epsilon} \nabla u(x) \nabla \phi(x) \, dx
     \end{align*}
     The boundary term vanishes as \(\epsilon \to 0\) since 
     \begin{align*}
-      \left|u(x) \nabla \phi(x) \frac{x}{|x|}\right| \le \|\nabla \phi \|_{L^\infty} |u(x)| = c \log|\log(r)|
+      \left|u(x) \nabla \phi(x) \frac{x}{|x|}\right| \le \|\nabla \phi \|_{L^\infty} |u(x)| = C \log|\log(r)|
     \end{align*}
     \begin{align*}
       \left| \int_{\partial B(0, \epsilon)} u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) \right| 
       &\le C \int_{\partial B(0, \epsilon)} \log |\log(\epsilon)| \, dS(x) \\
-      &= C \log |\log \epsilon| \underbrace{|\partial B(0, \epsilon)}_{\sim \epsilon^2} \xrightarrow{\epsilon \to 0} 0
+      &= C \log |\log \epsilon| \underbrace{|\partial B(0, \epsilon)|}_{\sim \epsilon^2} \xrightarrow{\epsilon \to 0} 0
     \end{align*}
     \begin{align*}
-      &\int_{|x| > \epsilon} \nabla u(x) \nabla \phi(x) \, dx 
-      = \sum_{i=1}^d \int_{|x| > \epsilon} \partial_i u(x) \partial_i \phi(x) \, dx \\
+      &\int_{|x|> \epsilon} \nabla u(x) \nabla \phi(x) \, dx 
+      = \sum_{i=1}^d \int_{|x|> \epsilon} \partial_i u(x) \partial_i \phi(x) \, dx \\
       &\quad= \sum_{i=1}^d \left(- \int_{\partial B(0, \epsilon)} \partial_i u(x) \phi(x) \frac{x_i}{|x|} \, dS(x) - \int_{|x|> \epsilon} \underbrace{\partial_i \partial_i u(x)}_{f(x)} \phi(x) \, dx\right)
     \end{align*}
     The boundary term vanishes as \(\epsilon \to 0\) as 
@@ -3024,7 +3026,7 @@
     \end{align*} as \(\epsilon \to 0\). 
     \((\star) u = u(r), u(x) = \omega(|x|), \partial_i u(x) = \omega(|x|)\frac{x_i}{|x|}\), \(|\partial_i u(x)| \le |\omega(|x|)| = \left|\frac{1}{r\log(r)}\right|\). Finally:
     \begin{equation*}
-      \int_{|x| > \epsilon} f(x) \phi(x) \, dx \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} f(x) \phi(x) \, dx
+      \int_{|x|> \epsilon} f(x) \phi(x) \, dx \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} f(x) \phi(x) \, dx
     \end{equation*}
     Since \(f \phi \in L^1\) and Dominated Convergence.
   \end{proof}
@@ -3061,6 +3063,8 @@
     \end{align*}
     Then \(- \Delta u = - \Delta (G \star f_B)\) in \(D'(B)\). Then \(u - G \star f_B\) is harmonic in \(B\) and by Weyls lemma we have \(u - G \star f_B \in C^\infty(B)\). So the smoothness of \(u\) in \(B\) is the same to that of \(G \star f\).
   \end{proof}
+
+  
 
 
 \end{document}
