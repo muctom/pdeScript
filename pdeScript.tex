@@ -2114,10 +2114,10 @@
       \item [(2) \(\Rightarrow\) (1):] If \(T = f \in C^1(\Omega)\), then: \(\partial_{x_i} f \in C(\Omega)\).
       \begin{align*}
         \partial_{x_i} T(\phi) &= - T(\partial_{x_i} \phi) 
-        = - \int_\Omega f(\partial_{x_i} \phi) \int_\Omega (\partial_{x_i} f) \phi
+        = - \int_\Omega f(\partial_{x_i} \phi) = \int_\Omega (\partial_{x_i} f) \phi
       \end{align*}
       for all \(\phi \in D(\Omega)\), so \(\partial_{x_i} T = \partial_{x_i} f\).
-      \item [(1) \(\Rightarrow\) (2):] Why is \(T = f\) with \(f\) continous? As \(\partial_{x_i} f = g_i\): 
+      \item [(1) \(\Rightarrow\) (2):] Why is \(T = f \in C^1(\Omega)\)? As \(\partial_{x_i} f = g_i\): 
       \begin{align*}
         f(x+y) - f(x) 
         &= \int_0^1 \nabla f(x+ty) y \, dt
@@ -2133,7 +2133,7 @@
       \frac{f(y + he_i) - f(y)}{h} 
       &= \int_0^1 \sum_{i=1}^d [g_i(ty + the_i)(y_i + h \delta_{ij})] \, dt \\
       &= \int_0^1 g_i(ty + the_i) \, dt + \int_0^1 \sum_{j \ne i} \frac{[g_i(ty + the_i) - g_i(ty)]}{h} y_i \, dt \\
-      &\xrightarrow{h \to 0} \int_0^1 g_i(ty) \, dt  + \text{ is difficult ...}
+      &\xrightarrow{h \to 0} \int_0^1 g_i(ty) \, dt  + \text{is difficult ...}
     \end{align*}
     Lets take \(\phi \in C_c^\infty\), then:
     \begin{align*}
@@ -2173,7 +2173,7 @@
   \end{proof}
   
   \begin{defn}[Sobolev Spaces]
-    Let \(\Omega \subseteq \mathbb{R}^d\) be open. We define for \(1 \le p \le \infty\):
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open. We define for \(1 \le p\le \infty\):
     \begin{align*}
       W^{1, p}(\Omega)
       &= \{f \in L^p(\Omega) \mid \partial_{x_i} f \in L^p(\Omega)\ \forall i=1, \dots, d \} \\
@@ -2193,7 +2193,7 @@
   \end{proof}
 
   \begin{rem}
-    In general, if we want to compute the distributional derivative \(D^\alpha f\), then we can find \(f_n \to f\) in \(D'(\Omega)\) and compute \(D^\alpha f\). Then \(D^\alpha f_n \to D^\alpha f\) in \(D^\alpha (\Omega)\). As an example we can compute \(\nabla |f|\) with \(f \in W_{loc}^{1,p}(\Omega)\).
+    In general, if we want to compute the distributional derivative \(D^\alpha f\), then we can find \(f_n \to f\) in \(D'(\Omega)\) and compute \(D^\alpha f_n\). Then \(D^\alpha f_n \to D^\alpha f\) in \(D^\alpha (\Omega)\). As an example we can compute \(\nabla |f|\) with \(f \in W_{loc}^{1,p}(\Omega)\).
     \begin{align*}
       (\nabla |f|)(x)
       &= \begin{cases}
@@ -2289,7 +2289,7 @@
       \item \(\mu(A) \le \mu(B)\) if \(A \subseteq B\)
       \item \(\mu \left(\bigcup_{i=1}^\infty A_i\right) \le \sum_{i=1}^\infty \mu(A_i)\)
     \end{enumerate}
-    From the outer measure we can find a \(\sigma\)-algebra \(\Sigma\) and \(\mu\) is a measure on \(\Omega\) s.t. \(E\) is measurable iff \[\mu(E) = \mu(E \cap A) + \mu(E \cap A^\complement)\].
+    From the outer measure we can find a \(\sigma\)-algebra \(\Sigma\) and \(\mu\) is a measure on \(\Omega\) s.t. \(E\) is measurable iff \[\mu(E) = \mu(E \cap A) + \mu(E \cap A^\complement).\]
     So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
   \end{proof}
 
@@ -3214,4 +3214,154 @@
   \begin{ex}
     Prove that (under the assumtion that the corrector exists) that \(\tilde G(x,y) = \tilde G(y,x)\) for all \(x,y \in \Omega\), \(x \ne y\).
   \end{ex}
+
+  \begin{ex}[E 6.1]
+    Show that If \(\chi \in C^\infty(\mathbb{R}^d)\), then \(f \in W^{1,p}(\mathbb{R}^d)\), \(1 \le p < \infty\), then \(\chi f \in W_{loc}^{1, p}(\mathbb{R}^d)\) and 
+    \[\partial_i (\chi f) = (\partial_i \chi) f + \chi(\partial_i f) \quad \text{in } D'(\mathbb{R}^d)\]
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \(\chi f \in L_{loc}^p(\mathbb{R}^d)\) obvious. \(\partial (\chi f) \in L_{loc}^p(\mathbb{R}^d)\) is nontrivial but follows from \(\partial_i (\chi f) = \underbrace{(\partial_i \chi) f + \chi (\partial f)}_{\in L_{loc}^p}\) in \(D'(\mathbb{R}^d)\). To compute the distributional derivative \(\partial_i (\chi f)\), then: Take \(\phi \in C_c^\infty(\mathbb{R}^d)\): 
+    \begin{align*}
+      - \int_{\mathbb{R}^d} \chi f (\partial \phi)
+      &= \int_{\mathbb{R}^d}(?) \phi 
+    \end{align*}
+    We have 
+    \begin{align*}
+      - \int_{\mathbb{R}^d}\chi f(\partial_i \phi) 
+      &= - \int_{\mathbb{R}^d} f(\chi \partial_i \phi) \\
+      &= - \int_{\mathbb{R}^d} f \left(\partial_i(\chi \phi)-(\partial_i \chi) \phi\right) \\
+      &= - \int_{\mathbb{R}^d} f \partial_i(\underbrace{\chi \phi}_{\in C_c^\infty}) + \int_{\mathbb{R}^d} f (\partial_i \chi) \phi \\
+      &= \int_{\mathbb{R}^d} (\partial_i f) \chi \phi + \int f(\partial_i \chi) \phi \\
+      &= \int_{\mathbb{R}^d} ((\partial_i f) \chi + f (\partial_i \chi)) \phi
+    \end{align*}
+    So \(\partial_i (\chi f) = (\partial_i f) \chi + f (\partial_i \chi)\) in \(D'(\mathbb{R}^d)\).
+  \end{proof}
+
+  \begin{rem}
+    Question: If \(\chi \in C^1(\mathbb{R}^d)\), \(f \in W^{1,p}(\mathbb{R}^d)\). Is this it still correct that \(\partial_i (\chi f) = (\partial_i \chi) f + \chi(\partial_i f) \quad \text{in } D'(\mathbb{R}^d)\)?
+  \end{rem}
+  
+  \begin{proof}
+    \begin{align*}
+      (\star) \quad - \int f \partial_i g
+      &\overset{?}{=} \int(\partial_i f) g
+    \end{align*}
+    Approximation: \((\star)\) is correct if \(g \in C_c^\infty\) \begin{itemize}
+      \item If \(g \in C_c^1\), there is \(\{g_n\} \subseteq C_c^\infty\) s.t. \(g_n \to g\) in \(W_{loc}^{1,p}\), \(\frac{1}{p} + \frac{1}{q} = 1\).
+      \begin{align*}
+        \int (\partial_i f) g \xleftarrow{n \to \infty} - \int \underbrace{f}_{L^p} \underbrace{\partial g_n}_{\to \partial_i g \text{ in } L^q} = \int \underbrace{(\partial_i f)}_{\in L^p} \underbrace{g_n}_{\to g \text{ in } L^q} \xrightarrow{n \to \infty} \int (\partial_i f) g
+      \end{align*}
+    \end{itemize}
+  \end{proof}
+
+  \begin{ex}[E 6.2]
+    \(\mathbb{R}^2\), \(G(x) = - \frac{1}{2 \pi} \log |x|\). Let \(f \in L^p(\mathbb{R}^d)\), compactly supported. Define \(u(x) =(G \star f)(x) = \int_{\mathbb{R}^2} G(x-y) f(y) \, dy\)
+    \begin{enumerate}
+      \item If \(p = 1\), then \(u \in L_{loc}^q(\mathbb{R}^2)\) for all \(q < \infty\).
+      \item If \(p > 2\), then \(u \in C^{1, \alpha}\) with \(0 < \alpha < 1 - \frac{2}{p}\).
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{enumerate}
+      \item Take any ball \(B = B(0,R)\) and:
+      \begin{align*}
+        \int_B |u(x)|^q \ dx 
+        &= \int_B \left(\int_{\mathbb{R}^d} |G(x-y)| |f(y)| \, dy\right)^q \, dx \\
+        &\le C \int_{B} \left(\int_{\mathbb{R}^2} |G(x-y)|^q |f(y)| \, dy\right) \, dx  \\
+        &= C \int_{\mathbb{R}^2} \left(\int_B |G(x-y)|^q \, dx\right) |f(y)| \, dy
+      \end{align*}
+      Recall from the proof of Youngs inequality:
+      \begin{align*}
+        |u(x)| &= \left| \int_{\mathbb{R}^2} G(x-y) f(y) \, dy \right| \\
+        &\le \int_{\mathbb{R}^2} |G(x-y)||f(y)| \, dy \\
+        &\le \left(\int_{\mathbb{R}^2} |G(x-y)|^q |f(y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^2} |f(y)| \, dy\right)^{\frac{1}{q}}, \quad \frac{1}{q} + \frac{1}{q'} = 1
+      \end{align*}
+      Assume \(\supp f \subseteq \overline{B(0, R)}\). Then if \(y \in \supp f\) and \(x \in B(0,R)\), then \(|x-y| \le |x| + |y| \le R + R_1\). For all \(y \in \supp f\):
+      \begin{align*}
+        \int_{B(0, R)} |G(x-y)|^q \, dx
+        &\le \int_{|x-y| \le R + R_1} |G(x-y)|^q \, dx \\
+        &= \int_{|z| \le R + R_1} |G(z)|^q \, dz < \infty
+      \end{align*}
+      as \(G \in L_{loc}^q\) (\(|G(z)| = \frac{1}{2 \pi} |\log(z)| \le \frac{C_{R + R_1, \epsilon}}{|z|^\epsilon}\) for all \(|z| \le R + R_1\)), so 
+      \begin{align*}
+        \int_{|z| \le R + R_1} |G(z)|^q \le C_{R + R_1, \epsilon} \int_{|z| \le R + R_1} \frac{1}{|z|^{\epsilon q}} \, dz < \infty
+      \end{align*}
+      if \(\epsilon q < 2\).
+      \item Recall \(\partial_i u \in L_{loc}^1(\mathbb{R}^2)\) and:
+      \begin{align*}
+        \partial_i u(x) &= (\partial_i G \star f)(x) 
+        = c \int_{\mathbb{R}^2} \frac{x_i - y_i}{|x-y|^2} f(y) \, dy
+      \end{align*}
+      First we show \(\partial_i u \in C^{0, \alpha}\): 
+      \begin{align*}
+        |\partial_i u(x) - \partial_i u(z)|
+        &= \left| C \int_{\mathbb{R}^2} \left(\frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2}\right) \, f(y) \, dy \right| \\
+        &\le C \int_{\mathbb{R}^2} \left| \frac{x_i y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2} \right| |f(y)| \, dy \\
+        &\overset{?}{\le} C |x-y|^\alpha
+      \end{align*}
+      Note that 
+      \begin{align*}
+        \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2} \right| 
+        &= \left| (x_i  - y_i) \left(\frac{1}{|x-y|^2} - \frac{1}{|z-y|^2}\right) + \frac{x_i - z_i}{|z-y|^2} \right| \\
+        &\le |x_i - y_i| \left| \frac{1}{|x-y|^2} - \frac{1}{|z-y|^2} \right| + \frac{|x_i - z_i|}{|z-y|^2} \\
+        &\le C|z-x|^\alpha \left(\frac{1}{|x-y|^{1 + \alpha}} + \frac{1}{|z-y|^{1 + \alpha}} + \frac{|x-z|}{|z-y|^{2}}\right)
+      \end{align*}
+      Here \(|x_i - z_i| \le |x-z|\) and \(|x_i - y_i| \le |x-y|\) and:
+      \begin{align*}
+        \smash{\underbrace{\left| \frac{1}{|x-y|^2} - \frac{1}{|z-y|^2} \right|}_{\text{sym } x \leftrightarrow z}}
+        &= \left| \frac{1}{|x-y|} - \frac{1}{|z-y|}\right| \left| \frac{1}{|x-y|} + \frac{1}{|z-y|}\right| \\
+        &= \frac{||z-y| - |x-y|}{|x-y||z-y|} \left| \frac{1}{|x-y|} + \frac{1}{|z-y|} \right| \\
+        &\le |z-x|^\alpha \frac{\max(|z-y|, |x-y|)^{1-\alpha}}{|x-y| |z-y|} \left(\frac{1}{|x-y|} + \frac{1}{|z-y|}\right) \\
+        &\le C |z-x|^\alpha \left(\frac{1}{|x-y|^{2 + \alpha}} + \frac{1}{|z-y|^{2 + \alpha}}\right)
+      \end{align*}
+    \end{enumerate}
+    By the symmetrie \(x \leftrightarrow z\):
+    \begin{align*}
+      LHS &\le C|z-x|^\alpha \left(\frac{1}{|x-y|^{1 + \alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right) + \frac{|x-y|}{|x-y|^2} \\
+      \Rightarrow LHS &\le C \dots + |x-z| \min\left(\frac{1}{|z-y|^2}, \frac{1}{|x-y|^2}\right) \\
+      & \le (|x-y| + |z-y|)^{1-\alpha} \\
+      & C |z-x|^\alpha \left(\frac{1}{|x-y|^{1+\alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right)
+    \end{align*}
+    In summary:
+    \begin{align*}
+      |\partial_i u(x) - \partial_i u(z)| 
+      &\le C \int_{\mathbb{R}^2} \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2}\right||f(y)| \, dy \\
+      &= C |x-y|^\alpha \int_{\mathbb{R}^2} \left(\frac{1}{|x-y|^{1+\alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right) |f(y)| \, dy
+    \end{align*}
+    Consider if \(|x| > 2 R_1\):
+    \begin{align*}
+      \int_{\mathbb{R}^2} \frac{1}{|x-y|^{1+\alpha}} |f(y)| \, dy 
+      &\le \int_{\mathbb{R}^2} \frac{1}{R_1^{1+\alpha}} |f(y)| \, dy \le C
+    \end{align*}
+    \(\supp f \subseteq B(0, R_1)\). If \(|x| < 2 R_1\), then \(|x-y| \le 3R\) if \(y \in B(0, R_1)\). Hence:
+    \begin{align*}
+      &\int_{|x-y| \le 3 R_1} \frac{1}{|x-y|^{1+\alpha}} |f(y)| \, dy \\
+      &\quad \le \left(\int_{|x-y| \le 3 R_1} \frac{1}{|x-y|^{(1+\alpha)p'}}\right)^{\frac{1}{p'}} \left(\int |f(y)|^p \, dy\right)^{\frac{1}{p}} \\
+      &\quad= \int_{|z| \le 3 R_1} \frac{1}{|z|^{(1+\alpha)p'}} \,dz < \infty
+    \end{align*}
+    So \(\alpha < 1 - \frac{2}{p}\).
+  \end{proof}
+
+  \begin{ex}[E 6.3]  
+    Let \(f \in C_{loc}^{0,\alpha}\) and \(- \Delta u = f\) in \(D'(\Omega)\). Prove \(u \in C_{loc}^{2, \alpha}(\Omega)\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Take an open ball \(B \subseteq \bar B \subseteq \Omega\). We prove \(u \in C^{2, \alpha}(B)\). There is an open \(\Omega_B\) s.t. \(\bar B \subseteq \bar \Omega_B \subseteq \Omega\). Then there is a \(\chi_B \in C_c^\infty(\mathbb{R}^d)\) s.t. \(\chi_B(x) = 1\) if \(x \in B\) and \(\chi_B(x) = 0\) if \(x \notin \Omega_B\). Define
+    \begin{align*}
+      f_B(x) = \chi_B(x)f(x): \ \mathbb{R}^d \to \mathbb{R}
+    \end{align*}
+    We prove that \(f_B \in C^{0, \alpha}(\mathbb{R}^d)\). Since \(f \in C_{loc}^{0,\alpha}(\Omega)\) we have \(f \in C^{0,\alpha}(\Omega)\), so \(|f(x)-f(y)| \le C|x-y|^\alpha\) for all \(x,y \in \Omega_B\). Then:
+    \begin{align*}
+      |f_B(x) - f_B(y)| 
+      &= |\chi_B(x) f(x) - \chi_B(y) f(y)| \\
+      &\le |(\chi_B(x) - \chi_B(y))f(x) + \chi_B(y)(f(x)-f(y))| \\
+      &\le C |x-y|^\alpha \|f\|_{L^\infty} + C\|\chi\|_{L^\infty(\Omega_B)}|x-y|^\alpha
+      \le C_{\Omega_B}|x-y|^\alpha
+    \end{align*}
+    What about other cases? If \(x, y\) are bot not in \(\Omega_B\), then \(|f_B(x) - f_B(y)| =0\), then if \(x \in \Omega_B\) and \(y \notin \Omega_B\): \(|f_B(x) - f_B(y)| = |f_B(x)| = |\chi_B(x)||f(x)| = |\chi_B(x) - \chi_B(y)||f(x)| \le C |x-y|^\alpha\). Conclusion: \(|f_B(x) - f_B(y)| \le C|x-y|^\alpha\) for all \(x,y \in \mathbb{R}^d\), i.e. \(f_B \in C^{0,\alpha}(\mathbb{R}^d)\). Also \(f_B\) is compactly supported. By a theorem in the lecture: \(G \star f_B \in C^{2, \alpha}(\mathbb{R}^d)\). Finally: \(-\Delta u = f\) in \(D'(\Omega)\), \(-\Delta (G \star f_B) = f_B\) in \(D'(\mathbb{R}^d)\). So we conclude \(-\Delta u = f = f_B = - \Delta (G\star f_B) \) in \(D'(B)\). \(-\Delta(u - G \star f_B)= 0\) in \(D'(B)\), so \(u - G \star f_B \in C^\infty(B)\), so \(u \in C^{2,\alpha}(B)\).
+  \end{proof}
+  
 \end{document}
