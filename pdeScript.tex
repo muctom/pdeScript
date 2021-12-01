@@ -3427,7 +3427,7 @@
     \item \(\Omega = \mathbb{R}_+^d\) (half-space)
     \item \(\Omega = B(0,r)\) (a ball)
   \end{itemize}
-  \section{Green's function on \(\mathbb{R}^d\)}
+  \section{Green's function on \(\mathbb{R}_+^d\)}
   We use the following notation:
   \begin{align*}
     \mathbb{R}_+^d &= \{x = (x_1, x_2, \dots, x_d) = (x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid x_d > 0\} \\
@@ -3474,7 +3474,6 @@
   \begin{align*}
     u(x) = - \int_{\partial \mathbb{R}_+^d} g(y) \frac{\partial \tilde G}{\partial \vec{n_y}} (x,y) \, dS(y) = \int_{\partial \mathbb{R}_+^d} g(y) \frac{2x_d}{d |B_1| |y-x|^d} \, dS(y)
   \end{align*}
-
   
   \begin{thm}
     Assume \(g \in C(\mathbb{R}^{d-1}) \cap L^\infty(\mathbb{R}^{d-1})\) Then 
@@ -3493,4 +3492,75 @@
     \end{align*}
   \end{thm}
   
+  \begin{proof}
+    Claim: For all \(y \in \partial \mathbb{R}_+^d\), \(x \mapsto K(x,y)\) is harmonic in \(\mathbb{R}_+^d\) (i.e. \(\Delta_x K(x,y) = 0\) in \(\mathbb{R}_+^d\))
+    \begin{itemize}
+      \item Argument from Evans: \begin{align*}
+        K(x,y) = - \frac{\partial}{\partial y_d}, \ \tilde G(y-x) = - \frac{\partial}{\partial y_d}(G(y-x)-G(y-\tilde x))
+      \end{align*}
+      We know that for all \(x \in \mathbb{R}_+^d\), \(y \mapsto \tilde G(y,x)\) is haromnic in \(\mathbb{R}_+^d \setminus \{x\}\). By symmetry we have \(\tilde G(y,x) = \tilde G(x,y)\) for all \(x,y \in \mathbb{R}^d_+\). So for all \(y \in \mathbb{R}_+^d\), \(x \mapsto \tilde G(y,x)\) is harmonic in \(\mathbb{R}_+^d \setminus \{y\}\). Then for all \(y \in \mathbb{R}_+^d:\) \(- \frac{\partial}{\partial y_d} \tilde G(y,x)= K(x,y)\) is harmonic \(x \in \mathbb{R}_+^d \setminus \{y\}\). By a limit argument, for all \(y \in \partial \mathbb{R}_+^d\), \(x \mapsto K(x,y)\) is harmonic for all \(x \in \mathbb{R}_+^d\).
+      \item  A direct proof:
+      \begin{align*}
+        K(x,y) = \frac{2 x_d}{d |B_1|} \frac{1}{|x-y|^d}
+      \end{align*}
+      for all \(x \in \mathbb{R}_+^d\), \(y \in \partial \mathbb{R}_+^d\). For \(i \ne d\), \(x=(x_1, \dots, x_d)\), 
+      \begin{align*}
+        \partial_{x_i} K(x,y) &= \frac{2 x_d}{d |B_1|} \frac{(-d)}{|x-y|^{d+1}}\frac{x_i-y_i}{|x-y|} = \frac{-2x_d}{|B_1|}\frac{x_i - y_i}{|x-y|^{d+2}} \\
+        \partial_{x_i}^2 K(x,y) &= - \frac{2 x_d}{|B_1|} \left[\frac{1}{|x-y|^{d+1}} - \frac{(d+2)}{|x-y|^{d+3}}(x_i-y_i) \frac{(x_i-y_i)}{|x-y|}\right] \\
+        &= - \frac{2 x_d}{|B_1|} \left[\frac{1}{|x-y|^{d+1}} - \frac{(d+2)}{|x-y|^{d+4}}(x_i-y_i)^2\right]
+      \end{align*}
+      Moreover:
+      \begin{align*}
+        \partial_{x_d} K(x,y) 
+        &= \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2 x_d}{d|B_1|}(-d) \frac{(x_d-y_d)}{|x-y|^{d+2}} \\
+        (y_d = 0) \quad &= \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2x_d^2}{|B_1||x-y|^{d+2}} \\
+        \partial_{x_d}^2K(x,y) &= \frac{-2}{|B_1|} \frac{(x_d-y_d)}{|x-y|^{d+2}} + \frac{4 x_d}{|B_1||x-y|^{d+2}} - \frac{2(d+2){|B_1|}} x_d^2 \frac{(x_d - y_d)}{|x-y|^{d+4}}
+      \end{align*}
+      Then: \begin{align*}
+        \Delta_x K(x,y) 
+        &= \sum_{i=1}^{d-1} \partial_{x_i}^2 K(x,y) + \partial_{x_i}^2 K(x,y) \\
+        &= - \frac{2 x_d}{|B_1|} \left[\frac{d-1}{|x-y|^{d+2}} - (d+2) \sum_{i=1}^{d-1} \frac{(x_i - y_i)^2}{|x-y|^{d+4}} \right. \\
+        &\quad + \left. \frac{1+2}{|x-y|^{d+2}} - \frac{(d+2)x_d(x_d-y_d)}{|x-y|^{d+4}}\right] \\
+        &= - \frac{2 x_d}{|B_1|} \left[\frac{d+2}{|x-y|^{d+2}} - (d+2) \frac{1}{|x-y|^{d+4}} \left(\underbrace{\sum_{i=1}^d |x_i - y_i|^2}_{\smash{|x-y|^2}}\right)\right] = 0
+      \end{align*}
+      for all \(x \in \mathbb{R}_+^d\), \(y \in \partial \mathbb{R}_+^d\).
+      Claim (exercise) for all \(x \in \mathbb{R}_+^d\), 
+      \begin{align*}
+        \int_{\partial \mathbb{R}_+^d} K(x,y) \, dy = 1 
+      \end{align*}
+      Consider 
+      \begin{align*}
+        u(x) = \int_{\partial \mathbb{R}_+^d} K(x,y) g(y) \, dy, \quad x \in \mathbb{R}_+^d
+      \end{align*}
+      Since \(g \in L^\infty(\mathbb{R}^{d-1}) = L^\infty(\partial \mathbb{R}_+^d)\) and \(K(x,y) \ge 0\), hence 
+      \begin{align*}
+        |u(x)| \le \left(\int_{\partial \mathbb{R}_+^d} K(x,y) \, dy\right) \|g\|_{L^\infty}
+      \end{align*}
+      Thus \(\|u\|_{L^\infty} \le \|g\|_{L^\infty}\). Moreover 
+      \begin{align*}
+        D_x^\alpha u(x) &= \int_{\partial \mathbb{R}_+^d} D_x^\alpha K(x,y) g(y) \, dy
+      \end{align*}
+      bounded, so \(u \in C^\infty(\mathbb{R}_+^d)\), \(x \mapsto K(x,y)\) is smooth as \(x \ne y\).
+      \begin{align*}
+        \Delta_x u(x) &= \int_{\partial \mathbb{R}_+^d} \underbrace{\Delta_x K(x,y)}_{= 0} g(y) \, dy = 0
+      \end{align*}
+      So \(u\) is harmonic in \(\mathbb{R}^d_+\). (\(\Rightarrow u \in C^\infty\) by Weyl's lemma). Take \(x_0 \in \partial \mathbb{R}_+^d\) and \(x \in \mathbb{R}_+^d\). Then:
+      \begin{align*}
+        |u(x)-g(x_0)| 
+        &= \left| \int_{\partial \mathbb{R}_+^d} K(x,y)(g(y) - g(x_0)) \, dy \right| \\
+        &\le \int_{\partial \mathbb{R}_+^d} K(x,y) |g(y)-g(x_0)| \, dy \\
+        &= \underbrace{\int_{|y-x_0| \le L |x-x_0|}}_{(I)} + \underbrace{\int_{|y-x_0| > L|x-x_0|}}_{(II)}
+      \end{align*}
+      \begin{align*}
+        (I) &= \int_{|y-x_0| \le L |x-x_0|} K(x,y) |g(y) - g(x_0)| \, dy \\
+        &= \sup_{|y-x_0| \le L|x-x_0|} |g(y) - g(x_0)| \xrightarrow{x \to x_0} 0 \quad \forall L > 0
+      \end{align*}
+      \((II)\): If \(|y-x_0| > L|x-x_0|\), then \(|y-x| > \frac{1}{2} |y-x_0| > \frac{L}{2}|x-x_0|\) if \(L \ge 2\).
+      \begin{align*}
+        &\int_{|y-x_0| > |L|x-x_0|} K(x,y) |g(y) - g(x_0)| \, dy \le C \int_{y \in \partial \mathbb{R}_+^d} \frac{x_d}{|x_0-y|} \, dy \\
+        &\quad C x_d \int_{\substack{z \in \mathbb{R}^{d-1}\\|z| > L|x-x_0|}} \frac{1}{|z|^d} \, dz = const. \frac{x_d}{L|x-x_0|} \le \frac{const.}{L} \xrightarrow{L \to \infty} 0
+      \end{align*}
+      \(x_d = |x_d - (x_0)_d| \le |x-x_0|\)
+    \end{itemize}
+  \end{proof}
 \end{document}
