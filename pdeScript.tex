@@ -3567,4 +3567,81 @@
       \(x_d = |x_d - (x_0)_d| \le |x-x_0|\)
     \end{itemize}
   \end{proof}
+
+  \section{Green's function for a ball}
+  Let \(B = B(0,1)\). For all \(x \in B,\) for all \(y \in \bar B\) we want to find the corrector function \(\Phi_x(y)\) s.t.
+  \[\begin{cases}
+    \Delta_y \Phi_x(y) = 0 & \text{in } B \\
+    \Phi_x(y) = G(y-x) & \text{on } \partial B
+  \end{cases}\] 
+  where for \(d \ge 3\): \(G(z) = \frac{1}{d(d-2)|B_1||z|^{d-2}}\).
+
+  \begin{defn}[Reflection / Duality through the sphere \(\partial B\)]
+    For all \(x \in \mathbb{R}^d \setminus \{0\}\) we define \(\tilde x = \frac{x}{|x|^2}\). Clearly we have for all \(x \in B\) that if \(|x| < 1\), then \(|\tilde x| = \left| \frac{x}{|x|^2}\right| = \frac{1}{|x|} > 1\), so \(\tilde x \notin \bar B\) 
+    % and \((\tilde x)^\sim = \frac{\tild x}{|\tilde x|^2 = \frac{\frac{x}{|x|^2}}{\left| \frac{x}{|x|^2}}\right|} = \frac{\frac{x}{|x|^2}}{\left(\frac{1}{|x|}\right)^2} = x\)
+  \end{defn}
+
+\begin{lem}
+  For \(d \ge 3\) the function \(\Phi_x(y) = G(|x|(y-\tilde x))\) is a corrector function.
+\end{lem}
+
+\begin{proof}
+  \begin{align*}
+    \Phi_x(y) &= \frac{1}{d(d-2)|B_1| |x|^{d-2} |y-\tilde x|^{d-2}}
+  \end{align*}
+  for all \(x \in B, x \ne 0\), for all \(y \in \bar B\). Then clearly \(y \mapsto \Phi_x(y)\) is harmonic in \(B\) (Since \(\frac{1}{|z|^{d-2}}\) is harmonic in \(\mathbb{R} \setminus {0}\)). Let's check the boundary: Let \(y \in \partial B\), i.e. \(|y| = 1\). Then
+  \begin{align*}
+    ||x|(y-\tilde x)| 
+    &= |x| \left|y- \frac{x}{|x|^2}\right|  \\
+    &= |x| \sqrt{|y|^2 - 2 \frac{xy}{|x|^2} + \left| \frac{x}{|x|^2}\right|^2} \\
+    &= \sqrt{|x|^2 |y|^2 - 2xy + 1} \\
+    (|y| = 1) \quad &= \sqrt{|x|^2 - 2xy + |y|^2} 
+    = |x-y|
+  \end{align*}
+  Thus \(\Phi_x(y) = G(|x| |y-\tilde x|) = G(y-x)\) for all \(0 \ne x \in B\), for all \(y \in \partial B\). Let's compute the Poisson kernel: If want to solve
+  \[\begin{cases}
+    - \Delta u = 0 & \text{in } B \\ u = g &\text{on } \partial B
+  \end{cases}\]
+  then \[u(x) = - \int_{\partial B} \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) g(y) dS(y).\]
+  \(\tilde G(x,y) = G(y-x) - \Phi_x(y) = G(y-x)-G(|x|(y-\tilde x))\) for all \(x \in B \setminus \{0\}\), \(y \in \bar B\).
+  \begin{align*}
+    \frac{\partial \tilde G}{\partial \vec{n}_y} = \sum_{i=1}^d \partial_{y_i} \tilde G y_i
+  \end{align*}
+  Here \begin{align*}
+    \partial_{y_i} \tilde G &= \partial_{y_i} G(y-x) - \partial_{y_i} [G(|x|(y-\tilde x))] \\
+    &= \frac{- (y_i -x_i)}{d|B_1||y-x|^d} + \frac{y_i-\tilde x_i}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
+    \Rightarrow \frac{\partial \tilde G}{\partial \vec{n}_y} &= \sum_{i=1}^d [\dots] y_i \\
+    &= \frac{-y(y-x))}{d|B_1||y-x|^d} + \frac{y(y-\tilde x)}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
+    &= \frac{1}{d|B_1||y-x|^d} (-y(y-x) + y(y-\tilde x) |x|^2) \\
+    &= \frac{1}{d|B_1||y-x|^d}[-|y|^2 + xy + |y|^2 |x|^2 - xy] \\
+    &= \frac{-1 + |x|^2}{d|B_1||y-x|^d}
+  \end{align*}
+  as \(y \in \partial B\).
+\end{proof}
+
+\begin{thm}[Poisson Formula for a Ball] Let \(B = B(0,1)\), \(g \in C(\partial B)\). Define for all \(x \in B\):
+  \begin{align*}
+    u(x) &= \int_{\partial B} K(x,y) g(y) \, dS(y),
+  \end{align*}
+  \(K(x,y) = - \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) = \frac{1-|x|^2}{d|B_1||y-x|^d}\) for all \(x \in B\), for all \(y \in \partial B\). Then \(u \in C^\infty(B)\), \(\Delta u = 0\) and for all \(x_0 \in \partial B\) we have \(\lim_{\substack{x \to x_0 \\ x \in B}} u(x) = g(x_0)\). This holds for all \(d \ge 2\).
+\end{thm}
+
+
+\begin{proof}
+  We need to check: \begin{enumerate}
+    \item For all \(y \in \partial B\), \(x \mapsto K(x,y)\) is harmonic in \(B\).
+    \item \(\int_{\partial B} K(x,y) \, dS(y) = 1\) for all \(x \in B\) (exercise)
+  \end{enumerate}
+  Now for all \(x \in B\), for all \(y \in \partial B\):
+  \begin{align*}
+    K(x,y) &= \frac{1-|x|^2}{d|B_1||y-x|^d} \\
+    \partial_{x_i} K(x,y) &= \frac{-2x_i}{d|B_1|} \frac{1}{|x-y|^d} - \frac{1-|x|^2}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
+    \partial_{x_i}^2 K(x,y) &= - \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
+    &\quad - \frac{1-|x|^2}{|B_1|} \frac{1}{|x-y|^{d+2}} + \frac{1+|x|^2}{|B_1|} (d+2) \frac{(x_i-y_i)^2}{|x-y|^{d+4}}\\
+    \Delta_x K &= \sum_{i=1}^d \partial_{x_i}^2 K = - \frac{2}{|B_1|} \frac{1}{|x-y|^d} + \frac{4 x(x-y)}{|B_1||x-y|^{d+2}} \\
+    &\quad - \frac{d(1-|x|^2)}{|B_1|} \frac{1}{|x-y|^{d+2}} + (d+2) \frac{1-|x|}{|B_1|} \frac{1}{|x-y|^{d+2}} \\
+    &= \frac{2}{|B_1||x-y|^{d+2}} [\underbrace{-|x-y|^2 + 2x(x-y) + 1-|x|^2}_{-|x|^2 + 2xy - |y|^2 + 2|x|^2 - 2xy + 1 - |x|^2}]
+  \end{align*}
+  \(1 - |y|^2 = 0\) as \(y \in \partial B\). Thus \(\Delta_x K(x,y) = 0\), for all \(x \in B\), for all \(y \in \partial B\).
+\end{proof}
 \end{document}
