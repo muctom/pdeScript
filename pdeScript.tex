@@ -3581,67 +3581,165 @@
     % and \((\tilde x)^\sim = \frac{\tild x}{|\tilde x|^2 = \frac{\frac{x}{|x|^2}}{\left| \frac{x}{|x|^2}}\right|} = \frac{\frac{x}{|x|^2}}{\left(\frac{1}{|x|}\right)^2} = x\)
   \end{defn}
 
-\begin{lem}
-  For \(d \ge 3\) the function \(\Phi_x(y) = G(|x|(y-\tilde x))\) is a corrector function.
-\end{lem}
+  \begin{lem}
+    For \(d \ge 3\) the function \(\Phi_x(y) = G(|x|(y-\tilde x))\) is a corrector function.
+  \end{lem}
 
-\begin{proof}
-  \begin{align*}
-    \Phi_x(y) &= \frac{1}{d(d-2)|B_1| |x|^{d-2} |y-\tilde x|^{d-2}}
-  \end{align*}
-  for all \(x \in B, x \ne 0\), for all \(y \in \bar B\). Then clearly \(y \mapsto \Phi_x(y)\) is harmonic in \(B\) (Since \(\frac{1}{|z|^{d-2}}\) is harmonic in \(\mathbb{R} \setminus {0}\)). Let's check the boundary: Let \(y \in \partial B\), i.e. \(|y| = 1\). Then
-  \begin{align*}
-    ||x|(y-\tilde x)| 
-    &= |x| \left|y- \frac{x}{|x|^2}\right|  \\
-    &= |x| \sqrt{|y|^2 - 2 \frac{xy}{|x|^2} + \left| \frac{x}{|x|^2}\right|^2} \\
-    &= \sqrt{|x|^2 |y|^2 - 2xy + 1} \\
-    (|y| = 1) \quad &= \sqrt{|x|^2 - 2xy + |y|^2} 
-    = |x-y|
-  \end{align*}
-  Thus \(\Phi_x(y) = G(|x| |y-\tilde x|) = G(y-x)\) for all \(0 \ne x \in B\), for all \(y \in \partial B\). Let's compute the Poisson kernel: If want to solve
-  \[\begin{cases}
-    - \Delta u = 0 & \text{in } B \\ u = g &\text{on } \partial B
-  \end{cases}\]
-  then \[u(x) = - \int_{\partial B} \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) g(y) dS(y).\]
-  \(\tilde G(x,y) = G(y-x) - \Phi_x(y) = G(y-x)-G(|x|(y-\tilde x))\) for all \(x \in B \setminus \{0\}\), \(y \in \bar B\).
-  \begin{align*}
-    \frac{\partial \tilde G}{\partial \vec{n}_y} = \sum_{i=1}^d \partial_{y_i} \tilde G y_i
-  \end{align*}
-  Here \begin{align*}
-    \partial_{y_i} \tilde G &= \partial_{y_i} G(y-x) - \partial_{y_i} [G(|x|(y-\tilde x))] \\
-    &= \frac{- (y_i -x_i)}{d|B_1||y-x|^d} + \frac{y_i-\tilde x_i}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
-    \Rightarrow \frac{\partial \tilde G}{\partial \vec{n}_y} &= \sum_{i=1}^d [\dots] y_i \\
-    &= \frac{-y(y-x))}{d|B_1||y-x|^d} + \frac{y(y-\tilde x)}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
-    &= \frac{1}{d|B_1||y-x|^d} (-y(y-x) + y(y-\tilde x) |x|^2) \\
-    &= \frac{1}{d|B_1||y-x|^d}[-|y|^2 + xy + |y|^2 |x|^2 - xy] \\
-    &= \frac{-1 + |x|^2}{d|B_1||y-x|^d}
-  \end{align*}
-  as \(y \in \partial B\).
-\end{proof}
+  \begin{proof}
+    \begin{align*}
+      \Phi_x(y) &= \frac{1}{d(d-2)|B_1| |x|^{d-2} |y-\tilde x|^{d-2}}
+    \end{align*}
+    for all \(x \in B, x \ne 0\), for all \(y \in \bar B\). Then clearly \(y \mapsto \Phi_x(y)\) is harmonic in \(B\) (Since \(\frac{1}{|z|^{d-2}}\) is harmonic in \(\mathbb{R} \setminus {0}\)). Let's check the boundary: Let \(y \in \partial B\), i.e. \(|y| = 1\). Then
+    \begin{align*}
+      ||x|(y-\tilde x)| 
+      &= |x| \left|y- \frac{x}{|x|^2}\right|  \\
+      &= |x| \sqrt{|y|^2 - 2 \frac{xy}{|x|^2} + \left| \frac{x}{|x|^2}\right|^2} \\
+      &= \sqrt{|x|^2 |y|^2 - 2xy + 1} \\
+      (|y| = 1) \quad &= \sqrt{|x|^2 - 2xy + |y|^2} 
+      = |x-y|
+    \end{align*}
+    Thus \(\Phi_x(y) = G(|x| |y-\tilde x|) = G(y-x)\) for all \(0 \ne x \in B\), for all \(y \in \partial B\). Let's compute the Poisson kernel: If want to solve
+    \[\begin{cases}
+      - \Delta u = 0 & \text{in } B \\ u = g &\text{on } \partial B
+    \end{cases}\]
+    then \[u(x) = - \int_{\partial B} \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) g(y) dS(y).\]
+    \(\tilde G(x,y) = G(y-x) - \Phi_x(y) = G(y-x)-G(|x|(y-\tilde x))\) for all \(x \in B \setminus \{0\}\), \(y \in \bar B\).
+    \begin{align*}
+      \frac{\partial \tilde G}{\partial \vec{n}_y} = \sum_{i=1}^d \partial_{y_i} \tilde G y_i
+    \end{align*}
+    Here \begin{align*}
+      \partial_{y_i} \tilde G &= \partial_{y_i} G(y-x) - \partial_{y_i} [G(|x|(y-\tilde x))] \\
+      &= \frac{- (y_i -x_i)}{d|B_1||y-x|^d} + \frac{y_i-\tilde x_i}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
+      \Rightarrow \frac{\partial \tilde G}{\partial \vec{n}_y} &= \sum_{i=1}^d [\dots] y_i \\
+      &= \frac{-y(y-x))}{d|B_1||y-x|^d} + \frac{y(y-\tilde x)}{d|B_1||x|^{d-2}|y-\tilde x|^d} \\
+      &= \frac{1}{d|B_1||y-x|^d} (-y(y-x) + y(y-\tilde x) |x|^2) \\
+      &= \frac{1}{d|B_1||y-x|^d}[-|y|^2 + xy + |y|^2 |x|^2 - xy] \\
+      &= \frac{-1 + |x|^2}{d|B_1||y-x|^d}
+    \end{align*}
+    as \(y \in \partial B\).
+  \end{proof}
 
-\begin{thm}[Poisson Formula for a Ball] Let \(B = B(0,1)\), \(g \in C(\partial B)\). Define for all \(x \in B\):
-  \begin{align*}
-    u(x) &= \int_{\partial B} K(x,y) g(y) \, dS(y),
-  \end{align*}
-  \(K(x,y) = - \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) = \frac{1-|x|^2}{d|B_1||y-x|^d}\) for all \(x \in B\), for all \(y \in \partial B\). Then \(u \in C^\infty(B)\), \(\Delta u = 0\) and for all \(x_0 \in \partial B\) we have \(\lim_{\substack{x \to x_0 \\ x \in B}} u(x) = g(x_0)\). This holds for all \(d \ge 2\).
-\end{thm}
+  \begin{thm}[Poisson Formula for a Ball] Let \(B = B(0,1)\), \(g \in C(\partial B)\). Define for all \(x \in B\):
+    \begin{align*}
+      u(x) &= \int_{\partial B} K(x,y) g(y) \, dS(y),
+    \end{align*}
+    \(K(x,y) = - \frac{\partial \tilde G}{\partial \vec{n}_y}(x,y) = \frac{1-|x|^2}{d|B_1||y-x|^d}\) for all \(x \in B\), for all \(y \in \partial B\). Then \(u \in C^\infty(B)\), \(\Delta u = 0\) and for all \(x_0 \in \partial B\) we have \(\lim_{\substack{x \to x_0 \\ x \in B}} u(x) = g(x_0)\). This holds for all \(d \ge 2\).
+  \end{thm}
 
 
-\begin{proof}
-  We need to check: \begin{enumerate}
-    \item For all \(y \in \partial B\), \(x \mapsto K(x,y)\) is harmonic in \(B\).
-    \item \(\int_{\partial B} K(x,y) \, dS(y) = 1\) for all \(x \in B\) (exercise)
-  \end{enumerate}
-  Now for all \(x \in B\), for all \(y \in \partial B\):
-  \begin{align*}
-    K(x,y) &= \frac{1-|x|^2}{d|B_1||y-x|^d} \\
-    \partial_{x_i} K(x,y) &= \frac{-2x_i}{d|B_1|} \frac{1}{|x-y|^d} - \frac{1-|x|^2}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
-    \partial_{x_i}^2 K(x,y) &= - \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
-    &\quad - \frac{1-|x|^2}{|B_1|} \frac{1}{|x-y|^{d+2}} + \frac{1+|x|^2}{|B_1|} (d+2) \frac{(x_i-y_i)^2}{|x-y|^{d+4}}\\
-    \Delta_x K &= \sum_{i=1}^d \partial_{x_i}^2 K = - \frac{2}{|B_1|} \frac{1}{|x-y|^d} + \frac{4 x(x-y)}{|B_1||x-y|^{d+2}} \\
-    &\quad - \frac{d(1-|x|^2)}{|B_1|} \frac{1}{|x-y|^{d+2}} + (d+2) \frac{1-|x|}{|B_1|} \frac{1}{|x-y|^{d+2}} \\
-    &= \frac{2}{|B_1||x-y|^{d+2}} [\underbrace{-|x-y|^2 + 2x(x-y) + 1-|x|^2}_{-|x|^2 + 2xy - |y|^2 + 2|x|^2 - 2xy + 1 - |x|^2}]
+  \begin{proof}
+    We need to check: \begin{enumerate}
+      \item For all \(y \in \partial B\), \(x \mapsto K(x,y)\) is harmonic in \(B\).
+      \item \(\int_{\partial B} K(x,y) \, dS(y) = 1\) for all \(x \in B\) (exercise)
+    \end{enumerate}
+    Now for all \(x \in B\), for all \(y \in \partial B\):
+    \begin{align*}
+      K(x,y) &= \frac{1-|x|^2}{d|B_1||y-x|^d} \\
+      \partial_{x_i} K(x,y) &= \frac{-2x_i}{d|B_1|} \frac{1}{|x-y|^d} - \frac{1-|x|^2}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
+      \partial_{x_i}^2 K(x,y) &= - \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} + \frac{2 x_i}{|B_1|} \frac{x_i - y_i}{|x-y|^{d+2}} \\
+      &\quad - \frac{1-|x|^2}{|B_1|} \frac{1}{|x-y|^{d+2}} + \frac{1+|x|^2}{|B_1|} (d+2) \frac{(x_i-y_i)^2}{|x-y|^{d+4}}\\
+      \Delta_x K &= \sum_{i=1}^d \partial_{x_i}^2 K = - \frac{2}{|B_1|} \frac{1}{|x-y|^d} + \frac{4 x(x-y)}{|B_1||x-y|^{d+2}} \\
+      &\quad - \frac{d(1-|x|^2)}{|B_1|} \frac{1}{|x-y|^{d+2}} + (d+2) \frac{1-|x|}{|B_1|} \frac{1}{|x-y|^{d+2}} \\
+      &= \frac{2}{|B_1||x-y|^{d+2}} [-|x|^2 + 2xy - |y|^2 + 2|x|^2 - 2xy + 1 - |x|^2] \\
+      &= \frac{2}{|B_1||x-y|^{d+2}} [-|x|^2 + 2xy - |y|^2 + 2|x|^2 - 2xy + 1 - |x|^2]
+    \end{align*}
+    \(1 - |y|^2 = 0\) as \(y \in \partial B\). Thus \(\Delta_x K(x,y) = 0\), for all \(x \in B\), for all \(y \in \partial B\).
+    \begin{align*}
+      |u(x)| &= \left| \int_{\partial B}K(x,y) g(y) \, dS(y) \right| \le \|g\|_{L^\infty(\partial B)}
+    \end{align*}
+    \(\int_{\partial B} K(x,y) , dS(y) = \|g\|_{L^\infty}\), 
+    \begin{align*}
+      \Delta_x u(x) &= \int_{\partial B} \underbrace{\Delta_x K(x,y)}_{= 0} g(y) \, dS(y) = 0
+    \end{align*}
+    Take \(x \in B\), \(x \to x_0 \in \partial B\).
+    \begin{align*}
+      |u(x) - g(x_0)| 
+      &= \left| \int_{\partial B} K(x,y)(g(y) - g(x_0)) \, dS(y) \right| \\
+      &\le \int_{A_1} + \int_{A_2} K(x,y) |g(y) - g(x_0)| \, dS(y),
+    \end{align*}
+    where
+    \begin{align*}
+      A_1 &= \{y \in \partial B \mid |y - x_0| \le |x-x_0|^\alpha\} \\
+      A_2 &= \{y \in \partial B \mid |y-x_0| > |x-x_0|^2\}
+    \end{align*}
+    On \(A_1\) we have:
+    \begin{align*}
+      \int_{A_1} \dots \le \sup_{\substack{|z-x_0| \le |x-x_0|^\alpha \\ z \in \partial B}} \int_{\partial B} K(x,y) \, dS(y) \xrightarrow{x \to x_0} 0
+    \end{align*}
+    since \(G \in C(\partial B)\). On \(A_2\):
+    \[
+      |y-x_0| > |x-x_0|^\alpha
+    \]
+    \[
+      \Rightarrow |y-x| \ge |y-x_0|-|x-x_0| \ge |x-x_0|^\alpha - |x-x_0| \ge \frac{1}{2} {x-x_0}^\alpha
+    \]
+    if \(\alpha < 1\) and \(|x-x_0|\) small. So we get 
+    \begin{align*}
+      K(x,y) &= \frac{1-|x|^2}{d|B_1||x-y|^d} \le C \frac{1-|x|^2}{|x-x_0|^{d\alpha}} \le C |x-x_0|^{1-d\alpha}
+    \end{align*}
+    Thus 
+    \begin{align*}
+      \int_{A_2} K(x,y) |g(y)-g(x_0)| \, dS(y) \le C \|g\|_{L^\infty} |x-x_0|^{1-d\alpha} \xrightarrow{x \to x_0} 0
+    \end{align*}
+    if \(1 - d\alpha > 0\) \(\Leftrightarrow\) \(\alpha < \frac{1}{d}\).
+  \end{proof}
+
+  \section{Energy Method}
+
+  Consider \(u \in C^2(\Omega)\) for \(\Omega \subseteq \mathbb{R}^d\) open, bounded and with \(C^1\) boundary and \begin{align*}
+    \begin{cases}
+      - \Delta u = f &\text{in } \Omega \\ u = g &\text{ on} \partial \Omega.
+    \end{cases}
   \end{align*}
-  \(1 - |y|^2 = 0\) as \(y \in \partial B\). Thus \(\Delta_x K(x,y) = 0\), for all \(x \in B\), for all \(y \in \partial B\).
-\end{proof}
+  Take \(\phi \in C_c^\infty(\Omega)\), then by integration by parts:
+  \begin{align*}
+    0 &= \int_\Omega(-\Delta u - f) \phi = \int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi
+  \end{align*}
+  Key observation: This is the \emph{derivative} of the energy functional 
+  \begin{align*}
+    \epsilon(u) &= \frac{1}{2} \int_\Omega|\nabla u|^2 - \int_\Omega f u
+  \end{align*}
+  If \(u\) is a minimizer of \(\epsilon\), then it solves the equation \(-\Delta u = f\) in \(\Omega\). The boundary condition \(u = g\) does not appear on \(\epsilon\), but this is encoded in the set of \emph{admissible functions}. (The set of candidates of solutions). For the classical solutions, we have 
+  
+  \begin{thm}(Dirichlet's principle) Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Let \(f \in C(\bar \Omega)\) and \(g \in C(\partial B)\). Then the following statements are equivalent:
+    \begin{enumerate}
+        \item \(u \in C^2(\bar \Omega)\) solves \(\begin{cases}
+          - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
+        \end{cases}\)
+        \item \(u\) is a minimizer of the variational problem \(E = \inf_{\nu \in A} \epsilon(\nu)\), where \(\epsilon(\nu) = \frac{1}{2} \int_\Omega |\nabla \nu|^2 - \int_\Omega f \nu\), \(A = \{\nu \in C^2(\bar \Omega) \mid \nu = g \text{ on } \partial \Omega\}\).
+    \end{enumerate}
+    Moreover there is at most a solution / minimizer (uniqueness). 
+  \end{thm}
+
+  \begin{proof}
+    The result holds even for complex-valued functions. Let us write the proof for real-valued functions.
+    \begin{itemize}
+      \item[1. \(\Rightarrow\) 2.:] Let \(u \in C^2(\bar \Omega)\) be a solution of \(\begin{cases}
+        - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
+      \end{cases}\). Then we prove \(\epsilon(u) \le \epsilon(\nu)\) for all \(\nu \in A\). If \(\nu \in A\), then \(u - \nu = 0\) on \(\partial \Omega\). Using this and \(-\Delta u = f\) in \(\Omega\), we have:
+      \begin{align*}
+        0 
+        &= \int_\Omega (-\Delta u - f)(u-v)  \\
+        &= \int_\Omega \nabla u (\nabla u - \nabla \nu) - \int_\Omega f (u-v) \\
+        &= \left[\frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega fu\right] - \left[\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right] \\
+        &\quad+ \frac{1}{2} \int_\Omega |\nabla u|^2 + \frac{1}{2} \int_\Omega  \\
+        &= \epsilon(u) - \epsilon(v) + \frac{1}{2} \underbrace{\int_\Omega |\nabla u - \nabla v|^2}_{\ge 0}
+      \end{align*}
+    
+      \(\epsilon(u) \le \epsilon(v)\), so \(u\) is a minimizer of \(\int_{v \in A} \epsilon(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(\epsilon(u) = \epsilon(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
+
+      \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minizer of \(\int_{v \in A} \epsilon(v)\). Then \(\epsilon(u) \le \epsilon(v)\) for all \(v \in A\). Take \(phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
+      \begin{enumerate}[label=\(\Rightarrow\)]
+        \item \(\epsilon(u) \le \epsilon(u + t \phi)\) for all \(t \in \mathbb{R}\)
+        \item \(t \mapsto \epsilon(u + t \phi)\) has a minimizer at \(t = 0\)
+        \item \(\begin{aligned}[t]
+          0 &= \frac{d}{dt} \epsilon(u + t \phi)|_{t = 0} = \frac{d}{dt} |_{t=0} \left(\frac{1}{2} \int_\Omega|\nabla u + t \nabla \phi|^2 - \int_{\Omega} f(u + t \phi)\right) \\
+          &= \frac{d}{dt} |_{t=0} \left(\frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi - \int_{\Omega} f(u + t \phi)\right) \\
+          &\int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi = \int_\Omega (- \Delta u  f) \phi
+        \end{aligned}\) \\
+        for all \(\phi \in C_c^\infty(\Omega)\). So \(- \Delta u - f = 0\) in \(\Omega\) and \(u = g\) since \(u \in A\). \qedhere
+      \end{enumerate}
+    \end{itemize}
+  \end{proof}
+
 \end{document}
