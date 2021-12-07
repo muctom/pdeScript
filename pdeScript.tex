@@ -1810,7 +1810,7 @@
   \end{rem}
 
   \begin{ex}[E 3.2]
-    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdroff-Young inequality. Prove that 
+    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdorff-Young inequality. Prove that 
     \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \quad \forall k \in \mathbb{R}^d\]
 
     Hint: In the lecture we already discussed the case \(f, g \in C_c(\mathbb{R}^d)\).
@@ -2374,13 +2374,13 @@
     A function \(u\) is called a weak solution (a distributional solution) if 
     \[\sum_\alpha c_\alpha D^\alpha u = F \quad \text{in } D'(\Omega).\]
     Namely,
-    \[\sum_\alpha (-1)^{|\alpha|} c_\alpha \int_\Omega u (D^\alpha \phi) = \int_\Omega F \phi, \quad \forall \phi \in D(\Omega)\]
+    \[\sum_\alpha (-1)^{|\alpha|} c_\alpha \int_\Omega u D^\alpha \phi = \int_\Omega F \phi, \quad \forall \phi \in D(\Omega)\]
   \end{defn}
 
   Regularity: Given some condition on the data \(F\), what can we say about the smoothness of \(u\)? Can we say that the equation holds in the classical sense? We derived \(G\) (the solution of the Laplace Equation) before in two ways:
   \begin{enumerate}
     \item \(\Delta G(x) = 0\) for all \(x \ne 0\), assuming \(G(x) = G(|x|)\) and \(d \ge 2\)
-    \item \(\hat G(k) = \frac{1}{|2\pi k}|^2\), \(d \ge 3\)
+    \item \(\hat G(k) = \frac{1}{|2\pi k|^2}\) for \(d \ge 3\)
   \end{enumerate}
   
   \begin{thm}
@@ -2404,7 +2404,10 @@
   \end{rem}
 
   \begin{rem}
-    Formally: \(-\Delta(G_y \star \phi) = (-\Delta G_y) \star \phi(x) = (\delta_0 \star \phi)(x) = \int \delta_0(y) \phi(x y) \, dy = \delta_0 (\phi(x-\bullet))\)
+    Formally: 
+    \begin{align*}
+      -\Delta(G_y \star \phi) = (-\Delta G_y) \star \phi(x) = (\delta_0 \star \phi)(x) = \int \delta_0(y) \phi(x - y) \, dy = \delta_0 (\phi(x-\bullet))
+    \end{align*}
   \end{rem}
 
   \begin{thm}[Poisson's equation with \(L_{loc}^1\) data]\label{PoissonsequationwithL1locdata}
@@ -2437,16 +2440,16 @@
     If \(y \in B\), then \(|y| \le R\), so \(|x-y| \le 2 R\) if \(x \in B\).
     \begin{align*}
       \int_{B(0,R)}|G(x-y)| \, dx
-      &\le \int_{|x-y| \le 2 R} |G(x-y)| \, dx
+      &\le \int_{|x-y|\le 2 R} |G(x-y)| \, dx
       = \int_{|z| \le 2 R} |G(z)| \, dz 
-      \le c_R \text{ as } G \in L_{loc}^1
+      \le c_R
     \end{align*}
-    Thus
+    as \(G \in L_{loc}^1\). Thus
     \begin{align*}
       \int_B |u| \, dy 
-      \le c_B \int_{|y| \ge R} \omega_d (y) |f(y)|\, dy + c_B \int_{|y| \le R} |f(y)| \, dy < \infty
+      \le c_B \int_{|y|\ge R} \omega_d (y) |f(y)|\, dy + c_B \int_{|y|\le R} |f(y)| \, dy < \infty
     \end{align*}
-    Let us prove \(- \Delta = f\) in \(D'(\mathbb{R}^d)\). Take \(\phi \in D(\mathbb{R}^d)\). Then:
+    Let us prove \(- \Delta u = f\) in \(D'(\mathbb{R}^d)\). Take \(\phi \in D(\mathbb{R}^d)\). Then:
     \begin{align*}
       (-\Delta u)(\phi)
       &= u(-\Delta \phi)\\
@@ -2543,7 +2546,7 @@
     \end{enumerate}
     where \(G\) is den fundamental solution of the laplace equation.
   \end{thm}
-¨
+  
   \begin{eg}
     Let \(r = |x|\)
     \begin{align*}
@@ -2892,7 +2895,7 @@
     \end{align*}
     with the norm
     \[\| f \|_{W^{1,p}} = \|f\| + \sum_{i=1}^d \| \partial_{x_i} f\|_{L^p(\Omega)}.\]
-    Prove that \(W^{1,p}(\Omega)\) is a Banach space. Here \(x = (x_i)_{i=1}^d \in \mathbb{R}^d\). Hint: You can use the fact that \(L^p(\Omega\) is a Banach Space.
+    Prove that \(W^{1,p}(\Omega)\) is a Banach space. Here \(x = (x_i)_{i=1}^d \in \mathbb{R}^d\). Hint: You can use the fact that \(L^p(\Omega)\) is a Banach Space.
   \end{ex}
 
   \begin{proof}[Solution]
@@ -2900,7 +2903,7 @@
   \end{proof}
 
   \begin{ex}[E 5.3]
-    Let \(f\) be a real-values function in \(W^{1,p}(\mathbb{R}^d)\) for some \(1 \le p < \infty\). Prove that \(|f| \in W^{1,p}(\mathbb{R}^d)\) and 
+    Let \(f\) be a real-valued function in \(W^{1,p}(\mathbb{R}^d)\) for some \(1 \le p < \infty\). Prove that \(|f| \in W^{1,p}(\mathbb{R}^d)\) and 
     \begin{align*}
       (\nabla |f|)(x) &= \begin{cases}
         \nabla f(x) & f(x) > 0 \\ - \nabla f(x) & f(x) < 0 \\ 0 & f(x) = 0
@@ -2915,7 +2918,7 @@
     \end{align*}
     so \(|G_\epsilon'(t)| \le 1\), \(G_\epsilon(0) = 0\). By the chain rule, \(G_\epsilon(f) \in W^{1,p}(\mathbb{R}^d)\) and 
     \begin{align*}
-      \partial_i G_\epsilon(f)(x) &= G_\epsilon'(f), \partial_if(x) = \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}} \partial_i f(x) \in L^p(\mathbb{R}^d)
+      (\partial_i G_\epsilon(f))(x) &= G_\epsilon'(f) \partial_if(x) = \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}} \partial_i f(x) \in L^p(\mathbb{R}^d)
     \end{align*}
     for all \(i = 1, \dots, d\). Note then when \(\epsilon \to 0\) that \(G_\epsilon(f)(x) \to |f(x)|\) pointwise, so \(G_\epsilon(f) \to |f|\) in \(L^p(\mathbb{R}^d)\). \(|G_\epsilon(f)(x) - G_\epsilon(0)| \le |f(x)| \in L^p(\mathbb{R}^d)\) by dominated convergence. \begin{align*}
       \partial_i G_\epsilon(f)(x) 
@@ -2933,10 +2936,10 @@
     \begin{align*}
       u(x) &= \int_\Omega G(x-y)f(y) \, dy
     \end{align*}
-    Prove that \(- \Delta u = f\) in \(D'(\Omega)\) and \(u \in L_{loc}^1(\Omega)\). Recall \(f \in L_{loc}^1(\mathbb{R}^d)\) and \(\omega_d f \in L^1(\mathbb{R}^d)\), \[\omega_d (x) = \begin{cases}
+    Let \(- \Delta u = f\) in \(D'(\Omega)\), \(u \in L_{loc}^1(\Omega)\), \(f \in L_{loc}^1(\mathbb{R}^d)\) and \(\omega_d f \in L^1(\mathbb{R}^d)\), where \[\omega_d (x) = \begin{cases}
       1 + |x| & d = 1 \\ \log(1 + |x|) & d = 1 \\ \frac{1}{(1 + |x|)^{d-2}} & d \ge 3
-    \end{cases}\]
-    Then \begin{align*}
+    \end{cases}.\]
+    Prove that \begin{align*}
       G \star f &= \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \in L_{loc}^1(\mathbb{R}^d) 
     \end{align*}
     and \(- \Delta (G \star f) = f\) in \(D'(\mathbb{R}^d)\).
@@ -2954,7 +2957,7 @@
     \begin{align*}
       (- \Delta u)(\phi) 
       &= \int_{\mathbb{R}^d} \tilde f \phi 
-      = \int_{\substack{\Omega, \\ \supp \phi \subseteq \Omega}} \tilde f \phi = \int_\Omega f \phi
+      = \int_{\substack{\Omega, \\ \supp \phi \subseteq \Omega}} \tilde f \phi = \int_\Omega f \phi \qedhere
     \end{align*}
   \end{proof}
 
@@ -3080,7 +3083,7 @@
     \begin{align*}
       - \int_{\mathbb{R}^d}\chi f(\partial_i \phi) 
       &= - \int_{\mathbb{R}^d} f(\chi \partial_i \phi) \\
-      &= - \int_{\mathbb{R}^d} f \left(\partial_i(\chi \phi)-(\partial_i \chi) \phi\right) \\
+      (\chi \partial_i \phi = (\partial_i \chi)\phi + \chi(\partial_i \phi)) \quad &= - \int_{\mathbb{R}^d} f \left(\partial_i(\chi \phi)-(\partial_i \chi) \phi\right) \\
       &= - \int_{\mathbb{R}^d} f \partial_i(\underbrace{\chi \phi}_{\in C_c^\infty}) + \int_{\mathbb{R}^d} f (\partial_i \chi) \phi \\
       &= \int_{\mathbb{R}^d} (\partial_i f) \chi \phi + \int f(\partial_i \chi) \phi \\
       &= \int_{\mathbb{R}^d} ((\partial_i f) \chi + f (\partial_i \chi)) \phi
@@ -3093,6 +3096,7 @@
   \end{rem}
   
   \begin{proof}
+    It suffices to show that we still can apply intergration by parts.
     \begin{align*}
       (\star) \quad - \int f \partial_i g
       &\overset{?}{=} \int(\partial_i f) g
@@ -3100,7 +3104,7 @@
     Approximation: \((\star)\) is correct if \(g \in C_c^\infty\) \begin{itemize}
       \item If \(g \in C_c^1\), there is \(\{g_n\} \subseteq C_c^\infty\) s.t. \(g_n \to g\) in \(W_{loc}^{1,p}\), \(\frac{1}{p} + \frac{1}{q} = 1\).
       \begin{align*}
-        \int (\partial_i f) g \xleftarrow{n \to \infty} - \int \underbrace{f}_{L^p} \underbrace{\partial g_n}_{\to \partial_i g \text{ in } L^q} = \int \underbrace{(\partial_i f)}_{\in L^p} \underbrace{g_n}_{\to g \text{ in } L^q} \xrightarrow{n \to \infty} \int (\partial_i f) g
+        \int (\partial_i g) f \xleftarrow{n \to \infty} - \int \underbrace{f}_{L^p} \underbrace{\partial g_n}_{\to \partial_i g \text{ in } L^q} = \int \underbrace{(\partial_i f)}_{\in L^p} \underbrace{g_n}_{\to g \text{ in } L^q} \xrightarrow{n \to \infty} \int (\partial_i f) g
       \end{align*}
     \end{itemize}
   \end{proof}
@@ -3240,7 +3244,7 @@
   \end{align*}
 
   \begin{rem}[Bonus 6]
-    Let \(f,g \in W^{1,2}(\mathbb{R}^d)\). Prove that \(f,g \in W^{1,1}(\mathbb{R}^d)\) and 
+    Let \(f,g \in W^{1,2}(\mathbb{R}^d)\). Prove that \(fg \in W^{1,1}(\mathbb{R}^d)\) and 
     \[\partial_i (fg) = (\partial_i f) g + f(\partial_i g) \quad \text{ in } D'(\mathbb{R}^d)\]
   \end{rem}
 
@@ -3419,7 +3423,7 @@
       \int_\Omega \Phi_x(y) f(y) \, dy 
       &= \int_\Omega \Phi_x(y) (-\Delta u(y)) \, dy  \\
       &= \int_\Omega \left[\Phi_x(y) (-\Delta u(y)) + (\Delta \Phi_x(y)) u(y)\right] \, dy \\
-      (\Delta \Phi_x(y) = 0) \quad &= \int_{\partial \Omega} \left(-\Phi_x(y) \frac{\partial u}{\partial \vec{n}} + \frac{\partial \Phi_x(y)}{\partial \vec{n}} \smash{\underbrace{u(y)}_{g(y)}}\right) \, dS(y)
+      (\Delta \Phi_x(y) = 0) \quad &= \int_{\partial \Omega} \left(-\Phi_x(y) \frac{\partial u}{\partial \vec{n}} + \frac{\partial \Phi_x(y)}{\partial \vec{n}} \smash{\underbrace{u(y)}_{g(y)}}\right) \, dS(y) \qedhere
     \end{align*}
   \end{proof}
   How can we compute \(\Phi_x(y)\)? It is not easy for general domains. But let us prove on two cases:
@@ -3427,13 +3431,13 @@
     \item \(\Omega = \mathbb{R}_+^d\) (half-space)
     \item \(\Omega = B(0,r)\) (a ball)
   \end{itemize}
-  \section{Green's function on \(\mathbb{R}_+^d\)}
+  \section{Green's function on the upper half plane}
   We use the following notation:
   \begin{align*}
     \mathbb{R}_+^d &= \{x = (x_1, x_2, \dots, x_d) = (x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid x_d > 0\} \\
     \partial \mathbb{R}_+^d &= \{x = (x', x_d) \mid x_d = 0\} = \mathbb{R}^{d-1} \times \{0\}
   \end{align*}
-  We want to find für all \(x \in \mathbb{R}^d\) the correction function \(\Phi_x(y)\) with \(y \in \overline{\mathbb{R}_{+}^d}\) s.t.
+  For all \(x \in \mathbb{R}^d\) we want to find the correction function \(\Phi_x(y)\) with \(y \in \overline{\mathbb{R}_{+}^d}\) s.t.
   \begin{align*}
     \begin{cases}
       + \Delta_y \Phi_x(y) = 0 & \text{in } \mathbb{R}_+^d \\ \Phi_x(y) = G(y-x) & \text{in } \partial \mathbb{R}_+^d
