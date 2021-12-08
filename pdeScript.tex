@@ -3684,6 +3684,139 @@
     if \(1 - d\alpha > 0\) \(\Leftrightarrow\) \(\alpha < \frac{1}{d}\).
   \end{proof}
 
+
+  \begin{ex}[E 7.1]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded with \(C^1\) boundary. For \(x \in \Omega\), assume there exist \(\Phi_x(y)\), \(y \in \bar \Omega\), s.t. 
+    \begin{align*}
+      \begin{cases}
+        \Delta_y \Phi_x(y) = 0 \\ \Phi_x(y) = G(y-x)
+      \end{cases},
+    \end{align*}
+    \(G(z) = \frac{1}{d(d-2)|B_1||z|^{d-2}}, d \ge 3\). Prove that \(\Phi_x(y) = \Phi_y(x)\) for all \(x,y \in \Omega\). Then \(tilde G(x,y) = G(y-x) - \Phi_x(y)\) is symmetric, i.e. \(\tilde G(x,y) = \tilde G(y,x)\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Assume \(x \ne y\). Define \begin{align*}
+      f(z) &= \tilde G(x,z) = G(z-x) - \Phi_x(z) \\
+      g(z) &= \tilde G(y,z) = G(z-y) - \Phi_y(z)
+    \end{align*}
+    Integration by parts:
+    \begin{align*}
+      \int_{\Omega \setminus (B(x, \epsilon) \cup B(y, \epsilon))} (f \Delta g - g \Delta f) 
+      &= \int_{\partial \Omega \cup \partial B(x,\epsilon) \cup \partial B(y, \epsilon)} \left(f \frac{\partial g}{\partial \vec{n_z}} - g \frac{\partial f}{\partial \vec{n_z}}\right) \, dS(z) \\
+      &= \int_{\partial B(x, \epsilon) \cup \partial B(y, \epsilon)} \left(f \frac{\partial g}{\partial \vec{n_z}} - g \frac{\partial f}{\partial \vec{n_z}}\right)\, dS(z)
+    \end{align*}
+    Consider \(f \frac{\partial g}{\partial \vec{n_z}}\) on \(\partial B(x,\epsilon)\). Since \(g\) is only singular at \(y\), so \(\left|\frac{\partial g}{\partial \vec{n}}\right| \le C\) on \(\partial B(x,\epsilon)\). This implies:
+    \begin{align*}
+      \int_{\partial B(x,\epsilon)} \left|f \frac{\partial g}{\partial \vec{n_z}}\right| \, dS(z) 
+      &\le C \int_{\partial B(x,\epsilon)}|f| \, dS(z) \\
+      &\le C \int_{\partial B(x,\epsilon)} \left(\frac{1}{|x-z|^{d-2}} + \|\Phi_x\|_{L^\infty(\Omega)}\right) \, dS(z) \\
+      &\le C \epsilon^{d-1} \left(\frac{1}{\epsilon^{d-2}} + 1\right)
+      \le C\epsilon \xrightarrow{\epsilon \to 0} 0
+    \end{align*}
+    Consider \(f \frac{\partial g}{\partial \vec{n_z}}\) on \(\partial B(y, \epsilon)\). Decompose \(\frac{\partial g}{\partial \vec{n}} = \left[\nabla_z G(z-y) - \nabla_z \Phi_y(z)\right]\frac{(z-y)}{|z-y|}\). Since \(\Phi_y(z)\) is harmonic in \(\Omega\), we have that 
+    \begin{align*}
+      \int_{\partial B(y,\epsilon)} \left| f \nabla_z \Phi_y(z) \frac{-(z-y)}{|z-y|} \right|
+      \le C \int_{\partial B(y,\epsilon)}|f|
+      \le C \epsilon^{d-1} \xrightarrow{\epsilon \to 0}0
+    \end{align*}
+    Thus the main contribution from \(f \frac{\partial g}{\partial \vec{n}}\) is 
+    \begin{align*}
+      &\int_{\partial B(y, \epsilon)} f(z) \nabla_z G(z-y) \frac{-(z-y)}{|z-y|} \, dS(z) \\
+      &\quad= \int_{\partial B(y, \epsilon)} f(z) \frac{-(z-y)}{d |B_1||z-y|^d} \frac{-(z-y)}{|z-y|} \, dS(z) \\
+      &\quad = \frac{1}{d|B_1|\epsilon^{d-1}} \int_{\partial B(y,\epsilon)} f(z) \, dS(z) \\
+      &\quad= \fint_{\partial B(y,\epsilon)} f(z) \, dS(z) = f(y)
+    \end{align*}
+    In summary:
+    \begin{align*}
+      \int_{\partial B(x, \epsilon) \cup \partial B(y,\epsilon)} f \frac{\partial g}{\partial \vec{n_z}} \, dS(z) \xrightarrow{\epsilon \to 0} f(y)
+    \end{align*}
+    Similary:
+    \begin{align*}
+      \int_{\partial B(x,\epsilon) \cup \partial B(y, \epsilon)} g \frac{\partial f}{\partial \vec{n_z}} \, dS(z) \xrightarrow{\epsilon \to 0} g(x)
+    \end{align*}
+    So we have that \(f(y) = g(x)\), so \begin{align*}
+      f(y) &= G(y-x) - \Phi_x(y) \\
+      g(x) &= G(x-y) - \Phi_y(x).
+    \end{align*}
+    So \(\Phi_x(y) = \Phi_y(x)\) for all \(x \ne y \in \Omega\). This implies \(\Phi_x(y) = \Phi_y(x)\) for all \(x,y \in \Omega\).
+  \end{proof}
+  
+  \begin{ex}[E 7.2]
+    Define \(\mathbb{R}_+^d = \{(x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid x_d > 0\}\). Let \(K(x,y) = \frac{2 x_d}{d |B_1| |x-y|^d}\) for all \(x \in \mathbb{R}_+^d, y \in \partial \mathbb{R}_+^d = \{(y', 0) \mid y' \in \mathbb{R}^{d-1}\} \simeq \mathbb{R}^{d-1}\). Prove
+    \begin{align*}
+      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) = 1 \quad \forall x \in \mathbb{R}_+^d
+    \end{align*}
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Denote \(x = (x', x_d)\), \(y = (y', 0)\), \(x', y' \in \mathbb{R}^{d-1}\), \(x_d > 0\).
+    \begin{align*}
+      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1|\left(|x'-y'|^2 + x_d^2\right)^{\frac{d}{2}}} \, dy' = \dots
+    \end{align*}
+    as \(|x-y| = |(x'-y', x_d)| = \sqrt{|x'-y'|^2 + x_d^2}\).
+    \begin{align*}
+      (y'-x' \mapsto y') \quad \dots &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1|\left(|y'|^2 + x_d^2\right)^{\frac{d}{2}}} \, dy' \\
+      (y' = x_d z) \quad &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1| \left(x_d^2 (|z|^2 + 1)\right)^{\frac{d}{2}}} \left(x_d^{d-1}\right) \, dz \\
+      &= \int_{\mathbb{R}^{d-1}} \frac{2}{d|B_1|\left(|z|^2 + 1\right)^{\frac{d}{2}}} \, dz \\
+      &= \int_0^\infty \frac{2 \omega_{d-1}}{d|B_1|} \frac{1}{(r^2+1)^{\frac{d}{2}}} r^{d-2} \, dr \\
+      &= \frac{2 \omega_{d-1}}{\omega_d} \int_0^\infty \frac{1}{\left(r^2+1\right)^{\frac{d}{2}}} r^{d-2} \, dr
+    \end{align*}
+    Set \(d = 2\): \(\omega_1 = 1, |\omega_2| = 2 \pi\) 
+    \begin{align*}
+      \frac{2}{\pi} \int_0^\infty \frac{1}{r^2+1} \, dr 
+      &= \frac{2}{\pi} \int_0^{\frac{\pi}{2}} \frac{1}{(\tan t)^2 +1} [(\tan t)^2 +1] \, dt = 1
+    \end{align*}
+    we we set \(r = \tan t, t \in \left(0, \frac{\pi}{2}\right), \frac{dr}{dt} = (\tan t)' = 1 + (\tan t)^2\)
+  \end{proof}
+  For \(d = 3\):
+  \begin{align*}
+    \frac{2 \cdot 2 \pi}{4 \pi} \int_0^\infty \frac{1}{(r^2 + 1)^{\frac{3}{2}}} r \, dr
+    &= \int_0^\infty \frac{d}{dr} \left[\frac{-1}{(r^2+1)^{\frac{1}{2}}}\right] \, dr = \left. \frac{-1}{(r^2 + 1)^{\frac{1}{2}}}\right]_0^\infty = 1
+  \end{align*}
+
+  \begin{ex}[7.3]
+    Let \(g \in C(\partial \mathbb{R}_+^d) \cap L^\infty(\partial \mathbb{R}_+^d)\) (\(\partial \mathbb{R}_+^d \simeq \mathbb{R}^{d-1}\)).
+    \begin{align*}
+      u(x) &= \int_{\partial \mathbb{R}_+^d} K(x,y) g(y) \, dS(y)
+      &K(x,y) &= \frac{2 x_d}{d |B_1| |x-y|^d}, x \in \mathbb{R}_+^d
+    \end{align*}
+    Prove that if \(g(y) = |y|\), if \(|y| \le 1\), then \(|\nabla u|\) is unbounded in \(B(0,r) \cap \mathbb{R}_+^d\) for all \(r > 0\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{align*}
+      \partial_{x_d} u(x) &= \int_{\partial \mathbb{R}_+^d} \partial x_d K(x,y) g(y) \, dy \quad \forall x \in \mathbb{R}_+^d \\
+      &= \frac{2}{d |B_1|} \int_{\partial \mathbb{R}_+^d} \left[\frac{1}{|x-y|^d} - \frac{dx_d^2}{|x-y|^{d+2}}\right] g(y) \, dy \\
+      &= \frac{2}{d |B_1|} \int_{\partial \mathbb{R}_+^d} \frac{1}{|x-y|^{d+2}} [|x-y|^2 - dx_d^2] g(y) \, dy \\
+      &= \frac{2}{d|B_1|} \int_{\partial \mathbb{R}_+^d} \frac{1}{(|x'-y'|+x_d^2)^{\frac{d+2}{2}}} \left[|y'|^2 - (d-1) x_d^2\right] g(y) \, dy
+    \end{align*}
+    Assume that \(\partial_d u\) is bounded in \(B(0,r) \cap \mathbb{R}_+^d\) Then:
+    \begin{align*}
+      |u(0,x_d) - \underbrace{u(0,0)}_{g(0) = 0}| \le C |x_d|
+    \end{align*}
+    if \(x_d\) small. Consider:
+    \begin{align*}
+      \limsup_{x_d \to 0^+} \frac{u(0,x_d)}{x_d} 
+      &= \limsup_{x_d \to 0^+} c \int_{\mathbb{R}^{d-1}} \frac{1}{(|y'|^2 + x_d^2)^{\frac{d}{2}}} g(y) \, dy' \\
+      &\ge \int_{\mathbb{R}^{d-1}} \frac{1}{|y'|^d} g(y) \, dy 
+      = \int_{|y'| \le 1} + \int_{|y'| > 1} \\
+      &to \int_{\mathbb{R}^{d-1}} \frac{1}{|y'|^{d-1}} \, dy' = \infty \qedhere
+    \end{align*}
+  \end{proof}
+
+  \begin{ex}[Bonus 7]
+    Recall the Poisson kernel on a ball \(B(0,r) \subseteq \mathbb{R}^d\):
+    \begin{align*}
+      K(x,y) = \frac{r^2 - |x|^2}{d|B_1|r} \frac{1}{|x-y|^d}
+    \end{align*}
+    for all \(x \in B(0,r)\), \(y \in \partial B(0,r)\). Prove:
+    \begin{align*}
+      \int_{\partial B(0,r)} K(x,y) \, dS(y) = 1
+    \end{align*}
+    for all \(x \in B(0,r)\). (It suffices if you can prove \(d = 2\) and \(d = 3\))
+  \end{ex}
+
   \section{Energy Method}
 
   Consider \(u \in C^2(\Omega)\) for \(\Omega \subseteq \mathbb{R}^d\) open, bounded and with \(C^1\) boundary and \begin{align*}
@@ -3728,7 +3861,7 @@
     
       \(\epsilon(u) \le \epsilon(v)\), so \(u\) is a minimizer of \(\int_{v \in A} \epsilon(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(\epsilon(u) = \epsilon(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
 
-      \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minizer of \(\int_{v \in A} \epsilon(v)\). Then \(\epsilon(u) \le \epsilon(v)\) for all \(v \in A\). Take \(phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
+      \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minizer of \(\int_{v \in A} \epsilon(v)\). Then \(\epsilon(u) \le \epsilon(v)\) for all \(v \in A\). Take \(\phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
       \begin{enumerate}[label=\(\Rightarrow\)]
         \item \(\epsilon(u) \le \epsilon(u + t \phi)\) for all \(t \in \mathbb{R}\)
         \item \(t \mapsto \epsilon(u + t \phi)\) has a minimizer at \(t = 0\)
@@ -3741,5 +3874,6 @@
       \end{enumerate}
     \end{itemize}
   \end{proof}
+
 
 \end{document}
