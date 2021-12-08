@@ -3875,5 +3875,109 @@
     \end{itemize}
   \end{proof}
 
+  Direct method ot calculus of variations. Think \(f: \mathbb{R} \to \mathbb{R}\), \(f \in C(\mathbb{R})\), \(f(x) \to \infty\) as \(|x| \to \infty\). There is a \(x_0 \in \mathbb{R}\) s.t. \(f(x_0) = \inf_{x \in \mathbb{R}} f(x)\).
+  \begin{enumerate}[label=Step \arabic*:]
+    \item \(E = \inf_{x \in \mathbb{R}} f(x) > - \infty\)
+    \item Take a minizing sequence \(\{x_n\} \subseteq \mathbb{R}\), \(f(x_n) \to E\). Up to a subsequence \(x_n \to x_0\) in \(\mathbb{R}\) (compactness)
+    \item Lower semicontinuity \(E = \liminf_{n \to \infty} f(x_n) \ge f(x_0)\)
+  \end{enumerate}
+  If we apply the direct method to \(\inf_{v \in A}E(v)\), 
+  \begin{align*}
+    E(v) = \frac{1}{2} \int_{\Omega} |\nabla v|^2 - \int_\Omega f v,
+  \end{align*}
+  \(A = \{v \in C^2(\bar \Omega), v=g \text{ on } \partial \Omega\}\)
+
+  \begin{enumerate}[label=Step \arabic*:]
+    \item Easy \(E = \int_{v \in A} E(v) > - \infty\)
+    \item There is a minimiziing sequence \(\{v_n\} \subseteq A\) s.t. \(E(v_n) \to E\). We don't know if there is a subsequence of \(\{v_n\}\) that converges to \(u \in A\). The lack of compactness is a serious problem! We need to find the rigt set \(A\)! Consider again \begin{align*}
+      \begin{cases}
+        - \Delta u = f & \text{in } \Omega \\ u = g &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*}
+    Consider the simple case \(g = 0\). 
+    \(\Delta u -f \) in \(\Omega\) \(\Leftrightarrow\) \(\nabla u \nabla \phi\)...
+    The right set \(A\) should be \(A = \{v \mid \int_\Omega |\nabla v|^2 < \infty, v = 0 \text{ on } \partial \Omega\}.\) Rigorously we take \(W_0^{1,2}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,2}(\Omega)\) (Notation: \(H_0^1 = W_0^{1,2}, H^1 = W^{1,2}\)) Recall that \(W^{1,p}\) is a banach space with norm \(\|f\|_{W^{1,p}(\Omega)} = \|f\|_{L^p(\Omega)} + \|\nabla f\|_{L^p(\Omega)}\). We know that \(C_c^\infty(\Omega)\) is dense in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(u \in W^{1,p}_{loc}(\Omega)\) there is \(\|u_n\| \subseteq C_c^\infty\) s.t. \(u_n \to u\) in \(W^{1,p}(K)\) for all \(K \subseteq \Omega\) compact. However in general \(C_c^\infty(\Omega)\) is not dense in \(W^{1,p}(\Omega)\), i.e. \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,p}(\Omega) \subseteq W^{1,p}(\Omega)\). Clearly \(W_0^{1,p}\) is a closed subspace of \(W^{1,p}(\Omega) \to W_0^{1,p}(\Omega)\)  is a Banach space with \(\|\cdot\|_{W^{1,p}(\Omega)}\). Why does \(W_0^{1,p}(\Omega)\) encode the \(0\)-boundary condition? Note that by definition for all \(u \in W_0^{1,p}(\Omega)\) there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\), \(u_n \to u\) in \(W^{1,p}(\Omega)\) up to a subsequence \(u_n(x) \to u(x)\) for almost every \(x \in \Omega\). Note \(u_n|_{\partial \Omega} = 0 \nrightarrow u|_{\partial \Omega} = 0\) since \(\partial \Omega\) must be of 0-measure.
+
+    \begin{thm}
+      Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in W^{1,p}(\Omega)\cap C(\bar \Omega)\). Then the following statements are equivalent:
+      \begin{enumerate}
+        \item \(u = 0\) on \(\partial \Omega\)
+        \item \(u \in W_0^{1,p}(\Omega)\)
+      \end{enumerate}
+      (Later we will remove the condition \(C(\bar \Omega)\) by introducing the \emph{Trance operator}.)
+    \end{thm}
+  \end{enumerate}
+
+  \begin{proof}\
+    \begin{itemize}
+      \item [(a) \(\Rightarrow\) (b):]
+      \begin{lem}
+        If \(u \in W^{1,p}(\Omega)\) and \(\supp u \subseteq \Omega\), then \(u \in W_0^{1,p}(\Omega)\).
+      \end{lem}
+      \begin{proof}
+        Since \(K \coloneqq \supp u\) is a compact subset in \(\Omega\), we can find a function \(\chi \in C_c^\infty(\Omega)\), \(\chi = 1\) on \(K\). Moreover since \(u \in W^{1,p}(\Omega)\), there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(W_{loc}^{1,p}(\Omega)\). We claim that \(\chi u_n \to \chi u\) in \(W_{loc}^{1,p}(\Omega)\). (exercise, \(\nabla (\chi u) = \nabla \chi u + \chi \nabla u\)). This implies \(\chi u_n \to u\) in \(W^{1,p}(\supp \chi)\), thus \(\chi u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\).
+      \end{proof}
+      Assume \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Take \(G \in C^1(\mathbb{R})\) s.t. \(|G(t) \le t\) for all \(t\), \(G(t) = t\) if \(t \ge 2\) and \(G(t) = 0\) if \(t \le 1\). Then
+        \begin{align*}
+          u_n(x) &= \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
+          \text{(Chain-rule)} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
+        \end{align*}
+        Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
+        \begin{align*}
+          \int_\Omega |u_n(x) - u(x)|^p \, dx \to 0
+        \end{align*}
+        since \(u_n(x) = \frac{1}{n} G(nu(x)) \xrightarrow{n \to \infty} u(x)\) for all \(x \in \Omega\) and \(|u_n(x)| \le \frac{1}{n} |G(nu(x))| \le \frac{1}{n} |nu(x)| \le |u(x)| \in L^p(\Omega)\).
+        \begin{align*}
+          \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
+          &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
+        \end{align*}
+        as \(|G'(nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
+    \end{itemize}
+    \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
+    We prove that if \(u \in W_0^{1,p} \)
+    \((Q_+) \cap C(\overline {Q_+)}\), then \(u = 0\) on \(Q_0 = \{(x', 0) \mid x' \in \mathbb{R}^{d-1}, |x'| < 1\}\). Since \(u \in W_0^{1,p}(Q_+)\) there is \(\{u_n\} \subseteq C_c^\infty(Q_+)\) s.t. \(u_n \to u\) in \(W^{1,p}(Q_+)\) for all \(x = (x', x_d) \in Q_+\), then:
+    \begin{align*}
+      u_n(x', x_d) = \underbrace{u_n(x', 0)}_{= 0} + \int_0^{x_d} \partial_d u_n(x', t) \, dt
+    \end{align*}
+    Hence 
+    \begin{align*}
+      |u_n(x', x_d)| &\le \int_0^{x_d} |\partial_d u_n(x', t) \, dt
+    \end{align*}
+    This implies:
+    \begin{align*}
+      &\int_{0 < x_d < \epsilon} \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d \\
+      &\quad \le \int_{0 < x_d < \epsilon} \int_{|x'| < 1} \left(\int_0^{x_d}|\partial_d u_n(x', t)| \, dt\right) \, dx' \, dx_d \\
+      &\quad \le \epsilon \int_{|x'| < 1} \int_0^\epsilon |\partial_d u_n(x', t)| \, dx' \, dt
+    \end{align*}
+    \begin{align*}
+      \Rightarrow \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d 
+      &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_d u_n(x', x_d)| \, dx' \, dx_d
+    \end{align*}
+    for all \(n \in \mathbb{N}\), \(\epsilon > 0\). Take now \(n \to \infty\), use \(u_n \to u\) in \(W^{1,p}(\Omega)\). Then:
+    \begin{align*}
+      \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u(x', x_d)| \, dx' \, dx_d
+      &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_x u_n(x', x_d)| \, dx' \, dy
+    \end{align*}
+    for all \(\epsilon > 0\). Take \(\epsilon \to 0\):
+    \begin{align*}
+      \int_{|x'| \le 1} |u(x', 0)| \, dx' \le 0
+    \end{align*}
+    here we use \(u \in C(\bar \Omega)\) for the left side and Dominated Convergence for the right side. Thus \(u(x', 0) = 0\) for all \(|x'| \le 1\), i.e. \(u = 0\) on \(\partial \Omega\). Let's regard the general case: Let \(\Omega\) be open, bounded and with \(C^1\)-boundary. Lets define \emph{local charts} By definition for all \(x \in \partial \Omega\), there is a \(U_x\) open, such there is a bijecitve map \(h: U_x \to Q\), and \(h, h^{-1}\) are \(C^1\). Then clearly \(\partial \Omega \subseteq \bigcup_{x \in \partial \Omega} U_x\). Since \(\partial \Omega\) is compact, there is a finite subcover \(\{U_i\}_{i=1}^N\) s.t. \(\partial \Omega \subseteq \bigcup_{i=1}^N U_i\). We can find \(U_0\) open s.t. \(\bar U_0 \subseteq \Omega\) and \(\Omega \subseteq \bigcup_{i=0}^N U_i\).
+
+    \begin{lem}
+      There is a sequence \(\{x_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t.
+      \begin{enumerate}
+        \item \(\chi_i \ge 0\), \(\sum_{i=0}^N \chi_i = 1\) in \(\mathbb{R}^d\) (\(\{\chi_i\}\) is a partition of unity)
+        \item For all \(i=1, \dots, N\), \(\supp \chi_i\) is in \(U_i\), i.e. \(\chi_i \in C_c^\infty(U_i)\).
+        \item \(i=0\), \(\supp \chi_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\) and \(\chi_0 \setminus \Omega \in C_c^\infty(\Omega)\). (exercise)
+      \end{enumerate}
+      Given \(u \in W_0^{1,p}(\Omega) \cap C(\bar \Omega)\). Then \(u = \sum_{i=0}^N \chi_i u\), where \(\chi_i \ge 0\), \(\chi_0 \in C_c^\infty(\Omega)\), \(\chi_i \in C_c^\infty(U_i)\). Since \(\chi_0 u\) is supported in a copact set inside \(\Omega\), \(\chi_0 u = 0\) on \(\partial \Omega\). It remains to show that for all \(i=1, \dots, N\), \(\chi_i u = 0\) on \(U_i \cap \partial \Omega\). Then \(\chi_i u(h^{-1}x) \in W_0^{1,p}(Q) \cap C(\bar \Omega)\). This implies \(\chi_i u (h^{-1}x) = 0\) on \(Q_0\), so \(\chi_i u(x) = 0\) on \(U_i \cap \partial \Omega\). 
+      Why \(W_0^{1,p}(U_i \cap \Omega) \to W_0^{1,p}(Q_+)\). If \(v \in W_0^{1,p}(U_i \cap \Omega)\), then \(v_n \to v, v_n \in C_c^\infty\). \(v_n \circ h^{-1} \to v \circ h^{-1} \Rightarrow v \circ h^{-1} \in W_0^{1,p}(Q_+)\)
+    \end{lem}
+  \end{proof}
+
+
+
+
 
 \end{document}
