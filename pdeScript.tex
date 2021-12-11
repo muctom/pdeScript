@@ -444,8 +444,8 @@
   \begin{thm}[Maximum Principle]\label{maximum-principle}
     Let \(\Omega \subseteq \mathbb{R}^d\) be open, let \(u \in C^2(\Omega) \cap C(\bar \Omega)\), \(\Delta u = 0\) in \(\Omega\). Then
     \begin{enumerate}[label=\alph*)]
-      \item \(\sup_{x \in \bar \Omega} u(x) = \sup_{x \in \partial \Omega} u(x)\)
-      \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \sup_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
+      \item \(\max_{x \in \bar \Omega} u(x) = \max_{x \in \partial \Omega} u(x)\)
+      \item Assume that \(\Omega\) is connected. Then if there is a \(x_0 \in \Omega\) s.t. \( u(x_0) = \max_{x \in \bar \Omega} u(x)\), then \( u \equiv const.\) in \(\Omega\).
     \end{enumerate}
   \end{thm}
 
@@ -1185,7 +1185,7 @@
   \end{ex}
 
   \begin{proof}[Solution]
-    Regard \(d = 3\). De function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
+    Regard \(d = 3\). The function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
     \begin{align*}
       \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
     \end{align*}
@@ -1260,77 +1260,6 @@
     \end{enumerate}
   \end{ex}
 
-  \begin{proof}[My Solution]
-    \begin{enumerate}[label=\alph*)]
-      \item Let \(x \in \mathbb{R} \setminus \{0\}\).
-      \begin{align*}
-        \partial_{x_i} u &= \partial_{x_i} |x|^{-1} = - |x|^{-2} \frac{x_i}{|x|} = -x_i |x|^{-3} \\
-        \Rightarrow \ \partial_{x_i}^2 u &= \partial_{x_i} (-x_i |x|^{-3}) = -|x|^{-3} + 3x_i^2 |x|^{-5} \\
-        \Rightarrow \ \Delta u &= - |x|^{-3} + 3x_1^2 |x|^{-5} - |x|^{-3} + 3x_2^2 |x|^{-5} \\
-        &= - 2 |x|^{-3} + 3 \underbrace{(x_2^2 + x_2^2)}_{= |x|^2} |x|^{-5} = \frac{1}{|x|^3} > 0
-      \end{align*}
-      So \(u\) is sub-harmonic in \(\mathbb{R}^2\setminus \{0\}\).
-
-      \item Let \(r > 0, x \in \mathbb{R}^2\) and \(|x| < r\). First we show that
-      \begin{align*}
-        \fint_{\partial B(x, r)} \frac{1}{|y|} \, dS(y) \ge \frac{1}{r} \qquad (\star)
-      \end{align*}
-      Now, 
-      \begin{align*}
-        \fint_{\partial B(0, r)} \frac{1}{|y|} \, dS(y)
-        &= \fint_{\partial B(0, r)} \frac{1}{|x-y|} dS(y) \eqqcolon \tilde u(x)
-      \end{align*}
-      Take \(z \in \mathbb{R}^2 \setminus \{0\}\) such that \(z = |x|\), then \(\tilde u(x) = \tilde u(z)\). Let \(0 < \epsilon < r\) be small. Then we get
-      \begin{align*}
-        \tilde u(z) 
-        &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|} \\
-        \left(\begin{aligned}|y| = r > |x| = |z| \\ \tilde u \text{ radial function} \end{aligned}\right)
-        \quad &= \fint_{\partial B(0, |x|-\epsilon)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|} \, \right) \, dS(z) \\
-        \text{(Fubini)} \quad &= \fint_{\partial B(0, r)} \left(\fint_{\partial B(0, |x|-\epsilon)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
-        &= \fint_{\partial B(0, r)} \left(\fint_{\partial B(y, |x|-\epsilon)} \frac{dS(z)}{|z|}\right) \, dS(y) \\
-        \left(\frac{1}{|y|} \text{ sub-harmonic in } \mathbb{R}^2\setminus \{0\}\right) 
-        \quad &\ge \fint_{\partial B(0, r)} \frac{1}{|y|} \, dS(y) \\
-        &= \fint_{\partial B(0, r)} \frac{1}{r} \, dS(y) \\
-        &= \frac{1}{r}
-      \end{align*}
-      Now, 
-      \begin{align*}
-        \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy &= \int_{|x| \ge |y|} \frac{f(y)}{|x-y|} \, dy + \int_{|x| < |y|} \frac{f(y)}{|x-y|} \, dy,
-      \end{align*}
-      where
-      \begin{align*}
-        \int_{|x| \le |y|} \frac{f(y)}{|x-y|} \, dy &= \int_0^\infty \int_{\partial B(0, r)} \frac{f(y)}{|x-y|} \mathbb{1}(|x| \le |y|) \, dS(y)  \, dr \\
-        (f \text{ radial}) \quad &= \int_0^\infty f(r) \int_{\partial B(0,r)} \frac{\mathbb{1}(|x| \le r)}{|x-y|} \, dS(y) \, dr \\
-        &= \int_0^\infty f(r) \int_{\partial B(x,r)} \frac{\mathbb{1}(|x| \le r)}{|y|} \, dS(y) \, dr \\
-        (\star) \quad &\ge \int_0^\infty  \frac{f(r)}{r} |\partial B(x, r)| \mathbb{1}(|x| \le r) \, dr \\
-        &= \int_0^\infty \int_{\partial B(x, r)} \frac{f(r)}{r} \mathbb{1}(|x| \le r) \, dS(y) \, dr \\
-        &= \int_{\mathbb{R}^2} \frac{f(y)}{|y|}\mathbb{1}(|x| \le |y|) \, dy \\
-        &= \int_{|x| \le |y|} \frac{f(y)}{|y|} \, dy
-      \end{align*}
-      and
-      \begin{align*}
-        \int_{|x| > |y|} \frac{f(y)}{|x-y|} \, dy 
-        &= \int_0^\infty \left(\int_{\partial B(0, r)} \frac{f(r)}{|x-y|}\mathbb{1}(|x| > |y|) \, dS(y)\right) \, dr \\
-        (f \text{ radial}) \quad &= \int_0^\infty f(r) \mathbb{1}(|x| > r)\left(\int_{\partial B(x,r)} \frac{1}{|y|} \, dS(y)\right) \, dr \\
-        \left(\begin{aligned}
-          \frac{1}{|y|} \text{ sub-harmonic in \(\mathbb{R}^2\),} \\ \text{MVP and } |x| > r
-        \end{aligned}\right)
-         \quad 
-        &\ge \int_0^\infty f(r) \mathbb{1}(|x| > r)|\partial B(x,r)|\frac{1}{|x|} \, dr \\
-        &= \int_0^\infty \int_{\partial B(x,r)} f(r) \mathbb{1}(|x| > r) \frac{1}{|x|} \, dS(y) \, dr \\
-        &= \int_{\mathbb{R}^2} f(y) \mathbb{1}(|x| > |y|) \frac{1}{|x|} \, dy \\
-        &= \int_{|x| > |y|} f(y) \frac{1}{|x|} \, dy.
-      \end{align*}
-
-      So we can conclude, 
-      \begin{align*}
-        \int_{\mathbb{R}^2} \frac{f(y)}{|x-y|} \, dy &= \int_{|x| > |y|} \frac{f(y)}{|x-y|} \, dy + \int_{|x| \le |y|} \frac{f(y)}{|x-y|} \, dy \\
-        &\ge \int_{|x| > |y|}  \frac{f(y)}{|x|} \, dy + \int_{|x| \le |y|} \frac{f(y)}{|y|} \, dy \\
-        &= \int_{\mathbb{R}^2} \frac{f(y)}{\max(|x|, |y|)} \, dy \qedhere
-      \end{align*}
-    \end{enumerate}
-  \end{proof}
-
   \section{Fourier Transformation}
   \begin{defn}[Fourier Transform]
     For \(f \in L^1(\mathbb{R}^d)\) define
@@ -1344,7 +1273,7 @@
       \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(\four\) can be extended to be a unitary transforamtion \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
       \[\|\four g\|_{L^2} = \|f\|_{L^2} \quad \forall f \in L^2(\mathbb{R}^d)\]
       \item The inverse of \(F\) can be defined as
-      \item \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
+      \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
       \item \(\widehat{D^\alpha f}(k) = (2 \pi i k)^\alpha \hat f(k)\) as \((2 \pi ik)^\alpha f(k) \in L^2(\mathbb{R}^d)\) (\(k^\alpha = k_1^{\alpha_1} \cdots k_\alpha^{\alpha_k}\))
       \item \(\widehat{f \star g}(k) = \hat f(k) \hat g (k)\) if \(f,g\) are nice enough.
     \end{enumerate}
@@ -1531,7 +1460,7 @@
   \begin{itemize}
     \item \(D(\Omega) = C_c^\infty(\Omega)\) the space of test functions.
     \item \(\phi_n \to \phi\) in \(D(\Omega)\) if \(\exists K \subseteq \Omega\), \(\supp(\phi_n), \supp(\phi) \subseteq K\) and \(\|D^\alpha(\phi_n - \phi)\|_{L^\infty} \to 0\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\), \(d_i \in \{0, 1, 2, \dots\}\).
-    \[D'(\Omega) = \{T: D(\Omega) \to \mathbb{R} \text{ on } \mathbb{C} \text{ linear and continuous}\}\] the space of distributions.
+    \[D'(\Omega) = \{T: D(\Omega) \to \mathbb{R} \text{ or } \mathbb{C} \text{ linear and continuous}\}\] the space of distributions.
   \end{itemize}
 
   Motivation: \(L^2(\Omega)' = L^2(\Omega)\), \((L^p(\Omega))' = (L^q(\Omega))\), \(\frac{1}{p} + \frac{1}{q} = 1\).
@@ -1716,7 +1645,7 @@
 
   \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
     Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
-    \[\fint_{B(x,r)} |f(y)| \, dy \xrightarrow{r \to 0} 0\]
+    \[\fint_{B(x,r)} |f(x) - f(y)| \, dy \xrightarrow{r \to 0} 0\]
   \end{ex}
 
   \begin{proof}
