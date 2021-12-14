@@ -3903,8 +3903,134 @@
     \end{lem}
   \end{proof}
 
+  \begin{ex}[E 8.1]
+  \end{ex}
 
+  \begin{proof}[Solution]
+    We have already seen that if \(f, g \in W_{loc}^{1,1}(\mathbb{R}^d)\), then \(\max(f,g) \in W_{loc}^{1,1}\). \(u^+, v^+ \in W^{1,1}_{loc}\) for \(v \in W_{loc}^{1,1}\), \(u = u^+ - u^-\) implies \(\nabla u  = \nabla u^+  -\nabla u^-\), \(u^- = \max(-u, 0)\). Claim:
+    \begin{align*}
+      \nabla u^+ = \begin{cases}
+        0 & u(x) \le 0 \\ \nabla u & u(x) > 0
+      \end{cases} \quad 
+      \nabla u^- = \begin{cases}
+        0 & u(x) \ge 0 \\ \nabla u & u(x) < 0
+      \end{cases}
+    \end{align*}    
+    \begin{align*}
+      \int_{\mathbb{R}^d} (\partial_i U^+) \phi 
+      &= - \int_{\mathbb{R}^d} u^+ \partial_i \phi = \int_{\{u(x) \le 0\}} 0 \phi_i \phi - \int_{\{u(x) > 0\}} u \partial_i \phi \\
+      &= \int_{\{u(x) \le 0\}}0 \phi + \int_{\{u(x) > 0\}} \partial_i u \phi
+    \end{align*}
+    This implies:
+    \begin{align*}
+      \nabla u^+ = \begin{cases}
+        0 & u(x) \le 0 \\ \nabla u & u(x) > 0
+      \end{cases}
+    \end{align*}
+    Alternative way: We showed for \(f \in W^{1,p}(\mathbb{R}^d)\), that 
+    \begin{align*}
+      \nabla |f| (x) &= \begin{cases}
+        (\nabla f)(x), &f(x) > 0 \\ - (\nabla f)(x) & f(x) < 0 \\ 0 & f(x) = 0
+      \end{cases}
+    \end{align*}
+    \(u_+ = \frac{1}{2}(u + |u|)\). Hence \(\nabla u_+ = \frac{1}{2}(\nabla u + \nabla |u|)\).
+    Remark: If \(A \subseteq \mathbb{R}\) has measure zero, then \(\nabla u 1 _{\{u(x) \in A\}} = 0\) a.e. (Th. 6.19 Lieb-Loss Analysis)
+  \end{proof}
 
+  \begin{ex}[E 8.2]
+    \(\Omega, U \subseteq \mathbb{R}^d\), open, \(U \cap \Omega \ne \emptyset\), \(u \in W_0^{1,p}(\Omega)\), \(1 \le p < \infty\), \(\chi \in C_c^\infty(U)\). Prove: \(\chi u \in W_0^{1,p}(\Omega \cap U)\)
+    Hint: Recall \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}^{\|\cdot\|_{W^{1,p}}}\)
+  \end{ex}
 
+  \begin{proof}[Solution]
+    % By definition there is a sequence \((u_n)_{n \in \mathbb{N}} \substeq C_c^\infty(\Omega)\) s.t. \(u_n \xrightarrow[n \to \infty]{\|\cdot\|_{W^{1,p}}} u\) , i.e.
+    \begin{align*}
+      \|u_n - u\|_p + \|\nabla u_n - \nabla u \|_{p} \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Define \(f_n: \mathbb{R}^d \to \mathbb{C}\), \(f_n(x) \coloneqq u_n(x) \chi(x)\). Note \(f_n \in C_c^\infty (\Omega \cap U)\) for all \(n \in \mathbb{N}\). Claim: \((f_n)_{n \in \mathbb{N}}\) is Cauchy with respect to \(\|\cdot \|_{W^{1,p}}\). Proof: 
+    \begin{align*}
+      \|f_n - f_m\|_p = \|\chi(u_nn - u_m)\|_p \le \|\chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty} 0} \xrightarrow{n,m \to \infty} 0 
+    \end{align*}
+    \(\nabla f_n = \nabla (\chi u_n) = (\nabla \chi) u_n + \chi \nabla u_n\)
+    \begin{align*}
+      \|\nabla f_n - \nabla f_m\|_p 
+      &\le \|\nabla \chi(u_n - u-m)\|_p + \|\chi(\nabla u_n - \nabla u_m)\|_p \\
+      &\le \|\nabla \chi\|_\infty \underbrace{u_n - u_m}_{\xrightarrow{n,m \to \infty} 0} + \underbrace{\|\chi\|}_{< \infty} \underbrace{\|\nabla u_n - \nabla u_m\|_p}_{\xrightarrow{n,m \to \infty}0}\xrightarrow{n,m \to \infty)} 0
+    \end{align*}
+    Thus, there is a \(f \in W_0^{1,p}(\Omega \cap U)\) s.t. \(\|f_n - f\|_{W^{1,p}} \xrightarrow{n \to \infty} 0\). We know:
+    \begin{align*}
+      \|f_n - \chi u\|_{L^p} &= \|\chi u_n - \chi u\|_p \\
+      &\le \|\chi\|_\infty \underbrace{\|u_n - u\|_p}_{\to 0} \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Since limits in \(L^p\) are unique, we get \(\chi u = f \in W_0^{1,p}(\Omega \cup U)\).
+  \end{proof}
 
+  \begin{ex}[E 8.3]
+    Let \(\Omega, U \subseteq \mathbb{R}^d\) open and bounded, \(h: \bar U \to \bar \Omega\) \(C^1\)-diffeomorphisms, \(u \in W_0^{1,p}(\Omega)\), \(1 \le p < \infty\). Prove (\(x \mapsto u(h(x)) \in W_0^{1,p}(U)\).
+  \end{ex}
+  
+  \begin{proof}[Solution]
+    Since \(u \in W_0^{1,p}(\Omega)\) there is a sequence \((u_n)_{n \in \mathbb{N}} \subseteq C_c^\infty(\Omega)\) s.t. \begin{align*}
+      \|u - u_n\|_p + \|\nabla u - \nabla u_n\|_p \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Define for all \(n \in \mathbb{N}\) \(f_n: U \to \mathbb{C}\), \(f_n(x) = u_n(h(x))\). Note \(f_n \in C_c^1(U)\).
+    Claim 1: \((f_n)_{n \in \mathbb{N}}\) is Cauchy wrt. \(\|\cdot\|_{W^{1,p}}\). \begin{align*}
+      \|f_n - f_m\|_p^p &= \int_U |u_n(h(x)) - u_m(h(x))|^p \, dx \\
+      &= \int_\Omega |u_n(y) - u_m(y)|^p \, dy \underbrace{|\det(Dh^{-1})(y)|}_{\le C < \infty} \xrightarrow{n,m \to \infty} = 0 \\
+      (\nabla f_n)(x) &= \nabla (u_n(h(x))) = (\nabla u_n) (h(x)) (Dh)(x)
+    \end{align*}
+    \begin{align*}
+      \|\nabla f_n - \nabla f_m\|_p^p &= \int_U \left|\left[(\nabla u_n)(h(x)) - (\nabla u_m)(h(x))\right]\smash{\underbrace{(Dh)(x)}_{bdd.}}\right|^p \, dx \\
+      &\le C \int_U \left| (\nabla u_n)(h(x)) - (\nabla u_m)(h(x)) \right|^p \, dx \\
+      &= C \int_\Omega \left|(\nabla u_n)(y) - (\nabla u_m)(y)\right|^p \underbrace{|\det Dh^{-1}(y)|}_{\le \tilde C} \, dx
+      \xrightarrow{n,m \to 0} 0
+    \end{align*}
+    Claim 2: \(\|f_n - u \circ h\|_p \xrightarrow{n \to \infty} 0\).
+    \begin{align*}
+      \|f_n - u\circ h\|_p 
+      &= \int_U |u_n(h(x)) - u(h(x))|^p \, dx \\
+      &= \int_\Omega |u_n(y)- u(y)|^p \underbrace{|\det Dh^{-1}(y)|}_{\le C}\, dy \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Conclusion: Since \((f_n)_{n \in \mathbb{N}} \subseteq C_c^1(U)\) are Cauchy with respect to \(\|\cdot\|_{W^{1,p}}\), there is a \(f \in W_0^{1,p}(U)\) s.t. \(f_n \xrightarrow[\|\cdot\|_{W^{1,p}}]{n \to \infty}f\). Since limits in \(L^p\) are unique by claim 2 we get \(u \circ h = f \in W_0^{1,p}(U)\).
+  \end{proof}
+
+  \begin{ex}[E 8.4]
+    Let \(\Gamma \subseteq \mathbb{R}^d\) be compact, \(\{U_i\}_{i=1}^N\) open s.t. \(\Gamma \subseteq \bigcup_{i=1}^N U\). Prove: There exists \(\{\chi_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t. \begin{enumerate}
+      \item \(\chi_i \ge 0\) for all \(i\), \(\sum_{i=0}^N \chi_i = 1\) 
+      \item \(\supp(\chi_i) \subseteq U_i\) for all \(i \in \{1, \dots, N\}\)
+      \item \(\supp(\chi_0) \subseteq \mathbb{R}^d \setminus \Gamma\)
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}
+    WLOG assume that \(U_i \ne \emptyset\) for all \(i\). If \(\Gamma \ne 0\), then \(\chi_0 = 1\) does the job. Now suppose \(\Gamma \ne \emptyset\). Let \(\psi \in C_c^\infty(B_1(0))\), \(\psi \ge 0\), \(\int \psi = 1\), \(\psi|_{B_{\frac{1}{2}}(0)} > 0\) and for \(\epsilon > 0\) let \(\psi_\epsilon(x) = \frac{1}{\epsilon^d} \psi \left(\frac{x}{\epsilon}\right)\), so \(\int \psi_\epsilon = 1\). Define \begin{align*}
+      \tilde d \coloneqq \sup \{\tilde{\tilde d} > 0 \mid \forall x \in \Gamma \exists i \in \{1, \dots, N\} s.t. \dist(x, U_i^c) \ge \tilde{\tilde d}\}
+    \end{align*}
+    Claim 1: \(\tilde d  > 0\) Suppose this was not true. Then there is a sequence \((x_n)_{n \in \mathbb{N}} \subseteq \Gamma\) s.t. for all \(i \in \{1, \dots, N\}\), 
+    \begin{align*}
+      \dist(x_n, U_i^c) < \frac{1}{n}
+    \end{align*}
+    Since \(\Gamma\) is compact, there is a subsequence, which we call \(x_n\) again, s.t. \(x_n \xrightarrow{n \to \infty} \bar x\) for asome \(\Gamma\). By \(\Gamma \subseteq \bigcup_{i=1}^N U_i\) there is a \(\epsilon_{\bar x} > 0\) and \(i \in \{1, \dots, N\}\) s.t. \(B_{\epsilon_{\bar x}}(\bar x) \subseteq U_i\ \lightning\).
+    Define \(d \coloneqq \min\{\tilde d, 1\} > 0\). For all \(\epsilon > 0\), for all \(A \subseteq \mathbb{R}^d\): \((A)_\epsilon \coloneqq \{x \in A \mid \dist(x, A^c) \ge \epsilon\}\). for every \(i \in \{1, \dots, N\}\) define \(\phi_i: U_i \to [0,\infty)\) by
+    \begin{align*}
+      \phi_i(x) \coloneqq \mathbb{1}_{(U_i \cap B_R(0))_{\frac{d}{4}}} \star \phi_{\frac{d}{4}}
+    \end{align*}
+    Note \(\phi_i \in C_c^\infty(U_i)\) and \((U_i \cap B_R(0))_{\frac{d}{4}} \subseteq (\supp(\phi_i))^0\). Define \(\phi_0: \mathbb{R}^d \setminus \Gamma \to [0, \infty)\) by \(\phi_0(x) = \mathbb{1}_{(\mathbb{R}^1 \setminus \Gamma)_{\frac{d}{4}}} \star \psi_{\frac{d}{4}}\). Again, \(\phi_0 \in C^\infty(\mathbb{R}^d \setminus \Gamma)\), \(\supp(\phi_0))^0 \supseteq (\mathbb{R}^d \setminus \Gamma)_{\frac{d}{4}}\), \(\supp(\phi_0) \subseteq \mathbb{R}^d \setminus \Gamma\). 
+    Claim 2: For all \(x \in \mathbb{R}^d\) there is a \(i \in \{0, 1, \dots, N\}: \phi_i (x) > 0\). Proof: By construction, we know for \(i \in \{1, \dots, N\}\) that \(\phi_i\) is \(>0\) on \((U_i \cap B_R(0))_{\frac{d}{4}}\). Moreover \(\phi_0 > 0\) on \((\mathbb{R}^d \setminus \Gamma)_{\frac{d}{4}}\). thus, we are done if we can show taht \(\bigcup_{i=1}^N (U_i \cap B_R(0))_{\frac{d}{4}} \cup (\mathbb{R}^d \setminus \Gamma)_{\frac{d}{4}} = \mathbb{R}^d\). Suppose there is a \(x \in \mathbb{R}^d \setminus A\). Then \(\dist(x, \Gamma) < \frac{d}{4}\). Since \(\Gamma \subseteq B_{\frac{R}{2}}(0)\) and \(R > 2\) and \(d \le 1\).
+    \begin{align*}
+      |x-0|
+      &\le \dist(x, \Gamma) + \frac{R}{2}
+      < \frac{d}{4} + \frac{R}{2} = R - \frac{d}{4} - \frac{R}{2} + \frac{d}{2} < R - \frac{d}{4} - \frac{2}{2} + \frac{1}{2} < R - \frac{d}{4}
+    \end{align*}
+    Thus \(x \in (B_R(c))_{\frac{d}{4}}\). Thus, we are done if we can show that \(x \in (U_i)_{\frac{d}{4}}\) for some \(i \in \{1, \dots, N\}\). Since \(\dist(x, \Gamma) < \frac{d}{4}\), there is a \(y \in \Gamma\) s.t. \(|x-y| < \frac{d}{4}\). By definition of \(\tilde d\) there is a \(i \in \{1, \dots, N\}\) s.t. \(\dist(y, U_i^c) \ge \tilde d \ge d\), i.e. for all \(z \in U_i^c\) we have \(|y-z| \ge d\). We get 
+    \begin{align*}
+      |x-z| \ge |\underbrace{|x-y|}_{< \frac{d}{4}}-\underbrace{|y-z|}_{\ge d}| \ge \frac{3d}{4} < \frac{d}{4}
+    \end{align*}
+    This implies \(\dist(x, U_i^c) > \frac{d}{4}\), so \(x \in (U_i)_{\frac{d}{4}}\) \(\lightning\).
+    Define for all \(i \in \{0, \dots, N\}: \chi_i: \mathbb{R}^d \to [0, \infty)\) by 
+    \begin{align*}
+      \chi_i(x) &= \frac{\phi_i(x)}{\sum_{j=0}^N \phi_j(x)}
+    \end{align*}
+    \(\chi_i\) is well-defined by Claim 2 and \(\chi_i \in C^\infty(\mathbb{R}^d)\). Also note that \(\sum \chi_i = 1\), \(\chi_i \ge 0\), which implies 1. Furthermore, since \(\supp(\phi_i) \subseteq U_i\), we have \(\supp(\chi_i) \subseteq U_i\) for all \(i \in \{1, \dots, N\}\), which implies 2. Finally, since \(\supp(\phi_0) \subseteq \mathbb{R}^d \setminus \Gamma\), we get \(\supp(\chi_0) \subseteq \mathbb{R}^d \setminus \Gamma\). This implies 3.
+  \end{proof}
 \end{document}
