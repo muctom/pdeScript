@@ -3904,10 +3904,11 @@
   \end{proof}
 
   \begin{ex}[E 8.1]
+    Let \(u \in W_{loc}^{1,1}(\mathbb{R}^d)\). Let \(B = u^{-1}(\{0\})\). Prove that \(\nabla u(x) = 0\) for a.e. \(x \in B\). 
   \end{ex}
 
   \begin{proof}[Solution]
-    We have already seen that if \(f, g \in W_{loc}^{1,1}(\mathbb{R}^d)\), then \(\max(f,g) \in W_{loc}^{1,1}\). \(u^+, v^+ \in W^{1,1}_{loc}\) for \(v \in W_{loc}^{1,1}\), \(u = u^+ - u^-\) implies \(\nabla u  = \nabla u^+  -\nabla u^-\), \(u^- = \max(-u, 0)\). Claim:
+    We have already seen that if \(f, g \in W_{loc}^{1,1}(\mathbb{R}^d)\), then \(\max(f,g) \in W_{loc}^{1,1}\). This implies that if \(u = u^+ - u^- \in W^{1,1}_{loc}\), then \(u^+, v^+ \in W_{loc}^{1,1}\) since \(u^+ = \max(u, 0)\) and \(u^- = \max(-u, 0)\). We have that \(\nabla u = \nabla u^+ - \nabla u^-\). Claim:
     \begin{align*}
       \nabla u^+ = \begin{cases}
         0 & u(x) \le 0 \\ \nabla u & u(x) > 0
@@ -3917,20 +3918,15 @@
       \end{cases}
     \end{align*}    
     \begin{align*}
-      \int_{\mathbb{R}^d} (\partial_i U^+) \phi 
-      &= - \int_{\mathbb{R}^d} u^+ \partial_i \phi = \int_{\{u(x) \le 0\}} 0 \phi_i \phi - \int_{\{u(x) > 0\}} u \partial_i \phi \\
+      \int_{\mathbb{R}^d} (\partial_i u^+) \phi 
+      &= - \int_{\mathbb{R}^d} u^+ \partial_i \phi 
+      = -\int_{\{u(x) \le 0\}} 0 \partial_i \phi - \int_{\{u(x) > 0\}} u \partial_i \phi \\
       &= \int_{\{u(x) \le 0\}}0 \phi + \int_{\{u(x) > 0\}} \partial_i u \phi
-    \end{align*}
-    This implies:
-    \begin{align*}
-      \nabla u^+ = \begin{cases}
-        0 & u(x) \le 0 \\ \nabla u & u(x) > 0
-      \end{cases}
     \end{align*}
     Alternative way: We showed for \(f \in W^{1,p}(\mathbb{R}^d)\), that 
     \begin{align*}
-      \nabla |f| (x) &= \begin{cases}
-        (\nabla f)(x), &f(x) > 0 \\ - (\nabla f)(x) & f(x) < 0 \\ 0 & f(x) = 0
+      \nabla |f|(x) &= \begin{cases}
+        (\nabla f)(x) &f(x) > 0 \\ - (\nabla f)(x) & f(x) < 0 \\ 0 & f(x) = 0
       \end{cases}
     \end{align*}
     \(u_+ = \frac{1}{2}(u + |u|)\). Hence \(\nabla u_+ = \frac{1}{2}(\nabla u + \nabla |u|)\).
@@ -3938,24 +3934,24 @@
   \end{proof}
 
   \begin{ex}[E 8.2]
-    \(\Omega, U \subseteq \mathbb{R}^d\), open, \(U \cap \Omega \ne \emptyset\), \(u \in W_0^{1,p}(\Omega)\), \(1 \le p < \infty\), \(\chi \in C_c^\infty(U)\). Prove: \(\chi u \in W_0^{1,p}(\Omega \cap U)\)
+    Let \(\Omega, U \subseteq \mathbb{R}^d\) be open, \(U \cap \Omega \ne \emptyset\), \(u \in W_0^{1,p}(\Omega)\), \(1 \le p < \infty\), \(\chi \in C_c^\infty(U)\). Prove: \(\chi u \in W_0^{1,p}(\Omega \cap U)\)
     Hint: Recall \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}^{\|\cdot\|_{W^{1,p}}}\)
   \end{ex}
 
   \begin{proof}[Solution]
-    % By definition there is a sequence \((u_n)_{n \in \mathbb{N}} \substeq C_c^\infty(\Omega)\) s.t. \(u_n \xrightarrow[n \to \infty]{\|\cdot\|_{W^{1,p}}} u\) , i.e.
+    By definition there is a sequence \((u_n)_{n \in \mathbb{N}} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \xrightarrow[n \to \infty]{\|\cdot\|_{W^{1,p}}} u\) , i.e.
     \begin{align*}
-      \|u_n - u\|_p + \|\nabla u_n - \nabla u \|_{p} \xrightarrow{n \to \infty} 0
+      \|u_n - u\|_p + \|\nabla u_n - \nabla u \|_{p} \xrightarrow{n \to \infty} 0.
     \end{align*}
     Define \(f_n: \mathbb{R}^d \to \mathbb{C}\), \(f_n(x) \coloneqq u_n(x) \chi(x)\). Note \(f_n \in C_c^\infty (\Omega \cap U)\) for all \(n \in \mathbb{N}\). Claim: \((f_n)_{n \in \mathbb{N}}\) is Cauchy with respect to \(\|\cdot \|_{W^{1,p}}\). Proof: 
     \begin{align*}
-      \|f_n - f_m\|_p = \|\chi(u_nn - u_m)\|_p \le \|\chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty} 0} \xrightarrow{n,m \to \infty} 0 
+      \|f_n - f_m\|_p = \|\chi(u_n - u_m)\|_p \le \|\chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty} 0} \xrightarrow{n,m \to \infty} 0 
     \end{align*}
     \(\nabla f_n = \nabla (\chi u_n) = (\nabla \chi) u_n + \chi \nabla u_n\)
     \begin{align*}
       \|\nabla f_n - \nabla f_m\|_p 
-      &\le \|\nabla \chi(u_n - u-m)\|_p + \|\chi(\nabla u_n - \nabla u_m)\|_p \\
-      &\le \|\nabla \chi\|_\infty \underbrace{u_n - u_m}_{\xrightarrow{n,m \to \infty} 0} + \underbrace{\|\chi\|}_{< \infty} \underbrace{\|\nabla u_n - \nabla u_m\|_p}_{\xrightarrow{n,m \to \infty}0}\xrightarrow{n,m \to \infty)} 0
+      &\le \|\nabla \chi(u_n - u_m)\|_p + \|\chi(\nabla u_n - \nabla u_m)\|_p \\
+      &\le \|\nabla \chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty} 0} + \underbrace{\|\chi\|}_{< \infty} \underbrace{\|\nabla u_n - \nabla u_m\|_p}_{\xrightarrow{n,m \to \infty}0}\xrightarrow{n,m \to \infty)} 0
     \end{align*}
     Thus, there is a \(f \in W_0^{1,p}(\Omega \cap U)\) s.t. \(\|f_n - f\|_{W^{1,p}} \xrightarrow{n \to \infty} 0\). We know:
     \begin{align*}
@@ -3976,14 +3972,14 @@
     Define for all \(n \in \mathbb{N}\) \(f_n: U \to \mathbb{C}\), \(f_n(x) = u_n(h(x))\). Note \(f_n \in C_c^1(U)\).
     Claim 1: \((f_n)_{n \in \mathbb{N}}\) is Cauchy wrt. \(\|\cdot\|_{W^{1,p}}\). \begin{align*}
       \|f_n - f_m\|_p^p &= \int_U |u_n(h(x)) - u_m(h(x))|^p \, dx \\
-      &= \int_\Omega |u_n(y) - u_m(y)|^p \, dy \underbrace{|\det(Dh^{-1})(y)|}_{\le C < \infty} \xrightarrow{n,m \to \infty} = 0 \\
+      &= \int_\Omega |u_n(y) - u_m(y)|^p \, dy \underbrace{|\det(Dh^{-1})(y)|}_{\le C < \infty} \xrightarrow{n,m \to \infty} 0 \\
       (\nabla f_n)(x) &= \nabla (u_n(h(x))) = (\nabla u_n) (h(x)) (Dh)(x)
     \end{align*}
     \begin{align*}
       \|\nabla f_n - \nabla f_m\|_p^p &= \int_U \left|\left[(\nabla u_n)(h(x)) - (\nabla u_m)(h(x))\right]\smash{\underbrace{(Dh)(x)}_{bdd.}}\right|^p \, dx \\
       &\le C \int_U \left| (\nabla u_n)(h(x)) - (\nabla u_m)(h(x)) \right|^p \, dx \\
       &= C \int_\Omega \left|(\nabla u_n)(y) - (\nabla u_m)(y)\right|^p \underbrace{|\det Dh^{-1}(y)|}_{\le \tilde C} \, dx
-      \xrightarrow{n,m \to 0} 0
+      \xrightarrow{n,m \to 0}0
     \end{align*}
     Claim 2: \(\|f_n - u \circ h\|_p \xrightarrow{n \to \infty} 0\).
     \begin{align*}
@@ -3991,7 +3987,7 @@
       &= \int_U |u_n(h(x)) - u(h(x))|^p \, dx \\
       &= \int_\Omega |u_n(y)- u(y)|^p \underbrace{|\det Dh^{-1}(y)|}_{\le C}\, dy \xrightarrow{n \to \infty} 0
     \end{align*}
-    Conclusion: Since \((f_n)_{n \in \mathbb{N}} \subseteq C_c^1(U)\) are Cauchy with respect to \(\|\cdot\|_{W^{1,p}}\), there is a \(f \in W_0^{1,p}(U)\) s.t. \(f_n \xrightarrow[\|\cdot\|_{W^{1,p}}]{n \to \infty}f\). Since limits in \(L^p\) are unique by claim 2 we get \(u \circ h = f \in W_0^{1,p}(U)\).
+    Conclusion: Since \((f_n)_{n \in \mathbb{N}} \subseteq C_c^1(U)\) is Cauchy with respect to \(\|\cdot\|_{W^{1,p}}\), there is a \(f \in W_0^{1,p}(U)\) s.t. \(f_n \smash{\xrightarrow[\|\cdot\|_{W^{1,p}}]{n \to \infty}f}\). Since limits in \(L^p\) are unique by claim 2 we get \(u \circ h = f \in W_0^{1,p}(U)\).
   \end{proof}
 
   \begin{ex}[E 8.4]
