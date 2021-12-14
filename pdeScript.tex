@@ -63,7 +63,7 @@
   \maketitle
   \tableofcontents
   \newpage
-  Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains solutions for exercises (which may be wrong). Of course, I don't push them to GitHub while the exercises can be handed in.
+  Please note that I write this lecture notes for my personal use. I may write things differently than presented in the lecture. This script also contains some of my personal solutions for exercises (which may be wrong).
   \newpage
 
   \chapter{Introduction}
@@ -598,17 +598,6 @@
     \end{enumerate}
   \end{ex}
 
-  \begin{proof}[My Solution]
-    \begin{enumerate}[label=\alph*)]
-      \item We have that \(\Delta (-u) = 0\), so \(-u\) is harmonic in \(\Omega\). Since \(\Omega\) is open and bounded we can apply the Maximum Principle (\ref{maximum-principle}) and get that
-      \[\sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0.\]
-      This implies \(\inf_{x \in \Omega} u(x) \ge 0\), so \(u \ge 0\) in \(\Omega\).
-      \item We prove this by contraposition. Assume there is a \(x_0 \in \Omega\) s.t. \(u(x_0) = 0\). Since we have \(u \ge 0\) on \(\Omega\) by a), it follows that
-      \[0 = -u(x_0) = \sup_{x \in \bar \Omega} -u(x) \le \sup_{x \in \partial \Omega} -g(x) \le 0,\]
-      so \(-u\) attains its maximum on \(\Omega\). Hence \(-u = 0 = u\) is constant by the strong maximum principle because \(\Omega\) is connected, in fact \(0 = u|_{\partial \Omega} = g\). \qedhere
-    \end{enumerate}
-  \end{proof}
-
   \begin{lem}[Estimates for derivatives]\label{estimates-of-derivatives}
     If \(u\) is harmonic in \(\Omega \subseteq \mathbb{R}^d\), \(\alpha \in \mathbb{N}_0^d\), \(|\alpha| = N\) and \(B(x_0, r) \subseteq \Omega\), then 
     \[|D^\alpha u(x)| \le \frac{(c_dN)^N}{r^{d+N}} \int_{B(x, r)} |u| \, dy\]
@@ -1053,7 +1042,7 @@
       \item Let \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\). Take \(\{f_m\} \subseteq C_c(\mathbb{R}^d)\), s.t. 
       \begin{align*}
         \begin{cases}
-          F_m \to g in L^1(\mathbb{R}) \text{ as } m \to \infty \\
+          F_m \to g \in L^1(\mathbb{R}) \text{ as } m \to \infty \\
           \int_{\mathbb{R}^d} F_m = 1 (\text{it is possible since } \int_{\mathbb{R}^d}) f = 1)
         \end{cases}
       \end{align*} 
@@ -1812,43 +1801,6 @@
   \end{ex}
   (\(f \in C^\infty\)) i.e. \(\exists \tilde f \in C^\infty\) s.t. \(f = \tilde f\) a.e.
 
-  \begin{proof}[My Solution]
-    First we regard for \(N \in \mathbb{N}\) and \(|k| \ge 1\):
-    \begin{align*}
-      \int_{\mathbb{R}^d} \frac{1}{(1 + |k|)^N} \, dk 
-      &= \int_0^\infty \left(\int_{\partial B(0, r)} \frac{1}{(1+r)^N} \, dS(y)\right) \, dr \\
-      &= \int_0^\infty \frac{1}{(1+r)^N} |\partial B(0, r)| \, dr \\
-      &\le \int_1^\infty \frac{1}{r^N} \underbrace{|\partial B(0,r)|}_{c r^{d-1}} \, dr \quad \text{for a } c \in \mathbb{R} \\
-      &= c \int_1^\infty \frac{1}{r^{N-d+1}} \, dr
-    \end{align*}
-    From Ana I we know that \(\int_1^\infty \frac{1}{r^{N-d+1}} \, dr < \infty\) is equivalent to \(N-d+1 > 1\) \(\Leftrightarrow\) \(N > d\), so for \(N > d\) we have 
-    \[\frac{1}{(1+|k|)^N} \in L^1(\mathbb{R}^d).\]
-    Now let \(\alpha \in \mathbb{N}^d\), then we have
-    \begin{align*}
-      k^\alpha 
-      = k_1^{\alpha_1} \cdots k_d^{\alpha_d}
-      = |k|^{\alpha_1} \cdots |k|^{\alpha_d}
-      = |k|^{\alpha_1 + \cdots + \alpha_d}
-      = |k|^{|\alpha|}
-      = (1 + |k|)^{|\alpha|}.
-    \end{align*}
-    By assumption we have for all \(N \ge 1\):
-    \begin{align*}
-      k^\alpha \hat f(k) 
-      \le k^\alpha \frac{C_n}{(1 + |k|)^N}
-      \le (1 + |k|)^{|\alpha|} \frac{C_n}{(1 + |k|)^N}
-      = \frac{C_n}{(1 + |k|)^{N - |\alpha|}}
-    \end{align*}
-    If we set \(N\) such that \(N - |\alpha| > d\), for example \(N = d + |\alpha| + 1\), then we can conclude that \(k^\alpha \hat f \in L^1(\mathbb{R}^d)\). This implies \(\widehat{k^\alpha \hat f} \in L^\infty(\mathbb{R}^d)\), so
-    \begin{align*}
-      \widehat{k^\alpha \hat f} (k)
-      = \partial^\alpha \widehat{\hat f}(k)
-      = \partial^\alpha (\hat f)^\lor (-k)
-      = \partial^\alpha f(-k) \in L^\infty(\mathbb{R}^d).
-    \end{align*}
-    This implies \(f \in C^\infty(\mathbb{R}^d)\).
-  \end{proof}
-  
   \begin{thm}
     Take \(T \in D'(\mathbb{R}), f \in C_c^\infty(\mathbb{R}^d) = D(\mathbb{R}^d)\), \(f_y(x) = f(x-y)\)
     \begin{enumerate}[label=\alph*)]
@@ -2226,24 +2178,12 @@
     Prove that if \(T_n \to T\) in \(D'(\mathbb{R}^d)\), then \(D^\alpha T_n  \to D^\alpha T\) in \(D^\alpha(\mathbb{R}^d)\) for all \(\alpha \in \mathbb{N}^d\).
   \end{ex}
 
-  \begin{proof}[My Solution]
-    See Goodnotes.
-  \end{proof}
-
   \begin{ex}[E 4.2]
   \end{ex}
-
-  \begin{proof}[My Solution]
-    See Goodnotes.
-  \end{proof}
 
   \begin{ex}[E 4.3]
     \(f \in L^1(\mathbb{R}^d)\), \(\int f = 1\) \(f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1}x)\). Then \(f_\epsilon \to \delta_0\) in \(D'(\mathbb{R}^d)\). 
   \end{ex}
-
-  \begin{proof}[My Solution]
-    See Goodnotes.
-  \end{proof}
 
   \begin{ex}[E 4.4]
     Let \(\{f_n\} \subseteq L^1\), \(\supp f \subseteq B(0,1), f_n \to f\) in \(L^1\). Prove for all \(g \in C_c^\infty\) that \(f_n \star g \to f \star g\) in \(D(\mathbb{R}^d)\).
@@ -3858,7 +3798,7 @@
           \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
           &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
         \end{align*}
-        as \(|G'(nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
+        as \(|G'(\nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
     \end{itemize}
     \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
     We prove that if \(u \in W_0^{1,p} \)
