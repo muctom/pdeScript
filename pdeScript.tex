@@ -3767,17 +3767,22 @@
 
   \begin{thm}
     Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in W^{1,p}(\Omega)\cap C(\bar \Omega)\). Then the following statements are equivalent:
-    \begin{enumerate}
+    \begin{enumerate}[label=\alph*)]
       \item \(u = 0\) on \(\partial \Omega\)
       \item \(u \in W_0^{1,p}(\Omega)\)
     \end{enumerate}
     (Later we will remove the condition \(C(\bar \Omega)\) by introducing the \emph{Trace operator}.)
   \end{thm}
 
+  
+  \begin{rem}
+    If \(d = 1\), \(W^{1,p} \subseteq C(\bar \Omega)\), then the theorem gives a full characterization for \(W_0^{1,p}\), but if \(d \ge 2\), then in general \(W^{1,p} \nsubseteq C(\Omega)\). (later)
+  \end{rem}
+
 
   \begin{proof}\
     \begin{itemize}
-      \item [(a) \(\Rightarrow\) (b):]
+      \item [a) \(\Rightarrow\) b):]
       \begin{lem}
         If \(u \in W^{1,p}(\Omega)\) and \(\supp u \subseteq \Omega\), then \(u \in W_0^{1,p}(\Omega)\).
       \end{lem}
@@ -3785,62 +3790,62 @@
         Since \(K \coloneqq \supp u\) is a compact subset in \(\Omega\), we can find a function \(\chi \in C_c^\infty(\Omega)\), \(\chi = 1\) on \(K\). Moreover since \(u \in W^{1,p}(\Omega)\), there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(W_{loc}^{1,p}(\Omega)\). We claim that \(\chi u_n \to \chi u\) in \(W_{loc}^{1,p}(\Omega)\). (exercise, \(\nabla (\chi u) = \nabla \chi u + \chi \nabla u\)). This implies \(\chi u_n \to u\) in \(W^{1,p}(\supp \chi)\), thus \(\chi u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\).
       \end{proof}
       Assume \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Take \(G \in C^1(\mathbb{R})\) s.t. \(|G(t) \le t\) for all \(t\), \(G(t) = t\) if \(t \ge 2\) and \(G(t) = 0\) if \(t \le 1\). Then
-        \begin{align*}
-          u_n(x) &= \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
-          \text{(Chain-rule)} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
-        \end{align*}
-        Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
-        \begin{align*}
-          \int_\Omega |u_n(x) - u(x)|^p \, dx \to 0
-        \end{align*}
-        since \(u_n(x) = \frac{1}{n} G(nu(x)) \xrightarrow{n \to \infty} u(x)\) for all \(x \in \Omega\) and \(|u_n(x)| \le \frac{1}{n} |G(nu(x))| \le \frac{1}{n} |nu(x)| \le |u(x)| \in L^p(\Omega)\).
-        \begin{align*}
-          \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
-          &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
-        \end{align*}
-        as \(|G'(\nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
-    \end{itemize}
-    \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
-    We prove that if \(u \in W_0^{1,p} \)
-    \((Q_+) \cap C(\overline {Q_+)}\), then \(u = 0\) on \(Q_0 = \{(x', 0) \mid x' \in \mathbb{R}^{d-1}, |x'| < 1\}\). Since \(u \in W_0^{1,p}(Q_+)\) there is \(\{u_n\} \subseteq C_c^\infty(Q_+)\) s.t. \(u_n \to u\) in \(W^{1,p}(Q_+)\) for all \(x = (x', x_d) \in Q_+\), then:
-    \begin{align*}
-      u_n(x', x_d) = \underbrace{u_n(x', 0)}_{= 0} + \int_0^{x_d} \partial_d u_n(x', t) \, dt
-    \end{align*}
-    Hence 
-    \begin{align*}
-      |u_n(x', x_d)| &\le \int_0^{x_d} |\partial_d u_n(x', t) \, dt
-    \end{align*}
-    This implies:
-    \begin{align*}
-      &\int_{0 < x_d < \epsilon} \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d \\
-      &\quad \le \int_{0 < x_d < \epsilon} \int_{|x'| < 1} \left(\int_0^{x_d}|\partial_d u_n(x', t)| \, dt\right) \, dx' \, dx_d \\
-      &\quad \le \epsilon \int_{|x'| < 1} \int_0^\epsilon |\partial_d u_n(x', t)| \, dx' \, dt
-    \end{align*}
-    \begin{align*}
-      \Rightarrow \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d 
-      &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_d u_n(x', x_d)| \, dx' \, dx_d
-    \end{align*}
-    for all \(n \in \mathbb{N}\), \(\epsilon > 0\). Take now \(n \to \infty\), use \(u_n \to u\) in \(W^{1,p}(\Omega)\). Then:
-    \begin{align*}
-      \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u(x', x_d)| \, dx' \, dx_d
-      &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_x u_n(x', x_d)| \, dx' \, dy
-    \end{align*}
-    for all \(\epsilon > 0\). Take \(\epsilon \to 0\):
-    \begin{align*}
-      \int_{|x'| \le 1} |u(x', 0)| \, dx' \le 0
-    \end{align*}
-    here we use \(u \in C(\bar \Omega)\) for the left side and Dominated Convergence for the right side. Thus \(u(x', 0) = 0\) for all \(|x'| \le 1\), i.e. \(u = 0\) on \(\partial \Omega\). Let's regard the general case: Let \(\Omega\) be open, bounded and with \(C^1\)-boundary. Lets define \emph{local charts} By definition for all \(x \in \partial \Omega\), there is a \(U_x\) open, such there is a bijecitve map \(h: U_x \to Q\), and \(h, h^{-1}\) are \(C^1\). Then clearly \(\partial \Omega \subseteq \bigcup_{x \in \partial \Omega} U_x\). Since \(\partial \Omega\) is compact, there is a finite subcover \(\{U_i\}_{i=1}^N\) s.t. \(\partial \Omega \subseteq \bigcup_{i=1}^N U_i\). We can find \(U_0\) open s.t. \(\bar U_0 \subseteq \Omega\) and \(\Omega \subseteq \bigcup_{i=0}^N U_i\).
+      \begin{align*}
+        u_n(x) &= \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
+        \text{(Chain-rule)} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
+      \end{align*}
+      Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
+      \begin{align*}
+        \int_\Omega |u_n(x) - u(x)|^p \, dx \to 0
+      \end{align*}
+      since \(u_n(x) = \frac{1}{n} G(nu(x)) \xrightarrow{n \to \infty} u(x)\) for all \(x \in \Omega\) and \(|u_n(x)| \le \frac{1}{n} |G(nu(x))| \le \frac{1}{n} |nu(x)| \le |u(x)| \in L^p(\Omega)\).
+      \begin{align*}
+        \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
+        &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
+      \end{align*}
+      as \(|G'(\nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
+      \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
+      We prove that if \(u \in W_0^{1,p} \)
+      \((Q_+) \cap C(\overline {Q_+)}\), then \(u = 0\) on \(Q_0 = \{(x', 0) \mid x' \in \mathbb{R}^{d-1}, |x'| < 1\}\). Since \(u \in W_0^{1,p}(Q_+)\) there is \(\{u_n\} \subseteq C_c^\infty(Q_+)\) s.t. \(u_n \to u\) in \(W^{1,p}(Q_+)\) for all \(x = (x', x_d) \in Q_+\), then:
+      \begin{align*}
+        u_n(x', x_d) = \underbrace{u_n(x', 0)}_{= 0} + \int_0^{x_d} \partial_d u_n(x', t) \, dt
+      \end{align*}
+      Hence 
+      \begin{align*}
+        |u_n(x', x_d)| &\le \int_0^{x_d} |\partial_d u_n(x', t) \, dt
+      \end{align*}
+      This implies:
+      \begin{align*}
+        &\int_{0 < x_d < \epsilon} \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d \\
+        &\quad \le \int_{0 < x_d < \epsilon} \int_{|x'| < 1} \left(\int_0^{x_d}|\partial_d u_n(x', t)| \, dt\right) \, dx' \, dx_d \\
+        &\quad \le \epsilon \int_{|x'| < 1} \int_0^\epsilon |\partial_d u_n(x', t)| \, dx' \, dt
+      \end{align*}
+      \begin{align*}
+        \Rightarrow \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d 
+        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_d u_n(x', x_d)| \, dx' \, dx_d
+      \end{align*}
+      for all \(n \in \mathbb{N}\), \(\epsilon > 0\). Take now \(n \to \infty\), use \(u_n \to u\) in \(W^{1,p}(\Omega)\). Then:
+      \begin{align*}
+        \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u(x', x_d)| \, dx' \, dx_d
+        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_x u_n(x', x_d)| \, dx' \, dy
+      \end{align*}
+      for all \(\epsilon > 0\). Take \(\epsilon \to 0\):
+      \begin{align*}
+        \int_{|x'| \le 1} |u(x', 0)| \, dx' \le 0
+      \end{align*}
+      here we use \(u \in C(\bar \Omega)\) for the left side and Dominated Convergence for the right side. Thus \(u(x', 0) = 0\) for all \(|x'| \le 1\), i.e. \(u = 0\) on \(\partial \Omega\). Let's regard the general case: Let \(\Omega\) be open, bounded and with \(C^1\)-boundary. Lets define \emph{local charts} By definition for all \(x \in \partial \Omega\), there is a \(U_x\) open, such there is a bijecitve map \(h: U_x \to Q\), and \(h, h^{-1}\) are \(C^1\). Then clearly \(\partial \Omega \subseteq \bigcup_{x \in \partial \Omega} U_x\). Since \(\partial \Omega\) is compact, there is a finite subcover \(\{U_i\}_{i=1}^N\) s.t. \(\partial \Omega \subseteq \bigcup_{i=1}^N U_i\). We can find \(U_0\) open s.t. \(\bar U_0 \subseteq \Omega\) and \(\Omega \subseteq \bigcup_{i=0}^N U_i\).
 
-    \begin{lem}
-      There is a sequence \(\{x_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t.
-      \begin{enumerate}
-        \item \(\chi_i \ge 0\), \(\sum_{i=0}^N \chi_i = 1\) in \(\mathbb{R}^d\) (\(\{\chi_i\}\) is a partition of unity)
-        \item For all \(i=1, \dots, N\), \(\supp \chi_i\) is in \(U_i\), i.e. \(\chi_i \in C_c^\infty(U_i)\).
-        \item \(i=0\), \(\supp \chi_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\) and \(\chi_0 \setminus \Omega \in C_c^\infty(\Omega)\). (exercise)
-      \end{enumerate}
-      Given \(u \in W_0^{1,p}(\Omega) \cap C(\bar \Omega)\). Then \(u = \sum_{i=0}^N \chi_i u\), where \(\chi_i \ge 0\), \(\chi_0 \in C_c^\infty(\Omega)\), \(\chi_i \in C_c^\infty(U_i)\). Since \(\chi_0 u\) is supported in a copact set inside \(\Omega\), \(\chi_0 u = 0\) on \(\partial \Omega\). It remains to show that for all \(i=1, \dots, N\), \(\chi_i u = 0\) on \(U_i \cap \partial \Omega\). Then \(\chi_i u(h^{-1}x) \in W_0^{1,p}(Q) \cap C(\bar \Omega)\). This implies \(\chi_i u (h^{-1}x) = 0\) on \(Q_0\), so \(\chi_i u(x) = 0\) on \(U_i \cap \partial \Omega\). 
-      Why \(W_0^{1,p}(U_i \cap \Omega) \to W_0^{1,p}(Q_+)\). If \(v \in W_0^{1,p}(U_i \cap \Omega)\), then \(v_n \to v, v_n \in C_c^\infty\). \(v_n \circ h^{-1} \to v \circ h^{-1} \Rightarrow v \circ h^{-1} \in W_0^{1,p}(Q_+)\)
-    \end{lem}
+      \begin{lem}
+        There is a sequence \(\{x_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t.
+        \begin{enumerate}
+          \item \(\chi_i \ge 0\), \(\sum_{i=0}^N \chi_i = 1\) in \(\mathbb{R}^d\) (\(\{\chi_i\}\) is a partition of unity)
+          \item For all \(i=1, \dots, N\), \(\supp \chi_i\) is in \(U_i\), i.e. \(\chi_i \in C_c^\infty(U_i)\).
+          \item \(i=0\), \(\supp \chi_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\) and \(\chi_0 \setminus \Omega \in C_c^\infty(\Omega)\). (exercise)
+        \end{enumerate}
+        Given \(u \in W_0^{1,p}(\Omega) \cap C(\bar \Omega)\). Then \(u = \sum_{i=0}^N \chi_i u\), where \(\chi_i \ge 0\), \(\chi_0 \in C_c^\infty(\Omega)\), \(\chi_i \in C_c^\infty(U_i)\). Since \(\chi_0 u\) is supported in a copact set inside \(\Omega\), \(\chi_0 u = 0\) on \(\partial \Omega\). It remains to show that for all \(i=1, \dots, N\), \(\chi_i u = 0\) on \(U_i \cap \partial \Omega\). Then \(\chi_i u(h^{-1}x) \in W_0^{1,p}(Q) \cap C(\bar \Omega)\). This implies \(\chi_i u (h^{-1}x) = 0\) on \(Q_0\), so \(\chi_i u(x) = 0\) on \(U_i \cap \partial \Omega\). 
+        Why \(W_0^{1,p}(U_i \cap \Omega) \to W_0^{1,p}(Q_+)\). If \(v \in W_0^{1,p}(U_i \cap \Omega)\), then \(v_n \to v, v_n \in C_c^\infty\). \(v_n \circ h^{-1} \to v \circ h^{-1} \Rightarrow v \circ h^{-1} \in W_0^{1,p}(Q_+)\)
+      \end{lem}
+    \end{itemize}
   \end{proof}
 
   \begin{ex}[E 8.1]
@@ -3931,14 +3936,14 @@
   \end{proof}
 
   \begin{ex}[E 8.4]
-    Let \(\Gamma \subseteq \mathbb{R}^d\) be compact, \(\{U_i\}_{i=1}^N\) open s.t. \(\Gamma \subseteq \bigcup_{i=1}^N U\). Prove: There exists \(\{\chi_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t. \begin{enumerate}
+    Let \(\Gamma \subseteq \mathbb{R}^d\) be compact, \(\{U_i\}_{i=1}^N\) open s.t. \(\Gamma \subseteq \bigcup_{i=1}^N U_i\). Prove: There exists \(\{\chi_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t. \begin{enumerate}
       \item \(\chi_i \ge 0\) for all \(i\), \(\sum_{i=0}^N \chi_i = 1\) 
       \item \(\supp(\chi_i) \subseteq U_i\) for all \(i \in \{1, \dots, N\}\)
       \item \(\supp(\chi_0) \subseteq \mathbb{R}^d \setminus \Gamma\)
     \end{enumerate}
   \end{ex}
 
-  \begin{proof}
+  \begin{proof}[Solution]
     WLOG assume that \(U_i \ne \emptyset\) for all \(i\). If \(\Gamma \ne 0\), then \(\chi_0 = 1\) does the job. Now suppose \(\Gamma \ne \emptyset\). Let \(\psi \in C_c^\infty(B_1(0))\), \(\psi \ge 0\), \(\int \psi = 1\), \(\psi|_{B_{\frac{1}{2}}(0)} > 0\) and for \(\epsilon > 0\) let \(\psi_\epsilon(x) = \frac{1}{\epsilon^d} \psi \left(\frac{x}{\epsilon}\right)\), so \(\int \psi_\epsilon = 1\). Define \begin{align*}
       \tilde d \coloneqq \sup \{\tilde{\tilde d} > 0 \mid \forall x \in \Gamma \exists i \in \{1, \dots, N\} s.t. \dist(x, U_i^c) \ge \tilde{\tilde d}\}
     \end{align*}
@@ -3968,5 +3973,344 @@
       \chi_i(x) &= \frac{\phi_i(x)}{\sum_{j=0}^N \phi_j(x)}
     \end{align*}
     \(\chi_i\) is well-defined by Claim 2 and \(\chi_i \in C^\infty(\mathbb{R}^d)\). Also note that \(\sum \chi_i = 1\), \(\chi_i \ge 0\), which implies 1. Furthermore, since \(\supp(\phi_i) \subseteq U_i\), we have \(\supp(\chi_i) \subseteq U_i\) for all \(i \in \{1, \dots, N\}\), which implies 2. Finally, since \(\supp(\phi_0) \subseteq \mathbb{R}^d \setminus \Gamma\), we get \(\supp(\chi_0) \subseteq \mathbb{R}^d \setminus \Gamma\). This implies 3.
+  \end{proof}
+
+  \section{Variational problem for weak solutions}
+  \begin{align*}
+    \begin{cases}
+      -\Delta u = f &\text{in } \Omega \\
+      u = 0 &\text{on } \partial \Omega
+    \end{cases}
+  \end{align*}
+    ("formally") for all \(\phi \in C_c^\infty(\Omega)\), then
+    \begin{align*}
+      \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi
+    \end{align*}
+    if \(\nabla u \in L^2\), \(f \in L^2\). By a density argument:
+    \begin{align*}
+      \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi
+    \end{align*}
+    for all \(\phi \in \overline{C_c^\infty(\Omega)}^{H^1(\Omega)} = H^1_0(\Omega)\).
+
+  \begin{thm}[Poincare inequality]\label{Poincare-inequality}
+    There is a \(C > 0\) s.t. 
+    \begin{align*}
+      C \int_\Omega|\nabla v|^2 \ge \int_\Omega |v|^2
+    \end{align*}
+    for all \(v \in H_0^1(\Omega)\).
+  \end{thm}
+  
+  \begin{rem}
+    \(H^1(\Omega)\) with \(\|v\|_{H^1(\Omega)} = \left(\|v\|_{L^2}^2 + \|\nabla v\|_{L^2}^2\right)^{\frac{1}{2}}\) is a Hilbert-Space. This implies that \(H_0^1(\Omega) \overset{(\text{closed})}{\subseteq} H^1(\Omega)\) is also a Hilbert space.
+    By the Poincare inequality (\ref{Poincare inequality}) we have for all \(v \in H_0^1(\Omega)\):
+    \begin{align*}
+      \|v\|_{H^1(\Omega)} \ge \|\nabla v\|_{L^2} \ge \frac{1}{2c} \|v\|_{L^2} + \frac{1}{2} \|\nabla v\|_{L^2} \ge \frac{1}{C^1} \|v\|_{H^1(\Omega)}
+    \end{align*}
+    We can think of \(H_0^1(\Omega)\) as a Hilbert space with \(\|v\|_{H_0^1(\Omega)} \coloneqq \|\nabla v\|_{L^2(\Omega)}\).
+  \end{rem}
+
+  \begin{proof}(Of the Poincare inequality (\ref{Poincare-inequality}))
+    We need to prove: 
+    \begin{align*}
+      \exists C > 0: \quad C \int_\Omega |\nabla v|^2 &\ge \int_\Omega |v|^2 \quad \forall v \in H_0^1(\Omega)\\
+      \Leftrightarrow \quad \exists C > 0: \quad C \int_\Omega |\nabla v|^2 &\ge \int_\Omega |v|^2 \quad \forall v \in C_c^\infty(\Omega)
+    \end{align*}
+    Assume by contradiction that this does not hold, i.e. there is no \(C > 0\) s.t. the statement holds. Thus there is a sequence \(\{v_n\} \subseteq C_c^\infty(\Omega)\) s.t. 
+    \begin{align*}
+      \int_\Omega |v_n|^2 = 1, \quad
+      \int_\Omega |\nabla v_n |^2 \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Since \(v_n \in C_c^2(\Omega)\) we can extend \(v_n\) by \(0\) outside \(\Omega\), so \(v_n \in C_c^\infty(\mathbb{R}^d)\). Then:
+    \begin{align*}
+      \int_{\mathbb{R}^d}|v_n|^2 = 1, \quad \int_{\mathbb{R}^d} |\nabla v_n|^2 \to 0, \quad \supp v_n \subseteq \Omega
+    \end{align*}
+    By the Fourier transform:
+    \begin{align*}
+      \int_{\mathbb{R}^d} |\hat v_n(k)|^2 \, dk = 1, \quad 
+      \int_{\mathbb{R}^d} |2 \pi k|^2 |\hat v_n(k)|^2 \, dk \to 0, \quad 
+      \supp v_n \subseteq \Omega  
+    \end{align*}
+    We prove that
+    \begin{align*}
+      \int_{\mathbb{R}^d} |\hat v_n(k)|^2 \, dk \to 0
+    \end{align*}
+    We write
+    \begin{align*}
+      \int_{\mathbb{R}^d} |\hat v_n(k)| \, dk = \int_{|k| \le \epsilon} + \int_{|k| > \epsilon}
+    \end{align*}
+    First, for all \(\epsilon > 0\):
+    \begin{align*}
+      \int_{|k|> \epsilon} |\hat v_n(k)|^2 \le \int_{\mathbb{R}^d} \frac{|k|^2}{\epsilon^2} |\hat v_n(k)|^2 \, dk \xrightarrow{n \to \infty} 0
+    \end{align*}
+    Second:
+    \begin{align*}
+      \int_{|k|\le \epsilon} |\hat v_n(k)|^2 \, dk 
+      &\le \left(\int_{|k| \le \epsilon} 1 \, dk\right)^{\frac{1}{q}} \left(\int_{|k|\le \epsilon} |\hat v_n(k)|^{2p} \, dk\right)^{\frac{1}{p}}, \quad 1 < p,q < \infty \\
+      & \le C \epsilon^{\frac{d}{q}}\|\hat v_n\|_{L^{2p}}^2, \quad \frac{1}{p} + \frac{1}{q} = 1 \text{ and } 1 \le r \le 2
+    \end{align*}
+    Moreover, since \(\Omega\) is bounded, 
+    \begin{align*}
+      \|v_n\|_{L^r} &\le \left(\int_\Omega |v_n|^r\right)^{\frac{1}{r}} \le \|1_\Omega\|_{L^s} \|v_n\|_{L^2}^{1 - \theta} \le C_\Omega \quad \forall 1 \le r \le 2.
+    \end{align*}
+    Thus we can take \(r < 1\) but close to \(1\). Then \(p\) is sufficiently large, so \(q\) is close to \(1\). Then 
+    \begin{align*}
+      \int_{|k| \le \epsilon} |\hat v_n(k)|^2 \le C \epsilon^{\frac{d}{q}} \|\hat v_n\|_{L^{2p}}^2 \le C \epsilon^{\frac{d}{q}} \|v_n\|_{L^r}^2 \le C \epsilon^{\frac{d}{q}}
+    \end{align*}
+    Conclusion:
+    \begin{align*}
+      \int_{\mathbb{R}^d} |\hat v_n(k)|^2 
+      = \int_{|k| \le \epsilon} + \int_{|k| > \epsilon} \le C \epsilon^{\frac{d}{q}} + \int_{|k| > \epsilon} \xrightarrow{n \to \infty} C \epsilon^{\frac{d}{q}} \xrightarrow{\epsilon \to 0} 0
+    \end{align*}
+    which contradicts to the assumtion \(\|\hat v\|_{L^2} = \|v\|_{L^2} = 1\).
+  \end{proof}
+
+  \begin{ex}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Let \(u \in W^{1,p}(\Omega)\), for some \(1 \le p < \infty\). Then the following is equivalent:
+    \begin{enumerate}[label=\alph*)]
+      \item \(u \in W^{1,p}_0(\Omega)\)
+      \item \(\tilde u(x) = \begin{cases}
+        u(x) & x \in \Omega \\ 0 & x \in \mathbb{R}^d \setminus \Omega
+      \end{cases} \in W^{1,p}(\mathbb)\)
+    \end{enumerate}
+  \end{ex}
+
+  \begin{thm}[Dirichlet, Riemann, Poincare, Hilbert]\label{Dirichlet, Riemann, Poincare, Hilbert}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Let \(f \in L^2(\Omega)\). Then there exists a unique solution \(u \in H_0^1(\Omega)\) of the variational problem 
+    \begin{align*}
+      \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi
+    \end{align*}
+    for all \(\phi \in H_0^1(\Omega)\). (\(\Rightarrow - \Delta = f\) in \(D'(\Omega)\)). Moreover, \(u\) is the unique minimizer of 
+    \begin{align*}
+      \inf_{v \in H_0^1(\Omega)} \left(\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right)
+    \end{align*}
+  \end{thm}
+
+  \begin{proof}
+    Let us prove that there is a solution \(u \in H_0^1(\Omega)\) for \(\inf_{v \in H_0^1(\Omega)} E(v)\), \(E(v) = \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega f v\).
+    \begin{itemize}
+      \item[Step 1:] We prove \(E > - \infty\). Take \(v \in H_0^1(\Omega)\). By the Poincare and Hölder inequalites:
+      \begin{align*}
+        E(v) &= \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v \\ 
+        &\ge \frac{1}{2C} \|v\|_{L^2(\Omega)} - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
+        &\ge \frac{1}{2C} \|v\|^2_{L^2(\Omega)} - \left(\frac{1}{4C} \|v\|_{L^2(\Omega)}^2 + C \|f\|_{L^2(\Omega)}^2\right) \\
+        &\ge - C \|f\|_{L^2(\Omega)}^2 > - \infty
+      \end{align*}
+      We can also bound:
+      \begin{align*}
+        E(v) &= \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega f v \\
+        &\ge \frac{1}{4} \int_\Omega |\nabla v|^2 - \frac{1}{4C} \int_\Omega |v|^2 - \|f\|_{L^2} \|v\|_{L^2} \\
+        &\ge \frac{1}{4} \int_\Omega |\nabla v|^2 - C \|f\|_{L^2}^2
+      \end{align*}
+      \item[Step 2:] We can take a minimizing sequence \(\{v_n\} \subseteq H_0^1(\Omega)\) s.t. \(E(v_n) \xrightarrow{n \to \infty} E\). Then:
+      \begin{align*}
+        \frac{1}{4} \int_\Omega |\nabla v_n|^2 \le E(v_n) + C \|f\|_{L^2}^2 \longrightarrow const.
+      \end{align*} 
+      So \(|\nabla v_n|\) is bounded in \(L^2(\Omega)\). We know that \(H_0^1(\Omega)\) is a Hilbert space with norm \(\|v\|_{H_0^1(\Omega)} = \|\nabla v\|_{L^2(\Omega)}\) (and the norm is equivalent to the \(H^1\)-norm). Thus \(\{v_n\}\) is bounded in \(H_0^1(\Omega)\). 
+
+      \begin{rem}[Reminder from functional analysis]
+        Let \(H\) be a Hilbert space. We say that \(v_n \to v\) if \(\|v_n - v\| \to 0\) and \(v_n \to v\) if \(\langle v_n, \phi \rangle \to \langle v, \phi \rangle\) for all \(\phi \in H\).
+      \end{rem}
+
+      \begin{thm}[Banach-Alaoglu]
+        If \(H\) is a Hilbert space and \(\{v_n\}\) is a bounded sequence, then there is a subsequence \(\{v_{n_k}\}\) s.t. \(v_{n_k} \to v\) weakly in \(H\).
+      \end{thm}
+
+      \begin{rem}
+        \begin{itemize}
+          \item \(v_n \to v\) in \(H\) iff \(f(v_n) \to f(v)\) for all \(f \in H^\star = \mathcal{L}(H, \mathbb{R})\).
+          \item If \(v_n \to v\) in \(H\), then: \(\liminf_{n \to \infty} \|v_n\| \ge \|v\|\) (Fatous Lemma)
+        \end{itemize}
+        In fact, for all \(\phi \in H\) \(\langle v_n, \phi \rangle \to \langle v, \phi \rangle\) and \(|\langle v_n, \phi\rangle| \le \|v_n\| \|\phi\|\). This implies 
+        \[\frac{|\langle v, \phi \rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|.\] So we get 
+        \[\|v\| = \sup_{\phi \ne 0} \frac{\langle v, \phi\rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|\] 
+      \end{rem}
+
+      By the Banach-Alaoglu theorem, up to a subsequence, \(v_n \to u\) weakly in \(H_0^1(\Omega)\). We prove that \(u\) is aminimizer for \(\mathcal{E}\)
+      \[E \longleftarrow \mathcal{E}(v_n) = \frac{1}{2} \int |\nabla v_n|^2 - \int f v_n\]
+      \begin{itemize}
+        \item Since \(v_n \to u\) in \(H_0^1(\Omega)\) we have that 
+        \begin{align*}
+          \liminf_{n \to \infty} \|v_n\|^2_{H_0^1(\Omega)} \ge \|u\|^2_{H_0^1(\Omega)}
+        \end{align*}
+        So we have 
+        \begin{align*}
+          \liminf_{n \to \infty} \int_\Omega|\nabla v_n|^2 \ge \int_\Omega |\nabla u|^2.
+        \end{align*}
+        \item Consider the functional \(\mathcal{L}: \phi \in H_0^1(\Omega) \to \int_\Omega f \phi\). We claim that \(\mathcal{L}\) is continuous. In fact:
+        \begin{align*}
+          |\mathcal{L}| = \left| \int_\Omega f \phi \right| \le \|f\|_{L^2}\|\phi\|_{L^2} \le C\|f\|_{L^2}\|\nabla f\|_{L^2} = C \|f\|_{L^2}\|\phi\|_{H_0^1(\Omega)}
+        \end{align*}
+        Thus from \(v_n \to v\) in \(H_0^1(\Omega)\) we get \(\mathcal{L}(v_n) \to \mathcal{L}(u)\), thus \(\int_\Omega f v_n \to \int_\Omega f u\).
+      \end{itemize}
+      Conclusion: \(E = \liminf \mathcal{E}(v_n) \ge \mathcal{E}(u)\), so \(u\) is a minimizer for \(\mathcal{E}\).
+      \item[Step 3:] Uniqueness. If \(E\) has 2 minimizers \(u_1, u_2\) we can prove that \(u_1 = u_2\). This is because of the convexity:
+      \begin{align*}
+        0 &\ge \frac{\mathcal{E}(u_1) + \mathcal{E}(u_2)}{2} - \mathcal{E}\left(\frac{u_1 + u_2}{2}\right) \\
+        &= \frac{1}{8} \left[2 \int_\Omega |\nabla u_1|^2 + 2 \int_\Omega |\nabla u_2|^2 - \int_\Omega |\nabla (u_1 + u_2)|^2\right] \\
+        &= \frac{1}{8} \int_\omega|\nabla u_1 - \nabla u_2|^2 \ge 0
+      \end{align*} 
+      This implies that \(\nabla(u_1 - u_2) = 0\), so \(u_1 - u_2 = const = c_0\). Since \(u_1, u_2 \in H_0^1(\Omega)\), we have that \(u_1 - u_2 \in H_0^1(\Omega)\) and \(c_0 \in C(\bar \Omega)\). Hence \(c_0 = 0\) on \(\partial \Omega\), so \(c_0 = 0\). \qedhere
+    \end{itemize}
+  \end{proof}
+
+  \begin{rem}
+    We can also prove directly that there is a unique \(u \in H_0^1(\Omega)\) s.t. 
+    \begin{align*}
+      \int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi \quad \forall \phi \in H_0^1(\Omega)
+    \end{align*}    
+    by Riesz theorem. So we get \(\langle u, \phi \rangle_{H_0^1(\Omega)} = \mathcal{L}(\phi)\).
+  \end{rem}
+
+  Recall the corrector function for the unit ball:
+  \[\phi_x(y) = G(|x||y-\tilde x|), \quad \tilde x = \frac{x}{|x|^2}\]
+  This is ok if \(x \ne 0\). When \(x \to 0\):
+  \begin{align*}
+    G(|x|(y-\tilde x)) = G(\underbrace{|x|y - \frac{x}{|x|}}_{|\cdot|\to 1}) G(z), \quad |z| = 1
+  \end{align*}
+  is well-defined as \(G\) is radial. \\
+  Question: If \(u \in H^1(\Omega)\), then how can we define \(u|_{\partial \Omega}\)?
+
+  \begin{thm}[Trace Operator]\label{Trace Operator}
+    Let \(\Omega \subseteq \mathbb{R^d}\) be open, bounded with \(C^1\) boundary. Then there is a unique linear bounded operator \(T: H^1(\Omega) \to L^2(\partial \Omega)\) such that
+    \begin{itemize}
+      \item If \(u \in H^1(\Omega) \cap C(\bar \Omega)\), then \(Tu = u|_{\partial \Omega}\) in the usual restriction sense.
+      \item There is a \(C > 0\) s.t. \(\|Tu\|_{L^2(\partial \Omega)} \le C \|u\|_{H^1(\Omega)}\) for all \(u \in H^1(\Omega)\)
+    \end{itemize}
+  \end{thm}
+
+  \begin{thm}
+    If \(u \in H^1(\Omega)\), then \(u \in H_0^1(\Omega)\) is equivalent to \(Tu = 0\) in \(L^2(\partial \Omega)\). (\(H_0^1(\Omega) = T^{-1}(\{0\})\)). The we can discuss about 
+    \[\begin{cases}
+      - \Delta u = f & \text{in } \Omega \\ u|_{\partial \Omega} = g &\text{on } \partial \Omega
+    \end{cases}\]
+  \end{thm}
+
+  \begin{lem}[Trace on \(\mathbb{R}_+^d\)] if \(u \in C_c^\infty(\mathbb{R}^d)\), then:
+    \begin{align*}
+      \|u|_{\partial \mathbb{R}_+^d}\| \le C \|u\|_{H^1(\mathbb{R}^d)} \quad \text{with } C > 0 \text{ independent of \(u\).}
+    \end{align*}
+  \end{lem}
+
+  \begin{proof}
+    \(x = (x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R}\). 
+    \begin{align*}
+      |u(x', 0)|^2 &= - \int_0^\infty \partial_d(|u(x', x_d)|^2) \, dx_d \\
+      &= - \int_0^\infty 2\partial_d u(x', x_d) u(x', x_d) \, dx_d \\
+      &\le \int_0^\infty \left[|\partial_d u(x', x_d)|^2 + |u(x', x_d)|^2\right] \, dx_d
+    \end{align*}
+    This implies:
+    \begin{align*}
+      \int_{\mathbb{R}^{d-1}} |u(x',0)|^2 \, dx'
+      &\le \int_{\mathbb{R}^{d-1}} \left(\int_0^\infty [\dots] \, dx_d\right) \, dx' \\
+      &= \int_{\mathbb{R}_+^d} \left[|\partial_d u|^2 + |u|^2\right] = \|u\|^2_{H^1(\mathbb{R}_+^d)} \qedhere
+    \end{align*}
+  \end{proof}
+  
+  \begin{cor}
+    If \(u \in H^1(Q)\) and \(u\) is compactly supported, then:
+    \[\|u\|_{L^2(Q_0)} \le \|u\|_{H^1(Q_+)}\]
+  \end{cor}
+  Here \begin{align*}
+    Q &= \{x = (x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'| < 1, |x_d| < 1\} \\
+    Q_+ &= \{x = (x', x_d) \in Q \mid x_d > 0\} \\
+    Q_0 &= \{x = (x', x_d) \in Q \mid x_d = 0\}.
+  \end{align*}
+
+  \begin{proof}
+    We extend \(u\) by \(0\) outside of \(Q\), so \(u \in H^1(\mathbb{R}^d)\).
+  \end{proof}
+
+  \begin{thm}[Extension]\label{extension-theorem} If \(\Omega \subseteq \mathbb{R}^d\) is open, bounded with \(C^1\)-boundary, then there is a bounded linear operator \(B: H^1(\Omega) \to H^1(\mathbb{R}^d)\) s.t. 
+  \begin{itemize}
+    \item \(Bu|_\Omega = u\) for all \(u \in H^1(\Omega)\)
+    \item \(\|Bu\|_{H^1(\mathbb{R}^d)} \le C \|u\|_{H^1(\Omega)}\) and \(\|Bu\|_{L^2(\mathbb{R}^d)}\le C \|u\|_{L^2(\Omega)}\).
+  \end{itemize}
+  \end{thm}
+
+  \begin{proof}[Proof of Theorem \ref{Trace Operator}] Since \(\partial \Omega\) is \(C^1\) there are open sets \(\{U_i\}_{i=1}^N \subseteq \mathbb{R}^d\) such that \(\partial \Omega \subseteq \bigcup_{i=1}^N U_i\) and for all \(i\) there is a \(C^1\)-diffeomorphism \(h_i: U_i \to Q\) s.t. \(h_i(U_i) = Q\), \(h_i(U_i \cap \Omega) = Q_+\), \(h_i(U_i \cap \partial \Omega) = Q_0\). Then there exists a partition of unity \(\{\theta_i\}_{i=0}^N \subseteq C^\infty(\mathbb{R}^d)\) s.t.
+    \begin{enumerate}
+      \item \(\sum_{i=0}^N \theta_i = 1\) for all \(x \in \mathbb{R}^d\)
+      \item For all \(i=1, \dots, N\): \(\theta_i \in C_c^\infty(U_i)\)
+      \item \(\supp \theta_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\) (in particular \(\theta_0|_\Omega \in C_c^\infty(\Omega)\))
+    \end{enumerate}
+    Then given \(u \in H^1(\Omega)\), we can write \(u = \sum_{i=0}^N u_i\), where \(u_i = \theta_i u\). By the extension theorem (\ref{extension-theorem}), \(u \longrightarrow \) extended to \(Bu \in H^1(\mathbb{R}^d)\), thus
+    \begin{align*}
+      Bu &= \sum_{i=0}^N \theta_i (Bu) = \sum_{i=0}^N v_i, \quad v_i = \theta_i(Bu)
+    \end{align*}
+    Then \(v_i \in H^1(\mathbb{R}^d)\) and \(v_i\) is compactly supported in \(U_i\) for all \(i=1, 2, \dots, N\) and \(\supp v_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\), \(v_i \in H^1(\mathbb{R}^d)\) and compactly supported inside \(U_i\). This implies \(\tilde v_i(y) = v_i(h^{-1}_i(y)) \in H^1(Q)\) and compactly supported inside \(Q\), \(y \in Q\). Thus \(\|\tilde v_i\|_{L^2(Q_0)} \le C \|\tilde v_i\|_{H^1(Q_+)}\). So we have \(\|v_i\|_{L^2(\partial \Omega)} \le C \|\tilde v_i\|_{L^2(Q_0)} \le C' \|\tilde v\|_{H^1(Q_+)} \le C'' \|v_i\|_{H^1(U_i \cap \Omega)}\). Thus:
+    \begin{align*}
+      \|u\|_{L^2(\partial \Omega)} &= \left\| \sum_{i=1}^N v_i\right\|_{L^2(\partial \Omega)} \le \sum_{i=1}^N \left\|v_i\right\|_{L^2(\partial \Omega)} \le \sum_{i=1}^N C'' \|v_i\|_{H^1(U_i \cap \Omega)} \\
+      &= C'' \sum_{i=1}^N \|\theta_i u\|_{H^1(\Omega)} \le C'' \sum_{i=1}^N C \|u\|_{H^1(\Omega)}
+    \end{align*}
+    This proof works for \(u \in C(\bar \Omega)\). This implies
+    \begin{align*}
+      \|u\|_{L^2(\partial \Omega)} \le C \|u\|_{H^1(\Omega)} \quad \text{for all } u \in H^1(\Omega) \cap C(\bar \Omega).
+    \end{align*}
+    This allows us to define 
+    \begin{align*}
+      T:  H^1(\Omega) &\longrightarrow L^2(\partial \Omega) \\
+      u &\longmapsto u|_{\partial \Omega}
+    \end{align*}
+    by continuity. I.e. for all \(u \in H^1(\Omega)\) there is \(\{u_n\} \subseteq H^1(\Omega) \cap C(\bar \Omega)\) s.t. \(u_n \to u\) in \(H_0^1\). Then \(Tu_n \to T u\) in \(L^2(\partial \Omega)\).
+  \end{proof}
+
+  \begin{lem}[Extension for \(Q\)] Let \(u \in H^1(Q_+)\). Then we define \(Bu: Q \to \mathbb{R}\) by
+    \begin{align*}
+      Bu(x) = \begin{cases}
+        u(x) & x \in Q_+ \\ -u(x', -x_d) & x \in Q_-
+      \end{cases},
+    \end{align*}
+    \(x = (x, x_d)\). Then \(Bu \in H^1(Q)\) and \(Bu|_{Q^+} = u\), \(\|Bu\|^2_{L^2(Q)} = 2 \|u\|_{L^2(Q_+)}^2\), \(\|\nabla (Bu)\|_{L^2(Q)}^2 = \|\nabla u\|_{L^2(Q_+)}^2\)
+  \end{lem}
+
+  \begin{proof}
+    It is obvious \(Bu|_{Q^+} = u\) and
+    \begin{align*}
+      \int_Q|Bu|^2 
+      &= \int_{Q_+} |Bu|^2  \int_{Q_-}|Bu|^2 \\
+      &= \int_Q |u|^2 + \int_{Q_- = \{(x,-x_d) \mid (x,x_d) \in Q_+\}} |u(x,-x_d)|^2 \\
+      &= 2 \int_{Q_+} |u|^2
+    \end{align*}
+    We prove:
+    \begin{align*}
+      \nabla (Bu)(x) &= \begin{cases}
+        \nabla u(x) & u \in Q_+ \\ \nabla u(x', -x_d) & u \in Q_-
+      \end{cases}
+    \end{align*}
+    First, \(\partial_d Bu(x) = \partial_d u(x', -x_d)\) if \(x \in Q_-\). Take \(\phi \in C_c^\infty(Q)\), then:
+    \begin{align*}
+      \int_Q (Bu(x)) (\partial_d \phi) (x) \, dx 
+      &= \int_{Q_+} u \partial_d \phi + \int_{Q_-} - u(x', -x_d) \partial_d [\phi(x', x_d)] \, dx \\
+      (x \to -x_d) \quad &= \int_{Q_+} u \partial_d \phi + \int_{Q_+}[u(x', x_d) (\partial_d \phi) (x', -x_d)]\, dx \\
+      &\overset{\mathclap{(\phi \notin C_c^\infty(Q_+))}}\approx \quad - \int_{Q^+} (\partial_d u) \phi(x) + \int_{Q_+}(\partial_d u (x', x_d)) \phi(x', -x_d) \, dx \\
+      &= - \int_{Q_+} (\partial_d u) \phi(x) + \int_{Q_-} \partial_d u(x', -x_d) \phi(x', x_d) \, dx \\
+      &= - \int_Q f \phi, \quad \text{where \(f(x) = \begin{cases}
+        \partial_d u & x \in Q_+ \\ - \partial_d u(x',-x_d) & x \in Q_-
+      \end{cases}\)} 
+    \end{align*}
+    We prove \(\int_{Q_+} u \partial_d \tilde \phi = - \int_{Q_+} (\partial_d u) \tilde \phi\) where \(\tilde \phi(x,x_d) = \phi(x,x_d) - \phi(x, -x_d)\), \(\tilde \phi \notin C_c^\infty(Q_+)\). Define \(\eta_\epsilon = 0\) when \(|x_d| \le \epsilon\), \(\eta_\epsilon = 1\) if \(|x_d| \ge 2 \epsilon\), \(\eta_\epsilon \in C^\infty\), \(\eta_\epsilon(x', x_d) = \eta_0(x', \frac{x_d}{\epsilon}), \eta_0 = \begin{cases}
+      1 & |x_d| \ge 2 \\ 0 & |x_d| \ge 1\end{cases}\). We have 
+      \begin{align*}
+        \int_{Q_+} u \partial_d(\eta_\epsilon \tilde \phi) = - \int_{Q_+} \partial_d u(\eta_\epsilon \tilde \phi)
+      \end{align*}
+      We take \(\epsilon \to 0\), \begin{align*}
+        \int_{Q_+} (\partial_d u) (\eta_\epsilon \tilde \phi) \to \int_{Q_+} (\partial_d u) \tilde \phi 
+      \end{align*}
+      by dominated convergence.
+      \begin{align*}
+        \int_{Q_+} u \partial_d(\eta_\epsilon \tilde \phi) &= \int_{Q_+} u(\partial_d \eta_\epsilon) \tilde \phi + \int_{Q_+} u \eta_\epsilon \partial_d \tilde \phi \\
+        \int_{Q_+} u \eta_\epsilon \partial_d \tilde \phi &\xrightarrow{\epsilon \to 0} u \partial_d \tilde \phi
+      \end{align*}
+      by dominated convergence.
+      \begin{align*}
+        \left|\int_{Q_+} u(\partial_d \eta_\epsilon) \tilde \phi\right| &= \left|\int_{Q} u \frac{1}{\epsilon} (\partial_d \eta_0)\left(x,\frac{x_d}{\epsilon}\right) \tilde \phi\right| \\
+        \left(\begin{aligned}
+          &|\tilde \phi(x', x_d)| \\
+        &= |\phi(x, x_d) - \phi(x,x_d)| \\
+        &\le \|\partial_d \phi\|_{L^\infty}|x_d|
+        \end{aligned}\right) \quad &\le \frac{1}{\epsilon} \|\partial_d \eta_0\|_{L^\infty} \int_{Q_+ \cap \{x_d \le 2 \epsilon\}}|u|\underbrace{|\tilde \phi|}_{\le C|x_d| \le C \epsilon} \\
+        \text{(Dominated cv \(u \in L^1(Q_+)\))} \quad &\le C \int_{Q_+ \cap \{0 < x_d \le 2 \epsilon\}}|u|\xrightarrow{\epsilon \to 0} 0
+      \end{align*}
+      where \(u \in L^2(Q_+)\) because \(u \in H^1(Q_+)\).
   \end{proof}
 \end{document}
