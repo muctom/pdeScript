@@ -139,12 +139,12 @@
 
   Classical solution of a PDE of order \(k \leadsto C^k\) solutions!
   \begin{align*}
-    L^p(\Omega) = \left\{ f: \ \Omega \to \mathbb{R} \text{ lebesgue measurable} \mid \int_\Omega |f|^p d\lambda < \infty, 1 \le p < \infty \right\}
+    L^p(\Omega) = \left\{ f: \ \Omega \to \mathbb{R} \text{ lebesgue measurable } \middle| \int_\Omega |f|^p d\lambda < \infty,\ 1 \le p < \infty \right\}
   \end{align*}
 
   Sobolev Space:
   \begin{align*}
-    W^{k,p}(\Omega)= \left \{ f \in L^p(\Omega) \mid \forall \alpha \in \mathbb{N}^n \text{ with } |\alpha| \leq k: D^{\alpha}f \in L^p(\Omega) \text{exists}  \right \}
+    W^{k,p}(\Omega)= \left \{ f \in L^p(\Omega) \mid \forall \alpha \in \mathbb{N}^n \text{ with } |\alpha| \leq k: D^{\alpha}f \in L^p(\Omega) \text{ exists}  \right \}
   \end{align*}
 
   In this course we will investigate
@@ -3087,7 +3087,7 @@
     What about other cases? If \(x, y\) are bot not in \(\Omega_B\), then \(|f_B(x) - f_B(y)| =0\), then if \(x \in \Omega_B\) and \(y \notin \Omega_B\): \(|f_B(x) - f_B(y)| = |f_B(x)| = |\chi_B(x)||f(x)| = |\chi_B(x) - \chi_B(y)||f(x)| \le C |x-y|^\alpha\). Conclusion: \(|f_B(x) - f_B(y)| \le C|x-y|^\alpha\) for all \(x,y \in \mathbb{R}^d\), i.e. \(f_B \in C^{0,\alpha}(\mathbb{R}^d)\). Also \(f_B\) is compactly supported. By a theorem in the lecture: \(G \star f_B \in C^{2, \alpha}(\mathbb{R}^d)\). Finally: \(-\Delta u = f\) in \(D'(\Omega)\), \(-\Delta (G \star f_B) = f_B\) in \(D'(\mathbb{R}^d)\). So we conclude \(-\Delta u = f = f_B = - \Delta (G\star f_B) \) in \(D'(B)\). \(-\Delta(u - G \star f_B)= 0\) in \(D'(B)\), so \(u - G \star f_B \in C^\infty(B)\), so \(u \in C^{2,\alpha}(B)\).
   \end{proof}
 
-  \begin{ex}[6.4]
+  \begin{ex}[E 6.4]
     \(u, f \in L^2(\mathbb{R}^d)\), \(-\Delta u = f \) in \(D'(\mathbb{R}^d)\). Prove \(u \in W^{2,2}(\mathbb{R}^d)\), \(\|u\|_{W^{2,2}(\mathbb{R}^d)} \le C \left(\|u\|_{L^2} + \|f\|_{L^2}\right)\).
     \begin{align*}
       W^{2,2}(\mathbb{R}^d)
@@ -3696,16 +3696,18 @@
   \end{align*}
   Key observation: This is the \emph{derivative} of the energy functional 
   \begin{align*}
-    \epsilon(u) &= \frac{1}{2} \int_\Omega|\nabla u|^2 - \int_\Omega f u
+    E(u) &= \frac{1}{2} \int_\Omega|\nabla u|^2 - \int_\Omega f u
   \end{align*}
-  If \(u\) is a minimizer of \(\epsilon\), then it solves the equation \(-\Delta u = f\) in \(\Omega\). The boundary condition \(u = g\) does not appear on \(\epsilon\), but this is encoded in the set of \emph{admissible functions}. (The set of candidates of solutions). For the classical solutions, we have 
+  If \(u\) is a minimizer of \(E\), then it solves the equation \(-\Delta u = f\) in \(\Omega\). The boundary condition \(u = g\) does not appear on \(E\), but this is encoded in the set of \emph{admissible functions}. (The set of candidates of solutions). For the classical solutions, we have 
   
   \begin{thm}(Dirichlet's principle) Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Let \(f \in C(\bar \Omega)\) and \(g \in C(\partial B)\). Then the following statements are equivalent:
     \begin{enumerate}
         \item \(u \in C^2(\bar \Omega)\) solves \(\begin{cases}
           - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
         \end{cases}\)
-        \item \(u\) is a minimizer of the variational problem \(E = \inf_{\nu \in A} \epsilon(\nu)\), where \(\epsilon(\nu) = \frac{1}{2} \int_\Omega |\nabla \nu|^2 - \int_\Omega f \nu\), \(A = \{\nu \in C^2(\bar \Omega) \mid \nu = g \text{ on } \partial \Omega\}\).
+        \item \(u\) is a minimizer of the variational problem \(E = \inf_{v \in A} E(v)\), where 
+        \[E(v) = \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v,\]
+        \(A = \{v \in C^2(\bar \Omega) \mid v = g \text{ on } \partial \Omega\}.\)
     \end{enumerate}
     Moreover there is at most a solution / minimizer (uniqueness). 
   \end{thm}
@@ -3715,26 +3717,27 @@
     \begin{itemize}
       \item[1. \(\Rightarrow\) 2.:] Let \(u \in C^2(\bar \Omega)\) be a solution of \(\begin{cases}
         - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
-      \end{cases}\). Then we prove \(\epsilon(u) \le \epsilon(\nu)\) for all \(\nu \in A\). If \(\nu \in A\), then \(u - \nu = 0\) on \(\partial \Omega\). Using this and \(-\Delta u = f\) in \(\Omega\), we have:
+      \end{cases}\). Then we prove \(E(u) \le E(v)\) for all \(v \in A\). If \(v \in A\), then \(u - v = 0\) on \(\partial \Omega\). Using this and \(-\Delta u = f\) in \(\Omega\), we have:
       \begin{align*}
         0 
-        &= \int_\Omega (-\Delta u - f)(u-v)  \\
-        &= \int_\Omega \nabla u (\nabla u - \nabla \nu) - \int_\Omega f (u-v) \\
-        &= \left[\frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega fu\right] - \left[\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right] \\
+        &= \int_\Omega (-\Delta u - f)\cdot(u-v) \, dy  \\
+        \text{(Part. Int.)} \quad &= \int_\Omega \nabla u (\nabla u - \nabla v) \, dy - \int_\Omega f (u-v) \, dy \\
+        &= \left[\frac{1}{2} \int_\Omega |\nabla u|^2 \, dy - \int_\Omega fu \, dy\right] - \left[\frac{1}{2} \int_\Omega |\nabla v|^2 \, dy - \int_\Omega f v \, dy\right] \\
         &\quad+ \frac{1}{2} \int_\Omega |\nabla u|^2 + \frac{1}{2} \int_\Omega  \\
-        &= \epsilon(u) - \epsilon(v) + \frac{1}{2} \underbrace{\int_\Omega |\nabla u - \nabla v|^2}_{\ge 0}
+        &= E(u) - E(v) + \frac{1}{2} \underbrace{\int_\Omega |\nabla u - \nabla v|^2}_{\ge 0}
       \end{align*}
     
-      \(\epsilon(u) \le \epsilon(v)\), so \(u\) is a minimizer of \(\int_{v \in A} \epsilon(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(\epsilon(u) = \epsilon(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
+      \(E(u) \le E(v)\), so \(u\) is a minimizer of \(\inf_{v \in A} E(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(E(u) = E(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
 
-      \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minizer of \(\int_{v \in A} \epsilon(v)\). Then \(\epsilon(u) \le \epsilon(v)\) for all \(v \in A\). Take \(\phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
+      \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minimizer of \(\inf_{v \in A} E(v)\). Then \(E(u) \le E(v)\) for all \(v \in A\). Take \(\phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
       \begin{enumerate}[label=\(\Rightarrow\)]
-        \item \(\epsilon(u) \le \epsilon(u + t \phi)\) for all \(t \in \mathbb{R}\)
-        \item \(t \mapsto \epsilon(u + t \phi)\) has a minimizer at \(t = 0\)
+        \item \(E(u) \le E(u + t \phi)\) for all \(t \in \mathbb{R}\)
+        \item \(t \mapsto E(u + t \phi)\) has a minimizer at \(t = 0\)
         \item \(\begin{aligned}[t]
-          0 &= \frac{d}{dt} \epsilon(u + t \phi)|_{t = 0} = \frac{d}{dt} |_{t=0} \left(\frac{1}{2} \int_\Omega|\nabla u + t \nabla \phi|^2 - \int_{\Omega} f(u + t \phi)\right) \\
-          &= \frac{d}{dt} |_{t=0} \left(\frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi - \int_{\Omega} f(u + t \phi)\right) \\
-          &\int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi = \int_\Omega (- \Delta u  f) \phi
+          0 &= \frac{d}{dt} E(u + t \phi)|_{t = 0}  \\
+          &= \frac{d}{dt}\left. \left(\frac{1}{2} \int_\Omega|\nabla u + t \nabla \phi|^2 - \int_{\Omega} f(u + t \phi)\right)\right|_{t=0} \\
+          &= \frac{d}{dt} \left. \left(\frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi - \int_{\Omega} f(u + t \phi)\right)\right|_{t=0} \\
+          &\int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi = \int_\Omega (- \Delta u - f) \phi
         \end{aligned}\) \\
         for all \(\phi \in C_c^\infty(\Omega)\). So \(- \Delta u - f = 0\) in \(\Omega\) and \(u = g\) since \(u \in A\).
       \end{enumerate}
@@ -3765,7 +3768,7 @@
     \end{enumerate}
   \end{proof}
 
-  \begin{thm}
+  \begin{thm}[Characterization for \(W_0^{1,p}\)]\label{characterization-for-w01p}
     Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in W^{1,p}(\Omega)\cap C(\bar \Omega)\). Then the following statements are equivalent:
     \begin{enumerate}[label=\alph*)]
       \item \(u = 0\) on \(\partial \Omega\)
@@ -3776,11 +3779,11 @@
 
   
   \begin{rem}
-    If \(d = 1\), \(W^{1,p} \subseteq C(\bar \Omega)\), then the theorem gives a full characterization for \(W_0^{1,p}\), but if \(d \ge 2\), then in general \(W^{1,p} \nsubseteq C(\Omega)\). (later)
+    If \(d = 1\), it holds that \(W^{1,p} \subseteq C(\bar \Omega)\). Then the theorem gives a full characterization for \(W_0^{1,p}\), but if \(d \ge 2\), then in general \(W^{1,p} \nsubseteq C(\Omega)\). (later)
   \end{rem}
 
 
-  \begin{proof}\
+  \begin{proof}[Proof of theorem \ref{characterization-for-w01p}]\
     \begin{itemize}
       \item [a) \(\Rightarrow\) b):]
       \begin{lem}
@@ -3789,10 +3792,10 @@
       \begin{proof}
         Since \(K \coloneqq \supp u\) is a compact subset in \(\Omega\), we can find a function \(\chi \in C_c^\infty(\Omega)\), \(\chi = 1\) on \(K\). Moreover since \(u \in W^{1,p}(\Omega)\), there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(W_{loc}^{1,p}(\Omega)\). We claim that \(\chi u_n \to \chi u\) in \(W_{loc}^{1,p}(\Omega)\). (exercise, \(\nabla (\chi u) = \nabla \chi u + \chi \nabla u\)). This implies \(\chi u_n \to u\) in \(W^{1,p}(\supp \chi)\), thus \(\chi u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\).
       \end{proof}
-      Assume \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Take \(G \in C^1(\mathbb{R})\) s.t. \(|G(t) \le t\) for all \(t\), \(G(t) = t\) if \(t \ge 2\) and \(G(t) = 0\) if \(t \le 1\). Then
+      Assume \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Take \(G \in C^1(\mathbb{R})\) s.t. \(|G(t)| \le t\) for all \(t\), \(G(t) = t\) if \(t \ge 2\) and \(G(t) = 0\) if \(t \le 1\). Then let
       \begin{align*}
-        u_n(x) &= \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
-        \text{(Chain-rule)} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
+        u_n(x) &\coloneqq \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
+        \overset{\text{(Chain-rule)}}{\Rightarrow} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
       \end{align*}
       Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
       \begin{align*}
@@ -3803,7 +3806,7 @@
         \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
         &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
       \end{align*}
-      as \(|G'(\nu(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
+      as \(|G'(v(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
       \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
       We prove that if \(u \in W_0^{1,p} \)
       \((Q_+) \cap C(\overline {Q_+)}\), then \(u = 0\) on \(Q_0 = \{(x', 0) \mid x' \in \mathbb{R}^{d-1}, |x'| < 1\}\). Since \(u \in W_0^{1,p}(Q_+)\) there is \(\{u_n\} \subseteq C_c^\infty(Q_+)\) s.t. \(u_n \to u\) in \(W^{1,p}(Q_+)\) for all \(x = (x', x_d) \in Q_+\), then:
@@ -4002,7 +4005,7 @@
   
   \begin{rem}
     \(H^1(\Omega)\) with \(\|v\|_{H^1(\Omega)} = \left(\|v\|_{L^2}^2 + \|\nabla v\|_{L^2}^2\right)^{\frac{1}{2}}\) is a Hilbert-Space. This implies that \(H_0^1(\Omega) \overset{(\text{closed})}{\subseteq} H^1(\Omega)\) is also a Hilbert space.
-    By the Poincare inequality (\ref{Poincare inequality}) we have for all \(v \in H_0^1(\Omega)\):
+    By the Poincare inequality (\ref{Poincare-inequality}) we have for all \(v \in H_0^1(\Omega)\):
     \begin{align*}
       \|v\|_{H^1(\Omega)} \ge \|\nabla v\|_{L^2} \ge \frac{1}{2c} \|v\|_{L^2} + \frac{1}{2} \|\nabla v\|_{L^2} \ge \frac{1}{C^1} \|v\|_{H^1(\Omega)}
     \end{align*}
@@ -4108,10 +4111,10 @@
       So \(|\nabla v_n|\) is bounded in \(L^2(\Omega)\). We know that \(H_0^1(\Omega)\) is a Hilbert space with norm \(\|v\|_{H_0^1(\Omega)} = \|\nabla v\|_{L^2(\Omega)}\) (and the norm is equivalent to the \(H^1\)-norm). Thus \(\{v_n\}\) is bounded in \(H_0^1(\Omega)\). 
 
       \begin{rem}[Reminder from functional analysis]
-        Let \(H\) be a Hilbert space. We say that \(v_n \to v\) if \(\|v_n - v\| \to 0\) and \(v_n \to v\) if \(\langle v_n, \phi \rangle \to \langle v, \phi \rangle\) for all \(\phi \in H\).
+        Let \(H\) be a Hilbert space. We say that \(v_n \to v\) if \(\|v_n - v\| \to 0\) and \(v_n \to v\) weakly in \(H\) if \(\langle v_n, \phi \rangle \to \langle v, \phi \rangle\) for all \(\phi \in H\).
       \end{rem}
 
-      \begin{thm}[Banach-Alaoglu]
+      \begin{thm}[Banach-Alaoglu]\label{banach-alagoglu}
         If \(H\) is a Hilbert space and \(\{v_n\}\) is a bounded sequence, then there is a subsequence \(\{v_{n_k}\}\) s.t. \(v_{n_k} \to v\) weakly in \(H\).
       \end{thm}
 
@@ -4170,6 +4173,7 @@
   is well-defined as \(G\) is radial. \\
   Question: If \(u \in H^1(\Omega)\), then how can we define \(u|_{\partial \Omega}\)?
 
+  \section{Theory of Trace}
   \begin{thm}[Trace Operator]\label{Trace Operator}
     Let \(\Omega \subseteq \mathbb{R^d}\) be open, bounded with \(C^1\) boundary. Then there is a unique linear bounded operator \(T: H^1(\Omega) \to L^2(\partial \Omega)\) such that
     \begin{itemize}
@@ -4185,9 +4189,9 @@
     \end{cases}\]
   \end{thm}
 
-  \begin{lem}[Trace on \(\mathbb{R}_+^d\)] if \(u \in C_c^\infty(\mathbb{R}^d)\), then:
+  \begin{lem}[Trace inequality on \(\mathbb{R}_+^d\)] if \(u \in C_c^\infty(\mathbb{R}^d)\), then:
     \begin{align*}
-      \|u|_{\partial \mathbb{R}_+^d}\| \le C \|u\|_{H^1(\mathbb{R}^d)} \quad \text{with } C > 0 \text{ independent of \(u\).}
+      \|u|_{\partial \mathbb{R}_+^d}\|_{L^2(\partial \mathbb{R}_+^d)} \le C \|u\|_{H^1(\mathbb{R}^d)} \quad \text{with } C > 0 \text{ independent of \(u\).}
     \end{align*}
   \end{lem}
 
@@ -4313,4 +4317,253 @@
       \end{align*}
       where \(u \in L^2(Q_+)\) because \(u \in H^1(Q_+)\).
   \end{proof}
+
+  \begin{ex}[E. 9.1]
+    Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in H_0^1(\Omega)\), \(f \in L^2(\Omega)\). Show that the following statements are equivalent:
+    \begin{enumerate}[label=\arabic*)]
+      \item \(- \Delta u = f\) in \(D'(\Omega)\)
+      \item \(\int \nabla u \nabla \phi = \int f \phi\) for all \(\phi \in H_0^1\)
+      \item \(E = \inf_v \left(\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right)\) 
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[Solution]\
+    \begin{itemize}
+      \item[1) \(\Rightarrow\) 2)] From \(- \Delta u = f\) in \(D'(\Omega)\) we get that 
+      \begin{align*}
+        \int_{\Omega} u(-\Delta \phi) = \int_\Omega f \phi
+      \end{align*}
+      for all \(\phi \in C_c^\infty(\Omega)\). Claim: If \(u \in H_0^1, \phi \in C_c^\infty\), then 
+      \begin{align*}
+        \int_\Omega (-\Delta \phi) = \int_\Omega \nabla u \nabla \phi
+      \end{align*}
+      Density argument: \(u \in H_0^1 = \overline{C_c^\infty(\Omega)}^{\|\cdot\|_{H}}\), so there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(H^1(\Omega)\). Since \(u_n, \phi \in C_c^\infty(\Omega)\), then by the integration by parts:
+      \begin{align*}
+        \int_\Omega u_n(-\Delta \phi) = \int_\Omega (\nabla u_n) \nabla \phi \forall n
+      \end{align*}
+      Take \(n \to \infty\), then, 
+      \begin{align*}
+        \int_\Omega u (-\Delta \phi) = \int_\Omega (\nabla u) \nabla \phi 
+      \end{align*}
+      as \(u_n \to u\) and \(\nabla u_n \to \nabla u\) in \(L^2\).
+      Claim: If \(\int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi\)for all \(\phi \in C_c^\infty(\Omega)\), then 
+      \begin{align*}
+        \int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi 
+      \end{align*}
+      for all \(\phi \in H_0^1\). (Given \(\nabla u, f \in L^2\)). With density argument: For all \(\phi \in H_0^1\) there is a sequence \(\{\phi_n\}\subseteq C_c^\infty(\Omega)\) s.t. \(\phi_n \to \phi\) in \(H^1\). Then:
+      \begin{align*}
+        \int_\Omega \nabla u \nabla \phi_n = \int_\Omega f \phi_n
+      \end{align*}
+      for all \(n\). Take \(n \to \infty\):
+      \begin{align*}
+        \int \nabla u \nabla \phi = \int f \phi
+      \end{align*}
+      as \(\phi_n \to \phi\), \(\nabla \phi_n \to \nabla \phi\) in \(L^2\).
+      \item[2) \(\Rightarrow\) 3)] We show \(E(u) \le E(v)\) for all \(v \in H_0^1\), i.e. 
+      \begin{align*}
+        \frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega f u \le \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v 
+      \end{align*}  
+      for all \(v \in H_0^1\). Write \(v = u + W\), then:
+      \begin{align*}
+        E(v) &= \frac{1}{2} \int |\nabla v|^2 - \int f v \\
+        &= \frac{1}{2} \int_\Omega |\nabla (u + w)|^2 - \int_\Omega f (u + w) \\
+        &= \frac{1}{2} \int_\Omega \left[|\nabla u|^2 + |\nabla w|^2 + 2 \nabla u \nabla w\right] \int_\Omega(fu + fw)\\
+        &= E(u) + \frac{1}{2} \int_\Omega|\nabla w|^2 + \left(\underbrace{\nabla u \nabla w - \int f w}_{\smash{= 0}}\right)
+      \end{align*}
+      as \(w = v-u \in H_0^1\) (by (2))
+      \item[3) \(\Rightarrow\) 1)] 
+      \begin{align*}
+        E(u) \le E(u + t\phi)
+      \end{align*}  
+      for all \(\phi \in H_0^1\) (or \(C_c^\infty\)) for all \(t \in \mathbb{R}\). This implies:
+      \[\frac{d}{dt} E(u + t \phi)|_{t = 0} = 0\]
+      Here 
+      \begin{align*}
+        E(u + t \phi) &= \frac{1}{2} \int \underbrace{|\nabla ( u + t \phi)|}_{\mathclap{|\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi}} - \int f(u + t \phi) \\
+        &= E(u) + t \left[\int_\Omega \nabla u \nabla \phi \int_\Omega f \phi\right] + t^2 \int_\Omega |\nabla \phi|^2
+      \end{align*}
+      This implies
+      \begin{align*}
+        \frac{d}{dt} E(u + t \phi)|_{t = 0} &= \int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi
+      \end{align*}
+      Conclude:
+      \begin{align*}
+        \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi 
+      \end{align*}
+      for all \(\phi \in H_0^1\) or \(C_c^\infty\) So we get 
+      \begin{align*}
+        \int_\Omega u (- \Delta \phi) = \int_\Omega f \phi
+      \end{align*}
+      for all \(\phi \in C_c^\infty\). so we can conclude:
+      \begin{align*}
+        - \Delta u = f 
+      \end{align*}
+      in \(D'(\Omega)\) \(\Rightarrow\) 1)
+    \end{itemize}
+  \end{proof}
+
+  \begin{ex}[E 9.2]
+    \begin{align*}
+      Q = \{(x', x_d) \mid |x'| < 1, |x_d| < 1\}
+    \end{align*}
+    Given \(u \in H^1(Q_+)\), define \(Bu: Q \to \mathbb{R}\) as 
+    \begin{align*}
+      Bu (x) = \begin{cases}
+        u(x) & x \in Q_+ \\ u(\tilde x) & x \in Q_-
+      \end{cases},
+    \end{align*}
+    \(x = (x', x_d) \Leftrightarrow \tilde x = (x', -x_d)\), \(x \in Q_- \Leftrightarrow \tilde x \in Q_+\). In the lectures:
+    \begin{align*}
+      \partial_d(Bu)(x) = \begin{cases}
+        \partial_d u(x) & x \in Q_+ \\ -(\partial_d u)(\tilde x) & x \in Q_-
+      \end{cases}
+    \end{align*}
+    This implies \(\partial_d (Bu) \in L^2(Q)\).
+    \begin{enumerate}
+      \item For all \(i=1,\dots,d-1\), then:
+      \begin{align*}
+        \partial_i (Bu)(x) = \begin{cases}
+          \partial_i u(x) & x \in Q_+ \\ \partial_i u(\tilde x) & x \in Q_-
+        \end{cases}
+      \end{align*}
+      \item Example \(u \in H^2(Q_+)\) but \(Bu \notin H^2(Q)\).
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{enumerate}
+      \item For all \(\phi \in C_c^\infty(Q)\):
+        \begin{align*}
+          \int_Q Bu(x) \partial_i \phi(x) &= \int_{Q_+} u(x) \partial_i \phi(x) + \int_{Q_-} u(\tilde x) \partial_i \phi(x)
+        \end{align*}
+        Write \(\vec{n} = (n_1, \dots, n_d)\). Here:
+        \begin{align*}
+          \int_{Q_+} u(x) \partial_i \phi(x) \, dx &= \int_{Q_+} - \partial_i u(x) \phi(x) \, dx + \int_{\partial Q_+} u(x) \phi(x) n_i \, dS \\
+          \int_{Q_-}u(x', -x_d) \partial_i \phi(x', x_d) \, dx' dx_d &= -\int_{Q_+} u(x', x_d) \partial \phi(x', -x_d) \, dx' \, dx_d \\
+          &= \int_{Q_+} \partial_i u(x) \phi(\tilde x) - \int_{\partial Q_+} u \phi n_i \, dS \\
+          &= \int_{Q_-} - \partial_i u(\tilde x) \phi(x)- \int_{\partial Q_+} u \phi n_i \, dS
+        \end{align*}
+        with \(d(-x_d) = d(x_d)\). Conclude:
+        \begin{align*}
+          \int_Q (Bu)(x) \partial_i \phi(x) \, dx 
+          &= \int_{Q_+}(-\partial_iu)(x) \phi(x) + \int_{Q_-} (-\partial_i u) (\tilde x) \phi(x) \\
+          &= \int_Q - h(x) \phi(x) \, dx, \quad h(x) = \begin{cases}
+            \partial_i u(x), & x \in Q_+ \\ \partial_i u(\tilde x), & x \in Q_-
+          \end{cases}
+        \end{align*}
+        for all \(\phi \in C_c^\infty(Q)\), so \(\partial_i (Bu) \in L^2\) for all \(i = 1, 2, \dots, d-1\). Thus \(Bu \in H^1(Q)\).
+      \item 1D: Take \(Q_+(0,1), Q_-=(-1,0), Q_0= \{0\}, Q=(-1,1)\), \(u(x) = x\) in \(Q_+ = (0,1)\), \(Bu(x) = u(x) = -x\) if \(x \in Q_- = (-1,0)\), i.e. \(Bu(x) = |x|\) if \(x \in Q = (-1,1)\). We know 
+      \begin{align*}
+        (Bu)'(x) = \begin{cases}
+          1 &  x \in (0,1) \\ -1 & x \in (-1,0)
+        \end{cases} \in L^2(-1,1)
+      \end{align*}
+      i.e. \(B u \in H^1(Q)\).
+      \[(Bu)''(x) = 2 \delta_0(x)\]
+      in \(D'(Q)\) but \(\notin L^2(-1,1)\), i.e. \(Bu \notin H^2(Q)\).
+    Question: Given \(u \in H^2(Q_+)\), can we find an extension \(Bu \in H^2(Q)\) Yes! E.g. \(u(x) = x\) in \((0,1)\), so \(Bu(x) = x\) in \((-1,1)\). In general: \(u \in H^2(Q) \leadsto \tilde u \in H^2(Q)\) but \(\nabla u = 0\) on \(\partial Q_+\). \qedhere
+  \end{enumerate}
+  \end{proof}
+
+  \begin{ex}[Bonus 8]
+    Assume \(u \in H^2(Q_+)\) and \(\begin{cases}
+      u = 0 \\ \nabla u = 0 
+    \end{cases}\text{on } \partial Q_+\)
+    Prove that \(Bu \in H^2(Q)\). (Reflection extension) (Ok in 1D)
+  \end{ex}
+  
+  \begin{rem}
+    If \(u \in H^2(Q_+)\), then \(\nabla u \in H^1(Q_+)\), so \(\nabla u|_{\partial Q_+}\) by trace theory. In general: \(\Omega \subseteq \mathbb{R}^d, C^2\)-boundary condition, then the same result holds.
+  \end{rem}
+
+  \begin{rem}
+    In 1D: \(\begin{cases}
+      u \in H^2(0,1) \\ u(0) = 0 \\ u'(0) = 0
+    \end{cases},\) \(u|_{Q_0} \in L^2(Q_0)\), 1D: \(Q_0 = \{0\}\). In general: If \(u \in H^1(0,1)\), then \(u(0)\) is determined by trace theory. If \(u \in H^2(0,1)\), \(u'(0)\) is determined. Sobolev:
+    \begin{align*}
+      H^1(0,1) \subseteq C([0,1]) \\ H^2(0,1) \subseteq C^1([0,1])
+    \end{align*}    
+  \end{rem}
+  
+  \begin{lem}[Poincare inequality]\label{Poincare inequality for L2}
+    Let \(\Omega\) be open, bounded connected with \(C^1\)-boundary. Then for all \(g \in L^2(\partial \Omega)\) s.t. \(g \ne constant\) there is a \(C > 0\) s.t. 
+    \[\|u\|_{L^2(\Omega)} \le C \|\nabla u\|_{L^2(\Omega)}\]
+    for all \(u \in M\), where 
+    \[M = \{v \in H^1(\Omega) \mid v|_{\partial \Omega} = g\}.\]
+  \end{lem}
+
+  \begin{proof}
+    We assume that the statement does not hold true. Then there is a sequence \(\{u_n\} \subseteq H^1(\Omega)\), \(u_n|_{\partial \Omega} = g\) s.t.
+    \[\|\nabla u_n\|_{L^2(\Omega)} \to 0, \quad \|u_n\|_{L^2(\Omega)} = 1.\]
+    Since \(\{u_n\}\) is bounded in \(H^1(\Omega)\), by the Banach-Alaoglu theorem (\ref{banach-alagoglu}), up to a subsequence 
+    \[u_n \to u_0 \quad \text{ weakly in } H^1(\Omega)\]
+    Since \(\nabla u_n \to 0\) strongly in \(L^2\) and \(\nabla u_n \to \nabla u_0\) weakly in \(L^2\), we have \(\nabla u_0 = 0\), so \(u_0|_{\partial \Omega} = const.\) (here we need \(\Omega\) to be connected), so \(u_0|_{\partial \Omega} = const.\) On the other hand, note that \(M\) is convex and closed in \(H^1(\Omega)\) since the trace operator \(T: H^1(\Omega) \to L^2(\partial \Omega)\) is continuous. Therefore, \(M\) is also weakly closed in \(H^1(\Omega)\) by the Hahn-Banach theorem. Thus from \(\{u_n\} \subseteq M\), \(u_n \to u_0\) wekly in \(H^1(\Omega)\) we get that \(u_0 \in M\), so \(u_0|_{\partial \Omega} = g\). We get a contradiction since \(g \ne const\) 
+  \end{proof}
+
+  \begin{thm}[Solution for Poisson Equation with inhomogeneous boundary condition]\label{Solution for Poisson Equation with inhomogeneous boundary condition}
+    Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(f \in L^2(\Omega)\), \(g \in L^2(\partial \Omega)\). There there is a unique \(u \in H^1(\Omega)\) s.t. 
+    \begin{align*}
+      \begin{cases}
+        - \Delta u = f &\text{in } D'(\Omega) \\ u|_{\partial \Omega} = g &\text{on } \partial \Omega
+      \end{cases}
+    \end{align*}
+    Here \(u|_{\partial \Omega} = T(u) \in L^2(\partial \Omega)\) is defined by the trace operator. Moreover if \(\Omega\) is connected and \(g \ne constant\), then \(u\) is the unique minimizer for the variational problem
+    \[E = \int_{v \in M} \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v,\]
+    where \(M = \{v \in H^1(\Omega), v|_{\partial \Omega} = g \text{ on }\partial \Omega\}\)
+  \end{thm}
+
+  \begin{proof}
+    First let us assume that \(\Omega\) is connected and \(g \ne const\).
+    \begin{enumerate}[label=Step \arabic*:]
+      \item We prove that \(E = \int_{v \in M} E(v)\) has a minimizer. By Poincares Inequality (\ref{Poincare inequality for L2}), for all \(v \in M\):
+      \begin{align*}
+        E(v) 
+        &= \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega fv \\
+        &\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
+        \text{(Poincaré \ref{Poincare inequality for L2})}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - C \|f\|_{L^2(\Omega)} \|\nabla v\|_{L^2(\Omega)} \\
+        &\ge \frac{1}{4} \| \nabla v\|_{L^2(\Omega)} - C\|f\|_{L^2(\Omega)}
+      \end{align*}
+      Thus \(E = \inf_{v \in M} E(v) > - \infty\). Moreover, taking a minimizing sequence \(\{v_n\} \subseteq M\), \(E(v_n) \to E\), we find that \(\|\nabla v_n\|_{L^2(\Omega)}\) is bounded, and hence \(\|v_n\|_{H^1(\Omega)}\) is bouned (by Poincare inequality) again. By Banach Alaoglu (\ref{banach-alagoglu}), up to a subsequence we have \(v_n \to u\) weakly in \(H^1(\Omega)\). Hence \begin{align*}
+        \begin{cases}
+          \limsup_{n \to \infty} \int_\Omega |\nabla v_n|^2 \ge \int_\Omega |\nabla u|^2 & \text{as } \nabla v_n \to u \text{ in } L^2 \\
+          \int_\Omega v_n f \to \int_\Omega u f &\text{as } v_n \to u \text{ in } L^2
+        \end{cases}
+      \end{align*}
+      Not that \(\{v_n\} \subseteq M\), \(v_n \to u\) in \(H^1(\Omega)\) and \(M\) is weakly closed in \(H^1(\Omega)\) (as argued in the proof of Poincare inequality), therefore \(u \in M\). This means that \(u\) is a minimizer for \(E = \inf_{v \in M} E(v)\).
+      \item Now we prove that if \(u\) is a minimizer for \(E\), then \(- \Delta u = f\) in \(D'(\Omega)\). In fact, for all \(\phi \in C_c^\infty(\Omega)\) we have 
+      \[E(u) \le E(u + t \phi) \quad \forall t \in \mathbb{R}\]
+      because \(u + t \phi \in M\). So we get that 
+      \begin{align*}
+        0 
+        &= \frac{d}{dt} E(u + t \phi)|_{t=0}
+        = \int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi
+      \end{align*}
+      Thus
+      \begin{align*}
+        \int_\Omega u(-\Delta \phi) 
+        &= \int_\Omega \nabla u \nabla \phi,
+        = \int_\Omega f \phi \quad \forall \phi \in C_c^\infty(\Omega).
+      \end{align*}
+      So \(- \Delta u = f\) in \(D'(\Omega)\).
+      \item We prove that Poissons equation has at most one solution. Assume that \(u_1\), \(u_2\) are 2 solutions. Then \(u = u_1 - u_2\) solves 
+      \begin{align*}
+        \begin{cases}
+          - \Delta u = 0 \text{ in } \Omega \\ u|_{\partial \Omega} = 0 \text{ on } \Omega
+        \end{cases}
+      \end{align*}
+      so \(u = 0\).
+      \item If \(g = c_0\) is a constant, then Poissons equation can be rewritten with \(\tilde u = u - c_0\):
+      \begin{align*}
+        &\begin{cases}
+          - \Delta u = f &\text{in } \Omega \\ u|_{\partial \Omega} = c_0 &\text{on } \Omega
+        \end{cases}
+        &&\Leftrightarrow
+        &&\begin{cases}
+          - \Delta \tilde u = f &\text{in } \Omega \\\tilde u = 0 &\text{on } \Omega
+        \end{cases}
+      \end{align*}
+      If \(\Omega\) is not connected, then by considering connected components of \(\Omega\) we can prove that Poisson's equation always has a unique solution (for all \(f \in L^2(\Omega), g \in L^2(\partial \Omega)\)).
+    \end{enumerate}
+  \end{proof}
+
 \end{document}

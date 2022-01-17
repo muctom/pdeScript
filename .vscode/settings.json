@@ -1,6 +1,6 @@
 {
     "window.autoDetectColorScheme": true,
     "workbench.preferredLightColorTheme": "Bluloco Light",
-    "workbench.colorTheme": "Monokai",
-    "workbench.preferredDarkColorTheme": "Monokai"
+    "workbench.preferredDarkColorTheme": "Monokai Night",
+    "workbench.colorTheme": "Monokai Night"
 }
