@@ -3764,7 +3764,7 @@
       \end{align*}
       Consider the simple case \(g = 0\). 
       \(\Delta u -f \) in \(\Omega\) \(\Leftrightarrow\) \(\nabla u \nabla \phi\)...
-      The right set \(A\) should be \(A = \{v \mid \int_\Omega |\nabla v|^2 < \infty, v = 0 \text{ on } \partial \Omega\}.\) Rigorously we take \(W_0^{1,2}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,2}(\Omega)\) (Notation: \(H_0^1 = W_0^{1,2}, H^1 = W^{1,2}\)) Recall that \(W^{1,p}\) is a banach space with norm \(\|f\|_{W^{1,p}(\Omega)} = \|f\|_{L^p(\Omega)} + \|\nabla f\|_{L^p(\Omega)}\). We know that \(C_c^\infty(\Omega)\) is dense in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(u \in W^{1,p}_{loc}(\Omega)\) there is \(\|u_n\| \subseteq C_c^\infty\) s.t. \(u_n \to u\) in \(W^{1,p}(K)\) for all \(K \subseteq \Omega\) compact. However in general \(C_c^\infty(\Omega)\) is not dense in \(W^{1,p}(\Omega)\), i.e. \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,p}(\Omega) \subseteq W^{1,p}(\Omega)\). Clearly \(W_0^{1,p}\) is a closed subspace of \(W^{1,p}(\Omega) \to W_0^{1,p}(\Omega)\)  is a Banach space with \(\|\cdot\|_{W^{1,p}(\Omega)}\). Why does \(W_0^{1,p}(\Omega)\) encode the \(0\)-boundary condition? Note that by definition for all \(u \in W_0^{1,p}(\Omega)\) there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\), \(u_n \to u\) in \(W^{1,p}(\Omega)\) up to a subsequence \(u_n(x) \to u(x)\) for almost every \(x \in \Omega\). Note \(u_n|_{\partial \Omega} = 0 \nrightarrow u|_{\partial \Omega} = 0\) since \(\partial \Omega\) must be of 0-measure. \qedhere
+      The right set \(A\) should be \(A = \{v \mid \int_\Omega |\nabla v|^2 < \infty, v = 0 \text{ on } \partial \Omega\}.\) Rigorously we take \(W_0^{1,2}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,2}(\Omega)\) (Notation: \(H_0^1 = W_0^{1,2}, H^1 = W^{1,2}\)) Recall that \(W^{1,p}\) is a banach space with norm \(\|f\|_{W^{1,p}(\Omega)} = \|f\|_{L^p(\Omega)} + \|\nabla f\|_{L^p(\Omega)}\). We know that \(C_c^\infty(\Omega)\) is dense in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(u \in W^{1,p}_{loc}(\Omega)\) there is \(\|u_n\| \subseteq C_c^\infty\) s.t. \(u_n \to u\) in \(W^{1,p}(K)\) for all \(K \subseteq \Omega\) compact. However in general \(C_c^\infty(\Omega)\) is not dense in \(W^{1,p}(\Omega)\), i.e. \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,p}(\Omega) \subsetneq W^{1,p}(\Omega)\). Clearly \(W_0^{1,p}\) is a closed subspace of \(W^{1,p}(\Omega) \to W_0^{1,p}(\Omega)\)  is a Banach space with \(\|\cdot\|_{W^{1,p}(\Omega)}\). Why does \(W_0^{1,p}(\Omega)\) encode the \(0\)-boundary condition? Note that by definition for all \(u \in W_0^{1,p}(\Omega)\) there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\), \(u_n \to u\) in \(W^{1,p}(\Omega)\) up to a subsequence \(u_n(x) \to u(x)\) for almost every \(x \in \Omega\). Note \(u_n|_{\partial \Omega} = 0 \nrightarrow u|_{\partial \Omega} = 0\) since \(\partial \Omega\) must be of 0-measure. \qedhere
     \end{enumerate}
   \end{proof}
 
@@ -4566,4 +4566,46 @@
     \end{enumerate}
   \end{proof}
 
+  \section{Final Remarks}
+  We can describe \(H_0^1(\Omega)\) as the kernel of the trace operator \(T: H^1(\Omega) \to L^2(\partial \Omega)\)
+
+  \begin{thm}
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Then:
+    \[H_0^1(\Omega) = \{u \in H^1(\Omega) \mid T(u) = 0 \text{ on } \partial \Omega\}\]
+    Recall that if \(u \in H^1(\Omega) \cap C(\bar \Omega)\), then \(T(u) = u|_{\partial \Omega}\) is the usual restriction. In this case we recover a result proved before.
+  \end{thm}
+
+  \begin{proof}
+    % We start with the easy direction
+    % \[H_0^1(\Omega) \subseteq \{u \in H^1(\Omega) \mid T(u) = 0\}.\]
+    % This follows from the facts that \(C_c^\infty(\Omega)\) is dense in \(H_0^1(\Omega)\) and the trace operator is continuous.
+    % Now, let us consider the difficult direction: Given \(u \in H^1(\Omega)\) and \(T(u) = 0\), we need to show that \(u \in H_0^1(\Omega)\). Let us think of the case \(\Omega = \mathbb{R}_+^d\) for simplicity. Then by a density argument, take \(\{u_n\} \subseteq C_c^\infty(\mathbb{R}^d)\) s.t. \(u_n|_\Omega \to u\) in \(H^1(\Omega)\). Then \(T(u_n) \to T(u) = 0\) in \(L^2(\partial \Omega)\). We have for \(x=(x', x_d) \in \mathbb{R}^{d-1} \times [0,\infty)\):
+    % \begin{align*}
+    %   u_n(x', x_d) &= u_n(x', 0) + \int_0^{x_d} \partial_d u_n(x', t) \, dt \\
+    %   \Rightarrow \quad |u_n(x', x_d)|^2 &\le 2 |u_n(x', 0)|^2 + 2 x_d \int_0^{x_d} |\partial_d u_n(x', t)|^2 \, dt \\
+    %   (n \to \infty) \quad \int_{\mathbb{R}^{d-1}} |u_n(x', x_d)|^2 \, dx' &\le 2 \|T(u_n)\|^2_{L^2(\mathbb{R}^{d-1})}
+    % \end{align*}
+    % \dots
+  \end{proof}
+
+  Recall that the varionational characterization of the Poisson equation 
+  \begin{align*}
+    \begin{cases}
+      - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
+    \end{cases}
+  \end{align*}
+  is 
+  \begin{align*}
+    \int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi \quad \forall \phi \in M
+  \end{align*}
+  where \(M = \{v \in H^1(\Omega) \mid v = g \text{ on } \partial \Omega\}\)
+  In fact, if \(u \in H^2(\Omega)\) and 
+  \[\int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi \quad \forall \phi \in H^1(\Omega)\]
+  Then \(u\) satisfies the Neumann condition:
+  \begin{align*}
+    \frac{\partial u}{\partial n} = \nabla u \cdot \vec{n} = 0 \text{ on } \partial \Omega
+  \end{align*}
+
+  (justification ...)
+  
 \end{document}
