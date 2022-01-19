@@ -4606,6 +4606,165 @@
     \frac{\partial u}{\partial n} = \nabla u \cdot \vec{n} = 0 \text{ on } \partial \Omega
   \end{align*}
 
-  (justification ...)
+  (justification ...) \\
   
+  For the exercises of sheet 10: Let \(\Omega = (a,b) \subseteq \mathbb{R}\) be an open bounded interval. For every \(u \in H^1(\Omega)\) the values \(u(a)\) and \(u(b)\) are determined uniquely by trace theory, or by Sobolev's embedding theorem.
+  Recall:
+  If \(u \in H^1((a,b)) \leadsto \partial \Omega = \{a,b\}\) counting measure iff \(g \in L^2(\partial \Omega)\) i.e. \(g(a) = g(b)\) are \emph{well-defined}.
+  
+  \begin{ex}[E 10.1]
+    \begin{enumerate}[label=\alph*)]
+      \item Prove \(H^1(\mathbb{R}) \subseteq (C(\mathbb{R}) \cap L^\infty(\mathbb{R}))\) \\ Hint: You can use Fourier Transform
+      \item \(H^1(\Omega) \subseteq C(\Omega)\)
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{enumerate}[label=\alph*)]
+      \item Let \(u \in H^1(\mathbb{R})\). Then \(u, u' \in L^2(\mathbb{R})\) \(\Leftrightarrow\) \(\hat u(k) (1 + |2 \pi k|) \in L^2(\mathbb{R})\). Thus:
+      \begin{align*}
+        u(x) 
+        &= \int_{\mathbb{R}} \hat u(k) e^{2\pi ik x} \, dk \in C(\mathbb{R}) \cap L^\infty(\mathbb{R})
+      \end{align*}
+      if \(\hat u \in L^1(\mathbb{R})\). So we have to show \(\hat u \in L^1(\mathbb{R})\).
+      \begin{align*}
+        \int_{\mathbb{R}} |\hat u(k)|
+        &= \int_{\mathbb{R}} \frac{|g(k)|}{1 + |2 \pi k|} \\
+        &\le \left(\int_{\mathbb{R}}|g(k)|^2 \, dk\right) \left[\int_{\mathbb{R}} \left(\frac{1}{1 + |2 \pi k|}\right)^2 \, dk\right]^{\frac{1}{2}} < \infty
+      \end{align*}
+      \item Given \(u \in H^1(\Omega)\), then there is an extension \(\tilde u \in H^1(\mathbb{R})\). By a) \(\tilde u \in C(\mathbb{R})\), so \(u = \tilde u|_{\tilde \Omega} \in C(\bar \Omega)\).
+      Remak: We have \(\|u\|_{L^\infty(\Omega)} \le C \|u\|_{H^1(\Omega)}\), where \(\Omega = (a,b)\) or \(\mathbb{R}\) (but only in 1D) \qedhere
+    \end{enumerate}
+  \end{proof}
+
+  Recall: If \(\Omega \subseteq \mathbb{R}^d (d \ge 1)\) open, bounded with \(C^1\)-boundary. Then 
+  \[\|u\|_{L^2(\Omega)} \le C \|\nabla u\|_{L^2(\Omega)} \quad \forall u \in H_0^1(\Omega)\]
+  Actually the same bound holds if \(u \in H^1(\Omega)\) and \(u|_\Gamma = 0\) for an open subset \(\Gamma \subseteq \partial \Omega\). In 1D we have:
+
+
+  \begin{ex}[E 10.2 (Poincare inequality)]
+    Let \(u \in H^1(\Omega)\), \(u(a) = 0\).
+    Prove that there exists a constant \(C > 0\) such that 
+    \[\|u\|_{L^2(\Omega)} \le C \|u'\|_{L^2(\Omega)}\]
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Let \(u \in C^1(\bar \Omega)\) and \(u(a) = 0\). Then:
+    \begin{align*}
+      u(x) &= u(a) + \int_0^x u'(t) \, dt \quad \forall x \in (a,b) \\ 
+      \Rightarrow \quad |u(x)| &\le \int_a^x |u'(t)|\, dt \le \int_a^b|u'(t)| \, dt = \|u'\|_{L^1(\Omega)} \le C\|u'\|_{L^2(\Omega)}
+    \end{align*}
+    as \(\Omega\) is bounded. This implies:
+    \begin{align*}
+      \frac{1}{C} \|u\|_{L^2(\Omega)} \le \|u\|_{L^\infty(\Omega)} \le C \|u'\|_{L^2(\Omega)}
+    \end{align*}
+    To extend this for \(u \in H^1(\Omega)\), we can use a density arguemnt. more precisely, for all \(u \in H^1(\Omega)\) there is a sequence \(\{u_n\} \subseteq C^1(\bar \Omega)\) s.t \(u_n \to u\) in \(H^1(\Omega)\). Then:
+    \[\|u\|_{L^2(\Omega)} = \lim_{n \to \infty} \|u_n\|_{L^2(\Omega)} \le C \lim_{n \to \infty} \|u_n'\|_{L^2(\Omega)} = C\|u’\|_{L^2(\Omega)}\]
+    Recall: For all \(f \in W_{loc}^{1,1}(O)\) with \(O\) in \(\mathbb{R}^d\), then:
+    \begin{align*}
+      f(x) - f(y) &= \int_0^1\nabla f(y + t(x-y))(x-y) \, dt 
+    \end{align*}
+    if \(x,y \in O\), \(y + t(x-y) \in O\) for all \(t \in [0,1]\). For 1D: If \(u \in H^1(a,b)\):
+    \begin{align*}
+      u(x) - u(y) = \int_y^x u'(t) \, dt \quad \forall x,y \in (a,b) \qedhere
+    \end{align*}
+  \end{proof}
+
+  \begin{ex}[E 10.3 (Poincare inequality)]
+    Let \(u \in H^2(\Omega)\) and \(f \in L^2(\Omega)\). Prove that the following statements are equivalent:
+    \begin{enumerate}[label=\alph*)]
+      \item \(u\) solves the equation:
+      \[\begin{cases}
+        - u'' = f & \text{in } D'(\Omega) \\ u'(0) = u'(1) = 0
+      \end{cases}\]
+      \item \[\int_\Omega u' \phi' = \int_\Omega f \phi\] for all \(\phi \in H^1(\Omega)\).
+    \end{enumerate}
+    Here \(u \in H^2(\Omega)\) \(\Rightarrow\) \(u' \in H^1(\Omega)\) \(\Rightarrow\) \(u'(0), u'(1)\) determined uniquely by trace theorem / Sobolev inequality \(H^1(\Omega) \subseteq C(\bar \Omega)\) 
+  \end{ex}
+
+  \begin{proof}[Solution]\
+    \begin{itemize}
+      \item [b) \(\Rightarrow\) a)] For all \(\phi \in C_c^\infty(\Omega)\):\begin{align*}
+        \int_{\Omega} f \phi = \int_\Omega u' \phi' = - \int_\Omega u \phi''
+      \end{align*}
+      This implies \(- u'' = f\) in \(D'(\Omega)\) a.e. Thus for all \(\phi \in H^1(\Omega)\):
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega - u'' \phi = \int_\Omega u'\phi' - [u' \phi]_a^b
+      \end{align*}
+      By b) we conclude \(0 = [u' \phi]_a^b = u'(b) \phi(b) - u'(a)\phi(a)\) for all \(\phi \in H^1(\Omega)\). We can choose \(\phi \in H^1(\Omega)\) s.t. \(\phi(a) = 0\), \(\phi(b) = 1\). This implies \(\phi'(b) = 0\). Similarly, we can chose \(\phi \in H^1(\Omega)\) s.t. \(\phi(a) = 1\), \(\phi(b) = 0\). This implies \(u'(a) = 0\).
+      \item [a) \(\Rightarrow\) b)] From a) and Integration by parts:
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega - u'' \phi = \int_\Omega u' \phi' - \underbrace{[u'\phi]_a^b}_{\mathclap{= 0 \text{ as } u'(a) = u'(b) = 0}}
+      \end{align*}
+      This implies:
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega u' \phi' \quad \forall \phi \in H^1(\Omega) 
+      \end{align*}\qedhere
+    \end{itemize}
+  \end{proof}
+
+  
+  \begin{ex}[E 10.4 (Robin boundary condition)]
+    Let \(f \in L^2(\Omega)\).
+    \begin{enumerate}[label=\alph*)]
+      \item Prove that there exists a unique \(u \in M \coloneqq \{\phi \in H^1(\Omega) , u(a) = 0\}\) s.t.
+    \end{enumerate}
+  \end{ex}
+
+  \begin{proof}
+    
+    \begin{enumerate}[label=\alph*)]
+      \item By 10.2 we have
+      \begin{align*}
+        \|\phi\|_{L^2(\Omega)} \le C \|\phi\|_{L^2(\Omega)} \quad \forall \phi \in M
+      \end{align*}
+      Thus: \((M, \|\phi\|_M \coloneqq \|\phi'\|_{L^2(\Omega)})\) is a Hilbert space. More precisely, we know \((M, \|\cdot \|_{H^2})\) is a closed subspace of \(H^1 \leadsto\) a hilbert space. And \(\|\cdot\|_M\) is comparable to \(\| \cdot \|_{H^1}\). By Riesz representation theorem there is a unique \(u \in M\) s.t. \(\langle \phi , u \rangle_M = F(\Phi)\) for all \(\phi \in M\). We use this for 
+      \begin{align*}
+        F(\phi) = \int_\Omega f \phi \quad \forall \phi \in M
+      \end{align*}
+      Here \(|F(\phi) \le \|f\|_{L^2} \|\phi\|_{L^2}\).
+      \item Let \(u \in M\) be the solution in (a) i.e. 
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega u'\phi' \quad \forall \phi \in M
+      \end{align*}
+      Then we prove that \(u\) solves 
+      \[\begin{cases}
+        -u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
+      \end{cases}\]
+      Since \(u \in M\) we have \(u \in H^1(\Omega)\) and \(u(a) = 0\). From 
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega u' \phi' \quad \forall \phi \in M
+      \end{align*}
+      we get for all \(\phi \in C_c^\infty(\Omega)\):
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega u' \phi' = \int_\Omega - u \phi''
+      \end{align*}
+      So we get \(- u'' = f\) in \(D'(\Omega)\). Since \(f \in L^2(\Omega)\) \(\Rightarrow\) \(u'' \in L^2(\Omega)\) \(\Rightarrow\) \(u \in H^2(\Omega)\) \(\Rightarrow\) \(u' \in H^1(\Omega)\) \(\Rightarrow\) \(u'(b)\) is dtermined uniquely. For all \(\phi \in M\):
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega- u'' \phi = \int_\Omega u' \phi' - \left(u'(b) \phi(b) - u'(a) \phi(a)\right) \quad \text{as } \phi \in M
+      \end{align*}
+      and \(\int_\Omega f \phi = \int_\Omega u' \phi'\). This implies:
+      \begin{align*}
+        u'(b) \phi(b) = 0 \quad \forall \phi \in M
+      \end{align*}
+      Take \(\phi(x) = \frac{x-a}{b-a} \in M\), \(\phi(b) = 1\).
+      Uniqueness of the solution: Take \(u \) s.t. 
+      \[\begin{cases}
+        - u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
+      \end{cases}\]
+      This implies \(u \in H^2(\Omega)\). By integration by parts: For all \(\phi \in H^1(\Omega)\), \(\phi(a) = 0\).
+      \begin{align*}
+        \int_\Omega f \phi = \int_\Omega-u''\phi = \int u' \phi' \quad \forall \phi \in M
+      \end{align*}
+      Thus \(u \in M\) and 
+      \[\int_\Omega f \phi = \int_\Omega u' \phi' \quad \forall \phi \in M.\]
+    \end{enumerate}
+  \end{proof}
+
+  \begin{ex}[Bonus 10]
+    Prove that the solution \(u\) in Problem E 10.4 is the unique minimizer for the minimization problem:
+    \[E = \inf_{v \in M} \left(\int_\Omega |v'|^2 - \int_\Omega f v\right)\]
+  \end{ex}
+  % If you understand the equivalence of the three different formulations _> easy
+  % Bound from below ..... unique solution
 \end{document}
