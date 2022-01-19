@@ -4363,7 +4363,7 @@
       \begin{align*}
         \frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega f u \le \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v 
       \end{align*}  
-      for all \(v \in H_0^1\). Write \(v = u + W\), then:
+      for all \(v \in H_0^1\). Write \(v = u + w\), then:
       \begin{align*}
         E(v) &= \frac{1}{2} \int |\nabla v|^2 - \int f v \\
         &= \frac{1}{2} \int_\Omega |\nabla (u + w)|^2 - \int_\Omega f (u + w) \\
@@ -4379,7 +4379,7 @@
       \[\frac{d}{dt} E(u + t \phi)|_{t = 0} = 0\]
       Here 
       \begin{align*}
-        E(u + t \phi) &= \frac{1}{2} \int \underbrace{|\nabla ( u + t \phi)|}_{\mathclap{|\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi}} - \int f(u + t \phi) \\
+        E(u + t \phi) &= \frac{1}{2} \int \underbrace{|\nabla ( u + t \phi)|^2}_{\mathclap{|\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi}} - \int f(u + t \phi) \\
         &= E(u) + t \left[\int_\Omega \nabla u \nabla \phi \int_\Omega f \phi\right] + t^2 \int_\Omega |\nabla \phi|^2
       \end{align*}
       This implies
@@ -4508,7 +4508,7 @@
       \end{cases}
     \end{align*}
     Here \(u|_{\partial \Omega} = T(u) \in L^2(\partial \Omega)\) is defined by the trace operator. Moreover if \(\Omega\) is connected and \(g \ne constant\), then \(u\) is the unique minimizer for the variational problem
-    \[E = \int_{v \in M} \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v,\]
+    \[E = \inf_{v \in M} \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v,\]
     where \(M = \{v \in H^1(\Omega), v|_{\partial \Omega} = g \text{ on }\partial \Omega\}\)
   \end{thm}
 
@@ -4519,17 +4519,17 @@
       \begin{align*}
         E(v) 
         &= \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega fv \\
-        &\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
+        \text{(Hölder)}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
         \text{(Poincaré \ref{Poincare inequality for L2})}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - C \|f\|_{L^2(\Omega)} \|\nabla v\|_{L^2(\Omega)} \\
         &\ge \frac{1}{4} \| \nabla v\|_{L^2(\Omega)} - C\|f\|_{L^2(\Omega)}
       \end{align*}
-      Thus \(E = \inf_{v \in M} E(v) > - \infty\). Moreover, taking a minimizing sequence \(\{v_n\} \subseteq M\), \(E(v_n) \to E\), we find that \(\|\nabla v_n\|_{L^2(\Omega)}\) is bounded, and hence \(\|v_n\|_{H^1(\Omega)}\) is bouned (by Poincare inequality) again. By Banach Alaoglu (\ref{banach-alagoglu}), up to a subsequence we have \(v_n \to u\) weakly in \(H^1(\Omega)\). Hence \begin{align*}
+      Thus \(E = \inf_{v \in M} E(v) > - \infty\). Moreover, taking a minimizing sequence \(\{v_n\} \subseteq M\), \(E(v_n) \to E\), we find that \(\|\nabla v_n\|_{L^2(\Omega)}\) is bounded, and hence \(\|v_n\|_{H^1(\Omega)}\) is bouned (by Poincare inequality) again. By Banach-Alaoglu (\ref{banach-alagoglu}), up to a subsequence we have \(v_n \to u\) weakly in \(H^1(\Omega)\). Hence \begin{align*}
         \begin{cases}
-          \limsup_{n \to \infty} \int_\Omega |\nabla v_n|^2 \ge \int_\Omega |\nabla u|^2 & \text{as } \nabla v_n \to u \text{ in } L^2 \\
+          \limsup_{n \to \infty} \int_\Omega |\nabla v_n|^2 \ge \int_\Omega |\nabla u|^2 & \text{as } \nabla v_n \to \nabla u \text{ in } L^2 \\
           \int_\Omega v_n f \to \int_\Omega u f &\text{as } v_n \to u \text{ in } L^2
         \end{cases}
       \end{align*}
-      Not that \(\{v_n\} \subseteq M\), \(v_n \to u\) in \(H^1(\Omega)\) and \(M\) is weakly closed in \(H^1(\Omega)\) (as argued in the proof of Poincare inequality), therefore \(u \in M\). This means that \(u\) is a minimizer for \(E = \inf_{v \in M} E(v)\).
+      Note that \(\{v_n\} \subseteq M\), \(v_n \to u\) in \(H^1(\Omega)\) and \(M\) is weakly closed in \(H^1(\Omega)\) (as argued in the proof of Poincare inequality), therefore \(u \in M\). This means that \(u\) is a minimizer for \(E = \inf_{v \in M} E(v)\).
       \item Now we prove that if \(u\) is a minimizer for \(E\), then \(- \Delta u = f\) in \(D'(\Omega)\). In fact, for all \(\phi \in C_c^\infty(\Omega)\) we have 
       \[E(u) \le E(u + t \phi) \quad \forall t \in \mathbb{R}\]
       because \(u + t \phi \in M\). So we get that 
@@ -4658,16 +4658,16 @@
     \begin{align*}
       \frac{1}{C} \|u\|_{L^2(\Omega)} \le \|u\|_{L^\infty(\Omega)} \le C \|u'\|_{L^2(\Omega)}
     \end{align*}
-    To extend this for \(u \in H^1(\Omega)\), we can use a density arguemnt. more precisely, for all \(u \in H^1(\Omega)\) there is a sequence \(\{u_n\} \subseteq C^1(\bar \Omega)\) s.t \(u_n \to u\) in \(H^1(\Omega)\). Then:
-    \[\|u\|_{L^2(\Omega)} = \lim_{n \to \infty} \|u_n\|_{L^2(\Omega)} \le C \lim_{n \to \infty} \|u_n'\|_{L^2(\Omega)} = C\|u’\|_{L^2(\Omega)}\]
-    Recall: For all \(f \in W_{loc}^{1,1}(O)\) with \(O\) in \(\mathbb{R}^d\), then:
-    \begin{align*}
-      f(x) - f(y) &= \int_0^1\nabla f(y + t(x-y))(x-y) \, dt 
-    \end{align*}
+    To extend this for \(u \in H^1(\Omega)\), we can use a density argument. More precisely, for all \(u \in H^1(\Omega)\) there is a sequence \(\{u_n\} \subseteq C^1(\bar \Omega)\) s.t \(u_n \to u\) in \(H^1(\Omega)\). Then:
+    \[\|u\|_{L^2(\Omega)} = \lim_{n \to \infty} \|u_n\|_{L^2(\Omega)} \le C \lim_{n \to \infty} \|u'_n\|_{L^2(\Omega)} = C\|u'\|_{L^2(\Omega)}\]
+    Recall: For all \(f \in W_{loc}^{1,1}(O)\) with \(O\) in \(\mathbb{R}^d\) we have
+    \[
+      f(x) - f(y) = \int_0^1\nabla f(y + t(x-y))(x-y) \, dt 
+    \]
     if \(x,y \in O\), \(y + t(x-y) \in O\) for all \(t \in [0,1]\). For 1D: If \(u \in H^1(a,b)\):
-    \begin{align*}
+    \[
       u(x) - u(y) = \int_y^x u'(t) \, dt \quad \forall x,y \in (a,b) \qedhere
-    \end{align*}
+    \]
   \end{proof}
 
   \begin{ex}[E 10.3 (Poincare inequality)]
@@ -4708,28 +4708,32 @@
     Let \(f \in L^2(\Omega)\).
     \begin{enumerate}[label=\alph*)]
       \item Prove that there exists a unique \(u \in M \coloneqq \{\phi \in H^1(\Omega) , u(a) = 0\}\) s.t.
+      \[\int_\Omega u' \phi' = \int_\Omega f \phi \quad \forall \phi \in M\]
+      \item Prove that the above function \(u\) is the unique solution to the equation
+      \[\begin{cases}
+        -u'' = f &\text{in } D'(\Omega) \\ u(a) = 0 & u'(b) = 0
+      \end{cases}\]
     \end{enumerate}
   \end{ex}
 
-  \begin{proof}
-    
+  \begin{proof}[Solution]
     \begin{enumerate}[label=\alph*)]
       \item By 10.2 we have
       \begin{align*}
-        \|\phi\|_{L^2(\Omega)} \le C \|\phi\|_{L^2(\Omega)} \quad \forall \phi \in M
+        \|\phi\|_{L^2(\Omega)} \le C \|\phi'\|_{L^2(\Omega)} \quad \forall \phi \in M
       \end{align*}
-      Thus: \((M, \|\phi\|_M \coloneqq \|\phi'\|_{L^2(\Omega)})\) is a Hilbert space. More precisely, we know \((M, \|\cdot \|_{H^2})\) is a closed subspace of \(H^1 \leadsto\) a hilbert space. And \(\|\cdot\|_M\) is comparable to \(\| \cdot \|_{H^1}\). By Riesz representation theorem there is a unique \(u \in M\) s.t. \(\langle \phi , u \rangle_M = F(\Phi)\) for all \(\phi \in M\). We use this for 
+      Thus: \((M, \|\phi\|_M \coloneqq \|\phi'\|_{L^2(\Omega)})\) is a Hilbert space. More precisely, we know \((M, \|\cdot \|_M)\) is a closed subspace of \(H^1 \leadsto\) a Hilbert space. And \(\|\cdot\|_M\) is comparable to \(\| \cdot \|_{H^1}\). By Riesz representation theorem there is a unique \(u \in M\) s.t. \(\langle \phi , u \rangle_M = F(\phi)\) for all \(\phi \in M\). We use this for 
       \begin{align*}
         F(\phi) = \int_\Omega f \phi \quad \forall \phi \in M
       \end{align*}
-      Here \(|F(\phi) \le \|f\|_{L^2} \|\phi\|_{L^2}\).
+      Here \(|F(\phi)| \le \|f\|_{L^2} \|\phi\|_{L^2}\).
       \item Let \(u \in M\) be the solution in (a) i.e. 
       \begin{align*}
         \int_\Omega f \phi = \int_\Omega u'\phi' \quad \forall \phi \in M
       \end{align*}
       Then we prove that \(u\) solves 
       \[\begin{cases}
-        -u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
+        -u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
       \end{cases}\]
       Since \(u \in M\) we have \(u \in H^1(\Omega)\) and \(u(a) = 0\). From 
       \begin{align*}
@@ -4739,7 +4743,7 @@
       \begin{align*}
         \int_\Omega f \phi = \int_\Omega u' \phi' = \int_\Omega - u \phi''
       \end{align*}
-      So we get \(- u'' = f\) in \(D'(\Omega)\). Since \(f \in L^2(\Omega)\) \(\Rightarrow\) \(u'' \in L^2(\Omega)\) \(\Rightarrow\) \(u \in H^2(\Omega)\) \(\Rightarrow\) \(u' \in H^1(\Omega)\) \(\Rightarrow\) \(u'(b)\) is dtermined uniquely. For all \(\phi \in M\):
+      So we get \(- u'' = f\) in \(D'(\Omega)\). Since \(f \in L^2(\Omega)\) \(\Rightarrow\) \(u'' \in L^2(\Omega)\) \(\Rightarrow\) \(u \in H^2(\Omega)\) \(\Rightarrow\) \(u' \in H^1(\Omega)\) \(\Rightarrow\) \(u'(b)\) is uniquely determined. For all \(\phi \in M\):
       \begin{align*}
         \int_\Omega f \phi = \int_\Omega- u'' \phi = \int_\Omega u' \phi' - \left(u'(b) \phi(b) - u'(a) \phi(a)\right) \quad \text{as } \phi \in M
       \end{align*}
@@ -4750,21 +4754,21 @@
       Take \(\phi(x) = \frac{x-a}{b-a} \in M\), \(\phi(b) = 1\).
       Uniqueness of the solution: Take \(u \) s.t. 
       \[\begin{cases}
-        - u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
+        - u'' = f &\text{in } D'(\Omega) \\ u(a) = u'(b) = 0
       \end{cases}\]
       This implies \(u \in H^2(\Omega)\). By integration by parts: For all \(\phi \in H^1(\Omega)\), \(\phi(a) = 0\).
       \begin{align*}
-        \int_\Omega f \phi = \int_\Omega-u''\phi = \int u' \phi' \quad \forall \phi \in M
+        \int_\Omega f \phi = \int_\Omega-u''\phi = \int u' \phi' \quad \forall \phi \in M
       \end{align*}
       Thus \(u \in M\) and 
-      \[\int_\Omega f \phi = \int_\Omega u' \phi' \quad \forall \phi \in M.\]
+      \[\int_\Omega f \phi = \int_\Omega u' \phi' \quad \forall \phi \in M. \qedhere\]
     \end{enumerate}
   \end{proof}
 
-  \begin{ex}[Bonus 10]
+  \begin{ex}[Bonus 9]
     Prove that the solution \(u\) in Problem E 10.4 is the unique minimizer for the minimization problem:
     \[E = \inf_{v \in M} \left(\int_\Omega |v'|^2 - \int_\Omega f v\right)\]
   \end{ex}
-  % If you understand the equivalence of the three different formulations _> easy
+  % If you understand the equivalence of the three different formulations -> easy
   % Bound from below ..... unique solution
 \end{document}
