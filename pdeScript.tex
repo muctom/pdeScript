@@ -182,7 +182,7 @@
   \begin{thm} (Green's Identities)\label{green-identities}
     Let \(A \subseteq \mathbb{R}^d\) open, \(K \subseteq A\) d-dim.\ compactum with \(C^1\) boundary and \(f, g \in C^2(A)\)
     \begin{enumerate}
-      \item Green's first identity (Partial Integration): \begin{align*}
+      \item Green's first identity (Integration by parts): \begin{align*}
         \int_K \nabla f \cdot \nabla g \, dx = \int_{\partial K} f \frac{\partial g}{\partial \nu} \, dS - \int_K f \Delta g \, dx
       \end{align*}
       where \(\frac{\partial g}{\partial \nu} = \partial_\nu g = \nu \cdot \nabla g\)
@@ -4769,6 +4769,88 @@
     Prove that the solution \(u\) in Problem E 10.4 is the unique minimizer for the minimization problem:
     \[E = \inf_{v \in M} \left(\int_\Omega |v'|^2 - \int_\Omega f v\right)\]
   \end{ex}
-  % If you understand the equivalence of the three different formulations -> easy
-  % Bound from below ..... unique solution
+
+  \chapter{Heat Equation}
+  \[
+    \begin{cases}
+      \partial_t u = \Delta u &(x,t) \in \mathbb{R}^d \times (0, \infty) \\
+      u=g &(x,t) \in \mathbb{R}^d \times \{0\}
+    \end{cases}
+  \]
+  The fundamential solution is:
+  \[
+    \Phi(x,t) = \frac{1}{(4 \pi t)^{\frac{d}{2}}} e^{-\frac{|x|^2}{4t}}, \quad x \in \mathbb{R}^d, t > 0
+  \]
+  We have:
+  \[
+    \begin{cases}
+      \partial_t \Phi = \Delta \phi &(x,t) \in \mathbb{R}^d \times (0,\infty) \\
+      \int_{\mathbb{R}^d} \Phi(x,t) \, dx = 1 & \forall t > 0 \\
+      \lim_{t \to 0} \Phi(x,t) = \delta_0(x) & \text{in } D'(\mathbb{R}^d)
+    \end{cases}
+  \]
+
+  \begin{thm}
+    If \(g \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\), then 
+    \[u(x,t) \coloneqq \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy\]
+    satisfies
+    
+    \begin{enumerate}[label=(\roman*)]
+      \item \(u \in C^\infty(\mathbb{R}^d \times (0,\infty))\)
+      \item \(\partial_t u = \Delta u\) for all \((x,t) \in \mathbb{R}^d \times (0,\infty)\)
+      \item \(\lim_{t \to 0} u(x,t) = g(x)\) for all \(x \in \mathbb{R}^d\)
+    \end{enumerate}
+  \end{thm}
+
+  \begin{thm}[Nonhomogeneous problem]
+    Let \(f \in C_1^2(\mathbb{R}^d, [0,\infty))\) be compactly supported. Define
+    \[u(x,t) = \int_0^t \int_{\mathbb{R}^d} \Phi(x-y, t-s) f(y,s) \, dy\, ds\]
+    Then 
+    \begin{enumerate}[label=(\roman*)]
+      \item \(u \in C_1^2(\mathbb{R}^d \times (0,\infty))\)
+      \item \(\partial_t u = \Delta u+ f\) for all \(x \in \mathbb{R}^d, t > 0\)
+      \item \(\lim_{t \to 0} u(x,t) = 0\) for all \(x \in \mathbb{R}^d\).
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    We write
+    \[
+      u(x,t) = \int_0^t \int_{\mathbb{R}^d} \Phi(y,s) f(x-y, t-s) \, dy \, ds
+    \]
+    With the Leibniz integral rule we get
+    \[
+      \partial_t u(x,t) = \int_0^t \int_{\mathbb{R}^d} \Phi(y,s) \partial_t f(x-y,t-s) \, dy \, ds + \int_{\mathbb{R}^d} \Phi(y,s) f(x-y, 0) \, dy
+    \]
+    and 
+    \[\partial_{ij} u(x,t) = \int_0^t \int_{\mathbb{R}^d} \Phi(y,s) \partial_{ij} f(x-y, t-s) \, dy.\]
+    This shows that \(\partial_t u\), \(\partial_{ij} u\) are in \(C(\mathbb{R}^d \times (0, \infty))\). Next we calculate:
+    \begin{align*}
+      \partial_t u - \Delta u
+      &= \int_0^t \int_{\mathbb{R}^d} \Phi(y,s) (\partial_t - \Delta_x) f(x-y, t-s) \, dy \, ds + \int_{\mathbb{R}^d} \Phi(y,s) f(x-y, 0) \, dy \\
+      &= \underbrace{\int_\epsilon^t \int_{\mathbb{R}^d} \Phi(y,s) (\partial_t - \Delta_x) f(x-y, t-s) \, dy \, ds}_{\eqqcolon I_\epsilon} \\
+      &\quad+ \underbrace{\int_0^\epsilon \int_{\mathbb{R}^d} \Phi(y,s) (\partial_t - \Delta_x) f(x-y, t-s) \, dy \, ds}_{J_\epsilon} \\ 
+      &\quad+ \underbrace{\int_{\mathbb{R}^d} \Phi(y,s) f(x-y,0) \, dy}_K
+    \end{align*}
+    Then
+    \begin{align*}
+      |J_\epsilon| &\le \|(\partial_t - \Delta_x) f\|_{L^\infty} \int_0^\epsilon \int_{\mathbb{R}^d} \Phi(y,s) \, dy \, ds \le C \epsilon \xrightarrow{\epsilon \to 0} 0 \\
+      I_\epsilon &= \int_\epsilon^t \int_{\mathbb{R}^d} \Phi(y,s) (-\partial_s - \Delta_y) f(x-y,t-s) \, dy \, ds \\
+      \text{(Green (\ref{green-identities}))}\quad &= \int_{\epsilon}^t \int_{\mathbb{R}^d} \underbrace{(\partial_s - \Delta_y) \Phi(y,s)}_{= 0} f(x-y, t-s) \, dy \, ds \\
+      &\quad - \left[\int_{\mathbb{R}^d} \Phi(y,s) f(x-y, t-s)\right]_{s=\epsilon}^{s=t}
+    \end{align*}
+    This implies:
+    \begin{align*}
+      I_\epsilon + K 
+      &= \int_{\mathbb{R}^d} \Phi(y,\epsilon) f(x-y, t-\epsilon) \, dy \\
+      &\quad \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} \delta_0(y) f(x-y, t) \, dy = f(x,t)
+    \end{align*}
+    Thus
+    \[\partial_t u - \Delta u = f(x,t) \quad \forall (x,t) \in \mathbb{R}^d \times (0,\infty)\]
+    Finally:
+    \begin{align*}
+      \|u(\cdot, t)\|_{L^\infty} &\le \|f\|_{L^\infty} \int_0^t \int_{\mathbb{R}^d} \Phi(y,s) \, dy \, ds
+      = \|f\|_{L^\infty} t \xrightarrow{t \to 0} 0
+    \end{align*}
+  \end{proof}
 \end{document}
