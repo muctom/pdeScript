@@ -4853,4 +4853,72 @@
       = \|f\|_{L^\infty} t \xrightarrow{t \to 0} 0
     \end{align*}
   \end{proof}
+
+  \begin{ex}
+    If \(f,g\) are given as above, then 
+    \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, gy + \int_0^t \int_{\mathbb{R}^d} \Phi(x-y,t-s) f(y,s) \, ds\]
+  solves
+  \[\begin{cases}
+    \partial_t - \Delta u = f \\ u(\cdot, t) = g
+  \end{cases}\]
+\end{ex}
+
+\begin{rem}[Duhamel formula]
+  Consider the ODE \(\partial_t w(t) = Aw(t)\) for all \(A \in \mathbb{R}\). Then the solution is
+  \[w(t) = e^{tA} w(0).\]
+  More generally: If \(\partial_t w(t) = Aw(t) + f(t)\), then
+  \begin{align*}
+    &&\partial_t(e^{-tA} w(t)) &= e^{-tA}(\partial_tw(t) - Aw(t)) = e^{-tA}f(t) = e^{-tA} f(t) \\
+    &\Rightarrow &e^{-tA} w(t) &= w(0) + \int_0^t e^{-sA} f(s) \, ds \\
+    &\Rightarrow &w(t) &= e^{tA} w(0) + \int_0^t e^{(t-s)A}f(s) \, ds
+  \end{align*}
+  More generally, if \(A\) is an operator (independend of time) then:
+ \begin{align*}
+   &&\partial_tw(t) &= Aw(t) + f(t) \\
+   &\Rightarrow &w(t) &= e^{tA} w(0) + \int_0^t e^{(t-s)A} f(s) \, ds
+ \end{align*}
+ Application: If \(A = \Delta\), then the operator \(e^{t\Delta}\) has kernel
+ \[e^{t\Delta}(x,y) = \Phi(x-y,t) = \frac{1}{(4 \pi t)^{\frac{d}{2}}}e^{-\frac{|x-y|^2}{4t}}.\]
+ This is called the \emph{heat kernel}.
+\end{rem}
+
+\begin{thm}[\(L^2\)-data]
+  For every \(g \in L^2(\mathbb{R}^d)\), define 
+  \[u(t,x) = \int_{\mathbb{R}^d} \Phi(x-y,t)g(y) \, dy\]
+  Then \(u \in C^\infty(\mathbb{R}^d \times (0,\infty))\) and it solves the heat equation
+  \[\begin{cases}
+    \partial_t u = \Delta_x u & \mathbb{R}^d \times (0,\infty) \\
+    \lim_{t \to 0} u(\cdot, t) = g &\text{in } L^2(\mathbb{R}^d)
+  \end{cases}\]
+\end{thm}
+
+\begin{proof}
+  Recall the heuristic computation from the heat equation using the Fourier transform 
+  \begin{align*}
+    &&\partial_t u(x,t) &= \Delta_x u(x,t) \\
+    &\Leftrightarrow&\partial_t \hat u (k,t) &= -|2\pi k|^2 \hat u (k,t) \\
+    &\Leftrightarrow&\partial_t(e^{t|2\pi k|^2} \hat u(k,t)) &= 0 \\
+    &\Leftrightarrow&e^{t|2\pi k|^2} \hat u(k,t) &= \hat u(k,0) = \hat g (k) \\
+    &\Leftrightarrow& \hat u(k,t) &= e^{-t|2 \pi k|^2} \hat g(k) = \hat \Phi(k,t) \hat g(k) = \widehat{\Phi \star g} \qedhere \\
+    &\Leftrightarrow& u(x,t) &= \Phi \star g = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy
+  \end{align*}
+  Here we only need the direction \(\Leftarrow\) which is rigorous if \(g \in L^2(\mathbb{R}^d)\). From the Fourier transform, it is also easy to check that \(u(\cdot, t) \to g\) in \(L^2\) as \(t \to 0\) (exercise). To see the smoothness, note that for all \(t>0,\) and for all \(m \in \mathbb{N}\):
+  \begin{align*}
+    (1 + |2 \pi k|^m) \hat u(k,t) = \underbrace{(1+|2 \pi k|^m) e^{-t|2 \pi k|^2}}_{\in L^\infty} \underbrace{\hat g(k)}_{\in L^2} \in L^2
+  \end{align*}
+  This implies \(u(\cdot, t) \in H^m(\mathbb{R}^d)\) for all \(m \ge 1\), so \(u(\cdot, t) \in C^\infty(\mathbb{R}^d)\) by Sobolev embedding (see below). This argument can also be used to show that \(u \in C^\infty(\mathbb{R}^d \times (0,\infty))\) (exercise)
+\end{proof}
+
+
+\begin{thm}[Sobolev embedding] 
+  If \(m > \frac{d}{2}\), then \(H^m(\mathbb{R}^d) \subseteq (C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d))\).
+\end{thm}
+
+\begin{proof}
+  We write for all \(u \in H^m(\mathbb{R}^d)\):
+  \[\hat u(k) = \underbrace{\hat u(k) (1 + |2\pi k|^m)}_{\in L^2 \text{ as } u \in H^m} \underbrace{\frac{1}{1 + |2 \pi k|^m}}_{\in L^2 \text{ as } m > \frac{d}{2}}\]
+  This implies \(\hat u(k) \in L^1(\mathbb{R}^d)\) and finally \(u = (\hat u)^\lor \in (C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d))\).
+\end{proof}
+
+
 \end{document}
