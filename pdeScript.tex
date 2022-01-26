@@ -4921,4 +4921,205 @@
 \end{proof}
 
 
+\begin{ex}[E 11.1]
+  Let \(g \in L^2(\mathbb{R}^d)\), 
+  \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y, t)g(y) \, dy\]
+  where \(\Phi\) is the fundamental solution of the heat equation.
+  \begin{enumerate}[label=\alph*)]
+    \item \[\begin{cases}
+      \partial_t u - \Delta_x u = 0 &\forall (x,t) \in \mathbb{R}^d \times (0,\infty) \\ u(x,t) \to g(x) &\text{as } t \to 0 
+    \end{cases}\]
+    \item Still to \TeX
+    \item Still to \TeX
+  \end{enumerate}
+  Prove \(u \in C^\infty(\mathbb{R}^d \times (0, \infty))\).
+\end{ex}
+
+\begin{proof}[Solution]
+  \begin{enumerate}[label=\alph*)]
+    \item We prove for all \(t > 0\):
+    \[u(x,t) \in \bigcap_{m \ge 1} H^m(\mathbb{R}^d) \subseteq C^\infty(\mathbb{R}^d)\]
+    We use the Fourier transform:
+    \begin{align*}
+      \hat \Phi(k,t) &= e^{-t|2 \pi k|^2}
+    \end{align*}
+    Recall \(\widehat{e^{-\pi |x|^2}} = e^{- \pi |k|^2}\). From this we get \(\widehat e^{- \pi \lambda |x|^2} = \lambda^{-\frac{d}{2}} e^{-\frac{\pi |k|^2}{\lambda}}\). Then:
+    \begin{align*}
+      \widehat{e^{-\frac{|x|^2}{4t}}} = \widehat{e^{-\pi \frac{1}{4 \pi t} |x|^2}} = \left(\frac{1}{4 \pi t}\right)^{-\frac{d}{2}} e^{- \pi |k|^2 4 \pi t} = (4 \pi t)^{\frac{d}{2}} e^{-t |2 \pi k|^2}
+    \end{align*}
+    Hence:
+    \begin{align*}
+      \hat u(k,t) = \hat \Phi(k,t) \hat g(k) = e^{-t|2 \pi k|^2} \hat g(k) \in L^1(\mathbb{R}^d, dk) \quad \forall t > 0
+    \end{align*}
+    This implies:
+    \begin{align*}
+      u(x,t) &= \int_{\mathbb{R}^d} e^{-t|2 \pi k|^2} \hat g(k) e^{2 \pi i kx} \, dk \quad \forall (x,t) \in \mathbb{R}^d \times (0,\infty)
+    \end{align*}
+    Consequently:
+    \begin{align*}
+      D_x^\alpha(x,t) &= \int_{\mathbb{R}^d} \underbrace{e^{-t|2 \pi k|^2} \hat g(k) (2 \pi ik)^\alpha}_{L^1(\mathbb{R}^d, dk)} e^{2 \pi i k x} \, dk \in C(\mathbb{R}^d, (0,\infty)) \\
+      D_t^\alpha(x,t) &= \int_{\mathbb{R}^d} (-|2\pi k|^2)^\alpha e^{-t|2\pi k|^2} \hat g(k) e^{2 \pi ikx} \, dk \in C(\mathbb{R}^d, (0,\infty))
+    \end{align*}
+    Also:
+    \begin{align*}
+      &\partial_t u - \Delta_x u \\&\quad= \int_{\mathbb{R}^d} -|2 \pi k|^2 e^{-t|2 \pi k|^2} \hat g(k) e^{2 \pi i k x} \, dk + \int_{\mathbb{R}^d} e^{-t |2 \pi k|^2} \hat g(k) |2 \pi i k|^2 e^{ 2 \pi i k x} \, dk = 0
+    \end{align*}
+    \item Finally:
+    \begin{align*}
+      \int_{\mathbb{R}^d} |u(x,t) - g(x)|^2 &= \int_{\mathbb{R}^d}|\hat u(k,t) - \hat g(k)|^2 \, dk \\
+      &= \int_{\mathbb{R}^d} \underbrace{|e^{-t |2 \pi k|^2}- 1|^2}_{\in [0,1]}\underbrace{|\hat g(k)|^2}_{\in L^1(\mathbb{R}^d)} \, dk \xrightarrow{t \to 0} 0
+    \end{align*}
+    by dominated convergence. Now,
+    \begin{align*}
+      \int_{\mathbb{R}^d} |u(x,t)|^2 \, dx &= \int_{\mathbb{R}^d} |\hat u(k,t)|^2 \, dk \\
+      &= \int_{\mathbb{R}^d} \underbrace{e^{-2t|2 \pi k|^2}}_{\in [0,1] \text{ and } \xrightarrow{t \to 0} 0} |\hat g (k)|^2 \, dk \xrightarrow{t \to \infty} 0
+    \end{align*}
+    \item Assume \(g \in H^1(\mathbb{R}^d)\) \(\Leftrightarrow\) \(\int_{\mathbb{R}^d} {1 + |2 \pi k|^2})|\hat g(k)|^2 \, dk < \infty\).
+    \begin{align*}
+      \int_{\mathbb{R}^d} |u(x,t) - g(x)|^2 \, dx 
+      &= \int_{\mathbb{R}^d} \underbrace{\left|1 - e^{-t |2 \pi k|^2}\right|^2|}_{\le C(t |2 \pi k|^2)}\hat g(k)|^2 \, dk \\
+      &\le C \int_{\mathbb{R}^d} t |2 \pi k|^2 |\hat g(k)|^2 \, dk \\
+      &\le Ct \|g\|_{H^1}^2 \quad \forall t > 0
+    \end{align*}
+    Claim: for all \(s \ge 0\), \(\left|1 - e^{-s}\right| \le \min(1,cs) \le C \sqrt{s}\). We have that \(s \mapsto \left|\frac{1-e^{-s}}{s}\right|\) is bounded and continuous in \([0,1]\) as \(\left| \frac{1 - e^{-s}}{s}\right| \to 1\), so \(\frac{1-e^{-s}}{s} \le C\) for all \(s \in [0,1]\)
+  \end{enumerate}
+\end{proof}
+
+
+\begin{rem}[Heat Equation in bounded set]
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open bounded with \(C^1\)-boundary.
+  \[\begin{cases}
+    \partial_t u - \Delta_x u = 0 &(x,t) \in \Omega \times (0,\infty) \\ u(x,0) = g(x) &u(x,t) = 0 \text{ if } x \in \partial \Omega
+  \end{cases}\]
+
+  \begin{enumerate}[label=Step \arabic*:]
+    \item Spectral problem:\[\begin{cases}
+      -\Delta u_n = \lambda_n u_n &\text{in } \Omega \\ u_n|_{\partial \Omega} = 0
+    \end{cases}\]
+    \begin{lem}
+      There is a \(\lambda_n > 0\), \(\lambda_n \xrightarrow{n \to \infty} \infty\) and an orthonormal family \(\{u_n\} \subseteq L^2(\Omega)\) s.t. \(u_n \in H_0^1(\Omega) \cap C^\infty(\Omega)\) solving this eigenvalue equation.
+    \end{lem}
+    \item \[\begin{cases}
+      \partial_t - \Delta_x u = 0 \\ u(x,0) = g(x)
+    \end{cases}
+    \Rightarrow
+    \begin{cases}
+      \partial_t \langle u_n, u\rangle_{L^2(\Omega)} = \langle u_n, \Delta_x u\rangle = \langle \Delta_x u_n, u\rangle = -\lambda_n \langle u_n, u\rangle \\ \langle u_n, u\rangle_{t = 0} = \langle u_n, g \rangle
+    \end{cases}\]
+    \begin{align*}
+      &\Rightarrow &\langle u_n, u\rangle &= e^{-t \lambda_n} \langle u_n, g\rangle &&\forall t > 0, \forall n = 1,2, \dots \\
+      &\Rightarrow & u&= \sum_{n=0}^\infty \langle \rangle = - \sum e^{-t \lambda_n} \langle \rangle u
+    \end{align*}
+    
+    \begin{eg}
+      \(\Omega = (0,1)\), \[\begin{cases}
+        - u_n'' = \lambda_n u_n &\text{in } (0,1) \\ u(0) = u(1) = 0
+      \end{cases}\]
+      has solution
+      \[
+        \begin{cases}
+          u_n(x) = \sqrt{2}\sin(\pi n x)& n = 1,2, \dots \\ \lambda_n = (\pi_n)^2
+        \end{cases}.
+      \]
+      This implies that 
+      \[
+        \begin{cases}
+          \partial_t - \Delta_x u = 0 &\text{in } (x,t) \in (0,1) \times (0,\infty) \\ u(x,0) = g(x) \\ u(x,t) = 0, x \in \{0,1\}
+        \end{cases}
+      \]
+      has a solution:
+      \begin{align*}
+        u(x,t) &= \sum_{n=1}^\infty e^{-t\lambda_n} \underbrace{\langle u_n, g \rangle}_{g_n} u_n(x) = \sum_{n=1}^\infty e^{- t \pi^2 n^2} g_n \sin(\pi n x),
+      \end{align*}
+      \[\int_0^1 \sin(n \pi x)^2 \,dx = \frac{1}{2} \quad \forall n > 1\]
+      \[g_n = \sqrt{2} \langle u_n, g\rangle = 2 \int_0^1 \sin(\pi n x) g(x)\, dx\]
+    \end{eg}
+  \end{enumerate}
+\end{rem}
+
+
+\begin{ex}[E 11.2]
+  Direct proof of heat equation. \(g \in C_c^1(0,1) \subseteq H_0^1(0,1)\), \(\Rightarrow\) \(\sum_n \pi^2 n^2 |g_n|^2 = c \|g'\|_{L^2(0,1)}^2 < \infty\), so \(\sum_n |g_n| < \infty\).
+  \begin{align*}
+    u(x,0) &= \underbrace{\sum_{n=1}^\infty g_n \sin(\pi n x)}_{\in C[0,1]} = g(x) \quad \forall x \in [0,1]
+  \end{align*}
+  From \(u(x,t) = \sum_{n=1}^\infty e^{-tn^2\pi^2} g_n \sin(\pi n x)\) we get 
+  \begin{align*}
+    \begin{cases}
+      \partial_t u(x,t) = \sum_{n=1}^\infty (-n^2 \pi^2) e^{-t\pi^2 n^2} g_n \sin(\pi n x) \quad \forall t > 0, \forall x \in (0,1) \\
+      \Delta_x u(x,t) = \sum_{n=1}^\infty e^{-t\pi^2 n^2} g_n[-(\pi n)^2] \sin(\pi n x) \quad \forall t > 0, \forall x \in (0,1)
+    \end{cases}
+  \end{align*}
+  So \(\partial_t u - \Delta_x u = 0\) for all \(t > 0, x \in (0,1)\)
+\end{ex}
+
+
+\begin{ex}[E 11.3]
+  \[\begin{cases}
+    \partial_t u - \Delta_x u = 0 & (x,t) \in \mathbb{R}^d \times (0,\infty) \\ u(x,0) = 0 & x \in \mathbb{R}^d
+  \end{cases}\]
+  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n} \quad \forall (x,t) \in \mathbb{R} \times (0,\infty)\]
+  where \(g(t) = e^{-\frac{t}{t^2}}\) (also ok \(g(t) = e^{-\frac{1}{t^s}}, s>1\)).
+\end{ex}
+
+  \begin{proof}[Solution]
+    Formally:
+    \begin{align*}
+      \left\{
+        \begin{aligned}
+          \partial_t u &= \sum_{n=0}^\infty \frac{g^{(n+1)}(t)}{(2n)!} x^{2n} \\
+          -\Delta_x u &= \sum_{n=1}^\infty \frac{g^{(n)}}{(2n)!} (2n)(2n-1)x^{2n-2}
+          = \sum_{n=1}^\infty \frac{g^{(n)}(t)}{(2n-2)!} x^{2n-2}
+          = \sum_{m=0}^\infty \frac{g^{(m+1)(t)}}{(2m)!} x^{2m}
+        \end{aligned}
+      \right.
+    \end{align*}
+    This imples \(\partial_t u = \Delta_x u\) (if the series are convergent) \((x,t) \in B \times \left[\epsilon, \frac{1}{\epsilon}\right]\) for \(B \subset \mathbb{R}\) bounded, \(\epsilon > 0\). Also
+    \begin{align*}
+      g(t) &= e^{- \frac{1}{t^2}} \xrightarrow{t \to 0^+} e^{-\infty} = 0 \\
+      g'(t) &= e^{- \frac{1}{t^2}} \left(\frac{2}{t^3}\right) \xrightarrow{t \to 0^+} 0 \\
+      g''(t) &= e^{\frac{1}{t^2}} \left(- \frac{3!}{t^4} + \frac{2}{t^3}\right) \xrightarrow{t \to 0^+} 0 \\
+      g'''(t) &= e^{- \frac{1}{t^2}} \left(\frac{4!}{t^5} - \frac{3!}{t^4} + \frac{2}{t^3}\right)
+    \end{align*}
+    Let's proof the convergence of the series:
+    \begin{align*}
+      u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n}
+    \end{align*}
+    converges absolutely for \(|x| \le C, t \in \left[\epsilon, \frac{1}{\epsilon}\right], \epsilon > 0\). By induction,
+    \begin{align*}
+      g^{(n)}(t) &= e^{-\frac{1}{t^2}} \underbrace{\left(\frac{(n+1)!}{t^{n+2}} - \frac{n!}{t^{n+1}} + \frac{(n+1)!}{t^n} - \dots\right)}_{\text{pol in } (\frac{1}{t}), \text{ all cos bounded by }(n+1)}(-1)^{n-1}
+    \end{align*}
+    This implies
+    \begin{align*}
+      |g^{(n)}(t)| \le e^{-\frac{1}{t^2}}[(n+2)!] \left(\frac{1}{t^{n+2}} + 1\right), \quad \frac{1}{t^s} \le \left(\frac{1}{t^{n+2}} + 1\right) \forall s =0,1,\dots, n+2
+    \end{align*}
+    Thus 
+    \begin{align*}
+      \sum_{n \ge 0} \left| \frac{g^{(n)}}{(2n)!}x^{2n}\right| \le \sum_{n \ge 0} e^{- \frac{1}{t^2}} \frac{(n+2)!}{(2n)!} \left(\frac{1}{t^{n+2}}+1\right)x^{2n}
+    \end{align*}
+    \begin{enumerate}[label=(\arabic*)]
+      \item \begin{align*}
+        \sum_{n \ge 0} \frac{(n+2)!}{(2n)!}x^{2n} &= \sum_{n \ge 0} \frac{1}{(n+3)(n+4)\cdots(2n)} \\
+        &\le \sum_{n \ge 0} \frac{1}{n^{n-2}} x^{2n} \\
+        &\le \sum_{n \ge M} + \sum_{n \ge M} \frac{1}{M^{n-2}} x^{2n} \\
+        &M^2 \sum_n {\left(\frac{x^2}{M}\right)^n} \\
+        &\le m^2 \frac{1}{1 - \left(\frac{x^2}{M}\right)}
+      \end{align*}
+      \item \(t \in [\epsilon, \frac{1}{\epsilon}]\), so \(\frac{1}{t} \le \frac{1}{\epsilon}\), so 
+      \(\frac{1}{t^{n+2}} \le \frac{1}{\epsilon^{n+2}} \longrightarrow \sum_{n \ge 0} \frac{(n+2)!}{(2n)!} \frac{1}{t^{n+2}} x^{2n} \le \sum_{n \ge 0} \frac{1}{n^{n-2}} \frac{1}{\epsilon^{n-2}} x^{2n}\)
+    \end{enumerate}
+  \end{proof}
+
+  \begin{rem}
+    \(|u(x,t)| \le \exp \left(\frac{cx^2}{t}\right) \leadsto \) unphysical solution. Violates \(|u(x,t)| \le Ce^{C|x|^2}\) for all \(\forall (x,t) \in \mathbb{R} \times [0,T]\)
+  \end{rem}
+
+  \begin{ex}[Bonus 11]
+    Consider 
+    \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy\]
+  \end{ex}
+  where \(\Phi(x,t) = \frac{1}{(4 \pi t)^{\frac{d}{2}}}e^{-\frac{x^2}{4t}}\). Assume \(g \in C_c^\infty(\mathbb{R}^d)\). Prove or disprove that 
+  \[\|u(\cdot, t)-g\|_{L^2(\mathbb{R}^d)} \le C_nt^n\]
+  as \(t \to 0^+\) for all \(n = 1,2,\dots\)
+  %
 \end{document}
