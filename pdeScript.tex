@@ -4967,7 +4967,7 @@
     \end{align*}
     Also:
     \begin{align*}
-      &\partial_t u - \Delta_x u \\&\quad= \int_{\mathbb{R}^d} -|2 \pi k|^2 e^{-t|2 \pi k|^2} \hat g(k) e^{2 \pi i k x} \, dk + \int_{\mathbb{R}^d} e^{-t |2 \pi k|^2} \hat g(k) |2 \pi i k|^2 e^{ 2 \pi i k x} \, dk = 0
+      &\partial_t u - \Delta_x u \\&\quad= \int_{\mathbb{R}^d} -|2 \pi k|^2 e^{-t|2 \pi k|^2} \hat g(k) e^{2 \pi i k x} \, dk + \int_{\mathbb{R}^d} e^{-t |2 \pi k|^2} \hat g(k) |2 \pi i k|^2 e^{ 2 \pi i k x} \, dk \\&\quad= 0
     \end{align*}
     \item Finally:
     \begin{align*}
@@ -4979,71 +4979,72 @@
       \int_{\mathbb{R}^d} |u(x,t)|^2 \, dx &= \int_{\mathbb{R}^d} |\hat u(k,t)|^2 \, dk \\
       &= \int_{\mathbb{R}^d} \underbrace{e^{-2t|2 \pi k|^2}}_{\in [0,1] \text{ and } \xrightarrow{t \to 0} 0} |\hat g (k)|^2 \, dk \xrightarrow{t \to \infty} 0
     \end{align*}
-    \item Assume \(g \in H^1(\mathbb{R}^d)\) \(\Leftrightarrow\) \(\int_{\mathbb{R}^d} {1 + |2 \pi k|^2})|\hat g(k)|^2 \, dk < \infty\).
+    \item Assume \(g \in H^1(\mathbb{R}^d)\) \(\Leftrightarrow\) \(\int_{\mathbb{R}^d} (1 + |2 \pi k|^2)|\hat g(k)|^2 \, dk < \infty\). We claim for all \(s \ge 0\) that \(\left|1 - e^{-s}\right| \le \min(1,Cs) \le C \sqrt{s}\): We have that \(s \mapsto \left|\frac{1-e^{-s}}{s}\right|\) is bounded and continuous in \([0,1]\) as \(\left|\frac{1 - e^{-s}}{s}\right| \to 1\), so \(\frac{1-e^{-s}}{s}\le C\) for all \(s \in [0,1]\).
     \begin{align*}
       \int_{\mathbb{R}^d} |u(x,t) - g(x)|^2 \, dx 
       &= \int_{\mathbb{R}^d} \underbrace{\left|1 - e^{-t |2 \pi k|^2}\right|^2|}_{\le C(t |2 \pi k|^2)}\hat g(k)|^2 \, dk \\
       &\le C \int_{\mathbb{R}^d} t |2 \pi k|^2 |\hat g(k)|^2 \, dk \\
       &\le Ct \|g\|_{H^1}^2 \quad \forall t > 0
     \end{align*}
-    Claim: for all \(s \ge 0\), \(\left|1 - e^{-s}\right| \le \min(1,cs) \le C \sqrt{s}\). We have that \(s \mapsto \left|\frac{1-e^{-s}}{s}\right|\) is bounded and continuous in \([0,1]\) as \(\left| \frac{1 - e^{-s}}{s}\right| \to 1\), so \(\frac{1-e^{-s}}{s} \le C\) for all \(s \in [0,1]\)
   \end{enumerate}
 \end{proof}
 
 
-\begin{rem}[Heat Equation in bounded set]
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open bounded with \(C^1\)-boundary.
-  \[\begin{cases}
-    \partial_t u - \Delta_x u = 0 &(x,t) \in \Omega \times (0,\infty) \\ u(x,0) = g(x) &u(x,t) = 0 \text{ if } x \in \partial \Omega
+\begin{enumerate}[label=Step \arabic*:]
+  \item Spectral problem:\[\begin{cases}
+    -\Delta u_n = \lambda_n u_n &\text{in } \Omega \\ u_n|_{\partial \Omega} = 0
   \end{cases}\]
-
-  \begin{enumerate}[label=Step \arabic*:]
-    \item Spectral problem:\[\begin{cases}
-      -\Delta u_n = \lambda_n u_n &\text{in } \Omega \\ u_n|_{\partial \Omega} = 0
-    \end{cases}\]
-    \begin{lem}
-      There is a \(\lambda_n > 0\), \(\lambda_n \xrightarrow{n \to \infty} \infty\) and an orthonormal family \(\{u_n\} \subseteq L^2(\Omega)\) s.t. \(u_n \in H_0^1(\Omega) \cap C^\infty(\Omega)\) solving this eigenvalue equation.
-    \end{lem}
-    \item \[\begin{cases}
-      \partial_t - \Delta_x u = 0 \\ u(x,0) = g(x)
-    \end{cases}
-    \Rightarrow
-    \begin{cases}
-      \partial_t \langle u_n, u\rangle_{L^2(\Omega)} = \langle u_n, \Delta_x u\rangle = \langle \Delta_x u_n, u\rangle = -\lambda_n \langle u_n, u\rangle \\ \langle u_n, u\rangle_{t = 0} = \langle u_n, g \rangle
-    \end{cases}\]
-    \begin{align*}
-      &\Rightarrow &\langle u_n, u\rangle &= e^{-t \lambda_n} \langle u_n, g\rangle &&\forall t > 0, \forall n = 1,2, \dots \\
-      &\Rightarrow & u&= \sum_{n=0}^\infty \langle \rangle = - \sum e^{-t \lambda_n} \langle \rangle u
-    \end{align*}
+  \begin{lem}
+    There is a \(\lambda_n > 0\), \(\lambda_n \xrightarrow{n \to \infty} \infty\) and an orthonormal family \(\{u_n\} \subseteq L^2(\Omega)\) s.t. \(u_n \in H_0^1(\Omega) \cap C^\infty(\Omega)\) solving this eigenvalue equation.
+  \end{lem}
+  \item \[\begin{cases}
+    \partial_t - \Delta_x u = 0 \\ u(x,0) = g(x)
+  \end{cases}
+  \Rightarrow
+  \begin{cases}
+    \partial_t \langle u_n, u\rangle_{L^2(\Omega)} = \langle u_n, \Delta_x u\rangle = \langle \Delta_x u_n, u\rangle = -\lambda_n \langle u_n, u\rangle \\ \langle u_n, u\rangle_{t = 0} = \langle u_n, g \rangle
+  \end{cases}\]
+  \begin{align*}
+    &\Rightarrow &\langle u_n, u\rangle &= e^{-t \lambda_n} \langle u_n, g\rangle &&\forall t > 0, \forall n = 1,2, \dots \\
+    &\Rightarrow & u&= \sum_{n=0}^\infty \langle \rangle = - \sum e^{-t \lambda_n} \langle \rangle u
+  \end{align*}
     
-    \begin{eg}
-      \(\Omega = (0,1)\), \[\begin{cases}
-        - u_n'' = \lambda_n u_n &\text{in } (0,1) \\ u(0) = u(1) = 0
-      \end{cases}\]
-      has solution
-      \[
-        \begin{cases}
-          u_n(x) = \sqrt{2}\sin(\pi n x)& n = 1,2, \dots \\ \lambda_n = (\pi_n)^2
-        \end{cases}.
-      \]
-      This implies that 
-      \[
-        \begin{cases}
-          \partial_t - \Delta_x u = 0 &\text{in } (x,t) \in (0,1) \times (0,\infty) \\ u(x,0) = g(x) \\ u(x,t) = 0, x \in \{0,1\}
-        \end{cases}
-      \]
-      has a solution:
-      \begin{align*}
-        u(x,t) &= \sum_{n=1}^\infty e^{-t\lambda_n} \underbrace{\langle u_n, g \rangle}_{g_n} u_n(x) = \sum_{n=1}^\infty e^{- t \pi^2 n^2} g_n \sin(\pi n x),
-      \end{align*}
-      \[\int_0^1 \sin(n \pi x)^2 \,dx = \frac{1}{2} \quad \forall n > 1\]
-      \[g_n = \sqrt{2} \langle u_n, g\rangle = 2 \int_0^1 \sin(\pi n x) g(x)\, dx\]
-    \end{eg}
-  \end{enumerate}
-\end{rem}
+  \begin{eg}
+    \(\Omega = (0,1)\), \[\begin{cases}
+      - u_n'' = \lambda_n u_n &\text{in } (0,1) \\ u(0) = u(1) = 0
+    \end{cases}\]
+    has solution
+    \[
+      \begin{cases}
+        u_n(x) = \sqrt{2}\sin(\pi n x)& n = 1,2, \dots \\ \lambda_n = (\pi_n)^2
+      \end{cases}.
+    \]
+    has a solution:
+    \begin{align*}
+      u(x,t) &= \sum_{n=1}^\infty e^{-t\lambda_n} \underbrace{\langle u_n, g \rangle}_{g_n} u_n(x) = \sum_{n=1}^\infty e^{- t \pi^2 n^2} g_n \sin(\pi n x),
+    \end{align*}
+    \[\int_0^1 \sin(n \pi x)^2 \,dx = \frac{1}{2} \quad \forall n > 1\]
+    \[g_n = \sqrt{2} \langle u_n, g\rangle = 2 \int_0^1 \sin(\pi n x) g(x)\, dx\]
+  \end{eg}
+\end{enumerate}
 
 
 \begin{ex}[E 11.2]
+  Consider the heat equation in a bounded domain
+  \[
+    \begin{cases}
+      \partial_t u(x,t) = \Delta_x u(x,t) & \forall x \in \Omega, t > 0 \\
+      u(x,t) = 0 & \forall x \in \partial \Omega, t > 0 \\
+      u(x,0) = g(x) & \forall x \in \Omega
+    \end{cases}\]
+    Let us focus on the simlest case \(\Omega = (0,1)\). Prove that for every \(g \in C_c^1(0,1)\), the function 
+    \begin{align*}
+      u(x,t) &= \sum_{n=1}^\infty g_n e^{-t \pi^2 n^2} \sin(n \pi x), & g_n &= 2 \int_0^1 g(y) \sin(n\pi y) \, dy
+    \end{align*}
+    is a classical solution to the above heat equation.
+\end{ex}
+
+\begin{proof}[Solution]
   Direct proof of heat equation. \(g \in C_c^1(0,1) \subseteq H_0^1(0,1)\), \(\Rightarrow\) \(\sum_n \pi^2 n^2 |g_n|^2 = c \|g'\|_{L^2(0,1)}^2 < \infty\), so \(\sum_n |g_n| < \infty\).
   \begin{align*}
     u(x,0) &= \underbrace{\sum_{n=1}^\infty g_n \sin(\pi n x)}_{\in C[0,1]} = g(x) \quad \forall x \in [0,1]
@@ -5056,15 +5057,17 @@
     \end{cases}
   \end{align*}
   So \(\partial_t u - \Delta_x u = 0\) for all \(t > 0, x \in (0,1)\)
-\end{ex}
+\end{proof}
 
 
 \begin{ex}[E 11.3]
-  \[\begin{cases}
-    \partial_t u - \Delta_x u = 0 & (x,t) \in \mathbb{R}^d \times (0,\infty) \\ u(x,0) = 0 & x \in \mathbb{R}^d
-  \end{cases}\]
-  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n} \quad \forall (x,t) \in \mathbb{R} \times (0,\infty)\]
-  where \(g(t) = e^{-\frac{t}{t^2}}\) (also ok \(g(t) = e^{-\frac{1}{t^s}}, s>1\)).
+  Let \(g(t) = e^{-\frac{1}{t^2}}\) and denote \(g^{(n)}(t)\) the \(n\)-th derivative of \(g\). Define 
+  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n}, \quad \forall x \in \mathbb{R}, t > 0\]
+  Prove that \(u\) is a classical solution to the heat equation 
+  \[\left\{\begin{aligned}
+    \partial_t u(x,t) &= \Delta_x u(x,t) &\forall x &\in \mathbb{R}, t > 0 \\
+    \lim_{t \to 0} u(x,t) &= 0 &\forall x &\in \mathbb{R}
+  \end{aligned}\right.\]
 \end{ex}
 
   \begin{proof}[Solution]
