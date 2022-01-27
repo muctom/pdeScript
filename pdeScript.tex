@@ -4923,16 +4923,21 @@
 
 \begin{ex}[E 11.1]
   Let \(g \in L^2(\mathbb{R}^d)\), 
-  \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y, t)g(y) \, dy\]
-  where \(\Phi\) is the fundamental solution of the heat equation.
+  \begin{align*}
+    u(x,t) &= \int_{\mathbb{R}^d} \Phi(x-y, t)g(y) \, dy,&
+    \Phi(x,t) &= \frac{1}{(4\pi t)^{\frac{d}{2}}} e^{- \frac{|x|^2}{4t}}
+  \end{align*}
+  be the fundamential solution of the heat equation
+  \[\begin{cases}
+    \partial_t u - \Delta_x u = 0 &\forall (x,t) \in \mathbb{R}^d \times (0,\infty) \\ u(x,t) \to g(x) &\text{as } t \to 0.
+  \end{cases}\]
+  
+  Prove that
   \begin{enumerate}[label=\alph*)]
-    \item \[\begin{cases}
-      \partial_t u - \Delta_x u = 0 &\forall (x,t) \in \mathbb{R}^d \times (0,\infty) \\ u(x,t) \to g(x) &\text{as } t \to 0 
-    \end{cases}\]
-    \item Still to \TeX
-    \item Still to \TeX
+    \item \(u \in C^\infty(\mathbb{R}^d \times (0, \infty))\).
+    \item \(\|u(\cdot, t) - g\|_{L^2(\mathbb{R}^d)} \smash{\xrightarrow{t \to 0^+}} 0\)
+    \item If \(g \in H^1(\mathbb{R}^d)\), then \(\|u(\cdot, t) -g\|_{L^2(\mathbb{R}^d)} \le C \sqrt{t}\) as \(t \to 0^+\).
   \end{enumerate}
-  Prove \(u \in C^\infty(\mathbb{R}^d \times (0, \infty))\).
 \end{ex}
 
 \begin{proof}[Solution]
@@ -4943,7 +4948,7 @@
     \begin{align*}
       \hat \Phi(k,t) &= e^{-t|2 \pi k|^2}
     \end{align*}
-    Recall \(\widehat{e^{-\pi |x|^2}} = e^{- \pi |k|^2}\). From this we get \(\widehat e^{- \pi \lambda |x|^2} = \lambda^{-\frac{d}{2}} e^{-\frac{\pi |k|^2}{\lambda}}\). Then:
+    Recall \(\widehat{e^{-\pi |x|^2}} = e^{- \pi |k|^2}\). From this we get \(\widehat{e^{- \pi \lambda |x|^2}} = \lambda^{-\frac{d}{2}} e^{-\frac{\pi |k|^2}{\lambda}}\). Then:
     \begin{align*}
       \widehat{e^{-\frac{|x|^2}{4t}}} = \widehat{e^{-\pi \frac{1}{4 \pi t} |x|^2}} = \left(\frac{1}{4 \pi t}\right)^{-\frac{d}{2}} e^{- \pi |k|^2 4 \pi t} = (4 \pi t)^{\frac{d}{2}} e^{-t |2 \pi k|^2}
     \end{align*}
@@ -4957,8 +4962,8 @@
     \end{align*}
     Consequently:
     \begin{align*}
-      D_x^\alpha(x,t) &= \int_{\mathbb{R}^d} \underbrace{e^{-t|2 \pi k|^2} \hat g(k) (2 \pi ik)^\alpha}_{L^1(\mathbb{R}^d, dk)} e^{2 \pi i k x} \, dk \in C(\mathbb{R}^d, (0,\infty)) \\
-      D_t^\alpha(x,t) &= \int_{\mathbb{R}^d} (-|2\pi k|^2)^\alpha e^{-t|2\pi k|^2} \hat g(k) e^{2 \pi ikx} \, dk \in C(\mathbb{R}^d, (0,\infty))
+      D_x^\alpha u(x,t) &= \int_{\mathbb{R}^d} \underbrace{e^{-t|2 \pi k|^2} \hat g(k) (2 \pi ik)^\alpha}_{L^1(\mathbb{R}^d, dk)} e^{2 \pi i k x} \, dk \in C(\mathbb{R}^d, (0,\infty)) \\
+      D_t^\alpha u(x,t) &= \int_{\mathbb{R}^d} (-|2\pi k|^2)^\alpha e^{-t|2\pi k|^2} \hat g(k) e^{2 \pi ikx} \, dk \in C(\mathbb{R}^d, (0,\infty))
     \end{align*}
     Also:
     \begin{align*}
@@ -5114,7 +5119,7 @@
     \(|u(x,t)| \le \exp \left(\frac{cx^2}{t}\right) \leadsto \) unphysical solution. Violates \(|u(x,t)| \le Ce^{C|x|^2}\) for all \(\forall (x,t) \in \mathbb{R} \times [0,T]\)
   \end{rem}
 
-  \begin{ex}[Bonus 11]
+  \begin{ex}[Bonus 10]
     Consider 
     \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy\]
   \end{ex}
