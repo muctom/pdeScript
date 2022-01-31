@@ -4802,6 +4802,11 @@
     \end{enumerate}
   \end{thm}
 
+  \begin{nota}
+    For functions of \((x,t)\) we introduce the following notation for different regularity in \(x\) and \(t\).
+    \[f \in C_1^2 \Leftrightarrow f, D_x f, D_x^2 f, \partial_t f \in C\]
+  \end{nota}
+
   \begin{thm}[Nonhomogeneous problem]
     Let \(f \in C_1^2(\mathbb{R}^d, [0,\infty))\) be compactly supported. Define
     \[u(x,t) = \int_0^t \int_{\mathbb{R}^d} \Phi(x-y, t-s) f(y,s) \, dy\, ds\]
@@ -5129,5 +5134,128 @@
   where \(\Phi(x,t) = \frac{1}{(4 \pi t)^{\frac{d}{2}}}e^{-\frac{x^2}{4t}}\). Assume \(g \in C_c^\infty(\mathbb{R}^d)\). Prove or disprove that 
   \[\|u(\cdot, t)-g\|_{L^2(\mathbb{R}^d)} \le C_nt^n\]
   as \(t \to 0^+\) for all \(n = 1,2,\dots\)
-  %
+  
+
+  \section{Maximum Principle}
+
+  Recall the Poisson eqation \(-\Delta u \le 0\) in \(\Omega \subseteq \mathbb{R}^d\) open, bounded. Then 
+  \[\sup_{\bar \Omega} u(x) = \sup_{\partial \Omega} u(x).\]
+
+  
+  \begin{thm}[Maximum principle for bouneded sets]
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and bouneded. Let \(T > 0\) and define 
+    \begin{align*}
+      \Omega_T &= \Omega \times (0,T), \\
+      \partial^\star \Omega_T &= (\bar \Omega \times \{0\}) \cup (\partial \Omega \times [0,T])
+    \end{align*}
+    If \(u \in C_1^2(\Omega_T) \cap C(\bar \Omega_T)\) solves 
+    \(\partial_t u - \Delta_x u \le 0\)
+    in \(\Omega_T\), then \[\max_{\bar \Omega_T} u = \max_{\partial^\star \Omega_T} u.\]
+  \end{thm}
+
+  \begin{proof}
+    We will use Hopf's argument which is simpler that the mean-value theorem (there exists a mean-value theorem for heat equation, buti it is complicated and we will not discuss it). Proof for the Poisson Equation:
+    Asumme \(u \in C^2(\Omega) \cap C(\bar \Omega)\)
+    \begin{enumerate}[label=Step \arabic*)]
+      \item Assume \(\Delta u > 0\) in \(\Omega\). Since \(\bar \Omega\) is compact, there is a \(x_0 \in \bar \Omega\) s.t. \(u(x_0) = \max_{x \in \bar \Omega} u(x)\). We prove that \(x_0 \in \partial \Omega\). In fact, if \(x_0 \in \Omega\), then since \(x_0\) is a (local) maximizer of \(u\) in \(\Omega\), we have \(\Delta u(x_0) \le 0\), which contradicts to the assumption that \(\Delta u > 0\) in \(\Omega\). Thus \(x_0 \in \partial \Omega\), and hence 
+      \[\max_{x \in \bar \Omega} u(x) = u(x_0) \le \max_{x \in \partial \Omega} u(x).\]
+      \item  Now assume \(\Delta u \ge 0\) in \(\Omega\). Define
+      \[u_\epsilon(x) = u(x) + \epsilon |x|^2, \quad \epsilon > 0.\]
+      Then, \(\Delta u_\epsilon > 0\) in \(\Omega\), hence by Step 1 and
+      \[u \le u_\epsilon \le u + \epsilon \sup_{x \in \bar \Omega} |x|^2\]
+      we have 
+      \begin{align*}
+        \max_{x \in \bar \Omega} u(x) 
+        &\le \max_{x \in \bar \Omega} u_\epsilon(x) 
+        \le \max_{x \in \partial \Omega} u_\epsilon(x) \\
+        &\le \max_{x \in \partial \Omega} u(x) + \epsilon \left(\sup_{x \in \bar \Omega} |x|^2\right)
+        \xrightarrow{\epsilon \to 0} \max_{x \in \partial \Omega} u(x)
+      \end{align*}
+    \end{enumerate}
+    Proof for the heat equation:
+    \begin{enumerate}[label=Step \arabic*)]
+      \item Assume \(u \in C_1^2(\Omega \times (0,T]) \cap C(\bar \Omega \times [0,T])\) and \[\partial_t u - \Delta_x u < 0\]
+      in \(\Omega \times (0,T]\). Then, beacuse of compactness, there is \((x_0, t_0) \in \bar \Omega \times [0,T]\) s.t. 
+      \begin{align*}
+        u(x_0, t_0) &= \max_{(x,t) \in \bar \Omega \times [0,T]} u(x,t).
+      \end{align*}
+      We prove that \((x_0, t_0) \in \partial^\star \Omega_T\). Assume by contradiction that \((x_0, t_0) \notin \partial^\star \Omega_T\), then \(x_0 \in \Omega\) and \(t_0 \in (0,T]\). Since \(x \mapsto u(x,t_0)\) has a (local) maximizer \(x_0 \in \Omega\) we have that \(\Delta_x u(x_0, t_0) \le 0\). Since \(t \mapsto u(x_0, t)\) has a (local) maximizer \(t_0 \in (0,T]\) we have that \(\partial_t u(x_0, t_0) = 0\). This implies:
+      \[(\partial_t u - \Delta_x u)(x_0, t_0) \ge 0\]
+      which is a contradiction to the assumption. Thus \((x_0, t_0) \in \partial^\star \Omega_T\), i.e. \(\max_{\bar \Omega_T} u = \max_{\partial^\star \Omega_T} u.\)
+      \item Assume \(u \in C_1^2(\Omega \times (0,T)) \cap C(\bar \Omega \times [0,T])\) and 
+      \[\partial_t u - \Delta_x u \le 0 \quad \text{in } \Omega \times (0,T).\]
+      Let \(\tilde T \in (0,T)\) and for \(\epsilon > 0:\)
+      \[u_\epsilon(x,t) = u(x,t) + \epsilon |x|^2.\]
+      Then: \(u_\epsilon \in C_1^2(\Omega \times (0,T']) \cap C(\bar \Omega \times [0, \tilde T])\) and \(\partial_t  u_\epsilon - \Delta_x  u_\epsilon < 0\) in \(\Omega \times (0,\tilde T]\). By Step 1:
+      \begin{align*}
+        &&\max_{\bar \Omega_{\tilde T}} u_\epsilon &\le \max_{\partial^\star \Omega_{\tilde T}} u_\epsilon \\
+        &\overset{\epsilon \to 0}{\Rightarrow} &\max_{\bar \Omega_{\tilde T}} u &\le \max_{\partial^\star \Omega_{\tilde T}} u \\
+        &\overset{\tilde T \to T}{\Rightarrow} &\max_{\bar \Omega_T} u &\le \max_{\partial^\star \Omega_T} u \qedhere
+      \end{align*}
+    \end{enumerate}
+  \end{proof}
+
+  \begin{thm}[Maximum principle for \(\Omega = \mathbb{R}^d\)]
+    Let \(\Omega_T = \mathbb{R}^d \times (0,T)\), \(\bar \Omega_T = \mathbb{R}^d \times [0,T]\). Let \(u \in C_1^2(\Omega_T) \cap C(\bar \Omega_T)\) such that 
+    \begin{itemize}
+      \item \(\partial_t u - \Delta_x u \le 0\) in \(\Omega_T\)
+      \item \(u(x,t) \le M e^{M|x|^2}\) for all \((x,t) \in \bar \Omega_T\)
+    \end{itemize}
+    Then \[\sup_{\bar \Omega_T} u(x,t) = \sup_{x \in \mathbb{R}^d} u(x,0).\]
+  \end{thm}
+
+  \begin{proof}
+    %ToDo
+  \end{proof}
+
+  \begin{rem}
+    The condition \(u \le Me^{M|x|^2}\) is necessary, otherwise there are solutions \(u \ne 0\) s.t. \(u(x,0) = 0\)
+  \end{rem}
+
+  \begin{thm}[Uniqueness]
+    If \(u \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C(\mathbb{R}^d \times [0,T])\) and
+    \begin{align*}
+      u(x,t) &\le Me^{M|x|^2} &&\text{in } \mathbb{R}^d \times [0,T], \\
+      \partial_t u - \Delta_x u &= 0 &&\text{in } \mathbb{R}^d \times (0,T), \\
+      u(x,0) &= 0 &&\text{in } \mathbb{R}^d 
+    \end{align*}
+    Then \(u = 0\) in \(\mathbb{R}^d \times [0,T]\).
+  \end{thm}
+
+  \begin{rem}
+    The heat equation 
+    \[\partial_t u - \Delta_x u = 0 \\ u(t=0) = g\] is a well-posed problem:
+    \begin{itemize}
+      \item Existence
+      \item Uniqueness
+      \item Stability (solution depends continuously on data)
+    \end{itemize}    
+    For the latter issue, by the maximum principle we have 
+    \[\|u(\cdot, t)\|_{L^\infty} \le \|u(\cdot, 0)\|_{L^\infty} \quad \forall t\]
+    or in the \(L^2\)-situation:
+    \[\|u(\cdot, t)\|_{L^2} \le \|u(\cdot, 0)\|_{L^2} \quad \forall t\]
+    On the other hand, the heat backward equation 
+    \[\begin{cases}
+      \partial_t u - \Delta_x u = 0 \\ u(t = T) = g
+    \end{cases}\]
+    is \emph{not} well-posed.
+    \begin{itemize}
+      \item Non-Existence: In general, the existence requires some special property on \(g\), e.g. \(g \) is very smooth (only \(g \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\) or \(g \in L^2(\mathbb{R}^d)\) is not enough)
+      \item Uniqueness: On the other hand, the uniqueness still holds.
+      \item 
+    \end{itemize}
+  \end{rem}
+
+  \begin{thm}
+    If \(u \in C_1^2(\mathbb{R}^d \times [0,T]) \cap C^1(\mathbb{R}^d, [0,T])\) and 
+    \[\begin{cases}
+      \partial_t u - \Delta_x u = 0 & \text{in } \mathbb{R}^d \times (0,T) \\
+      u(x,T) = 0
+    \end{cases}\]
+    Then \(u = 0\) in \(\mathbb{R}^d \times [0,T]\).
+  \end{thm}
+
+  \begin{proof}
+    %ToDo 
+  \end{proof}
 \end{document}
