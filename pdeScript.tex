@@ -52,6 +52,7 @@
 \newcommand{\supp}{\operatorname{supp}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Rd}{\mathbb{R}^d}
+\newcommand{\Tr}{\operatorname{Tr}}
 \renewcommand\qedsymbol{\(\blacksquare\)}
 
 \title{Partial Differerential Equations \\ Thành Nam Phan \\ Winter Semester 2021/2022}
@@ -5258,4 +5259,169 @@
   \begin{proof}
     %ToDo 
   \end{proof}
+
+  \section{Instability of the backward heat equation}
+  \begin{thm}[Instability]
+    There exist functions \(u_\epsilon \)
+  \end{thm}
+
+  Some remarks about the eat equation in unbounded domains:
+  \[\begin{cases}
+    \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+    u(x,0) = 0 &(\text{i.e. \(\lim_{t \to 0} u(x,t) = 0 \forall x \in \mathbb{R}^d\)})
+  \end{cases}\]
+  There is a classical solution \(0\ne u \in C^1(\mathbb{R}^d \times (0,\infty))\).
+  An example is 
+  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n}, \quad g(t) = e^{- \frac{1}{t^2}}\]
+  (s.t. \(g \to 0\) as \(t \to 0\)). Note
+  \begin{align*}
+    g(t) &= e^{- \frac{1}{t^2}}, \\
+    g'(t) &= \frac{2}{t^3} g(t) \\
+    g''(t) &= \left(\frac{2}{t^3}\right)'g(t) + \frac{2}{t^3} \frac{2}{t^3} g(t) \\
+    g^{(n)}(t) &= P_n \left(\frac{1}{t}\right)g(t)
+  \end{align*}
+  where
+  \[\begin{cases}
+    P_0 = 1 \\ P_{n+1} \left(\frac{1}{t}\right) = \left(P_n\left(\frac{1}{t}\right)\right)' + \left(\frac{2}{t^3}\right)P_n \left(\frac{1}{t}\right) = A_1 P_n + A_2 P_n, \begin{cases}
+      A_1 = \partial_t \\ A_2 = \frac{2}{t^3}
+    \end{cases}\\
+    P_{n+1} = (A_1 + A_2) P_n = (A_1 + A_2) (A_1 + A_2)P_{n-1} = 
+  \end{cases}\]
+  This implies:
+  \begin{align}
+    P_n = (A_1 + A_2)^n P_0 = \sum_{\sigma \in \{1,2\}^n} A_{\sigma(1)} A_{\sigma(2)} \cdots A_{\sigma(n)} P_0
+  \end{align}
+  \[A_1 \left(\frac{\alpha}{t^s}\right) = \frac{-s\alpha}{t^{s+1}} \to A_1\]
+  Multiple coefficients by a factors and \(+\) power by 1
+  \[A_2 \left(\frac{\alpha}{t^s}\right) = \frac{2\alpha}{t^{s+3}} \to A_2\]
+  Mul Cof by a factor 2 and + power by 3
+  \[|\underbrace{A_{\sigma(1)} \cdots A_{\sigma(n)},1}_{\text{\(k\) times \(A_2\), \(n-k\) times \(A_1\)}}| \le \frac{2^k}{t^{3k}} \le \frac{2^k}{t^{3k}} \frac{(3n)^{n-k}}{t^{n-k}} = \frac{2^k(3n)^{n-k}}{t^{n+2k}}\]
+  This implies 
+  \[|P_n \left(\frac{1}{t}\right)| \le \max_{0 \le k \le n} \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}}\]
+  Thus:
+  \begin{align*}
+    \sum_{n} \left|\frac{g^{(n)}(t)}{(2n)!} x^{2n}\right| &
+    \le \sum_n \max_{0 \le k \le n} \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}(2n)!} \frac{e^{-\frac{1}{t^2}}}{1} x^{2n} \\
+    &\le \sum_{n} \max \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}(2n)!} (k!)(2t^2)^k e^{- \frac{1}{2t^2}} x^{2n} \\
+    &= \sum_{n} \frac{2^n 2^k 2^k (3n)^{n-k}(k!)}{(2n)!t^n} e^{- \frac{1}{2t^2}} x^{2n} \\
+    &\le \sum_{n} \frac{(c_n)^n}{(2n)!t^n} e^{- \frac{1}{2t^2}} x^{2n}\\
+    &\le \sum_{n} \frac{c^n}{n!t^n} e^{- \frac{1}{2t^2}} x^{2n} \\
+    &\le \sum_{n} e^{\frac{cx^2}{t}-\frac{1}{2t^2}}
+  \end{align*}
+  Where we used that
+  \[e^s = \sum_k \frac{s^k}{k!} \ge \frac{s^k}{k!}\]
+  for all \(s \ge 0\) implies 
+  \[e^{- \frac{1}{2t^2}} = \frac{1}{e^{\frac{1}{2t^2}}} \le \frac{1}{\left(\frac{1}{2t^2}\right) \frac{1}{k!}} = k!(2t^2)^k.\]
+  We conclude:
+  \begin{itemize}
+    \item \(u(x,t)\) is well-defined, \(x \in \mathbb{R}^d\), \(t > 0\) real? \(to\) heat equation. 
+    \item \(u(x,t) \to 0\) as \(t \to 0\) for all \(x \in \mathbb{R}^d\).
+  \end{itemize}
+
+  \begin{ex}[12.1]
+    Let \(u \in C^2(\Omega)\) and let \(x_0 \in \Omega\) be a local minizer. Then 
+    \[H = Hu(x_0) = (\partial_i \partial_j u)_{i,j = 1}^d(x_0) \le 0\]
+    i.e. \(\xi H \xi \le 0\) for all \(\xi \in \mathbb{R}^d\).
+  \end{ex}
+
+  \begin{proof}[Solution]
+    In 1D this is obvious if \(x_0\) is a local minimizer of \(u\), then \(u'(x_0) = 0, u''(x_0) \le 0\) (Taylor expansion). \\
+    In \(d\) dimensions:
+    \[\phi(t) = u(x_0 + t \xi) \quad \xi \in \mathbb{R}^d, t \in \mathbb{R}, |t| \text{small}\]
+    So \(0\) is a local maximizer of \(\phi\). This implies
+    \[0 = \phi'(0) = \nabla u (x_0) \xi \quad \forall \xi \in \mathbb{R}^d \Rightarrow H \le 0\]
+    \begin{align*}
+      \phi''(0) &= \lim_{t \to 0} \frac{\phi'(t) - \phi'(0)}{t} = \lim_{† \to 0} \frac{\nabla u(x_0 + t \xi)}{t} = \lim_{t \to 0}\frac{(\nabla u(x_0 + t \xi) - \nabla u(x_0))\xi}{t} \\
+      &= \lim_{t \to 0} \sum_{i=1}^d \frac{(\partial_i u(x_0 + t\xi)-\partial_i u(x_0))\xi_i}{t} = \sum_{i=1}^d \sum_{j=1}^d \partial_j \partial_i u(x_0) \xi_j \xi_i = \langle \xi, H\xi\rangle
+    \end{align*}
+    \(H = (\partial_i \partial_j u(x_0))_{i,j = 1}^d\). Consequently
+    \[\Delta u(x_0) = \sum_{i=1}^d \partial_i \partial_j u(x_0) = \operatorname{Tr}(H) \le 0\]
+  \end{proof}
+
+  \begin{ex}[E 12.2]
+    \[Lu(x) = \sum_{ij} a_{ij}(x) \partial_i \partial_j u(x) + \sum_i b_i(x) \partial_ju(x),\]
+      \(a_{ij}, b_i \in C(\bar \Omega)\), \(A(x) = (a_{ij}(x))_{i,j = 1}^d \ge \mathbb{1}\) (as matrics \(A-\mathbb{1} \ge 0\))
+      Prove taht if \(Lu(x) \ge 0\) for all \(x \in \Omega\) and \(u \in C^2(\Omega) \cap C(\bar \Omega)\), then \(\max_{x \in \bar \Omega}u(x) = \max_{x \in \partial \Omega} u(x)\)
+  \end{ex}
+
+  \begin{proof}[Solution]
+    \begin{enumerate}[label=\arabic*)]
+      \item \(Lu(x) > 0\) for all \(x \in \Omega\):
+      Since \(u \in C(\bar \Omega)\) there is a \(x_0 \in \bar \Omega\) s.t. 
+      \[u(x_0) = \max_{x \in \bar \Omega} u(x).\]
+      We prove \(x_0 \in \partial \Omega.\) Assume by contradiction that \(x_0 \notin \partial \Omega\), so \(x_0 \in \Omega\) imples that \(x_0\) is a local minimizer. We prove \(Lu(x_0) \le 0\). Note:
+      \begin{align*}
+        Lu(x_0) &= \sum_{ij} a_{ij}(x) \partial_i \partial_ju(x_0) + \sum_{i} b_i(x_0) \partial_i u(x_0) \\
+        &= \operatorname{Tr}[A(x_0) H(x_0)] + B(x_0) \underbrace{\nabla u(x_0)}_{=0} \le 0 \quad \lightning
+      \end{align*}
+      \(A(x_0) = (a_{ij}(x_0))_{i,j=1}^d\), \(B(x_0) = (b_i(x_0))_{i=1}^d\),
+      where \(\Tr[AH] = \sum_i(AH)_{ii} = \sum_i \sum_j A_{ij} H_{ij}\)
+    \end{enumerate}
+    General fact: If \(A \ge 0, B \ge 0\) (matrices), then \(Tr(AB) \ge 0\).
+    \begin{itemize}
+      \item \(A = (\sqrt{A})^2 \Rightarrow \Tr(AB) = \Tr((\sqrt{A})^2B) = \Tr(\underbrace{\sqrt{A}B\sqrt{A}}_{\ge 0}) \ge 0\)
+      \item Spectral theorem: \(A \ge 0\), then there are eigenvectors \((\alpha_i)\) and eigenvalues \(\lambda_i \ge 0\) s.t. 
+      \[\Tr(AB) = \sum_i \langle \alpha_i, AB\alpha_i\rangle = \sum_i \underbrace{\lambda_i}_{\ge 0} \underbrace{\langle \alpha_i, B \alpha_i\rangle}_{\ge 0} \ge 0\]
+    \item General Case: \(L u(x) \ge 0\) for all \(x \in \Omega\). Assume that there is a \(v \in C^2(\Omega) \cap C(\bar \Omega)\) s.t. \(Lv(x) > 0\) for all \(x \in \Omega\). Define for all \(\epsilon > 0\) \(u_\epsilon = u + \epsilon v\). Then \(L u_\epsilon(x) = Lu(x) + \epsilon Lv(x) > 0\) for all \(x \in \Omega\). By Step 1,
+    \begin{align*}
+      \max_{x \in \bar \Omega} u_\epsilon(x) &\le \max_{x \in \partial \Omega} u_\epsilon(x) \\
+      \xrightarrow{\epsilon \to 0} \quad \max_{x \in \bar \Omega} u(x) &\le \max_{x \in \partial \Omega} u(x)
+    \end{align*}
+    What \(v\)? First \(v(x) = x^2 = x_1^2 + \dots + x_d^2\),
+    \begin{align*}
+      Lv(x) &= \sum_{ij} a_{ij}(x) 2 \delta_{ij} + \sum_i b_i(x) 2x_i
+    \end{align*}
+    not clear to be \(\ge 0\).
+    \begin{align*}
+      v(x) &= x^{2n} \quad \text{\(n\) large} \\
+      v(x) &= x_1^{2n} \longrightarrow Lv(x) = a_{11}(x) 2n(2n+1)x_1^{2n-2} + b_1(x) 2n x_1^{2n-1} \\
+      &\ge 2n x_1^{2n-2}[\underbrace{(2n-1) + \underbrace{b_1(x)x_1}_{\text{b.d. in \(\bar \Omega\)}}}_{> 0}] \ge 0 \quad \forall x \in \bar \Omega
+    \end{align*}
+    if \(n\) is large enough.
+    \[v(x) = (x_1 + R)^{2n}\]
+    where \(R > 0\) large s.t. \(x_1 + R \ge 1\) for all \(\forall x \in \bar \Omega\). This implies
+    \begin{align*}
+      Lv(x) \ge 2n \underbrace{(x_1 + R)^{2n-2}}_{> 0}[\underbrace{2n-1 + b_1(x) (x_1 + R)}_{> 0}] > 0
+    \end{align*}
+    for all \(x \in \bar \Omega\) if \(n\) is large.
+    \end{itemize}
+  \end{proof}
+
+  \begin{ex}[E 12.3]
+    \[\begin{cases}
+      \partial_tu-\Delta_x u = f(x,t) &\text{in } \mathbb{R}^d \times (0,T)\\ u(t=0) = g &\text{in } \mathbb{R}^d
+    \end{cases},\]
+    \(f \in C_1^2\) and compactly supported, \(g \in C \cap L^\infty(\mathbb{R}^d)\) and \(u(x,t) \le Me^{M|x|^2}\).
+  \end{ex}
+
+  \begin{proof}[Solution]\
+    \begin{enumerate}[label=Step \arabic*:]
+      \item There is at most one solution \(u\).
+      \item \[u(x,t) = \int_{\mathbb{R}^d} \phi(x-y,t) g(y) \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s)f(y,s) \, dy \, ds\]
+    \end{enumerate}
+    This implies:
+    \begin{align*}
+      \|u\|_{L^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds  \\
+      \Rightarrow \quad \|u\|_{L_{x,t)^\infty}} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
+      &= \|g\|_{L_x^\infty} + T \|f\|_{L_{x,t}^\infty}
+    \end{align*}
+    This is optimal! E.g. \(g = 0, f = 1\), \(u(x,t) = u(t)\).
+    \[\begin{cases}
+      u' = 1 \\ u(0) =0
+    \end{cases}\Rightarrow u(t) = t\]
+  \end{proof}
+
+  \begin{ex}[Bonus 11]
+    Denote for all \(u \in C^2(\Omega) \cap C(\bar \Omega)\):
+    \[Lu(x) = \sum_{i,j=1}^d a_{ij}(x) \partial_i \partial_j u(x)\]
+    where \(a_{ij} \in C(\bar \Omega)\) s.t. \(A(x) = (a_{ij}(x)) \ge 1\).
+    Prove that if \(\Omega \subseteq \mathbb{R}^d\) is open and bounded, \(u \in C_1^2(\bar \Omega \times [0,T])\) and 
+    \[\begin{cases}
+      \partial_t u - Lu \le 0 &\text{in } \Omega \times (0,T) \\
+      u(t=0) = 0 \\ u(x \in \partial \Omega) = 0
+    \end{cases}\]
+    Prove that \(u(x,t) \le 0\) for all \((x,t) \in \bar \Omega \times [0,T]\).
+  \end{ex}
+  %Hint: Apply half method. But with general operator L. 
+
 \end{document}
