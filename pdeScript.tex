@@ -5177,7 +5177,7 @@
     Proof for the heat equation:
     \begin{enumerate}[label=Step \arabic*)]
       \item Assume \(u \in C_1^2(\Omega \times (0,T]) \cap C(\bar \Omega \times [0,T])\) and \[\partial_t u - \Delta_x u < 0\]
-      in \(\Omega \times (0,T]\). Then, beacuse of compactness, there is \((x_0, t_0) \in \bar \Omega \times [0,T]\) s.t. 
+      in \(\Omega \times (0,T]\). Then, because of compactness, there is \((x_0, t_0) \in \bar \Omega \times [0,T]\) s.t. 
       \begin{align*}
         u(x_0, t_0) &= \max_{(x,t) \in \bar \Omega \times [0,T]} u(x,t).
       \end{align*}
@@ -5203,11 +5203,47 @@
       \item \(\partial_t u - \Delta_x u \le 0\) in \(\Omega_T\)
       \item \(u(x,t) \le M e^{M|x|^2}\) for all \((x,t) \in \bar \Omega_T\)
     \end{itemize}
-    Then \[\sup_{\bar \Omega_T} u(x,t) = \sup_{x \in \mathbb{R}^d} u(x,0).\]
+    Then \[\sup_{(x,t) \in \bar \Omega_T} u(x,t) = \sup_{x \in \mathbb{R}^d} u(x,0).\]
   \end{thm}
 
-  \begin{proof}
-    %ToDo
+  \begin{proof}\
+    \begin{enumerate}[label=Step \arabic*:]
+      \item For all \(y \in \mathbb{R}^d\) and \(\epsilon > 0\) define 
+      \[v(x,t) = u(x,t) - \frac{\epsilon}{(T+\epsilon-t)^{\frac{d}{2}}} \exp \left(\frac{|x-y|^2}{4(T+\epsilon-t)}\right)\]
+      This implies 
+      \[\partial_t v - \Delta_x v = \partial_t u - \Delta_x u \le 0\] in \(\Omega_T\). For \(U = B(y,r), U_T = U \times (0,T), \bar U_T = \bar U \times [0,T]\), \(
+        \partial^\star U_T = (U \times \{0\}) \cup (\partial U \times [0,T])\), by the maximum principle for \(U\) bounded we have 
+        \[\max_{\bar U_T} v \le \max_{\partial^\star U_T} v.\]
+        Let us bound \(\max_{\partial^\star U_T} v\).
+        \begin{itemize}
+          \item On \(U \times \{0\}\) we use \(v \le u\) and hence 
+          \[\max_{x \in \bar U} v(x,0) \le \max_{x \in \bar U} u(x,0) \le \max_{x \in \mathbb{R}^d} u(x,0).\]
+          \item On \(\partial U \times [0,T]\) we use \(|x-y|=r \Rightarrow |x| \le |y| + r\).
+          \begin{align*}
+            v(x,t) &= u(x,t) - \frac{\epsilon}{(T+\epsilon-t)^{\frac{d}{2}}} \exp \left(\frac{|x-y|^2}{4(T+\epsilon-t)}\right) \\
+            &\le Me^{M(|y|+r)^2}-\frac{\epsilon}{(T+\epsilon)^{\frac{d}{2}}} \exp \left(\frac{r^2}{4(T+\epsilon)}\right) \xrightarrow{r \to \infty} - \infty
+          \end{align*}
+          if  \(M < \frac{1}{4(T+\epsilon)}\). In particular, we can choose \(r\) large s.t.
+          \[\max_{\substack{x \in \partial U\\t \in [0,T]}} v(x,t) \le \max_{x \in \mathbb{R}^d} u(x,0).\]
+        \end{itemize}
+
+		In summary, if \(M < \frac{1}{4(T+\epsilon)}\), then:
+		\begin{align*}
+		  u(y,t) - \frac{\epsilon}{(T+\epsilon-t)^{\frac{d}{2}}} = v(y,t) \le \max_{\bar U_T} v \le \max_{x \in \mathbb{R}^d} u(x,0)
+		\end{align*}
+		This holds for all \((y,t) \in \mathbb{R}^d \times [0,T]\). Thus,
+		\[\max_{\mathbb{R}^d \times [0,T]} u \le \frac{\epsilon}{(T+\epsilon-t)^{\frac{d}{2}}} + \max_{x \in \mathbb{R}^d} u(x,0)\]
+		Taking \(\epsilon \to 0\) we conclude that if \(M < \frac{1}{4T}\),
+		\[\max_{\mathbb{R}^d \times [0,T]} u \le \max_{x \in \mathbb{R}^d} u(x,0)\]
+		\item For general \(T\), we denote \(T_1 = \frac{T}{N}\), \(N \in \mathbb{N}\) s.t. \(M <\frac{4}{T_1}\). Then by step 1:
+		\begin{align*}
+			\max_{\mathbb{R}^d \times [0,T_1]} u &\le \max_{x \in \mathbb{R}^d} u(x,0) \\
+			\max_{\mathbb{R}^d \times [T_1, 2 T_1]} u &\le \max_{x \in \mathbb{R}^d} u(x,T_1) \le \max_{x \in \mathbb{R}^d} u(x,0) \\
+			&\vdots \\
+			\max_{\mathbb{R}^d \times [(N-1) T_1, N T_1]} & \le \max_{x \in \mathbb{R}^d} u(x,(N-1) T_1) \le \max_{x \in \mathbb{R}^d} u(x,0) \\
+			\leadsto \quad \max_{\mathbb{R}^d \times [0,T]} u &\le \max_{x \in \mathbb{R}^d} u(x,0)
+		\end{align*}
+    \end{enumerate}
   \end{proof}
 
   \begin{rem}
@@ -5244,7 +5280,6 @@
     \begin{itemize}
       \item Non-Existence: In general, the existence requires some special property on \(g\), e.g. \(g \) is very smooth (only \(g \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\) or \(g \in L^2(\mathbb{R}^d)\) is not enough)
       \item Uniqueness: On the other hand, the uniqueness still holds.
-      \item 
     \end{itemize}
   \end{rem}
 
