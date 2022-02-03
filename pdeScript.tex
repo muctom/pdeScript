@@ -5278,7 +5278,9 @@
 
   \begin{rem}
     The heat equation 
-    \[\partial_t u - \Delta_x u = 0 \\ u(t=0) = g\] is a well-posed problem:
+    \[\begin{cases}
+		\partial_t u - \Delta_x u = 0 \\ u(t=0) = g
+	\end{cases}\] is a well-posed problem:
     \begin{itemize}
       \item Existence
       \item Uniqueness
@@ -5299,8 +5301,26 @@
     \end{itemize}
   \end{rem}
 
+  \begin{lem}\label{e-becomes-zero}
+		If \(e \in C^2(0,T)\), \(e(t) \ge 0\), \(e'(t) \le 0\), \(e''(t) \ge 0\) and \(|e'(t)|^2 \le e(t) e''(t)\) for \(t \in [0,T]\) and \(e(T) = 0\), then \(e \equiv 0\).
+	\end{lem}
+
+	\begin{proof}
+		Since \(e\) is monotonly decreasing and \(e(T) = 0\) there is a \(t_0 \in [0,T]\) s.t. \(e(t_0) = 0\) and \(e(t) > 0\) if \(t \le t_0\). We need to prove that \(t_0 = 0\). Assume by contradiction \(0 < t_0 \le T\), then for \(t \in (0,t_0)\) define \(f(t) \coloneqq \log e(t)\). Then 
+		\begin{align*}
+			f'(t) &= \frac{e'(t)}{e(t)} \\
+			\Rightarrow \quad f''(t) &= \frac{e''(t) e(t)-|e'(t)|^2}{e(t)^2} \ge 0
+		\end{align*}
+		This means that \(f\) is convex, so for all \(t_1, t_2 \in (0,t_0)\) and \(\tau \in (0,1)\):
+		\begin{align*}
+			f(\tau t_1 + (1-\tau)t_2) &\le \tau f(t_1) + (1-\tau)f(t_2) \\
+			\Rightarrow \quad e(\tau t_1 + (1-\tau) t_2) &\le e(t_1)^\tau e(t_2)^{1-\tau}
+		\end{align*}
+		Now, \(e(\tau t_1 + (1-\tau) t_2) \xrightarrow{t_2 \to t_0} 0\) and \(\tau \to 1\) implies \(e(t_1) = 0\) for all \(t_1 \in (0,t_0)\) which is a contradiction.
+	\end{proof}
+
   \begin{thm}
-    If \(u \in C_1^2(\mathbb{R}^d \times [0,T]) \cap C^1(\mathbb{R}^d, [0,T])\) and 
+    If \(u \in C_1^2(\mathbb{R}^d \times [0,T]) \cap C^1(H^1(\mathbb{R}^d) \times [0,T])\) and 
     \[\begin{cases}
       \partial_t u - \Delta_x u = 0 & \text{in } \mathbb{R}^d \times (0,T) \\
       u(x,T) = 0
@@ -5309,13 +5329,25 @@
   \end{thm}
 
   \begin{proof}
-    %ToDo 
+    Recall 
+	\[e(t) = \int_{\mathbb{R}^d} |u(x,t)|^2 \, dx.\]
+	Then,
+	\begin{align*}
+		e'(t) &= 2 \int_{\mathbb{R}^d} u \partial_t u \, dx
+		= 2 \int_{\mathbb{R}^d} u \Delta_x u \, dx
+		= -2\int_{\mathbb{R}^d} |\nabla_x u|^2 \, dx \\
+		e''(t) &= - 4 \int_{\mathbb{R}^d} \nabla_x u \nabla_x(\partial_t u) 
+		= 4 \int_{\mathbb{R}^d} \Delta_x u \partial_t u \, dx
+		= 4 \int_{\mathbb{R}^d}|\Delta_x u|^2 \, dx \ge 0
+	\end{align*}
+	and hence
+	\begin{align*}
+		|e'(t)|^2 &= 4 \left| \int_{\mathbb{R}^d} u \Delta_x u \, dx \right|^2 
+		\le 4 \left(\int_{\mathbb{R}^d} |u|^2 \, dx\right) \left(\int_{\mathbb{R}^d} |\Delta_x u|^2 \, dx\right) = e(t) e''(t)
+	\end{align*}
+	Then the statement follows with lemma \ref{e-becomes-zero}.
   \end{proof}
 
-  \section{Instability of the backward heat equation}
-  \begin{thm}[Instability]
-    There exist functions \(u_\epsilon \)
-  \end{thm}
 
   Some remarks about the eat equation in unbounded domains:
   \[\begin{cases}
@@ -5324,7 +5356,7 @@
   \end{cases}\]
   There is a classical solution \(0\ne u \in C^1(\mathbb{R}^d \times (0,\infty))\).
   An example is 
-  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n}, \quad g(t) = e^{- \frac{1}{t^2}}\]
+  \[u(x,t) = \sum_{n=0}^\infty \frac{g^{(n)}(t)}{(2n)!} x^{2n}, \quad g(t) = e^{-\frac{1}{t^2}}\]
   (s.t. \(g \to 0\) as \(t \to 0\)). Note
   \begin{align*}
     g(t) &= e^{- \frac{1}{t^2}}, \\
@@ -5490,5 +5522,13 @@
     Prove that \(u(x,t) \le 0\) for all \((x,t) \in \bar \Omega \times [0,T]\).
   \end{ex}
   %Hint: Apply half method (Hopf Method?). But with general operator L. 
+
+
+  \section{Backward heat equation}
+  \begin{thm}[Instability]\ \newline
+    There exist functions \(u_\epsilon \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C^1(H^1(\mathbb{R}^d) \times [0,T])\) s.t. \[\partial_t u - \Delta_x u = 0 \quad \text{in } \mathbb{R}^d \times [0,T]\]
+		such that when \(\epsilon \to 0^+\):
+		\[\|u_\epsilon(\bullet, T)\|_{L^2(\mathbb{R}^d)} \to 0, \quad \|u(\bullet, 0)\|_{L^2(\mathbb{R}^d)} \to \infty.\]
+  \end{thm}
 
 \end{document}
