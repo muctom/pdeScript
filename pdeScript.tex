@@ -5350,19 +5350,21 @@
   \end{proof}
 
   \begin{ex}[E 12.2]
-    \[Lu(x) = \sum_{ij} a_{ij}(x) \partial_i \partial_j u(x) + \sum_i b_i(x) \partial_ju(x),\]
-      \(a_{ij}, b_i \in C(\bar \Omega)\), \(A(x) = (a_{ij}(x))_{i,j = 1}^d \ge \mathbb{1}\) (as matrics \(A-\mathbb{1} \ge 0\))
-      Prove taht if \(Lu(x) \ge 0\) for all \(x \in \Omega\) and \(u \in C^2(\Omega) \cap C(\bar \Omega)\), then \(\max_{x \in \bar \Omega}u(x) = \max_{x \in \partial \Omega} u(x)\)
+    Let \(\Omega \subseteq \mathbb{R}^d\) be open and bouned. We prove the maximum principle for a general elliptic operator
+    \[Lu(x) = \sum_{i,j=1}^d a_{ij}(x) \partial_i \partial_j u(x) + \sum_{i=1}^d b_i(x) \partial_ju(x),\]
+      \(a_{ij}, b_i \in C(\bar \Omega)\), \(A(x) = (a_{ij}(x))_{i,j = 1}^d \ge \mathbb{1}\) (as matrices). % \(A-\mathbb{1} \ge 0\)
+      Prove that if \(Lu(x) \ge 0\) for all \(x \in \Omega\) and \(u \in C^2(\Omega) \cap C(\bar \Omega)\), then 
+      \[\max_{x \in \bar \Omega}u(x) = \max_{x \in \partial \Omega} u(x).\]
   \end{ex}
 
-  \begin{proof}[Solution]
-    \begin{enumerate}[label=\arabic*)]
-      \item \(Lu(x) > 0\) for all \(x \in \Omega\):
+  \begin{proof}[Solution]\
+    \begin{enumerate}[label=Step \arabic*:]
+      \item Assume \(Lu(x) > 0\) for all \(x \in \Omega\):
       Since \(u \in C(\bar \Omega)\) there is a \(x_0 \in \bar \Omega\) s.t. 
       \[u(x_0) = \max_{x \in \bar \Omega} u(x).\]
-      We prove \(x_0 \in \partial \Omega.\) Assume by contradiction that \(x_0 \notin \partial \Omega\), so \(x_0 \in \Omega\) imples that \(x_0\) is a local minimizer. We prove \(Lu(x_0) \le 0\). Note:
+      We prove \(x_0 \in \partial \Omega.\) Assume by contradiction that \(x_0 \notin \partial \Omega\), so \(x_0 \in \Omega\) is a local maximizer. We prove \(Lu(x_0) \le 0\). Note:
       \begin{align*}
-        Lu(x_0) &= \sum_{ij} a_{ij}(x) \partial_i \partial_ju(x_0) + \sum_{i} b_i(x_0) \partial_i u(x_0) \\
+        Lu(x_0) &= \sum_{i,j=1}^d a_{ij}(x_0) \partial_i \partial_ju(x_0) + \sum_{i=1}^d b_i(x_0) \partial_i u(x_0) \\
         &= \operatorname{Tr}[A(x_0) H(x_0)] + B(x_0) \underbrace{\nabla u(x_0)}_{=0} \le 0 \quad \lightning
       \end{align*}
       \(A(x_0) = (a_{ij}(x_0))_{i,j=1}^d\), \(B(x_0) = (b_i(x_0))_{i=1}^d\),
@@ -5399,10 +5401,13 @@
   \end{proof}
 
   \begin{ex}[E 12.3]
+    Consider the inhomogeneous heat equation
     \[\begin{cases}
       \partial_tu-\Delta_x u = f(x,t) &\text{in } \mathbb{R}^d \times (0,T)\\ u(t=0) = g &\text{in } \mathbb{R}^d
     \end{cases},\]
-    \(f \in C_1^2\) and compactly supported, \(g \in C \cap L^\infty(\mathbb{R}^d)\) and \(u(x,t) \le Me^{M|x|^2}\).
+    \(f \in C_1^2(\mathbb{R}^d \times (0,T))\) and compactly supported and \(g \in C(\mathbb{R}^d \times [0,T]) \cap L^\infty(\mathbb{R}^d \times [0,T])\). Assume that there exists a solution \(u \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C(\mathbb{R}^d \times [0,T])\) satisfying \[u(x,t) \le Me^{M|x|^2}, \quad (x,t) \in \mathbb{R}^d \times [0,T].\]
+    Prove that 
+    \[\max_{(x,t) \in \mathbb{R}^d \times [0,T]} |u(x,t)| \le \|g\|_{L^\infty} + T\|f\|_{L^\infty}.\]
   \end{ex}
 
   \begin{proof}[Solution]\
@@ -5413,7 +5418,7 @@
     This implies:
     \begin{align*}
       \|u\|_{L^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds  \\
-      \Rightarrow \quad \|u\|_{L_{x,t)^\infty}} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
+      \Rightarrow \quad \|u\|_{L_{x,t}^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
       &= \|g\|_{L_x^\infty} + T \|f\|_{L_{x,t}^\infty}
     \end{align*}
     This is optimal! E.g. \(g = 0, f = 1\), \(u(x,t) = u(t)\).
@@ -5433,6 +5438,6 @@
     \end{cases}\]
     Prove that \(u(x,t) \le 0\) for all \((x,t) \in \bar \Omega \times [0,T]\).
   \end{ex}
-  %Hint: Apply half method. But with general operator L. 
+  %Hint: Apply half method (Hopf Method?). But with general operator L. 
 
 \end{document}
