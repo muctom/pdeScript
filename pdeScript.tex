@@ -5181,7 +5181,7 @@
       \begin{align*}
         u(x_0, t_0) &= \max_{(x,t) \in \bar \Omega \times [0,T]} u(x,t).
       \end{align*}
-      We prove that \((x_0, t_0) \in \partial^\star \Omega_T\). Assume by contradiction that \((x_0, t_0) \notin \partial^\star \Omega_T\), then \(x_0 \in \Omega\) and \(t_0 \in (0,T]\). Since \(x \mapsto u(x,t_0)\) has a (local) maximizer \(x_0 \in \Omega\) we have that \(\Delta_x u(x_0, t_0) \le 0\). Since \(t \mapsto u(x_0, t)\) has a (local) maximizer \(t_0 \in (0,T]\) we have that \(\partial_t u(x_0, t_0) = 0\). This implies:
+      We prove that \((x_0, t_0) \in \partial^\star \Omega_T\). Assume by contradiction that \((x_0, t_0) \notin \partial^\star \Omega_T\), then \(x_0 \in \Omega\) and \(t_0 \in (0,T]\). Since \(x \mapsto u(x,t_0)\) has a (local) maximizer \(x_0 \in \Omega\) we have that \(\Delta_x u(x_0, t_0) \le 0\). Since \(t \mapsto u(x_0, t)\) has a (local) maximizer \(t_0 \in (0,T]\) we have that \(\partial_t u(x_0, t_0) \ge 0\). This implies:
       \[(\partial_t u - \Delta_x u)(x_0, t_0) \ge 0\]
       which is a contradiction to the assumption. Thus \((x_0, t_0) \in \partial^\star \Omega_T\), i.e. \(\max_{\bar \Omega_T} u = \max_{\partial^\star \Omega_T} u.\)
       \item Assume \(u \in C_1^2(\Omega \times (0,T)) \cap C(\bar \Omega \times [0,T])\) and 
