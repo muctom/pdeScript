@@ -5088,7 +5088,7 @@
         \end{aligned}
       \right.
     \end{align*}
-    This imples \(\partial_t u = \Delta_x u\) (if the series are convergent) \((x,t) \in B \times \left[\epsilon, \frac{1}{\epsilon}\right]\) for \(B \subset \mathbb{R}\) bounded, \(\epsilon > 0\). Also
+    This implies \(\partial_t u = \Delta_x u\) (if the series are convergent) \((x,t) \in B \times \left[\epsilon, \frac{1}{\epsilon}\right]\) for \(B \subset \mathbb{R}\) bounded, \(\epsilon > 0\). Also
     \begin{align*}
       g(t) &= e^{- \frac{1}{t^2}} \xrightarrow{t \to 0^+} e^{-\infty} = 0 \\
       g'(t) &= e^{- \frac{1}{t^2}} \left(\frac{2}{t^3}\right) \xrightarrow{t \to 0^+} 0 \\
@@ -5241,7 +5241,7 @@
 			\max_{\mathbb{R}^d \times [T_1, 2 T_1]} u &\le \max_{x \in \mathbb{R}^d} u(x,T_1) \le \max_{x \in \mathbb{R}^d} u(x,0) \\
 			&\vdots \\
 			\max_{\mathbb{R}^d \times [(N-1) T_1, N T_1]} & \le \max_{x \in \mathbb{R}^d} u(x,(N-1) T_1) \le \max_{x \in \mathbb{R}^d} u(x,0) \\
-			\leadsto \quad \max_{\mathbb{R}^d \times [0,T]} u &\le \max_{x \in \mathbb{R}^d} u(x,0)
+			\leadsto \quad \max_{\mathbb{R}^d \times [0,T]} u &\le \max_{x \in \mathbb{R}^d} u(x,0) \qedhere
 		\end{align*}
     \end{enumerate}
   \end{proof}
@@ -5259,6 +5259,22 @@
     \end{align*}
     Then \(u = 0\) in \(\mathbb{R}^d \times [0,T]\).
   \end{thm}
+
+  \begin{proof}
+	  Use the maximum principle for \(u\) and \(-u\).
+  \end{proof}
+
+  \begin{rem}
+	If \(u(\cdot, t) \in L^2(\mathbb{R}^d)\), the proof of uniquness can be done without the maximum principle. Heuristically:
+	\begin{align*}
+		\frac{d}{dt} \int_{\mathbb{R}^d} |u(x,t)|^2 \, dt &= 2 \int_{\mathbb{R}^d} (\partial_t u)u \, dx
+		= 2 \int_{\mathbb{R}^d} \Delta_x u u \, dx
+		= -2 \int_{\mathbb{R}^d} |\nabla_x u|^2 \, dx \le 0
+	\end{align*}
+	This implies 
+	\[e(t) \coloneqq \int_{\mathbb{R}^d} |u(x,t)|^2 \, dx\]
+	is descreasing. Hence, if \(e(0) = 0\), then \(e(t) = 0\) for all \(t \ge 0\). This argument will be helpful below for the heat backward equation.
+  \end{rem}
 
   \begin{rem}
     The heat equation 
