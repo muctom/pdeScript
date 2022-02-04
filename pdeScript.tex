@@ -4772,6 +4772,7 @@
   \end{ex}
 
   \chapter{Heat Equation}
+	\section{Fundamental Solution}
   \[
     \begin{cases}
       \partial_t u = \Delta u &(x,t) \in \mathbb{R}^d \times (0, \infty) \\
@@ -4785,7 +4786,7 @@
   We have:
   \[
     \begin{cases}
-      \partial_t \Phi = \Delta \phi &(x,t) \in \mathbb{R}^d \times (0,\infty) \\
+      \partial_t \Phi = \Delta \Phi &(x,t) \in \mathbb{R}^d \times (0,\infty) \\
       \int_{\mathbb{R}^d} \Phi(x,t) \, dx = 1 & \forall t > 0 \\
       \lim_{t \to 0} \Phi(x,t) = \delta_0(x) & \text{in } D'(\mathbb{R}^d)
     \end{cases}
@@ -5526,9 +5527,82 @@
 
   \section{Backward heat equation}
   \begin{thm}[Instability]\ \newline
-    There exist functions \(u_\epsilon \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C^1(H^1(\mathbb{R}^d) \times [0,T])\) s.t. \[\partial_t u - \Delta_x u = 0 \quad \text{in } \mathbb{R}^d \times [0,T]\]
-		such that when \(\epsilon \to 0^+\):
-		\[\|u_\epsilon(\bullet, T)\|_{L^2(\mathbb{R}^d)} \to 0, \quad \|u(\bullet, 0)\|_{L^2(\mathbb{R}^d)} \to \infty.\]
+    There exist functions \(u_\epsilon \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C^1(H^1(\mathbb{R}^d) \times [0,T])\) s.t. \[\partial_t u_\epsilon - \Delta_x u_\epsilon = 0 \quad \text{in } \mathbb{R}^d \times [0,T]\]
+		with:
+		\[\|u_\epsilon(\bullet, T)\|_{L^2(\mathbb{R}^d)} \xrightarrow{\epsilon \to 0^+} 0, \quad \|u_\epsilon(\bullet, 0)\|_{L^2(\mathbb{R}^d)} \xrightarrow{\epsilon \to 0^+} \infty.\]
   \end{thm}
 
+	\begin{proof}
+		Recall by Fourier Transform 
+		\begin{align*}
+			&&\partial_t \hat u (k,t) + |2 \pi k|^2 \hat u(k,t) &= 0\\ 
+			&\Leftrightarrow&\partial_t (e^{|2 \pi k|^2t} \hat u(k,t)) &= 0 \\
+			&\Rightarrow&e^{|2 \pi k|^2t} \hat u(k,t) &= u(k,0) \\
+			&\Rightarrow&\hat u(k,t) &= e^{-t |2 \pi k|^2} \hat u(k,0) \\
+			&\Rightarrow&\hat u(k,0) &= e^{T |2 \pi k|^2} (k,T).
+		\end{align*}
+		Now we can take
+		\[\hat u_\epsilon(k,t) = \mathbb{1}\left(|k| \le \frac{1}{\epsilon}\right) \epsilon^{d+1} \, dk\]
+		Then,
+		\begin{align*}
+			\|u(\bullet, T)\|_{L^2(\mathbb{R}^d)}^2 &= \int_{\mathbb{R}^d} \hat u_\epsilon(k,t) \,dk = \lambda^d(\{|k| \le \epsilon^{-1}\})\epsilon^{d+1} \sim \epsilon \xrightarrow{\epsilon \to 0} 0 \\
+			\|u(\bullet, 0)\|_{L^2(\mathbb{R}^d)}^2 &= \int_{\mathbb{R}^d} e^{2T |2 \pi k|^2} \mathbb{1}(|k|\le \epsilon^{-1})\epsilon^{d+1} \, dk \\
+			&\ge \int_{\frac{\epsilon}{2} \le |k| \le \frac{\epsilon}{2}} e^{2T |2 \pi k|^2}\mathbb{1}(|k|\le \epsilon^{-1})\epsilon^{d+1} \, dk
+			\tilde \ge e^{2T\epsilon^{-2}}\epsilon \xrightarrow{\epsilon \to 0} \infty
+		\end{align*}
+	\end{proof}
+
+	\begin{rem}
+		This means that a small error of the data at \(t=T\) may cause a large error of the output \(t= 0\).
+	\end{rem}
+
+	\begin{thm}[Regularized solution]\ \\
+		Assume that \(u \in C_1^2(\mathbb{R}^d \times (0,T)) \cap C^1(H^1(\mathbb{R}^d), [0,T])\)
+		\[\begin{cases}
+			\partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,T) \\
+			u(x,T) = g(x) &\text{in } \mathbb{R}^d
+		\end{cases}\]
+		Then from given data \(g_\epsilon \in L^2(\mathbb{R}^d)\) s.t. 
+		\[\|g_\epsilon - g\|_{L^2(\mathbb{R}^d)} \le \epsilon\]
+		we construct a solution \(\tilde u_\epsilon\) s.t.
+		\[\sup_{t \in [0,T]}\|\tilde u_\epsilon(\bullet, t) - u(\bullet, t)\|_{L^2(\mathbb{R}^d)} \xrightarrow{\epsilon \to 0} 0\]
+	\end{thm}
+
+	\begin{proof}
+		Clearly we should not choose \(\tilde u_\epsilon\) to solve 
+		\[\begin{cases}
+			\partial_t u_\epsilon - \Delta_x u_\epsilon = 0 \\
+			u_\epsilon(t = T) = g_\epsilon
+		\end{cases},\]
+		i.e. \[\hat u_\epsilon(k,t) = e^{(T-t)|2\pi k|^2}\hat g_\epsilon(k).\]
+		Rather we take 
+		\[\hat u_\epsilon(k,t) = e^{(T-t)|2 \pi k|^2} \hat g_\epsilon(k) \mathbb{1}(|k| \le \delta_\epsilon^{-1})\]
+		Where \(\delta_\epsilon \to 0\) (chosen later). Then we have for all \(t \in [0,T]\):
+		\begin{align*}
+			\|u_\epsilon(\bullet,t) - u(\bullet, t)\|_{L^2(\mathbb{R}^d)}^2 &= \int_{\mathbb{R}^d} e^{2(T-t)|2 \pi k|^2} |\hat g_\epsilon(k) \mathbb{1}(|k|\le \delta_\epsilon^{-1}) - \hat g(k)|^2 \, dk \\
+			&\le 2 \int_{\mathbb{R}^d} e^{2 T|2 \pi k|^2} |\hat g_\epsilon(k) - \hat g (k)| \mathbb{1}(|k|\le \delta_\epsilon^{-1}) \, dk \\
+			&\quad + 2 \int_{\mathbb{R}^d} \underbrace{e^{2 T |2 \pi k|^2}|\hat g(k)|^2}_{|\hat u(k,0)|^2} \mathbb{1}(|k| > \delta_\epsilon^{-1}) \, dk
+			= \text{(I)} + \text{(II)}
+		\end{align*}
+		We have 
+		\begin{align*}
+			\text{(I)} &\le 2 \int_{\mathbb{R}^d} e^{c\delta_\epsilon^{-2}} |\hat g_\epsilon(k) - \hat g (k)|^2 \, dk = 2 e^{c \delta_\epsilon^{-2}} \epsilon^{-2} \longrightarrow 0 &&\text{if \(\delta_\epsilon \gg \frac{1}{\sqrt{|\log \epsilon|}}\)} \\
+			\text{(II)} &= 2 \int_{\mathbb{R}^d} |\hat u(k,0)|^2 \mathbb{1}(|k| \ge \delta_\epsilon^{-1}) \, dk
+			\le 2 \int_{\mathbb{R}^d} |k|^2 \delta_\epsilon^2 |\hat u(k,0)|^2 \, dk
+		\end{align*}
+		Thus chosing \(\frac{1}{\sqrt{|\log \epsilon|}} \ll \delta_\epsilon \ll 1\), e.g. \(\delta_\epsilon = (|\log \epsilon|)^{-\frac{1}{4}}\).
+		\[\sup_{t \in [0,T]} \|u_\epsilon(\bullet, t) - u(\bullet, t)\|_{L^2(\mathbb{R}^d)} \le \text{(I)} + \text{(II)} \xrightarrow{\epsilon \to 0} 0 \qedhere\]
+	\end{proof}
+
+	\begin{rem}
+		In application, both \(u\) and \(g\) are unknown. Only \(g_\epsilon\) is given. So we have to construct \(\tilde u_\epsilon\) using only information from \(g_\epsilon\).
+	\end{rem}
+
+	% \chapter{Wave Equation}
+	% \section
+	% Wave equation:
+	% \[\begin{cases}
+	% 	\partial_t^2 u - \Delta_x u = 0 &x \in \mathbb{R}^d, t > 0 \\
+	% 	u = g, \partial_t u = h &x \in \mathbb{R}^d, t = 0
+	% \end{cases}\]
 \end{document}
