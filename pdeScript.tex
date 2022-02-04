@@ -5598,11 +5598,101 @@
 		In application, both \(u\) and \(g\) are unknown. Only \(g_\epsilon\) is given. So we have to construct \(\tilde u_\epsilon\) using only information from \(g_\epsilon\).
 	\end{rem}
 
-	% \chapter{Wave Equation}
-	% \section
-	% Wave equation:
-	% \[\begin{cases}
-	% 	\partial_t^2 u - \Delta_x u = 0 &x \in \mathbb{R}^d, t > 0 \\
-	% 	u = g, \partial_t u = h &x \in \mathbb{R}^d, t = 0
-	% \end{cases}\]
+	\chapter{Wave Equation}
+	\section{\(d=1\)}
+	Wave equation:
+	\[\begin{cases}
+		\partial_t^2 u - \Delta_x u = 0 &x \in \mathbb{R}^d, t > 0 \\
+		u = g, \partial_t u = h &x \in \mathbb{R}^d, t = 0
+	\end{cases}\]
+	In \(d=1\):
+	\[\begin{cases}
+		\partial_t^2 u - \partial_x^2 u = 0, & (x,t) \in \mathbb{R} \times (0,\infty) \\
+		u = g, \partial_t u = h, & x \in \mathbb{R}, t = 0
+	\end{cases}\]
+	Key idea: Factorization:
+	\[\partial_t^2 - \partial_x^2 = (\partial_t + \partial_x) (\partial_t - \partial_x).\]
+	Then, if we denote \(v = (\partial_t - \partial_x) u\), we get the transport equation
+		\[(\partial_t + \partial_x) v = 0.\]
+	This implies 
+	\begin{align*}
+		v(x,t) &= a(x-t), \quad a(x) = v(x,0)
+	\end{align*}
+	From this we get the inhomogeneous transport equation
+	\[(\partial_t - \partial_x) u = a(x-t).\]
+	Now we decompose \(u = u_1 + u_2\), where 
+	\[\begin{cases}
+		(\partial_t - \partial_x) u_1 = 0 \\
+		(\partial_t - \partial_x) u_2 = a (x-t)
+	\end{cases}.\]
+	Like above, we get \(u_1 = b(x+t)\) and an explicit choice of \(u_2\) is
+	\[u_2(x,t) = \frac{1}{2} \int_{x-t}^{x+t} a(y) \, dy\]
+	Thus,
+	\[u(x,t) = b(x+t) + \frac{1}{2} \int_{x-t}^{x+t} a(y) \, dy\]
+	Let's compute \(a\) and \(b\):\
+	\begin{align*}
+		b(x) &= u(x,0) = g(x) \\
+		a(x) &= v(x,0) = (\partial_t u - \partial_x u)_{t = 0} = h-g'.
+	\end{align*}
+	
+	\begin{thm}[d'Alembert formula]
+		For \(d = 1\) let \(g \in C^2(\mathbb{R}^d)\), \(h \in C^1(\mathbb{R})\) and define \(u\) by the \emph{d'Alembert formula}
+		\begin{align*}
+			u(x,t) &= \int_{x-t}^{x+t} (h(y)-g'(y)) \, dy + g(x+t) \\
+			&= \frac{1}{2} [g(x+t)+g(x-t)] + \frac{1}{2} \int_{x-t}^{x+t} h(y) \, dy.
+		\end{align*}
+		Then:
+		\begin{itemize}
+			\item \(u \in C^2(\mathbb{R} \times (0,\infty))\)
+			\item \(\partial_t^2 u - \partial_x^2 u = 0\) 
+			\item \(u = g, \partial_t u = h\) when \(t \to 0\)
+		\end{itemize}
+	\end{thm}
+
+	\begin{proof}
+		Exercise.
+	\end{proof}
+
+	\begin{rem}
+		If \(g \in C^k\) and \(h \in C^{k-1}\), then \(u \in C^k\) (but not better).
+	\end{rem}
+
+	Now, let's apply the \emph{Reflection Method}. Replace \(\mathbb{R}\) by \(\mathbb{R}_+ = (0,\infty)\) and assume
+	\[\begin{cases}
+		\partial_t^2 u - \partial_x^2 u = 0 &\mathbb{R}_+ \times (0,\infty) \\
+		u = g, \partial_t u = h &\text{on } \mathbb{R}_+ \times \{t = 0\}, g(0) = h(0) = 0 \\
+		u = 0 &\text{on } \{x = 0\} \times \{t > 0\}
+	\end{cases}\]
+	Define
+	\begin{align*}
+		\tilde u(x,t) &= \begin{cases}
+			u(x,t),&x \ge 0, t \ge 0 \\
+			-u(-x,t),&x \le 0, t \ge 0
+		\end{cases}\\
+		\tilde g(x) &= \begin{cases}
+			g(x) &x \ge 0 \\
+			-g(-x) &x \le 0
+		\end{cases} \\
+		\tilde h(x) &= \begin{cases}
+			h(x) &x \ge 0 \\
+			-h(-x) &h \le 0
+		\end{cases}
+	\end{align*}
+	Then 
+	\[\begin{cases}
+		\partial_t^2 \tilde u - \partial_x^2 \tilde u = 0 &\text{in } \mathbb{R} \times (0,\infty) \\
+		\tilde u = \tilde g, \partial_t \tilde u = \tilde h & \text{on } \mathbb{R} \times \{t = 0\}
+	\end{cases}.\]
+	By d'Alembert formula 
+	\begin{align*}
+		\tilde u(x,t) &= \frac{1}{2} \left[\tilde g(x+t) + \tilde g(x-t)\right] + \frac{1}{2} \int_{x - t}^{x+t} \tilde h(y) \, dy
+	\end{align*}
+  This imples 
+  \[u(x,t) = \begin{cases}
+    \frac{1}{2} [g(x+t)+g(x-t)] + \frac{1}{2} \int_{x-t}^{x+t}h(y) \, dy &x \ge t \ge 0 \\
+    \frac{1}{2} [g(x+t)-g(t-x)] + \frac{1}{2} \int_{t-x}^{x+t} h(y) \, dy &t \ge x \ge 0
+  \end{cases}.\]
+  This is the solution of the heat equation in \(\mathbb{R}_+ \times (0,\infty)\).
+
+  
 \end{document}
