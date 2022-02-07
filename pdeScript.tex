@@ -5599,7 +5599,7 @@
 	\end{rem}
 
 	\chapter{Wave Equation}
-	\section{\(d=1\)}
+	\section{d'Alembert}
 	Wave equation:
 	\[\begin{cases}
 		\partial_t^2 u - \Delta_x u = 0 &x \in \mathbb{R}^d, t > 0 \\
@@ -5694,7 +5694,7 @@
   \end{cases}.\]
   This is the solution of the heat equation in \(\mathbb{R}_+ \times (0,\infty)\).
 
-  \section{\(d \ge 2\)}
+  \section{Euler-Poisson-Darboux}
   \[(\star) \quad \begin{cases}
     \partial_t^2 u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
     u = g, \partial_t u = h &\mathbb{R}^d \times \{t = 0\}
@@ -5772,4 +5772,51 @@
       U = G \\ \partial_t U = H
     \end{cases}. \qedhere\]
   \end{proof}
+
+  We showed that it is a neccessary condition for \(u\) to solve the Euler-Poisson-Darboux equation. Now we try to actually solve the equation. In general, this is easier for odd \(d\) than for even \(d\). We will consider the cases \(d = 2,3\).
+
+  \subsection{Solution in three dimensions}
+  Now, for \(r > 0\) let \(\tilde U = r U, \tilde G = rG, \tilde H = rH\). Then 
+  \[\begin{cases}
+    \partial_t^2 \tilde U - \partial_r^2 \tilde U = 0 & \text{in } \mathbb{R}_+ \times (0,\infty) \\
+    \tilde U = \tilde G, \partial_t \tilde U = \tilde H &\text{when } t = 0 \\
+    \tilde U = 0 &\text{when } r = 0
+  \end{cases}\]
+  Then, by d'Alembert's formula, for \(0 \le r \le t\) we have
+  \begin{align*}
+    \tilde U_r(x,t) &= \frac{1}{2} \left[\tilde G(r+t) - \tilde G(t-r)\right] + \frac{1}{2} \int_{t-r}^{t+r} \tilde H(y) \, dy. \\
+    \Rightarrow \quad U_r(x,t) &= \frac{1}{2} \left[\frac{\tilde G(r+t) - \tilde G(t-r)}{r}\right]  + \frac{1}{2r} \int_{t-r}^{t+r} \tilde H(y) \, dy 
+  \end{align*}
+  Now, taking \(r \to 0\) we get 
+  \begin{align*}
+    u(x,t) &= \tilde G'(t) + \tilde H(t) \\
+    &= \partial_t \left(t \fint_{\partial B(x,t)} g(y) \, dS(y) \right) + t \fint_{\partial B(x,t)} h(y) \, dS(y)
+  \end{align*}
+  Using 
+  \[\fint_{\partial B(x,t)} g(y) \, dS(y) = \fint_{\partial B(0,1)} g(x+tz) \, dS(z)\]
+  we get 
+  \begin{align*}
+    \partial_t \fint_{\partial B(x,t)} g(y) \, dS(y) &= \fint_{\partial B(0,1)} \nabla g(x+tz) z \, dz \\
+    &= \fint_{\partial B(x,t)} \nabla g(y) \left(\frac{y-x}{t}\right) \, dS(y) \\
+    \Rightarrow \quad \partial_t \left(t \fint_{\partial B(x,t)} g(y) \, dS(y)\right) &= \fint_{\partial B(x,t)} \left(g + \nabla g (y-x)\right) \, dS(y)
+  \end{align*}
+  From that we get:
+
+  \begin{rem}[Kirchhoff's formula in 3D]
+    For all \(x \in \mathbb{R}^3\), \(t > 0\):
+    \[u(x,t) = \fint_{\partial B(x,t)} \left(g(y) + \nabla g (y-x) + th(y)\right)\, dS(y)\]
+  \end{rem}
+
+  % \subsection{Solution in two dimensions}
+  
+  % The transformation \(\tilde U = r U\) does not work! The idea is to think of the 2D problem as 3D problem with \(x_3\) hidden. We write \(\bar u(x_1, x_2, x_3, t) = u(x_1, x_2, t)\). Then we get 
+  % \[\begin{cases}
+  %   \partial_t^2 \bar u - \Delta_x \bar u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+  %   \bar u = \bar g, \partial_t \bar u = \bar h &\text{on } \mathbb{R}^3 \times \{t=0\}
+  % \end{cases}\]
+  % With Kirchhoff's formula:
+  % \begin{align*}
+  %   u(x,t) = \bar u(\bar x,t) = \partial_t \left(t \fint_{\partial \bar B(\bar x, t)} \bar g(y) d \bar S(y)\right) + t \int_{\partial \bar B(\bar x, t)} \bar h \, d\bar S(y)
+  % \end{align*}
+
 \end{document}
