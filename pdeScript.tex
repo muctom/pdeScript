@@ -5807,16 +5807,68 @@
     \[u(x,t) = \fint_{\partial B(x,t)} \left(g(y) + \nabla g (y-x) + th(y)\right)\, dS(y)\]
   \end{rem}
 
-  % \subsection{Solution in two dimensions}
+  \subsection{Solution in two dimensions}
   
-  % The transformation \(\tilde U = r U\) does not work! The idea is to think of the 2D problem as 3D problem with \(x_3\) hidden. We write \(\bar u(x_1, x_2, x_3, t) = u(x_1, x_2, t)\). Then we get 
-  % \[\begin{cases}
-  %   \partial_t^2 \bar u - \Delta_x \bar u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
-  %   \bar u = \bar g, \partial_t \bar u = \bar h &\text{on } \mathbb{R}^3 \times \{t=0\}
-  % \end{cases}\]
-  % With Kirchhoff's formula:
-  % \begin{align*}
-  %   u(x,t) = \bar u(\bar x,t) = \partial_t \left(t \fint_{\partial \bar B(\bar x, t)} \bar g(y) d \bar S(y)\right) + t \int_{\partial \bar B(\bar x, t)} \bar h \, d\bar S(y)
-  % \end{align*}
+  The transformation \(\tilde U = r U\) does not work! The idea is to think of the 2D problem as 3D problem with \(x_3\) hidden. We write \(\bar u(x_1, x_2, x_3, t) = u(x_1, x_2, t)\). Then we get 
+  \[\begin{cases}
+    \partial_t^2 \bar u - \Delta_x \bar u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+    \bar u = \bar g, \partial_t \bar u = \bar h &\text{on } \mathbb{R}^3 \times \{t=0\}
+  \end{cases}\]
+  With Kirchhoff's formula:
+  \begin{align*}
+    u(x,t) = \bar u(\bar x,t) = \partial_t \left(t \fint_{\partial \bar B(\bar x, t)} \bar g(y) d \bar S(y)\right) + t \int_{\partial \bar B(\bar x, t)} \bar h \, d\bar S(y)
+  \end{align*}
 
+  Let \(\gamma(y) = (t^2 - |y-x|^2)^{\frac{1}{2}}, y \in B(x,t)\), then
+  \begin{align*}
+    \fint_{\partial \bar B(\bar x, t)} \bar g \, d\bar S &= \frac{1}{4 \pi t^2} \int_{\partial \bar B(\bar x, t)} \bar g \, d\bar S(y) \\
+    &= \frac{1}{4 \pi t^2} \int_{B(x,t)} g(y) 2 (1 + |\nabla \gamma|^2)^{\frac{1}{2}} \, dy \\
+    &= \frac{1}{4 \pi t^2} \int_{B(x,r)} g(y) \frac{2t}{\sqrt{t^2 - |y-x|^2}} \, dy \\
+    &= \frac{t}{2} \fint_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
+  \end{align*}
+  Similarly:
+  \begin{align*}
+    \fint_{\partial B(\bar x, t)} \bar h \, d\bar S(y) &= \frac{t}{2} \fint_{B(x,t)} \frac{h(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
+  \end{align*}
+  This implies:
+  \begin{align*}
+    u(x,t) &= \partial_t \left(\frac{t^2}{2} \fint_{B(x,t)} \frac{g(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy\right) + \frac{t^2}{2} \fint_{B(x,r)} \frac{h(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy \\
+    &= (I) + (II) \\
+    (I) &= \partial_t \left(\frac{1}{2} t \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz\right) \\
+    &= \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz + t \fint_{B(0,1)} \frac{\nabla g(x+tz) z}{(1-|z|^2)^{\frac{1}{2}}} \, dz \\
+    &= t \int_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}}\, dy + t \fint_{B(x,r)} \frac{\nabla g(y) (y-x)}{\sqrt{t^2 - |y-x|^2}} \, dy
+  \end{align*}
+
+  \begin{rem}[Poisson formula for 2D]
+    For \(x \in \mathbb{R}^2\), \(t>0\) we have
+    \[u(x,t) = \frac{t}{2} \fint_{B(x,t)} \frac{g(y) + \nabla g(y)(y-x) + th(y)}{(t^2 - |y-x|^2)^{\frac{1}{2}}} \, dy.\]
+  \end{rem}
+
+  \section{Spectral Method}
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded.
+  \[\begin{cases}
+    \partial_t^2 u - \Delta_x u = 0 &\text{in }  \Omega \times (0,\infty) \\
+    u = g, \partial_t u = h &\text{when } t = 0 \\
+    u = 0 &\text{when } x \in \partial \Omega
+  \end{cases}\]
+  \(-\Delta\) has eigenvecors \((e_i)_{i=1}^\infty\) with eigenvalues \((\lambda_i)_{i=1}^\infty\), i.e.
+  \[\begin{cases}
+    -\Delta e_i = \lambda_i e_i \\ e_i|_{\partial \Omega} = 0
+  \end{cases}\]
+  s.t. \(\lambda_1 < \lambda_2 \le \dots \le \lambda_i \to \infty\) and \((e_i)_{i \in \mathbb{N}}\) is an orthonormal basis for \(L^2(\Omega)\).
+  We write 
+  \[u(x,t) = \sum_{i \in \mathbb{N}} a_i(t) e_i(x)\]
+  This implies:
+  \begin{align*}
+    a_i''(t) + \lambda_i a_i(t) &= 0 \\
+    \text{(ODE)} \quad \Rightarrow \quad a_i(t) &= a_i(0) \cos(\sqrt{\lambda_i}t) + \frac{a_i'(0)}{\sqrt{\lambda_i}} \sin(\sqrt{\lambda_i}t)
+  \end{align*}
+  Here \(a_i(0)\), \(a_i'(0)\) is determined by 
+  \[\begin{cases}
+    g = u(t=0) = \sum_{i=1}^\infty a_i(0) e_i(x) \\
+    h=\partial_t u(t=0) = \sum_{i=1}^\infty a_i'(0) e_i(x)
+  \end{cases}
+  \Rightarrow \begin{cases}
+    a_i(0) = \langle e_i, g \rangle \\ a_i'(0) = \langle e_i, h\rangle
+  \end{cases}\]
 \end{document}
