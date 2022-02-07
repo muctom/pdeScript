@@ -5694,5 +5694,82 @@
   \end{cases}.\]
   This is the solution of the heat equation in \(\mathbb{R}_+ \times (0,\infty)\).
 
-  
+  \section{\(d \ge 2\)}
+  \[(\star) \quad \begin{cases}
+    \partial_t^2 u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+    u = g, \partial_t u = h &\mathbb{R}^d \times \{t = 0\}
+  \end{cases}\]
+  Idea: Averaging of \(u\) over sphere \(\leadsto\) 1D problem.
+  Define for \(x \in \mathbb{R}^d\), \(t > 0\), \(r > 0\),
+  \begin{align*}
+    U_r(x,t) &\coloneqq \fint_{\partial B(x,r)} u(y,t) \, dS(y) \\
+    G_r(x) &\coloneqq \fint_{\partial B(x,r)} g(y) \, dS(y) \\
+    H_r(x) &\coloneqq \fint_{\partial B(x,r)} h(y) \, dS(y)
+  \end{align*}
+
+  \begin{lem}[Euler-Poisson-Darboux equation]
+    If \(u \in C^2(\mathbb{R}^d \times [0,\infty))\) solves \((\star)\), then for all \(x \in \mathbb{R}^d:\)
+    \begin{itemize}
+      \item \((r,t) \mapsto U \in C^2([0,\infty) \times [0,\infty)])\)
+      \item \(\begin{cases}
+        \partial_t^2 U - \partial_r^2 U - \frac{d-1}{r}\partial_r U = 0 &\text{in } \mathbb{R}_+ \times \mathbb{R}_+ \\
+        U = G, \partial_t U = H &\text{on }\mathbb{R}_+ \times \{t=0\}
+         \end{cases}\)
+    \end{itemize}
+  \end{lem}
+
+  Note that \(\partial_r^2 + \frac{d-1}{r}\partial_r\) is the radial part of \(\Delta\).
+
+
+  \begin{proof}
+    We compute for \(r > 0\):
+    \begin{align*}
+      \partial_r U_r(x,t) &= \partial_r \fint_{\partial B(x,r)} u(y,t) \, dS(y) \\
+      &= \partial_r \fint_{\partial B(0,1)} u(x+rz,t) \, dS(z) \\
+      &= \fint_{\partial B(0,1)} \nabla u(x+rz,t) z \, dS(z) \\
+      &= \fint_{\partial B(x,r)} \nabla u(y,t) \frac{y-x}{r} dS(y) \\
+      &= \fint_{\partial B(x,r)} \frac{\partial u(y,t)}{\partial \vec{n}} \, dS(y) \\
+      \text{(Green \ref{green-identities})}\quad &= \frac{1}{|\partial B(0,r)|} \int_{B(x,r)} \Delta_x u(y,t) \, dy \\
+      \left(|B(0,r)| = \frac{r}{d} |\partial B(0,r)|\right)\quad&= \frac{r}{d} \fint_{B(x,r)} \Delta_x u(y,t) \, dy
+    \end{align*}
+    (The computation is similar to the proof of the mean-value theorem for the Poisson equation.) 
+    We compute the second derivative
+    \begin{align*}
+      \partial^2_r U_r(x,t) &= \partial_r \left[\frac{r}{d} \fint_{B(x,r)} \Delta_x u(y,t) \, dy\right] \\
+      \left(|B(0,r)|=r^d|B(0,1)|\right)\quad &= \partial_r \left[\frac{1}{d|B_1|r^{d-1}} \int_{B(x,r)} \Delta_x u(y,t) \, dy\right] 
+    \end{align*}
+    Now, \(\partial_r \frac{1}{d|B_1|r^{d-1}} =  \frac{-d+1}{d|B_1|r^d} = - \frac{d-1}{d|B(0,r)|}\) and 
+    \begin{align*}
+      \partial_r \int_{B(x,r)} \Delta_x u(y,t) \, dS(y) &= \partial_r \int_{B(0,r)} \Delta_x u(x+ry,t) \, dy \\
+      \text{(Green \ref{green-identities})}\quad &= \partial_r \int_{\partial B(0,1)} \nabla_x u(x+ry, t)\frac{y}{|y|} \, dS(y) \\
+      (|y|=1) \quad &= \int_{\partial B(0,1)} \partial_r \nabla_x u(x+ry, t)y \, dS(y) \\
+      &= \int_{\partial B(0,1)} \Delta_x u(x+ry, t)y\cdot y \, dS(y) \\
+      (y\cdot y = |y|^2 = 1) \quad &= \int_{\partial B(0,1)} \Delta_x u(x+ry, t) \, dS(y) \\
+      &= \int_{\partial B(x,r)} \Delta_x u(y, t) \, dS(y)
+    \end{align*}
+    Now with the product rule we get 
+    \begin{align*}
+      \partial^2_r U_r(x,t) &= - \left(\frac{d-1}{d}\right) \fint_{B(x,r)} \Delta_x u(y,t) \, dy \\&\quad+ \frac{1}{d|B_1|r^{d-1}} \int_{\partial B(x,r)} \Delta_x u(y,t) \, dS(y) \\
+      &= - \left(\frac{d-1}{d}\right) \fint_{B(x,r)} \Delta_x u(y,t) \, dy \\&\quad+ \fint_{\partial B(x,r)} \Delta_x u \, dS(y)
+    \end{align*}
+    And, since \(u\) is a solution,
+    \begin{align*}
+      \partial_t^2 U = \partial_t^2 \fint_{\partial B(x,r)} u\, dS(y) = \fint_{\partial B(x,r)} (\partial_t^2 u) \, dS(y) = \fint_{\partial B(x,r)} (\Delta_x u) \, dS(y).
+    \end{align*}
+    So we can conclude 
+    \[\partial_t^2 U - \partial_r^2 U - \frac{d-1}{d} U = 0\]
+    the above computation also shows that \(U \in C^2(\mathbb{R}_+ \times [0,\infty))\). Moreover 
+    \begin{align*}
+      \partial_r U_r(x,t) &\xrightarrow{r \to 0^+} 0 \\
+      \partial^2_r U_r(x,t) &\xrightarrow{r \to 0^+} \left(\frac{1}{d} - 1\right) \Delta_x u + \Delta_x u = \frac{1}{d} \Delta_x u
+    \end{align*}
+    This imples that \(U \in C^2([0,\infty) \times [0,\infty))\). Finally, when \(t=0\),
+    \[\begin{cases}
+      u = g \\ \partial_t = h
+    \end{cases} 
+    \Rightarrow
+    \begin{cases}
+      U = G \\ \partial_t U = H
+    \end{cases}. \qedhere\]
+  \end{proof}
 \end{document}
