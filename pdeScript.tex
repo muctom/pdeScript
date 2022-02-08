@@ -922,14 +922,15 @@
 
   \begin{rem}[Properties of the Convolution]\
     \begin{itemize}
-      \item \((f \star g)(x) = f \star (g \star h)\)
-      \item \(\widehat{f \star g} = \hat f \star \hat g\)
+      \item \(f \star g = g \star f\)
+      \item \((f \star g) \star h = f \star (g \star h)\) (by Fubini)
+      \item \(\widehat{f \star g} = \hat f \hat g\) (Proof, see exercise \ref{fourier-convolution-product})
     \end{itemize}
   \end{rem}
 
 
-  \begin{thm}[Young Inequality]
-    If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \[\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}.\] More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \[\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q},\]where \(1 \le p, q, r \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\).
+  \begin{thm}[Young Inequality]\label{young}
+    If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \[\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}.\] More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \[\| f \star g\|_{L^r} \le \|f\|_{L^p} \|g\|_{L^q},\]where \(1 \le p, q, r \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\).
   \end{thm}
 
   \begin{proof}
@@ -1277,10 +1278,8 @@
   \end{thm}
 
   \begin{thm}[Hausdorff-Young-Inequality]\label{hausdorff-young}
-    If \(1 \le p \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1\) and \(f \in L^p(\mathbb{R}^d) \cap L^1(\mathbb{R}^n)\) then
-    \[\| \hat f \|_{L^{q}} \le \|f\|_{L^p}\]
-    and 
-    \[\|\hat f\|_{L^q} \le \|f\|_{L^p} \quad \forall f \in L^p(\mathbb{R}^d).\]
+    Let \(f \in L^p(\mathbb{R}^d)\). If \(1 \le p \le 2\) and \(\frac{1}{p} + \frac{1}{q} = 1\), then \(\mathcal{F}: L^p(\mathbb{R}^d) \to L^q(\mathbb{R}^d)\) is well-defined and
+    \[\|\mathcal{F}f\|_{L^q(\mathbb{R}^d)} \le \|f\|_{L^p(\mathbb{R}^d)}.\]
   \end{thm}
   
   \begin{rem}
@@ -1331,33 +1330,35 @@
   \end{proof}
 
 
-  \begin{ex}[E 3.2]
+  \begin{ex}[E 3.2]\label{fourier-convolution-product}
     Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdorff-Young inequality. Prove that 
     \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \quad \forall k \in \mathbb{R}^d\]
   \end{ex}
 
   \begin{proof}[Solution] \
     \begin{enumerate}[label=Step \arabic*)]
-      \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
+      \item \(f, g \in C_c^\infty(\mathbb{R}^d)\)
       \begin{align*}
-        \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
-        &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \left(f(x-y) e^{- 2 \pi i k(x-y)}\right) (g(y)) e^{- 2 \pi i k y}) \, dx \, dy \\
-        &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} (f(x-y) e^{- 2 \pi i k (x-y)} \, dy)\right) (g(y) e^{ - 2 \pi i k y}) \, dy = \hat f(k) \hat g(k)
+        \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx \\
+        &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
+        &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y)e^{-2 \pi i k(x-y)} g(y) e^{-2 \pi i ky} \, dx \, dy \\
+        (z(x) \coloneqq x-y) \quad &= \int_{\mathbb{R}^d}\left(\int_{\mathbb{R}^d} f(z) e^{- 2 \pi i kz} \, dz\right) g(y) e^{- 2 \pi i k y}  \, dy \\
+        &= \left(\int_{\mathbb{R}^d} f(z) e^{- 2 \pi i kz} \, dz\right) \left(\int_{\mathbb{R}^d} g(y) e^{- 2 \pi i k y}  \, dy\right) = \hat f(k) \hat g(k)
       \end{align*}
-      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. we have
+      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). Then we have \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) almost everywhere. We get with the Hausdorff-Young Inequality (\ref{hausdorff-young})
       \begin{align*}
-        \text{(Hausdorff-Young)} \quad &\|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
-        &\le \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^r} \\
+        \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}}
+        &\le \|f \star g - f_n \star g_n\|_{L^r} \\
         &= \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
         &\le \| (f-f_n) \star g_n \|_{L^r} + \| f_n \star (g_n - g)\|_{L^r} \\
-        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
+        \text{(Young \ref{young})} \quad &\le \|f - f_n\|_{L^p} \|g_n\|_{L^q} + \|f_n\|_{L^p} \|g_n - g\|_{L^q} \xrightarrow{n \to \infty} 0
       \end{align*}
       Moreover:
       \begin{align*}
         \|\hat f_n \hat g_n - \hat f \hat g \|_{L^{r'}} 
         &= \|(\hat f_n \hat f)\hat g_n + \hat f (\hat g_n - \hat g) \|_{L^{r'}} \\
         \text{(Hölder)} \quad &\le \|\hat f_n - \hat f \|_{L^{p'}} \| \hat g_n \|_{L^{q'}} + \| \hat f \|_{L^{q'}} \\
-        \text{(Hausdorff-Young (\ref{hausdorff-young}))} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
+        \text{(Hausdorff-Young \ref{hausdorff-young})} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
       \end{align*}
       So \(\hat f_n \hat g_n \to \hat f \hat g \text{ in } L^{r'}\)
       \(\widehat{f \star g} = \hat f \hat g\) in \(L^{r'}\)
