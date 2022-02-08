@@ -928,7 +928,6 @@
     \end{itemize}
   \end{rem}
 
-
   \begin{thm}[Young Inequality]\label{young}
     If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \[\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}.\] More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \[\| f \star g\|_{L^r} \le \|f\|_{L^p} \|g\|_{L^q},\]where \(1 \le p, q, r \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\).
   \end{thm}
@@ -1378,7 +1377,11 @@
       \hat u(k) &= \hat G(k) \hat f(k) = \widehat{G \star f} \\
       \Rightarrow u(x) &= (G \star f) (x) = \int_{\Rd} G(x-y)f(y)\, dy
     \end{align*}
-    In fact \(G\) is the fundamential solution of laplace quation.
+    Thus we need to compute 
+    \[G(x) = \left(\frac{1}{|2 \pi k|^2}\right)^\lor\]
+    It turns out for \(d \ge 3\) that 
+    \[G(x) = \frac{1}{d(d-2)|B_1||x|^{d-2}}.\]
+    In fact \(G\) is the fundamential solution of the Laplace Equation. To make it rigorous, we need to compute the Fourier transform of \(\frac{1}{|x|^\alpha}\) for \(0 \le \alpha < d\).
   \end{rem}
 
   
