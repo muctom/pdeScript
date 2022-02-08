@@ -1169,76 +1169,83 @@
     \end{enumerate}
   \end{proof}
 
-  
-  \begin{ex}[E 2.2]
-    
+  \begin{ex}[E 2.2, Newton's Theorem]
+    Let \(d \ge 3\). 
+    \begin{enumerate}[label=\alph*)]
+      \item Prove that for all \(r > 0\) and \(x \in \mathbb{R}^d\), we  have \[\fint_{\partial B(x,r)} \frac{dS(y)}{|y|^{d-2}} = \frac{1}{\max(|x|,r)^{d-2}}\]
+      where \(dS(y)\) is the surface measure on the sphere \(\partial B(x,r) \subseteq \mathbb{R}^d\).
+      \item Let \(0 \le f_1, f_2 \in L^1(\mathbb{R}^d)\) be radial functions with \(\int_{\mathbb{R}^d} f_i = M_i\). Prove that for all \(z_1, z_2 \in \mathbb{R}^d\) we have 
+      \[\int \int_{\mathbb{R}^d} \frac{f_1(x-z_1)f_2(y-z_2)}{|x-y|^{d-2}} \, dx \, dy \le \frac{M_1 M_2}{|z_1-z_2|^{d-2}}\]
+      Moreover, prove that we have the equality if \(f_1, f_2\) are compactly supported and \(|z_1-z_2|\) is sufficiently large.
+    \end{enumerate}
+    Hint: For a) you may use the mean-value theorem (the function \(\frac{1}{|x|^{d-2}}\) is harmonic in \(\Omega\) if \(0 \notin \Omega\)). For b) you may use a) and polar coordinates.
   \end{ex}
 
   \begin{proof}[Solution]
-    Regard \(d = 3\). The function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
-    \begin{align*}
-      \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
-    \end{align*}
-    If \(|x| > r\), then \(0 \notin B(x,r + \epsilon)\). Then
-    \[y \mapsto \frac{1}{|y|}\] is harmonic in \(B(x, r  + \epsilon)\). Then by the Mean Value Property:
-    \[\fint_{\partial B(x,r)} \frac{dS(y)}{|y|} = \frac{1}{|x|}\]
-    If \(|x| < r\): Then \(\frac{1}{|y|}\) is not harmonic in \(B(x,r)\) since \(0 \in B(x,r)\). Note
-    \begin{align*}
-      \fint_{\partial B(x,r)} \frac{d S(y)}{|y|} 
-      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}
-    \end{align*}
-    This function depends on \(x\) only via \(|x|\). 
-    \begin{align*}
-      ... &= \fint_{\partial B(0,r)} \frac{dS(y)}{|Rx-Ry|}
-    \end{align*}
-    for all \(R\) rotation \(SO(3)\), \(dS(R_y) = dS(y)\)
-    \begin{align*}
-      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|Rx - y|} \\
-      &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z - y|} \\
-      \text{(Radial in z)} \quad &= \fint_{\partial B(0, |x|)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|}\right) \, dS(z) \\
-      (\text{Fubini}) \quad &= \fint_{\partial B(0,r)} \left(\fint_{\partial B(0, |x|)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
-      (\text{case 1 since \(|y| = r > |x|\))} \quad &= \fint_{\partial B(0,r)} \frac{1}{|y|} \, dS(y)
-      = \frac{1}{r}
-    \end{align*}
-    If \(|x| = r\): Continuity: \(x \mapsto \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}\)
+    \begin{enumerate}[label=\alph*)]
+      \item Regard \(d = 3\). The function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
+      \begin{align*}
+        \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
+      \end{align*}
+      If \(|x| > r\), then \(0 \notin B(x,r + \epsilon)\). Then
+      \[y \mapsto \frac{1}{|y|}\] is harmonic in \(B(x, r  + \epsilon)\). Then by the Mean Value Property:
+      \[\fint_{\partial B(x,r)} \frac{dS(y)}{|y|} = \frac{1}{|x|}\]
+      If \(|x| < r\): Then \(\frac{1}{|y|}\) is not harmonic in \(B(x,r)\) since \(0 \in B(x,r)\). Note
+      \begin{align*}
+        \fint_{\partial B(x,r)} \frac{d S(y)}{|y|} 
+        &= \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}
+      \end{align*}
+      This function depends on \(x\) only via \(|x|\). 
+      \begin{align*}
+        ... &= \fint_{\partial B(0,r)} \frac{dS(y)}{|Rx-Ry|}
+      \end{align*}
+      for all \(R\) rotation \(SO(3)\), \(dS(R_y) = dS(y)\)
+      \begin{align*}
+        &= \fint_{\partial B(0, r)} \frac{dS(y)}{|Rx - y|} \\
+        &= \fint_{\partial B(0, r)} \frac{dS(y)}{|z - y|} \\
+        \text{(Radial in z)} \quad &= \fint_{\partial B(0, |x|)} \left(\fint_{\partial B(0, r)} \frac{dS(y)}{|z-y|}\right) \, dS(z) \\
+        (\text{Fubini}) \quad &= \fint_{\partial B(0,r)} \left(\fint_{\partial B(0, |x|)} \frac{dS(z)}{|z-y|}\right) \, dS(y) \\
+        (\text{case 1 since \(|y| = r > |x|\))} \quad &= \fint_{\partial B(0,r)} \frac{1}{|y|} \, dS(y)
+        = \frac{1}{r}
+      \end{align*}
+      If \(|x| = r\): Continuity: \(x \mapsto \fint_{\partial B(0, r)} \frac{dS(y)}{|x-y|}\)
+    \item \begin{rem}
+      For \(f \in C^{|\alpha|}, g \in C^{|\beta|}\):
+      \begin{align*}
+        D^{\alpha + \beta}(f \star g) = (D^\alpha f)\star(D^\beta g)
+      \end{align*}
+    \end{rem}
+    
+    \begin{lem}
+      If \(d \ge 3\) and \(f: \mathbb{R}^d \to \mathbb{R}\) radial. Then:
+      \begin{align*}
+        \left(\frac{1}{|x|^{d-2}} \star f \right)(x) 
+        = \int_{\mathbb{R}^d} \frac{f(y)}{|x-y|^{d-2}} \, dy
+        = \int_{\mathbb{R}^d} \frac{f(y)}{\max(|x|^{d-2}, |y|^{d-2})}\, dy
+      \end{align*}
+    \end{lem}
+    \begin{proof}
+      (d=3) Polar coordinates:
+      \begin{align*}
+        \int_{\mathbb{R}^3} \frac{f(y)}{|x-y|}\, dy 
+        &= \int_0^{\infty} \left[\int_{\partial B(0,1)} \frac{d\omega}{|x-rw|}  \right] \, f(r) \, dr \\
+        (a) \quad &= \int_0^\infty \left[\int_{\partial B(0,1)} \frac{d \omega}{\max(|x|, r)}\right] f(r) \, dr \\
+        &= \int_{\mathbb{R}^3} \frac{f(y)}{\max(|x|, |y|)} \, dy \qedhere
+      \end{align*}
+    \end{proof}
+      Now, for \(d=3\), if \(f\) radial and non-negative with the lemma we get
+      \begin{align*}
+        (\star) \quad \int_{\mathbb{R}^3} \frac{f(y)}{|x-y|} \, dy &= \int_{\mathbb{R}^3} \frac{f(y)}{\max(|x|, |y|)} \, dy \le \int_{\mathbb{R}^3} \frac{f(y)}{|x|} \, dy = \frac{(\int_{\mathbb{R}^3}f(y) \, dy)}{|x|}
+      \end{align*}
+      Then
+      \begin{align*}
+        \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x-z_1)f_2(y-z_2)}{|x-y|} \, dx \, dy &= \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x) f_2(y)}{|x+ z_1 - y - z_2|} \, dx \, dy \\
+        &= \int_{\mathbb{R}^3} \left(\int_{\mathbb{R}^3} \frac{f_1(x) }{|x+ z_1 - y - z_2|} \, dx \right) f_2(y) \, dy \\
+        (\star) \quad &\le \int_{\mathbb{R}^3} \frac{\left(\int_{\mathbb{R}^3} f_1(x) \, dx\right)f_2(y)}{|y + z_2 - z_1|}  \, dy \\
+        &\le \frac{(\int_{\mathbb{R}^3} f_1)(\int_{\mathbb{R}^3} f_2)}{|z_1 - z_2|} \qedhere
+      \end{align*}
+    \end{enumerate}
   \end{proof}
-
-  \begin{rem}
-    For \(f \in C^{|\alpha|}, g \in C^{|\beta|}\):
-    \begin{align*}
-      D^{\alpha + \beta}(f \star g) = (D^\alpha f)\star(D^\beta g)
-    \end{align*}
-  \end{rem}
-
-  
-  \begin{lem}
-    If \(d \ge 3\) and \(f: \mathbb{R}^d \to \mathbb{R}\) radial. Then:
-    \begin{align*}
-      \left(\frac{1}{|x|^{d-2}} \star f \right)(x) 
-      = \int_{\mathbb{R}^d} \frac{f(y)}{|x-y|^{d-2}} \, dy \\
-      = \int_{\mathbb{R}^d} \frac{f(y)}{\max(|x|^{d-2}, |y|^{d-2})}\, dy
-    \end{align*}
-  \end{lem}
-  \begin{proof}
-    (d=3) Polar coordinates:
-    \begin{align*}
-      \int_{\mathbb{R}^3} \frac{f(y)}{|x-y|}\, dy 
-      &= \int_0^{\infty} \left[\int_{\partial B(0,1)} \frac{1}{|x-rw|} \, d\omega \right] \, f(r) \, dr \\
-      (a) \quad &= \int_0^\infty \left[\int_{\partial B(0,1)} \frac{d \omega}{\max(|x|, r)}\right] f(r) \, dr \\
-      &= \int_{\mathbb{R}^3} \frac{f(y)}{\max(|x|, |y|)} \, dy
-    \end{align*}
-    (b) (d=3) If \(f\) radial and non-negative
-    \begin{align*}
-      \int_{\mathbb{R}^3} \frac{f(y))}{|x-y|} &= \int_{\mathbb{R}^3} \frac{f(y)}{|x|} \, dy = \frac{(Sf?)}{|x|}
-    \end{align*}
-    Then
-    \begin{align*}
-      \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x-z_1)f_2(y-z_2)}{|x-y|} \, dx \, dy &= \int_{\mathbb{R}^3}\int_{\mathbb{R}^3} \frac{f_1(x) f_2(y)}{|x+ z_1 - y - z_2} \, dx \, dy \\
-      &= \int_{\mathbb{R}^3} \left(\int_{\mathbb{R}^3} f_1(x) \, dx \right) f_2(y) \, dy \le \int_{\mathbb{R}^3} \frac{\left(\int_{\mathbb{R}^3} f_1\right)}{|y + z_2 - z_1|} f_2(y) \, dy \\
-      &\le \frac{(\int_{\mathbb{R}^3} f_1)(\int_{\mathbb{R}^3} f_2)}{|z_1 - z_2|}
-    \end{align*}
-  \end{proof}
-
   
   \begin{ex}[Bonus 2]
     \begin{enumerate}[label=\alph*)]
@@ -1250,12 +1257,12 @@
     \end{enumerate}
   \end{ex}
 
+
   \section{Fourier Transformation}
   \begin{defn}[Fourier Transform]
     For \(f \in L^1(\mathbb{R}^d)\) define
     \[\four f(k) = \hat f(k) = \int_{\mathbb{R}^d} f(x) e^{- 2 \pi i k \cdot x} \, dx, \quad k\cdot x = \sum_{i=1}^d k_i x_i\]
   \end{defn}
-
   
   \begin{thm}[Basic Properties]
     \begin{enumerate}
