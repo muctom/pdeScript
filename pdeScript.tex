@@ -1128,7 +1128,7 @@
   \begin{proof}[Solution]\
     \begin{enumerate}[label=\alph*)]
       \item In 1D: If \(u\) is convex \(\Leftrightarrow\) \(u''(x) \ge 0\) for all \(x \in \mathbb{R}\). In general: Taylor expansion for all \(x,z \in \mathbb{R}^d\):
-      \begin{align*}
+      \begin{align*}c
         u(x) &= u(z) + \nabla u(z)(x-z) + \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-z)^\alpha}{\alpha!} \, ds
       \end{align*}
       Note that we have \(x = z + s(x-z)\) if  \(s=1\).
@@ -5871,4 +5871,169 @@
   \Rightarrow \begin{cases}
     a_i(0) = \langle e_i, g \rangle \\ a_i'(0) = \langle e_i, h\rangle
   \end{cases}\]
+
+  \section{Uniqueness}
+  For \(\Omega \subseteq \mathbb{R}^d\) open and bounded with \(C^1\)-boundary regard
+  \[\begin{cases}
+    \partial_t^2 u - \Delta_x u = 0 &\text{in } \Omega \times (0,T) \\
+    u = 0, \partial_t u = 0 &\text{in } \Omega \times \{t=0\} \\
+    u=0 &\partial \Omega \times [0,T]
+  \end{cases}.\]
+  If \(u \in C^2(\bar \Omega \times [0,T])\), then \(u = 0\).
+
+  \begin{proof}
+    Let 
+    \[e(t) = \int_{\Omega} (|\partial_t u|^2 + |\nabla_x u|^2) dx\]
+    has \(e'(t) = 0\). This implies \(e(t) = e(0) = 0\), so \(\partial_t u = 0\) and hence \(u=0\).
+  \end{proof}
+  The same result holds for \(\mathbb{R}^d\), i.e.
+  \[\begin{cases}
+    \partial_t^2 u - \Delta_x u = 0 &\mathbb{R}^d \times (0,T) \\
+    u = 0, \partial_t = 0 &\mathbb{R}^d \times \{t = 0\}
+  \end{cases}\]
+  and \(u \in C^2(H^2(\mathbb{R}^d), [0,T])\) (i.e. \(u(t,\bullet) \in H^2(\mathbb{R}^d)\) and \(t \mapsto u(t,\bullet)\) continuous).
+
+  \section{Propagation of the wave}
+  \begin{thm}
+    Assume that \(u \in C^2(\mathbb{R}^d \times [0,\infty)\) and 
+    \[\begin{cases}
+      \partial_t^2 u - \Delta_x u = 0&\mathbb{R}^d \times (0,\infty) \\
+      u = 0, \partial_t u = 0 &B(x_0, t_0) \times \{t=0\}
+    \end{cases}\]
+  \end{thm}
+
+  Then \(u(x,t) = 0\) for \(x \in B(x_0, t_0-t)\).
+
+  \begin{proof}
+    Let for \(t \in [0,t_0]\)
+    \[e(t) = \int_{B(x_0, t_0-t)} \left(|\partial_t u|^2 + |\nabla_x u|^2\right) \, dx\]
+  \end{proof}
+  This implies 
+  \begin{align*}
+    e'(t) &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u + \nabla_x u \partial_t \nabla_x u) - \int_{\partial B(x_0, t_0 - t)} (|\partial_t u|^2 + |\nabla_x u|^2) \, dS \\
+    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u - \Delta_x u \partial_t u) + \int_{\partial B(x_0, t_0-t)} [2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2] \, dS \\
+    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \underbrace{(\partial_t^2 u - \Delta_x u )}_{= 0}) + \int_{\partial B(x_0, t_0-t)} \underbrace{[2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2]}_{\le 0} \, dS
+  \end{align*}
+  where we used \begin{align*}
+    |2 (\nabla_x u \vec{n}) \partial_t u| \le 2 |\nabla_x u| |\partial_t u| \le |\nabla_x u|^2 + |\partial_t u|^2.
+  \end{align*}
+  Thus \(e'(t) \le 0\) for all \(t \in (0,t_0)\), so \(e(t) \le e(0) = 0\) (as \(u = 0\), \(\partial_t u = 0\) in \(B(x_0, t_0) \times \{t=0\}\)). This implies \(e(t) = 0\) for all \(t \in (0,t_0)\), so 
+  \[\begin{cases}
+    \partial_t u = 0 &x \in B(x_0, t_0-t) \\ u= 0&x \in B(x_0,t_0-t) \times \{t=0\}
+  \end{cases}.\]
+  So we get that \(u = 0\) for \(x \in B(x_0, t_0 - t)\) for all \(t \in (0,t_0)\) and \(u = 0\) for \(x \in B(x_0, t_0 - t)\) for all \(t \in [0,t_0]\). (More precisely \(u(x_0, t_0) = 0\))
+
+  \section{Wave vs. Heat Equation}
+  \begin{nota}
+    For \(g \in L^2(\mathbb{R}^d)\), \(t > 0\) we write \(e^{t\Delta} g \in L^2(\mathbb{R}^d)\) for 
+    \begin{align*}
+      \widehat{e^{t \Delta}} g(k) &= e^{-t |2 \pi k|^2} \hat g(k) \\
+      \Leftrightarrow \quad (e^{t \Delta} g)(x) &= \frac{1}{(4 \pi t)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{– \frac{|x-y|^2}{4t}} g(y) \, dy      
+    \end{align*}
+    \[\widehat{\frac{1}{(4 \pi t)^{\frac{d}{2}}}e ^{- \frac{|x|^2}{4t}}} = e^{-t|2 \pi k|^2}\]
+
+  \end{nota}
+  \begin{minipage}[t]{0.5 \textwidth}
+    \subsubsection*{Heat Equation:} 
+    \begin{itemize}
+      \item Improves smoothness, \(i.e.\) \(g \in L^2(\mathbb{R})\) imples \(e^{t \Delta} g \in \bigcap_{m \ge 1} H^m(\mathbb{R}^d) \subseteq C^\infty(\mathbb{R}^d)\) for all \(t > 0\).
+      \item Propagation: Speed is \(\infty\). \begin{itemize}
+        \item [\(t=0\):] \(g \in C_c^\infty\)
+        \item [\(t>0\):]\(e^{t \Delta} g\) does not have compact support
+      \end{itemize}
+    \end{itemize}
+  \end{minipage}
+  \begin{minipage}[t]{0.5 \textwidth}
+    \subsubsection*{Wave Equation:}
+    \begin{itemize}
+      \item No improvement of smoothnes 
+      \item Propagation: Speed is finite 
+    \end{itemize}
+  \end{minipage}
+
+  \chapter{Schrödinger Equation}
+  \[\begin{cases}
+    -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty)\\
+    u(x,0) = g(x) &x \in \mathbb{R}^d
+  \end{cases}\]
+  Formally 
+  \(-i \partial_t = \frac{1}{i} \frac{d}{dt} = \frac{d}{d(it)}\) \(\Rightarrow\) \(\partial_\xi u - \Delta_x u = 0\), \(\xi = it\) \(\leadsto\) Heat equation with \emph{imaginary time}.
+  From the heat equation 
+  \[\begin{cases}
+    \partial_t u - \Delta_x u = 0 \\ u(x,0) = g(x)
+  \end{cases} \Rightarrow u(x,t) = (e^{t\Delta} g)(x) = \frac{1}{(4 \pi t)^{\frac{d}{2}}}\int_{\mathbb{R}^d} e^{-\frac{|x-y|^2}{4t}} g(y)\]
+  \[\leadsto \begin{cases}
+    - i \partial_t u - \Delta_x u = 0 \\ u(x,0) = g(x)
+  \end{cases} \Rightarrow u(x,t) = (e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
+  if \(g \in L^1\).
+
+  
+  \begin{thm}
+    For \(g \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), define 
+    \[(e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
+    Then \(\|e^{it\Delta}g\|_{L^2(\mathbb{R}^d)} = \|g\|_{L^2(\mathbb{R}^d)}\). Consequently, for all \(g \in L^2(\mathbb{R}^d)\) we can define \(e^{it \Delta} g \in L^2(\mathbb{R}^d)\) by a density argument. Moreover, 
+    \[\widehat{e^{i t \Delta}g(k)} = e^{-it |2 \pi k|^2} \hat g(k)\]
+    for almost every \(k \in \mathbb{R}^d\).
+  \end{thm}
+
+  \begin{proof}
+    Fourier transform of Gaussian:
+    \begin{align*}
+      \frac{1}{(4 \pi t)^{\frac{d}{2}}} \widehat{e^{- \frac{|x|^2}{4t}}} = e^{-t |2 \pi k|^2}, \quad t > 0
+    \end{align*}
+    Key point: This formula also holds if \(t \in \mathbb{C}\) and \(\Re(t) > 0\).
+    For all \(\epsilon > 0\) consider
+    \[(e^{(it + \epsilon)\Delta} g)(x) = \left(e^{-(it + \epsilon) |2 \pi k|^2} \hat g (k)\right)^\lor (x) = (\hat G_\epsilon g)^\lor = (G_\epsilon \star g) (x)\] where 
+    \[G_\epsilon(x) = \frac{1}{(4 \pi (it + \epsilon))^{\frac{d}{2}}} e^{- \frac{|x|^2}{4 (it + \epsilon)}}.\]
+    Since \(g \in L^1(\mathbb{R}^d)\):
+    \begin{align*}
+      (G_\epsilon \star g)(x) &= \frac{1}{(4 \pi (it + \epsilon))^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{- \frac{|x-y|^2}{4(it + \epsilon)}} g(y) \, dy \\
+      &\longrightarrow \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{- \frac{|x-y|^2}{4 i t}} g(y) \, dy = (e^{it \Delta}g)(x)
+    \end{align*}
+    for all \(x \in \mathbb{R}^d\).
+    Moreover, 
+    \begin{align*}
+      \|G_\epsilon \star g\|_{L^2(\mathbb{R}^d)} &= \| \widehat{G_\epsilon \star g} \|_{L^2(\mathbb{R}^d)} = \|\hat G_\epsilon \hat g\|_{L^2(\mathbb{R}^d)} = \left(\int_{\mathbb{R}^d} \left|e^{-(it + \epsilon)|2 \pi k|^2}\right|^2|\hat g (k)|^2 \, dk\right)^{\frac{1}{2}} \\
+      &= \left(\int_{\mathbb{R}^d}e^{-\epsilon |2 \pi k|^2}|\hat g (k)|^2 \, dk\right)^{\frac{1}{2}} \xrightarrow{\epsilon \to 0^+} \left(\int_{\mathbb{R}^d} |\hat g(k)|^2\right)^{\frac{1}{2}} = \|g\|_{L^2(\mathbb{R}^d)}
+    \end{align*}
+    as \(g \in L^2(\mathbb{R}^d)\). Thus, \(G_\epsilon \star g \to e^{i t \Delta} g\) pointwise. With Fatou:
+    \begin{align*}
+      \liminf_{\epsilon \to 0^+} \|G_\epsilon \star g\|_{L^2(\mathbb{R}^d)} \ge \|e^{i t \Delta} g\|_{L^2(\mathbb{R}^d)}
+    \end{align*}
+    Thus, \(e^{it \Delta} g \in L^2(\mathbb{R}^d)\) and  \(\|e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \le \|g\|_{L^2(\mathbb{R}^d)}\).
+    To get the equality:
+    \begin{align*}
+      \widehat{G_\epsilon \star g}(k) &= e^{-(it + \epsilon)|2 \pi k|^2}  \underbrace{\hat g(k)}_{L^2} = \underbrace{e^{-\epsilon | 2 \pi k|^2}}_{\in [0,1]} \left(e^{-it |2 \pi k|^2} \hat g(k)\right) \xrightarrow{\epsilon \to 0^+} e^{it|2 \pi k|^2} \hat g(k)
+    \end{align*}
+    in \(L^2(\mathbb{R}^d, dk)\). Thus \(G_\epsilon \star g\) converges in \(L^2(\mathbb{R}^d)\). Then up to a subsequence \(\epsilon \to 0^+\), we can assume that 
+    \[(G_\epsilon \star g)(x) \xrightarrow{\epsilon \to 0^+} H(x) \]
+    almost everywhere. (Dominated convergence) We already proved \(G_\epsilon \star g \to e^{it \Delta} g\) pointwise, so \(e^{it \Delta} g = H\), i.e. \(G_\epsilon \star g \to e^{it \Delta}\) in \(L^2(\mathbb{R}^d)\). Conclude 
+    \[\|g\|_{L^2(\mathbb{R}^d)} \xleftarrow{\epsilon \to 0} \|G_\epsilon \star g\|_{L^2(\mathbb{R}^d)} \xrightarrow{\epsilon \to 0^+} \|e^{it \Delta} g \|_{L^2}.\]
+    This implies \(\|e^{it\Delta} g\|_{L^2(\mathbb{R}^d)} = \|g\|_{L^2(\mathbb{R}^d)}\) for all \(g \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\). For \(g \in L^2(\mathbb{R}^d)\) there is a sequence \(\{g_n\} \subseteq L^1 \cap L^2\) s.t. \(g_n \to g\) in \(L^2(\mathbb{R}^d)\). Then 
+    \begin{align*}
+      \|e^{it \Delta} g_n - e^{ it \Delta} g_m \|_{L^2} &= \|e^{it \Delta} \underbrace{(g_n - g_m)}_{L^1 \cap L^2} = \|g_n - g_m\|_{L^2} \to 0
+    \end{align*}
+    as \(m,n \to \infty\). So \(e^{it \Delta} g_n\) is a Cauchy sequence in \(L^2\), so it has a limit which we define as \(e^{i t \Delta} g\). Why the limit \(e^{it\Delta} g\) is independent of the choice of \(g_n\): If we have 2 different sequences \(\{g_n\}, \{\tilde g_n\} \subseteq L^1 \cap L^2\), then \(g_n, \tilde g_n \to g\) in \(L^2(\mathbb{R}^d)\). Then
+    \begin{align*}
+      \|e^{it \Delta} g_n - e^{it \Delta} \tilde g_n\|_{L^2(\mathbb{R}^d)} = \|e^{it \Delta} \underbrace{(g_n - \tilde g_n)}_{L^1 \cap L^2}\|_{L^2} = \|g_n - \tilde g_n\|_{L^2} \xrightarrow{n \to \infty} 0
+    \end{align*}
+    \(\leadsto\) \(\lim_{n \to \infty} e^{it \Delta} g_n = \lim_{n \to \infty} e^{it\Delta}\tilde g_n\). Finally, we have \(g \in L^2(\mathbb{R}^d), g_n \in L^1 \cap L^2 \to g\) in \(L^2\).
+    \begin{align*}
+      \widehat{e^{it \Delta}}g(k)\xleftarrow{n \to \infty} \widehat{e^{it \Delta} g_n} (k) &= e^{-it |2 \pi k|^2} \hat g_n (k) \xrightarrow{n \to \infty} e^{-it |2 \pi k|^2} \hat g(k)
+    \end{align*}
+    in \(L^2(\mathbb{R}^d)\).
+  \end{proof}
+
+  \begin{rem}[Long Term bevavior]\
+    \begin{enumerate}
+      \item If \(g \in L^1(\mathbb{R}^d)\), then \((e^{it \Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4 t}} g(y) \, dy\). This implies 
+      \[\|e^{it \Delta} g\|_{L^\infty} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1} \to 0\] as \(t \to \infty.\) On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
+      Exercise: If \(g \in L^1 \cap L^2\) then \(\|e^{it \Delta} g\|_{L^p} \to 0\) for all \( 2 < p \le \infty\).
+      \item For all bounded sets \(\Omega\), for all \(g \in L^2(\mathbb{R}^d)\) we have \(\|\mathbb{1}_\Omega e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \to 0\) as \(t \to \infty\). Equivalently, for all \(R > 0\):
+      \begin{align*}
+        \int_{|x| \le R} |(e^{it \Delta}g)(x)|^2 \, dx \xrightarrow{t \to \infty} 0
+      \end{align*}
+      (RAGE theorem)
+    \end{enumerate}
+  \end{rem}
 \end{document}
