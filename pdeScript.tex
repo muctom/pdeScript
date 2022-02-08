@@ -1267,7 +1267,7 @@
   \begin{thm}[Basic Properties]
     \begin{enumerate}
       \item If \(f \in L^1(\mathbb{R}^d)\), then \(\hat f \in L^\infty(\mathbb{R}^d)\) and \(\| \hat f \|_{L^\infty} \le \|f\|_{L^1}\)
-      \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(\four\) can be extended to be a unitary transforamtion \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
+      \item For all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), \(\|\hat f\|_{L^2} = \|f\|_{L^2}\). Moreover, \(\four\) can be extended to be a unitary transformation \(L^2(\mathbb{R}^d) \to L^2(\mathbb{R}^d)\) s.t.
       \[\|\four g\|_{L^2} = \|f\|_{L^2} \quad \forall f \in L^2(\mathbb{R}^d)\]
       \item The inverse of \(F\) can be defined as
       \[(F^{-1}f)(x) = \check f (x) = \int_{\mathbb{R}^d} f(x) e^{2 \pi ik x} \, dk\] for all \(f \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\)
@@ -1277,75 +1277,107 @@
   \end{thm}
 
   \begin{thm}[Hausdorff-Young-Inequality]\label{hausdorff-young}
-    If \(1 \le p \le 2\), \(\frac{1}{p} + \frac{1}{p'} = 1\) and \(f \in L^p(\mathbb{R}^d) \cap L^1(\mathbb{R}^n)\) then
-    \[\| \hat f \|_{L^{p'}} \le \|f\|_{L^p}\]
+    If \(1 \le p \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1\) and \(f \in L^p(\mathbb{R}^d) \cap L^1(\mathbb{R}^n)\) then
+    \[\| \hat f \|_{L^{q}} \le \|f\|_{L^p}\]
     and 
-    \[\|\hat f\|_{L^p} \le \|f\|_{L^p} \quad \forall f \in L^p(\mathbb{R}^d)\]
+    \[\|\hat f\|_{L^q} \le \|f\|_{L^p} \quad \forall f \in L^p(\mathbb{R}^d).\]
   \end{thm}
   
-  % \begin{rem}
-  %   If \(1 \le p \le 2\) and \(f \in L^p(\mathbb{R}^d)\) we can write \(f = f_1 + f_2\) when \(f_1 \in L^1\), \(f_2 \in L^2\), e.g.
-  %   \begin{align*}
-  %     f = \underbrace{f \mathbb{1}(|f| \ge 1)}_{f_1} + \underbrace{f \mathbb{1}(|f| < 1)}_{f_2}
-  %   \end{align*}
-  %   \begin{align*}
-  %     \int_{\mathbb{R}^d} |f_2|^2 \, dy &= \int_{\mathbb{R}^d}|f|^2 \mathbb{1}(|f| < 1) \le \int_{\mathbb{R}^d} |f|^p \, dy < \infty \\
-  %     \int_{\mathbb{R}^d} |f_1| \, dy &= \int_{\mathbb{R}^d} |f| \mathbb{1}(|f| \ge 1) \le \int_{\mathbb{R}^d} |f|^p < \infty
-  %   \end{align*}
-  %   thus we can define \(\hat f = \hat f_1 + \hat f_2\) well defined in \(L^\infty(\mathbb{R}^d) + L^2(\mathbb{R}^d)\) what it in unclear why \(\hat f \in L^q\)?
-  %   Proof of HY inequality. Weee nedd Riez-Theorem interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
-    % \[T: L^{p_0}(\Omega} + L^{p_1})(\Omega) \longrightarrow L^{q_0}(\Omega} + L^{q_1})(\Omega)\]
-    % is a linear operator and
-    % \begin{align*}
-    %   T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for } i = 0, 1.
-    %   \text{ Then } T: \ L^{p_0} \to L^{q_0} \text{ and } \|T\|_{L^{p_1} \to L^{q_1}} \le 1, \quad \text{ for any } 0 < \theta < 1, where \begin{cases}
-    %     \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} \\
-    %     \frac{1}{q_0} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1}
-    %   \end{cases}
-    % \end{align*}
-    % Consider the Foureir Transform:
-    % \begin{align*}
-    %   F: L^1 + L^1 \to L^2 + L^\infty 
-    % \end{align*}
-    % and
-    % \begin{align*}
-    %   \|F\|_{L^1 \to L^\infty} \le 1 \text{ as } \|\hat f\|_{L^\infty} \le \|f\|_{L^1} \forall f p \in L^1 \\
-    %   \|F\|_{L^2 \to L^2} = 1 \text{ as } \| \hat f \|_{L^2} = \|f\|_{L^2} \forall f \in L^2 \\
-    %   \Rightarrow \|F\|_{L^{p_0} \to L^{p_t}} \le 1 \forall \theta \in (0,1)
-    % \end{align*}
-    % \(p_0 = 1, p_1 = 2, q_0 = \infty, q_1 = 2\)
-    % \begin{align*}
-    %   \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} = \theta + \frac{1 - \theta}{2} = \frac{1 + \theta}{2} \\
-    %   \frac{1}{q_\theta} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1} = \frac{1 - \theta}{2} \\
-    %   \Rightarrow \frac{1}{p_0} + \frac{1}{q_\theta}} = \frac{1 + \theta}{2} + \frac{1 - \theta}{2} = 1
-    % \end{align*}
-    % Thus: Let \(1 \le p,q,r \le 2\) s.t. \(\frac{1}{p} + \frac{1}{a} = 1 + \frac{1}{r}}\)
-    % Let \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\). Recall \(f \star g \in L^r(\mathbb{R}^d)\) by Young. We have
-    % \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \text{ a.e. k \in \mathbb{R}^d}\]
-  
+  \begin{rem}
+    If \(1 \le p \le 2\) and \(f \in L^p(\mathbb{R}^d)\) we can write \(f = f_1 + f_2\) when \(f_1 \in L^1\), \(f_2 \in L^2\), e.g.
+    \begin{align*}
+      f = \underbrace{f \mathbb{1}(|f| \ge 1)}_{f_1} + \underbrace{f \mathbb{1}(|f| < 1)}_{f_2}
+    \end{align*}
+    \begin{align*}
+      \int_{\mathbb{R}^d} |f_2|^2 \, dy &= \int_{\mathbb{R}^d}|f|^2 \mathbb{1}(|f| < 1) \le \int_{\mathbb{R}^d} |f|^p \, dy < \infty \\
+      \int_{\mathbb{R}^d} |f_1| \, dy &= \int_{\mathbb{R}^d} |f| \mathbb{1}(|f| \ge 1) \le \int_{\mathbb{R}^d} |f|^p < \infty
+    \end{align*}
+    thus we can define \(\hat f = \hat f_1 + \hat f_2\) well defined in \(L^\infty(\mathbb{R}^d) + L^2(\mathbb{R}^d)\).
+  \end{rem}
     
-    % \begin{ex}
-    %   Hint: first \(f,g \in C_c(\mathbb{R}^d)\) then use a density arugment)
-    % \end{ex}
 
-    % \begin{align*}
-    %   \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
-    %   = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \left(f(x-y) e^{- 2 \pi i k(x-y)}\right) (g(y)) e^{- 2 \pi i k y}) \, dx \, dy \\
-    %   &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} (f(x-y) e^{- 2 \pi i k (x-y)} \, dy)\right) (g(y) e^{ - 2 \pi i k y}) \, dy = \hat f(k) \hat g(k)
-    % \end{align*}
-    \begin{rem}
-      We want to apply the Fourier transform to find the solution of a PDE, e.g. the Poisson-Equation:
+  \begin{proof}[Proof of the Hausdorff-Young-Inequality \ref{hausdorff-young}]
+    We need Riez-Theorem representation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
+    \[T: L^{p_0}(\Omega) + L^{p_1}(\Omega) \longrightarrow L^{q_0}(\Omega) + L^{q_1}(\Omega)\]
+    is a linear operator and
+    \begin{align*}
+      T: \ L^{p_0} \to L^{q_0}
+    \end{align*}
+    and \(\|T\|_{L^{p_i} \to L^{q_i}} \le 1\) for \(i = 0, 1.\) Then,
+    \begin{align*}
+      T: \ L^{p_\theta} \to L^{q_\theta} \text{ and } \|T\|_{L^{p_\theta} \to L^{q_\theta}} \le 1
+    \end{align*}  
+    for any \(0 < \theta < 1\) where 
+    \[\begin{cases}
+      \frac{1}{p_0} = \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} \\
+      \frac{1}{q_0} = \frac{\theta}{q_0} + \frac{1 - \theta}{q_1}
+    \end{cases}.\]
+    Consider the Fourier Transform:
+    \begin{align*}
+      F: L^1 + L^1 \to L^2 + L^\infty 
+    \end{align*}
+    and
+    \begin{align*}
+      \|F\|_{L^1 \to L^\infty} &\le 1 \text{ as } \|\hat f\|_{L^\infty} \le \|f\|_{L^1} &&\forall f p \in L^1 \\
+      \|F\|_{L^2 \to L^2} &= 1 \text{ as } \| \hat f \|_{L^2} = \|f\|_{L^2} &&\forall f \in L^2 \\
+      \Rightarrow\quad  \|F\|_{L^{p_\theta} \to L^{p_\theta}} &\le 1 &&\forall \theta \in (0,1)
+    \end{align*}
+    \(p_0 = 1, p_1 = 2, q_0 = \infty, q_1 = 2\)
+    \begin{align*}
+      \frac{1}{p_0} &= \frac{\theta}{p_0} + \frac{1 - \theta}{p_2} = \theta + \frac{1 - \theta}{2} = \frac{1 + \theta}{2} \\
+      \frac{1}{q_\theta} &= \frac{\theta}{q_0} + \frac{1 - \theta}{q_1} = \frac{1 - \theta}{2} \\
+      \Rightarrow \quad 1 &= \frac{1}{p_0} + \frac{1}{q_\theta} = \frac{1 + \theta}{2} + \frac{1 - \theta}{2} \qedhere
+    \end{align*}
+  \end{proof}
+
+
+  \begin{ex}[E 3.2]
+    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdorff-Young inequality. Prove that 
+    \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \quad \forall k \in \mathbb{R}^d\]
+  \end{ex}
+
+  \begin{proof}[Solution] \
+    \begin{enumerate}[label=Step \arabic*)]
+      \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
       \begin{align*}
-        - \Delta u = f \text{ in } \mathbb{R}^d
-        \Rightarrow | 2 \pi k|^2 \hat u (k) = \hat f(k)
-        \Rightarrow \hat u(k) = \frac{1}{|2 \pi k|^2} \hat f(k) 
+        \widehat{f \star g}(k) &= \int_{\mathbb{R}^d} (f \star g)(x) e^{-2 \pi i k x} \, dx = \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} f(x-y) g(y) e^{-2 \pi i kx} \, dx \, dy \\
+        &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \left(f(x-y) e^{- 2 \pi i k(x-y)}\right) (g(y)) e^{- 2 \pi i k y}) \, dx \, dy \\
+        &= \int_{\mathbb{R}^d} \left(\int_{\mathbb{R}^d} (f(x-y) e^{- 2 \pi i k (x-y)} \, dy)\right) (g(y) e^{ - 2 \pi i k y}) \, dy = \hat f(k) \hat g(k)
       \end{align*}
-      If we can find \(G\) s.t. \(\hat G(k)  = \frac{1}{|2 \pi k|^2}\), then
+      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. we have
       \begin{align*}
-        \hat u(k) &= \hat G(k) \hat f(k) = \widehat{G \star f} \\
-        \Rightarrow u(x) &= (G \star f) (x) = \int_{\Rd} G(x-y)f(y)\, dy
+        \text{(Hausdorff-Young)} \quad &\|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
+        &\le \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^r} \\
+        &= \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
+        &\le \| (f-f_n) \star g_n \|_{L^r} + \| f_n \star (g_n - g)\|_{L^r} \\
+        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
       \end{align*}
-      In fact \(G\) is the fundamential solution of laplace quation.
+      Moreover:
+      \begin{align*}
+        \|\hat f_n \hat g_n - \hat f \hat g \|_{L^{r'}} 
+        &= \|(\hat f_n \hat f)\hat g_n + \hat f (\hat g_n - \hat g) \|_{L^{r'}} \\
+        \text{(Hölder)} \quad &\le \|\hat f_n - \hat f \|_{L^{p'}} \| \hat g_n \|_{L^{q'}} + \| \hat f \|_{L^{q'}} \\
+        \text{(Hausdorff-Young (\ref{hausdorff-young}))} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
+      \end{align*}
+      So \(\hat f_n \hat g_n \to \hat f \hat g \text{ in } L^{r'}\)
+      \(\widehat{f \star g} = \hat f \hat g\) in \(L^{r'}\)
+      \(\frac{1}{r'} = \frac{1}{p'} + \frac{1}{q'}\) \qedhere
+    \end{enumerate}
+  \end{proof}
+  
+  \begin{rem}
+    We want to apply the Fourier transform to find the solution of a PDE, e.g. the Poisson-Equation:
+    \begin{align*}
+      - \Delta u = f \text{ in } \mathbb{R}^d
+      \Rightarrow | 2 \pi k|^2 \hat u (k) = \hat f(k)
+      \Rightarrow \hat u(k) = \frac{1}{|2 \pi k|^2} \hat f(k) 
+    \end{align*}
+    If we can find \(G\) s.t. \(\hat G(k)  = \frac{1}{|2 \pi k|^2}\), then
+    \begin{align*}
+      \hat u(k) &= \hat G(k) \hat f(k) = \widehat{G \star f} \\
+      \Rightarrow u(x) &= (G \star f) (x) = \int_{\Rd} G(x-y)f(y)\, dy
+    \end{align*}
+    In fact \(G\) is the fundamential solution of laplace quation.
   \end{rem}
 
   
@@ -1734,37 +1766,6 @@
       \[\{x \mid f^\star(x) > \epsilon\} \le \frac{c_d}{\epsilon} \|f\|_{L^1(\mathbb{R}^d)}\] (Hardy-Littlewood maximal function)
     \end{enumerate}
   \end{rem}
-
-  \begin{ex}[E 3.2]
-    Let \(1 \le p, q, r \le 2\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\). Recall that if \(f \in L^p(\mathbb{R}^d)\), \(g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^r(\mathbb{R}^d)\) by Young's Inequality, and its Fourier transform is well-defined by the Hausdorff-Young inequality. Prove that 
-    \[\widehat{f \star g}(k) = \hat f(k) \hat g(k) \quad \forall k \in \mathbb{R}^d\]
-
-    Hint: In the lecture we already discussed the case \(f, g \in C_c(\mathbb{R}^d)\).
-  \end{ex}
-
-  \begin{proof}[Solution] \
-    \begin{enumerate}[label=Step \arabic*)]
-      \item \(f, g \in C_c^\infty(\mathbb{R}^d)\) (Fubini)
-      \item \(f \in L^p, g \in L^q\), find \(f_n, g_n \in C_c^\infty\) s.t. \(f_n \to f\) in \(L^p\), \(g_n \to g\) in \(L^q\). \(\widehat{f_n \star g_n} = \hat f_n \hat g_n\) pointwise a.e. we have
-      \begin{align*}
-        \text{(Hausdorff-Young)} \quad &\|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^{r'}} \\
-        &\le \|\widehat{f \star g} - \widehat{f_n \star g_n}\|_{L^r} \\
-        &= \|(f - f_n) \star g_n + f_n \star (g_n - g) \|_{L^r} \\
-        &\le \| (f-f_n) \star g_n \|_{L^r} + \| f_n \star (g_n - g)\|_{L^r} \\
-        \text{(Young)} &\le \|f - f_n\|_{L^p} \|g_n\| + \|f_n\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
-      \end{align*}
-      Moreover:
-      \begin{align*}
-        \|\hat f_n \hat g_n - \hat f \hat g \|_{L^{r'}} 
-        &= \|(\hat f_n \hat f)\hat g_n + \hat f (\hat g_n - \hat g) \|_{L^{r'}} \\
-        \text{(Hölder)} \quad &\le \|\hat f_n - \hat f \|_{L^{p'}} \| \hat g_n \|_{L^{q'}} + \| \hat f \|_{L^{q'}} \\
-        \text{(Hausdorff-Young (\ref{hausdorff-young}))} \quad &\le \| f_n - f \|_{L^p}\|g_n\|_{L^q} + \|f\|_{L^p} \|g_n - g\|_{L^p} \xrightarrow{n \to \infty} 0
-      \end{align*}
-      So \(\hat f_n \hat g_n \to \hat f \hat g \text{ in } L^{r'}\)
-      \(\widehat{f \star g} = \hat f \hat g\) in \(L^{r'}\)
-      \(\frac{1}{r'} = \frac{1}{p'} + \frac{1}{q'}\) \qedhere
-    \end{enumerate}
-  \end{proof}
 
   
   \begin{ex}[E 3.3]
