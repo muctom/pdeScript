@@ -920,27 +920,25 @@
     \end{align*}
   \end{defn}
 
-  \begin{rem}[Properties of the Convolution]
+  \begin{rem}[Properties of the Convolution]\
     \begin{itemize}
       \item \((f \star g)(x) = f \star (g \star h)\)
-      \item \(\hat{f \star g} = \hat f \star \hat g\)
+      \item \(\widehat{f \star g} = \hat f \star \hat g\)
     \end{itemize}
   \end{rem}
 
 
   \begin{thm}[Young Inequality]
-    If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \(\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}\). More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \(\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q}\), where \(1 \le p, q, r, \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\)
+    If \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\), where \(1 \le p \le \infty\), then \(f \star g \in L^p(\mathbb{R}^d)\) and \[\|f \star g \|_{L^p} \le \|f\|_{L^1} \|g\|_{L^p}.\] More generally, if \(f \in L^p(\mathbb{R}^d), g \in L^q(\mathbb{R}^d)\), then \(f \star g \in L^1(\mathbb{R}^d)\), \[\| f \star g\|_{L^1} \le \|f\|_{L^p} \|g\|_{L^q},\]where \(1 \le p, q, r \le \infty\), \(\frac{1}{p} + \frac{1}{q} = 1 + \frac{1}{r}\).
   \end{thm}
 
   \begin{proof}
-    Let \(f \in L^1, g \in L^p\). With the Hölder Inequality \ref{hölder-inequality}, we have:
-    % \begin{align*}
-    %   \left|(f \star g)(x)| 
-    %   &= \left| \int_{\mathbb{R}^d} f(x-y)g(y) \, dy \right| \\
-    %   &\le \left(\int_{\mathbb{R}^d} |f(x-y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
-    %   &= \| f \|_{L^1}^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} \dots \right)^{\frac{1}{p}}
-    % \end{align*}
+    Let \(f \in L^1, g \in L^p\). With the Hölder Inequality we have:
     \begin{align*}
+      |(f \star g)(x)| 
+      &= \left| \int_{\mathbb{R}^d} f(x-y)g(y) \, dy \right| \\
+      &\le \left(\int_{\mathbb{R}^d} |f(x-y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
+      &= \| f \|_{L^1}^{\frac{1}{q}} \left(\int_{\mathbb{R}^d} |f(x-x)| |g(y)|^p \, dy \right)^{\frac{1}{p}} \\
       \|f \star g\|_{L^p}^p
       &= \int_{\mathbb{R}^d} |f \star g(x)|^p \, dx \\
       &\le \|f\|_{L^1}^{\frac{p}{q}} \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} |f(x-y)||g(y)|^p \, dy \, dx \\
@@ -986,7 +984,7 @@
 
 
   \begin{rem}
-      Question: Is there a \(f\) s.t. \(f \star g = g\) for all \(g\). In fact there is no regular function \(f\) that solves this formally:
+      Question: Is there a \(f\) s.t. \(f \star g = g\) for all \(g\)? In fact there is no regular function \(f\) that solves this formally:
       \[f \star g = g \Rightarrow \widehat{f \star g} = \hat g \Rightarrow \hat f \hat g = \hat g\ \Rightarrow \hat f = 1 \Rightarrow f \text{ is not a regular function!}\]
 
       However, if \(f\) is the Dirac-Delta Distribution, \(f = \delta_0\) then \(\delta_0 \star g = g\) for all \(g\). Formally:
@@ -1009,14 +1007,15 @@
     \begin{enumerate}[label=Step \arabic*:]
       \item Let \(f, g \in C_c(\mathbb{R}^d)\). Then
       \begin{align*}
-        (f_\epsilon \star g)(x) - g(x) 
+        (f_\epsilon \star g)(x) - g(x)
+        &= \int_{\mathbb{R}^d} f_\epsilon(y) g(x-y) \, dy - g(x) \int_{\mathbb{R}^d} f_\epsilon(y) \, dy \\
         &= \int_{\mathbb{R}^d} f_\epsilon(y) g(x-y) \, dy - \int_{\mathbb{R}^d} f_\epsilon(y) g(x) \, dy \\
         &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
         |(f_\epsilon \star g)(x) - g(x)| 
         &= \left| \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \right| \\
         &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
         &\le \int_{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
-        &\le \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right] 
+        &\le \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right]  \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} 
         \xrightarrow{\epsilon \to 0} 0
       \end{align*}
       We have Dominated Convergence since:
@@ -1036,9 +1035,8 @@
       
       So we get:
       \begin{align*}
-        \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} 
-        &\le (\|f\|_{L^p} + 1) \|g - g_m\|_{L^p} + \underbrace{\limsup_{\epsilon \to 0} \|f_\epsilon \star g_m - g_m\|_{L^p}}_{0 \text{by step 1.}} \\
-        \xrightarrow{m \to \infty} 0
+        &\limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} \\
+        &\quad\le (\|f\|_{L^p} + 1) \|g - g_m\|_{L^p} + \underbrace{\limsup_{\epsilon \to 0} \|f_\epsilon \star g_m - g_m\|_{L^p}}_{0 \text{ by step 1.}} \xrightarrow{m \to \infty} 0.
       \end{align*}
       \item Let \(f \in L^1(\mathbb{R}^d)\) and \(g \in L^p(\mathbb{R}^d)\). Take \(\{f_m\} \subseteq C_c(\mathbb{R}^d)\), s.t. 
       \begin{align*}
@@ -1062,8 +1060,8 @@
   \end{lem}
 
   \begin{proof}
-    For all \(g \in L^p(\mathbb{R}^d)\) there are \(g_m\) step functions and \(g_m \to m\) in \(L^p(\mathbb{R}^d)\),
-    % \[g_m(x) = \sum_{\substack{\Omega \\ \text{{finite sum} \\ \Omega \subseteq \mathbb{R}^d \text{measurable}}}} \chi_\Omega(x) a_\Omega\]
+    For all \(g \in L^p(\mathbb{R}^d)\) there are step functions \((g_m)_m\) and \(g_m \to g\) in \(L^p(\mathbb{R}^d)\),
+    \[g_m(x) = \sum_{\substack{\Omega \\ \text{finite sum} \\ \Omega \subseteq \mathbb{R}^d \text{measurable}}} \chi_\Omega(x) a_\Omega.\]
     We can assume that \(\Omega\) is open and bounded and we want to approximate \(\chi_\Omega\) by \(C_c(\mathbb{R}^d)\). 
   \end{proof}
 
@@ -1080,20 +1078,22 @@
     \end{align*}
   \end{lem}
 
-  \begin{lem}[Gernal Version of Urnson]
+  \begin{lem}[General Version of Urnson]
     If \(A, B \subseteq \mathbb{R}^d\), \(A\) closed, \(B\) closed, \(A \cap B = \emptyset\). Then
     \[\eta(x) = \frac{\dist(x, A)}{\dist(x, A) + \dist(x, B)}\]
-    Then \(\eta \in C(\mathbb{R}^d)\), \(0 \le \eta \le 1\) and \(\eta = 0\)if \(x \in B\), \(\eta = 1\) if \(x \in A\). App to \(A = \overline{\Omega_\epsilon} \subset \subset \Omega\) and \(B = \mathbb{R}^d \setminus \Omega\).
+    Then \(\eta \in C(\mathbb{R}^d)\), \(0 \le \eta \le 1\) and \(\eta = 0\) if \(x \in B\), \(\eta = 1\) if \(x \in A\).
   \end{lem}
+
+  For example, this lemma can be applied to \(A = \overline{\Omega_\epsilon} \subsetneq \Omega\) and \(B = \mathbb{R}^d \setminus \Omega\) for \(\Omega \subseteq \mathbb{R}^d\) open.
 
   
   \begin{thm}[Appendix C4 in Evans]
     Let \(\Omega\) be open in \(\mathbb{R}^d\) and for \(\epsilon > 0\) define
-    \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \mathbb{R}^d \setminus \Omega) > \epsilon\}\]
-    Let \(f \in C_c^\infty(\mathbb{R}^d), \int_{\mathbb{R}^d} f = 1, \supp f \subseteq B(0, 1), f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x) \supp\) is \(B(0, \epsilon)\). Then for all \(g \in L_{loc}^p(\Omega)\) (i.e. \(\mathbb{1}_K g \in L^p(\Omega) \forall K\) compakt set in \(\Omega\)), then:
+    \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \mathbb{R}^d \setminus \Omega) > \epsilon\}\]
+    Let \(f \in C_c^\infty(\mathbb{R}^d), \int_{\mathbb{R}^d} f = 1, \supp f \subseteq B(0, 1), f_\epsilon(x) = \epsilon^{-d} f(\epsilon^{-1} x)\). Then \(\supp f_\epsilon \subseteq B(0, \epsilon)\) and for all \(g \in L_{loc}^p(\Omega)\) (i.e. \(\mathbb{1}_K g \in L^p(\Omega)\) for all \(K \subseteq \Omega\) compact) we have
     \begin{enumerate}[label=\alph*)]
-      \item \(g_\epsilon(x) = (f_\epsilon \star g)(x) = \int_{\mathbb{R}^d} f_\epsilon(x-y) g(y) \, dy - \int_\Omega f_\epsilon(x-y) g(y) \, dy\) is well-defined in \(\Omega_\epsilon\) and \(g_\epsilon \in C^\infty(\Omega_\epsilon)\).
-      \item \(g_\epsilon \to g\) in \(L_{loc}^p(\Omega)\) if \(1 \le p < \infty\) and \(g_\epsilon(x) \to g(x)\) almost everywhere \(x \in \Omega\).
+      \item \(g_\epsilon(x) = (f_\epsilon \star g)(x) = \int_{\mathbb{R}^d} f_\epsilon(x-y) g(y) \, dy - \int_\Omega f_\epsilon(x-y) g(y) \, dy\) is well-defined in \(\Omega_\epsilon\) and \(g_\epsilon \in C^\infty(\Omega_\epsilon)\),
+      \item \(g_\epsilon \to g\) in \(L_{loc}^p(\Omega)\) if \(1 \le p < \infty\) and \(g_\epsilon(x) \to g(x)\) almost everywhere \(x \in \Omega\),
       \item If \(g \in C(\Omega)\), then \(g_\epsilon(x) \to g(x)\) uniformly in any compact subset of \(\Omega\).
     \end{enumerate}
   \end{thm}
@@ -1106,7 +1106,6 @@
     \end{enumerate}
   \end{proof}
 
-  
   \begin{cor}[Lebesgue differentation theorem]
     If \(f \in L_{loc}^P(\mathbb{R}^d)\), then
     \begin{align*}
@@ -1114,24 +1113,25 @@
     \end{align*}
   \end{cor}
 
-
   \begin{ex}[E 2.1]
-    Let \(u \in C^2(\mathbb{R}^2)\) be convex. I.e.
+    Let \(u \in C^2(\mathbb{R}^2)\) be convex, i.e.
     \begin{align*}
-      t u(x) + u(y) (1-t) \ge u(tx + (1-t)y) \forall x,y \in \mathbb{R}^d \forall t \in [0,1]
+      t u(x) + u(y) (1-t) \ge u(tx + (1-t)y)
     \end{align*}
+    for all \(x,y \in \mathbb{R}^d\), \(t \in [0,1]\).
     \begin{enumerate}[label=\alph*)]
-      \item Prove for all \(x \in \mathbb{R}^d\) that \(H(x) =  \) ...
+      \item Prove for all \(x \in \mathbb{R}^d\) that the Hessian matrix \(H\) is positive semidifinite.
+      \item Prove that \(u\) is sub-harmonic in \(\mathbb{R}^d\).
     \end{enumerate}
   \end{ex}
   
   \begin{proof}[Solution]\
-    \begin{enumerate}[label=\alph*]
+    \begin{enumerate}[label=\alph*)]
       \item In 1D: If \(u\) is convex \(\Leftrightarrow\) \(u''(x) \ge 0\) for all \(x \in \mathbb{R}\). In general: Taylor expansion for all \(x,z \in \mathbb{R}^d\):
       \begin{align*}
-        u(x) &= u(z) + \nabla u(z)(x-y) + \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-z)^\alpha}{\alpha!} \, ds
+        u(x) &= u(z) + \nabla u(z)(x-z) + \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-z)^\alpha}{\alpha!} \, ds
       \end{align*}
-      \(x = z + s(x-z), s= 1\)
+      Note that we have \(x = z + s(x-z)\) if  \(s=1\).
       Use \(z = tx + (t-1)y\) \(\Rightarrow\) \(x-z = (1-t)(x-y)\)
       \begin{align*}
         t u(x) &= tu(z) + t\nabla u(z) (1-t)(x-y) + t\int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{\left[(1-t)(x-y)\right]^\alpha}{\alpha!} \, ds \\
@@ -2276,7 +2276,7 @@
   \begin{rem}
     Formally: 
     \begin{align*}
-      -\Delta(G_y \star \phi) = (-\Delta G_y) \star \phi(x) = (\delta_0 \star \phi)(x) = \int \delta_0(y) \phi(x - y) \, dy = \delta_0 (\phi(x-\bullet))
+      -\Delta(G_y \star \phi) = (-\Delta G_y) \star \phi(x) = (\delta_0 \star \phi)(x) = \int_{\mathbb{R}^d} \delta_0(y) \phi(x - y) \, dy = \delta_0 (\phi(x-\bullet))
     \end{align*}
   \end{rem}
 
@@ -5824,7 +5824,7 @@
     \fint_{\partial \bar B(\bar x, t)} \bar g \, d\bar S &= \frac{1}{4 \pi t^2} \int_{\partial \bar B(\bar x, t)} \bar g \, d\bar S(y) \\
     &= \frac{1}{4 \pi t^2} \int_{B(x,t)} g(y) 2 (1 + |\nabla \gamma|^2)^{\frac{1}{2}} \, dy \\
     &= \frac{1}{4 \pi t^2} \int_{B(x,r)} g(y) \frac{2t}{\sqrt{t^2 - |y-x|^2}} \, dy \\
-    &= \frac{t}{2} \fint_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
+    &= \frac{t}{2} \fint_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
   \end{align*}
   Similarly:
   \begin{align*}
