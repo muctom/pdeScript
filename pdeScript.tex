@@ -1384,7 +1384,6 @@
     In fact \(G\) is the fundamential solution of the Laplace Equation. To make it rigorous, we need to compute the Fourier transform of \(\frac{1}{|x|^\alpha}\) for \(0 \le \alpha < d\).
   \end{rem}
 
-  
   \begin{thm}[Fourier Transform of \(\frac{1}{|x|^\alpha}\) for \(0 < \alpha < d\)] We have formally
     \begin{align*}
       \widehat{\frac{c_\alpha}{|x|^\alpha}} = \frac{c_{d-\alpha}}{|k|^{d - \alpha}} \quad \forall\ 0 < \alpha < d
@@ -1399,35 +1398,15 @@
     \end{align*}
     Moreover if \(\alpha > \frac{d}{2}\), then we also have
     \begin{align*}
-      \left(\frac{c_\alpha}{|x|^\alpha} \star f\right)^\land = \frac{c_{d - \alpha}}{|f|^{d-\alpha}} \hat f (k)
+      \left(\frac{c_\alpha}{|x|^\alpha} \star f\right)^\land = \frac{c_{d - \alpha}}{|k|^{d-\alpha}} \hat f (k)
     \end{align*}
   \end{thm}
 
-  % \begin{rem}
-  %   If \(f \in L^p\), \(1 \le p \le 2\) \(\Rightarrow\) \(f = \underbrace{f_1}_{\in L^1} + \underbrace{f_2}_{\in L^2} \Rightarrow \hat f = \hat f_1 + \hat f_2\) \\
-  %   Question: If \(f = \tilde f_1 + \tilde f_2\), where \(\tilde f_1 \in L^1\) and \(\tilde f_2 \in L^2\), do we have that \(\hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_2}} \in L^1 \cap \L^2\)?
-  %   In fact:
-  %   \begin{align*}
-  %     f_1 + f_2 &= \tilde f_1 + \tilde f_2  \\
-  %     \Rightarrow \underbrace{f_1 - \tilde f_1}_{\in L^1} = \Rightarrow \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2 \\
-  %     \Rightarrow \hat f_1 - \hat{\tilde f_1} = \widehat{\tilde f_2}- \hat f_2 \Rightarrow \hat f_1 + \hat f_2 = \widehat{\tilde f_1} + \widehat{\tilde f_2}.
-  %   \end{align*}
-  % \end{rem}
-  
-  \begin{lem}[Fourier Transform of Gaussians] In \(\Rd\),
-    \[\widehat{e^{- \pi |x|^2}} = e^{- \pi |k|^2}\]
-    More generally for all \(\lambda > 0\):
-    \[\widehat{e^{- \pi \lambda^2 |x|^2}} = \lambda^{-d} e^{-\pi \frac{|k|^2}{\lambda^2}}\]
-    (exercise)
-  \end{lem}
-
-  \begin{proof}[Proof of Theorem]
-    Formally:
+  \begin{proof}
     \begin{align*}
-      \frac{c_\alpha}{|x|^\alpha} &= \frac{1}{|x|^\alpha} \pi^{- \frac{\alpha}{2}} \int_0^\infty e^{-\lambda} \lambda^{\frac{\alpha}{2} -1} \, d \lambda = \int_0^\infty e^{- \pi \lambda |x|^2} \lambda^{\frac{\alpha}{2}-1} \, d \lambda \\
+      \frac{c_\alpha}{|x|^\alpha} &= \frac{1}{|x|^\alpha} \pi^{- \frac{\alpha}{2}} \int_0^\infty e^{-\lambda} \lambda^{\frac{\alpha}{2} -1} \, d\lambda = \int_0^\infty e^{- \pi \lambda |x|^2} \lambda^{\frac{\alpha}{2}-1} \, d \lambda \\
       \Rightarrow \frac{\hat c_\alpha}{|x|^\alpha}(k) &= \int_0^\infty \widehat{e^{- \pi \lambda |x|^2}}(k) \lambda^{\frac{\alpha}{2}-1} \, d \lambda = \int_0^\infty \lambda^{-\frac{d}{2}} e^{- \pi \frac{|k|^2}{\lambda}} \lambda^{\frac{\alpha}{2}-1} \, d \lambda \\
-      (\lambda \to \frac{1}{\lambda}) \quad &= \int_0^\infty \lambda^{\frac{d}{2} e^{- \pi |k|^2 \lambda}} \lambda^{- \frac{\alpha}{2} + 1} \lambda^{-2} \, d\lambda \\
-      &= \frac{c_{d-\alpha}}{|k|^{d-\alpha}}
+      (\lambda \to \frac{1}{\lambda}) \quad &= \int_0^\infty \lambda^{\frac{d}{2} e^{- \pi |k|^2 \lambda}} \lambda^{- \frac{\alpha}{2} + 1} \lambda^{-2} \, d\lambda  = \frac{c_{d-\alpha}}{|k|^{d-\alpha}}
     \end{align*}
 
     Let \(f \in C_c(\Rd)\). Then \(\left(\frac{1}{|x|^\alpha} \star f\right)(x) = \int_{\Rd} \frac{1}{|x-y|^\alpha} f(y) \, dy\) is well defined as \(\frac{1}{|x-y|} \in L_{loc}^1(\mathbb{R}^d, dy)\). It is bounded
@@ -1475,6 +1454,21 @@
       \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
     \end{align*}
   \end{proof}
+
+  \begin{rem}
+    If \(f \in L^p\), \(1 \le p \le 2\) is such that \(\tilde f_1 + \tilde f_2 = f = f_1 + f_2\) with \(f_1, \tilde f_1 \in L^1\), \(f_2, \tilde f_2 \in L^2\). Do we have that \(\hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_2}} \in L^1 \cap L^2\)? In fact, from \(f_1 + f_2 = \tilde f_1 + \tilde f_2\) we get 
+      \[\underbrace{f_1 - \tilde f_1}_{\in L^1} = \underbrace{\tilde f_2 - f_2}_{\in L^2} \in L^1 \cap L^2\]
+      \[\Rightarrow \quad \hat f_1 - \widehat{\tilde{f_1}} = \widehat{\tilde{f_2}}- \hat f_2 \qquad
+      \Rightarrow \quad \hat f_1 + \hat f_2 = \widehat{\tilde{f_1}} + \widehat{\tilde{f_1}}.\]
+  \end{rem}
+  
+  \begin{lem}[Fourier Transform of Gaussians] In \(\Rd\),
+    \[\widehat{e^{- \pi |x|^2}} = e^{- \pi |k|^2}\]
+    More generally for all \(\lambda > 0\):
+    \[\widehat{e^{- \pi \lambda^2 |x|^2}} = \lambda^{-d} e^{-\pi \frac{|k|^2}{\lambda^2}}\]
+    (exercise)
+  \end{lem}
+
   
   \begin{rem}
     If \(d \ge 3\)
@@ -1489,11 +1483,14 @@
   \end{rem}
 
   \section{Theory of Distribution}
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open.
+  In the following let \(\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}\). Let \(\Omega \subseteq \mathbb{R}^d\) be open.
   \begin{itemize}
     \item \(D(\Omega) = C_c^\infty(\Omega)\) the space of test functions.
-    \item \(\phi_n \to \phi\) in \(D(\Omega)\) if \(\exists K \subseteq \Omega\), \(\supp(\phi_n), \supp(\phi) \subseteq K\) and \(\|D^\alpha(\phi_n - \phi)\|_{L^\infty} \to 0\) for all \(\alpha = (\alpha_1, \dots, \alpha_d)\), \(d_i \in \{0, 1, 2, \dots\}\).
-    \[D'(\Omega) = \{T: D(\Omega) \to \mathbb{R} \text{ or } \mathbb{C} \text{ linear and continuous}\}\] the space of distributions.
+    \item We say that \(\phi_n \to \phi\) in \(D(\Omega)\) if for all \(K\subseteq \Omega\) compact we have that \(\begin{cases}
+      \supp(\phi_n - \phi) \subseteq K \text{ for all } n \\
+      \|D^\alpha(\phi_n - \phi)\|_{L^\infty(K)} \to 0 \text{ as } n \to \infty \text{ for all } \alpha
+    \end{cases}\)
+    \item \(D'(\Omega) = \{T: D(\Omega) \to \mathbb{K} \text{ linear and continuous}\}\) the space of distributions.
   \end{itemize}
 
   Motivation: \(L^2(\Omega)' = L^2(\Omega)\), \((L^p(\Omega))' = (L^q(\Omega))\), \(\frac{1}{p} + \frac{1}{q} = 1\).
@@ -1505,17 +1502,17 @@
     is a distribution for all \(\phi \in D(\Omega)\), i.e. \(T \in D'(\Omega)\). Indeed, it is clear that \(T(\phi)\) is well-defined for all \(\phi \in D(\Omega)\) and \(\phi \mapsto T(\phi)\) is linear. Let us check that \(\phi \mapsto T(\phi)\) is continuous. Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove that \(T(\phi_n) \to T(\phi)\). Since \(\phi_n \to \phi\) in \(D(\Omega)\), there is a compact \(K\) s.t. \(\supp(\phi_n), \supp(\phi) \subseteq K \subseteq \Omega\).
   \end{eg}
 
-  Question: Why is \(f \mapsto T_f\) injective?
+  Question: Why is \(f \mapsto T_f\) injective?
 
-  \begin{lem}[Fundamental lemma of calculus of variants]
+  \begin{thm}[Fundamental theorem of calculus of variants]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open. If \(f, g \in L_{loc}^1(\Omega)\) and 
     \(\int_\Omega f \phi \, dy = \int_{\Omega} g \phi \, dy\) for all \(\phi \in D(\Omega) \), then \(f = g\) in \(L_{loc}^1(\Omega)\)
-  \end{lem}
+  \end{thm}
 
   % \begin{proof}
   %   By the linearity, it suffices to show that if \(f \in L_{loc}^1(\Omega)\) and \(\int_\Omega f \phi = 0\) for all \(\phi \in D(\Omega)\), then \(f = 0\).
   %   \begin{enumerate}[label=Step \arabic*)]
-  %     \item (\(\Omega = \mathbb{R}^d\) and \(f \in L^1(\mathbb{R}^d)\))Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\) for all \(\epsilon > 0\). Then \(h_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\) as \(\epsilon \to 0\). On the other hand: \[h_\epsilon \star f(x) = \int_{\mathbb{R}^d} f(y) \underbrace{h_\epsilon(x-y)}_{\phi_{\epsilon, x}(y)} \, dy = 0\] as \(\phi_{\epsilon, x} \in C_c^\infty\).
+  %     \item (\(\Omega = \mathbb{R}^d\) and \(f \in L^1(\mathbb{R}^d)\)) Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\) for all \(\epsilon > 0\). Then \(h_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\) as \(\epsilon \to 0\). On the other hand: \[h_\epsilon \star f(x) = \int_{\mathbb{R}^d} f(y) \underbrace{h_\epsilon(x-y)}_{\phi_{\epsilon, x}(y)} \, dy = 0\] as \(\phi_{\epsilon, x} \in C_c^\infty\).
   %     \item (\(\Omega \subseteq \mathbb{R}^d, f \in L_{loc}^1(\Omega)\)) For any \(\epsilon > 0\), 
   %     \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \Omega^\complement) > \epsilon\}\]
   %     Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\supp f \subseteq \{|x| \le 1\}\) and \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\). Then for all \(g \in C_c^\infty(\Omega_\epsilon)\) for all \(\epsilon > 0\) small we have 
@@ -1619,10 +1616,10 @@
     \begin{align*}
       g'(\phi) 
       &= - g(\phi') 
-      = - \int_{\mathbb{R}} g\phi' \, dx
-      = - \int_{-\infty}^0 (-1) \phi'  \, dx - \int_0^\infty (1) \phi'  \, dx\\
-      &= - \int_0^\infty \phi'  \, dx + \int_{-\infty}^0 \phi' \, dx
-      = [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
+      = - \int_{\mathbb{R}} g\phi' \, dx\\
+      &= - \int_{-\infty}^0 (-1) \phi'  \, dx - \int_0^\infty (1) \phi'  \, dx\\
+      &= - \int_0^\infty \phi'  \, dx + \int_{-\infty}^0 \phi' \, dx \\
+      &= [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
       = 2 \phi(0) = 2 \delta_0 (\phi)
     \end{align*}
     So \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\).
