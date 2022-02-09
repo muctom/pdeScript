@@ -5644,7 +5644,7 @@
 		a(x) &= v(x,0) = (\partial_t u - \partial_x u)_{t = 0} = h-g'.
 	\end{align*}
 	
-	\begin{thm}[d'Alembert formula]
+	\begin{ex}[E 13.1, d'Alembert formula]
 		For \(d = 1\) let \(g \in C^2(\mathbb{R}^d)\), \(h \in C^1(\mathbb{R})\) and define \(u\) by the \emph{d'Alembert formula}
 		\begin{align*}
 			u(x,t) &= \int_{x-t}^{x+t} (h(y)-g'(y)) \, dy + g(x+t) \\
@@ -5656,10 +5656,9 @@
 			\item \(\partial_t^2 u - \partial_x^2 u = 0\) 
 			\item \(u = g, \partial_t u = h\) when \(t \to 0\)
 		\end{itemize}
-	\end{thm}
+	\end{ex}
 
-	\begin{proof}
-		Exercise.
+	\begin{proof}[Solution]
 	\end{proof}
 
 	\begin{rem}
@@ -5816,6 +5815,20 @@
     \[u(x,t) = \fint_{\partial B(x,t)} \left(g(y) + \nabla g (y-x) + th(y)\right)\, dS(y)\]
   \end{rem}
 
+  \begin{ex}[E 13.3]
+    Let \(g \in C_c^2(\mathbb{R}^3)\), \(h \in C_c^1(\mathbb{R}^3)\). Assume that \(u \in C^2(\mathbb{R}^3 \times [0,\infty])\) satisfies the wave equation 
+    \[\begin{cases}
+      \partial_t^2 u - \Delta_x u = 0 &\forall x \in \mathbb{R}^3, t > 0 \\
+      u(x,0) = g(x), \partial_tu(x,0) = h(x) &\forall x \in \mathbb{R}^3
+    \end{cases}\]
+    Prove that there exists a constant \(C > 0\) such that 
+    \[|u(x,t)| \le \frac{C}{t}, \quad \forall x \in \mathbb{R}^3, t > 0.\]
+  \end{ex}
+
+  \begin{proof}[Solution]
+    
+  \end{proof}
+
   \subsection{Solution in two dimensions}
   
   The transformation \(\tilde U = r U\) does not work! The idea is to think of the 2D problem as 3D problem with \(x_3\) hidden. We write \(\bar u(x_1, x_2, x_3, t) = u(x_1, x_2, t)\). Then we get 
@@ -5848,10 +5861,15 @@
     &= t \int_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}}\, dy + t \fint_{B(x,r)} \frac{\nabla g(y) (y-x)}{\sqrt{t^2 - |y-x|^2}} \, dy
   \end{align*}
 
-  \begin{rem}[Poisson formula for 2D]
-    For \(x \in \mathbb{R}^2\), \(t>0\) we have
+  \begin{ex}[E 13.2, Poisson formula for 2D]
+    For \(x \in \mathbb{R}^2\), \(t>0\) let
     \[u(x,t) = \frac{t}{2} \fint_{B(x,t)} \frac{g(y) + \nabla g(y)(y-x) + th(y)}{(t^2 - |y-x|^2)^{\frac{1}{2}}} \, dy.\]
-  \end{rem}
+    Prove that \(u \in C^2(\mathbb{R}^2 \times (0,\infty))\) and 
+    \[\begin{cases}
+      \partial_t^2 - \Delta_x u = 0 &\forall x \in \mathbb{R}^2, t > 0 \\
+      \lim_{t \to 0^+} u(x,t) = g(x), \lim_{t \to 0^+} \partial_t u(x,t) = h(x), &\forall x \in \mathbb{R}^2
+    \end{cases}\]
+  \end{ex}
 
   \section{Spectral Method}
   Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded.
@@ -6036,8 +6054,8 @@
   \begin{rem}[Long Term bevavior]\
     \begin{enumerate}
       \item If \(g \in L^1(\mathbb{R}^d)\), then \((e^{it \Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4 t}} g(y) \, dy\). This implies 
-      \[\|e^{it \Delta} g\|_{L^\infty} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1} \to 0\] as \(t \to \infty.\) On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
-      Exercise: If \(g \in L^1 \cap L^2\) then \(\|e^{it \Delta} g\|_{L^p} \to 0\) for all \( 2 < p \le \infty\).
+      \[\|e^{it \Delta} g\|_{L^\infty(\mathbb{R}^d)} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1(\mathbb{R}^d)}\xrightarrow{t \to \infty} 0\]. On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
+      Exercise \ref{E 13.4}: If \(g \in L^1 \cap L^2\) then \(\|e^{it \Delta} g\|_{L^p} \to 0\) for all \( 2 < p \le \infty\).
       \item For all bounded sets \(\Omega\), for all \(g \in L^2(\mathbb{R}^d)\) we have \(\|\mathbb{1}_\Omega e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \to 0\) as \(t \to \infty\). Equivalently, for all \(R > 0\):
       \begin{align*}
         \int_{|x| \le R} |(e^{it \Delta}g)(x)|^2 \, dx \xrightarrow{t \to \infty} 0
@@ -6045,4 +6063,11 @@
       (RAGE theorem)
     \end{enumerate}
   \end{rem}
+
+  \begin{ex}[E 13.4]\label{E 13.4}
+    Let \(g \in L^2(\mathbb{R}^d) \cap L^1(\mathbb{R}^d)\). Let \(u: \mathbb{R}^d \times \mathbb{R} \to \mathbb{C}\) be the solution of the Schrödinger equation with the initial data \(g\), namely 
+    \[u(x,t) = (e^{it \Delta} g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{\frac{i |x-y|}{4t}} g(y) \, dy.\]
+    Prove that for all \(2 \le p \le \infty\) we have 
+    \[\lim_{t \to \infty} \|u(\bullet, t)\|_{L^p(\mathbb{R}^d)} = 0.\]
+  \end{ex}
 \end{document}
