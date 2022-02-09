@@ -6172,10 +6172,10 @@
     in \(L^2(\mathbb{R}^d)\).
   \end{proof}
 
-  \begin{rem}[Long Term bevavior]\
+  \begin{thm}[Long Term bevavior]\
     \begin{enumerate}
       \item If \(g \in L^1(\mathbb{R}^d)\), then \((e^{it \Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4 t}} g(y) \, dy\). This implies 
-      \[\|e^{it \Delta} g\|_{L^\infty(\mathbb{R}^d)} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1(\mathbb{R}^d)}\xrightarrow{t \to \infty} 0\]. On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
+      \[\|e^{it \Delta} g\|_{L^\infty(\mathbb{R}^d)} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1(\mathbb{R}^d)}\xrightarrow{t \to \infty} 0.\] On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
       Exercise \ref{E 13.4}: If \(g \in L^1 \cap L^2\) then \(\|e^{it \Delta} g\|_{L^p} \to 0\) for all \( 2 < p \le \infty\).
       \item For all bounded sets \(\Omega\), for all \(g \in L^2(\mathbb{R}^d)\) we have \(\|\mathbb{1}_\Omega e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \to 0\) as \(t \to \infty\). Equivalently, for all \(R > 0\):
       \begin{align*}
@@ -6183,7 +6183,27 @@
       \end{align*}
       (RAGE theorem)
     \end{enumerate}
-  \end{rem}
+  \end{thm}
+
+  \begin{proof}
+    \begin{enumerate}
+      \item \begin{align*}
+        \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{e^{-it |2 \pi k|^2}-1}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\hat g(k)|^2 \, dk \xrightarrow{t \to 0}
+      \end{align*}
+      by dominated convergence.
+      \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). We take \(g_1 \in L^1\) s.t. \begin{align}
+        \|e^{it \Delta} g_1 \|_{L^\infty)} &\le \frac{\|g_1\|_{L1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0 \\
+        \Rightarrow \int_{|x|\le R} |(e^{it \Delta}g_1) (x)|^2 &\le \frac{C R^d \|g_1\|_{L^1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0
+      \end{align}
+      On the other hand, with a good choice of \(g_2\):
+      \begin{align}
+        \|e^{it\Delta} g_2 \|_{L^2(\mathbb{R}^d)} &= \|g_2\|_{L^2(\mathbb{R}^d)} &\to 0 \\
+        \Rightarrow \quad \int_{|x| \le R}|(e^{it \Delta} g_2)(x)|^2 \, dx &\le \|e^{it \Delta} g_2\|_{L^2(\mathbb{R}^d)}^2 \to 0
+      \end{align}
+      Conclusion:
+      \[\int_{|x|\le R}|(e^{it \Delta} g)(x)|^2 \, dx \le 2 \int_{|x|<R}|(e^{it \Delta}g_1)(x)|^2 + 2 \int_{|x| \le R} |e^{it \Delta} g_2(x)|^2 \xrightarrow{t \to \infty} 0\]
+    \end{enumerate}
+  \end{proof}
 
   \begin{ex}[E 13.4]\label{E 13.4}
     Let \(g \in L^2(\mathbb{R}^d) \cap L^1(\mathbb{R}^d)\). Let \(u: \mathbb{R}^d \times \mathbb{R} \to \mathbb{C}\) be the solution of the Schrödinger equation with the initial data \(g\), namely 
@@ -6209,4 +6229,155 @@
     Hint: You can use Riesz–Thorin interpolation theorem.
   \end{ex}
   % Need something to proof that e^{it \Delta} g belongs to L^{p'}(\mathbb{R}^d).
+
+  \begin{lem}
+    If \(g \in L^2(\mathbb{R}^d)\), then for all \(\epsilon > 0\) we can write \(g = g_1 + g_2\), \(g, g_2 \in L^2\), \(g_1 \in L^1\). s.t. \(\|g_2\|_{L^2} \le \epsilon\) and \(\|g_1\|_{L^1} \le C_\epsilon\).
+  \end{lem}
+
+  \begin{proof}
+    \[g = \underbrace{g \mathbb{1}(|g| \le L)}_{g_1} + \underbrace{g \mathbb{1}(|g|>L)}_{g_2}\]
+    
+    Now \(g \in L^2\), then \(g_2 \in L^2\) and 
+    \begin{align}
+      \int_{\mathbb{R}^d} |g_2|^2 &= \int_{\mathbb{R}^d} |g|^2 \mathbb{1}(|g| < L) \xrightarrow{L \to 0} 0
+    \end{align}
+    and \(g_1 \in L^1\) since 
+    \begin{align*}
+      \int_{\mathbb{R}^d} |g_1| &= \int_{\mathbb{R}^d} |g| \mathbb{1}(|g| > L) &\le \int_{\mathbb{R}^d} |g| \frac{|g|}{L} = \frac{1}{L} \int_{\mathbb{R}^d} |g|^2 < \infty
+    \end{align*}
+    Consequently:
+    \begin{align*}
+      \int_{|x| \le R} |(e^{it \Delta}g)(x)|^2 \, dx
+      &\le 2 \int_{|x| \le R} |e^{it \Delta}g_1(x)|^2 + 2 \int_{|x| \le R} |e^{it \Delta} g_2(x)|^2 \\
+      &\le C R^d \left(\frac{\|g\|_{L^1}}{t^{\frac{d}{2}}}\right) + \|g_2\|_{L^2}^2 \\
+      &\le \frac{C_\epsilon R^d}{t^d} + \epsilon^2 \xrightarrow{t \to \infty} \epsilon^2 \xrightarrow{\epsilon \to 0} 0 \qedhere
+    \end{align*}
+  \end{proof}
+
+  \begin{thm}
+    If \(g \in C_c^\infty(\mathbb{R}^d)\), then 
+    \[u(x,t) = \frac{1}{(4 \pi t)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{\frac{i |x-y|^2}{4t}} g(y) \, dy,\]
+    \(x \in \mathbb{R}^d, t> 0\). satisfies 
+    \(u \in C^\infty(\mathbb{R}^d \times (0,\infty))\) and 
+    \[\begin{cases}
+      -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+      \lim_{t \to 0} u(x,t) = g(x) \text{ uniformly } x \in \mathbb{R^d}
+    \end{cases}.\]
+  \end{thm}
+
+  \begin{proof}
+    \begin{align*}
+      \hat u(k,t) &= e^{-it|2 \pi k|^2} \hat g (k) \quad \forall k \in \mathbb{R}^d, \forall t > 0 \\
+      \Rightarrow \quad \widehat{D^\alpha u}(k,t) &= e^{-it |2 \pi k|^2} (2 \pi ik)^\alpha \hat g(k), \quad (2 \pi ik)^\alpha = \prod_{j=1}^d(2 \pi ik_j)^{\alpha_j} \\
+      \Rightarrow \quad \|\widehat{D^\alpha u}(k,t)\|_{L^1(\mathbb{R}^d, dk)} &= \int_{\mathbb{R}^d} |(2 \pi ik)^\alpha| |\hat g (k)| \, dk  \le \int_{\mathbb{R}^d} |k|^{|\alpha|} |\hat g(k)| \, dk < \infty
+    \end{align*}
+    as \(|\hat g(k)| \le \frac{C_n}{(1 + |k|)^N}\) for all \(N \ge 1\). This implies \(D^\alpha u(\bullet, t) \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\). Moreover,
+    \begin{align}
+      \partial_t \hat u(k,t) &= e^{-it |2 \pi k|^2} \hat g(k) \underbrace{(-i |2 \pi k|^2)}_{\in L^1(\mathbb{R}^d, dk)}
+    \end{align}
+    \(\leadsto t \mapsto u(x,t) \in C^1\). Similary \(t \mapsto u(x,t) \in C^m\) for all \(m \ge 1\).
+    \begin{align*}
+      - i \widehat{\partial_t u - \Delta_x u} &= (-i) e^{-it |2 \pi k|^2} (- i |2 \pi k|^2) \hat g(k) + e^{-it | 2 \pi k|^2} |2 \pi k|^2 \hat g(k) = 0. \\
+      \Rightarrow \quad - i \partial_t u - \Delta_x u &= 0 \quad \text{almost everywhere in \(\mathbb{R}^d\)} \\
+      \Rightarrow \quad - i \partial_t u - \Delta_x u &= 0 \quad \text{everywhere in \(\mathbb{R}^d\)}
+    \end{align*}
+    Before we proved \(u(x,t) = (e^{it \Delta} g)(x) \to g(x)\) in \(L^2(\mathbb{R}^d)\).. Here we can do better:
+    \begin{align*}
+      \int_{\mathbb{R}^d} | \hat u(k,t) - \hat g(k)|\, dk = \int_{\mathbb{R}^d} | \underbrace{e^{-it |2 \pi k|^2}-1}_{\xrightarrow{t \to +0}0}|\underbrace{|\hat g(k)|}_{\in L^1} \xrightarrow{t \to 0} 0
+    \end{align*}
+    So we get 
+    \begin{align*}
+      \sup_{x \in \mathbb{R}^d} |u(x,t) - g(x)|&\xrightarrow{t \to 0} 0. \qedhere
+    \end{align*}
+  \end{proof}
+
+  \begin{thm}
+    \begin{enumerate}
+      \item If \(g \in H^2(\mathbb{R}^d)\), then \(u = e^{it \Delta} g\) satisfies
+      \begin{itemize}
+        \item  \(-i \frac{d}{dt} u(\bullet, t)\) exists as a function in \(L^2(\mathbb{R}^d)\) and \(= \Delta_x u\) for all \(t > 0\).
+        \[\left(- i \frac{d}{dt} u(\bullet, t) = \frac{u(\bullet, t+h) - u(\bullet, t)}{h} \xrightarrow{h \to 0} \Delta_x u = e^{it \Delta}\underbrace{(\Delta g)}_{\in L^2} \in L^2(\mathbb{R}^d)\right)\]
+        \item \(u(\bullet, t) \xrightarrow{t \to 0} g\) in \(L^2\).
+      \end{itemize}
+      \item If \(g \in L^2(\mathbb{R}^d)\), then \(u = e^{it \Delta} g\) satisfies:
+      \begin{align*}
+        - i \frac{d}{dt} \langle \phi, u\rangle_{L^2} = \langle \Delta \phi, u\rangle_{L^2} \quad \forall \phi \in C_c^\infty(\mathbb{R}^d) (\text{or } \phi \in H^2(\mathbb{R}^d))
+      \end{align*}     
+      (Here \(-i \frac{d}{dt} = \Delta_x u\) is meant in distributional sense) 
+    \end{enumerate}
+  \end{thm}
+
+  \begin{proof}
+    \begin{enumerate}
+      \item \(g \in H^2(\mathbb{R}^d)\), 
+      \begin{align*}
+        &\left\| \frac{u(\bullet, t+h) - u(\bullet, t)}{h} e^{it \Delta} (\Delta g) \right\|_{L^2(\mathbb{R}^d)}^2 = \left\| \widehat{\frac{u(\bullet, t+h) - u(\bullet, t)}{h} e^{it \Delta} (\Delta g)}\right\|_{L^2(k, dk)}^2 \\
+        &\quad= \int_{\mathbb{R}^d} \left| \frac{e^{- (t +h) | 2 \pi k|^2} \hat g(k) - e^{-it |2 \pi k|^2}\hat g(k)}{h} - e^{-it |2 \pi k|^2} | 2 \pi k|^2 \hat g (k) \right|^2 \, dk \\
+        &\quad= \int_{\mathbb{R}^d} \underbrace{\left|(-i) \frac{(e^{-ih| 2 \pi k|^2}-1)}{h} + |2 \pi k|^2 \right|^2 |\hat g(k)|^2}_{\xrightarrow{h \to 0} 0} \, dk \xrightarrow{h \to 0} 0
+      \end{align*}
+      by Dominated Convergence,
+      \(|\dots| \le C|k|^2|\hat (k)|^2 \in L^1\).
+      We have 
+      \[(-i) \frac{e^{-ih |2 \pi k|^2}-1}{h} \xrightarrow{h \to 0} (-i)^2 | 2 \pi k|^2 = - |2 \pi k|^2\]
+      and \(|\dots| \le C|k|^2\). Also 
+      \begin{align}
+        \hat u = \widehat{e^{it \Delta}g} = e^{-it | 2 \pi k|^2}\hat g(k)
+      \end{align}
+        \begin{enumerate}[label=\(\Rightarrow\)]
+          \item \(|2 \pi k|^2 \hat u(k) = e^{-it |2 \pi k|^2} \underbrace{|2 \pi k|^2 \hat g(k)}_{\in L^2(dk)} \in L^2(dk)\)
+          \item \(\widehat{\Delta_x u}= \widehat{e^{it \Delta} (\Delta g)}\)
+          \item \(\Delta_x u = e^{it \Delta}(\Delta g)\)
+        \end{enumerate}
+      \item \(g \in L^2\): 
+      \begin{align*}
+        - i \frac{d}{dt} = \langle \phi, u \rangle &= - i \frac{d}{dt} \int_{\mathbb{R}^d} \underbrace{\overline{\hat \phi(k)}}_{\le \frac{C_N}{(1 + |k|)^N} \forall N \ge 1} e^{-it  |2 \pi k|^2} \hat g(k) \, dk \\
+        &= \int_{\mathbb{R}^d} \overline{\hat \phi(k)} (- |2 \pi k|^2) \hat g (k) \, dk \\
+        &= \int_{\mathbb{R}^d} \overline{\widehat{\Delta \phi}} \hat g = \langle \Delta \phi, g\rangle_{L^2}
+      \end{align*}
+      Spectral technique: If \(\mathcal{H}\) is a Hilbertspace (separable) and \(A: D(A) \to \mathcal{H}\) is a self-adjoint \(A = A^\star\), i.e. 
+      \[\begin{cases}
+        \langle u, Av \rangle = \langle A u, v \rangle \\
+        D(A) = D(A^\star)
+      \end{cases}\]
+      where 
+      \begin{align*}
+        D(A^\star) &= \{u \in \mathcal{H} \mid \langle u, Av\rangle = \langle A^\star u, v \rangle \} \\
+        &= \left\{ u \in \mathcal{H} \middle| \sup_{ v \in D(A)} \frac{|\langle u, Av\rangle}{\|v\|_{\mathcal{H}}} < \infty \right\}
+      \end{align*}
+      Then we can define a unitary operator \(e^{-it A}: \mathcal{H} \to \mathcal{H}\) with \(t \in \mathbb{R}\). Moreover, for all \(g \in \mathcal{H}\), \(u = e^{- i t A} g\) solves 
+      \[\begin{cases}
+        i \partial_t u = A u \\ u(t \to 0) = g
+      \end{cases}\]
+      (Stone Theorem) (eg \(A = -\Delta\))
+    \end{enumerate}
+  \end{proof}
+
+  \begin{thm}[Spectral theorem]
+    If \(A\) is a self-adjoint operator on a seperable Hilbert space, then, there is a unitary operator \(U: \mathcal{H} \to L^2(\Omega)\) s.t. 
+    \(UAU^\star = M_f\) on \(L^2(\Omega)\), where \(M_f\) is a multipilication operator of a real-value function \(f: \Omega \to \mathbb{R}\):
+    \[(M_f)(\phi)(x) = f(x) \phi(x)\]
+    for all \(x \in \Omega, \forall \phi \in L^2(\Omega)\).
+    Consequence: \(U e^{-itA} U^\star = e^{-it M_f}\) (multipilication) on \(L^2(\Omega)\) where
+    \[(e^{-it M_f}\phi)(x) = e^{-it f(x)} \phi(x)\] for all \(x \in \Omega\), \(\phi \in L^2(\Omega)\).
+  \end{thm}
+
+  \begin{eg}
+    \(A = - \Delta\) on \(\mathcal{H} = L^2(\mathbb{R}^d)\), \(U = \mathcal{F}\) (Fourier Transform), \(\mathcal{F} (- \Delta) \mathcal{F}^\star = |2 \pi k|^2\) multiplication.
+    \[\mathcal{F}(e^{-itA} \phi) = e^{-it |2 \pi k|^2} \hat \phi(k)\]
+  \end{eg}
+
+  \begin{eg}
+    Consider \(A = - \Delta + V(x)\) in \(L^2(\mathbb{R}^d)\), \(V(x) \in C_c^\infty(\mathbb{R}^d)\) or \(V(x) = |x|^2\). If \(V\) is nice, then \(A\) can be defined \(D(A) \to L^2(\mathbb{R}^d)\) as a self-adjoint operator. \\
+    \(\leadsto e^{-itA} = e^{-it(-\Delta + v)}\) is well-defined as a unitary operator for all \(t \in \mathbb{R}\). In particular, for all \(g \in L^2\), \(u = e^{-it(-\Delta + v)} g\) solves 
+    \[\begin{cases}
+      i \partial_t u = (-\Delta + v) u \\ u(t \to 0) = g
+    \end{cases}\]
+    Scattery Theory: \(e^{-it(- \Delta + v)} g \) as \(t \to \infty.\)
+    \begin{enumerate}
+      \item RAGE: If \(-\Delta + V\) has no eigenfunction, then 
+      \[\frac{1}{T} \int_0^T \int_{|x| \le R} \left| \left(e^{-it(-\Delta +v)}g\right)(x)\right|^2 \, dx \, dt \xrightarrow{T \to 0} 0\]
+      \item (Asymptotic completeness) If \(0 \le V \in C_c^\infty\) is small, then there is a unitary operator \(U\) on \(L^2\) s.t. for all \(g \in L^2\):
+      \[\left\|e^{-it(-\Delta + v)}g - e^{-it \Delta} (Ug) \right\|_{L^2(\mathbb{R}^d)} \xrightarrow{t \to \infty} 0 \]
+    \end{enumerate}
+  \end{eg}
 \end{document}
