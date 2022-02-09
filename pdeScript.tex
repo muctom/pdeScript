@@ -134,7 +134,7 @@
     Let \(\Omega \subseteq R^d\) be open
     \begin{align*}
       C(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid f \text{ continuous} \right\} \\
-      C^k(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid D^\alpha f \text{ is continuous for all } |\alpha| \le k \right\}
+      C^k(\Omega) &= \left\{ f: \ \Omega \to \mathbb{R} \mid D^\alpha f \text{ is continuous for all } |\alpha| \le k \right\}
     \end{align*}
   \end{defn}
 
@@ -280,7 +280,7 @@
     \end{align*}
     and 
     \begin{align*}
-      |\Phi(y) f(x-y)| &\le \| f ||_{L^\infty} \cdot \mathbb{1}(|y| \le R) \cdot |\Phi(y)| \in L^1(\mathbb{R}^d, dy)
+      |\Phi(y) f(x-y)| &\le \| f ||_{L^\infty} \cdot \mathbb{1}(|y| \le R) \cdot |\Phi(y)| \in L^1(\mathbb{R}^d, dy)
     \end{align*}
     where \(R > 0\) depends on \(\{x_n\}\) and \(\operatorname{supp}(f)\) but independent of \(y\). Now we compute the derivatives:
     \begin{align*}
@@ -334,9 +334,9 @@
           \item \( 
               \begin{aligned}[t]
                 \left|\int_{\partial B(0, \epsilon)} \Phi(y) \frac{\partial f}{\partial \vec{n}}(x-y) \ dS(y)\right|
-                &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
+                &\le \|\nabla f\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\Phi(y)| \ dy \\
                 &\le \begin{cases}
-                  const \cdot \epsilon | \log \epsilon| \to 0, & d = 2 \\
+                  const \cdot \epsilon | \log \epsilon| \to 0, & d = 2 \\
                   const \cdot \epsilon \to 0, & d \ge 3
                 \end{cases}
               \end{aligned}
@@ -621,7 +621,7 @@
       &\le \frac{|S_1|}{|B_1| \frac{r}{N}} \frac{[c_d(N-1)]^{N-1}}{\left(r \frac{N-1}{N^d}\right)^{d + N - 1}} \int_{B(x_0, r)} |u| \, dy \\
       &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} (N-1)^d} \int_{B(x_0, r)} |u| \, dy \\
       &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} N^d} \left(\frac{N}{N-1}\right)^d \int_{B(x_0, r)} |u| \, dy \\
-      &\le \frac{2^d |S_1|}{|B_1|} \frac{c_d^{N-1} N^N}{r^{d+N}} \int_{B(x_0, r)} |u| \, dy \qquad \text{if } c_d \ge \frac{2^d |S_1|}{|B_1|}
+      &\le \frac{2^d |S_1|}{|B_1|} \frac{c_d^{N-1} N^N}{r^{d+N}} \int_{B(x_0, r)} |u| \, dy \qquad \text{if } c_d \ge \frac{2^d |S_1|}{|B_1|}
     \end{align*}
   \end{proof}
 
@@ -648,7 +648,7 @@
   %   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
 
   %   Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
-  %   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
+  %   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
   %   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
   %   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
   %   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
@@ -714,7 +714,7 @@
   %   So we get
   %   \begin{align*}
   %     \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
-  %     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
+  %     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
   %   \end{align*}
   %   and by the induction hypothesis:
     
@@ -807,7 +807,7 @@
   %       &\qquad + \lim_{h \to 0} \int_{|x-y-he_i| < 2h} \frac{1}{h} \left[ \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy
   %     \end{align*}
   %     \begin{align*}
-  %       (I) \quad \lim_{h \to 0} \int_{\mathbb{R}^3} \frac{\mathbb{1}(|x-y-he_i| \ge 2H)}{h} \left[\frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy
+  %       (I) \quad \lim_{h \to 0} \int_{\mathbb{R}^3} \frac{\mathbb{1}(|x-y-he_i| \ge 2H)}{h} \left[\frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right] f(y) \, dy
   %     \end{align*}
   %     Dominated Convergence:
   %     \begin{align*}
@@ -815,7 +815,7 @@
   %     \end{align*}
   %     and
   %     \begin{align*}
-  %       \left| \frac{\mathbb{1}(|x-y-he_i| \ge 2h)}{h}\right| \left| \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right| |f(y)|
+  %       \left| \frac{\mathbb{1}(|x-y-he_i| \ge 2h)}{h}\right| \left| \frac{1}{|x-y-he_i|} - \frac{1}{|x-y|}\right| |f(y)|
   %     \end{align*}
   %     Here:
   %     \begin{align*}
@@ -824,7 +824,7 @@
   %     So we get
   %     \begin{align*}
   %       &\mathbb{1}(|x_3 - he_i) \ge 4h) \left|\frac{1}{|x-y-he_i|} - \frac{1}{|x-y|} \right| \\
-  %       &\qquad \le \frac{|he_i|}{|x-y-he_i||x-y|} \mathbb{1}(|x-y-he_i| \ge 4h) \\
+  %       &\qquad \le \frac{|he_i|}{|x-y-he_i||x-y|} \mathbb{1}(|x-y-he_i| \ge 4h) \\
   %       &\qquad \le \frac{h}{\left(\frac{2}{3}\right)|x-y|}
   %     \end{align*}
   %     \begin{align*}
@@ -891,7 +891,7 @@
       \Phi = \Phi_1 + \Phi_2 = \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
       \Phi \star f = \Phi_1 \star f + \Phi_2 \star f
     \end{align*}
-    We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
+    We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
   \end{proof}
 
   \begin{ex} (Hanack's inequality)
@@ -970,7 +970,7 @@
         &= \lim_{h \to 0} \frac{(f \star g)(x + he_i) - (f \star g)(x)}{h} \\
         &= \lim_{h \to 0} \int_{\mathbb{R}^d} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
         \text{(Dominated Convergence)} \quad &= \int_{\mathbb{R}^d}\lim_{h \to 0} \frac{f(x + he_i - y) - f(x-y)}{h} g(y) \, dy \\
-        &= \int_{\mathbb{R}^d} (\partial_{x_i} f)(x-y) g(y) \, dy
+        &= \int_{\mathbb{R}^d} (\partial_{x_i} f)(x-y) g(y) \, dy
       \end{align*}
       We could apply Dominated Convergence since
       \begin{align*}
@@ -1013,9 +1013,9 @@
         &= \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \\
         |(f_\epsilon \star g)(x) - g(x)| 
         &= \left| \int_{\mathbb{R}^d} f_\epsilon(y) (g(x-y) - g(x)) \, dy \right| \\
-        &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
+        &\le \int_{\mathbb{R}^d} |f_\epsilon(y)| |g(x-y) - g(x)| \, dy \\
         &\le \int_{|y| \le R_\epsilon} |f_\epsilon(y)||g(x-y) - g(x)| \, dy \\
-        &\le \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right]  \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} 
+        &\le \left[\sup_{|z| \le R} |g(x-z) - g(x)| \right]  \underbrace{\int_{|y| \le R_\epsilon} |f_\epsilon(y)| \, dy}_{\le \|f_\epsilon\|_{L^1} = \|f\|_{L^1}} 
         \xrightarrow{\epsilon \to 0} 0
       \end{align*}
       We have Dominated Convergence since:
@@ -1049,7 +1049,7 @@
       \begin{align*}
         f_\epsilon \star g - g &= (f_\epsilon - F_{m, \epsilon}) \star g + F_{m, \epsilon} \star g -g \\
         \Rightarrow \|f_\epsilon - g \|_{L^p} &\le \underbrace{\|f_\epsilon - F_{m, \epsilon} \star g\|_{L^p}}_{\mathclap{\overset{\text{Young}}{\le} \|f_\epsilon - F_{m, \epsilon}\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g\|_{L^p}}} + \|F_{m, \epsilon} \star g - g\|_{L^p} \\
-        \Rightarrow \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} &\le \|f - F_m\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g \|_{L^p} \qedhere
+        \Rightarrow \limsup_{\epsilon \to 0} \|f_\epsilon \star g - g\|_{L^p} &\le \|f - F_m\|_{L^1} \|g\|_{L^p} = \|f - F_m\|_{L^1} \|g \|_{L^p} \qedhere
       \end{align*}
     \end{enumerate}
   \end{proof}
@@ -1143,7 +1143,7 @@
       \end{align*}
       
       \begin{align*}
-        t(1-t)^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-y)}{\alpha!} \, ds + (1-t) t^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(y-z)) \frac{(y-z)^\alpha}{\alpha!} \,ds \ge 0
+        t(1-t)^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(x-z)) \frac{(x-y)}{\alpha!} \, ds + (1-t) t^2 \int_0^1 \sum_{|\alpha| = 2} D^\alpha u(z + s(y-z)) \frac{(y-z)^\alpha}{\alpha!} \,ds \ge 0
       \end{align*}
       for all \(x,y \in \mathbb{R}^d, t \in [0,1], z = tx+ (1-t)y\). Divides for \(t(1-t)\)
       \begin{align*}
@@ -1185,7 +1185,7 @@
     \begin{enumerate}[label=\alph*)]
       \item Regard \(d = 3\). The function \(\frac{1}{|x|}\) is harmonic in \(\mathbb{R}^3 \setminus \{0\}\). We prove 
       \begin{align*}
-        \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
+        \fint_{\partial B(x, r)} \frac{dS(y)}{|y|} = \frac{1}{\max(|x|, r)}
       \end{align*}
       If \(|x| > r\), then \(0 \notin B(x,r + \epsilon)\). Then
       \[y \mapsto \frac{1}{|y|}\] is harmonic in \(B(x, r  + \epsilon)\). Then by the Mean Value Property:
@@ -1413,7 +1413,7 @@
     \begin{align*}
       \frac{1}{|x|^\alpha} \star f = \frac{1}{|x|^\alpha} \underbrace{\mathbb{1}(|x| \le 1)}_{\in L^\infty(\Rd)} \star \underbrace{f}_{L^\infty} + \underbrace{\frac{1}{|x|} \mathbb{1}(|x| > 1)}_{\in L^\infty} \star \underbrace{f}_{\in L^1} \in L^\infty(\Rd)
     \end{align*}
-    When \(|x| \to \infty\):
+    When \(|x| \to \infty\):
     \begin{align*}
       \left(\frac{1}{|x|^\alpha} \star f\right)(x) &= \int_{\Rd} \frac{f(y)}{|x-y|^\alpha} \, dy = \int_{|y| \le R} \frac{f(y)}{|x-y|^\alpha} \, dy \sim \frac{\int_{\Rd} f(y) \, dy}{|x|^\alpha}
     \end{align*}
@@ -1421,7 +1421,7 @@
     Note that \(\frac{c_{d-\alpha}}{|k|^{d-\alpha}} \underbrace{\hat f(k)}_{\text{bounded}} \in L^1(\Rd)\).
     \begin{align*}
       (...) \mathbb{1}(|k| \le 1) + (...) \mathbb{1}(|k|> 1)
-      \frac{1}{|k|^{d - \alpha}}|\hat f(k)| \mathbb{1}(|k| \le 1) \le \|f\|_{L^1} \frac{\mathbb{1}(|k| \le 1)}{|k|^{d-\alpha}} \in L^1(\Rd, dk) \\
+      \frac{1}{|k|^{d - \alpha}}|\hat f(k)| \mathbb{1}(|k| \le 1) \le \|f\|_{L^1} \frac{\mathbb{1}(|k| \le 1)}{|k|^{d-\alpha}} \in L^1(\Rd, dk) \\
       \frac{1}{|k|^{d-\alpha}} |\hat f(k)| \mathbb{1}(k >1) \le |\hat f(k)| \in L^2(\Rd, dK) \text{ as } f \in L^2(\Rd)
     \end{align*}
 
@@ -1446,7 +1446,7 @@
     \end{align*}
     Assume \(d > \alpha > \frac{d}{2}\). Then \(\frac{c_\alpha}{|x|^\alpha} \star f \in L^\infty\) and behaves \(\frac{c_\alpha(\int f)}{|x|^\alpha}\) as \(|x| \to \infty\). This implies:
     \begin{align*}
-      \int_{\mathbb{R}^d} \left| \frac{c_\alpha}{|x|^\alpha} \star f \right|^2 \le c + \int_{|x| \ge R} \frac{c}{|x|^{2d}} \, dx < \infty 
+      \int_{\mathbb{R}^d} \left| \frac{c_\alpha}{|x|^\alpha} \star f \right|^2 \le c + \int_{|x| \ge R} \frac{c}{|x|^{2d}} \, dx < \infty 
     \end{align*}
     Thus the Fourier Transform \(\widehat{\frac{c_\alpha}{|x|^\alpha}} \star f\) exists. Combining with 
     \begin{align*}
@@ -1530,12 +1530,12 @@
 
   \begin{eg}[Principle Value]
     The function \(f(x) = \frac{1}{x}\) is not in \(L_{loc}^1(\mathbb{R})\), but we can still define
-    \[\int_{\mathbb{R}} f(x) \phi(x) \, dx = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \[\phi(x) = |\phi(x)-\phi(0)| \le  x \sup |\phi'|,\] so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supported. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
+    \[\int_{\mathbb{R}} f(x) \phi(x) \, dx = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \[\phi(x) = |\phi(x)-\phi(0)| \le  x \sup |\phi'|,\] so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supported. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
     Define \(T: D(\mathbb{R}) \to \mathbb{K}\) by \begin{align*}
       T(\phi) 
       &= \lim_{\epsilon \to 0} \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \quad \forall \phi \in D(\mathbb{R}) \text{ s.t. } \phi(0) = 0
     \end{align*}
-    We write \(T = \frac{1}{x}\) and check that \(T \in D'(\mathbb{R})\): For all \(\epsilon > 0\) we have  \[\left|\frac{\phi(x)}{x}\right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\] for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
+    We write \(T = \frac{1}{x}\) and check that \(T \in D'(\mathbb{R})\): For all \(\epsilon > 0\) we have  \[\left|\frac{\phi(x)}{x}\right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\] for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
     \begin{align*}
       \mathbb{1}(|x| \ge \epsilon)\frac{\phi(x)}{x} \in L^1(\mathbb{R}) \leadsto \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx < \infty
     \end{align*}
@@ -1728,10 +1728,10 @@
     Here consider \(F = \{B_x\}_{x \in \tilde S_{n \epsilon}}\). With the vitali covering leamm there is a \(G \subseteq F\) s.t. \(G \) contains disjoint balls and:
     \[\tilde S_{n, \epsilon} \subseteq \bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5 B\]
     So we get
-    \[|\tilde S_{n, \epsilon}| \le |\bigcup_{B \in G} 5B| \le \sum_{B \in G} |5B| = \sum_{B \in G} 5^d|B|\]
+    \[|\tilde S_{n, \epsilon}| \le |\bigcup_{B \in G} 5B| \le \sum_{B \in G} |5B| = \sum_{B \in G} 5^d|B|\]
     On the other hand, for all \(B \in G \subseteq F\): 
     \begin{align*}
-      \fint_B |f_n(y) - f(y)| \, dy > \epsilon \Rightarrow \int_B |f_n - f| > \epsilon|B|
+      \fint_B |f_n(y) - f(y)| \, dy > \epsilon \Rightarrow \int_B |f_n - f| > \epsilon|B|
     \end{align*}
     This implies:
     \begin{align*}
@@ -1746,13 +1746,13 @@
     So 
     \[|\tilde S_{n \epsilon}| \le \frac{5^d}{\epsilon} \|f_n - f\|_{L^1}\]
     In summary: 
-    \[|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}| \le \frac{5^d + 1}{\epsilon} \|f_n - f\|_{L^1} \to 0\]
+    \[|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}| \le \frac{5^d + 1}{\epsilon} \|f_n - f\|_{L^1} \to 0\]
     as \(n \to \infty\). So \(|A_\epsilon| = 0\) for all \(\epsilon > 0\)
   \end{proof}
   
   \begin{rem}
     \begin{enumerate}
-      \item The proof can be done by using the Besicovitch covering lemma: For all \(E \subseteq \mathbb{R}^d\) s.t. \(E\) is bounded. Let \(F = \) collection of balls s.t. for all \(x \in E\) there is a \(B_x \in F\) s.t. \(x\) is the center of \(B_x\). There is a sub-collection \(G \subseteq F\) s.t.
+      \item The proof can be done by using the Besicovitch covering lemma: For all \(E \subseteq \mathbb{R}^d\) s.t. \(E\) is bounded. Let \(F = \) collection of balls s.t. for all \(x \in E\) there is a \(B_x \in F\) s.t. \(x\) is the center of \(B_x\). There is a sub-collection \(G \subseteq F\) s.t.
       \begin{itemize}
         \item \(E \subseteq \bigcup_{B \in G} B\)
         \item Any point in \(E\) belongs to at most \(C_d\) balls in \(C_T\) (\(C_d\) depends only on \(\mathbb{R}^d\)), i.e. 
@@ -1831,7 +1831,7 @@
         \item \(\begin{aligned}[t]
           &\frac{f_{y - h e_i}(x)- f_y(x)}{h} - (\partial_i f)_y(x) \\
           &\quad = \frac{f(x-y+he_i) - f(x-y)}{h} - (\partial_i f)(x-y) \\
-          &\left| \int_0^1 \partial_i f(x-y+the_i) \, dt - \partial_i f(x-y) \right| \xrightarrow{h \to 0} 0 \text{ uniformly in } x
+          &\left| \int_0^1 \partial_i f(x-y+the_i) \, dt - \partial_i f(x-y) \right| \xrightarrow{h \to 0} 0 \text{ uniformly in } x
         \end{aligned}\) \\
         Similary:
         \begin{align*}
@@ -1865,7 +1865,7 @@
         because
         \begin{align*}
           \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f_{y_j} (x) \to (f\star g)(x) \text{ in } D(\mathbb{R}^d) \\
-          \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \xrightarrow{\text{Riemann}} \int_{\mathbb{R}^d} g(y) f(x-y) \, dy = (f \star g)(x)
+          \lim_{\Delta_N \to 0} \Delta_N \sum_{j=1}^N g(y_j) f(x-y_j) \xrightarrow{\text{Riemann}} \int_{\mathbb{R}^d} g(y) f(x-y) \, dy = (f \star g)(x)
         \end{align*}
         Proof of: 
         \begin{align*}
@@ -2039,7 +2039,7 @@
     \end{align*}
     \begin{align*}
       &\Rightarrow T(\phi \star \psi) - T(\phi)\int \psi = \dots \\
-      &\Rightarrow \int_{\mathbb{R}^d} T(\psi_y) \phi(y) \, dy - T(\phi) \int \psi = \dots
+      &\Rightarrow \int_{\mathbb{R}^d} T(\psi_y) \phi(y) \, dy - T(\phi) \int \psi = \dots
     \end{align*}
     Take \(\psi \in C_c^\infty(\mathbb{R}^d)\) such that \(\int \psi = 1\). Then:
     \begin{align*}
@@ -2110,7 +2110,7 @@
       |G(f^{(n)}) - G(f)|
       \le \|\nabla G\|_{L^\infty} |f^{(n)} - f| \to 0 \text{ in  \(L_{loc}^p\)}
     \end{align*}
-    So \(G(f^{(n)}) \to G(f)\) in \(L_{loc}^p\), thus \(\partial_{x_i} G(f^{(n)}) \to \partial_{x_i} G(f)\) in \(D'(\Omega)\). On the other hand, by the standard Chain-Rule for \(C^1\)-functions:
+    So \(G(f^{(n)}) \to G(f)\) in \(L_{loc}^p\), thus \(\partial_{x_i} G(f^{(n)}) \to \partial_{x_i} G(f)\) in \(D'(\Omega)\). On the other hand, by the standard Chain-Rule for \(C^1\)-functions:
     \begin{align*}
       \partial_{x_i} G(f^{(k)})
       &= \sum_{k=1}^d \underbrace{\partial_k G(f^{(k)})}_{(\text{b.d.} \to \partial_k G(f))} \underbrace{\partial_i f_k^{(n)}}_{(\to \partial_i f_k \text{ in } L^p(\Omega))} \to \sum_{k=1}^d \partial_k G(f) \partial_i f_k \text{ in }L_{loc}^p(\Omega)
@@ -2178,7 +2178,7 @@
       \item \(\mu \left(\bigcup_{i=1}^\infty A_i\right) \le \sum_{i=1}^\infty \mu(A_i)\)
     \end{enumerate}
     From the outer measure we can find a \(\sigma\)-algebra \(\Sigma\) and \(\mu\) is a measure on \(\Omega\) s.t. \(E\) is measurable iff \[\mu(E) = \mu(E \cap A) + \mu(E \cap A^\complement).\]
-    So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
+    So all open sets are measurable, thus outer regularity (by def \(\mu(A) = \inf\{\mu(O) \mid O \text{ open } \supseteq A\)), so inner regularity \(\mu(A) = \sup\{\mu(K) \mid K \text{ compact} \subseteq A\}\). 
   \end{proof}
 
   \begin{ex}[E 4.1]
@@ -2197,10 +2197,10 @@
   \end{ex}
 
   \begin{proof}[Solution]
-    Since \(f_n \in L^1\), \(\supp f \subseteq B(0,1)\) and \(g \in C_c^\infty\) we have \(f_n \star g \in C_c^\infty\) and \[\supp(f_n \star g) \subseteq (\supp g) + \overline{B(0,1)} = K.\] Since \(f_n \to f\) in \(L^1\) there is a subsequence \(f_{n_k} \to f\) almost everywhere, so \(f \supp\) in \(\overline{B(0,1)}\), so \(f \star g \in C_c^\infty\), \(\supp(f \star g) \subseteq K\). We have:
+    Since \(f_n \in L^1\), \(\supp f \subseteq B(0,1)\) and \(g \in C_c^\infty\) we have \(f_n \star g \in C_c^\infty\) and \[\supp(f_n \star g) \subseteq (\supp g) + \overline{B(0,1)} = K.\] Since \(f_n \to f\) in \(L^1\) there is a subsequence \(f_{n_k} \to f\) almost everywhere, so \(f \supp\) in \(\overline{B(0,1)}\), so \(f \star g \in C_c^\infty\), \(\supp(f \star g) \subseteq K\). We have:
     \begin{align*}
       |f_n \star g(x) - f \star g(x)| 
-      &= \left|\int_{\mathbb{R}^d} (f_n(y)-f(y))g(x-y) \, dy \right| \\
+      &= \left|\int_{\mathbb{R}^d} (f_n(y)-f(y))g(x-y) \, dy \right| \\
       &\le \int_{\mathbb{R}^d} |f_n(y) - f(y)| |g(x-y)| \, dy \\
       &\le \|g\|_{L^\infty} ||f_n - f\|_{L^1} 
       \xrightarrow{n \to \infty} 0
@@ -2289,7 +2289,7 @@
   \begin{thm}[Poisson's equation with \(L_{loc}^1\) data]\label{PoissonsequationwithL1locdata}
     Let \(f \in L_{loc}^1(\mathbb{R}^d)\) s.t. \(\omega_d f \in L^1(\mathbb{R}^d)\) where 
     \[\omega_d(x) = \begin{cases}
-      1 + |x| & d = 1 \\ \log(1 + |x|) & d=2 \\ \frac{1}{1 + |x|^{d-2}} & d \ge 3,
+      1 + |x| & d = 1 \\ \log(1 + |x|) & d=2 \\ \frac{1}{1 + |x|^{d-2}} & d \ge 3,
     \end{cases}\]
     then \(u(x) = (G\star f)(x) \in L_{loc}^1(\mathbb{R}^d)\). Moreover \(-\Delta u = f\) in \(D'(\mathbb{R}^d)\). In fact, \(u \in W_{loc}^{1,1}(\mathbb{R}^d)\) and:
     \[\partial_{x_i} u(x) = (\partial_{x_i} G) \star f(x) = \int_{\mathbb{R}^d} (\partial_{x_i} G)(x-y)f(y) \, dy\]
@@ -2303,7 +2303,7 @@
     First we check that \(u \in L_{loc}^1\). Take any Ball \(B(0, R) \subseteq \mathbb{R}^d\), prove \(\int_B |u| \, dy < \infty\). We have 
     \begin{align*}
       \int_B |u| \, dy 
-      &= \int_B \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \, dx \\
+      &= \int_B \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \, dx \\
       &\le \int_B \int_{\mathbb{R}^d} |G(x-y)||f(y)| \, dy \, dx \\
       &= \int_{\mathbb{R}^d} \left(\int_B |G(x-y) \, dx\right)|f(y)| \, dy
     \end{align*}
@@ -2339,8 +2339,8 @@
     So \(-\Delta u = f\) in \(D'(\mathbb{R}^d)\). We check that \(\partial_i G \star f \in L_{loc}^1(\mathbb{R}^d)\). Note that 
     \[|\partial_i G(x)| \le c \frac{1}{|x|^{d-1}} \in L_{loc}^1(\mathbb{R}^d)\]
     and
-    \[\int_{B(0,R)} |\partial_i G(x-y)| \, dx \le \begin{cases}
-      C_r \omega_d(y) & |y| \ge R \\ C_r & |y| \le R
+    \[\int_{B(0,R)} |\partial_i G(x-y)| \, dx \le \begin{cases}
+      C_r \omega_d(y) & |y| \ge R \\ C_r & |y| \le R
     \end{cases}\]
     So \(\int_{B(0,R)} |(\partial_i G\star f)|(y) < \infty\) for all \(R > 0\). For all \(\phi \in D(\mathbb{R}^d)\): 
     \begin{align*}
@@ -2349,7 +2349,7 @@
       = \int_{\mathbb{R}^d} u(x) \partial_i \phi(x) \, dx \\
       &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} G(x-y) f(y) \partial_i \phi(x) \, dx \, dy \\
       &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} G(y-x) f(y) \partial_i \phi(x) \, dx \, dy \\
-      &= \int_{\mathbb{R}^d} (G \star \partial_i^y \phi)(y) f(y) \, dy \\
+      &= \int_{\mathbb{R}^d} (G \star \partial_i^y \phi)(y) f(y) \, dy \\
       &= \int_{\mathbb{R}^d}(\partial_i^y G \star \phi)(y) f(y) \, dy \\
       &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} \partial_i^y G(y-x) f(y) \phi(x) \, dx \, dy \\
       &= \int_{\mathbb{R}^d} \int_{\mathbb{R}^d} -(\partial_i G)(x-y) f(y) \phi(x) \, dx \, dy \\
@@ -2389,7 +2389,7 @@
     Take \(\int_{\mathbb{R}^d} g \, dy = 1\), then:
     \begin{align*}
       T(\phi) 
-      &= \int_{\mathbb{R}^d} T(g_y) \phi(y) \, dy 
+      &= \int_{\mathbb{R}^d} T(g_y) \phi(y) \, dy 
     \end{align*}
     For all \(\phi \in C_c^\infty\). Then \(T = T(g_y) \in C^\infty\)
   \end{proof}
@@ -2440,7 +2440,7 @@
     \begin{enumerate}[label=\alph*)]
       \item (\(p=1\)) Why is \(G \star f \in L_{loc}^q\)? Recall from the proof of Youngs inequality: \begin{align*}
         |(G\star f)(x)| 
-        &= \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \\
+        &= \left| \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \right| \\
         (\text{Hölder}) \quad &= \left(\int_{\mathbb{R}^d} |G(x-y)|^q |f(y)| \, yd\right)^{\frac{1}{q}}\left(\int_{\mathbb{R}^d} |f(y)| \, dy\right)^{\frac{1}{q'}}
       \end{align*}
       Where \(\frac{1}{q} + \frac{1}{q'} = 1\). Then:
@@ -2499,20 +2499,20 @@
         \end{align*}
         Claim: If \(f \in L^p(\mathbb{R}^d)\) is compactly supported, \(d \ge p > \frac{d}{2}\), then: 
         \begin{align*}
-          \sup_{\xi \in \mathbb{R}^d} \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d - 2 + d}}|f(z)| \, dz < \infty
+          \sup_{\xi \in \mathbb{R}^d} \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d - 2 + d}}|f(z)| \, dz < \infty
         \end{align*}
         for all \(0 < \alpha < 2 - \frac{d}{p}\). Assume \(\supp f \subseteq \overline{B(0, R_1)}\). Consider 2 cases:
         \begin{itemize}
-          \item If \(|\xi| > 2 R_1\), then: \(|\xi - z| \ge R_1\) for all \(z \in B(0, R_1)\). Hence: \begin{align*}
+          \item If \(|\xi| > 2 R_1\), then: \(|\xi - z| \ge R_1\) for all \(z \in B(0, R_1)\). Hence: \begin{align*}
             \int_{\mathbb{R}^d} \frac{1}{|\xi -z|^{d-2+\alpha}}|f(z)| \, dz
             &\le \frac{1}{R_1^{d-2+\alpha}} \|f\|_{L^1} < \infty
           \end{align*}
           \item If \(|\xi| \le 2 R_1\), then: \(|\xi - z| \le 3 R_1\) for all \(z \in B(0, R_1)\):
           \begin{align*}
             \int_{\mathbb{R}^d} \frac{1}{|\xi - z|^{d-2+\alpha}} |f(z)| \, dz
-            &\le \int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{d - 2 + \alpha}} |f(z)| \, dz \\
+            &\le \int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{d - 2 + \alpha}} |f(z)| \, dz \\
             (\text{Hölder}), \left(\frac{1}{p} + \frac{1}{q} = 1\right) \quad &\le \left(\int_{\mathbb{R}^d}|f(z)|^p \, dz\right)^{\frac{1}{p}}\\
-            &\quad \cdot \left(\int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{(d - 2 + \alpha)q}}\right)^{\frac{1}{q}} \\
+            &\quad \cdot \left(\int_{|\xi - z| \le 3 R_1} \frac{1}{|\xi - z|^{(d - 2 + \alpha)q}}\right)^{\frac{1}{q}} \\
             &= \|f\|_{L^p} \left(\int_{|z| \le 3 R_1} \frac{1}{|z|^{(d-2+\alpha)q}} \, dz\right)^{\frac{1}{q}} < \infty
           \end{align*}
         \end{itemize}
@@ -2522,9 +2522,9 @@
         as \(\omega_d f \in L^1(\mathbb{R}^d)\). We claim that \(\partial_i G \star f \in C^{0, \alpha}(\mathbb{R}^d)\). So \(G \star f \in C^{1, \alpha}(\mathbb{R}^d)\) by the equivalence between the classical and the distributional derivatives. Exercise. Hint:
         \begin{align*}
           |\partial_i G\star f(x) - \partial_i G \star f(y)|
-          &\le \int_{\mathbb{R}^d} |\partial_i G(x-z) - \partial_i G(y-z)||f(z)| \, dz,
+          &\le \int_{\mathbb{R}^d} |\partial_i G(x-z) - \partial_i G(y-z)||f(z)| \, dz,
         \end{align*}
-        \(\partial_i G(x) = \frac{-x_i}{d|B_1||x|^d}\). \(\leadsto\) Need to estimate \(|\partial_i G(x) - \partial_i G(y)| \le C|x-y|^\alpha\). \qedhere
+        \(\partial_i G(x) = \frac{-x_i}{d|B_1||x|^d}\). \(\leadsto\) Need to estimate \(|\partial_i G(x) - \partial_i G(y)| \le C|x-y|^\alpha\). \qedhere
     \end{enumerate}
   \end{proof}
 
@@ -2547,7 +2547,7 @@
     in the classical sense. We will compute the distributional derivatives \(\partial_i \partial_j (G \star f)\) and prove that they are Hölder continuous. Compute \(\partial_j \partial_i (G \star f)\): For all \(\phi \in C_c^\infty(\mathbb{R}^d)\) we have
     \begin{align*}
       -(\partial_j \partial_i G \star f)(\phi)
-      &= (\underbrace{\partial_i(G \star f)}_{\in C})(\partial_j \phi) \\
+      &= (\underbrace{\partial_i(G \star f)}_{\in C})(\partial_j \phi) \\
       &= \int_{\mathbb{R}^d}((\partial_i G)\star f)(x) \partial_j \phi(x) \, dx \\
       &= \int_{\mathbb{R}^d}\int_{\mathbb{R}^d} \partial_i G(x-y) f(y) \partial_j \phi(x) \, dx \, dy \\
       &= \int_{\mathbb{R}^d} f(y) \left[\int_{\mathbb{R}^d} \partial_i G(x-y)\partial \phi(x) \, x\right] \, dy \\
@@ -2561,31 +2561,31 @@
     By dominated convergence we have \(|\partial_i G(x-y) \partial_j \phi(x)| \in L^1(dx)\).
     By the Gauss-Green-Theorem (\ref{gauss-green}) for all \(\epsilon > 0\):
     \begin{align*}
-      &\int_{|x-y| \ge \epsilon} \partial_i G(x-y) \partial_j \phi(x) \, dx \\
-      &\quad= \int_{\partial B(y, \epsilon)}\partial_i G(x-y) \phi(x) \omega_j \, dS(x) - \int_{|x-y| \ge \epsilon} \partial_j \partial_i G(x-y) \phi(x) \, dx
+      &\int_{|x-y| \ge \epsilon} \partial_i G(x-y) \partial_j \phi(x) \, dx \\
+      &\quad= \int_{\partial B(y, \epsilon)}\partial_i G(x-y) \phi(x) \omega_j \, dS(x) - \int_{|x-y| \ge \epsilon} \partial_j \partial_i G(x-y) \phi(x) \, dx
     \end{align*}
     Where \(\omega = \frac{x-y}{|x-y|}\). For the boundary term:
     \begin{align*}
       - \int_{\partial B(y, \epsilon)} \partial_i G(x-y) \phi(x) \omega_j \, dS(x)
       &= - \epsilon^{d-1} \int_{\partial B(0, 1)} \partial_i G(\epsilon \omega) \phi(y + \epsilon \omega) \omega_j \, d\omega \\
       (\star) \quad &= \int_{\partial B(0, 1)} \frac{1}{d|B_1|} \omega_i \omega_j \phi(y + \epsilon \omega) \, d \omega \\
-      &\xrightarrow{\epsilon \to 0} \int_{\partial B(0, 1)} \frac{1}{d|B_1|} \omega_i \omega_j \phi(y) \, d\omega \\
+      &\xrightarrow{\epsilon \to 0} \int_{\partial B(0, 1)} \frac{1}{d|B_1|} \omega_i \omega_j \phi(y) \, d\omega \\
       &= \frac{1}{d} \delta_{i,j} \phi(y)
     \end{align*}
     \((\star)\) \ \(\partial_i G(x) = \frac{- x_i}{d|B_1||x|^d}\)
-    , so \(\partial_i G(\epsilon \omega) = - \frac{- \omega_i}{d |B_1|} \frac{1}{\epsilon^{d-1}}.\) for all \(|\omega| = 1\). \\
+    , so \(\partial_i G(\epsilon \omega) = - \frac{- \omega_i}{d |B_1|} \frac{1}{\epsilon^{d-1}}.\) for all \(|\omega| = 1\). \\
     
     Now we split:
     \begin{align*}
-      &- \int_{|x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(x) \, dx \\
-      &\quad= - \int_{|x-y| \ge 1}  \partial_i \partial_j G(x-y) \phi(x) \, dx - \int_{1 \ge |x-y| \ge \epsilon}  \partial_i \partial_j G(x-y) \phi(x) \, dx
+      &- \int_{|x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(x) \, dx \\
+      &\quad= - \int_{|x-y| \ge 1}  \partial_i \partial_j G(x-y) \phi(x) \, dx - \int_{1 \ge |x-y| \ge \epsilon}  \partial_i \partial_j G(x-y) \phi(x) \, dx
     \end{align*}
     The key observation is: \(\int_{\partial B(0, r)} \partial_i \partial_j G(x) \, dx = 0\) since \[\partial_i \partial_j G(x) = \frac{1}{|B_1|}\left(\omega_i \omega_j - \frac{\partial_{ij}}{d}\right) \frac{1}{|x|^d},\] \(\omega = \frac{x}{|x|}\). For example if \(i = 1, j = 2, r = 1\):
     \begin{align*}
       \int_{\partial B(0, 1)} \partial_1 \partial_2 G(x) \, dS(x) 
       &= \frac{1}{|B_1|} \int_{\partial B(0, 1)} \omega_1 \omega_2 \, d \omega,
     \end{align*}
-    \(\partial B(0,1) = \{\omega \mid |\omega| = 1\}\). Consider: \(\omega \mapsto R \omega, (\omega_1, \dots, \omega_d) \mapsto (- \omega_1, \omega_2, \dots, \omega_d)\). Then
+    \(\partial B(0,1) = \{\omega \mid |\omega| = 1\}\). Consider: \(\omega \mapsto R \omega, (\omega_1, \dots, \omega_d) \mapsto (- \omega_1, \omega_2, \dots, \omega_d)\). Then
     \begin{align*}
       -\int_{1 \ge |x-y| \ge \epsilon} \partial_i \partial_j G(x-y) \phi(y) \, dx = 0.
     \end{align*}
@@ -2607,11 +2607,11 @@
     Conclusion: 
     \begin{align*}
       \partial_i \partial_j (G \star f) (x) &= - \frac{\delta_{ij}}{d} f(x) + \int_{|x-y| > 1} \partial_i \partial_j G(x-y) f(y) \, dy \\
-      &\quad + \int_{|x-y| \le 1} \partial_i \partial_j G(x-y) \left(f(y) - f(x)\right) \, dy
+      &\quad + \int_{|x-y| \le 1} \partial_i \partial_j G(x-y) \left(f(y) - f(x)\right) \, dy
     \end{align*}
-    The first term \(f \in C^{0, \alpha}\). The second term is also at least \(C^{0, \alpha}\) since \(\partial_i \partial_j G(x)\) is smooth as \(|x| > 1\). We need to prove that the thirt term
+    The first term \(f \in C^{0, \alpha}\). The second term is also at least \(C^{0, \alpha}\) since \(\partial_i \partial_j G(x)\) is smooth as \(|x| > 1\). We need to prove that the thirt term
     \begin{align*}
-      W_{ij}(x) &= \int_{|x-y| \le 1} \partial_i \partial_j G(x-y)(f(y) - f(x)) \, dy
+      W_{ij}(x) &= \int_{|x-y| \le 1} \partial_i \partial_j G(x-y)(f(y) - f(x)) \, dy
     \end{align*}
     is Hölder-continuous, \(|W_{ij}(x) - W_{ij(y)}| \le C |x-y|^\alpha\). Recall:
     \begin{align*}
@@ -2646,7 +2646,7 @@
       &\le C_\epsilon |x-y|^{\alpha (1 - \epsilon)}
     \end{align*}
 
-    thus it is easy to prove \(|W_{ij}(x) - W_{ij}(y)| \le C_\alpha |x-y|^\alpha\) for all \(\alpha' \le \alpha\). However, to get \(\alpha' = \alpha\) we need a more precise estimate. We split:
+    thus it is easy to prove \(|W_{ij}(x) - W_{ij}(y)| \le C_\alpha |x-y|^\alpha\) for all \(\alpha' \le \alpha\). However, to get \(\alpha' = \alpha\) we need a more precise estimate. We split:
     \begin{align*}
       W_{ij}(x) - W_{ij}(y) 
       &= \int_{|z| \le 1} \dots = \int_{|z| \le min(4|x-y|, 1)} + \int_{4|x-y| < |z| \le 1}
@@ -2659,17 +2659,17 @@
     \end{align*}
     For the second domain:
     \begin{align*}
-      &\int_{4|x-y| < |z| \le 1} \partial_{ij} G(z) (f(x+z) - f(y+z) + f(y)  f(x)) \, dz \\
+      &\int_{4|x-y| < |z| \le 1} \partial_{ij} G(z) (f(x+z) - f(y+z) + f(y)  f(x)) \, dz \\
       &\quad = \int_{4|x-y| < z \le 1} \partial_{ij} G(z) (f(x+z) - f(y+z)) \, dz = (\ldots)
     \end{align*}
     since \(\int_{4|x-y|<|z|\le1} \partial_{ij}G(z) \, dz = 0\). Then
     \begin{align*}
-      (\ldots) &= \int_{4|x-y| < |z-x| \le 1} \partial_{ij} G(z-x) f(z) \, dz - \int_{4|x-y| < |z-y| \le 1} \partial_{ij} G(z-y) f(z) \, dz.
+      (\ldots) &= \int_{4|x-y| < |z-x| \le 1} \partial_{ij} G(z-x) f(z) \, dz - \int_{4|x-y| < |z-y| \le 1} \partial_{ij} G(z-y) f(z) \, dz.
     \end{align*}
-    Denote \(A = \{z \mid 4 |x-y| < |z-x| \le 1\}\), \(B = \{z \mid 4|x-y| < |z-y| \le 1\}\). Consider 
+    Denote \(A = \{z \mid 4 |x-y| < |z-x| \le 1\}\), \(B = \{z \mid 4|x-y| < |z-y| \le 1\}\). Consider 
     \begin{align*}
       &\int_A \partial_{ij} G(z-x) f(z) \, dz - \int_B \partial_{ij} G(z-y) f(z) \, dz \\
-      &\quad = \int_{A\setminus B} + \int_{B \setminus A} + \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y))f(z) \, dz
+      &\quad = \int_{A\setminus B} + \int_{B \setminus A} + \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y))f(z) \, dz
     \end{align*}
     Lets regard the intersection. We have \begin{align*}
       \partial_{ij} G(x) &= \frac{1}{|B_1|}\frac{1}{|x|^d} (\omega_i \omega_j - \frac{1}{d} \delta_{ij}) \\
@@ -2683,13 +2683,13 @@
     So we have 
     \begin{align*}
       &\left| \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y)) f(z) \, dz \right| \\
-      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |f(z)| \, dz = (\ldots)
+      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |f(z)| \, dz = (\ldots)
     \end{align*}
     Now we replace \(f(z)\) by \(f(z) - f(x)\), then:
     \begin{align*}
       &\left| \int_{A \cap B} (\partial_{ij} G(z-x) - \partial_{ij} G(z-y)) (f(z)-f(x)) \, dz \right| \\
-      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |z-x|^\alpha \, dz \\
-      &\quad = C \underbrace{\int_{A \cap B} |x-y| \frac{1}{|z-x|^{d + 1 - \alpha}} \, dz}_{(I)} + \underbrace{C \int_{A \cap B} |x-y| \frac{1}{|z-y|^{d+1}}|z-x|^\alpha \, dz}_{(II)}
+      &\quad \le C \int_{A \cap B} |x-y| \left(\frac{1}{|z-x|^{d+1}} + \frac{1}{|z-y|^{d+1}}\right) |z-x|^\alpha \, dz \\
+      &\quad = C \underbrace{\int_{A \cap B} |x-y| \frac{1}{|z-x|^{d + 1 - \alpha}} \, dz}_{(I)} + \underbrace{C \int_{A \cap B} |x-y| \frac{1}{|z-y|^{d+1}}|z-x|^\alpha \, dz}_{(II)}
     \end{align*}
     Now, \begin{align*}
       (I) &\le C |x-y| \int_{4 |x-y| < |z-x| \le 1} \frac{1}{|z - x|^{d+1-\alpha}} \, dz \\
@@ -2703,7 +2703,7 @@
     \begin{align*}
       (II) &\le C |x-y| \int_{A \cap B} \frac{1}{|z-y|^{d+1}} |z-x|^\alpha \, dz \\
       &\le C |x-y| \int_{A \cap B} \frac{1}{|z-y|^{d+1}} \left(|z-y|^\alpha + |x-y|^\alpha\right) \, dz \\
-      &\le \underbrace{C |x-y| \int_B \frac{1}{|z-y|^{d+1-\alpha}} \, dz}_{\text{similar to (I)}} +\ C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz \\
+      &\le \underbrace{C |x-y| \int_B \frac{1}{|z-y|^{d+1-\alpha}} \, dz}_{\text{similar to (I)}} +\ C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz \\
     \end{align*}
     and \begin{align*}
       C |x-y|^{1+\alpha} \int_B \frac{1}{|z-y|^{d+1}} \, dz
@@ -2716,21 +2716,21 @@
     \end{align*}
     where
     \begin{align*}
-      A &= \{z \mid 4 |x-y| < |z-x| \le 1\} \\
+      A &= \{z \mid 4 |x-y| < |z-x| \le 1\} \\
       B &= \{z \mid 4 |x-y| < |z-y| \le 1\} \\
       A \setminus B &= \{z \in A \mid |z-y| \le 4 |x-y|\} \cup \{z \in A \mid |z-y| > 1\} = E_1 \cup E_2 \\
     \end{align*}
     for 
     \begin{align*}
-      E_1 &= \{z \mid |z-y| \le 4 |x-y| < |z-x| \le 1\} \\
-      &\subseteq \{ z \mid 4 |x-y| \le |x-z| \le 5 |x-y| \}.
+      E_1 &= \{z \mid |z-y| \le 4 |x-y| < |z-x| \le 1\} \\
+      &\subseteq \{ z \mid 4 |x-y| \le |x-z| \le 5 |x-y| \}.
     \end{align*}
     \(|x-z| \le |x-y| + |y-z| \le 5 |x-y|\) in \(E_1\).
     We have 
     \begin{align*}
       \int_{E_1} \frac{1}{|z-x|^d} \, dz 
-      &\le \int_{4|x-y| \le |x-z| \le 5 |x-y|} \frac{1}{|z-x|^{d-\alpha}} \, dz \\
-      &= \int_{4|x-y| \le |z| \le 5 |x-y|} \frac{1}{|z|^{d-\alpha}} \, dz \\
+      &\le \int_{4|x-y| \le |x-z| \le 5 |x-y|} \frac{1}{|z-x|^{d-\alpha}} \, dz \\
+      &= \int_{4|x-y| \le |z| \le 5 |x-y|} \frac{1}{|z|^{d-\alpha}} \, dz \\
       &= \int_{4|x-y|} \frac{1}{r^d} r^{d-1} \, dr \\
       &= \int_{4|x-y|} \frac{1}{r^{1-\alpha}} \, dr \\
       &\le C |x-y|^\alpha
@@ -2802,7 +2802,7 @@
         \partial f_i(x) & f(x) > 0 \\ - \partial_i f(x) & f(x) < 0 \\ 0 & f(x) = 0
       \end{cases} \\
       |\partial_i G_\epsilon(f)(x)|
-      &\le \left| \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}}\right| |\partial_i f(x)| \le |\partial_i f(x)| \in L^p(\mathbb{R}^d)
+      &\le \left| \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}}\right| |\partial_i f(x)| \le |\partial_i f(x)| \in L^p(\mathbb{R}^d)
     \end{align*}
     So we get \(\partial_i G_\epsilon(f) \xrightarrow{\epsilon \to 0} g_i\) in \(L^p(\mathbb{R}^d)\) by Dominated Convergence. So we conclude: \(\partial_i(|f|) = g_i \in L^p(\mathbb{R}^d)\) for all \(i = 1, \dots, d\), so \(|f| \in W^{1,p}(\mathbb{R}^d)\), \(|f| \in L^p\).
   \end{proof}
@@ -2859,14 +2859,14 @@
     % \[- \Delta u = - \omega''(r) - \frac{2 \omega'(r)}{r} = \frac{\log(r) + 1}{(r \log(r))^2} - \frac{2}{r^2 \log (r)} = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)\]
     We show that \(f \in L^{\frac{3}{2}}: \) 
     \begin{align*}
-      \int_B |f(x)|^{\frac{3}{2}} \, dx 
-      &= const \int_0^{\frac{1}{2}} \left| \frac{1}{r^2 (\log r)^2} - \frac{1}{r^2 \log{r}} \right|^{\frac{3}{2}} r^2 \, dr \\
-      &\tilde < \int_0^{\frac{1}{2}} \frac{1}{r} \left| \frac{1}{(\log(r))^2} - \frac{1}{(\log(r))} \right|^{\frac{3}{2}} \, dr \\
+      \int_B |f(x)|^{\frac{3}{2}} \, dx 
+      &= const \int_0^{\frac{1}{2}} \left| \frac{1}{r^2 (\log r)^2} - \frac{1}{r^2 \log{r}} \right|^{\frac{3}{2}} r^2 \, dr \\
+      &\tilde < \int_0^{\frac{1}{2}} \frac{1}{r} \left| \frac{1}{(\log(r))^2} - \frac{1}{(\log(r))} \right|^{\frac{3}{2}} \, dr \\
       \left(\begin{aligned}
         r = e^{-x}, \\
         x \in (\log(2), \infty), \\
-        dr = -e^{-x} \, dx
-      \end{aligned}\right) \quad &\tilde < \int_{\log(2)}^\infty e^x \left(\frac{1}{x^2} + \frac{1}{x}\right)^{\frac{3}{2}} e^{-x} \, dx \\
+        dr = -e^{-x} \, dx
+      \end{aligned}\right) \quad &\tilde < \int_{\log(2)}^\infty e^x \left(\frac{1}{x^2} + \frac{1}{x}\right)^{\frac{3}{2}} e^{-x} \, dx \\
       &\tilde < \int_{\log(2)}^\infty \frac{1}{x^{\frac{3}{2}}} \, dx < \infty
     \end{align*}
     Where \(\tilde <\) means \emph{up to a constant}. Now, \(u(x) = \omega(r) = \log(-\log(r))\). 
@@ -2888,7 +2888,7 @@
       \left|u(x) \nabla \phi(x) \frac{x}{|x|}\right| \le \|\nabla \phi \|_{L^\infty} |u(x)| = C \log|\log(r)|
     \end{align*}
     \begin{align*}
-      \left| \int_{\partial B(0, \epsilon)} u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) \right| 
+      \left| \int_{\partial B(0, \epsilon)} u(x) \nabla \phi(x) \frac{x}{|x|} \, dS(x) \right| 
       &\le C \int_{\partial B(0, \epsilon)} \log |\log(\epsilon)| \, dS(x) \\
       &= C \log |\log \epsilon| \underbrace{|\partial B(0, \epsilon)|}_{\sim \epsilon^2} \xrightarrow{\epsilon \to 0} 0
     \end{align*}
@@ -2899,11 +2899,11 @@
     \end{align*}
     The boundary term vanishes as \(\epsilon \to 0\) as 
     \begin{align*}
-      \left| \int_{\partial B(0, \epsilon)} \partial u(x) \phi(x) \frac{x_i}{|x|}\, dS(x) \right|
-      &\le \|\phi\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\partial_i u(x)| \, dS(x) \\
+      \left| \int_{\partial B(0, \epsilon)} \partial u(x) \phi(x) \frac{x_i}{|x|}\, dS(x) \right|
+      &\le \|\phi\|_{L^\infty} \int_{\partial B(0, \epsilon)} |\partial_i u(x)| \, dS(x) \\
       (\star) \quad &\le C \frac{1}{|\epsilon \log(r)|} |\partial B(0, \epsilon)| \to 0
     \end{align*} as \(\epsilon \to 0\). 
-    \((\star) u = u(r), u(x) = \omega(|x|), \partial_i u(x) = \omega(|x|)\frac{x_i}{|x|}\), \(|\partial_i u(x)| \le |\omega(|x|)| = \left|\frac{1}{r\log(r)}\right|\). Finally:
+    \((\star) u = u(r), u(x) = \omega(|x|), \partial_i u(x) = \omega(|x|)\frac{x_i}{|x|}\), \(|\partial_i u(x)| \le |\omega(|x|)| = \left|\frac{1}{r\log(r)}\right|\). Finally:
     \begin{equation*}
       \int_{|x|> \epsilon} f(x) \phi(x) \, dx \xrightarrow{\epsilon \to 0} \int_{\mathbb{R}^d} f(x) \phi(x) \, dx
     \end{equation*}
@@ -2913,7 +2913,7 @@
   \begin{ex}[Bonus 5]
     Construct \(u \in L^1(\mathbb{R}^3)\) compactly supported s.t. \(- \Delta u \in L^{\frac{3}{2}}(\mathbb{R}^3)\) and \(u\) is not continuous at \(0\).
   \end{ex}
-  Hint: Related to E 5.5. \(u_0(x) = \omega(r) = \log(|\log(r)|)\) if \(0 < r = |x| < \frac{1}{2}\). Consider \(\chi u_0\) where \(\chi \in C_c^\infty\), \(\chi = 0\) if \(|x| > \frac{1}{2}\), \(\chi = 1\) if \(|x| < \frac{1}{4}\). You can prove that \(\Delta (\chi u_0) = (\Delta \chi) u_0 + 2 \nabla \chi \nabla u_0 + \chi(\underbrace{\Delta u_0}_{\in L^{\frac{3}{2}}})\) in \(D'(\mathbb{R}^3)\). (almost everywhere, in distributional sense, integration by parts)
+  Hint: Related to E 5.5. \(u_0(x) = \omega(r) = \log(|\log(r)|)\) if \(0 < r = |x| < \frac{1}{2}\). Consider \(\chi u_0\) where \(\chi \in C_c^\infty\), \(\chi = 0\) if \(|x| > \frac{1}{2}\), \(\chi = 1\) if \(|x| < \frac{1}{4}\). You can prove that \(\Delta (\chi u_0) = (\Delta \chi) u_0 + 2 \nabla \chi \nabla u_0 + \chi(\underbrace{\Delta u_0}_{\in L^{\frac{3}{2}}})\) in \(D'(\mathbb{R}^3)\). (almost everywhere, in distributional sense, integration by parts)
 
   \begin{thm}[Regularity on Domains] Let \(\Omega \subseteq \mathbb{R}^d\) be open. Assume \(u, f \in D'(\Omega)\) such that \(- \Delta u = f\) in \(D'(\Omega)\).
     \begin{enumerate}[label=\alph*)]
@@ -3005,7 +3005,7 @@
       Recall from the proof of Youngs inequality:
       \begin{align*}
         |u(x)| &= \left| \int_{\mathbb{R}^2} G(x-y) f(y) \, dy \right| \\
-        &\le \int_{\mathbb{R}^2} |G(x-y)||f(y)| \, dy \\
+        &\le \int_{\mathbb{R}^2} |G(x-y)||f(y)| \, dy \\
         &\le \left(\int_{\mathbb{R}^2} |G(x-y)|^q |f(y)| \, dy\right)^{\frac{1}{q}} \left(\int_{\mathbb{R}^2} |f(y)| \, dy\right)^{\frac{1}{q}}, \quad \frac{1}{q} + \frac{1}{q'} = 1
       \end{align*}
       Assume \(\supp f \subseteq \overline{B(0, R)}\). Then if \(y \in \supp f\) and \(x \in B(0,R)\), then \(|x-y| \le |x| + |y| \le R + R_1\). For all \(y \in \supp f\):
@@ -3033,15 +3033,15 @@
       \end{align*}
       Note that 
       \begin{align*}
-        \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2} \right| 
-        &= \left| (x_i  - y_i) \left(\frac{1}{|x-y|^2} - \frac{1}{|z-y|^2}\right) + \frac{x_i - z_i}{|z-y|^2} \right| \\
+        \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2} \right| 
+        &= \left| (x_i  - y_i) \left(\frac{1}{|x-y|^2} - \frac{1}{|z-y|^2}\right) + \frac{x_i - z_i}{|z-y|^2} \right| \\
         &\le |x_i - y_i| \left| \frac{1}{|x-y|^2} - \frac{1}{|z-y|^2} \right| + \frac{|x_i - z_i|}{|z-y|^2} \\
         &\le C|z-x|^\alpha \left(\frac{1}{|x-y|^{1 + \alpha}} + \frac{1}{|z-y|^{1 + \alpha}} + \frac{|x-z|}{|z-y|^{2}}\right)
       \end{align*}
-      Here \(|x_i - z_i| \le |x-z|\) and \(|x_i - y_i| \le |x-y|\) and:
+      Here \(|x_i - z_i| \le |x-z|\) and \(|x_i - y_i| \le |x-y|\) and:
       \begin{align*}
         \smash{\underbrace{\left| \frac{1}{|x-y|^2} - \frac{1}{|z-y|^2} \right|}_{\text{sym } x \leftrightarrow z}}
-        &= \left| \frac{1}{|x-y|} - \frac{1}{|z-y|}\right| \left| \frac{1}{|x-y|} + \frac{1}{|z-y|}\right| \\
+        &= \left| \frac{1}{|x-y|} - \frac{1}{|z-y|}\right| \left| \frac{1}{|x-y|} + \frac{1}{|z-y|}\right| \\
         &= \frac{||z-y| - |x-y|}{|x-y||z-y|} \left| \frac{1}{|x-y|} + \frac{1}{|z-y|} \right| \\
         &\le |z-x|^\alpha \frac{\max(|z-y|, |x-y|)^{1-\alpha}}{|x-y| |z-y|} \left(\frac{1}{|x-y|} + \frac{1}{|z-y|}\right) \\
         &\le C |z-x|^\alpha \left(\frac{1}{|x-y|^{2 + \alpha}} + \frac{1}{|z-y|^{2 + \alpha}}\right)
@@ -3050,22 +3050,22 @@
     By the symmetrie \(x \leftrightarrow z\):
     \begin{align*}
       LHS &\le C|z-x|^\alpha \left(\frac{1}{|x-y|^{1 + \alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right) + \frac{|x-y|}{|x-y|^2} \\
-      \Rightarrow LHS &\le C \dots + |x-z| \min\left(\frac{1}{|z-y|^2}, \frac{1}{|x-y|^2}\right) \\
+      \Rightarrow LHS &\le C \dots + |x-z| \min\left(\frac{1}{|z-y|^2}, \frac{1}{|x-y|^2}\right) \\
       & \le (|x-y| + |z-y|)^{1-\alpha} \\
       & C |z-x|^\alpha \left(\frac{1}{|x-y|^{1+\alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right)
     \end{align*}
     In summary:
     \begin{align*}
       |\partial_i u(x) - \partial_i u(z)| 
-      &\le C \int_{\mathbb{R}^2} \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2}\right||f(y)| \, dy \\
+      &\le C \int_{\mathbb{R}^2} \left| \frac{x_i - y_i}{|x-y|^2} - \frac{z_i - y_i}{|z-y|^2}\right||f(y)| \, dy \\
       &= C |x-y|^\alpha \int_{\mathbb{R}^2} \left(\frac{1}{|x-y|^{1+\alpha}} + \frac{1}{|z-y|^{1+\alpha}}\right) |f(y)| \, dy
     \end{align*}
     Consider if \(|x| > 2 R_1\):
     \begin{align*}
       \int_{\mathbb{R}^2} \frac{1}{|x-y|^{1+\alpha}} |f(y)| \, dy 
-      &\le \int_{\mathbb{R}^2} \frac{1}{R_1^{1+\alpha}} |f(y)| \, dy \le C
+      &\le \int_{\mathbb{R}^2} \frac{1}{R_1^{1+\alpha}} |f(y)| \, dy \le C
     \end{align*}
-    \(\supp f \subseteq B(0, R_1)\). If \(|x| < 2 R_1\), then \(|x-y| \le 3R\) if \(y \in B(0, R_1)\). Hence:
+    \(\supp f \subseteq B(0, R_1)\). If \(|x| < 2 R_1\), then \(|x-y| \le 3R\) if \(y \in B(0, R_1)\). Hence:
     \begin{align*}
       &\int_{|x-y| \le 3 R_1} \frac{1}{|x-y|^{1+\alpha}} |f(y)| \, dy \\
       &\quad \le \left(\int_{|x-y| \le 3 R_1} \frac{1}{|x-y|^{(1+\alpha)p'}}\right)^{\frac{1}{p'}} \left(\int |f(y)|^p \, dy\right)^{\frac{1}{p}} \\
@@ -3098,7 +3098,7 @@
     \(u, f \in L^2(\mathbb{R}^d)\), \(-\Delta u = f \) in \(D'(\mathbb{R}^d)\). Prove \(u \in W^{2,2}(\mathbb{R}^d)\), \(\|u\|_{W^{2,2}(\mathbb{R}^d)} \le C \left(\|u\|_{L^2} + \|f\|_{L^2}\right)\).
     \begin{align*}
       W^{2,2}(\mathbb{R}^d)
-      &= \{g \in L^2(\mathbb{R}^d) \mid D^\alpha g \in L^2 \text{ for all } |\alpha| \le 2\} \\
+      &= \{g \in L^2(\mathbb{R}^d) \mid D^\alpha g \in L^2 \text{ for all } |\alpha| \le 2\} \\
       &= \{g \in L^2(\mathbb{R}^d) \mid \widehat{D^\alpha g}(k) = (-2 \phi ik)^\alpha \hat g(k) \in L^2(\mathbb{R}^d) \text{ for all } |\alpha| \le 2\} \\
       &= \{g \in L^2(\mathbb{R}^d) \mid (1 + |k|^2) \hat g (k) \in L^2(\mathbb{R}^d)\}
     \end{align*}
@@ -3106,7 +3106,7 @@
     \begin{align*}
       \int \widehat{D^\alpha g} (k) \hat \phi (k) , dk
       &= \int (D^\alpha g) \phi = (-1)^{|\alpha|} \int g (D^\alpha \phi) \\
-      &= (-1)^{|\alpha|} \int \overline{\widehat{g}}(k) \widehat{D^\alpha} \phi(k) \\
+      &= (-1)^{|\alpha|} \int \overline{\widehat{g}}(k) \widehat{D^\alpha} \phi(k) \\
       &= (-1)^{|\alpha|} \int \overline{\widehat{g}}(k)(-2 \pi i k)^\alpha \hat \phi(k) \, dk
     \end{align*}
   \end{ex}
@@ -3127,7 +3127,7 @@
 
   \chapter{Existence for Poisson's Equation on Domains}
 
-  Let \(\Omega \subseteq \mathbb{R}^d\) be open. Consider Poisson's equation.
+  Let \(\Omega \subseteq \mathbb{R}^d\) be open. Consider Poisson's equation.
   \[\begin{cases}
     - \Delta u = f & \text{in } \Omega \\ u = g & \text{on } \partial \Omega
   \end{cases}\]
@@ -3276,7 +3276,7 @@
     Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded with \(C^1\) boundary. For \(x \in \Omega\), assume there exist \(\Phi_x(y)\), \(y \in \bar \Omega\), s.t. 
     \begin{align*}
       \begin{cases}
-        \Delta_y \Phi_x(y) = 0 \\ \Phi_x(y) = G(y-x)
+        \Delta_y \Phi_x(y) = 0 \\ \Phi_x(y) = G(y-x)
       \end{cases},
     \end{align*}
     \(G(z) = \frac{1}{d(d-2)|B_1||z|^{d-2}}, d \ge 3\). Prove that \(\Phi_x(y) = \Phi_y(x)\) for all \(x,y \in \Omega\). Then \(\tilde G(x,y) = G(y-x) - \Phi_x(y)\) is symmetric, i.e. \(\tilde G(x,y) = \tilde G(y,x)\).
@@ -3303,7 +3303,7 @@
     \end{align*}
     Consider \(f \frac{\partial g}{\partial \vec{n_z}}\) on \(\partial B(y, \epsilon)\). Decompose \(\frac{\partial g}{\partial \vec{n}} = \left[\nabla_z G(z-y) - \nabla_z \Phi_y(z)\right]\frac{(z-y)}{|z-y|}\). Since \(\Phi_y(z)\) is harmonic in \(\Omega\), we have that 
     \begin{align*}
-      \int_{\partial B(y,\epsilon)} \left| f \nabla_z \Phi_y(z) \frac{-(z-y)}{|z-y|} \right|
+      \int_{\partial B(y,\epsilon)} \left| f \nabla_z \Phi_y(z) \frac{-(z-y)}{|z-y|} \right|
       \le C \int_{\partial B(y,\epsilon)}|f|
       \le C \epsilon^{d-1} \xrightarrow{\epsilon \to 0}0
     \end{align*}
@@ -3391,7 +3391,7 @@
   Consider \(f = 0\) and 
   \begin{align*}
     \begin{cases}
-      - \Delta = 0 &\text{in } \mathbb{R}_+^d \\ u = g & \text{on } \partial \mathbb{R}_+^d
+      - \Delta = 0 &\text{in } \mathbb{R}_+^d \\ u = g & \text{on } \partial \mathbb{R}_+^d
     \end{cases}
   \end{align*}
   Then we expect \[u(x) = - \int_{\partial \Omega} g(y) \frac{\partial \tilde G}{\partial \vec{n_y}}(x,y) \, dS(y)\]
@@ -3449,14 +3449,14 @@
         \partial_{x_d} K(x,y) 
         &= \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2 x_d}{d|B_1|}(-d) \frac{(x_d-y_d)}{|x-y|^{d+2}} \\
         (y_d = 0) \quad &= \frac{2}{d|B_1|} \frac{1}{|x-y|^d} + \frac{2x_d^2}{|B_1||x-y|^{d+2}} \\
-        \partial_{x_d}^2K(x,y) &= \frac{-2}{|B_1|} \frac{(x_d-y_d)}{|x-y|^{d+2}} + \frac{4 x_d}{|B_1||x-y|^{d+2}} - \frac{2(d+2){|B_1|}} x_d^2 \frac{(x_d - y_d)}{|x-y|^{d+4}}
+        \partial_{x_d}^2K(x,y) &= \frac{-2}{|B_1|} \frac{(x_d-y_d)}{|x-y|^{d+2}} + \frac{4 x_d}{|B_1||x-y|^{d+2}} - \frac{2(d+2){|B_1|}} x_d^2 \frac{(x_d - y_d)}{|x-y|^{d+4}}
       \end{align*}
       Then: \begin{align*}
         \Delta_x K(x,y) 
-        &= \sum_{i=1}^{d-1} \partial_{x_i}^2 K(x,y) + \partial_{x_i}^2 K(x,y) \\
+        &= \sum_{i=1}^{d-1} \partial_{x_i}^2 K(x,y) + \partial_{x_i}^2 K(x,y) \\
         &= - \frac{2 x_d}{|B_1|} \left[\frac{d-1}{|x-y|^{d+2}} - (d+2) \sum_{i=1}^{d-1} \frac{(x_i - y_i)^2}{|x-y|^{d+4}} \right. \\
         &\quad + \left. \frac{1+2}{|x-y|^{d+2}} - \frac{(d+2)x_d(x_d-y_d)}{|x-y|^{d+4}}\right] \\
-        &= - \frac{2 x_d}{|B_1|} \left[\frac{d+2}{|x-y|^{d+2}} - (d+2) \frac{1}{|x-y|^{d+4}} \left(\underbrace{\sum_{i=1}^d |x_i - y_i|^2}_{\smash{|x-y|^2}}\right)\right] = 0
+        &= - \frac{2 x_d}{|B_1|} \left[\frac{d+2}{|x-y|^{d+2}} - (d+2) \frac{1}{|x-y|^{d+4}} \left(\underbrace{\sum_{i=1}^d |x_i - y_i|^2}_{\smash{|x-y|^2}}\right)\right] = 0
       \end{align*}
       for all \(x \in \mathbb{R}_+^d\), \(y \in \partial \mathbb{R}_+^d\).
       Claim (exercise) for all \(x \in \mathbb{R}_+^d\), 
@@ -3482,8 +3482,8 @@
       So \(u\) is harmonic in \(\mathbb{R}^d_+\). (\(\Rightarrow u \in C^\infty\) by Weyl's lemma). Take \(x_0 \in \partial \mathbb{R}_+^d\) and \(x \in \mathbb{R}_+^d\). Then:
       \begin{align*}
         |u(x)-g(x_0)| 
-        &= \left| \int_{\partial \mathbb{R}_+^d} K(x,y)(g(y) - g(x_0)) \, dy \right| \\
-        &\le \int_{\partial \mathbb{R}_+^d} K(x,y) |g(y)-g(x_0)| \, dy \\
+        &= \left| \int_{\partial \mathbb{R}_+^d} K(x,y)(g(y) - g(x_0)) \, dy \right| \\
+        &\le \int_{\partial \mathbb{R}_+^d} K(x,y) |g(y)-g(x_0)| \, dy \\
         &= \underbrace{\int_{|y-x_0| \le L |x-x_0|}}_{(I)} + \underbrace{\int_{|y-x_0| > L|x-x_0|}}_{(II)}
       \end{align*}
       \begin{align*}
@@ -3493,23 +3493,23 @@
       \((II)\): If \(|y-x_0| > L|x-x_0|\), then \(|y-x| > \frac{1}{2} |y-x_0| > \frac{L}{2}|x-x_0|\) if \(L \ge 2\).
       \begin{align*}
         &\int_{|y-x_0| > |L|x-x_0|} K(x,y) |g(y) - g(x_0)| \, dy \le C \int_{y \in \partial \mathbb{R}_+^d} \frac{x_d}{|x_0-y|} \, dy \\
-        &\quad C x_d \int_{\substack{z \in \mathbb{R}^{d-1}\\|z| > L|x-x_0|}} \frac{1}{|z|^d} \, dz = const. \frac{x_d}{L|x-x_0|} \le \frac{const.}{L} \xrightarrow{L \to \infty} 0
+        &\quad C x_d \int_{\substack{z \in \mathbb{R}^{d-1}\\|z| > L|x-x_0|}} \frac{1}{|z|^d} \, dz = const. \frac{x_d}{L|x-x_0|} \le \frac{const.}{L} \xrightarrow{L \to \infty} 0
       \end{align*}
-      \(x_d = |x_d - (x_0)_d| \le |x-x_0|\)
+      \(x_d = |x_d - (x_0)_d| \le |x-x_0|\)
     \end{itemize}
   \end{proof}
 
   \section{Green's function for a ball}
   Let \(B = B(0,1)\). For all \(x \in B,\) for all \(y \in \bar B\) we want to find the corrector function \(\Phi_x(y)\) s.t.
   \[\begin{cases}
-    \Delta_y \Phi_x(y) = 0 & \text{in } B \\
+    \Delta_y \Phi_x(y) = 0 & \text{in } B \\
     \Phi_x(y) = G(y-x) & \text{on } \partial B
   \end{cases}\] 
   where for \(d \ge 3\): \(G(z) = \frac{1}{d(d-2)|B_1||z|^{d-2}}\).
 
   \begin{defn}[Reflection / Duality through the sphere \(\partial B\)]
     For all \(x \in \mathbb{R}^d \setminus \{0\}\) we define \(\tilde x = \frac{x}{|x|^2}\). Clearly we have for all \(x \in B\) that if \(|x| < 1\), then \(|\tilde x| = \left| \frac{x}{|x|^2}\right| = \frac{1}{|x|} > 1\), so \(\tilde x \notin \bar B\) 
-    % and \((\tilde x)^\sim = \frac{\tild x}{|\tilde x|^2 = \frac{\frac{x}{|x|^2}}{\left| \frac{x}{|x|^2}}\right|} = \frac{\frac{x}{|x|^2}}{\left(\frac{1}{|x|}\right)^2} = x\)
+    % and \((\tilde x)^\sim = \frac{\tild x}{|\tilde x|^2 = \frac{\frac{x}{|x|^2}}{\left| \frac{x}{|x|^2}}\right|} = \frac{\frac{x}{|x|^2}}{\left(\frac{1}{|x|}\right)^2} = x\)
   \end{defn}
 
   \begin{lem}
@@ -3520,7 +3520,7 @@
     \begin{align*}
       \Phi_x(y) &= \frac{1}{d(d-2)|B_1| |x|^{d-2} |y-\tilde x|^{d-2}}
     \end{align*}
-    for all \(x \in B, x \ne 0\), for all \(y \in \bar B\). Then clearly \(y \mapsto \Phi_x(y)\) is harmonic in \(B\) (Since \(\frac{1}{|z|^{d-2}}\) is harmonic in \(\mathbb{R} \setminus {0}\)). Let's check the boundary: Let \(y \in \partial B\), i.e. \(|y| = 1\). Then
+    for all \(x \in B, x \ne 0\), for all \(y \in \bar B\). Then clearly \(y \mapsto \Phi_x(y)\) is harmonic in \(B\) (Since \(\frac{1}{|z|^{d-2}}\) is harmonic in \(\mathbb{R} \setminus {0}\)). Let's check the boundary: Let \(y \in \partial B\), i.e. \(|y| = 1\). Then
     \begin{align*}
       ||x|(y-\tilde x)| 
       &= |x| \left|y- \frac{x}{|x|^2}\right|  \\
@@ -3580,17 +3580,17 @@
     \end{align*}
     \(\int_{\partial B} K(x,y) , dS(y) = \|g\|_{L^\infty}\), 
     \begin{align*}
-      \Delta_x u(x) &= \int_{\partial B} \underbrace{\Delta_x K(x,y)}_{= 0} g(y) \, dS(y) = 0
+      \Delta_x u(x) &= \int_{\partial B} \underbrace{\Delta_x K(x,y)}_{= 0} g(y) \, dS(y) = 0
     \end{align*}
     Take \(x \in B\), \(x \to x_0 \in \partial B\).
     \begin{align*}
       |u(x) - g(x_0)| 
-      &= \left| \int_{\partial B} K(x,y)(g(y) - g(x_0)) \, dS(y) \right| \\
-      &\le \int_{A_1} + \int_{A_2} K(x,y) |g(y) - g(x_0)| \, dS(y),
+      &= \left| \int_{\partial B} K(x,y)(g(y) - g(x_0)) \, dS(y) \right| \\
+      &\le \int_{A_1} + \int_{A_2} K(x,y) |g(y) - g(x_0)| \, dS(y),
     \end{align*}
     where
     \begin{align*}
-      A_1 &= \{y \in \partial B \mid |y - x_0| \le |x-x_0|^\alpha\} \\
+      A_1 &= \{y \in \partial B \mid |y - x_0| \le |x-x_0|^\alpha\} \\
       A_2 &= \{y \in \partial B \mid |y-x_0| > |x-x_0|^2\}
     \end{align*}
     On \(A_1\) we have:
@@ -3606,7 +3606,7 @@
     \]
     if \(\alpha < 1\) and \(|x-x_0|\) small. So we get 
     \begin{align*}
-      K(x,y) &= \frac{1-|x|^2}{d|B_1||x-y|^d} \le C \frac{1-|x|^2}{|x-x_0|^{d\alpha}} \le C |x-x_0|^{1-d\alpha}
+      K(x,y) &= \frac{1-|x|^2}{d|B_1||x-y|^d} \le C \frac{1-|x|^2}{|x-x_0|^{d\alpha}} \le C |x-x_0|^{1-d\alpha}
     \end{align*}
     Thus 
     \begin{align*}
@@ -3616,22 +3616,22 @@
   \end{proof}
 
   \begin{ex}[E 7.2]
-    Define \(\mathbb{R}_+^d = \{(x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid x_d > 0\}\). Let \(K(x,y) = \frac{2 x_d}{d |B_1| |x-y|^d}\) for all \(x \in \mathbb{R}_+^d, y \in \partial \mathbb{R}_+^d = \{(y', 0) \mid y' \in \mathbb{R}^{d-1}\} \simeq \mathbb{R}^{d-1}\). Prove
+    Define \(\mathbb{R}_+^d = \{(x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R} \mid x_d > 0\}\). Let \(K(x,y) = \frac{2 x_d}{d |B_1| |x-y|^d}\) for all \(x \in \mathbb{R}_+^d, y \in \partial \mathbb{R}_+^d = \{(y', 0) \mid y' \in \mathbb{R}^{d-1}\} \simeq \mathbb{R}^{d-1}\). Prove
     \begin{align*}
-      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) = 1 \quad \forall x \in \mathbb{R}_+^d
+      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) = 1 \quad \forall x \in \mathbb{R}_+^d
     \end{align*}
   \end{ex}
 
   \begin{proof}[Solution]
     Denote \(x = (x', x_d)\), \(y = (y', 0)\), \(x', y' \in \mathbb{R}^{d-1}\), \(x_d > 0\).
     \begin{align*}
-      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1|\left(|x'-y'|^2 + x_d^2\right)^{\frac{d}{2}}} \, dy' = \dots
+      \int_{\partial \mathbb{R}_+^d} K(x,y) \, dS(y) &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1|\left(|x'-y'|^2 + x_d^2\right)^{\frac{d}{2}}} \, dy' = \dots
     \end{align*}
     as \(|x-y| = |(x'-y', x_d)| = \sqrt{|x'-y'|^2 + x_d^2}\).
     \begin{align*}
       (y'-x' \mapsto y') \quad \dots &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1|\left(|y'|^2 + x_d^2\right)^{\frac{d}{2}}} \, dy' \\
       (y' = x_d z) \quad &= \int_{\mathbb{R}^{d-1}} \frac{2 x_d}{d |B_1| \left(x_d^2 (|z|^2 + 1)\right)^{\frac{d}{2}}} \left(x_d^{d-1}\right) \, dz \\
-      &= \int_{\mathbb{R}^{d-1}} \frac{2}{d|B_1|\left(|z|^2 + 1\right)^{\frac{d}{2}}} \, dz \\
+      &= \int_{\mathbb{R}^{d-1}} \frac{2}{d|B_1|\left(|z|^2 + 1\right)^{\frac{d}{2}}} \, dz \\
       &= \int_0^\infty \frac{2 \omega_{d-1}}{d|B_1|} \frac{1}{(r^2+1)^{\frac{d}{2}}} r^{d-2} \, dr \\
       &= \frac{2 \omega_{d-1}}{\omega_d} \int_0^\infty \frac{1}{\left(r^2+1\right)^{\frac{d}{2}}} r^{d-2} \, dr
     \end{align*}
@@ -3654,7 +3654,7 @@
       u(x) &= \int_{\partial \mathbb{R}_+^d} K(x,y) g(y) \, dS(y)
       &K(x,y) &= \frac{2 x_d}{d |B_1| |x-y|^d}, x \in \mathbb{R}_+^d
     \end{align*}
-    Prove that if \(g(y) = |y|\), if \(|y| \le 1\), then \(|\nabla u|\) is unbounded in \(B(0,r) \cap \mathbb{R}_+^d\) for all \(r > 0\).
+    Prove that if \(g(y) = |y|\), if \(|y| \le 1\), then \(|\nabla u|\) is unbounded in \(B(0,r) \cap \mathbb{R}_+^d\) for all \(r > 0\).
   \end{ex}
 
   \begin{proof}[Solution]
@@ -3674,7 +3674,7 @@
       &= \limsup_{x_d \to 0^+} c \int_{\mathbb{R}^{d-1}} \frac{1}{(|y'|^2 + x_d^2)^{\frac{d}{2}}} g(y) \, dy' \\
       &\ge \int_{\mathbb{R}^{d-1}} \frac{1}{|y'|^d} g(y) \, dy 
       = \int_{|y'| \le 1} + \int_{|y'| > 1} \\
-      &to \int_{\mathbb{R}^{d-1}} \frac{1}{|y'|^{d-1}} \, dy' = \infty \qedhere
+      &to \int_{\mathbb{R}^{d-1}} \frac{1}{|y'|^{d-1}} \, dy' = \infty \qedhere
     \end{align*}
   \end{proof}
 
@@ -3692,9 +3692,9 @@
 
   \section{Energy Method}
 
-  Consider \(u \in C^2(\Omega)\) for \(\Omega \subseteq \mathbb{R}^d\) open, bounded and with \(C^1\) boundary and \begin{align*}
+  Consider \(u \in C^2(\Omega)\) for \(\Omega \subseteq \mathbb{R}^d\) open, bounded and with \(C^1\) boundary and \begin{align*}
     \begin{cases}
-      - \Delta u = f &\text{in } \Omega \\ u = g &\text{ on} \partial \Omega.
+      - \Delta u = f &\text{in } \Omega \\ u = g &\text{ on} \partial \Omega.
     \end{cases}
   \end{align*}
   Take \(\phi \in C_c^\infty(\Omega)\), then by integration by parts:
@@ -3703,18 +3703,18 @@
   \end{align*}
   Key observation: This is the \emph{derivative} of the energy functional 
   \begin{align*}
-    E(u) &= \frac{1}{2} \int_\Omega|\nabla u|^2 - \int_\Omega f u
+    E(u) &= \frac{1}{2} \int_\Omega|\nabla u|^2 - \int_\Omega f u
   \end{align*}
   If \(u\) is a minimizer of \(E\), then it solves the equation \(-\Delta u = f\) in \(\Omega\). The boundary condition \(u = g\) does not appear on \(E\), but this is encoded in the set of \emph{admissible functions}. (The set of candidates of solutions). For the classical solutions, we have 
   
   \begin{thm}(Dirichlet's principle) Let \(\Omega \subseteq \mathbb{R}^d\) be open, bounded with \(C^1\)-boundary. Let \(f \in C(\bar \Omega)\) and \(g \in C(\partial B)\). Then the following statements are equivalent:
     \begin{enumerate}
         \item \(u \in C^2(\bar \Omega)\) solves \(\begin{cases}
-          - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
+          - \Delta u = f &\text{in } \Omega \\ u = g &\text{on } \partial \Omega
         \end{cases}\)
         \item \(u\) is a minimizer of the variational problem \(E = \inf_{v \in A} E(v)\), where 
         \[E(v) = \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v,\]
-        \(A = \{v \in C^2(\bar \Omega) \mid v = g \text{ on } \partial \Omega\}.\)
+        \(A = \{v \in C^2(\bar \Omega) \mid v = g \text{ on } \partial \Omega\}.\)
     \end{enumerate}
     Moreover there is at most a solution / minimizer (uniqueness). 
   \end{thm}
@@ -3734,7 +3734,7 @@
         &= E(u) - E(v) + \frac{1}{2} \underbrace{\int_\Omega |\nabla u - \nabla v|^2}_{\ge 0}
       \end{align*}
     
-      \(E(u) \le E(v)\), so \(u\) is a minimizer of \(\inf_{v \in A} E(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(E(u) = E(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
+      \(E(u) \le E(v)\), so \(u\) is a minimizer of \(\inf_{v \in A} E(v)\). Moreover \(u\) is the unique minimizer on \(A\). Since \(E(u) = E(v)\) we have \(\int_\Omega|\nabla (u-v)^2 = 0\), so \(u-v = const.\), so \(u-v = 0\) in \(\bar \Omega\).
 
       \item[2. \(\Rightarrow\) 1.:] Assume that \(u\) is a minimizer of \(\inf_{v \in A} E(v)\). Then \(E(u) \le E(v)\) for all \(v \in A\). Take \(\phi \in C_c^\infty(\Omega)\), then \(u + t \phi \in A\) for all \(t \in \mathbb{R}\).
       \begin{enumerate}[label=\(\Rightarrow\)]
@@ -3743,14 +3743,14 @@
         \item \(\begin{aligned}[t]
           0 &= \frac{d}{dt} E(u + t \phi)|_{t = 0}  \\
           &= \frac{d}{dt}\left. \left(\frac{1}{2} \int_\Omega|\nabla u + t \nabla \phi|^2 - \int_{\Omega} f(u + t \phi)\right)\right|_{t=0} \\
-          &= \frac{d}{dt} \left. \left(\frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi - \int_{\Omega} f(u + t \phi)\right)\right|_{t=0} \\
+          &= \frac{d}{dt} \left. \left(\frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi - \int_{\Omega} f(u + t \phi)\right)\right|_{t=0} \\
           &\int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi = \int_\Omega (- \Delta u - f) \phi
         \end{aligned}\) \\
         for all \(\phi \in C_c^\infty(\Omega)\). So \(- \Delta u - f = 0\) in \(\Omega\) and \(u = g\) since \(u \in A\).
       \end{enumerate}
     \end{itemize}
     
-    Direct method of calculus of variations. Think \(f: \mathbb{R} \to \mathbb{R}\), \(f \in C(\mathbb{R})\), \(f(x) \to \infty\) as \(|x| \to \infty\). There is a \(x_0 \in \mathbb{R}\) s.t. \(f(x_0) = \inf_{x \in\mathbb{R}} f(x)\).
+    Direct method of calculus of variations. Think \(f: \mathbb{R} \to \mathbb{R}\), \(f \in C(\mathbb{R})\), \(f(x) \to \infty\) as \(|x| \to \infty\). There is a \(x_0 \in \mathbb{R}\) s.t. \(f(x_0) = \inf_{x \in\mathbb{R}} f(x)\).
     \begin{enumerate}[label=Step \arabic*:]
       \item \(E = \inf_{x \in \mathbb{R}} f(x) > - \infty\)
       \item Take a minizing sequence \(\{x_n\} \subseteq \mathbb{R}\), \(f(x_n) \to E\). Up to a subsequence \(x_n \to x_0\) in \(\mathbb{R}\) (compactness)
@@ -3771,7 +3771,7 @@
       \end{align*}
       Consider the simple case \(g = 0\). 
       \(\Delta u -f \) in \(\Omega\) \(\Leftrightarrow\) \(\nabla u \nabla \phi\)...
-      The right set \(A\) should be \(A = \{v \mid \int_\Omega |\nabla v|^2 < \infty, v = 0 \text{ on } \partial \Omega\}.\) Rigorously we take \(W_0^{1,2}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,2}(\Omega)\) (Notation: \(H_0^1 = W_0^{1,2}, H^1 = W^{1,2}\)) Recall that \(W^{1,p}\) is a banach space with norm \(\|f\|_{W^{1,p}(\Omega)} = \|f\|_{L^p(\Omega)} + \|\nabla f\|_{L^p(\Omega)}\). We know that \(C_c^\infty(\Omega)\) is dense in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(u \in W^{1,p}_{loc}(\Omega)\) there is \(\|u_n\| \subseteq C_c^\infty\) s.t. \(u_n \to u\) in \(W^{1,p}(K)\) for all \(K \subseteq \Omega\) compact. However in general \(C_c^\infty(\Omega)\) is not dense in \(W^{1,p}(\Omega)\), i.e. \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,p}(\Omega) \subsetneq W^{1,p}(\Omega)\). Clearly \(W_0^{1,p}\) is a closed subspace of \(W^{1,p}(\Omega) \to W_0^{1,p}(\Omega)\)  is a Banach space with \(\|\cdot\|_{W^{1,p}(\Omega)}\). Why does \(W_0^{1,p}(\Omega)\) encode the \(0\)-boundary condition? Note that by definition for all \(u \in W_0^{1,p}(\Omega)\) there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\), \(u_n \to u\) in \(W^{1,p}(\Omega)\) up to a subsequence \(u_n(x) \to u(x)\) for almost every \(x \in \Omega\). Note \(u_n|_{\partial \Omega} = 0 \nrightarrow u|_{\partial \Omega} = 0\) since \(\partial \Omega\) must be of 0-measure. \qedhere
+      The right set \(A\) should be \(A = \{v \mid \int_\Omega |\nabla v|^2 < \infty, v = 0 \text{ on } \partial \Omega\}.\) Rigorously we take \(W_0^{1,2}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,2}(\Omega)\) (Notation: \(H_0^1 = W_0^{1,2}, H^1 = W^{1,2}\)) Recall that \(W^{1,p}\) is a banach space with norm \(\|f\|_{W^{1,p}(\Omega)} = \|f\|_{L^p(\Omega)} + \|\nabla f\|_{L^p(\Omega)}\). We know that \(C_c^\infty(\Omega)\) is dense in \(W_{loc}^{1,p}(\Omega)\), i.e. for all \(u \in W^{1,p}_{loc}(\Omega)\) there is \(\|u_n\| \subseteq C_c^\infty\) s.t. \(u_n \to u\) in \(W^{1,p}(K)\) for all \(K \subseteq \Omega\) compact. However in general \(C_c^\infty(\Omega)\) is not dense in \(W^{1,p}(\Omega)\), i.e. \(W_0^{1,p}(\Omega) = \overline{C_c^\infty(\Omega)}W^{1,p}(\Omega) \subsetneq W^{1,p}(\Omega)\). Clearly \(W_0^{1,p}\) is a closed subspace of \(W^{1,p}(\Omega) \to W_0^{1,p}(\Omega)\)  is a Banach space with \(\|\cdot\|_{W^{1,p}(\Omega)}\). Why does \(W_0^{1,p}(\Omega)\) encode the \(0\)-boundary condition? Note that by definition for all \(u \in W_0^{1,p}(\Omega)\) there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\), \(u_n \to u\) in \(W^{1,p}(\Omega)\) up to a subsequence \(u_n(x) \to u(x)\) for almost every \(x \in \Omega\). Note \(u_n|_{\partial \Omega} = 0 \nrightarrow u|_{\partial \Omega} = 0\) since \(\partial \Omega\) must be of 0-measure. \qedhere
     \end{enumerate}
   \end{proof}
 
@@ -3802,9 +3802,9 @@
       Assume \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Take \(G \in C^1(\mathbb{R})\) s.t. \(|G(t)| \le t\) for all \(t\), \(G(t) = t\) if \(t \ge 2\) and \(G(t) = 0\) if \(t \le 1\). Then let
       \begin{align*}
         u_n(x) &\coloneqq \frac{1}{n} G(n u(x)) \in W^{1,p}(\Omega) \\
-        \overset{\text{(Chain-rule)}}{\Rightarrow} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
+        \overset{\text{(Chain-rule)}}{\Rightarrow} \quad \nabla u_n(x) &= \frac{1}{n} G'(nu(x)) n \nabla u(x) = G'(n u(x)) \nabla u(x)
       \end{align*}
-      Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
+      Moreover, \(u_n\) is compactly supported in \(\Omega\), so \(u_n \in W_0^{1,p}(\Omega)\) by the lemma and \(u_n \to u\) in \(W^{1,p}(\Omega)\), so \(u \in W_0^{1,p}(\Omega)\) since \(W_0^{1,p}\) is a closed space. Recall that \(u \in C(\bar \Omega)\) and \(u = 0\) on \(\partial \Omega\). Thus for all \(\epsilon > 0\) there is a compact \(K_\epsilon \subseteq \Omega\) s.t. \(\sup_{x \in \Omega \setminus K_\epsilon} |u(x)| \le \epsilon\). For any given \(n \in \mathbb{N}\), \(u_n(x) \ne 0\), so \(G(nu(x)) \ne 0\). This implies \(n|u(x)| > 1\), hence \(|u(x)| > \frac{1}{n}\). Thus \(u_n(x) = 0\) for all \(x\) such that \(|u(x)| \le \frac{1}{n}\), so \(\supp u_n \subseteq K_{\frac{1}{n}}\) compact in \(\Omega\). Next, let us check \(u_n \to u\) in \(W^{1,p}(\Omega)\).
       \begin{align*}
         \int_\Omega |u_n(x) - u(x)|^p \, dx \to 0
       \end{align*}
@@ -3813,8 +3813,8 @@
         \int_\Omega|\nabla u_n(x) - \nabla u(x)|^p \, dx 
         &= \int_\Omega |G'(nu(x)) - 1|^p |\nabla u(x)|^p \, dx \to 0
       \end{align*}
-      as \(|G'(v(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
-      \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
+      as \(|G'(v(x))-1| \to 0\) for all \(x\) s.t. \(u(x) \ne 0\) and \(\nabla u(x) = 0\) on \(\{x \mid u(x) = 0\}\).  (exercise)
+      \item [(b) \(\Rightarrow\) (a):] Let \(u \in W^{1,p}(\Omega) \cap C(\bar \Omega)\) and \(u \in W_0^{1,p}(\Omega)\). Then we prove \(u = 0\) on \(\partial \Omega\). Lets regard the case \(\Omega = Q_+ = \{(x',x_d) \mid \mathbb{R}^{d-1} \times \mathbb{R} \mid |x'|<1, 0 < x_d < 1\}\). 
       We prove that if \(u \in W_0^{1,p} \)
       \((Q_+) \cap C(\overline {Q_+)}\), then \(u = 0\) on \(Q_0 = \{(x', 0) \mid x' \in \mathbb{R}^{d-1}, |x'| < 1\}\). Since \(u \in W_0^{1,p}(Q_+)\) there is \(\{u_n\} \subseteq C_c^\infty(Q_+)\) s.t. \(u_n \to u\) in \(W^{1,p}(Q_+)\) for all \(x = (x', x_d) \in Q_+\), then:
       \begin{align*}
@@ -3826,22 +3826,22 @@
       \end{align*}
       This implies:
       \begin{align*}
-        &\int_{0 < x_d < \epsilon} \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d \\
-        &\quad \le \int_{0 < x_d < \epsilon} \int_{|x'| < 1} \left(\int_0^{x_d}|\partial_d u_n(x', t)| \, dt\right) \, dx' \, dx_d \\
-        &\quad \le \epsilon \int_{|x'| < 1} \int_0^\epsilon |\partial_d u_n(x', t)| \, dx' \, dt
+        &\int_{0 < x_d < \epsilon} \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d \\
+        &\quad \le \int_{0 < x_d < \epsilon} \int_{|x'| < 1} \left(\int_0^{x_d}|\partial_d u_n(x', t)| \, dt\right) \, dx' \, dx_d \\
+        &\quad \le \epsilon \int_{|x'| < 1} \int_0^\epsilon |\partial_d u_n(x', t)| \, dx' \, dt
       \end{align*}
       \begin{align*}
-        \Rightarrow \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d 
-        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_d u_n(x', x_d)| \, dx' \, dx_d
+        \Rightarrow \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u_n(x', x_d)| \, dx' \, dx_d 
+        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_d u_n(x', x_d)| \, dx' \, dx_d
       \end{align*}
       for all \(n \in \mathbb{N}\), \(\epsilon > 0\). Take now \(n \to \infty\), use \(u_n \to u\) in \(W^{1,p}(\Omega)\). Then:
       \begin{align*}
         \frac{1}{\epsilon} \int_0^\epsilon \int_{|x'| \le 1} |u(x', x_d)| \, dx' \, dx_d
-        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_x u_n(x', x_d)| \, dx' \, dy
+        &\le \int_0^\epsilon \int_{|x'| < 1} |\partial_x u_n(x', x_d)| \, dx' \, dy
       \end{align*}
       for all \(\epsilon > 0\). Take \(\epsilon \to 0\):
       \begin{align*}
-        \int_{|x'| \le 1} |u(x', 0)| \, dx' \le 0
+        \int_{|x'| \le 1} |u(x', 0)| \, dx' \le 0
       \end{align*}
       here we use \(u \in C(\bar \Omega)\) for the left side and Dominated Convergence for the right side. Thus \(u(x', 0) = 0\) for all \(|x'| \le 1\), i.e. \(u = 0\) on \(\partial \Omega\). Let's regard the general case: Let \(\Omega\) be open, bounded and with \(C^1\)-boundary. Lets define \emph{local charts} By definition for all \(x \in \partial \Omega\), there is a \(U_x\) open, such there is a bijecitve map \(h: U_x \to Q\), and \(h, h^{-1}\) are \(C^1\). Then clearly \(\partial \Omega \subseteq \bigcup_{x \in \partial \Omega} U_x\). Since \(\partial \Omega\) is compact, there is a finite subcover \(\{U_i\}_{i=1}^N\) s.t. \(\partial \Omega \subseteq \bigcup_{i=1}^N U_i\). We can find \(U_0\) open s.t. \(\bar U_0 \subseteq \Omega\) and \(\Omega \subseteq \bigcup_{i=0}^N U_i\).
 
@@ -3853,7 +3853,7 @@
           \item \(i=0\), \(\supp \chi_0 \subseteq \mathbb{R}^d \setminus \partial \Omega\) and \(\chi_0 \setminus \Omega \in C_c^\infty(\Omega)\). (exercise)
         \end{enumerate}
         Given \(u \in W_0^{1,p}(\Omega) \cap C(\bar \Omega)\). Then \(u = \sum_{i=0}^N \chi_i u\), where \(\chi_i \ge 0\), \(\chi_0 \in C_c^\infty(\Omega)\), \(\chi_i \in C_c^\infty(U_i)\). Since \(\chi_0 u\) is supported in a copact set inside \(\Omega\), \(\chi_0 u = 0\) on \(\partial \Omega\). It remains to show that for all \(i=1, \dots, N\), \(\chi_i u = 0\) on \(U_i \cap \partial \Omega\). Then \(\chi_i u(h^{-1}x) \in W_0^{1,p}(Q) \cap C(\bar \Omega)\). This implies \(\chi_i u (h^{-1}x) = 0\) on \(Q_0\), so \(\chi_i u(x) = 0\) on \(U_i \cap \partial \Omega\). 
-        Why \(W_0^{1,p}(U_i \cap \Omega) \to W_0^{1,p}(Q_+)\). If \(v \in W_0^{1,p}(U_i \cap \Omega)\), then \(v_n \to v, v_n \in C_c^\infty\). \(v_n \circ h^{-1} \to v \circ h^{-1} \Rightarrow v \circ h^{-1} \in W_0^{1,p}(Q_+)\)
+        Why \(W_0^{1,p}(U_i \cap \Omega) \to W_0^{1,p}(Q_+)\). If \(v \in W_0^{1,p}(U_i \cap \Omega)\), then \(v_n \to v, v_n \in C_c^\infty\). \(v_n \circ h^{-1} \to v \circ h^{-1} \Rightarrow v \circ h^{-1} \in W_0^{1,p}(Q_+)\)
       \end{lem}
     \end{itemize}
   \end{proof}
@@ -3942,7 +3942,7 @@
       &= \int_U |u_n(h(x)) - u(h(x))|^p \, dx \\
       &= \int_\Omega |u_n(y)- u(y)|^p \underbrace{|\det Dh^{-1}(y)|}_{\le C}\, dy \xrightarrow{n \to \infty} 0
     \end{align*}
-    Conclusion: Since \((f_n)_{n \in \mathbb{N}} \subseteq C_c^1(U)\) is Cauchy with respect to \(\|\cdot\|_{W^{1,p}}\), there is a \(f \in W_0^{1,p}(U)\) s.t. \(f_n \smash{\xrightarrow[\|\cdot\|_{W^{1,p}}]{n \to \infty}f}\). Since limits in \(L^p\) are unique by claim 2 we get \(u \circ h = f \in W_0^{1,p}(U)\).
+    Conclusion: Since \((f_n)_{n \in \mathbb{N}} \subseteq C_c^1(U)\) is Cauchy with respect to \(\|\cdot\|_{W^{1,p}}\), there is a \(f \in W_0^{1,p}(U)\) s.t. \(f_n \smash{\xrightarrow[\|\cdot\|_{W^{1,p}}]{n \to \infty}f}\). Since limits in \(L^p\) are unique by claim 2 we get \(u \circ h = f \in W_0^{1,p}(U)\).
   \end{proof}
 
   \begin{ex}[E 8.4]
@@ -3954,7 +3954,7 @@
   \end{ex}
 
   \begin{proof}[Solution]
-    WLOG assume that \(U_i \ne \emptyset\) for all \(i\). If \(\Gamma \ne 0\), then \(\chi_0 = 1\) does the job. Now suppose \(\Gamma \ne \emptyset\). Let \(\psi \in C_c^\infty(B_1(0))\), \(\psi \ge 0\), \(\int \psi = 1\), \(\psi|_{B_{\frac{1}{2}}(0)} > 0\) and for \(\epsilon > 0\) let \(\psi_\epsilon(x) = \frac{1}{\epsilon^d} \psi \left(\frac{x}{\epsilon}\right)\), so \(\int \psi_\epsilon = 1\). Define \begin{align*}
+    WLOG assume that \(U_i \ne \emptyset\) for all \(i\). If \(\Gamma \ne 0\), then \(\chi_0 = 1\) does the job. Now suppose \(\Gamma \ne \emptyset\). Let \(\psi \in C_c^\infty(B_1(0))\), \(\psi \ge 0\), \(\int \psi = 1\), \(\psi|_{B_{\frac{1}{2}}(0)} > 0\) and for \(\epsilon > 0\) let \(\psi_\epsilon(x) = \frac{1}{\epsilon^d} \psi \left(\frac{x}{\epsilon}\right)\), so \(\int \psi_\epsilon = 1\). Define \begin{align*}
       \tilde d \coloneqq \sup \{\tilde{\tilde d} > 0 \mid \forall x \in \Gamma \exists i \in \{1, \dots, N\} s.t. \dist(x, U_i^c) \ge \tilde{\tilde d}\}
     \end{align*}
     Claim 1: \(\tilde d  > 0\) Suppose this was not true. Then there is a sequence \((x_n)_{n \in \mathbb{N}} \subseteq \Gamma\) s.t. for all \(i \in \{1, \dots, N\}\), 
@@ -3988,8 +3988,8 @@
   \section{Variational problem for weak solutions}
   \begin{align*}
     \begin{cases}
-      -\Delta u = f &\text{in } \Omega \\
-      u = 0 &\text{on } \partial \Omega
+      -\Delta u = f &\text{in } \Omega \\
+      u = 0 &\text{on } \partial \Omega
     \end{cases}
   \end{align*}
     ("formally") for all \(\phi \in C_c^\infty(\Omega)\), then
@@ -4046,7 +4046,7 @@
     \end{align*}
     We write
     \begin{align*}
-      \int_{\mathbb{R}^d} |\hat v_n(k)| \, dk = \int_{|k| \le \epsilon} + \int_{|k| > \epsilon}
+      \int_{\mathbb{R}^d} |\hat v_n(k)| \, dk = \int_{|k| \le \epsilon} + \int_{|k| > \epsilon}
     \end{align*}
     First, for all \(\epsilon > 0\):
     \begin{align*}
@@ -4064,7 +4064,7 @@
     \end{align*}
     Thus we can take \(r < 1\) but close to \(1\). Then \(p\) is sufficiently large, so \(q\) is close to \(1\). Then 
     \begin{align*}
-      \int_{|k| \le \epsilon} |\hat v_n(k)|^2 \le C \epsilon^{\frac{d}{q}} \|\hat v_n\|_{L^{2p}}^2 \le C \epsilon^{\frac{d}{q}} \|v_n\|_{L^r}^2 \le C \epsilon^{\frac{d}{q}}
+      \int_{|k| \le \epsilon} |\hat v_n(k)|^2 \le C \epsilon^{\frac{d}{q}} \|\hat v_n\|_{L^{2p}}^2 \le C \epsilon^{\frac{d}{q}} \|v_n\|_{L^r}^2 \le C \epsilon^{\frac{d}{q}}
     \end{align*}
     Conclusion:
     \begin{align*}
@@ -4108,7 +4108,7 @@
       We can also bound:
       \begin{align*}
         E(v) &= \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega f v \\
-        &\ge \frac{1}{4} \int_\Omega |\nabla v|^2 - \frac{1}{4C} \int_\Omega |v|^2 - \|f\|_{L^2} \|v\|_{L^2} \\
+        &\ge \frac{1}{4} \int_\Omega |\nabla v|^2 - \frac{1}{4C} \int_\Omega |v|^2 - \|f\|_{L^2} \|v\|_{L^2} \\
         &\ge \frac{1}{4} \int_\Omega |\nabla v|^2 - C \|f\|_{L^2}^2
       \end{align*}
       \item[Step 2:] We can take a minimizing sequence \(\{v_n\} \subseteq H_0^1(\Omega)\) s.t. \(E(v_n) \xrightarrow{n \to \infty} E\). Then:
@@ -4122,7 +4122,7 @@
       \end{rem}
 
       \begin{thm}[Banach-Alaoglu]\label{banach-alagoglu}
-        If \(H\) is a Hilbert space and \(\{v_n\}\) is a bounded sequence, then there is a subsequence \(\{v_{n_k}\}\) s.t. \(v_{n_k} \to v\) weakly in \(H\).
+        If \(H\) is a Hilbert space and \(\{v_n\}\) is a bounded sequence, then there is a subsequence \(\{v_{n_k}\}\) s.t. \(v_{n_k} \to v\) weakly in \(H\).
       \end{thm}
 
       \begin{rem}
@@ -4131,7 +4131,7 @@
           \item If \(v_n \to v\) in \(H\), then: \(\liminf_{n \to \infty} \|v_n\| \ge \|v\|\) (Fatous Lemma)
         \end{itemize}
         In fact, for all \(\phi \in H\) \(\langle v_n, \phi \rangle \to \langle v, \phi \rangle\) and \(|\langle v_n, \phi\rangle| \le \|v_n\| \|\phi\|\). This implies 
-        \[\frac{|\langle v, \phi \rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|.\] So we get 
+        \[\frac{|\langle v, \phi \rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|.\] So we get 
         \[\|v\| = \sup_{\phi \ne 0} \frac{\langle v, \phi\rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|\] 
       \end{rem}
 
@@ -4148,7 +4148,7 @@
         \end{align*}
         \item Consider the functional \(\mathcal{L}: \phi \in H_0^1(\Omega) \to \int_\Omega f \phi\). We claim that \(\mathcal{L}\) is continuous. In fact:
         \begin{align*}
-          |\mathcal{L}| = \left| \int_\Omega f \phi \right| \le \|f\|_{L^2}\|\phi\|_{L^2} \le C\|f\|_{L^2}\|\nabla f\|_{L^2} = C \|f\|_{L^2}\|\phi\|_{H_0^1(\Omega)}
+          |\mathcal{L}| = \left| \int_\Omega f \phi \right| \le \|f\|_{L^2}\|\phi\|_{L^2} \le C\|f\|_{L^2}\|\nabla f\|_{L^2} = C \|f\|_{L^2}\|\phi\|_{H_0^1(\Omega)}
         \end{align*}
         Thus from \(v_n \to v\) in \(H_0^1(\Omega)\) we get \(\mathcal{L}(v_n) \to \mathcal{L}(u)\), thus \(\int_\Omega f v_n \to \int_\Omega f u\).
       \end{itemize}
@@ -4205,7 +4205,7 @@
   \begin{proof}
     \(x = (x', x_d) \in \mathbb{R}^{d-1} \times \mathbb{R}\). 
     \begin{align*}
-      |u(x', 0)|^2 &= - \int_0^\infty \partial_d(|u(x', x_d)|^2) \, dx_d \\
+      |u(x', 0)|^2 &= - \int_0^\infty \partial_d(|u(x', x_d)|^2) \, dx_d \\
       &= - \int_0^\infty 2\partial_d u(x', x_d) u(x', x_d) \, dx_d \\
       &\le \int_0^\infty \left[|\partial_d u(x', x_d)|^2 + |u(x', x_d)|^2\right] \, dx_d
     \end{align*}
@@ -4293,13 +4293,13 @@
       \int_Q (Bu(x)) (\partial_d \phi) (x) \, dx 
       &= \int_{Q_+} u \partial_d \phi + \int_{Q_-} - u(x', -x_d) \partial_d [\phi(x', x_d)] \, dx \\
       (x \to -x_d) \quad &= \int_{Q_+} u \partial_d \phi + \int_{Q_+}[u(x', x_d) (\partial_d \phi) (x', -x_d)]\, dx \\
-      &\overset{\mathclap{(\phi \notin C_c^\infty(Q_+))}}\approx \quad - \int_{Q^+} (\partial_d u) \phi(x) + \int_{Q_+}(\partial_d u (x', x_d)) \phi(x', -x_d) \, dx \\
+      &\overset{\mathclap{(\phi \notin C_c^\infty(Q_+))}}\approx \quad - \int_{Q^+} (\partial_d u) \phi(x) + \int_{Q_+}(\partial_d u (x', x_d)) \phi(x', -x_d) \, dx \\
       &= - \int_{Q_+} (\partial_d u) \phi(x) + \int_{Q_-} \partial_d u(x', -x_d) \phi(x', x_d) \, dx \\
       &= - \int_Q f \phi, \quad \text{where \(f(x) = \begin{cases}
         \partial_d u & x \in Q_+ \\ - \partial_d u(x',-x_d) & x \in Q_-
       \end{cases}\)} 
     \end{align*}
-    We prove \(\int_{Q_+} u \partial_d \tilde \phi = - \int_{Q_+} (\partial_d u) \tilde \phi\) where \(\tilde \phi(x,x_d) = \phi(x,x_d) - \phi(x, -x_d)\), \(\tilde \phi \notin C_c^\infty(Q_+)\). Define \(\eta_\epsilon = 0\) when \(|x_d| \le \epsilon\), \(\eta_\epsilon = 1\) if \(|x_d| \ge 2 \epsilon\), \(\eta_\epsilon \in C^\infty\), \(\eta_\epsilon(x', x_d) = \eta_0(x', \frac{x_d}{\epsilon}), \eta_0 = \begin{cases}
+    We prove \(\int_{Q_+} u \partial_d \tilde \phi = - \int_{Q_+} (\partial_d u) \tilde \phi\) where \(\tilde \phi(x,x_d) = \phi(x,x_d) - \phi(x, -x_d)\), \(\tilde \phi \notin C_c^\infty(Q_+)\). Define \(\eta_\epsilon = 0\) when \(|x_d| \le \epsilon\), \(\eta_\epsilon = 1\) if \(|x_d| \ge 2 \epsilon\), \(\eta_\epsilon \in C^\infty\), \(\eta_\epsilon(x', x_d) = \eta_0(x', \frac{x_d}{\epsilon}), \eta_0 = \begin{cases}
       1 & |x_d| \ge 2 \\ 0 & |x_d| \ge 1\end{cases}\). We have 
       \begin{align*}
         \int_{Q_+} u \partial_d(\eta_\epsilon \tilde \phi) = - \int_{Q_+} \partial_d u(\eta_\epsilon \tilde \phi)
@@ -4374,8 +4374,8 @@
       \begin{align*}
         E(v) &= \frac{1}{2} \int |\nabla v|^2 - \int f v \\
         &= \frac{1}{2} \int_\Omega |\nabla (u + w)|^2 - \int_\Omega f (u + w) \\
-        &= \frac{1}{2} \int_\Omega \left[|\nabla u|^2 + |\nabla w|^2 + 2 \nabla u \nabla w\right] \int_\Omega(fu + fw)\\
-        &= E(u) + \frac{1}{2} \int_\Omega|\nabla w|^2 + \left(\underbrace{\nabla u \nabla w - \int f w}_{\smash{= 0}}\right)
+        &= \frac{1}{2} \int_\Omega \left[|\nabla u|^2 + |\nabla w|^2 + 2 \nabla u \nabla w\right] \int_\Omega(fu + fw)\\
+        &= E(u) + \frac{1}{2} \int_\Omega|\nabla w|^2 + \left(\underbrace{\nabla u \nabla w - \int f w}_{\smash{= 0}}\right)
       \end{align*}
       as \(w = v-u \in H_0^1\) (by (2))
       \item[3) \(\Rightarrow\) 1)] 
@@ -4455,7 +4455,7 @@
           \int_Q (Bu)(x) \partial_i \phi(x) \, dx 
           &= \int_{Q_+}(-\partial_iu)(x) \phi(x) + \int_{Q_-} (-\partial_i u) (\tilde x) \phi(x) \\
           &= \int_Q - h(x) \phi(x) \, dx, \quad h(x) = \begin{cases}
-            \partial_i u(x), & x \in Q_+ \\ \partial_i u(\tilde x), & x \in Q_-
+            \partial_i u(x), & x \in Q_+ \\ \partial_i u(\tilde x), & x \in Q_-
           \end{cases}
         \end{align*}
         for all \(\phi \in C_c^\infty(Q)\), so \(\partial_i (Bu) \in L^2\) for all \(i = 1, 2, \dots, d-1\). Thus \(Bu \in H^1(Q)\).
@@ -4474,7 +4474,7 @@
 
   \begin{ex}[Bonus 8]
     Assume \(u \in H^2(Q_+)\) and \(\begin{cases}
-      u = 0 \\ \nabla u = 0 
+      u = 0 \\ \nabla u = 0 
     \end{cases}\text{on } \partial Q_+\)
     Prove that \(Bu \in H^2(Q)\). (Reflection extension) (Ok in 1D)
   \end{ex}
@@ -4503,7 +4503,7 @@
     We assume that the statement does not hold true. Then there is a sequence \(\{u_n\} \subseteq H^1(\Omega)\), \(u_n|_{\partial \Omega} = g\) s.t.
     \[\|\nabla u_n\|_{L^2(\Omega)} \to 0, \quad \|u_n\|_{L^2(\Omega)} = 1.\]
     Since \(\{u_n\}\) is bounded in \(H^1(\Omega)\), by the Banach-Alaoglu theorem (\ref{banach-alagoglu}), up to a subsequence 
-    \[u_n \to u_0 \quad \text{ weakly in } H^1(\Omega)\]
+    \[u_n \to u_0 \quad \text{ weakly in } H^1(\Omega)\]
     Since \(\nabla u_n \to 0\) strongly in \(L^2\) and \(\nabla u_n \to \nabla u_0\) weakly in \(L^2\), we have \(\nabla u_0 = 0\), so \(u_0|_{\partial \Omega} = const.\) (here we need \(\Omega\) to be connected), so \(u_0|_{\partial \Omega} = const.\) On the other hand, note that \(M\) is convex and closed in \(H^1(\Omega)\) since the trace operator \(T: H^1(\Omega) \to L^2(\partial \Omega)\) is continuous. Therefore, \(M\) is also weakly closed in \(H^1(\Omega)\) by the Hahn-Banach theorem. Thus from \(\{u_n\} \subseteq M\), \(u_n \to u_0\) wekly in \(H^1(\Omega)\) we get that \(u_0 \in M\), so \(u_0|_{\partial \Omega} = g\). We get a contradiction since \(g \ne const\) 
   \end{proof}
 
@@ -4526,7 +4526,7 @@
       \begin{align*}
         E(v) 
         &= \frac{1}{2} \int_\Omega|\nabla v|^2 - \int_\Omega fv \\
-        \text{(Hölder)}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
+        \text{(Hölder)}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - \|f\|_{L^2(\Omega)} \|v\|_{L^2(\Omega)} \\
         \text{(Poincaré \ref{Poincare inequality for L2})}\quad&\ge \frac{1}{2} \|\nabla v\|_{L^2(\Omega)}^2 - C \|f\|_{L^2(\Omega)} \|\nabla v\|_{L^2(\Omega)} \\
         &\ge \frac{1}{4} \| \nabla v\|_{L^2(\Omega)} - C\|f\|_{L^2(\Omega)}
       \end{align*}
@@ -4566,7 +4566,7 @@
         \end{cases}
         &&\Leftrightarrow
         &&\begin{cases}
-          - \Delta \tilde u = f &\text{in } \Omega \\\tilde u = 0 &\text{on } \Omega
+          - \Delta \tilde u = f &\text{in } \Omega \\\tilde u = 0 &\text{on } \Omega
         \end{cases}
       \end{align*}
       If \(\Omega\) is not connected, then by considering connected components of \(\Omega\) we can prove that Poisson's equation always has a unique solution (for all \(f \in L^2(\Omega), g \in L^2(\partial \Omega)\)).
@@ -4610,7 +4610,7 @@
   \[\int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi \quad \forall \phi \in H^1(\Omega)\]
   Then \(u\) satisfies the Neumann condition:
   \begin{align*}
-    \frac{\partial u}{\partial n} = \nabla u \cdot \vec{n} = 0 \text{ on } \partial \Omega
+    \frac{\partial u}{\partial n} = \nabla u \cdot \vec{n} = 0 \text{ on } \partial \Omega
   \end{align*}
 
   (justification ...) \\
@@ -4682,7 +4682,7 @@
     \begin{enumerate}[label=\alph*)]
       \item \(u\) solves the equation:
       \[\begin{cases}
-        - u'' = f & \text{in } D'(\Omega) \\ u'(0) = u'(1) = 0
+        - u'' = f & \text{in } D'(\Omega) \\ u'(0) = u'(1) = 0
       \end{cases}\]
       \item \[\int_\Omega u' \phi' = \int_\Omega f \phi\] for all \(\phi \in H^1(\Omega)\).
     \end{enumerate}
@@ -5019,7 +5019,7 @@
   \end{cases}\]
   \begin{align*}
     &\Rightarrow &\langle u_n, u\rangle &= e^{-t \lambda_n} \langle u_n, g\rangle &&\forall t > 0, \forall n = 1,2, \dots \\
-    &\Rightarrow & u&= \sum_{n=0}^\infty \langle \rangle = - \sum e^{-t \lambda_n} \langle \rangle u
+    &\Rightarrow & u&= \sum_{n=0}^\infty \langle \rangle = - \sum e^{-t \lambda_n} \langle \rangle u
   \end{align*}
     
   \begin{eg}
@@ -5127,12 +5127,12 @@
         &\le m^2 \frac{1}{1 - \left(\frac{x^2}{M}\right)}
       \end{align*}
       \item \(t \in [\epsilon, \frac{1}{\epsilon}]\), so \(\frac{1}{t} \le \frac{1}{\epsilon}\), so 
-      \(\frac{1}{t^{n+2}} \le \frac{1}{\epsilon^{n+2}} \longrightarrow \sum_{n \ge 0} \frac{(n+2)!}{(2n)!} \frac{1}{t^{n+2}} x^{2n} \le \sum_{n \ge 0} \frac{1}{n^{n-2}} \frac{1}{\epsilon^{n-2}} x^{2n}\)
+      \(\frac{1}{t^{n+2}} \le \frac{1}{\epsilon^{n+2}} \longrightarrow \sum_{n \ge 0} \frac{(n+2)!}{(2n)!} \frac{1}{t^{n+2}} x^{2n} \le \sum_{n \ge 0} \frac{1}{n^{n-2}} \frac{1}{\epsilon^{n-2}} x^{2n}\)
     \end{enumerate}
   \end{proof}
 
   \begin{rem}
-    \(|u(x,t)| \le \exp \left(\frac{cx^2}{t}\right) \leadsto \) unphysical solution. Violates \(|u(x,t)| \le Ce^{C|x|^2}\) for all \(\forall (x,t) \in \mathbb{R} \times [0,T]\)
+    \(|u(x,t)| \le \exp \left(\frac{cx^2}{t}\right) \leadsto \) unphysical solution. Violates \(|u(x,t)| \le Ce^{C|x|^2}\) for all \(\forall (x,t) \in \mathbb{R} \times [0,T]\)
   \end{rem}
 
   \begin{ex}[Bonus 10]
@@ -5294,7 +5294,7 @@
       \item Stability (solution depends continuously on data)
     \end{itemize}    
     For the latter issue, by the maximum principle we have 
-    \[\|u(\cdot, t)\|_{L^\infty} \le \|u(\cdot, 0)\|_{L^\infty} \quad \forall t\]
+    \[\|u(\cdot, t)\|_{L^\infty} \le \|u(\cdot, 0)\|_{L^\infty} \quad \forall t\]
     or in the \(L^2\)-situation:
     \[\|u(\cdot, t)\|_{L^2} \le \|u(\cdot, 0)\|_{L^2} \quad \forall t\]
     On the other hand, the heat backward equation 
@@ -5373,7 +5373,7 @@
   \end{align*}
   where
   \[\begin{cases}
-    P_0 = 1 \\ P_{n+1} \left(\frac{1}{t}\right) = \left(P_n\left(\frac{1}{t}\right)\right)' + \left(\frac{2}{t^3}\right)P_n \left(\frac{1}{t}\right) = A_1 P_n + A_2 P_n, \begin{cases}
+    P_0 = 1 \\ P_{n+1} \left(\frac{1}{t}\right) = \left(P_n\left(\frac{1}{t}\right)\right)' + \left(\frac{2}{t^3}\right)P_n \left(\frac{1}{t}\right) = A_1 P_n + A_2 P_n, \begin{cases}
       A_1 = \partial_t \\ A_2 = \frac{2}{t^3}
     \end{cases}\\
     P_{n+1} = (A_1 + A_2) P_n = (A_1 + A_2) (A_1 + A_2)P_{n-1} = 
@@ -5391,7 +5391,7 @@
   \[|P_n \left(\frac{1}{t}\right)| \le \max_{0 \le k \le n} \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}}\]
   Thus:
   \begin{align*}
-    \sum_{n} \left|\frac{g^{(n)}(t)}{(2n)!} x^{2n}\right| &
+    \sum_{n} \left|\frac{g^{(n)}(t)}{(2n)!} x^{2n}\right| &
     \le \sum_n \max_{0 \le k \le n} \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}(2n)!} \frac{e^{-\frac{1}{t^2}}}{1} x^{2n} \\
     &\le \sum_{n} \max \frac{2^n 2^k (3n)^{n-k}}{t^{n+2k}(2n)!} (k!)(2t^2)^k e^{- \frac{1}{2t^2}} x^{2n} \\
     &= \sum_{n} \frac{2^n 2^k 2^k (3n)^{n-k}(k!)}{(2n)!t^n} e^{- \frac{1}{2t^2}} x^{2n} \\
@@ -5508,7 +5508,7 @@
     This implies:
     \begin{align*}
       \|u\|_{L^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds  \\
-      \Rightarrow \quad \|u\|_{L_{x,t}^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
+      \Rightarrow \quad \|u\|_{L_{x,t}^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
       &= \|g\|_{L_x^\infty} + T \|f\|_{L_{x,t}^\infty}
     \end{align*}
     This is optimal! E.g. \(g = 0, f = 1\), \(u(x,t) = u(t)\).
@@ -5697,8 +5697,8 @@
 	\end{align*}
 	Then 
 	\[\begin{cases}
-		\partial_t^2 \tilde u - \partial_x^2 \tilde u = 0 &\text{in } \mathbb{R} \times (0,\infty) \\
-		\tilde u = \tilde g, \partial_t \tilde u = \tilde h & \text{on } \mathbb{R} \times \{t = 0\}
+		\partial_t^2 \tilde u - \partial_x^2 \tilde u = 0 &\text{in } \mathbb{R} \times (0,\infty) \\
+		\tilde u = \tilde g, \partial_t \tilde u = \tilde h & \text{on } \mathbb{R} \times \{t = 0\}
 	\end{cases}.\]
 	By d'Alembert formula 
 	\begin{align*}
@@ -5729,7 +5729,7 @@
     \begin{itemize}
       \item \((r,t) \mapsto U \in C^2([0,\infty) \times [0,\infty)])\)
       \item \(\begin{cases}
-        \partial_t^2 U - \partial_r^2 U - \frac{d-1}{r}\partial_r U = 0 &\text{in } \mathbb{R}_+ \times \mathbb{R}_+ \\
+        \partial_t^2 U - \partial_r^2 U - \frac{d-1}{r}\partial_r U = 0 &\text{in } \mathbb{R}_+ \times \mathbb{R}_+ \\
         U = G, \partial_t U = H &\text{on }\mathbb{R}_+ \times \{t=0\}
          \end{cases}\)
     \end{itemize}
@@ -5904,7 +5904,7 @@
     Now,
     \begin{align}
       \text{RHS of \((\star)\)}  &= \partial_t \left(\frac{t^2}{2} \fint_{B_{\mathbb{R}^2}} \frac{g(y)}{\sqrt{t^2 - |x-y|^2}} \, dy\right) + \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy \\
-      ?? \quad &= \partial_t \frac{t}{2} \frac{g(y) + \nabla g(y) (y-x)}{\sqrt{t^2-|x-y|^2}}+ \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy
+      ?? \quad &= \partial_t \frac{t}{2} \frac{g(y) + \nabla g(y) (y-x)}{\sqrt{t^2-|x-y|^2}}+ \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy
     \end{align}
     3D-Problem: We claim that if \(\bar g \in C^3(\mathbb{R}^3)\), \(\bar h \in C^2(\mathbb{R}^3)\) and 
     \[\bar u(\bar x, t) = \partial_t \left(t \fint_{\partial B_{\mathbb{R}^2}(\bar x , t)}\bar g\right) + t \int_{\partial B_{\mathbb{R}^2}(\bar x, t)} \bar h,\]
@@ -5994,7 +5994,7 @@
   \[\begin{cases}
     \partial_t^2 u - \Delta_x u = 0 &\text{in }  \Omega \times (0,\infty) \\
     u = g, \partial_t u = h &\text{when } t = 0 \\
-    u = 0 &\text{when } x \in \partial \Omega
+    u = 0 &\text{when } x \in \partial \Omega
   \end{cases}\]
   \(-\Delta\) has eigenvecors \((e_i)_{i=1}^\infty\) with eigenvalues \((\lambda_i)_{i=1}^\infty\), i.e.
   \[\begin{cases}
@@ -6020,8 +6020,8 @@
   \section{Uniqueness}
   For \(\Omega \subseteq \mathbb{R}^d\) open and bounded with \(C^1\)-boundary regard
   \[\begin{cases}
-    \partial_t^2 u - \Delta_x u = 0 &\text{in } \Omega \times (0,T) \\
-    u = 0, \partial_t u = 0 &\text{in } \Omega \times \{t=0\} \\
+    \partial_t^2 u - \Delta_x u = 0 &\text{in } \Omega \times (0,T) \\
+    u = 0, \partial_t u = 0 &\text{in } \Omega \times \{t=0\} \\
     u=0 &\partial \Omega \times [0,T]
   \end{cases}.\]
   If \(u \in C^2(\bar \Omega \times [0,T])\), then \(u = 0\).
@@ -6098,7 +6098,7 @@
 
   \chapter{Schrödinger Equation}
   \[\begin{cases}
-    -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty)\\
+    -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty)\\
     u(x,0) = g(x) &x \in \mathbb{R}^d
   \end{cases}\]
   Formally 
@@ -6109,11 +6109,11 @@
   \end{cases} \Rightarrow u(x,t) = (e^{t\Delta} g)(x) = \frac{1}{(4 \pi t)^{\frac{d}{2}}}\int_{\mathbb{R}^d} e^{-\frac{|x-y|^2}{4t}} g(y)\]
   \[\leadsto \begin{cases}
     - i \partial_t u - \Delta_x u = 0 \\ u(x,0) = g(x)
-  \end{cases} \Rightarrow u(x,t) = (e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
+  \end{cases} \Rightarrow u(x,t) = (e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
   if \(g \in L^1\).
 
   
-  \begin{thm}
+  \begin{thm}[Fourier for Schrödinger Solution]
     For \(g \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), define 
     \[(e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
     Then \(\|e^{it\Delta}g\|_{L^2(\mathbb{R}^d)} = \|g\|_{L^2(\mathbb{R}^d)}\). Consequently, for all \(g \in L^2(\mathbb{R}^d)\) we can define \(e^{it \Delta} g \in L^2(\mathbb{R}^d)\) by a density argument. Moreover, 
@@ -6148,7 +6148,7 @@
     Thus, \(e^{it \Delta} g \in L^2(\mathbb{R}^d)\) and  \(\|e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \le \|g\|_{L^2(\mathbb{R}^d)}\).
     To get the equality:
     \begin{align*}
-      \widehat{G_\epsilon \star g}(k) &= e^{-(it + \epsilon)|2 \pi k|^2}  \underbrace{\hat g(k)}_{L^2} = \underbrace{e^{-\epsilon | 2 \pi k|^2}}_{\in [0,1]} \left(e^{-it |2 \pi k|^2} \hat g(k)\right) \xrightarrow{\epsilon \to 0^+} e^{it|2 \pi k|^2} \hat g(k)
+      \widehat{G_\epsilon \star g}(k) &= e^{-(it + \epsilon)|2 \pi k|^2}  \underbrace{\hat g(k)}_{L^2} = \underbrace{e^{-\epsilon | 2 \pi k|^2}}_{\in [0,1]} \left(e^{-it |2 \pi k|^2} \hat g(k)\right) \xrightarrow{\epsilon \to 0^+} e^{it|2 \pi k|^2} \hat g(k)
     \end{align*}
     in \(L^2(\mathbb{R}^d, dk)\). Thus \(G_\epsilon \star g\) converges in \(L^2(\mathbb{R}^d)\). Then up to a subsequence \(\epsilon \to 0^+\), we can assume that 
     \[(G_\epsilon \star g)(x) \xrightarrow{\epsilon \to 0^+} H(x) \]
@@ -6156,7 +6156,7 @@
     \[\|g\|_{L^2(\mathbb{R}^d)} \xleftarrow{\epsilon \to 0} \|G_\epsilon \star g\|_{L^2(\mathbb{R}^d)} \xrightarrow{\epsilon \to 0^+} \|e^{it \Delta} g \|_{L^2}.\]
     This implies \(\|e^{it\Delta} g\|_{L^2(\mathbb{R}^d)} = \|g\|_{L^2(\mathbb{R}^d)}\) for all \(g \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\). For \(g \in L^2(\mathbb{R}^d)\) there is a sequence \(\{g_n\} \subseteq L^1 \cap L^2\) s.t. \(g_n \to g\) in \(L^2(\mathbb{R}^d)\). Then 
     \begin{align*}
-      \|e^{it \Delta} g_n - e^{ it \Delta} g_m \|_{L^2} &= \|e^{it \Delta} \underbrace{(g_n - g_m)}_{L^1 \cap L^2} = \|g_n - g_m\|_{L^2} \to 0
+      \|e^{it \Delta} g_n - e^{ it \Delta} g_m \|_{L^2} &= \|e^{it \Delta} \underbrace{(g_n - g_m)}_{L^1 \cap L^2} = \|g_n - g_m\|_{L^2} \to 0
     \end{align*}
     as \(m,n \to \infty\). So \(e^{it \Delta} g_n\) is a Cauchy sequence in \(L^2\), so it has a limit which we define as \(e^{i t \Delta} g\). Why the limit \(e^{it\Delta} g\) is independent of the choice of \(g_n\): If we have 2 different sequences \(\{g_n\}, \{\tilde g_n\} \subseteq L^1 \cap L^2\), then \(g_n, \tilde g_n \to g\) in \(L^2(\mathbb{R}^d)\). Then
     \begin{align*}
@@ -6164,15 +6164,15 @@
     \end{align*}
     \(\leadsto\) \(\lim_{n \to \infty} e^{it \Delta} g_n = \lim_{n \to \infty} e^{it\Delta}\tilde g_n\). Finally, we have \(g \in L^2(\mathbb{R}^d), g_n \in L^1 \cap L^2 \to g\) in \(L^2\).
     \begin{align*}
-      \widehat{e^{it \Delta}}g(k)\xleftarrow{n \to \infty} \widehat{e^{it \Delta} g_n} (k) &= e^{-it |2 \pi k|^2} \hat g_n (k) \xrightarrow{n \to \infty} e^{-it |2 \pi k|^2} \hat g(k)
+      \widehat{e^{it \Delta}}g(k)\xleftarrow{n \to \infty} \widehat{e^{it \Delta} g_n} (k) &= e^{-it |2 \pi k|^2} \hat g_n (k) \xrightarrow{n \to \infty} e^{-it |2 \pi k|^2} \hat g(k)
     \end{align*}
     in \(L^2(\mathbb{R}^d)\).
   \end{proof}
 
-  \begin{thm}[Long Term bevavior]\
+  \begin{thm}[Long term behaviour]\
     \begin{enumerate}
       \item If \(g \in L^1(\mathbb{R}^d)\), then \((e^{it \Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4 t}} g(y) \, dy\). This implies 
-      \[\|e^{it \Delta} g\|_{L^\infty(\mathbb{R}^d)} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1(\mathbb{R}^d)}\xrightarrow{t \to \infty} 0.\] On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
+      \[\|e^{it \Delta} g\|_{L^\infty(\mathbb{R}^d)} \le \frac{1}{(4 \pi t)^{\frac{d}{2}}} \|g\|_{L^1(\mathbb{R}^d)}\xrightarrow{t \to \infty} 0.\] On the other hand, for all \(g \in L^2(\mathbb{R}^d)\), \(\|e^{it \Delta} g\|_{L^2} = \|g\|_{L^2}\). \\
       Exercise \ref{E 13.4}: If \(g \in L^1 \cap L^2\) then \(\|e^{it \Delta} g\|_{L^p} \to 0\) for all \( 2 < p \le \infty\).
       \item For all bounded sets \(\Omega\), for all \(g \in L^2(\mathbb{R}^d)\) we have \(\|\mathbb{1}_\Omega e^{it \Delta} g\|_{L^2(\mathbb{R}^d)} \to 0\) as \(t \to \infty\). Equivalently, for all \(R > 0\):
       \begin{align*}
@@ -6185,12 +6185,12 @@
   \begin{proof}
     \begin{enumerate}
       \item \begin{align*}
-        \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{e^{-it |2 \pi k|^2}-1}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\hat g(k)|^2 \, dk \xrightarrow{t \to 0}
+        \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{(e^{-it |2 \pi k|^2}-1)}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\hat g(k)|^2 \, dk \xrightarrow{t \to 0}0
       \end{align*}
       by dominated convergence.
       \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). We take \(g_1 \in L^1\) s.t. \begin{align}
         \|e^{it \Delta} g_1 \|_{L^\infty)} &\le \frac{\|g_1\|_{L1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0 \\
-        \Rightarrow \int_{|x|\le R} |(e^{it \Delta}g_1) (x)|^2 &\le \frac{C R^d \|g_1\|_{L^1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0
+        \Rightarrow \int_{|x|\le R} |(e^{it \Delta}g_1) (x)|^2 &\le \frac{C R^d \|g_1\|_{L^1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0
       \end{align}
       On the other hand, with a good choice of \(g_2\):
       \begin{align}
@@ -6212,15 +6212,15 @@
   \begin{proof}[Solution]
     We already know:
     \begin{align*}
-      \|e^{it \Delta} g\|_{L^\infty} &\le \frac{\|g\|_{L^1}}{(4 \pi t)^{\frac{d}{2}}} \xrightarrow{t \to 0} 0 \\
+      \|e^{it \Delta} g\|_{L^\infty} &\le \frac{\|g\|_{L^1}}{(4 \pi t)^{\frac{d}{2}}} \xrightarrow{t \to 0} 0 \\
       \|e^{it \Delta} g\|_{L^2} &= \|g\|_{L^2}
     \end{align*}
     Now, interpolation for all \(2 < p < \infty\) gives 
     \[\|e^{it \Delta} g\|_{L^p} \le \|e^{it \Delta} g\|_{L^2}^\theta \|e^{it \Delta} g\|_{L^\infty}^{1-\theta} \xrightarrow{t \to \infty} 0,\]
-    \(\theta \in (0,1) \)
+    for \(\theta \in (0,1)\).
   \end{proof}
 
-  \begin{ex}[Bonus]
+  \begin{ex}[Bonus 12]
     Assume \(g \in L^p(\mathbb{R}^d)\), for some \(1 < p < 2\). Prove that for all \(t > 0\), \(e^{it \Delta} g\) is well-defined and belongs to \(L^{p'}(\mathbb{R}^d)\) where \(\frac{1}{p} + \frac{1}{p'} = 1\). Moreover:
     \[\|e^{it\Delta} g\|_{L^{p'}} \xrightarrow{t \to \infty} 0\]
     Hint: You can use Riesz–Thorin interpolation theorem.
@@ -6228,7 +6228,7 @@
   % Need something to proof that e^{it \Delta} g belongs to L^{p'}(\mathbb{R}^d).
 
   \begin{lem}
-    If \(g \in L^2(\mathbb{R}^d)\), then for all \(\epsilon > 0\) we can write \(g = g_1 + g_2\), \(g, g_2 \in L^2\), \(g_1 \in L^1\). s.t. \(\|g_2\|_{L^2} \le \epsilon\) and \(\|g_1\|_{L^1} \le C_\epsilon\).
+    If \(g \in L^2(\mathbb{R}^d)\), then for all \(\epsilon > 0\) we can write \(g = g_1 + g_2\), \(g, g_2 \in L^2\), \(g_1 \in L^1\). s.t. \(\|g_2\|_{L^2} \le \epsilon\) and \(\|g_1\|_{L^1} \le C_\epsilon\).
   \end{lem}
 
   \begin{proof}
@@ -6245,7 +6245,7 @@
     Consequently:
     \begin{align*}
       \int_{|x| \le R} |(e^{it \Delta}g)(x)|^2 \, dx
-      &\le 2 \int_{|x| \le R} |e^{it \Delta}g_1(x)|^2 + 2 \int_{|x| \le R} |e^{it \Delta} g_2(x)|^2 \\
+      &\le 2 \int_{|x| \le R} |e^{it \Delta}g_1(x)|^2 + 2 \int_{|x| \le R} |e^{it \Delta} g_2(x)|^2 \\
       &\le C R^d \left(\frac{\|g\|_{L^1}}{t^{\frac{d}{2}}}\right) + \|g_2\|_{L^2}^2 \\
       &\le \frac{C_\epsilon R^d}{t^d} + \epsilon^2 \xrightarrow{t \to \infty} \epsilon^2 \xrightarrow{\epsilon \to 0} 0 \qedhere
     \end{align*}
@@ -6257,7 +6257,7 @@
     \(x \in \mathbb{R}^d, t> 0\). satisfies 
     \(u \in C^\infty(\mathbb{R}^d \times (0,\infty))\) and 
     \[\begin{cases}
-      -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+      -i \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
       \lim_{t \to 0} u(x,t) = g(x) \text{ uniformly } x \in \mathbb{R^d}
     \end{cases}.\]
   \end{thm}
@@ -6270,17 +6270,17 @@
     \end{align*}
     as \(|\hat g(k)| \le \frac{C_n}{(1 + |k|)^N}\) for all \(N \ge 1\). This implies \(D^\alpha u(\bullet, t) \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\). Moreover,
     \begin{align}
-      \partial_t \hat u(k,t) &= e^{-it |2 \pi k|^2} \hat g(k) \underbrace{(-i |2 \pi k|^2)}_{\in L^1(\mathbb{R}^d, dk)}
+      \partial_t \hat u(k,t) &= e^{-it |2 \pi k|^2} \hat g(k) \underbrace{(-i |2 \pi k|^2)}_{\in L^1(\mathbb{R}^d, dk)}
     \end{align}
     \(\leadsto t \mapsto u(x,t) \in C^1\). Similary \(t \mapsto u(x,t) \in C^m\) for all \(m \ge 1\).
     \begin{align*}
-      - i \widehat{\partial_t u - \Delta_x u} &= (-i) e^{-it |2 \pi k|^2} (- i |2 \pi k|^2) \hat g(k) + e^{-it | 2 \pi k|^2} |2 \pi k|^2 \hat g(k) = 0. \\
+      - i \widehat{\partial_t u - \Delta_x u} &= (-i) e^{-it |2 \pi k|^2} (- i |2 \pi k|^2) \hat g(k) + e^{-it | 2 \pi k|^2} |2 \pi k|^2 \hat g(k) = 0. \\
       \Rightarrow \quad - i \partial_t u - \Delta_x u &= 0 \quad \text{almost everywhere in \(\mathbb{R}^d\)} \\
       \Rightarrow \quad - i \partial_t u - \Delta_x u &= 0 \quad \text{everywhere in \(\mathbb{R}^d\)}
     \end{align*}
     Before we proved \(u(x,t) = (e^{it \Delta} g)(x) \to g(x)\) in \(L^2(\mathbb{R}^d)\).. Here we can do better:
     \begin{align*}
-      \int_{\mathbb{R}^d} | \hat u(k,t) - \hat g(k)|\, dk = \int_{\mathbb{R}^d} | \underbrace{e^{-it |2 \pi k|^2}-1}_{\xrightarrow{t \to +0}0}|\underbrace{|\hat g(k)|}_{\in L^1} \xrightarrow{t \to 0} 0
+      \int_{\mathbb{R}^d} | \hat u(k,t) - \hat g(k)|\, dk = \int_{\mathbb{R}^d} | \underbrace{e^{-it |2 \pi k|^2}-1}_{\xrightarrow{t \to +0}0}|\underbrace{|\hat g(k)|}_{\in L^1} \xrightarrow{t \to 0} 0
     \end{align*}
     So we get 
     \begin{align*}
@@ -6321,7 +6321,7 @@
         \hat u = \widehat{e^{it \Delta}g} = e^{-it | 2 \pi k|^2}\hat g(k)
       \end{align}
         \begin{enumerate}[label=\(\Rightarrow\)]
-          \item \(|2 \pi k|^2 \hat u(k) = e^{-it |2 \pi k|^2} \underbrace{|2 \pi k|^2 \hat g(k)}_{\in L^2(dk)} \in L^2(dk)\)
+          \item \(|2 \pi k|^2 \hat u(k) = e^{-it |2 \pi k|^2} \underbrace{|2 \pi k|^2 \hat g(k)}_{\in L^2(dk)} \in L^2(dk)\)
           \item \(\widehat{\Delta_x u}= \widehat{e^{it \Delta} (\Delta g)}\)
           \item \(\Delta_x u = e^{it \Delta}(\Delta g)\)
         \end{enumerate}
@@ -6372,7 +6372,7 @@
     Scattery Theory: \(e^{-it(- \Delta + v)} g \) as \(t \to \infty.\)
     \begin{enumerate}
       \item RAGE: If \(-\Delta + V\) has no eigenfunction, then 
-      \[\frac{1}{T} \int_0^T \int_{|x| \le R} \left| \left(e^{-it(-\Delta +v)}g\right)(x)\right|^2 \, dx \, dt \xrightarrow{T \to 0} 0\]
+      \[\frac{1}{T} \int_0^T \int_{|x| \le R} \left| \left(e^{-it(-\Delta +v)}g\right)(x)\right|^2 \, dx \, dt \xrightarrow{T \to 0} 0\]
       \item (Asymptotic completeness) If \(0 \le V \in C_c^\infty\) is small, then there is a unitary operator \(U\) on \(L^2\) s.t. for all \(g \in L^2\):
       \[\left\|e^{-it(-\Delta + v)}g - e^{-it \Delta} (Ug) \right\|_{L^2(\mathbb{R}^d)} \xrightarrow{t \to \infty} 0 \]
     \end{enumerate}
