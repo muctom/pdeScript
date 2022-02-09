@@ -5379,9 +5379,9 @@
     P_{n+1} = (A_1 + A_2) P_n = (A_1 + A_2) (A_1 + A_2)P_{n-1} = 
   \end{cases}\]
   This implies:
-  \begin{align}
+  \begin {align*}
     P_n = (A_1 + A_2)^n P_0 = \sum_{\sigma \in \{1,2\}^n} A_{\sigma(1)} A_{\sigma(2)} \cdots A_{\sigma(n)} P_0
-  \end{align}
+  \end {align*}
   \[A_1 \left(\frac{\alpha}{t^s}\right) = \frac{-s\alpha}{t^{s+1}} \to A_1\]
   Multiple coefficients by a factors and \(+\) power by 1
   \[A_2 \left(\frac{\alpha}{t^s}\right) = \frac{2\alpha}{t^{s+3}} \to A_2\]
@@ -5902,10 +5902,10 @@
     where \(\bar B(\bar x, t)\) is a ball in 3D, \(\bar g(\bar x) = g(x)\), \(\bar h(\bar x) = h(x)\). From \ref{wave-2d-formula} we have 
     \[\fint_{\partial \bar B(\bar x, t)} \bar g \, d \bar S = \frac{t}{2} \fint_{B_{\mathbb{R}^2}(x,t)} \frac{g(y)}{\sqrt{t^2 - |x-y|^2}} \, dy\]
     Now,
-    \begin{align}
+    \begin {align*}
       \text{RHS of \((\star)\)}  &= \partial_t \left(\frac{t^2}{2} \fint_{B_{\mathbb{R}^2}} \frac{g(y)}{\sqrt{t^2 - |x-y|^2}} \, dy\right) + \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy \\
       ?? \quad &= \partial_t \frac{t}{2} \frac{g(y) + \nabla g(y) (y-x)}{\sqrt{t^2-|x-y|^2}}+ \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy
-    \end{align}
+    \end {align*}
     3D-Problem: We claim that if \(\bar g \in C^3(\mathbb{R}^3)\), \(\bar h \in C^2(\mathbb{R}^3)\) and 
     \[\bar u(\bar x, t) = \partial_t \left(t \fint_{\partial B_{\mathbb{R}^2}(\bar x , t)}\bar g\right) + t \int_{\partial B_{\mathbb{R}^2}(\bar x, t)} \bar h,\]
     then \(\bar u \in C^2(\mathbb{R}^3 \times (0,\infty))\) and 
@@ -5916,9 +5916,9 @@
     Proof: 
       \begin{enumerate}[label=Step \arabic*:]
         \item Assume \(\bar g = 0\), \(\bar u (\bar x, t) = t \int_{\partial B(\bar x, t)} \bar h.\) Lemma (from lecture): 
-        \begin{align}
+        \begin {align*}
           \partial_r \int_{\partial B(\bar x, r)} \bar h = \frac{r}{d} \fint_{B(\bar x, r)} \Delta \bar h, \quad d = 3
-        \end{align}
+        \end {align*}
         (\(\bar U = \fint_{B(\bar x, r)} u(x,t)\))
         Hence:
         \begin{align*}
@@ -6113,7 +6113,7 @@
   if \(g \in L^1\).
 
   
-  \begin{thm}[Fourier for Schrödinger Solution]
+  \begin{thm}[Fourier for Schrödinger Solution]\label{schroedinger-fourier}
     For \(g \in L^1(\mathbb{R}^d) \cap L^2(\mathbb{R}^d)\), define 
     \[(e^{it\Delta}g)(x) = \frac{1}{(4 \pi it)^{\frac{d}{2}}} \int_{\mathbb{R}^d} e^{i \frac{|x-y|^2}{4t}} g(y) \, dy\]
     Then \(\|e^{it\Delta}g\|_{L^2(\mathbb{R}^d)} = \|g\|_{L^2(\mathbb{R}^d)}\). Consequently, for all \(g \in L^2(\mathbb{R}^d)\) we can define \(e^{it \Delta} g \in L^2(\mathbb{R}^d)\) by a density argument. Moreover, 
@@ -6184,19 +6184,19 @@
 
   \begin{proof}
     \begin{enumerate}
-      \item \begin{align*}
-        \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{(e^{-it |2 \pi k|^2}-1)}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\hat g(k)|^2 \, dk \xrightarrow{t \to 0}0
+      \item With the Fourier transform of \(e^{it \Delta g}\) (Theorem \ref{schroedinger-fourier}) we get \begin{align*}
+        \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{(e^{-it |2 \pi k|^2}-1)}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\underbrace{\hat g(k)}_{\in L^2}|^2 \, dk \xrightarrow{t \to 0}0
       \end{align*}
       by dominated convergence.
-      \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). We take \(g_1 \in L^1\) s.t. \begin{align}
+      \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). We take \(g_1 \in L^1\) s.t. \begin {align*}
         \|e^{it \Delta} g_1 \|_{L^\infty)} &\le \frac{\|g_1\|_{L1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0 \\
         \Rightarrow \int_{|x|\le R} |(e^{it \Delta}g_1) (x)|^2 &\le \frac{C R^d \|g_1\|_{L^1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0
-      \end{align}
+      \end {align*}
       On the other hand, with a good choice of \(g_2\):
-      \begin{align}
+      \begin {align*}
         \|e^{it\Delta} g_2 \|_{L^2(\mathbb{R}^d)} &= \|g_2\|_{L^2(\mathbb{R}^d)} &\to 0 \\
         \Rightarrow \quad \int_{|x| \le R}|(e^{it \Delta} g_2)(x)|^2 \, dx &\le \|e^{it \Delta} g_2\|_{L^2(\mathbb{R}^d)}^2 \to 0
-      \end{align}
+      \end {align*}
       Conclusion:
       \[\int_{|x|\le R}|(e^{it \Delta} g)(x)|^2 \, dx \le 2 \int_{|x|<R}|(e^{it \Delta}g_1)(x)|^2 + 2 \int_{|x| \le R} |e^{it \Delta} g_2(x)|^2 \xrightarrow{t \to \infty} 0\]
     \end{enumerate}
@@ -6235,12 +6235,12 @@
     \[g = \underbrace{g \mathbb{1}(|g| \le L)}_{g_1} + \underbrace{g \mathbb{1}(|g|>L)}_{g_2}\]
     
     Now \(g \in L^2\), then \(g_2 \in L^2\) and 
-    \begin{align}
+    \begin {align*}
       \int_{\mathbb{R}^d} |g_2|^2 &= \int_{\mathbb{R}^d} |g|^2 \mathbb{1}(|g| < L) \xrightarrow{L \to 0} 0
-    \end{align}
+    \end {align*}
     and \(g_1 \in L^1\) since 
     \begin{align*}
-      \int_{\mathbb{R}^d} |g_1| &= \int_{\mathbb{R}^d} |g| \mathbb{1}(|g| > L) &\le \int_{\mathbb{R}^d} |g| \frac{|g|}{L} = \frac{1}{L} \int_{\mathbb{R}^d} |g|^2 < \infty
+      \int_{\mathbb{R}^d} |g_1| &= \int_{\mathbb{R}^d} |g| \mathbb{1}(|g| > L) \le \int_{\mathbb{R}^d} |g| \frac{|g|}{L} = \frac{1}{L} \int_{\mathbb{R}^d} |g|^2 < \infty
     \end{align*}
     Consequently:
     \begin{align*}
@@ -6269,9 +6269,9 @@
       \Rightarrow \quad \|\widehat{D^\alpha u}(k,t)\|_{L^1(\mathbb{R}^d, dk)} &= \int_{\mathbb{R}^d} |(2 \pi ik)^\alpha| |\hat g (k)| \, dk  \le \int_{\mathbb{R}^d} |k|^{|\alpha|} |\hat g(k)| \, dk < \infty
     \end{align*}
     as \(|\hat g(k)| \le \frac{C_n}{(1 + |k|)^N}\) for all \(N \ge 1\). This implies \(D^\alpha u(\bullet, t) \in C(\mathbb{R}^d) \cap L^\infty(\mathbb{R}^d)\). Moreover,
-    \begin{align}
+    \begin {align*}
       \partial_t \hat u(k,t) &= e^{-it |2 \pi k|^2} \hat g(k) \underbrace{(-i |2 \pi k|^2)}_{\in L^1(\mathbb{R}^d, dk)}
-    \end{align}
+    \end {align*}
     \(\leadsto t \mapsto u(x,t) \in C^1\). Similary \(t \mapsto u(x,t) \in C^m\) for all \(m \ge 1\).
     \begin{align*}
       - i \widehat{\partial_t u - \Delta_x u} &= (-i) e^{-it |2 \pi k|^2} (- i |2 \pi k|^2) \hat g(k) + e^{-it | 2 \pi k|^2} |2 \pi k|^2 \hat g(k) = 0. \\
@@ -6317,9 +6317,9 @@
       We have 
       \[(-i) \frac{e^{-ih |2 \pi k|^2}-1}{h} \xrightarrow{h \to 0} (-i)^2 | 2 \pi k|^2 = - |2 \pi k|^2\]
       and \(|\dots| \le C|k|^2\). Also 
-      \begin{align}
+      \begin {align*}
         \hat u = \widehat{e^{it \Delta}g} = e^{-it | 2 \pi k|^2}\hat g(k)
-      \end{align}
+      \end {align*}
         \begin{enumerate}[label=\(\Rightarrow\)]
           \item \(|2 \pi k|^2 \hat u(k) = e^{-it |2 \pi k|^2} \underbrace{|2 \pi k|^2 \hat g(k)}_{\in L^2(dk)} \in L^2(dk)\)
           \item \(\widehat{\Delta_x u}= \widehat{e^{it \Delta} (\Delta g)}\)
