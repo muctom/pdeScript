@@ -1512,7 +1512,7 @@
   % \begin{proof}
   %   By the linearity, it suffices to show that if \(f \in L_{loc}^1(\Omega)\) and \(\int_\Omega f \phi = 0\) for all \(\phi \in D(\Omega)\), then \(f = 0\).
   %   \begin{enumerate}[label=Step \arabic*)]
-  %     \item (\(\Omega = \mathbb{R}^d\) and \(f \in L^1(\mathbb{R}^d)\)) Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\) for all \(\epsilon > 0\). Then \(h_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\) as \(\epsilon \to 0\). On the other hand: \[h_\epsilon \star f(x) = \int_{\mathbb{R}^d} f(y) \underbrace{h_\epsilon(x-y)}_{\phi_{\epsilon, x}(y)} \, dy = 0\] as \(\phi_{\epsilon, x} \in C_c^\infty\).
+  %     \item (\(\Omega = \mathbb{R}^d\) and \(f \in L^1(\mathbb{R}^d)\)) Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\) for all \(\epsilon > 0\). Then \(h_\epsilon \star f \to f\) in \(L^1(\mathbb{R}^d)\) as \(\epsilon \to 0\). On the other hand: \[(h_\epsilon \star f)(x) = \int_{\mathbb{R}^d} f(y) \underbrace{h_\epsilon(x-y)}_{\phi_{\epsilon, x}(y)} \, dy = 0\] as \(\phi_{\epsilon, x} \in C_c^\infty\).
   %     \item (\(\Omega \subseteq \mathbb{R}^d, f \in L_{loc}^1(\Omega)\)) For any \(\epsilon > 0\), 
   %     \[\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \Omega^\complement) > \epsilon\}\]
   %     Take \(h \in C_c^\infty(\mathbb{R}^d)\), \(\supp f \subseteq \{|x| \le 1\}\) and \(\int_{\mathbb{R}^d} h = 1\), \(h_\epsilon(x) = \epsilon^{-d}h(\epsilon^{-1}x)\). Then for all \(g \in C_c^\infty(\Omega_\epsilon)\) for all \(\epsilon > 0\) small we have 
@@ -1525,17 +1525,17 @@
   % \end{proof}
   
   \begin{eg}[Dirac delta function]
-    Let \(\Omega \subseteq \mathbb{R}^d\) open. Define \(T: D(\Omega) \to \mathbb{R}\) or \(\mathbb{C}\) by \(T(\phi) = \phi(x_0)\). Let \(x_0 \in \Omega\). Then \(T \in D'(\Omega)\) and we denote it by \(\delta_{x_0}\). It is clear that \(\phi \mapsto T(\phi) = \phi(x_0)\) is well-defined and linear for all \(\phi \in D(\Omega)\). Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove \(T(\phi_n) \to T(\phi)\), i.e. \(\phi_n(x_0) \to \phi(x_0)\) (obvious.)
+    Let \(\Omega \subseteq \mathbb{R}^d\) open and let \(x_0 \in \Omega\). Define \(T: D(\Omega) \to \mathbb{K}\) by \(T(\phi) = \phi(x_0)\). Then \(T \in D'(\Omega)\) and we denote it by \(\delta_{x_0}\). It is clear that \(\phi \mapsto T(\phi) = \phi(x_0)\) is well-defined and linear for all \(\phi \in D(\Omega)\). Take \(\phi_n \to \phi\) in \(D(\Omega)\) and prove \(T(\phi_n) \to T(\phi)\), i.e. \(\phi_n(x_0) \to \phi(x_0)\) (obvious.)
   \end{eg}
 
   \begin{eg}[Principle Value]
     The function \(f(x) = \frac{1}{x}\) is not in \(L_{loc}^1(\mathbb{R})\), but we can still define
-    \[\int_{\mathbb{R}} f(x) \phi(x) \, dx = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \[\phi(x) = |\phi(x)-\phi(0)| \le (\sup |\phi'|)(x),\] so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supported. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
-    Define \(T: D(\mathbb{R}) \to \mathbb{R}\) or \(\mathbb{C}\) by \begin{align*}
+    \[\int_{\mathbb{R}} f(x) \phi(x) \, dx = \int_{\mathbb{R}} \frac{\phi(x)}{x} \, dx\] for all \(\phi \in D(\mathbb{R})\) s.t. \(\phi(0) = 0\). In fact, \[\phi(x) = |\phi(x)-\phi(0)| \le  x \sup |\phi'|,\] so \(\frac{|\phi(x)|}{|x|} \in L^\infty(\mathbb{R})\) and compactly supported. So \(\frac{\phi(x)}{x} \in L^1(\mathbb{R})\).
+    Define \(T: D(\mathbb{R}) \to \mathbb{K}\) by \begin{align*}
       T(\phi) 
       &= \lim_{\epsilon \to 0} \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx \quad \forall \phi \in D(\mathbb{R}) \text{ s.t. } \phi(0) = 0
     \end{align*}
-    We denote \(T = p.v. \left(\frac{1}{x}\right)\). We check that \(T \in D'(\mathbb{R})\): For all \(\epsilon > 0\) we have  \[\left|\frac{\phi(x)}{x}\right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\] for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
+    We write \(T = \frac{1}{x}\) and check that \(T \in D'(\mathbb{R})\): For all \(\epsilon > 0\) we have  \[\left|\frac{\phi(x)}{x}\right| \le \frac{\|\phi\|_{L^\infty}}{\epsilon}\] for all \(|x| \ge \epsilon\) and \(\phi\) is compactly supported. So we get for all \(\epsilon > 0\):
     \begin{align*}
       \mathbb{1}(|x| \ge \epsilon)\frac{\phi(x)}{x} \in L^1(\mathbb{R}) \leadsto \int_{|x| \ge \epsilon} \frac{\phi(x)}{x} \, dx < \infty
     \end{align*}
@@ -1553,7 +1553,7 @@
     Since \(\phi \in C_c^\infty(\mathbb{R})\) it holds that \(|\phi(x) - \phi(-x)|  \le 2 \|\phi'\|_{L^\infty}(x)\).
     \begin{align*}
       \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^\infty(\mathbb{R})
-      \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^1(0, 1) \\
+      \Rightarrow \frac{\phi(x) - \phi(-x)}{x} \in L^1((0, 1)) \\
       \Rightarrow \int_0^1 \frac{\phi(x) - \phi(-x)}{x} \, dx = \lim_{\epsilon \to 0} \int_\epsilon^1 \frac{\phi(x) - \phi(-x)}{x} \, dx
     \end{align*}
   \end{eg}
@@ -1561,8 +1561,6 @@
   \begin{rem}
     The function \(\frac{1}{|x|^d}\) is not in \(L_{loc}^1(\mathbb{R}^d)\) but \(\exists T \in D'(\mathbb{R}^d)\) s.t. \(T(\phi) = \int_{\mathbb{R}^d} \frac{\phi(x)}{|x|^d} \, dx\) for all \(\phi \in C_c^\infty(\mathbb{R}^d)\) s.t. \(\phi(0) = 0\)
   \end{rem}
-
-  Let in the following \(\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}\).
 
   \begin{defn}[Derivatives of distributions] 
     Let \(\Omega \subseteq \mathbb{R}^d\) and \(T \in D'(\Omega)\). Define for \(\alpha \in \mathbb{N}^d\): 
@@ -1589,38 +1587,38 @@
 
   \begin{eg}
     Consider \(f: x \mapsto |x|\), then \(f \in C(\mathbb{R})\) but \(f \notin C^1(\mathbb{R})\). However, 
-    \[f'(x) = g(x) = \begin{cases}
+    \[f'(x) = g(x) \coloneqq \begin{cases}
       1 & x \ge 0 \\ -1 &x < 0
-    \end{cases} \in L_{loc}^1\]
-    Lets check \(f' = g\), i.e. \(-f(\phi') = f'(\phi) = g(\phi)\) for all \(\phi \in D(\mathbb{R})\). Thus we need to prove:
+    \end{cases} \in L_{loc}^1 \quad \text{in } D'(\mathbb{R})\]
+    Lets check \(f' = g\), i.e. \(-f(\phi') = f'(\phi) \overset{!}{=} g(\phi)\) for all \(\phi \in D(\mathbb{R})\). Thus we need to prove:
     \begin{align*}
       - \int_{\mathbb{R}} f(x) \phi'(x) \, dx = \int_{\mathbb{R}} g(x) \phi(x) \, dx \quad \forall \phi \in D(\mathbb{R})
     \end{align*}
-    namely:
+    namely we have to show
     \begin{align*}
-      \underbrace{- \int_{\mathbb{R}} |x| \phi'(x) \, dx}_{\coloneqq (\star)} &= \int_0^\infty \phi(x) \, dx - \int_{-\infty}^0 \phi(x) \, dx
+      \underbrace{- \int_{\mathbb{R}} |x| \phi'(x) \, dx}_{\coloneqq (\star)} &= \int_0^\infty \phi(x) \, dx - \int_{-\infty}^0 \phi(x) \, dx.
     \end{align*}
     Now we have
     \begin{align*}
       (\star) = - \int_0^\infty x \phi'(x) \, dx + \int_{-\infty}^0 x \phi'(x) \, dx.
     \end{align*}
-    By integration by parts:
+    By integration by parts we have
     \begin{align*}
       \int_0^\infty x \phi'(x) \, dx = \underbrace{[x \phi(x)]_0^\infty}_{= 0} - \int_0^\infty \phi(x) \, dx = - \int_0^\infty \phi(x) \, dx
     \end{align*}
-    and similary:
+    and similary
     \begin{align*}
-      \int_{-\infty}^0 x \phi'(x) \, dx = - \int_{-\infty}^0 \phi(x) \, dx
+      \int_{-\infty}^0 x \phi'(x) \, dx = - \int_{-\infty}^0 \phi(x) \, dx.
     \end{align*}
     Thus \(f' = g\) in \(D'(\Omega)\). We claim that \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\). In fact, for all \(\phi \in D(\mathbb{R})\), then:
     \begin{align*}
       g'(\phi) 
       &= - g(\phi') 
-      = - \int_{\mathbb{R}} g\phi' \, dx\\
-      &= - \int_{-\infty}^0 (-1) \phi'  \, dx - \int_0^\infty (1) \phi'  \, dx\\
-      &= - \int_0^\infty \phi'  \, dx + \int_{-\infty}^0 \phi' \, dx \\
-      &= [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]
-      = 2 \phi(0) = 2 \delta_0 (\phi)
+      = - \int_{\mathbb{R}} g\phi' \, dx
+      = - \int_{-\infty}^0 (-1) \phi'  \, dx - \int_0^\infty (1) \phi'  \, dx \\
+      &= - \int_0^\infty \phi'  \, dx + \int_{-\infty}^0 \phi' \, dx 
+      = [\phi(0) - \underbrace{\phi(\infty)}_{= 0}] + [\phi(0) - \underbrace{\phi(-\infty)}_{= 0}]\\
+      &= 2 \phi(0) = 2 \delta_0 (\phi)
     \end{align*}
     So \(g' = 2 \delta_0\) in \(D'(\mathbb{R})\).
   \end{eg}
@@ -1653,7 +1651,7 @@
     \begin{enumerate}
       \item \(y \mapsto T(f_y)\) is \(C^\infty(\mathbb{R}^d)\) and 
       \[D_y^\alpha(T(f_y)) = (D^\alpha T)(f_y) = (-1)^{|\alpha|}T(D^\alpha f_y)\]
-      \item For all \(g \in L^1(\mathbb{R}^d)\) and compactly supported, then
+      \item If \(g \in L^1(\mathbb{R}^d)\) and \(g\) is compactly supported, then
       \[\int_{\mathbb{R}^d} g(y) T(f_y) \, dy = T(\underbrace{f \star g}_{\in C_c^\infty(\mathbb{R})})\]
     \end{enumerate}
   \end{thm}
@@ -1671,7 +1669,6 @@
       \[\|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} \to 0\] \qedhere
     \end{enumerate}
   \end{proof}
-
 
   \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
     Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
@@ -6380,4 +6377,6 @@
       \[\left\|e^{-it(-\Delta + v)}g - e^{-it \Delta} (Ug) \right\|_{L^2(\mathbb{R}^d)} \xrightarrow{t \to \infty} 0 \]
     \end{enumerate}
   \end{eg}
+
+  
 \end{document}
