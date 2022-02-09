@@ -5659,6 +5659,18 @@
 	\end{ex}
 
 	\begin{proof}[Solution]
+    We can compute the derivative by regarding \(\int_x^{x+t} + \int_{x-t}^x\) and \(\int_t^{x+t} + \int_{x-t}^t\):
+    \begin{align*}
+      \partial_t u &= \frac{1}{2} \left(g'(x+t) - g'(x+t)\right) + \frac{1}{2} \left(h(x+t) + h(x-t)\right) \\
+      \partial^2_t u &= \frac{1}{2} \left(g''(x+t) + g''(x+t)\right) + \frac{1}{2} \left(h'(x+t) - h'(x-t)\right) \\
+      \partial_x u &= \frac{1}{2} \left(g'(x+t)+g'(x-t)\right) + \frac{1}{2} \left(h(x+t)-h(x-t)\right) \\
+      \partial^2_x u &= \frac{1}{2} \left(g''(x+t)+g''(x-t)\right) + \frac{1}{2} \left(h'(x+t)-h''(x-t)\right) = \partial_t^2 u
+    \end{align*}
+    Now,
+    \begin{align*}
+      \lim_{t \to 0} u &= \frac{1}{2} \left(g(x) + g(x)\right) + \frac{1}{2} \int_x^x h = g(x) \\
+      \lim_{t \to 0} \partial_t u &= \frac{1}{2}\left(g'(x) - g'(x)\right)+ \frac{1}{2} \left(h(x) + h(x)\right) = h(x).
+    \end{align*}
 	\end{proof}
 
 	\begin{rem}
@@ -5825,8 +5837,22 @@
     \[|u(x,t)| \le \frac{C}{t}, \quad \forall x \in \mathbb{R}^3, t > 0.\]
   \end{ex}
 
-  \begin{proof}[Solution]
-    
+  \begin{proof}[Solution]\
+    \begin{enumerate}[label=Step \arabic*:]
+      \item Assume 
+      \[(\star) \quad u(x,t) = \fint_{\partial B_{\mathbb{R}^3}} \left(g(y) + \nabla g(y)(y-x) + t h(y)\right)\, dS(y)\]
+      Assume \(\supp g,h \subseteq B(0,R)\). Then 
+      \begin{align*}
+        |u(x,t)| &\le \frac{1}{|\partial B(x,t)|} \int_{\partial B_{\mathbb{R}^3}(x,t)} \left(\|g\|_{L^\infty} + \|\nabla g\|_{L^\infty} t + t \|h\|_{L^\infty}\right) \mathbb{1}(|y| \le R) \, dS(y) \\
+        &= \frac{C(1+t)}{t^2} \le \frac{C}{t} \quad \text{as } t \ge 1
+      \end{align*}
+      and
+      \begin{align*}
+        |u(x,t)| &\le C \fint_{\partial B(x,t)} \le C
+      \end{align*}
+      if \(t \le 1\).
+      \item Why is \(u\) given by \((\star)\)? This follows from the uniqueness of the solution of the wave equation. In fact, if \(g, h\) are compactly supported, then for all \(t \in [0,T]\), \(u(x,t)\) supported in \(B(0, R_T)\) a finite ball.
+    \end{enumerate}
   \end{proof}
 
   \subsection{Solution in two dimensions}
@@ -5841,28 +5867,30 @@
     u(x,t) = \bar u(\bar x,t) = \partial_t \left(t \fint_{\partial \bar B(\bar x, t)} \bar g(y) d \bar S(y)\right) + t \int_{\partial \bar B(\bar x, t)} \bar h \, d\bar S(y)
   \end{align*}
 
-  Let \(\gamma(y) = (t^2 - |y-x|^2)^{\frac{1}{2}}, y \in B(x,t)\), then
-  \begin{align*}
-    \fint_{\partial \bar B(\bar x, t)} \bar g \, d\bar S &= \frac{1}{4 \pi t^2} \int_{\partial \bar B(\bar x, t)} \bar g \, d\bar S(y) \\
-    &= \frac{1}{4 \pi t^2} \int_{B(x,t)} g(y) 2 (1 + |\nabla \gamma|^2)^{\frac{1}{2}} \, dy \\
-    &= \frac{1}{4 \pi t^2} \int_{B(x,r)} g(y) \frac{2t}{\sqrt{t^2 - |y-x|^2}} \, dy \\
-    &= \frac{t}{2} \fint_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
-  \end{align*}
-  Similarly:
-  \begin{align*}
-    \fint_{\partial B(\bar x, t)} \bar h \, d\bar S(y) &= \frac{t}{2} \fint_{B(x,t)} \frac{h(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
-  \end{align*}
-  This implies:
-  \begin{align*}
-    u(x,t) &= \partial_t \left(\frac{t^2}{2} \fint_{B(x,t)} \frac{g(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy\right) + \frac{t^2}{2} \fint_{B(x,r)} \frac{h(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy \\
-    &= (I) + (II) \\
-    (I) &= \partial_t \left(\frac{1}{2} t \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz\right) \\
-    &= \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz + t \fint_{B(0,1)} \frac{\nabla g(x+tz) z}{(1-|z|^2)^{\frac{1}{2}}} \, dz \\
-    &= t \int_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}}\, dy + t \fint_{B(x,r)} \frac{\nabla g(y) (y-x)}{\sqrt{t^2 - |y-x|^2}} \, dy
-  \end{align*}
+  \begin{rem}\label{wave-2d-formula}
+    Let \(\gamma(y) = (t^2 - |y-x|^2)^{\frac{1}{2}}, y \in B(x,t)\), then
+    \begin{align*}
+      \fint_{\partial \bar B(\bar x, t)} \bar g \, d\bar S &= \frac{1}{4 \pi t^2} \int_{\partial \bar B(\bar x, t)} \bar g \, d\bar S(y) \\
+      &= \frac{1}{4 \pi t^2} \int_{B(x,t)} g(y) 2 (1 + |\nabla \gamma|^2)^{\frac{1}{2}} \, dy \\
+      &= \frac{1}{4 \pi t^2} \int_{B(x,r)} g(y) \frac{2t}{\sqrt{t^2 - |y-x|^2}} \, dy \\
+      &= \frac{t}{2} \fint_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
+    \end{align*}
+    Similarly:
+    \begin{align*}
+      \fint_{\partial B(\bar x, t)} \bar h \, d\bar S(y) &= \frac{t}{2} \fint_{B(x,t)} \frac{h(y)}{\sqrt{t^2 - |y-x|^2}} \, dy
+    \end{align*}
+    This implies:
+    \begin{align*}
+      u(x,t) &= \partial_t \left(\frac{t^2}{2} \fint_{B(x,t)} \frac{g(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy\right) + \frac{t^2}{2} \fint_{B(x,r)} \frac{h(y)}{(t^2-|y-x|^2)^{\frac{1}{2}}} \, dy \\
+      &= (I) + (II) \\
+      (I) &= \partial_t \left(\frac{1}{2} t \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz\right) \\
+      &= \fint_{B(0,1)} \frac{g(x+tz)}{(1-|z|^2)^{\frac{1}{2}}} \, dz + t \fint_{B(0,1)} \frac{\nabla g(x+tz) z}{(1-|z|^2)^{\frac{1}{2}}} \, dz \\
+      &= t \int_{B(x,t)} \frac{g(y)}{\sqrt{t^2 - |y-x|^2}}\, dy + t \fint_{B(x,r)} \frac{\nabla g(y) (y-x)}{\sqrt{t^2 - |y-x|^2}} \, dy
+    \end{align*}
+  \end{rem}
 
   \begin{ex}[E 13.2, Poisson formula for 2D]
-    For \(x \in \mathbb{R}^2\), \(t>0\) let
+    For \(x \in \mathbb{R}^2\), \(t>0\), \(g \in C^2(\mathbb{R}^2)\), \(h \in C^2(\mathbb{R}^2)\) let
     \[u(x,t) = \frac{t}{2} \fint_{B(x,t)} \frac{g(y) + \nabla g(y)(y-x) + th(y)}{(t^2 - |y-x|^2)^{\frac{1}{2}}} \, dy.\]
     Prove that \(u \in C^2(\mathbb{R}^2 \times (0,\infty))\) and 
     \[\begin{cases}
@@ -5870,6 +5898,99 @@
       \lim_{t \to 0^+} u(x,t) = g(x), \lim_{t \to 0^+} \partial_t u(x,t) = h(x), &\forall x \in \mathbb{R}^2
     \end{cases}\]
   \end{ex}
+
+  \begin{proof}[Solution]
+    Let \(\bar x = (x, x_3) \in \mathbb{R}^3\), \(\bar u(\bar x, t) = u(x,t)\). We claim that 
+    \[(\star) \quad \bar u(\bar x, t) = \partial_t \left(t \fint_{\partial \bar B(\bar x, t)} \bar g \, d\bar S(y) \right) + t \fint_{\partial \bar B(x,t)}\bar h \, d \bar S\]
+    where \(\bar B(\bar x, t)\) is a ball in 3D, \(\bar g(\bar x) = g(x)\), \(\bar h(\bar x) = h(x)\). From \ref{wave-2d-formula} we have 
+    \[\fint_{\partial \bar B(\bar x, t)} \bar g \, d \bar S = \frac{t}{2} \fint_{B_{\mathbb{R}^2}(x,t)} \frac{g(y)}{\sqrt{t^2 - |x-y|^2}} \, dy\]
+    Now,
+    \begin{align}
+      \text{RHS of \((\star)\)}  &= \partial_t \left(\frac{t^2}{2} \fint_{B_{\mathbb{R}^2}} \frac{g(y)}{\sqrt{t^2 - |x-y|^2}} \, dy\right) + \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy \\
+      ?? \quad &= \partial_t \frac{t}{2} \frac{g(y) + \nabla g(y) (y-x)}{\sqrt{t^2-|x-y|^2}}+ \frac{t^2}{2}\fint_{B_{\mathbb{R}^2}(x,t)} h(y) \, dy
+    \end{align}
+    3D-Problem: We claim that if \(\bar g \in C^3(\mathbb{R}^3)\), \(\bar h \in C^2(\mathbb{R}^3)\) and 
+    \[\bar u(\bar x, t) = \partial_t \left(t \fint_{\partial B_{\mathbb{R}^2}(\bar x , t)}\bar g\right) + t \int_{\partial B_{\mathbb{R}^2}(\bar x, t)} \bar h,\]
+    then \(\bar u \in C^2(\mathbb{R}^3 \times (0,\infty))\) and 
+    \[\begin{cases}
+      \partial_t^2 \bar u - \Delta_{\bar x} u = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\
+      \bar u = \bar g, \partial_t \bar u = \bar h &\text{in } \mathbb{R}^3 \times \{t = 0\}
+    \end{cases}\]
+    Proof: 
+      \begin{enumerate}[label=Step \arabic*:]
+        \item Assume \(\bar g = 0\), \(\bar u (\bar x, t) = t \int_{\partial B(\bar x, t)} \bar h.\) Lemma (from lecture): 
+        \begin{align}
+          \partial_r \int_{\partial B(\bar x, r)} \bar h = \frac{r}{d} \fint_{B(\bar x, r)} \Delta \bar h, \quad d = 3
+        \end{align}
+        (\(\bar U = \fint_{B(\bar x, r)} u(x,t)\))
+        Hence:
+        \begin{align*}
+          \partial_t \bar u(x,t) &= \partial_t \left(t \fint_{\partial B(\bar x, t)} \bar h\right) = \fint_{\partial B(\bar x, t)} \bar h + t \frac{t}{3}\fint_{B(x,t)} \Delta \bar h \\
+          \partial_t^2 \bar u(x,t) &= \frac{t}{3}\fint_{B(\bar, t)} \Delta \bar h + \frac{2}{3} t \fint_{B(x,t)} \Delta \bar h + \frac{t^2}{3} \fint_{B(\bar x, t)} \Delta \bar h
+        \end{align*}
+        Where we have 
+        \begin{align*}
+          \frac{t^2}{3} \fint_{B(\bar x, t)} \Delta \bar h &= \frac{1}{|B_1| 3 t} \int_{B(\bar x, t)} \Delta \bar h \\
+          \partial_t (\dots) &= - \frac{1}{|B_1| 3 t^2} \int_{B(\bar x, t)} \Delta \bar h + \frac{1}{|B_1| 3t} \int_{\partial B(\bar x, t)} \Delta \bar h \\
+          &= - \frac{t}{3} \fint_{B(\bar x, t)} \Delta \bar h + t \fint_{\partial B(\bar x, t)} \Delta \bar h
+        \end{align*}
+        So we get 
+        \begin{align*}
+          \partial_t^2 \bar u(x,t) &= \frac{t}{3}\fint_{B(\bar, t)} \Delta \bar h + \frac{2}{3} t \fint_{B(x,t)} \Delta \bar h - \frac{t}{3} \fint_{B(\bar x, t)} \Delta \bar h + t \fint_{\partial B(\bar x, t)} \Delta \bar h \\
+          &= t \fint_{\partial B(\bar x, t)} \Delta \bar h
+        \end{align*}
+        This implies 
+        \begin{align*}
+          \Delta_{\bar x} \bar u(x,t) &= \Delta_{\bar x} \left(t \fint_{\partial B(\bar x, t)} \bar h\right) = \Delta_x \left(t \fint_{\partial B(0,t)} \bar h(\bar x + y) \, dS(y)\right) \\
+          &= t \fint_{\partial B(0,t)} \Delta \bar h(\bar x + y) \, dS(y)  = t \fint_{\partial B(\bar x, t)}\Delta \bar h = \partial_t^2 \bar u
+        \end{align*}
+        Thus, \(\partial_t \bar u - \Delta_{\bar x} \bar u = 0\) in \(\mathbb{R}^3 \times (0,\infty)\). Moreover,
+        \begin{align*}
+          \bar u(x,t) = t \fint_{\partial B(\bar x, t)} \bar h \xrightarrow{t \to 0} 0
+        \end{align*}
+        and 
+        \begin{align*}
+          \partial_t \bar u(x,t) &= \fint_{\partial B(\bar x,t)}\bar h + \frac{t^2}{3} \fint_{B(x,t)} \Delta \bar h \xrightarrow{t \to 0} \bar h(\bar x) \quad \checkmark
+        \end{align*}
+        \item General Case: \(\bar g \ne 0\). Assume \(h = 0\), then 
+        \begin{align*}
+          \bar u(\bar x, t) &= \partial_t \left(t \fint_{\partial B_{\mathbb{R}^3}} \bar g\right)
+        \end{align*}
+        By Step 1, \(v(\bar x, t) \coloneqq t \fint_{\partial B_{\mathbb{R}^3}(0,\infty)} \bar g\) satisfies 
+        \[\begin{cases}
+          \partial_t^2 - \Delta_{\bar x} v = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\
+          v = 0 \text{ and } \partial_t v = \bar g &\text{in } \mathbb{R}^3 \times \{t = 0\}
+        \end{cases}\]
+        Then \(\bar u = \partial_t \bar v\). This implies 
+        \begin{align*}
+          \partial_t^2 \bar u - \Delta_{\bar x} \bar u &= \partial_t^3 \bar v - \Delta_{\bar x} \partial_t \bar v = \partial_t (\underbrace{\partial_t^2 \bar v - \Delta_{\bar x} \bar v}_{= 0}) = 0 \quad \text{in } \mathbb{R}^3 \times (0,\infty)
+        \end{align*}
+        and 
+        \begin{align*}
+          \bar u(t=0) &= \partial_t \bar v(t=0) = \bar g, \\\partial_t \bar u(t=0) &= \partial_t^2 \bar v(t=0) = \left. t \fint_{\partial B(\bar x, t)} \Delta \bar g \right|_{t = 0} = 0
+        \end{align*}
+      \item Consider the case \(g \ne 0\), \(h \ne 0\):
+      \begin{align*}
+        \bar u = \underbrace{\partial_t \left(t \fint_{\partial B(\bar x, t)} \bar g\right)}_{\bar u_1} + \underbrace{t \fint_{\partial B(\bar x, t)}h}_{\bar u_2}
+      \end{align*}
+      Now we have 
+      \[
+      \begin{cases}
+        \partial_t^2 \bar u_1 - \Delta_{\bar x} \bar u_1 = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\ 
+        \bar u_1 = \bar g, \partial_t \bar u_1 = 0 &\text{in } \mathbb{R}^3 \times \{t=0\}
+      \end{cases}\]
+      and 
+      \[\begin{cases}
+        \partial_t^2 \bar u_2 - \Delta_{\bar x} \bar u_2 = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\ 
+        \bar u_2 = 0, \partial_t \bar u_2 = h &\text{in }\mathbb{R}^3 \times (0,\infty)
+      \end{cases}.\]
+      This implies 
+      \[\begin{cases}
+        \partial_t^2 \bar u - \Delta_{\bar x} \bar u = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\ 
+        \bar u = \bar g, \partial_t \bar u = \bar h &\text{in }\mathbb{R}^3 \times (0,\infty)
+      \end{cases}.\]
+    \end{enumerate}
+  \end{proof}
 
   \section{Spectral Method}
   Let \(\Omega \subseteq \mathbb{R}^d\) be open and bounded.
@@ -6070,4 +6191,22 @@
     Prove that for all \(2 \le p \le \infty\) we have 
     \[\lim_{t \to \infty} \|u(\bullet, t)\|_{L^p(\mathbb{R}^d)} = 0.\]
   \end{ex}
+
+  \begin{proof}[Solution]
+    We already know:
+    \begin{align*}
+      \|e^{it \Delta} g\|_{L^\infty} &\le \frac{\|g\|_{L^1}}{(4 \pi t)^{\frac{d}{2}}} \xrightarrow{t \to 0} 0 \\
+      \|e^{it \Delta} g\|_{L^2} &= \|g\|_{L^2}
+    \end{align*}
+    Now, interpolation for all \(2 < p < \infty\) gives 
+    \[\|e^{it \Delta} g\|_{L^p} \le \|e^{it \Delta} g\|_{L^2}^\theta \|e^{it \Delta} g\|_{L^\infty}^{1-\theta} \xrightarrow{t \to \infty} 0,\]
+    \(\theta \in (0,1) \)
+  \end{proof}
+
+  \begin{ex}[Bonus]
+    Assume \(g \in L^p(\mathbb{R}^d)\), for some \(1 < p < 2\). Prove that for all \(t > 0\), \(e^{it \Delta} g\) is well-defined and belongs to \(L^{p'}(\mathbb{R}^d)\) where \(\frac{1}{p} + \frac{1}{p'} = 1\). Moreover:
+    \[\|e^{it\Delta} g\|_{L^{p'}} \xrightarrow{t \to \infty} 0\]
+    Hint: You can use Riesz–Thorin interpolation theorem.
+  \end{ex}
+  % Need something to proof that e^{it \Delta} g belongs to L^{p'}(\mathbb{R}^d).
 \end{document}
