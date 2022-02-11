@@ -2968,7 +2968,7 @@
   \end{rem}
   
   \begin{proof}
-    It suffices to show that we still can apply intergration by parts.
+    It suffices to show that we still can apply integration by parts.
     \begin{align*}
       (\star) \quad - \int f \partial_i g
       &\overset{?}{=} \int(\partial_i f) g
@@ -2976,13 +2976,13 @@
     Approximation: \((\star)\) is correct if \(g \in C_c^\infty\) \begin{itemize}
       \item If \(g \in C_c^1\), there is \(\{g_n\} \subseteq C_c^\infty\) s.t. \(g_n \to g\) in \(W_{loc}^{1,p}\), \(\frac{1}{p} + \frac{1}{q} = 1\).
       \begin{align*}
-        \int (\partial_i g) f \xleftarrow{n \to \infty} - \int \underbrace{f}_{L^p} \underbrace{\partial g_n}_{\to \partial_i g \text{ in } L^q} = \int \underbrace{(\partial_i f)}_{\in L^p} \underbrace{g_n}_{\to g \text{ in } L^q} \xrightarrow{n \to \infty} \int (\partial_i f) g
+        \int (\partial_i g) f \xleftarrow{n \to \infty} - \int \underbrace{f}_{L^p} \underbrace{\partial_i g_n}_{\to \partial_i g \text{ in } L^q} &= \int \underbrace{(\partial_i f)}_{\in L^p} \underbrace{g_n}_{\to g \text{ in } L^q} \xrightarrow{n \to \infty} \int (\partial_i f) g \qedhere
       \end{align*}
     \end{itemize}
   \end{proof}
 
   \begin{ex}[E 6.2]
-    \(\mathbb{R}^2\), \(G(x) = - \frac{1}{2 \pi} \log |x|\). Let \(f \in L^p(\mathbb{R}^d)\), compactly supported. Define \(u(x) =(G \star f)(x) = \int_{\mathbb{R}^2} G(x-y) f(y) \, dy\)
+    \(G(x) = - \frac{1}{2 \pi} \log |x|\). Let \(f \in L^p(\mathbb{R}^2)\), compactly supported. Define \(u(x) =(G \star f)(x) = \int_{\mathbb{R}^2} G(x-y) f(y) \, dy\)
     \begin{enumerate}
       \item If \(p = 1\), then \(u \in L_{loc}^q(\mathbb{R}^2)\) for all \(q < \infty\).
       \item If \(p > 2\), then \(u \in C^{1, \alpha}\) with \(0 < \alpha < 1 - \frac{2}{p}\).
