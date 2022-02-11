@@ -2091,7 +2091,7 @@
     \end{align*}
   \end{rem}
   
-  \begin{thm}[Chain Rule]
+  \begin{thm}[Chain Rule]\label{distribution-chain-rule}
     Let \(G \in C^1(\mathbb{R}^d)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{1,p}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{1,p}(\Omega)\) and
     \begin{align*}
       \partial_{x_i} G(f)
@@ -2372,7 +2372,6 @@
       = T(\phi) \left(\int_{\mathbb{R}^d} g \, dy \right)
     \end{align*}
   
-  
     \begin{ex}
       Let \(f \in C^\infty(\mathbb{R}^d)\) be a harmonic function and \(g \in C_c^\infty\), \(g\) is radial. Then:
       \begin{align*}
@@ -2400,9 +2399,8 @@
   \end{rem}
 
   \begin{rem}
-    The regularity is a \emph{local question}, namely if we write \[f = f_1 + f_2 = f \phi + f(1-\phi),\] where \(\phi = 1\) in a ball \(B\) and \(\phi \in C_c^\infty\).
+    The regularity is a \emph{local question}, namely if we write \[f = f_1 + f_2 = f \phi + f(1-\phi),\] where \(\phi = 1\) in a ball \(B\) and \(\phi \in C_c^\infty\). Then \(G \star f = G \star f_1 + G \star f_2\). Here \(f_2 = f(1 - \phi) = 0\) in \(B\). With Weyls Lemma (\ref{weyl}), \(G \star f_2 \in C^\infty\).
   \end{rem}
-  Then \(G \star f = G \star f_1 + G \star f_2\). Here \(f_2 = f(1 - \phi) = 0\) in \(B\). With Weyls Lemma (\ref{weyl}), \(G \star f_2 \in C^\infty\).
 
   \begin{thm}[Low Regularity of Poisson Equation]\label{Low Regularity for Poisson Equation}
     Lef \(f \in L^p(\mathbb{R}^d)\) and compactly supported. Then
@@ -2774,7 +2772,7 @@
   \end{ex}
 
   \begin{proof}[Solution]
-    \(W^{1,p}(\Omega) \subseteq L^p(\Omega) \times L^p(\Omega) \cdots \times L^p(\Omega) = (L^p(\Omega))^{d+1}\). For an element \(f \in W^{1,p}(\Omega)\) we can think of it as \(f \mapsto (f, \partial_1 f, \partial_2 f, \dots, \partial_d f)\), so \(W^{1,p}(\Omega)\)  is a subspace of \((L^p(\Omega))^{d+1}\), which is a norm-space. Why is \(W^{1,p}(\Omega)\) closed in \((L^p(\Omega))^{d+1}\)? Take \(\{f_n\}_{n=1}^\infty \subseteq W^{1,p}(\Omega)\) such that \(f_n \to f\) in \(L^p\) an \(\partial_i f_n \to g_i\) in \(L^p\) for all \(i = 1, \dots, d\). We prove that \((f, g_1, \dots, g_d) \in W^{1,p}(\Omega)\), i.e. \(f \in W^{1,p}\) and \(g_i = \partial_i f\) for all \(i = 1, \dots, d\). We know that \(f_n \to f\) in \(L^p(\Omega)\), so \(f_n \to f\) in \(D'(\Omega)\) and \(\partial_i f_n \to \partial_i f\) in \(D'(\Omega)\). On the other hand we have \(partial_i f_n \to g_i\) in \(L^p(\Omega)\), so \(\partial_i f_n \to g_i\) in \(D'(\Omega)\). So we get \(\partial_i f = g_i \in L^p(\Omega)\) for all \(i=1, \dots, d\) in \(D'(\Omega)\). So we can conclude \(f \in W^{1,p}(\Omega)\) and \(\partial_i f = g_i\) for all \(i = 1, \dots, d\).
+    \(W^{1,p}(\Omega) \subseteq L^p(\Omega) \times L^p(\Omega) \cdots \times L^p(\Omega) = (L^p(\Omega))^{d+1}\). For an element \(f \in W^{1,p}(\Omega)\) we can think of it as \(f \mapsto (f, \partial_1 f, \partial_2 f, \dots, \partial_d f)\), so \(W^{1,p}(\Omega)\)  is a subspace of \((L^p(\Omega))^{d+1}\), which is a norm-space. Why is \(W^{1,p}(\Omega)\) closed in \((L^p(\Omega))^{d+1}\)? Take \(\{f_n\}_{n=1}^\infty \subseteq W^{1,p}(\Omega)\) such that \(f_n \to f\) in \(L^p\) and \(\partial_i f_n \to g_i\) in \(L^p\) for all \(i = 1, \dots, d\). We prove that \((f, g_1, \dots, g_d) \in W^{1,p}(\Omega)\), i.e. \(f \in W^{1,p}\) and \(g_i = \partial_i f\) for all \(i = 1, \dots, d\). We know that \(f_n \to f\) in \(L^p(\Omega)\), so \(f_n \to f\) in \(D'(\Omega)\) and \(\partial_i f_n \to \partial_i f\) in \(D'(\Omega)\). On the other hand we have \(\partial_i f_n \to g_i\) in \(L^p(\Omega)\), so \(\partial_i f_n \to g_i\) in \(D'(\Omega)\). So we get \(\partial_i f = g_i \in L^p(\Omega)\) for all \(i=1, \dots, d\) in \(D'(\Omega)\). So we can conclude \(f \in W^{1,p}(\Omega)\) and \(\partial_i f = g_i\) for all \(i = 1, \dots, d\).
   \end{proof}
 
   \begin{ex}[E 5.3]
@@ -2791,7 +2789,7 @@
     \begin{align*}
       G_\epsilon'(t) &= \frac{2t}{2 \sqrt{\epsilon^2 + t^2}} = \frac{t}{\sqrt{\epsilon^2 + t^2}},
     \end{align*}
-    so \(|G_\epsilon'(t)| \le 1\), \(G_\epsilon(0) = 0\). By the chain rule, \(G_\epsilon(f) \in W^{1,p}(\mathbb{R}^d)\) and 
+    so \(|G_\epsilon'(t)| \le 1\), \(G_\epsilon(0) = 0\). By the chain rule (\ref{distribution-chain-rule}) we have \(G_\epsilon(f) \in W^{1,p}(\mathbb{R}^d)\) and 
     \begin{align*}
       (\partial_i G_\epsilon(f))(x) &= G_\epsilon'(f) \partial_if(x) = \frac{f(x)}{\sqrt{\epsilon^2 + f^2(x)}} \partial_i f(x) \in L^p(\mathbb{R}^d)
     \end{align*}
@@ -2922,7 +2920,7 @@
         \item \(u \in L_{loc}^q(\Omega)\) for all \(q < \frac{d}{d-2}\) if \(d \ge 3\)
       \end{itemize}
       \item If \(f \in L_{loc}^q(\Omega)\), \( d \ge p < \frac{d}{2}\), then \(u \in C_{loc}^{0, \alpha}(\Omega)\), where \(0 < \alpha < 2 - \frac{d}{p}\)
-      \item If \(f \in L_{loc}^p(\Omega)\), \(p > d\)f, then \(u \in C_{loc}^{1, \alpha}(\Omega)\), where \(0 \le \alpha < 1 - \frac{d}{p}\)
+      \item If \(f \in L_{loc}^p(\Omega)\), \(p > d\), then \(u \in C_{loc}^{1, \alpha}(\Omega)\), where \(0 \le \alpha < 1 - \frac{d}{p}\)
       \item If \(f \in C_{loc}^{0, \alpha}(\Omega)\) for some \(0 < \alpha < 1\), then \(u \in C_{loc}^{2, \alpha}(\Omega)\)
       \item If \(f \in C_{loc}^{m, \alpha}(\Omega)\), then \(u \in C_{loc}^{m+2, \alpha}(\Omega)\)
     \end{enumerate}
@@ -2942,26 +2940,25 @@
     Then \(- \Delta u = - \Delta (G \star f_B)\) in \(D'(B)\). Then \(u - G \star f_B\) is harmonic in \(B\) and by Weyls lemma we have \(u - G \star f_B \in C^\infty(B)\). So the smoothness of \(u\) in \(B\) is the same to that of \(G \star f\).
   \end{proof}
 
-
   \begin{ex}[E 6.1]
-    Show that If \(\chi \in C^\infty(\mathbb{R}^d)\), then \(f \in W^{1,p}(\mathbb{R}^d)\), \(1 \le p < \infty\), then \(\chi f \in W_{loc}^{1, p}(\mathbb{R}^d)\) and 
+    Show that if \(\chi \in C^\infty(\mathbb{R}^d)\), \(f \in W^{1,p}(\mathbb{R}^d)\), \(1 \le p < \infty\), then \(\chi f \in W_{loc}^{1, p}(\mathbb{R}^d)\) and 
     \[\partial_i (\chi f) = (\partial_i \chi) f + \chi(\partial_i f) \quad \text{in } D'(\mathbb{R}^d)\]
   \end{ex}
 
   \begin{proof}[Solution]
     \(\chi f \in L_{loc}^p(\mathbb{R}^d)\) obvious. \(\partial (\chi f) \in L_{loc}^p(\mathbb{R}^d)\) is nontrivial but follows from \(\partial_i (\chi f) = \underbrace{(\partial_i \chi) f + \chi (\partial f)}_{\in L_{loc}^p}\) in \(D'(\mathbb{R}^d)\). To compute the distributional derivative \(\partial_i (\chi f)\), then: Take \(\phi \in C_c^\infty(\mathbb{R}^d)\): 
     \begin{align*}
-      - \int_{\mathbb{R}^d} \chi f (\partial \phi)
-      &= \int_{\mathbb{R}^d}(?) \phi 
+      - \int_{\mathbb{R}^d} \chi f (\partial \phi) \, dx
+      &= \int_{\mathbb{R}^d}(?) \phi \, dx
     \end{align*}
     We have 
     \begin{align*}
-      - \int_{\mathbb{R}^d}\chi f(\partial_i \phi) 
-      &= - \int_{\mathbb{R}^d} f(\chi \partial_i \phi) \\
-      (\chi \partial_i \phi = (\partial_i \chi)\phi + \chi(\partial_i \phi)) \quad &= - \int_{\mathbb{R}^d} f \left(\partial_i(\chi \phi)-(\partial_i \chi) \phi\right) \\
-      &= - \int_{\mathbb{R}^d} f \partial_i(\underbrace{\chi \phi}_{\in C_c^\infty}) + \int_{\mathbb{R}^d} f (\partial_i \chi) \phi \\
-      &= \int_{\mathbb{R}^d} (\partial_i f) \chi \phi + \int f(\partial_i \chi) \phi \\
-      &= \int_{\mathbb{R}^d} ((\partial_i f) \chi + f (\partial_i \chi)) \phi
+      - \int_{\mathbb{R}^d}\chi f(\partial_i \phi)\, dx 
+      &= - \int_{\mathbb{R}^d} f(\chi \partial_i \phi)\, dx \\
+      (\partial_i(\chi \phi) = \chi \partial_i \phi + (\partial_i \chi) \phi) \quad &= - \int_{\mathbb{R}^d} f \left(\partial_i(\chi \phi)\, -(\partial_i \chi) \phi\right) \, dx\\
+      &= - \int_{\mathbb{R}^d} f \partial_i(\underbrace{\chi \phi}_{\in C_c^\infty})\, dx + \int_{\mathbb{R}^d} f (\partial_i \chi) \phi \, dx\\
+      &= \int_{\mathbb{R}^d} (\partial_i f) \chi \phi\, dx + \int_{\mathbb{R}^d} f(\partial_i \chi) \phi\, dx \\
+      &= \int_{\mathbb{R}^d} ((\partial_i f) \chi + f (\partial_i \chi)) \phi\, dx
     \end{align*}
     So \(\partial_i (\chi f) = (\partial_i f) \chi + f (\partial_i \chi)\) in \(D'(\mathbb{R}^d)\).
   \end{proof}
