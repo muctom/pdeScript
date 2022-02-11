@@ -1295,7 +1295,7 @@
     
 
   \begin{proof}[Proof of the Hausdorff-Young-Inequality \ref{hausdorff-young}]
-    We need Riez-Theorem representation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
+    We need Riez-Thorin interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
     \[T: L^{p_0}(\Omega) + L^{p_1}(\Omega) \longrightarrow L^{q_0}(\Omega) + L^{q_1}(\Omega)\]
     is a linear operator and
     \begin{align*}
@@ -1764,7 +1764,6 @@
       \[\{x \mid f^\star(x) > \epsilon\} \le \frac{c_d}{\epsilon} \|f\|_{L^1(\mathbb{R}^d)}\] (Hardy-Littlewood maximal function)
     \end{enumerate}
   \end{rem}
-
   
   \begin{ex}[E 3.3]
     \(f \in C_c^\infty(\mathbb{R}^d)\). Prove \(|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\)
@@ -6188,13 +6187,14 @@
         \|e^{it \Delta} g - g\|_{L^2}^2 &= \|\widehat{e^{it\Delta}g} - \hat g\|_{L^2}^2 = \int_{\mathbb{R}^d} \underbrace{(e^{-it |2 \pi k|^2}-1)}_{\substack{\xrightarrow{t \to 0} 0 \\\text{bd. by } 2 \forall t}}|\underbrace{\hat g(k)}_{\in L^2}|^2 \, dk \xrightarrow{t \to 0}0
       \end{align*}
       by dominated convergence.
-      \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). We take \(g_1 \in L^1\) s.t. \begin{align*}
-        \|e^{it \Delta} g_1 \|_{L^\infty)} &\le \frac{\|g_1\|_{L1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0 \\
+      \item Decompose \(g = g_1 + g_2\), then \(e^{it \Delta} g = e^{it\Delta} g_1 + e^{it \Delta} g_2\). Take \(g_1 \in L^1\), then by 1. we have
+      \begin{align*}
+        \|e^{it \Delta} g_1 \|_{L^\infty} &\le \frac{\|g_1\|_{L1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0 \\
         \Rightarrow \int_{|x|\le R} |(e^{it \Delta}g_1) (x)|^2 &\le \frac{C R^d \|g_1\|_{L^1}}{|4 \pi t|^{\frac{d}{2}}} \xrightarrow{t \to \infty} 0
       \end{align*}
       On the other hand, with a good choice of \(g_2\):
       \begin{align*}
-        \|e^{it\Delta} g_2 \|_{L^2(\mathbb{R}^d)} &= \|g_2\|_{L^2(\mathbb{R}^d)} &\to 0 \\
+        \|e^{it\Delta} g_2 \|_{L^2(\mathbb{R}^d)} &= \|g_2\|_{L^2(\mathbb{R}^d)} \to 0 \\
         \Rightarrow \quad \int_{|x| \le R}|(e^{it \Delta} g_2)(x)|^2 \, dx &\le \|e^{it \Delta} g_2\|_{L^2(\mathbb{R}^d)}^2 \to 0
       \end{align*}
       Conclusion:
@@ -6232,11 +6232,11 @@
   \end{lem}
 
   \begin{proof}
-    \[g = \underbrace{g \mathbb{1}(|g| \le L)}_{g_1} + \underbrace{g \mathbb{1}(|g|>L)}_{g_2}\]
+    \[g = \underbrace{g \mathbb{1}(|g| > L)}_{g_1} + \underbrace{g \mathbb{1}(|g|\le L)}_{g_2}\]
     
     Now \(g \in L^2\), then \(g_2 \in L^2\) and 
     \begin{align*}
-      \int_{\mathbb{R}^d} |g_2|^2 &= \int_{\mathbb{R}^d} |g|^2 \mathbb{1}(|g| < L) \xrightarrow{L \to 0} 0
+      \int_{\mathbb{R}^d} |g_2|^2 &= \int_{\mathbb{R}^d} |g|^2 \mathbb{1}(|g| \le L) \xrightarrow{L \to 0} 0
     \end{align*}
     and \(g_1 \in L^1\) since 
     \begin{align*}
