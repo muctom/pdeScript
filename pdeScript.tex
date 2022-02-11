@@ -907,6 +907,130 @@
   \end{proof}
 
 
+  \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
+    Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
+    \[\fint_{B(x,r)} |f(x) - f(y)| \, dy \xrightarrow{r \to 0} 0\]
+  \end{ex}
+
+  \begin{proof}
+    Clearly the same result holds with \(\mathbb{R}^d \leadsto \Omega \subseteq \mathbb{R}^d\) open. Also it suffices to consider \(f \in L^1(\mathbb{R}^d)\). From the last time discussion, by a density argument there exists \(r_n \to 0\) s.t.
+    \[\fint_{B(x, r_n)} |f(y) - f(x)| \, dy = 0\]
+    for a.e. \(x \in \mathbb{R}^d\). We prove that for all \(\epsilon > 0\), te set \(A_\epsilon = \{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy > \epsilon\}\) has measure \(0\). This will imply that 
+    \[\bigcup_{n = 1}^\infty A_{\frac{1}{n}} = \left\{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \int_{B(x,r)} |f(y) - f(x)| \, dy > 0\right\}\] has measure \(0\), which is what wie want to show. First, we show that \(|A_\epsilon| = 0\): Take \(\{f_n\} \subseteq C_c^\infty\), \(f_n \to f\) in \(L^1(\mathbb{R}^d)\). By the triangle inequality:
+    \begin{align*}
+      |f(y) - f(x)| \le |f(y) - f_n(y)| + |f_n(y) - f_n(x)| + |f_n(x) - f(x)|
+    \end{align*}
+    So we get 
+    \begin{align*}
+      &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
+      \quad &\le \fint_{B(x,r)}|f(y) - f_n(y)| \, dy + \fint_{B(x, r)} |f_n(y) - f_n(x)| + |f_n(x) - f(x)| \\
+      \Rightarrow \quad \limsup_{r \to 0} ... &\le \limsup_{r \to 0} (\dots) +0 + |f_n(x) - f(x)|
+    \end{align*}
+    Thus, for all \(x \in A_\epsilon\), then:
+    \begin{align*}
+      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(y) - f(y)| \, dy + |f_n(x) - f(x)| > 2 \epsilon
+    \end{align*}
+    Observation: If \(a, b \ge 0\), \(a + b > 2 \epsilon\) then either \(a > \epsilon\) or \(b > \epsilon\). Therefore \(A_\epsilon \subseteq \left(S_{n, \epsilon} \bigcup \tilde S_{n, \epsilon}\right)\), where
+    \begin{align*}
+      S_{n, \epsilon} &= \{x \mid |f_n(x) - f(x)| > \epsilon\} \\
+      \tilde S_{n, \epsilon} &= \{x \mid \limsup_{r \to 0} \fint_{B(x,r)} |f_n(y) - f(y)| \, dy > \epsilon\}
+    \end{align*}
+    Consequently: \(|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}|\) for all \(n \ge 1\). By the Markov / Chebyshev inequality:
+    \begin{align*}
+      |S_{n, \epsilon}| 
+      &\le \int_{S_{n, \epsilon}} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
+      = \int_{\mathbb{R}^d} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
+      = \frac{\|f_n - f\|_{L^1}}{\epsilon}
+    \end{align*}
+    We want to prove a simpler bound for \(\tilde S_{n \epsilon}\). For all \(x \in \tilde S_{n \epsilon}\): 
+    \begin{align*}
+      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(x) - f(y)| \, dy > \epsilon
+    \end{align*}
+    So there is a \(r_x \in (0,1)\) s.t.
+    \[\fint_{B(x,r_x) = B_x} |f_n(y) - f(y)| \, dy > \epsilon\]
+    Thus \(\tilde S_{n \epsilon} \subseteq \left(\bigcup_{x \in \tilde S_{n, \epsilon}} B_x\right)\). 
+    
+    \begin{lem}[Vitali Covering]
+      If \(F\) is a collection of balls in \(\mathbb{R}^d\) with bounded radius, then there exists a sub-collection \(G \subseteq F\) s.t.
+      \begin{itemize}
+        \item \(G\) has disjoint balls
+        \item \(\bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5B, 5B(x,r) = B(x, 5r)\)
+      \end{itemize}
+    \end{lem}
+
+    \begin{rem}
+      The condition of the boundedness of the radius is necessary. Otherwise, consider \(\{B(0,n)\}_{n=1}^\infty\)
+    \end{rem}
+
+    Here consider \(F = \{B_x\}_{x \in \tilde S_{n \epsilon}}\). With the vitali covering leamm there is a \(G \subseteq F\) s.t. \(G \) contains disjoint balls and:
+    \[\tilde S_{n, \epsilon} \subseteq \bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5 B\]
+    So we get
+    \[|\tilde S_{n, \epsilon}| \le |\bigcup_{B \in G} 5B| \le \sum_{B \in G} |5B| = \sum_{B \in G} 5^d|B|\]
+    On the other hand, for all \(B \in G \subseteq F\): 
+    \begin{align*}
+      \fint_B |f_n(y) - f(y)| \, dy > \epsilon \Rightarrow \int_B |f_n - f| > \epsilon|B|
+    \end{align*}
+    This implies:
+    \begin{align*}
+      \sup_{B \in G} \int_B |f_n - f| > \epsilon \sum_{B \in G} |B|
+    \end{align*}
+    Since balls in \(G\) are disjoint:
+    \begin{align*}
+      \int_{\mathbb{R}^d} \ge \int_{\bigcup_{B \in G}} |f_n - f| \, dy 
+      > \epsilon \sum_{B \in G} |B|
+      \ge \frac{\epsilon}{5^d} |\tilde S_{n, \epsilon}|
+    \end{align*}
+    So 
+    \[|\tilde S_{n \epsilon}| \le \frac{5^d}{\epsilon} \|f_n - f\|_{L^1}\]
+    In summary: 
+    \[|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}| \le \frac{5^d + 1}{\epsilon} \|f_n - f\|_{L^1} \to 0\]
+    as \(n \to \infty\). So \(|A_\epsilon| = 0\) for all \(\epsilon > 0\)
+  \end{proof}
+  
+  \begin{rem}
+    \begin{enumerate}
+      \item The proof can be done by using the Besicovitch covering lemma: For all \(E \subseteq \mathbb{R}^d\) s.t. \(E\) is bounded. Let \(F = \) collection of balls s.t. for all \(x \in E\) there is a \(B_x \in F\) s.t. \(x\) is the center of \(B_x\). There is a sub-collection \(G \subseteq F\) s.t.
+      \begin{itemize}
+        \item \(E \subseteq \bigcup_{B \in G} B\)
+        \item Any point in \(E\) belongs to at most \(C_d\) balls in \(C_T\) (\(C_d\) depends only on \(\mathbb{R}^d\)), i.e. 
+        \begin{align*}
+          \mathbb{1}_E(x) \le \sum_{B \in G} \mathbb{1}_B(x) \le C_d \mathbb{1}_E(x) \forall x
+        \end{align*}
+      \end{itemize}
+      \item By a simpler argument we can prove the weak \(L^1\)-estimate:
+      \[\{x \mid f^\star(x) > \epsilon\} \le \frac{c_d}{\epsilon} \|f\|_{L^1(\mathbb{R}^d)}\] (Hardy-Littlewood maximal function)
+    \end{enumerate}
+  \end{rem}
+  
+  \begin{ex}[E 3.3]
+    \(f \in C_c^\infty(\mathbb{R}^d)\). Prove \(|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\)
+  \end{ex}
+
+  \begin{proof}[Solution]
+    Since \(f \in C_c^\infty\) we have that \(D^\alpha f \in C_c^\infty\).
+    Recall
+    \begin{align*}
+      \widehat{D^\alpha f}(k) &= (-2 \pi ik)^\alpha \hat f (k)
+    \end{align*}
+    For example
+    \begin{align*}
+      \widehat{- \Delta f}(k) &= |2 \pi i k|^2 \hat f (k) \\
+      (\text{Induction}) \leadsto \widehat{(-\Delta)^N f}(k) &= |2 \pi k|^{2N} \hat f (k)
+    \end{align*}
+    So we can conclude
+    \[ \hat f(k) = \frac{\widehat{(-\Delta)^N}f(k)}{|2 \pi k|^{2N}} \forall k \in \mathbb{R}^d\]
+    \begin{enumerate}
+      \item \(f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \hat f \in L^\infty\)
+      \item \((-\Delta)^N f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \widehat{(-\Delta)^N f} \in L^\infty\)
+    \end{enumerate}
+    Conclusion: \(\hat f(k) \le \begin{cases}
+      C &\forall k \\ \frac{C_N}{|k|^{2N}} &\forall k
+    \end{cases}\)
+    So \(\hat f(k) \le \frac{C_N}{(1+|k|)^N}\)
+  \end{proof}
+
+
+
   \chapter{Convolution, Fourier Transform and Distributions}
 
   \section{Convolutions}
@@ -1295,7 +1419,7 @@
     
 
   \begin{proof}[Proof of the Hausdorff-Young-Inequality \ref{hausdorff-young}]
-    We need Riez-Thorin interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
+    We need Riesz-Thorin interpolation theorem. If \(1 \le p_0, p_1, q_0, q_1 \le \infty\), and \(\Omega \subseteq \mathbb{R}^d\) open and 
     \[T: L^{p_0}(\Omega) + L^{p_1}(\Omega) \longrightarrow L^{q_0}(\Omega) + L^{q_1}(\Omega)\]
     is a linear operator and
     \begin{align*}
@@ -1398,7 +1522,7 @@
     \end{align*}
     Moreover if \(\alpha > \frac{d}{2}\), then we also have
     \begin{align*}
-      \left(\frac{c_\alpha}{|x|^\alpha} \star f\right)^\land = \frac{c_{d - \alpha}}{|k|^{d-\alpha}} \hat f (k)
+      \left(\frac{c_\alpha}{|x|^\alpha} \star f\right)^\land = \frac{c_{d - \alpha}}{|k|^{d-\alpha}} \hat f (k).
     \end{align*}
   \end{thm}
 
@@ -1450,8 +1574,8 @@
     \end{align*}
     Thus the Fourier Transform \(\widehat{\frac{c_\alpha}{|x|^\alpha}} \star f\) exists. Combining with 
     \begin{align*}
-      \frac{c_\alpha}{|x|^\alpha} \star f = \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f(k) \right)^\lor \\
-      \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} = \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k)
+      \frac{c_\alpha}{|x|^\alpha} \star f &= \left(\frac{c_{d-\alpha}}{|f|^{d-\alpha}} \hat f(k) \right)^\lor \\
+      \Rightarrow \widehat{\frac{c_\alpha}{|x|^\alpha} \star f} &= \frac{c_{d-\alpha}}{|k|^{d-\alpha}} \hat f (k) \qedhere
     \end{align*}
   \end{proof}
 
@@ -1477,7 +1601,7 @@
       &= \frac{1}{|2 \pi k|^2}  \\
       \Rightarrow G(x) 
       &= \left(\frac{1}{|2 \pi k|^2}\right)^\lor
-      = \frac{1}{d(d-2(k) |x|^{d-2})} 
+      = \frac{1}{d(d-2)(k) |x|^{d-2})}
       = \Phi(x)
     \end{align*}
   \end{rem}
@@ -1666,139 +1790,15 @@
       \end{align*}
       So we get \(\| f_{y_n} - f_y\|_{L^\infty} \to 0\)
       Similary:
-      \[\|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} \to 0\] \qedhere
+      \begin{align}
+        \|D^\alpha f_{y_n} - D^\alpha f_n \|_{L^\infty} &\to 0 \qedhere
+      \end{align}
     \end{enumerate}
-  \end{proof}
-
-  \begin{ex}[E 3.1 Lebesgue Differentiation Theorem]
-    Let \(f \in L_{loc}^1(\mathbb{R}^d)\). Prove that that for almost every \(x \in \mathbb{R}^d\):
-    \[\fint_{B(x,r)} |f(x) - f(y)| \, dy \xrightarrow{r \to 0} 0\]
-  \end{ex}
-
-  \begin{proof}
-    Clearly the same result holds with \(\mathbb{R}^d \leadsto \Omega \subseteq \mathbb{R}^d\) open. Also it suffices to consider \(f \in L^1(\mathbb{R}^d)\). From the last time discussion, by a density argument there exists \(r_n \to 0\) s.t.
-    \[\fint_{B(x, r_n)} |f(y) - f(x)| \, dy = 0\]
-    for a.e. \(x \in \mathbb{R}^d\). We prove that for all \(\epsilon > 0\), te set \(A_\epsilon = \{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \fint_{B(x,r)} |f(y) - f(x)| \, dy > \epsilon\}\) has measure \(0\). This will imply that 
-    \[\bigcup_{n = 1}^\infty A_{\frac{1}{n}} = \left\{x \in \mathbb{R}^d \mid \limsup_{r \to 0} \int_{B(x,r)} |f(y) - f(x)| \, dy > 0\right\}\] has measure \(0\), which is what wie want to show. First, we show that \(|A_\epsilon| = 0\): Take \(\{f_n\} \subseteq C_c^\infty\), \(f_n \to f\) in \(L^1(\mathbb{R}^d)\). By the triangle inequality:
-    \begin{align*}
-      |f(y) - f(x)| \le |f(y) - f_n(y)| + |f_n(y) - f_n(x)| + |f_n(x) - f(x)|
-    \end{align*}
-    So we get 
-    \begin{align*}
-      &\fint_{B(x,r)} |f(y) - f(x)| \, dy \\
-      \quad &\le \fint_{B(x,r)}|f(y) - f_n(y)| \, dy + \fint_{B(x, r)} |f_n(y) - f_n(x)| + |f_n(x) - f(x)| \\
-      \Rightarrow \quad \limsup_{r \to 0} ... &\le \limsup_{r \to 0} (\dots) +0 + |f_n(x) - f(x)|
-    \end{align*}
-    Thus, for all \(x \in A_\epsilon\), then:
-    \begin{align*}
-      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(y) - f(y)| \, dy + |f_n(x) - f(x)| > 2 \epsilon
-    \end{align*}
-    Observation: If \(a, b \ge 0\), \(a + b > 2 \epsilon\) then either \(a > \epsilon\) or \(b > \epsilon\). Therefore \(A_\epsilon \subseteq \left(S_{n, \epsilon} \bigcup \tilde S_{n, \epsilon}\right)\), where
-    \begin{align*}
-      S_{n, \epsilon} &= \{x \mid |f_n(x) - f(x)| > \epsilon\} \\
-      \tilde S_{n, \epsilon} &= \{x \mid \limsup_{r \to 0} \fint_{B(x,r)} |f_n(y) - f(y)| \, dy > \epsilon\}
-    \end{align*}
-    Consequently: \(|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}|\) for all \(n \ge 1\). By the Markov / Chebyshev inequality:
-    \begin{align*}
-      |S_{n, \epsilon}| 
-      &\le \int_{S_{n, \epsilon}} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
-      = \int_{\mathbb{R}^d} \frac{|f_n(x) - f(x)|}{\epsilon} \, dx
-      = \frac{\|f_n - f\|_{L^1}}{\epsilon}
-    \end{align*}
-    We want to prove a simpler bound for \(\tilde S_{n \epsilon}\). For all \(x \in \tilde S_{n \epsilon}\): 
-    \begin{align*}
-      \limsup_{r \to 0} \fint_{B(x, r)} |f_n(x) - f(y)| \, dy > \epsilon
-    \end{align*}
-    So there is a \(r_x \in (0,1)\) s.t.
-    \[\fint_{B(x,r_x) = B_x} |f_n(y) - f(y)| \, dy > \epsilon\]
-    Thus \(\tilde S_{n \epsilon} \subseteq \left(\bigcup_{x \in \tilde S_{n, \epsilon}} B_x\right)\). 
-    
-    \begin{lem}[Vitali Covering]
-      If \(F\) is a collection of balls in \(\mathbb{R}^d\) with bounded radius, then there exists a sub-collection \(G \subseteq F\) s.t.
-      \begin{itemize}
-        \item \(G\) has disjoint balls
-        \item \(\bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5B, 5B(x,r) = B(x, 5r)\)
-      \end{itemize}
-    \end{lem}
-
-    \begin{rem}
-      The condition of the boundedness of the radius is necessary. Otherwise, consider \(\{B(0,n)\}_{n=1}^\infty\)
-    \end{rem}
-
-    Here consider \(F = \{B_x\}_{x \in \tilde S_{n \epsilon}}\). With the vitali covering leamm there is a \(G \subseteq F\) s.t. \(G \) contains disjoint balls and:
-    \[\tilde S_{n, \epsilon} \subseteq \bigcup_{B \in F} B \subseteq \bigcup_{B \in G} 5 B\]
-    So we get
-    \[|\tilde S_{n, \epsilon}| \le |\bigcup_{B \in G} 5B| \le \sum_{B \in G} |5B| = \sum_{B \in G} 5^d|B|\]
-    On the other hand, for all \(B \in G \subseteq F\): 
-    \begin{align*}
-      \fint_B |f_n(y) - f(y)| \, dy > \epsilon \Rightarrow \int_B |f_n - f| > \epsilon|B|
-    \end{align*}
-    This implies:
-    \begin{align*}
-      \sup_{B \in G} \int_B |f_n - f| > \epsilon \sum_{B \in G} |B|
-    \end{align*}
-    Since balls in \(G\) are disjoint:
-    \begin{align*}
-      \int_{\mathbb{R}^d} \ge \int_{\bigcup_{B \in G}} |f_n - f| \, dy 
-      > \epsilon \sum_{B \in G} |B|
-      \ge \frac{\epsilon}{5^d} |\tilde S_{n, \epsilon}|
-    \end{align*}
-    So 
-    \[|\tilde S_{n \epsilon}| \le \frac{5^d}{\epsilon} \|f_n - f\|_{L^1}\]
-    In summary: 
-    \[|A_\epsilon| \le |S_{n, \epsilon}| + |\tilde S_{n, \epsilon}| \le \frac{5^d + 1}{\epsilon} \|f_n - f\|_{L^1} \to 0\]
-    as \(n \to \infty\). So \(|A_\epsilon| = 0\) for all \(\epsilon > 0\)
-  \end{proof}
-  
-  \begin{rem}
-    \begin{enumerate}
-      \item The proof can be done by using the Besicovitch covering lemma: For all \(E \subseteq \mathbb{R}^d\) s.t. \(E\) is bounded. Let \(F = \) collection of balls s.t. for all \(x \in E\) there is a \(B_x \in F\) s.t. \(x\) is the center of \(B_x\). There is a sub-collection \(G \subseteq F\) s.t.
-      \begin{itemize}
-        \item \(E \subseteq \bigcup_{B \in G} B\)
-        \item Any point in \(E\) belongs to at most \(C_d\) balls in \(C_T\) (\(C_d\) depends only on \(\mathbb{R}^d\)), i.e. 
-        \begin{align*}
-          \mathbb{1}_E(x) \le \sum_{B \in G} \mathbb{1}_B(x) \le C_d \mathbb{1}_E(x) \forall x
-        \end{align*}
-      \end{itemize}
-      \item By a simpler argument we can prove the weak \(L^1\)-estimate:
-      \[\{x \mid f^\star(x) > \epsilon\} \le \frac{c_d}{\epsilon} \|f\|_{L^1(\mathbb{R}^d)}\] (Hardy-Littlewood maximal function)
-    \end{enumerate}
-  \end{rem}
-  
-  \begin{ex}[E 3.3]
-    \(f \in C_c^\infty(\mathbb{R}^d)\). Prove \(|\hat f(k)| \le \frac{C_N}{(1 + |k|)^N}\)
-  \end{ex}
-
-  \begin{proof}[Solution]
-    Since \(f \in C_c^\infty\) we have that \(D^\alpha f \in C_c^\infty\).
-    Recall
-    \begin{align*}
-      \widehat{D^\alpha f}(k) &= (-2 \pi ik)^\alpha \hat f (k)
-    \end{align*}
-    For example
-    \begin{align*}
-      \widehat{- \Delta f}(k) &= |2 \pi i k|^2 \hat f (k) \\
-      (\text{Induction}) \leadsto \widehat{(-\Delta)^N f}(k) &= |2 \pi k|^{2N} \hat f (k)
-    \end{align*}
-    So we can conclude
-    \[ \hat f(k) = \frac{\widehat{(-\Delta)^N}f(k)}{|2 \pi k|^{2N}} \forall k \in \mathbb{R}^d\]
-    \begin{enumerate}
-      \item \(f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \hat f \in L^\infty\)
-      \item \((-\Delta)^N f \in C_c^\infty \subseteq L^1(\mathbb{R}^d) \Rightarrow \widehat{(-\Delta)^N f} \in L^\infty\)
-    \end{enumerate}
-    Conclusion: \(\hat f(k) \le \begin{cases}
-      C &\forall k \\ \frac{C_N}{|k|^{2N}} &\forall k
-    \end{cases}\)
-    So \(\hat f(k) \le \frac{C_N}{(1+|k|)^N}\)
   \end{proof}
 
   \begin{ex}[E 3.4]
-    
+    Compute the Fourier Transform of the Gaussian.
   \end{ex}
-
-  \begin{proof}
-    Siehe Goodnotes
-  \end{proof}
   
   \begin{ex}[Bonus 3]
     Let \(f \in L^1(\mathbb{R}^d)\) such that
@@ -1915,7 +1915,7 @@
   \end{thm}
 
   \begin{proof}
-    \((\Omega = \mathbb{R}^d)\) for all \(f \in C_c^\infty\), \(y \mapsto T(f_y) \in C^\infty(\mathbb{R}^d)\) and \(\partial_{y_i} T(f_y) = (\partial_j T)(f_y) = 0\) for all \(i = 1, \dots, d\). Then by the result of the theorem for \(C^\infty\) functions,
+    \((\Omega = \mathbb{R}^d)\) We show for all \(f \in C_c^\infty\) that \(y \mapsto T(f_y) \in C^\infty(\mathbb{R}^d)\) and \(\partial_{y_i} T(f_y) = (\partial_j T)(f_y) = 0\) for all \(i = 1, \dots, d\). Then by the result of the theorem for \(C^\infty\) functions,
     \(y \mapsto T(f_y) = const\) independent of \(y\). Consequently:
     \begin{align*}
       T(f_y) = T(f_0) = T(f) \quad \forall y \in \mathbb{R}^d \ \forall f \in C_c^\infty(\mathbb{R}^d)
@@ -2095,7 +2095,7 @@
     Let \(G \in C^1(\mathbb{R}^d)\) with \(|\nabla G|\) is bounded. Let \(f = (f_i)_{i=1}^d \subseteq W_{loc}^{1,p}(\Omega)\). Then \(x \mapsto G(f(x)) \in W_{loc}^{1,p}(\Omega)\) and
     \begin{align*}
       \partial_{x_i} G(f)
-      &= \sum_{k=1}^d (\partial_k G)(f) \cdot \partial_{x_i} f_k \quad \text{ in } D'(\Omega)
+      &= \sum_{k=1}^d (\partial_k G)(f) \cdot \partial_{x_i} f_k \quad \text{ in } D'(\Omega).
     \end{align*}
     Moreover, if \(G(0) \in L^p(\Omega)\) (i.e. either \(|\Omega| < \infty\) or \(G(0) = 0\)), then if \(f = (f_i)_{i=1}^d \subseteq W^{1,p}(\Omega)\), then \(G(f) \in W^{1,p}(\Omega)\).
   \end{thm}
@@ -2124,7 +2124,7 @@
     \end{align*}
     and 
     \begin{align*}
-      \partial_{x_i} G(f) = \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{1,p}(\Omega)
+      \partial_{x_i} G(f) &= \sum_k \underbrace{\partial_k G}_{\in L^\infty} \underbrace{\partial_i f_k}_{\in L^p} \in L^p \Rightarrow G(f) \in W^{1,p}(\Omega) \qedhere
     \end{align*}
   \end{proof}
   
@@ -2181,7 +2181,7 @@
   \end{proof}
 
   \begin{ex}[E 4.1]
-    Prove that if \(T_n \to T\) in \(D'(\mathbb{R}^d)\), then \(D^\alpha T_n  \to D^\alpha T\) in \(D^\alpha(\mathbb{R}^d)\) for all \(\alpha \in \mathbb{N}^d\).
+    Prove that if \(T_n \to T\) in \(D'(\mathbb{R}^d)\), then \(D^\alpha T_n  \to D^\alpha T\) in \(D'(\mathbb{R}^d)\) for all \(\alpha \in \mathbb{N}^d\).
   \end{ex}
 
   \begin{ex}[E 4.2]
@@ -2222,8 +2222,8 @@
     \end{cases}\). Take \(\phi \in C_c^\infty(\mathbb{R}^d)\).
     \begin{align*}
       -f'(\phi) 
-      &= - \int_{\mathbb{R}^d} f \phi' \, dy \\
-      &= - \int_{-\infty}^1 f \phi' \, dy - \int_1^\infty f \phi' \, dy  \\
+      &= \int_{\mathbb{R}^d} f \phi' \, dy \\
+      &=  \int_{-\infty}^1 f \phi' \, dy + \int_1^\infty f \phi' \, dy  \\
       &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 f' \phi \, dy + [f \phi]_1^\infty - \int_1^\infty f' \phi \, dy \\
       &= [f \phi]_{- \infty}^1 - \int_{- \infty}^1 g \phi \, dy + [f \phi]_1^\infty - \int_1^\infty g \phi \, dy \\
       &= f(1-) \phi(1) - f(1+)\phi(1) - \int_{\mathbb{R}^d} g \phi \, dy \\
@@ -2739,7 +2739,7 @@
       \int_{E_2} \frac{1}{|z-x|^{d-\alpha}} \, dz
       &\le \int \frac{1}{|z-x|^{d-\alpha}} \, dz
       = \int_{1-|x-y|}^1 \frac{1}{r^{d-\alpha}} r^{d-1} \, dr \\
-      &\le const. \left| 1 - \frac{1}{(1 - |x-y|)^\alpha} \right| \le C |x-y|^\alpha
+      &\le const. \left| 1 - \frac{1}{(1 - |x-y|)^\alpha} \right| \le C |x-y|^\alpha \qedhere
     \end{align*}
   \end{proof}
 
