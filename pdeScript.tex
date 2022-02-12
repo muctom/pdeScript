@@ -4320,7 +4320,7 @@
       where \(u \in L^2(Q_+)\) because \(u \in H^1(Q_+)\).
   \end{proof}
 
-  \begin{ex}[E. 9.1]
+  \begin{ex}[E 9.1]
     Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in H_0^1(\Omega)\), \(f \in L^2(\Omega)\). Show that the following statements are equivalent:
     \begin{enumerate}[label=\arabic*)]
       \item \(- \Delta u = f\) in \(D'(\Omega)\)
@@ -4333,44 +4333,44 @@
     \begin{itemize}
       \item[1) \(\Rightarrow\) 2)] From \(- \Delta u = f\) in \(D'(\Omega)\) we get that 
       \begin{align*}
-        \int_{\Omega} u(-\Delta \phi) = \int_\Omega f \phi
+        \int_{\Omega} u(-\Delta \phi) \, dx = \int_\Omega f \phi \, dx
       \end{align*}
-      for all \(\phi \in C_c^\infty(\Omega)\). Claim: If \(u \in H_0^1, \phi \in C_c^\infty\), then 
+      for all \(\phi \in C_c^\infty(\Omega)\). \\
+      
+      Claim: For \(u \in H_0^1, \phi \in C_c^\infty\) we can apply integration by parts, namely 
       \begin{align*}
-        \int_\Omega (-\Delta \phi) = \int_\Omega \nabla u \nabla \phi
+        \int_\Omega u(-\Delta \phi) \, dx = \int_\Omega \nabla u \nabla \phi \, dx.
       \end{align*}
-      Density argument: \(u \in H_0^1 = \overline{C_c^\infty(\Omega)}^{\|\cdot\|_{H}}\), so there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(H^1(\Omega)\). Since \(u_n, \phi \in C_c^\infty(\Omega)\), then by the integration by parts:
+      Density argument: \(u \in H_0^1 = \overline{C_c^\infty(\Omega)}^{\|\cdot\|_{H^1}}\), so there is a sequence \(\{u_n\} \subseteq C_c^\infty(\Omega)\) s.t. \(u_n \to u\) in \(H^1(\Omega)\). Since \(u_n, \phi \in C_c^\infty(\Omega)\), then by the integration by parts:
       \begin{align*}
-        \int_\Omega u_n(-\Delta \phi) = \int_\Omega (\nabla u_n) \nabla \phi \forall n
+        \int_\Omega u_n(-\Delta \phi) \, dx = \int_\Omega (\nabla u_n) \nabla \phi \, dx \quad \forall n
       \end{align*}
       Take \(n \to \infty\), then, 
       \begin{align*}
-        \int_\Omega u (-\Delta \phi) = \int_\Omega (\nabla u) \nabla \phi 
+        \int_\Omega u (-\Delta \phi) \, dx = \int_\Omega (\nabla u) \nabla \phi  \, dx
       \end{align*}
-      as \(u_n \to u\) and \(\nabla u_n \to \nabla u\) in \(L^2\).
-      Claim: If \(\int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi\)for all \(\phi \in C_c^\infty(\Omega)\), then 
-      \begin{align*}
-        \int_\Omega \nabla u \nabla \phi = \int_\Omega f \phi 
-      \end{align*}
+      as \(u_n \to u\) and \(\nabla u_n \to \nabla u\) in \(L^2\). \\
+
+      Claim: If \(\int_\Omega \nabla u \nabla \phi \, dx = \int_\Omega f \phi \, dx\) for all \(\phi \in C_c^\infty(\Omega)\), then \(\int_\Omega \nabla u \nabla \phi  \, dx= \int_\Omega f \phi  \, dx\)
       for all \(\phi \in H_0^1\). (Given \(\nabla u, f \in L^2\)). With density argument: For all \(\phi \in H_0^1\) there is a sequence \(\{\phi_n\}\subseteq C_c^\infty(\Omega)\) s.t. \(\phi_n \to \phi\) in \(H^1\). Then:
       \begin{align*}
-        \int_\Omega \nabla u \nabla \phi_n = \int_\Omega f \phi_n
+        \int_\Omega \nabla u \nabla \phi_n  \, dx= \int_\Omega f \phi_n \, dx
       \end{align*}
       for all \(n\). Take \(n \to \infty\):
       \begin{align*}
-        \int \nabla u \nabla \phi = \int f \phi
+        \int \nabla u \nabla \phi  \, dx =  \int f \phi \, dx
       \end{align*}
       as \(\phi_n \to \phi\), \(\nabla \phi_n \to \nabla \phi\) in \(L^2\).
       \item[2) \(\Rightarrow\) 3)] We show \(E(u) \le E(v)\) for all \(v \in H_0^1\), i.e. 
       \begin{align*}
-        \frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega f u \le \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v 
+        \frac{1}{2} \int_\Omega |\nabla u|^2 - \int_\Omega f u  \, dx \le \frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v  \, dx
       \end{align*}  
       for all \(v \in H_0^1\). Write \(v = u + w\), then:
       \begin{align*}
-        E(v) &= \frac{1}{2} \int |\nabla v|^2 - \int f v \\
-        &= \frac{1}{2} \int_\Omega |\nabla (u + w)|^2 - \int_\Omega f (u + w) \\
-        &= \frac{1}{2} \int_\Omega \left[|\nabla u|^2 + |\nabla w|^2 + 2 \nabla u \nabla w\right] \int_\Omega(fu + fw)\\
-        &= E(u) + \frac{1}{2} \int_\Omega|\nabla w|^2 + \left(\underbrace{\nabla u \nabla w - \int f w}_{\smash{= 0}}\right)
+        E(v) &= \frac{1}{2} \int |\nabla v|^2  \, dx- \int f v  \, dx \\
+        &= \frac{1}{2} \int_\Omega |\nabla (u + w)|^2  \, dx- \int_\Omega f (u + w)  \, dx\\
+        &= \frac{1}{2} \int_\Omega \left[|\nabla u|^2 + |\nabla w|^2 + 2 \nabla u \nabla w\right] \, dx - \int_\Omega fu + fw \, dx \\
+        &= E(u) + \frac{1}{2} \int_\Omega|\nabla w|^2  \, dx + \biggl(\underbrace{\int_\Omega\nabla u \nabla w  \, dx - \int_\Omega f w  \, dx}_{\smash{= 0}}\biggr)
       \end{align*}
       as \(w = v-u \in H_0^1\) (by (2))
       \item[3) \(\Rightarrow\) 1)] 
@@ -4381,26 +4381,27 @@
       \[\frac{d}{dt} E(u + t \phi)|_{t = 0} = 0\]
       Here 
       \begin{align*}
-        E(u + t \phi) &= \frac{1}{2} \int \underbrace{|\nabla ( u + t \phi)|^2}_{\mathclap{|\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi}} - \int f(u + t \phi) \\
-        &= E(u) + t \left[\int_\Omega \nabla u \nabla \phi \int_\Omega f \phi\right] + t^2 \int_\Omega |\nabla \phi|^2
+        E(u + t \phi) &= \frac{1}{2} \int_\Omega |\nabla ( u + t \phi)|^2 \, dx- \int_\Omega f(u + t \phi) \, dx\\
+        &= \frac{1}{2} \int_\Omega |\nabla u|^2 + t^2 |\nabla \phi|^2 + 2 t \nabla u \nabla \phi\, dx - \int_\Omega f(u + t \phi)\, dx \\
+        &= E(u) + t \left[\int_\Omega \nabla u \nabla \phi \, dx - \int_\Omega f \phi\, dx\right] + t^2 \int_\Omega |\nabla \phi|^2\, dx
       \end{align*}
       This implies
       \begin{align*}
-        \frac{d}{dt} E(u + t \phi)|_{t = 0} &= \int_\Omega \nabla u \nabla \phi - \int_\Omega f \phi
+        \frac{d}{dt} E(u + t \phi)|_{t = 0} &= \int_\Omega \nabla u \nabla \phi\, dx - \int_\Omega f \phi\, dx
       \end{align*}
-      Conclude:
+      and we can conclude
       \begin{align*}
-        \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi 
+        \int_\Omega \nabla u \nabla \phi\, dx &= \int_\Omega f \phi\, dx
       \end{align*}
-      for all \(\phi \in H_0^1\) or \(C_c^\infty\) So we get 
+      for all \(\phi \in H_0^1\) or \(C_c^\infty\). So we get 
       \begin{align*}
-        \int_\Omega u (- \Delta \phi) = \int_\Omega f \phi
+        \int_\Omega u (- \Delta \phi)\, dx = \int_\Omega f \phi\, dx
       \end{align*}
-      for all \(\phi \in C_c^\infty\). so we can conclude:
+      for all \(\phi \in C_c^\infty\) and hence
       \begin{align*}
-        - \Delta u = f 
+        - \Delta u = f
       \end{align*}
-      in \(D'(\Omega)\) \(\Rightarrow\) 1)
+      in \(D'(\Omega)\). This implies 1). \qedhere
     \end{itemize}
   \end{proof}
 
