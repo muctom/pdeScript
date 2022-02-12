@@ -3079,12 +3079,12 @@
     \begin{align*}
       f_B(x) = \chi_B(x)f(x): \ \mathbb{R}^d \to \mathbb{R}
     \end{align*}
-    We prove that \(f_B \in C^{0, \alpha}(\mathbb{R}^d)\). Since \(f \in C_{loc}^{0,\alpha}(\Omega)\) we have \(f \in C^{0,\alpha}(\Omega)\), so \(|f(x)-f(y)| \le C|x-y|^\alpha\) for all \(x,y \in \Omega_B\). Then:
+    We prove that \(f_B \in C^{0, \alpha}(\mathbb{R}^d)\). Since \(f \in C_{loc}^{0,\alpha}(\Omega)\) we have \(f \in C^{0,\alpha}(\Omega_B)\), so \(|f(x)-f(y)| \le C|x-y|^\alpha\) for all \(x,y \in \Omega_B\). Then:
     \begin{align*}
       |f_B(x) - f_B(y)| 
       &= |\chi_B(x) f(x) - \chi_B(y) f(y)| \\
       &\le |(\chi_B(x) - \chi_B(y))f(x) + \chi_B(y)(f(x)-f(y))| \\
-      &\le C |x-y|^\alpha \|f\|_{L^\infty} + C\|\chi\|_{L^\infty(\Omega_B)}|x-y|^\alpha
+      &\le C |x-y|^\alpha \|f\|_{L^\infty(\Omega_B)} + C\|\chi\|_{L^\infty(\Omega_B)}|x-y|^\alpha
       \le C_{\Omega_B}|x-y|^\alpha
     \end{align*}
     What about other cases? If \(x, y\) are bot not in \(\Omega_B\), then \(|f_B(x) - f_B(y)| =0\), then if \(x \in \Omega_B\) and \(y \notin \Omega_B\): \(|f_B(x) - f_B(y)| = |f_B(x)| = |\chi_B(x)||f(x)| = |\chi_B(x) - \chi_B(y)||f(x)| \le C |x-y|^\alpha\). Conclusion: \(|f_B(x) - f_B(y)| \le C|x-y|^\alpha\) for all \(x,y \in \mathbb{R}^d\), i.e. \(f_B \in C^{0,\alpha}(\mathbb{R}^d)\). Also \(f_B\) is compactly supported. By a theorem in the lecture: \(G \star f_B \in C^{2, \alpha}(\mathbb{R}^d)\). Finally: \(-\Delta u = f\) in \(D'(\Omega)\), \(-\Delta (G \star f_B) = f_B\) in \(D'(\mathbb{R}^d)\). So we conclude \(-\Delta u = f = f_B = - \Delta (G\star f_B) \) in \(D'(B)\). \(-\Delta(u - G \star f_B)= 0\) in \(D'(B)\), so \(u - G \star f_B \in C^\infty(B)\), so \(u \in C^{2,\alpha}(B)\).
@@ -3760,7 +3760,7 @@
 
     \begin{enumerate}[label=Step \arabic*:]
       \item Easy \(E = \int_{v \in A} E(v) > - \infty\)
-      \item There is a minimizing sequence \(\{v_n\} \subseteq A\) s.t. \(E(v_n) \to E\). We don't know if there is a subsequence of \(\{v_n\}\) that converges to \(u \in A\). The lack of compactness is a serious problem! We need to find the rigt set \(A\)! Consider again \begin{align*}
+      \item There is a minimizing sequence \(\{v_n\} \subseteq A\) s.t. \(E(v_n) \to E\). We don't know if there is a subsequence of \(\{v_n\}\) that converges to \(u \in A\). The lack of compactness is a serious problem! We need to find the right set \(A\)! Consider again \begin{align*}
         \begin{cases}
           - \Delta u = f & \text{in } \Omega \\ u = g &\text{on } \partial \Omega
         \end{cases}
@@ -3902,7 +3902,7 @@
     \begin{align*}
       \|\nabla f_n - \nabla f_m\|_p 
       &\le \|\nabla \chi(u_n - u_m)\|_p + \|\chi(\nabla u_n - \nabla u_m)\|_p \\
-      &\le \|\nabla \chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty} 0} + \underbrace{\|\chi\|}_{< \infty} \underbrace{\|\nabla u_n - \nabla u_m\|_p}_{\xrightarrow{n,m \to \infty}0}\xrightarrow{n,m \to \infty)} 0
+      &\le \|\nabla \chi\|_\infty \underbrace{\|u_n - u_m\|_p}_{\xrightarrow{n,m \to \infty}\, 0} + \underbrace{\|\chi\|}_{< \infty} \underbrace{\|\nabla u_n - \nabla u_m\|_p}_{\xrightarrow{n,m \to \infty}\, 0}\xrightarrow{n,m \to \infty} 0
     \end{align*}
     Thus, there is a \(f \in W_0^{1,p}(\Omega \cap U)\) s.t. \(\|f_n - f\|_{W^{1,p}} \xrightarrow{n \to \infty} 0\). We know:
     \begin{align*}
@@ -4076,7 +4076,7 @@
       \item \(u \in W^{1,p}_0(\Omega)\)
       \item \(\tilde u(x) = \begin{cases}
         u(x) & x \in \Omega \\ 0 & x \in \mathbb{R}^d \setminus \Omega
-      \end{cases} \in W^{1,p}(\mathbb)\)
+      \end{cases} \in W^{1,p}(\mathbb{R}^d)\)
     \end{enumerate}
   \end{ex}
 
@@ -4085,7 +4085,7 @@
     \begin{align*}
       \int_\Omega \nabla u \nabla \phi &= \int_\Omega f \phi
     \end{align*}
-    for all \(\phi \in H_0^1(\Omega)\). (\(\Rightarrow - \Delta = f\) in \(D'(\Omega)\)). Moreover, \(u\) is the unique minimizer of 
+    for all \(\phi \in H_0^1(\Omega)\). (\(\Rightarrow - \Delta u = f\) in \(D'(\Omega)\)). Moreover, \(u\) is the unique minimizer of 
     \begin{align*}
       \inf_{v \in H_0^1(\Omega)} \left(\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right)
     \end{align*}
@@ -4131,7 +4131,7 @@
         \[\|v\| = \sup_{\phi \ne 0} \frac{\langle v, \phi\rangle|}{\|\phi\|} \le \liminf_{n \to \infty} \|v_n\|\] 
       \end{rem}
 
-      By the Banach-Alaoglu theorem, up to a subsequence, \(v_n \to u\) weakly in \(H_0^1(\Omega)\). We prove that \(u\) is aminimizer for \(\mathcal{E}\)
+      By the Banach-Alaoglu theorem (\ref{banach-alagoglu}), up to a subsequence, \(v_n \to u\) weakly in \(H_0^1(\Omega)\). We prove that \(u\) is a minimizer for \(\mathcal{E}\)
       \[E \longleftarrow \mathcal{E}(v_n) = \frac{1}{2} \int |\nabla v_n|^2 - \int f v_n\]
       \begin{itemize}
         \item Since \(v_n \to u\) in \(H_0^1(\Omega)\) we have that 
@@ -4171,10 +4171,9 @@
   \[\phi_x(y) = G(|x||y-\tilde x|), \quad \tilde x = \frac{x}{|x|^2}\]
   This is ok if \(x \ne 0\). When \(x \to 0\):
   \begin{align*}
-    G(|x|(y-\tilde x)) = G(\underbrace{|x|y - \frac{x}{|x|}}_{|\cdot|\to 1}) G(z), \quad |z| = 1
+    G(|x|(y-\tilde x)) = G \biggl( \underbrace{|x|y - \frac{x}{|x|}}_{|\cdot|\to 1}\biggr) G(z), \quad |z| = 1
   \end{align*}
-  is well-defined as \(G\) is radial. \\
-  Question: If \(u \in H^1(\Omega)\), then how can we define \(u|_{\partial \Omega}\)?
+  is well-defined as \(G\) is radial. Question: If \(u \in H^1(\Omega)\), then how can we define \(u|_{\partial \Omega}\)?
 
   \section{Theory of Trace}
   \begin{thm}[Trace Operator]\label{Trace Operator}
