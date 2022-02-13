@@ -5270,7 +5270,7 @@
   \begin{rem}
 	If \(u(\cdot, t) \in L^2(\mathbb{R}^d)\), the proof of uniquness can be done without the maximum principle. Heuristically:
 	\begin{align*}
-		\frac{d}{dt} \int_{\mathbb{R}^d} |u(x,t)|^2 \, dt &= 2 \int_{\mathbb{R}^d} (\partial_t u)u \, dx
+		\frac{d}{dt} \int_{\mathbb{R}^d} |u(x,t)|^2 \, dx &= 2 \int_{\mathbb{R}^d} (\partial_t u)u \, dx
 		= 2 \int_{\mathbb{R}^d} \Delta_x u u \, dx
 		= -2 \int_{\mathbb{R}^d} |\nabla_x u|^2 \, dx \le 0
 	\end{align*}
@@ -6024,7 +6024,7 @@
 
   \begin{proof}
     Let 
-    \[e(t) = \int_{\Omega} (|\partial_t u|^2 + |\nabla_x u|^2) dx\]
+    \[e(t) = \int_{\Omega} (|\partial_t u|^2 + |\nabla_x u|^2)\, dx\]
     has \(e'(t) = 0\). This implies \(e(t) = e(0) = 0\), so \(\partial_t u = 0\) and hence \(u=0\).
   \end{proof}
   The same result holds for \(\mathbb{R}^d\), i.e.
