@@ -629,101 +629,101 @@
     Let \(\Omega\) be open in \(\mathbb{R}^d\). Let \(u \in C(\Omega)\) satisfy \(u(x) = \fint_{\partial B} u \, dy\) for any \(x \in B(x, r) \subseteq \Omega\). Then \(u\) is a harmonic function in \(\Omega\). Moreover, \(u \in C^\infty(\Omega)\) and \(u\) is analytic in \(\Omega\).
   \end{thm}
 
-  % \begin{proof}
-  %   We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
-  %   \begin{align*}
-  %     \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
-  %   \end{align*}
-  %   We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
-  %   \begin{align*}
-  %     u_\epsilon(x) 
-  %     &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
-  %     &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
-  %     (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
-  %     \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
-  %     &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
-  %     &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
-  %   \end{align*}
+  \begin{proof}
+    We use the convolution. For simlicity consider the case \(\Omega = \mathbb{R}^d\) first. Take \(\eta \in C_c^\infty(\mathbb{R}^d)\) with \(0 \le \eta \le 1\), \(\eta(x) = 0\) if \(|x| \ge 1\), \(\eta\) radial and \(\int \eta = 1\). Define \(\eta_\epsilon (x) = \epsilon^{-d} \eta(\epsilon^{-1} x)\) for all \(\epsilon > 0\). Then
+    \begin{align*}
+      \int_{\mathbb{R}^d} \eta_\epsilon = \int_{\mathbb{R}^d} \eta = 1
+    \end{align*}
+    We prove \(u_\epsilon \coloneqq \eta_\epsilon \star u = u\) for all \(\epsilon > 0\). By definition:
+    \begin{align*}
+      u_\epsilon(x) 
+      &= \int_{\mathbb{R}^d} \eta_\epsilon(x-y)u(y) \, dy \\
+      &= \int_0^\infty \left[\int_{\partial B(x, r)} \eta_\epsilon(x-y) u(y) \, dS(y)\right] dr \\
+      (\eta \text{ radial}) \quad &= \int_0^\infty \left[\eta_\epsilon(r) \int_{\partial B(x, r)} u(y) \, dS(y)\right] dr \\
+      \text{(Assumption)} \quad &= \int_0^\infty \eta_\epsilon(r)\, |\partial B(x, r)|\, u(x) \, dr \\
+      &= u(x) \int_0^\infty \eta_\epsilon(r) |\partial B(0, r)| \, dr \\
+      &= u(x) \int_{\mathbb{R}^d} \eta_\epsilon(y) \, dy = u(x)
+    \end{align*}
 
-  %   On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
+    On the other hand, \(u_\epsilon = \eta_\epsilon \star u\) is \(C^\infty(\mathbb{R}^d)\). In fact \(D^\alpha(\eta_\epsilon \star u) = (D^\alpha \eta_\epsilon) \star u\) is continuous for any \(\alpha\) (Exercise). Then \(u \in C^\infty(\mathbb{R}^d)\), so \(u\) is harmonic in \(\mathbb{R}^d\), i.e. \(\Delta u = 0\) in \(\mathbb{R}^d\). \\
 
-  %   Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
-  %   Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
-  %   Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
-  %   \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
-  %   is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
-  %   Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
-  %   To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
-  %   Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
-  %   We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
-  %   \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
-  %   where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
-  %   New: Let \(x_0 \in \Omega\), take \(r > 0\), \(r < \frac{1}{L+1} \dist(x_0, \Omega^c)\) s.t. if \(x \in B(x_0, r)\), then \[B(x, Lr) \subseteq B(x_0, (L+1)r) \subseteq \Omega\]. With Lemma~\ref{estimates-of-derivatives} we get:
-  %   \begin{align*}
-  %     |D^\alpha u(x_0 + t(x-x_0))
-  %     &\le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|
-  %   \end{align*}
-  %   With \((x_0, r) \leadsto (x, Lr)\)
-  %   \begin{align*}
-  %     |R_N(x)| \le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{1}{\alpha!} \frac{1}{\alpha!} \tau^N \int_{B(x_0, (L+1)r) |u|}
-  %   \end{align*}
+    Consider now the general case where \(\Omega \subseteq \mathbb{R}^d\) is open. Take \(\epsilon > 0\) small and define \(\Omega_\epsilon = \{x \in \Omega \mid \dist(x, \partial \Omega) > \epsilon\}\). 
+    Define \[u_\epsilon(x) = \int_{\mathbb{R}^d} \eta_\epsilon(x-y) u(y) \, dy \quad \text{ for all } x \in \Omega_\epsilon\]
+    Recall that \(\eta_\epsilon(y) = 0\) if \(|y| \ge \epsilon\), then:
+    \[u_\epsilon(x) = \int_{B(x, \epsilon)} \eta_\epsilon(x-y)u(y) \, dy\]
+    is well-defined since \(B(x,\epsilon) \subseteq \Omega\) for all \(x \in \Omega_\epsilon\).
+    Then by the same computation using the polar-decomposition, we find that \(u_\epsilon(x) = u(x)\) for all \(x \in \Omega\). Note that \(u_\epsilon \in C^\infty(\Omega_\epsilon)\). Taking \(\epsilon \to 0\), we get \(u \in C^\infty(\Omega)\). Then we conclude that \(u\) is harmonic (We need to reverse the proof of the mean-value theorem).\\
+    To proof that \(u\) is analytic, we need to show that for all \(x_0 \in \Omega\), there is a \(r > 0\) s.t. \(B(x_0, r) \subseteq \Omega\) and \[u(x) = u(x_0) + \sum_{\alpha \ne 0} c_\alpha(x-x_0)^\alpha \quad \text{for  all } x \in B(x_0, r)\]
+    Here \(\alpha = (\alpha_1, \dots, \alpha_d), \alpha_i \in \{0, 1, 2, \dots\}\) and \(y^\alpha = y_1^{\alpha_1}y_2^{\alpha_2} \dots y_d^{\alpha_d}\). 
+    We want to prove that the series converges uniformly in \(B(x_0, r)\). Recall the Taylor expansion:
+    \[u(x) = u(x_0) + \sum_{0 < |\alpha| < N} D^\alpha u(x_0) \frac{(x-x_0)^\alpha}{\alpha!} + R_N(x)\]
+    where \(|\alpha| = \alpha_1 + \alpha_2 + \dots + \alpha_d\), \(\alpha! = \alpha_1! \cdots \alpha_d!\) and \[R_N(x) = \sum_{|\alpha| = N} \int_0^1 D^\alpha u(x_0 + t(x-x_0)) \frac{(x-x_0)^\alpha}{\alpha!} \, dt\]
+    New: Let \(x_0 \in \Omega\), take \(r > 0\), \(r < \frac{1}{L+1} \dist(x_0, \Omega^c)\) s.t. if \(x \in B(x_0, r)\), then \[B(x, Lr) \subseteq B(x_0, (L+1)r) \subseteq \Omega.\] With Lemma~\ref{estimates-of-derivatives} we get:
+    \begin{align*}
+      |D^\alpha u(x_0 + t(x-x_0))
+      &\le \frac{(c_d N)^N}{(Lr)^{d+N}} \int_{B(x, Lr)} |u|
+    \end{align*}
+    With \((x_0, r) \leadsto (x, Lr)\)
+    \begin{align*}
+      |R_N(x)| \le \sum_{|\alpha| = N} \frac{(c_d N)^N}{(Lr)^{d+N}} \frac{1}{\alpha!} \frac{1}{\alpha!} \tau^N \int_{B(x_0, (L+1)r) |u|}
+    \end{align*}
 
-  %   Thus 
-  %   \begin{align*}
-  %     \left(\frac{\tilde c_d N}{L}\right) \frac{1}{N!}
-  %     &\le \left(\frac{\tilde c_d N}{L}\right) \left(\frac{e}{N}\right)^N \quad \text{ if \(N\) large} \\
-  %     &= \left(\frac{\tilde c_d e}{L}\right)^N \xrightarrow{N \to \infty} 0 \quad \text{if } L > \tilde c_d e (L = L_d)
-  %   \end{align*}
-  %   We conclude that \[u(x) = u(x_0) + \sum_{\alpha \ne 0} \frac{D^\alpha u(x_0)}{\alpha!}(x-x_0)^\alpha\]
-  %   The series converges uniformly \(x \in B(x_0, r)\).
-  %   Now we proof the bound on derivatives. For \(\alpha = 0\)
-  %   \begin{align*}
-  %     |u(x_0)| = \left| \fint_{B(x_0, r)} u \right| \le \frac{1}{|B_1|r^d} \int_{B(x_0, r)} |u|
-  %   \end{align*}
-  %   For \(\alpha = 1:\) \(\Delta u = 0\) in \(\Omega\) \(\Rightarrow\) \(0 = \partial_{x_i} (\Delta u) = \Delta (\partial_{x_i} u)\), so \(\partial_{x_i} u\) is harmonic in \(\Omega\). Hence, by the mean-varlue theorem again:
-  %   \begin{align*}
-  %     \partial_{x_i} u(x_0) &= \fint_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{\frac{r}{2}}{2}^d} \int_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{r}{2}^d} \int_{\partial B(x_0, \frac{r}{2})}u n_i \, dS
-  %   \end{align*}
-  %   So we get:
-  %   \begin{align*}
-  %     |\partial_{x_i} u(x_0)| 
-  %     &= \frac{1}{|B_1| r^d} \int_{\partial B(x, r)} \, dS \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}  \\
-  %     &= \frac{|S_1|}{|B_1|\frac{r}{2}} \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}
-  %   \end{align*}
-  %   For any \(y \in \partial B(x_0, \frac{r}{2})\) by the mean value theorem, we get:
-  %   \begin{align*}
-  %     |u(y)| 
-  %     &= \left| \fint_{B(y, \frac{r}{2})} u\right|
-  %     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(y, \frac{r}{2})} |u|
-  %     &\le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
-  %   \end{align*}
-  %   Thus,
-  %   \begin{align*}
-  %     |\partial_{x_i} u(x_0)| 
-  %     &\le \frac{|S_1|}{|B_1| \left(\frac{r}{2}\right)} \frac{1}{|B_1|  \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
-  %     \le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u|
-  %   \end{align*}
-  %   Induction: Assume that we already proved the bound when \(|\alpha| = N-1\). Then:
-  %   \begin{align*}
-  %     \partial_{x_i} D^\alpha u 
-  %     &= D^\alpha(\underbrace{\partial_{x_i} u}_{\text{harmonic}})
-  %     = 0
-  %     \quad \Rightarrow \quad
-  %     D^\alpha u \text{ is harmonic}
-  %   \end{align*}
-  %   So we get
-  %   \begin{align*}
-  %     \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
-  %     \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
-  %   \end{align*}
-  %   and by the induction hypothesis:
+    Thus 
+    \begin{align*}
+      \left(\frac{\tilde c_d N}{L}\right) \frac{1}{N!}
+      &\le \left(\frac{\tilde c_d N}{L}\right) \left(\frac{e}{N}\right)^N \quad \text{ if \(N\) large} \\
+      &= \left(\frac{\tilde c_d e}{L}\right)^N \xrightarrow{N \to \infty} 0 \quad \text{if } L > \tilde c_d e (L = L_d)
+    \end{align*}
+    We conclude that \[u(x) = u(x_0) + \sum_{\alpha \ne 0} \frac{D^\alpha u(x_0)}{\alpha!}(x-x_0)^\alpha\]
+    The series converges uniformly \(x \in B(x_0, r)\).
+    Now we proof the bound on derivatives. For \(\alpha = 0\)
+    \begin{align*}
+      |u(x_0)| = \left| \fint_{B(x_0, r)} u \right| \le \frac{1}{|B_1|r^d} \int_{B(x_0, r)} |u|
+    \end{align*}
+    For \(\alpha = 1:\) \(\Delta u = 0\) in \(\Omega\) \(\Rightarrow\) \(0 = \partial_{x_i} (\Delta u) = \Delta (\partial_{x_i} u)\), so \(\partial_{x_i} u\) is harmonic in \(\Omega\). Hence, by the mean-varlue theorem again:
+    \begin{align*}
+      \partial_{x_i} u(x_0) &= \fint_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{\frac{r}{2}}{2}^d} \int_{B(x_0, \frac{r}{2})} \partial_{x_i} u = \frac{1}{|B_1| \frac{r}{2}^d} \int_{\partial B(x_0, \frac{r}{2})}u n_i \, dS
+    \end{align*}
+    So we get:
+    \begin{align*}
+      |\partial_{x_i} u(x_0)| 
+      &= \frac{1}{|B_1| r^d} \int_{\partial B(x, r)} \, dS \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}  \\
+      &= \frac{|S_1|}{|B_1|\frac{r}{2}} \|u\|_{L^\infty(\partial B(x_0, \frac{r}{2}))}
+    \end{align*}
+    For any \(y \in \partial B(x_0, \frac{r}{2})\) by the mean value theorem, we get:
+    \begin{align*}
+      |u(y)| 
+      &= \left| \fint_{B(y, \frac{r}{2})} u\right|
+      \le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(y, \frac{r}{2})} |u|
+      \le \frac{1}{|B_1| \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+    \end{align*}
+    Thus,
+    \begin{align*}
+      |\partial_{x_i} u(x_0)| 
+      &\le \frac{|S_1|}{|B_1| \left(\frac{r}{2}\right)} \frac{1}{|B_1|  \left(\frac{r}{2}\right)^d} \int_{B(x_0, r)} |u|
+      \le \frac{c_d}{r^{d+1}} \int_{B(x_0, r)} |u|
+    \end{align*}
+    Induction: Assume that we already proved the bound when \(|\alpha| = N-1\). Then:
+    \begin{align*}
+      \partial_{x_i} D^\alpha u 
+      &= D^\alpha(\underbrace{\partial_{x_i} u}_{\text{harmonic}})
+      = 0
+      \quad \Rightarrow \quad
+      D^\alpha u \text{ is harmonic}
+    \end{align*}
+    So we get
+    \begin{align*}
+      \partial_{x_i} (D^\alpha u) &= \fint_{B(x_0, \frac{r}{4})} \partial_{x_i} (D^\alpha u) \\
+      \Rightarrow \quad |\partial_{x_i} (D^\alpha u)| &\le  \frac{C_d}{r^{d+1}} \int_{B(x_0, \frac{r}{2})} |D^\alpha u|
+    \end{align*}
+    and by the induction hypothesis:
     
-  %   \begin{align*}
-  %     |D^\alpha u(x_0)| &\le \frac{c_d}{r} \|D^\alpha u\|_{L^\infty B(x_0, \frac{r}{2})} \\
-  %     &\le \frac{c_d}{r^{d+N-1}} \int_{B(x_0, r)} |u| \quad \forall x \in B\left(x_0, \frac{r}{2}\right)
-  %   \end{align*}
-  %   Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
-  % \end{proof}
+    \begin{align*}
+      |D^\alpha u(x_0)| &\le \frac{c_d}{r} \|D^\alpha u\|_{L^\infty B(x_0, \frac{r}{2})} \\
+      &\le \frac{c_d}{r^{d+N-1}} \int_{B(x_0, r)} |u| \quad \forall x \in B\left(x_0, \frac{r}{2}\right)
+    \end{align*}
+    Then: \(|\partial_{x_i} D^\alpha u(x_0)| \le \frac{c_d}{r^{d+N}} \int_{B(x_0, r)} |u|\)
+  \end{proof}
 
   \begin{ex}[E 1.1: Proof the Gauss–Green formula]
     Let \(f \coloneqq (f_i)_1^d \in C^1(\mathbb{R}^d, \mathbb{R}^d)\). Prove that for every open ball \(B(y, r) \subseteq \mathbb{R}^d\) we have \[\int_{\partial B(y, r)} f(y) \cdot \nu_y \, dS(y) = \int_{B(y, r)}\div f \, dx.\]
@@ -1225,7 +1225,7 @@
   \begin{proof}
     \begin{enumerate}[label=\alph*)]
       \item \(D^\alpha(g_\epsilon) = (D^\alpha f_\epsilon) \star g \in C(\Omega_\epsilon)\)
-      % \item Replace \(g \mapsto \mathbb{1}_K g\) where \(K\) is a compact set \(\subbseteq \Omega\). Then \(\mathbb{1}_K g \in L^p\). Then our theorem \(f_\epsilon \star (\mathbb{1}_K g) \to \mathbb{1}_K g\) in \(L^p(\Omega)\). On the other hand \(\mathbb{1}_K[(f_\epsilon \star \mathbb{1}_K g) - (f_\epsilon \star g)] \to 0\) as \(\epsilon \to 0\) (exercise)
+      \item Replace \(g \mapsto \mathbb{1}_K g\) where \(K\) is a compact set \(\subseteq \Omega\). Then \(\mathbb{1}_K g \in L^p\). Then our theorem \(f_\epsilon \star (\mathbb{1}_K g) \to \mathbb{1}_K g\) in \(L^p(\Omega)\). On the other hand \(\mathbb{1}_K[(f_\epsilon \star \mathbb{1}_K g) - (f_\epsilon \star g)] \to 0\) as \(\epsilon \to 0\) (exercise)
       \item Already proved in \(\mathbb{R}^d\) space.
     \end{enumerate}
   \end{proof}
@@ -1607,6 +1607,7 @@
   \end{rem}
 
   \section{Theory of Distribution}
+  \subsection{Basic Properties, Convergence, Derivatives}
   In the following let \(\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}\). Let \(\Omega \subseteq \mathbb{R}^d\) be open.
   \begin{itemize}
     \item \(D(\Omega) = C_c^\infty(\Omega)\) the space of test functions.
@@ -2058,6 +2059,8 @@
     \end{align*}
     So we get \(\partial_{x_i} f(x) = g_i(x) \in C(\Omega)\) in the classical sense. So \(f \in C^1(\Omega)\).
   \end{proof}
+
+  \subsection{Sobolev Spaces}
   
   \begin{defn}[Sobolev Spaces]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open. We define for \(1 \le p\le \infty\):
@@ -2852,8 +2855,7 @@
     \begin{align*}
       - \Delta u = w''(r) = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)
     \end{align*}
-    % Originally:
-    % \[- \Delta u = - \omega''(r) - \frac{2 \omega'(r)}{r} = \frac{\log(r) + 1}{(r \log(r))^2} - \frac{2}{r^2 \log (r)} = \frac{1}{(r \log r)^2} - \frac{1}{r^2 \log(r)} = f(r)\]
+    
     We show that \(f \in L^{\frac{3}{2}}: \) 
     \begin{align*}
       \int_B |f(x)|^{\frac{3}{2}} \, dx 
@@ -4324,8 +4326,8 @@
     Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(u \in H_0^1(\Omega)\), \(f \in L^2(\Omega)\). Show that the following statements are equivalent:
     \begin{enumerate}[label=\arabic*)]
       \item \(- \Delta u = f\) in \(D'(\Omega)\)
-      \item \(\int \nabla u \nabla \phi = \int f \phi\) for all \(\phi \in H_0^1\)
-      \item \(E = \inf_v \left(\frac{1}{2} \int_\Omega |\nabla v|^2 - \int_\Omega f v\right)\) 
+      \item \(\int_\Omega \nabla u \nabla \phi \, dx = \int_\Omega f \phi \, dx\) for all \(\phi \in H_0^1\)
+      \item \(E = \inf_v \left(\frac{1}{2} \int_\Omega |\nabla v|^2 \, dx - \int_\Omega f v \, dx\right)\) 
     \end{enumerate}
   \end{ex}
 
@@ -4504,7 +4506,7 @@
   \end{proof}
 
   \begin{thm}[Solution for Poisson Equation with inhomogeneous boundary condition]\label{Solution for Poisson Equation with inhomogeneous boundary condition}
-    Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(f \in L^2(\Omega)\), \(g \in L^2(\partial \Omega)\). There there is a unique \(u \in H^1(\Omega)\) s.t. 
+    Let \(\Omega\) be open, bounded with \(C^1\)-boundary. Let \(f \in L^2(\Omega)\), \(g \in L^2(\partial \Omega)\). Then there is a unique \(u \in H^1(\Omega)\) s.t. 
     \begin{align*}
       \begin{cases}
         - \Delta u = f &\text{in } D'(\Omega) \\ u|_{\partial \Omega} = g &\text{on } \partial \Omega
@@ -4908,8 +4910,8 @@
     &\Leftrightarrow&\partial_t \hat u (k,t) &= -|2\pi k|^2 \hat u (k,t) \\
     &\Leftrightarrow&\partial_t(e^{t|2\pi k|^2} \hat u(k,t)) &= 0 \\
     &\Leftrightarrow&e^{t|2\pi k|^2} \hat u(k,t) &= \hat u(k,0) = \hat g (k) \\
-    &\Leftrightarrow& \hat u(k,t) &= e^{-t|2 \pi k|^2} \hat g(k) = \hat \Phi(k,t) \hat g(k) = \widehat{\Phi \star g} \qedhere \\
-    &\Leftrightarrow& u(x,t) &= \Phi \star g = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy
+    &\Leftrightarrow& \hat u(k,t) &= e^{-t|2 \pi k|^2} \hat g(k) = \hat \Phi(k,t) \hat g(k) = \widehat{\Phi \star g} \\
+    &\Leftrightarrow& u(x,t) &= \Phi \star g = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy \qedhere
   \end{align*}
   Here we only need the direction \(\Leftarrow\) which is rigorous if \(g \in L^2(\mathbb{R}^d)\). From the Fourier transform, it is also easy to check that \(u(\cdot, t) \to g\) in \(L^2\) as \(t \to 0\) (exercise). To see the smoothness, note that for all \(t>0,\) and for all \(m \in \mathbb{N}\):
   \begin{align*}
@@ -4993,11 +4995,10 @@
       \int_{\mathbb{R}^d} |u(x,t) - g(x)|^2 \, dx 
       &= \int_{\mathbb{R}^d} \underbrace{\left|1 - e^{-t |2 \pi k|^2}\right|^2|}_{\le C(t |2 \pi k|^2)}\hat g(k)|^2 \, dk \\
       &\le C \int_{\mathbb{R}^d} t |2 \pi k|^2 |\hat g(k)|^2 \, dk \\
-      &\le Ct \|g\|_{H^1}^2 \quad \forall t > 0
+      &\le Ct \|g\|_{H^1}^2 \quad \forall t > 0 \qedhere
     \end{align*}
   \end{enumerate}
 \end{proof}
-
 
 \begin{enumerate}[label=Step \arabic*:]
   \item Spectral problem:\[\begin{cases}
@@ -5046,7 +5047,7 @@
       u(x,t) = 0 & \forall x \in \partial \Omega, t > 0 \\
       u(x,0) = g(x) & \forall x \in \Omega
     \end{cases}\]
-    Let us focus on the simlest case \(\Omega = (0,1)\). Prove that for every \(g \in C_c^1(0,1)\), the function 
+    Let us focus on the simplest case \(\Omega = (0,1)\). Prove that for every \(g \in C_c^1(0,1)\), the function 
     \begin{align*}
       u(x,t) &= \sum_{n=1}^\infty g_n e^{-t \pi^2 n^2} \sin(n \pi x), & g_n &= 2 \int_0^1 g(y) \sin(n\pi y) \, dy
     \end{align*}
@@ -5145,8 +5146,7 @@
   Recall the Poisson eqation \(-\Delta u \le 0\) in \(\Omega \subseteq \mathbb{R}^d\) open, bounded. Then 
   \[\sup_{\bar \Omega} u(x) = \sup_{\partial \Omega} u(x).\]
 
-  
-  \begin{thm}[Maximum principle for bouneded sets]
+  \begin{thm}[Maximum principle for bounded sets]
     Let \(\Omega \subseteq \mathbb{R}^d\) be open and bouneded. Let \(T > 0\) and define 
     \begin{align*}
       \Omega_T &= \Omega \times (0,T), \\
@@ -5159,8 +5159,8 @@
 
   \begin{proof}
     We will use Hopf's argument which is simpler that the mean-value theorem (there exists a mean-value theorem for heat equation, but it is complicated and we will not discuss it).
-    Firstly, to illustrate the principle, we proof the maximum princple for the Poisson Equation:
-    Asumme \(u \in C^2(\Omega) \cap C(\bar \Omega)\)
+    Firstly, to illustrate the principle, we proof the maximum principle for the Poisson Equation:
+    Assume \(u \in C^2(\Omega) \cap C(\bar \Omega)\)
     \begin{enumerate}[label=Step \arabic*)]
       \item Assume \(\Delta u > 0\) in \(\Omega\). Since \(\bar \Omega\) is compact, there is a \(x_0 \in \bar \Omega\) s.t. \(u(x_0) = \max_{x \in \bar \Omega} u(x)\). We prove that \(x_0 \in \partial \Omega\). In fact, if \(x_0 \in \Omega\), then since \(x_0\) is a (local) maximizer of \(u\) in \(\Omega\), we have \(\Delta u(x_0) \le 0\), which contradicts to the assumption that \(\Delta u > 0\) in \(\Omega\). Thus \(x_0 \in \partial \Omega\), and hence 
       \[\max_{x \in \bar \Omega} u(x) = u(x_0) \le \max_{x \in \partial \Omega} u(x).\]
@@ -5352,7 +5352,7 @@
   \end{proof}
 
 
-  Some remarks about the eat equation in unbounded domains:
+  Some remarks about the heat equation in unbounded domains:
   \[\begin{cases}
     \partial_t u - \Delta_x u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
     u(x,0) = 0 &(\text{i.e. \(\lim_{t \to 0} u(x,t) = 0 \forall x \in \mathbb{R}^d\)})
@@ -5482,7 +5482,7 @@
     \begin{align*}
       Lv(x) \ge 2n \underbrace{(x_1 + R)^{2n-2}}_{> 0}[\underbrace{2n-1 + b_1(x) (x_1 + R)}_{> 0}] > 0
     \end{align*}
-    for all \(x \in \bar \Omega\) if \(n\) is large.
+    for all \(x \in \bar \Omega\) if \(n\) is large. \qedhere
     \end{itemize}
   \end{proof}
 
@@ -5499,18 +5499,18 @@
   \begin{proof}[Solution]\
     \begin{enumerate}[label=Step \arabic*:]
       \item There is at most one solution \(u\).
-      \item \[u(x,t) = \int_{\mathbb{R}^d} \phi(x-y,t) g(y) \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s)f(y,s) \, dy \, ds\]
+      \item \[u(x,t) = \int_{\mathbb{R}^d} \Phi(x-y,t) g(y) \, dy + \int_0^t \int_{\mathbb{R}^d} \Phi(x-y,t-s)f(y,s) \, dy \, ds\]
     \end{enumerate}
     This implies:
     \begin{align*}
-      \|u\|_{L^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^t \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds  \\
-      \Rightarrow \quad \|u\|_{L_{x,t}^\infty} &\le \int_{\mathbb{R}^d} \phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
+      \|u\|_{L^\infty} &\le \int_{\mathbb{R}^d} \Phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^t \int_{\mathbb{R}^d} \Phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds  \\
+      \Rightarrow \quad \|u\|_{L_{x,t}^\infty} &\le \int_{\mathbb{R}^d} \Phi(x-y,t) \|g\|_{L^\infty} \, dy + \int_0^T \int_{\mathbb{R}^d} \Phi(x-y,t-s) \|f\|_{L^\infty} \, dy \, ds \\
       &= \|g\|_{L_x^\infty} + T \|f\|_{L_{x,t}^\infty}
     \end{align*}
     This is optimal! E.g. \(g = 0, f = 1\), \(u(x,t) = u(t)\).
     \[\begin{cases}
       u' = 1 \\ u(0) =0
-    \end{cases}\Rightarrow u(t) = t\]
+    \end{cases}\Rightarrow u(t) = t \qedhere\]
   \end{proof}
 
   \begin{ex}[Bonus 11]
@@ -5550,7 +5550,7 @@
 			\|u(\bullet, T)\|_{L^2(\mathbb{R}^d)}^2 &= \int_{\mathbb{R}^d} \hat u_\epsilon(k,t) \,dk = \lambda^d(\{|k| \le \epsilon^{-1}\})\epsilon^{d+1} \sim \epsilon \xrightarrow{\epsilon \to 0} 0 \\
 			\|u(\bullet, 0)\|_{L^2(\mathbb{R}^d)}^2 &= \int_{\mathbb{R}^d} e^{2T |2 \pi k|^2} \mathbb{1}(|k|\le \epsilon^{-1})\epsilon^{d+1} \, dk \\
 			&\ge \int_{\frac{\epsilon}{2} \le |k| \le \frac{\epsilon}{2}} e^{2T |2 \pi k|^2}\mathbb{1}(|k|\le \epsilon^{-1})\epsilon^{d+1} \, dk
-			\tilde \ge e^{2T\epsilon^{-2}}\epsilon \xrightarrow{\epsilon \to 0} \infty
+			\tilde \ge e^{2T\epsilon^{-2}}\epsilon \xrightarrow{\epsilon \to 0} \infty \qedhere
 		\end{align*}
 	\end{proof}
 
@@ -5638,7 +5638,7 @@
 	\end{align*}
 	
 	\begin{ex}[E 13.1, d'Alembert formula]
-		For \(d = 1\) let \(g \in C^2(\mathbb{R}^d)\), \(h \in C^1(\mathbb{R})\) and define \(u\) by the \emph{d'Alembert formula}
+		For \(d = 1\) let \(g \in C^2(\mathbb{R})\), \(h \in C^1(\mathbb{R})\) and define \(u\) by the \emph{d'Alembert formula}
 		\begin{align*}
 			u(x,t) &= \int_{x-t}^{x+t} (h(y)-g'(y)) \, dy + g(x+t) \\
 			&= \frac{1}{2} [g(x+t)+g(x-t)] + \frac{1}{2} \int_{x-t}^{x+t} h(y) \, dy.
@@ -5654,15 +5654,15 @@
 	\begin{proof}[Solution]
     We can compute the derivative by regarding \(\int_x^{x+t} + \int_{x-t}^x\) and \(\int_t^{x+t} + \int_{x-t}^t\):
     \begin{align*}
-      \partial_t u &= \frac{1}{2} \left(g'(x+t) - g'(x+t)\right) + \frac{1}{2} \left(h(x+t) + h(x-t)\right) \\
-      \partial^2_t u &= \frac{1}{2} \left(g''(x+t) + g''(x+t)\right) + \frac{1}{2} \left(h'(x+t) - h'(x-t)\right) \\
+      \partial_t u &= \frac{1}{2} \left(g'(x+t) - g'(x-t)\right) + \frac{1}{2} \left(h(x+t) + h(x-t)\right) \\
+      \partial^2_t u &= \frac{1}{2} \left(g''(x+t) + g''(x-t)\right) + \frac{1}{2} \left(h'(x+t) - h'(x-t)\right) \\
       \partial_x u &= \frac{1}{2} \left(g'(x+t)+g'(x-t)\right) + \frac{1}{2} \left(h(x+t)-h(x-t)\right) \\
       \partial^2_x u &= \frac{1}{2} \left(g''(x+t)+g''(x-t)\right) + \frac{1}{2} \left(h'(x+t)-h''(x-t)\right) = \partial_t^2 u
     \end{align*}
     Now,
     \begin{align*}
       \lim_{t \to 0} u &= \frac{1}{2} \left(g(x) + g(x)\right) + \frac{1}{2} \int_x^x h = g(x) \\
-      \lim_{t \to 0} \partial_t u &= \frac{1}{2}\left(g'(x) - g'(x)\right)+ \frac{1}{2} \left(h(x) + h(x)\right) = h(x).
+      \lim_{t \to 0} \partial_t u &= \frac{1}{2}\left(g'(x) - g'(x)\right)+ \frac{1}{2} \left(h(x) + h(x)\right) = h(x). \qedhere
     \end{align*}
 	\end{proof}
 
@@ -5844,7 +5844,7 @@
         |u(x,t)| &\le C \fint_{\partial B(x,t)} \le C
       \end{align*}
       if \(t \le 1\).
-      \item Why is \(u\) given by \((\star)\)? This follows from the uniqueness of the solution of the wave equation. In fact, if \(g, h\) are compactly supported, then for all \(t \in [0,T]\), \(u(x,t)\) supported in \(B(0, R_T)\) a finite ball.
+      \item Why is \(u\) given by \((\star)\)? This follows from the uniqueness of the solution of the wave equation. In fact, if \(g, h\) are compactly supported, then for all \(t \in [0,T]\), \(u(x,t)\) supported in \(B(0, R_T)\) a finite ball. \qedhere
     \end{enumerate}
   \end{proof}
 
@@ -5852,7 +5852,7 @@
   
   The transformation \(\tilde U = r U\) does not work! The idea is to think of the 2D problem as 3D problem with \(x_3\) hidden. We write \(\bar u(x_1, x_2, x_3, t) = u(x_1, x_2, t)\). Then we get 
   \[\begin{cases}
-    \partial_t^2 \bar u - \Delta_x \bar u = 0 &\text{in } \mathbb{R}^d \times (0,\infty) \\
+    \partial_t^2 \bar u - \Delta_x \bar u = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\
     \bar u = \bar g, \partial_t \bar u = \bar h &\text{on } \mathbb{R}^3 \times \{t=0\}
   \end{cases}\]
   With Kirchhoff's formula:
@@ -5981,7 +5981,7 @@
       \[\begin{cases}
         \partial_t^2 \bar u - \Delta_{\bar x} \bar u = 0 &\text{in } \mathbb{R}^3 \times (0,\infty) \\ 
         \bar u = \bar g, \partial_t \bar u = \bar h &\text{in }\mathbb{R}^3 \times (0,\infty)
-      \end{cases}.\]
+      \end{cases}. \qedhere\]
     \end{enumerate}
   \end{proof}
 
@@ -5992,7 +5992,7 @@
     u = g, \partial_t u = h &\text{when } t = 0 \\
     u = 0 &\text{when } x \in \partial \Omega
   \end{cases}\]
-  \(-\Delta\) has eigenvecors \((e_i)_{i=1}^\infty\) with eigenvalues \((\lambda_i)_{i=1}^\infty\), i.e.
+  \(-\Delta\) has eigenvectors \((e_i)_{i=1}^\infty\) with eigenvalues \((\lambda_i)_{i=1}^\infty\), i.e.
   \[\begin{cases}
     -\Delta e_i = \lambda_i e_i \\ e_i|_{\partial \Omega} = 0
   \end{cases}\]
