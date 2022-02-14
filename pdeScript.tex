@@ -6050,11 +6050,14 @@
     \[e(t) = \int_{B(x_0, t_0-t)} \left(|\partial_t u|^2 + |\nabla_x u|^2\right) \, dx\]
   \end{proof}
   This implies 
+  {\footnotesize
   \begin{align*}
-    e'(t) &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u + \nabla_x u \partial_t \nabla_x u) - \int_{\partial B(x_0, t_0 - t)} (|\partial_t u|^2 + |\nabla_x u|^2) \, dS \\
-    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u - \Delta_x u \partial_t u) + \int_{\partial B(x_0, t_0-t)} [2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2] \, dS \\
-    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \underbrace{(\partial_t^2 u - \Delta_x u )}_{= 0}) + \int_{\partial B(x_0, t_0-t)} \underbrace{[2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2]}_{\le 0} \, dS
+    e'(t) &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u  + \nabla_x u \partial_t \nabla_x u)\, dx - \int_{\partial B(x_0, t_0 - t)} (|\partial_t u|^2 + |\nabla_x u|^2) \, dS \\
+    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \partial_t^2 u  - \Delta_x u \partial_t u) \, dx+ \int_{\partial B(x_0, t_0-t)} [2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2] \, dS \\
+    &= \int_{B(x_0, t_0-t)} 2(\partial_t u \underbrace{(\partial_t^2 u - \Delta_x u )}_{= 0})  \, dx+ \int_{\partial B(x_0, t_0-t)} \underbrace{[2(\nabla_x u \vec{n})\partial_t u - |\partial_t u|^2 - |\nabla_x u|^2]}_{\le 0} \, dS
   \end{align*}
+  }
+  
   where we used \begin{align*}
     |2 (\nabla_x u \vec{n}) \partial_t u| \le 2 |\nabla_x u| |\partial_t u| \le |\nabla_x u|^2 + |\partial_t u|^2.
   \end{align*}
@@ -6305,13 +6308,13 @@
     \begin{enumerate}
       \item \(g \in H^2(\mathbb{R}^d)\), 
       \begin{align*}
-        &\left\| \frac{u(\bullet, t+h) - u(\bullet, t)}{h} e^{it \Delta} (\Delta g) \right\|_{L^2(\mathbb{R}^d)}^2 = \left\| \widehat{\frac{u(\bullet, t+h) - u(\bullet, t)}{h} e^{it \Delta} (\Delta g)}\right\|_{L^2(k, dk)}^2 \\
-        &\quad= \int_{\mathbb{R}^d} \left| \frac{e^{- (t +h) | 2 \pi k|^2} \hat g(k) - e^{-it |2 \pi k|^2}\hat g(k)}{h} - e^{-it |2 \pi k|^2} | 2 \pi k|^2 \hat g (k) \right|^2 \, dk \\
+        &\left\| (-i)\frac{u(\bullet, t+h) - u(\bullet, t)}{h} - e^{it \Delta} (\Delta g) \right\|_{L^2(\mathbb{R}^d)}^2 \\
+        &\quad= \left\| \left((-i)\frac{u(\bullet, t+h) - u(\bullet, t)}{h} -e^{it \Delta} (\Delta g)\right)^\land\right\|_{L^2(k, dk)}^2 \\
+        &\quad= \int_{\mathbb{R}^d} \left| (-i)\frac{e^{- (t +h) | 2 \pi k|^2} \hat g(k) - e^{-it |2 \pi k|^2}\hat g(k)}{h} - e^{-it |2 \pi k|^2} | 2 \pi k|^2 \hat g (k) \right|^2 \, dk \\
         &\quad= \int_{\mathbb{R}^d} \underbrace{\left|(-i) \frac{(e^{-ih| 2 \pi k|^2}-1)}{h} + |2 \pi k|^2 \right|^2 |\hat g(k)|^2}_{\xrightarrow{h \to 0} 0} \, dk \xrightarrow{h \to 0} 0
       \end{align*}
-      by Dominated Convergence,
-      \(|\dots| \le C|k|^2|\hat (k)|^2 \in L^1\).
-      We have 
+      by Dominated Convergence because
+      \(|\dots| \le C|k|^2|\hat g(k)|^2 \in L^1\) and 
       \[(-i) \frac{e^{-ih |2 \pi k|^2}-1}{h} \xrightarrow{h \to 0} (-i)^2 | 2 \pi k|^2 = - |2 \pi k|^2\]
       and \(|\dots| \le C|k|^2\). Also 
       \begin{align*}
@@ -6320,23 +6323,22 @@
         \begin{enumerate}[label=\(\Rightarrow\)]
           \item \(|2 \pi k|^2 \hat u(k) = e^{-it |2 \pi k|^2} \underbrace{|2 \pi k|^2 \hat g(k)}_{\in L^2(dk)} \in L^2(dk)\)
           \item \(\widehat{\Delta_x u}= \widehat{e^{it \Delta} (\Delta g)}\)
-          \item \(\Delta_x u = e^{it \Delta}(\Delta g)\)
         \end{enumerate}
       \item \(g \in L^2\): 
       \begin{align*}
         - i \frac{d}{dt} = \langle \phi, u \rangle &= - i \frac{d}{dt} \int_{\mathbb{R}^d} \underbrace{\overline{\hat \phi(k)}}_{\le \frac{C_N}{(1 + |k|)^N} \forall N \ge 1} e^{-it  |2 \pi k|^2} \hat g(k) \, dk \\
-        &= \int_{\mathbb{R}^d} \overline{\hat \phi(k)} (- |2 \pi k|^2) \hat g (k) \, dk \\
-        &= \int_{\mathbb{R}^d} \overline{\widehat{\Delta \phi}} \hat g = \langle \Delta \phi, g\rangle_{L^2}
+        &= \int_{\mathbb{R}^d} \overline{\hat \phi(k)} (- |2 \pi k|^2) \hat g (k) \, dk
+        = \int_{\mathbb{R}^d} \overline{\widehat{\Delta \phi}} \hat g = \langle \Delta \phi, g\rangle_{L^2}
       \end{align*}
-      Spectral technique: If \(\mathcal{H}\) is a Hilbertspace (separable) and \(A: D(A) \to \mathcal{H}\) is a self-adjoint \(A = A^\star\), i.e. 
+      Spectral technique: If \(\mathcal{H}\) is a Hilbert space (separable) and \(A: D(A) \to \mathcal{H}\) is a self-adjoint \(A = A^\star\), i.e. 
       \[\begin{cases}
         \langle u, Av \rangle = \langle A u, v \rangle \\
         D(A) = D(A^\star)
       \end{cases}\]
       where 
       \begin{align*}
-        D(A^\star) &= \{u \in \mathcal{H} \mid \langle u, Av\rangle = \langle A^\star u, v \rangle \} \\
-        &= \left\{ u \in \mathcal{H} \middle| \sup_{ v \in D(A)} \frac{|\langle u, Av\rangle}{\|v\|_{\mathcal{H}}} < \infty \right\}
+        D(A^\star) &= \{u \in \mathcal{H} \mid \langle u, Av\rangle = \langle A^\star u, v \rangle \}
+        = \left\{ u \in \mathcal{H} \middle| \sup_{ v \in D(A)} \frac{|\langle u, Av\rangle}{\|v\|_{\mathcal{H}}} < \infty \right\}
       \end{align*}
       Then we can define a unitary operator \(e^{-it A}: \mathcal{H} \to \mathcal{H}\) with \(t \in \mathbb{R}\). Moreover, for all \(g \in \mathcal{H}\), \(u = e^{- i t A} g\) solves 
       \[\begin{cases}
