@@ -409,7 +409,7 @@
   \begin{rem}
     Recall the polar decomposition. Let \(x \in \mathbb{R}^d, x = (r,w), r = |x| > 0, \omega \in S^{d-1}\), then
     \begin{align*}
-      \int_{B(0, r)} g(y) \, dy = \int_0^r \left(\int_{B(0, r)} g(y) \, dS(y) \right) dr
+      \int_{B(0, r)} g(y) \, dy = \int_0^r \left(\int_{\partial B(0, r)} g(y) \, dS(y) \right) dr
     \end{align*}
   \end{rem}
 
@@ -621,7 +621,7 @@
       &\le \frac{|S_1|}{|B_1| \frac{r}{N}} \frac{[c_d(N-1)]^{N-1}}{\left(r \frac{N-1}{N^d}\right)^{d + N - 1}} \int_{B(x_0, r)} |u| \, dy \\
       &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} (N-1)^d} \int_{B(x_0, r)} |u| \, dy \\
       &= \frac{|S_1|}{|\beta_1|} \frac{c_d^{N-1}}{\left(\frac{r}{N}\right)^{d+N} N^d} \left(\frac{N}{N-1}\right)^d \int_{B(x_0, r)} |u| \, dy \\
-      &\le \frac{2^d |S_1|}{|B_1|} \frac{c_d^{N-1} N^N}{r^{d+N}} \int_{B(x_0, r)} |u| \, dy \qquad \text{if } c_d \ge \frac{2^d |S_1|}{|B_1|}
+      &\le \frac{2^d |S_1|}{|B_1|} \frac{c_d^{N-1} N^N}{r^{d+N}} \int_{B(x_0, r)} |u| \, dy \qquad \text{if } c_d \ge \frac{2^d |S_1|}{|B_1|} \qedhere
     \end{align*}
   \end{proof}
 
@@ -888,8 +888,8 @@
   \begin{proof}
     If we can prove that \(v\) is bounded, then \(v = const.\). We first need to show that \(\Phi \star f\) is bounded.
     \begin{align*}
-      \Phi = \Phi_1 + \Phi_2 = \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
-      \Phi \star f = \Phi_1 \star f + \Phi_2 \star f
+      \Phi = \Phi_1 + \Phi_2 &= \Phi \mathbb{1}(|x| \le 1) + \Phi(|x| \ge 1) \\
+      \Phi \star f &= \Phi_1 \star f + \Phi_2 \star f
     \end{align*}
     We have \(\Phi_1 \star f \in L^1(\mathbb{R}^d)\) and \(\Phi_2 \star f\) is bounded since \(\Phi \to 0\)  as \(|x| \to \infty\)  in \(d \ge 3\).
   \end{proof}
@@ -2770,7 +2770,7 @@
       W^{1, p}(\Omega) &= \{f \in L^p(\Omega) \mid \partial_{x_i} f \in L^p(\Omega), \ \forall i = 1, 2, \dots, d\}
     \end{align*}
     with the norm
-    \[\| f \|_{W^{1,p}} = \|f\| + \sum_{i=1}^d \| \partial_{x_i} f\|_{L^p(\Omega)}.\]
+    \[\| f \|_{W^{1,p}} = \|f\|_{L^p(\Omega)} + \sum_{i=1}^d \| \partial_{x_i} f\|_{L^p(\Omega)}.\]
     Prove that \(W^{1,p}(\Omega)\) is a Banach space. Here \(x = (x_i)_{i=1}^d \in \mathbb{R}^d\). Hint: You can use the fact that \(L^p(\Omega)\) is a Banach Space.
   \end{ex}
 
@@ -2813,7 +2813,7 @@
       u(x) &= \int_\Omega G(x-y)f(y) \, dy
     \end{align*}
     Let \(- \Delta u = f\) in \(D'(\Omega)\), \(u \in L_{loc}^1(\Omega)\), \(f \in L_{loc}^1(\mathbb{R}^d)\) and \(\omega_d f \in L^1(\mathbb{R}^d)\), where \[\omega_d (x) = \begin{cases}
-      1 + |x| & d = 1 \\ \log(1 + |x|) & d = 1 \\ \frac{1}{(1 + |x|)^{d-2}} & d \ge 3
+      1 + |x| & d = 1 \\ \log(1 + |x|) & d = 2 \\ \frac{1}{(1 + |x|)^{d-2}} & d \ge 3
     \end{cases}.\]
     Prove that \begin{align*}
       G \star f &= \int_{\mathbb{R}^d} G(x-y) f(y) \, dy \in L_{loc}^1(\mathbb{R}^d) 
@@ -6326,7 +6326,7 @@
         \end{enumerate}
       \item \(g \in L^2\): 
       \begin{align*}
-        - i \frac{d}{dt} = \langle \phi, u \rangle &= - i \frac{d}{dt} \int_{\mathbb{R}^d} \underbrace{\overline{\hat \phi(k)}}_{\le \frac{C_N}{(1 + |k|)^N} \forall N \ge 1} e^{-it  |2 \pi k|^2} \hat g(k) \, dk \\
+        - i \frac{d}{dt} \langle \phi, u \rangle &= - i \frac{d}{dt} \int_{\mathbb{R}^d} \underbrace{\overline{\hat \phi(k)}}_{\le \frac{C_N}{(1 + |k|)^N} \forall N \ge 1} e^{-it  |2 \pi k|^2} \hat g(k) \, dk \\
         &= \int_{\mathbb{R}^d} \overline{\hat \phi(k)} (- |2 \pi k|^2) \hat g (k) \, dk
         = \int_{\mathbb{R}^d} \overline{\widehat{\Delta \phi}} \hat g = \langle \Delta \phi, g\rangle_{L^2}
       \end{align*}
@@ -6344,7 +6344,7 @@
       \[\begin{cases}
         i \partial_t u = A u \\ u(t \to 0) = g
       \end{cases}\]
-      (Stone Theorem) (eg \(A = -\Delta\))
+      (Stone Theorem) (eg \(A = -\Delta\)) \qedhere
     \end{enumerate}
   \end{proof}
 
